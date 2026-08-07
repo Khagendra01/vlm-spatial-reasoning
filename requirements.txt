@@ -1,6 +1,11 @@
+# VLM Spatial Reasoning - Requirements
+# Environment: conda p310 (Python 3.10.18, CUDA-enabled)
+
+# PyTorch with CUDA (install via conda: conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia)
+# torch>=2.0.0
+# torchvision>=0.15.0
+
 # Core dependencies
-torch>=2.0.0
-torchvision>=0.15.0
 transformers>=4.30.0
 datasets>=2.14.0
 accelerate>=0.21.0
@@ -22,8 +27,7 @@ plotly>=5.15.0
 
 # Evaluation metrics
 rouge-score>=0.1.2
-cider>=1.0.1
-# pycocotools  # Uncomment if needed
+# cider>=1.0.1  # Removed: macOS-only, not needed for VSR classification
 
 # Experiment tracking
 wandb>=0.15.0
