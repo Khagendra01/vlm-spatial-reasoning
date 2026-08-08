@@ -88,21 +88,13 @@ class SmolVLMClassifier:
     def predict_batch(self, images: list, statements: list[str]) -> list[str]:
         """
         Batch prediction - processes multiple examples at once for speed.
-        Resizes images to reduce VRAM usage.
         """
         if len(images) == 0:
             return []
 
-        # Resize images to save VRAM (SmolVLM processes at 384x384 anyway)
-        resized = []
-        for img in images:
-            if isinstance(img, Image.Image):
-                img = img.resize((384, 384), Image.LANCZOS)
-            resized.append(img)
-
         # Build messages for all examples
         batch_messages = []
-        for image, statement in zip(resized, statements):
+        for image, statement in zip(images, statements):
             prompt = SPATIAL_PROMPT.format(statement=statement)
             messages = [
                 {
