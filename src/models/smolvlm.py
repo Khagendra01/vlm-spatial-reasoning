@@ -40,6 +40,9 @@ class SmolVLMClassifier:
 
         print(f"Loading {model_name}...")
         self.processor = AutoProcessor.from_pretrained(model_name)
+        # Fix padding side for decoder-only batch generation
+        if hasattr(self.processor, "tokenizer"):
+            self.processor.tokenizer.padding_side = "left"
         self.model = AutoModelForImageTextToText.from_pretrained(
             model_name,
             dtype=torch.bfloat16,
@@ -85,20 +88,21 @@ class SmolVLMClassifier:
     def predict_batch(self, images: list, statements: list[str]) -> list[str]:
         """
         Batch prediction - processes multiple examples at once for speed.
-
-        Args:
-            images: List of PIL Images or image URLs
-            statements: List of spatial statements
-
-        Returns:
-            List of raw model output strings
+        Resizes images to reduce VRAM usage.
         """
         if len(images) == 0:
             return []
 
+        # Resize images to save VRAM (SmolVLM processes at 384x384 anyway)
+        resized = []
+        for img in images:
+            if isinstance(img, Image.Image):
+                img = img.resize((384, 384), Image.LANCZOS)
+            resized.append(img)
+
         # Build messages for all examples
         batch_messages = []
-        for image, statement in zip(images, statements):
+        for image, statement in zip(resized, statements):
             prompt = SPATIAL_PROMPT.format(statement=statement)
             messages = [
                 {
@@ -112,7 +116,6 @@ class SmolVLMClassifier:
             batch_messages.append(messages)
 
         # Process batch through the processor
-        # SmolVLM processor handles batching via padding
         inputs = self.processor.apply_chat_template(
             batch_messages,
             add_generation_prompt=True,
@@ -130,13 +133,15 @@ class SmolVLMClassifier:
                 max_new_tokens=self.max_new_tokens,
             )
 
-        # Decode all outputs
+        # Decode only the generated tokens (not the input prompt)
+        input_len = inputs["input_ids"].shape[1]
+        generated_ids = generated_ids[:, input_len:]
+
         generated_texts = self.processor.batch_decode(
             generated_ids,
             skip_special_tokens=True,
         )
 
-        # Extract answers
         return [self._extract_answer(text) for text in generated_texts]
 
     def _extract_answer(self, text: str) -> str:
