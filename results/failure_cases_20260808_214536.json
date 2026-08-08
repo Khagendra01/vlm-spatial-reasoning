@@ -1,0 +1,452 @@
+[
+  {
+    "id": 10,
+    "statement": "The motorcycle is in front of the truck.",
+    "relation": "in front of",
+    "ground_truth": false,
+    "prediction": true,
+    "raw_output": " True.",
+    "image_url": "http://images.cocodataset.org/train2017/000000120207.jpg"
+  },
+  {
+    "id": 39,
+    "statement": "The oven is in front of the cake.",
+    "relation": "in front of",
+    "ground_truth": true,
+    "prediction": false,
+    "raw_output": " False.",
+    "image_url": "http://images.cocodataset.org/train2017/000000185777.jpg"
+  },
+  {
+    "id": 30,
+    "statement": "The pizza is touching the person.",
+    "relation": "touching",
+    "ground_truth": true,
+    "prediction": false,
+    "raw_output": " False.",
+    "image_url": "http://images.cocodataset.org/train2017/000000114169.jpg"
+  },
+  {
+    "id": 167,
+    "statement": "The person is touching the suitcase.",
+    "relation": "touching",
+    "ground_truth": false,
+    "prediction": true,
+    "raw_output": " True.",
+    "image_url": "http://images.cocodataset.org/val2017/000000375278.jpg"
+  },
+  {
+    "id": 69,
+    "statement": "The book is behind the cat.",
+    "relation": "behind",
+    "ground_truth": false,
+    "prediction": true,
+    "raw_output": " True.",
+    "image_url": "http://images.cocodataset.org/train2017/000000014766.jpg"
+  },
+  {
+    "id": 298,
+    "statement": "The book is behind the teddy bear.",
+    "relation": "behind",
+    "ground_truth": true,
+    "prediction": false,
+    "raw_output": " False.",
+    "image_url": "http://images.cocodataset.org/train2017/000000514292.jpg"
+  },
+  {
+    "id": 25,
+    "statement": "The laptop is at the left side of the cake.",
+    "relation": "at the left side of",
+    "ground_truth": false,
+    "prediction": true,
+    "raw_output": " True.",
+    "image_url": "http://images.cocodataset.org/train2017/000000512569.jpg"
+  },
+  {
+    "id": 85,
+    "statement": "The pizza is at the left side of the dog.",
+    "relation": "at the left side of",
+    "ground_truth": true,
+    "prediction": false,
+    "raw_output": " False.",
+    "image_url": "http://images.cocodataset.org/train2017/000000508555.jpg"
+  },
+  {
+    "id": 36,
+    "statement": "The truck is under the couch.",
+    "relation": "under",
+    "ground_truth": true,
+    "prediction": false,
+    "raw_output": " False.",
+    "image_url": "http://images.cocodataset.org/train2017/000000358630.jpg"
+  },
+  {
+    "id": 148,
+    "statement": "The handbag is under the cat.",
+    "relation": "under",
+    "ground_truth": false,
+    "prediction": true,
+    "raw_output": " True.",
+    "image_url": "http://images.cocodataset.org/train2017/000000470862.jpg"
+  },
+  {
+    "id": 138,
+    "statement": "The book is on the teddy bear.",
+    "relation": "on",
+    "ground_truth": false,
+    "prediction": true,
+    "raw_output": " True.",
+    "image_url": "http://images.cocodataset.org/train2017/000000434672.jpg"
+  },
+  {
+    "id": 140,
+    "statement": "The bench is on the boat.",
+    "relation": "on",
+    "ground_truth": true,
+    "prediction": false,
+    "raw_output": " False.",
+    "image_url": "http://images.cocodataset.org/train2017/000000082678.jpg"
+  },
+  {
+    "id": 207,
+    "statement": "The cat is at the right side of the bed.",
+    "relation": "at the right side of",
+    "ground_truth": true,
+    "prediction": false,
+    "raw_output": " False.",
+    "image_url": "http://images.cocodataset.org/val2017/000000134882.jpg"
+  },
+  {
+    "id": 244,
+    "statement": "The cake is at the right side of the laptop.",
+    "relation": "at the right side of",
+    "ground_truth": true,
+    "prediction": false,
+    "raw_output": " False.",
+    "image_url": "http://images.cocodataset.org/train2017/000000393375.jpg"
+  },
+  {
+    "id": 576,
+    "statement": "The train is below the clock.",
+    "relation": "below",
+    "ground_truth": true,
+    "prediction": false,
+    "raw_output": " False.",
+    "image_url": "http://images.cocodataset.org/train2017/000000334735.jpg"
+  },
+  {
+    "id": 602,
+    "statement": "The cat is below the bottle.",
+    "relation": "below",
+    "ground_truth": false,
+    "prediction": true,
+    "raw_output": " True.",
+    "image_url": "http://images.cocodataset.org/train2017/000000307995.jpg"
+  },
+  {
+    "id": 73,
+    "statement": "The suitcase is on top of the person.",
+    "relation": "on top of",
+    "ground_truth": false,
+    "prediction": true,
+    "raw_output": " True.",
+    "image_url": "http://images.cocodataset.org/train2017/000000435986.jpg"
+  },
+  {
+    "id": 131,
+    "statement": "The cat is on top of the suitcase.",
+    "relation": "on top of",
+    "ground_truth": false,
+    "prediction": true,
+    "raw_output": " True.",
+    "image_url": "http://images.cocodataset.org/train2017/000000137413.jpg"
+  },
+  {
+    "id": 94,
+    "statement": "The laptop is above the cat.",
+    "relation": "above",
+    "ground_truth": false,
+    "prediction": true,
+    "raw_output": " True.",
+    "image_url": "http://images.cocodataset.org/train2017/000000047848.jpg"
+  },
+  {
+    "id": 200,
+    "statement": "The car is above the cat.",
+    "relation": "above",
+    "ground_truth": true,
+    "prediction": false,
+    "raw_output": " False.",
+    "image_url": "http://images.cocodataset.org/train2017/000000230224.jpg"
+  },
+  {
+    "id": 114,
+    "statement": "The person is facing the book.",
+    "relation": "facing",
+    "ground_truth": false,
+    "prediction": true,
+    "raw_output": " True.",
+    "image_url": "http://images.cocodataset.org/train2017/000000040114.jpg"
+  },
+  {
+    "id": 213,
+    "statement": "The laptop is facing the sandwich.",
+    "relation": "facing",
+    "ground_truth": true,
+    "prediction": false,
+    "raw_output": " False.",
+    "image_url": "http://images.cocodataset.org/train2017/000000302643.jpg"
+  },
+  {
+    "id": 33,
+    "statement": "The cat is facing away from the sink.",
+    "relation": "facing away from",
+    "ground_truth": true,
+    "prediction": false,
+    "raw_output": " False.",
+    "image_url": "http://images.cocodataset.org/train2017/000000508846.jpg"
+  },
+  {
+    "id": 34,
+    "statement": "The cat is facing away from the toilet.",
+    "relation": "facing away from",
+    "ground_truth": true,
+    "prediction": false,
+    "raw_output": " False.",
+    "image_url": "http://images.cocodataset.org/train2017/000000455365.jpg"
+  },
+  {
+    "id": 193,
+    "statement": "The dog is next to the book.",
+    "relation": "next to",
+    "ground_truth": true,
+    "prediction": false,
+    "raw_output": " False.",
+    "image_url": "http://images.cocodataset.org/train2017/000000183453.jpg"
+  },
+  {
+    "id": 294,
+    "statement": "The book is next to the bed.",
+    "relation": "next to",
+    "ground_truth": true,
+    "prediction": false,
+    "raw_output": " False.",
+    "image_url": "http://images.cocodataset.org/val2017/000000297353.jpg"
+  },
+  {
+    "id": 145,
+    "statement": "The bench is over the cat.",
+    "relation": "over",
+    "ground_truth": false,
+    "prediction": true,
+    "raw_output": " True.",
+    "image_url": "http://images.cocodataset.org/train2017/000000107188.jpg"
+  },
+  {
+    "id": 196,
+    "statement": "The banana is over the person.",
+    "relation": "over",
+    "ground_truth": false,
+    "prediction": true,
+    "raw_output": " True.",
+    "image_url": "http://images.cocodataset.org/train2017/000000182812.jpg"
+  },
+  {
+    "id": 240,
+    "statement": "The oven is beneath the sandwich.",
+    "relation": "beneath",
+    "ground_truth": true,
+    "prediction": false,
+    "raw_output": " False.",
+    "image_url": "http://images.cocodataset.org/val2017/000000046463.jpg"
+  },
+  {
+    "id": 436,
+    "statement": "The truck is beneath the surfboard.",
+    "relation": "beneath",
+    "ground_truth": true,
+    "prediction": false,
+    "raw_output": " False.",
+    "image_url": "http://images.cocodataset.org/train2017/000000417210.jpg"
+  },
+  {
+    "id": 16,
+    "statement": "The cat is at the edge of the sink.",
+    "relation": "at the edge of",
+    "ground_truth": false,
+    "prediction": true,
+    "raw_output": " True.",
+    "image_url": "http://images.cocodataset.org/train2017/000000419051.jpg"
+  },
+  {
+    "id": 31,
+    "statement": "The sheep is at the edge of the cake.",
+    "relation": "at the edge of",
+    "ground_truth": true,
+    "prediction": false,
+    "raw_output": " False.",
+    "image_url": "http://images.cocodataset.org/train2017/000000409808.jpg"
+  },
+  {
+    "id": 102,
+    "statement": "The refrigerator contains the dog.",
+    "relation": "contains",
+    "ground_truth": true,
+    "prediction": false,
+    "raw_output": " False.",
+    "image_url": "http://images.cocodataset.org/train2017/000000350851.jpg"
+  },
+  {
+    "id": 272,
+    "statement": "The suitcase contains the cat.",
+    "relation": "contains",
+    "ground_truth": false,
+    "prediction": true,
+    "raw_output": " True.",
+    "image_url": "http://images.cocodataset.org/val2017/000000432468.jpg"
+  },
+  {
+    "id": 125,
+    "statement": "The horse is right of the person.",
+    "relation": "right of",
+    "ground_truth": false,
+    "prediction": true,
+    "raw_output": " True.",
+    "image_url": "http://images.cocodataset.org/train2017/000000532748.jpg"
+  },
+  {
+    "id": 210,
+    "statement": "The pizza is right of the bottle.",
+    "relation": "right of",
+    "ground_truth": true,
+    "prediction": false,
+    "raw_output": " False.",
+    "image_url": "http://images.cocodataset.org/train2017/000000342259.jpg"
+  },
+  {
+    "id": 53,
+    "statement": "The zebra is at the back of the truck.",
+    "relation": "at the back of",
+    "ground_truth": true,
+    "prediction": false,
+    "raw_output": " False.",
+    "image_url": "http://images.cocodataset.org/train2017/000000319902.jpg"
+  },
+  {
+    "id": 406,
+    "statement": "The parking meter is at the back of the truck.",
+    "relation": "at the back of",
+    "ground_truth": true,
+    "prediction": false,
+    "raw_output": " False.",
+    "image_url": "http://images.cocodataset.org/train2017/000000019185.jpg"
+  },
+  {
+    "id": 87,
+    "statement": "The bus is far away from the train.",
+    "relation": "far away from",
+    "ground_truth": false,
+    "prediction": true,
+    "raw_output": " True.",
+    "image_url": "http://images.cocodataset.org/train2017/000000434867.jpg"
+  },
+  {
+    "id": 580,
+    "statement": "The bench is far away from the hot dog.",
+    "relation": "far away from",
+    "ground_truth": true,
+    "prediction": false,
+    "raw_output": " False.",
+    "image_url": "http://images.cocodataset.org/train2017/000000443165.jpg"
+  },
+  {
+    "id": 157,
+    "statement": "The chair is left of the teddy bear.",
+    "relation": "left of",
+    "ground_truth": true,
+    "prediction": false,
+    "raw_output": " False.",
+    "image_url": "http://images.cocodataset.org/train2017/000000531568.jpg"
+  },
+  {
+    "id": 612,
+    "statement": "The banana is left of the sandwich.",
+    "relation": "left of",
+    "ground_truth": false,
+    "prediction": true,
+    "raw_output": " True.",
+    "image_url": "http://images.cocodataset.org/train2017/000000557005.jpg"
+  },
+  {
+    "id": 19,
+    "statement": "The truck is parallel to the motorcycle.",
+    "relation": "parallel to",
+    "ground_truth": false,
+    "prediction": true,
+    "raw_output": " True.",
+    "image_url": "http://images.cocodataset.org/train2017/000000302514.jpg"
+  },
+  {
+    "id": 508,
+    "statement": "The suitcase is parallel to the couch.",
+    "relation": "parallel to",
+    "ground_truth": true,
+    "prediction": false,
+    "raw_output": " False.",
+    "image_url": "http://images.cocodataset.org/train2017/000000479539.jpg"
+  },
+  {
+    "id": 175,
+    "statement": "The person is away from the cake.",
+    "relation": "away from",
+    "ground_truth": true,
+    "prediction": false,
+    "raw_output": " False.",
+    "image_url": "http://images.cocodataset.org/train2017/000000398153.jpg"
+  },
+  {
+    "id": 1095,
+    "statement": "The bench is away from the umbrella.",
+    "relation": "away from",
+    "ground_truth": false,
+    "prediction": true,
+    "raw_output": " True.",
+    "image_url": "http://images.cocodataset.org/train2017/000000547807.jpg"
+  },
+  {
+    "id": 52,
+    "statement": "The cat is in the toilet.",
+    "relation": "in",
+    "ground_truth": false,
+    "prediction": true,
+    "raw_output": " True.",
+    "image_url": "http://images.cocodataset.org/train2017/000000225322.jpg"
+  },
+  {
+    "id": 687,
+    "statement": "The hot dog is in the person.",
+    "relation": "in",
+    "ground_truth": false,
+    "prediction": true,
+    "raw_output": " True.",
+    "image_url": "http://images.cocodataset.org/train2017/000000574955.jpg"
+  },
+  {
+    "id": 78,
+    "statement": "The bench is far from the teddy bear.",
+    "relation": "far from",
+    "ground_truth": true,
+    "prediction": false,
+    "raw_output": " False.",
+    "image_url": "http://images.cocodataset.org/train2017/000000306749.jpg"
+  },
+  {
+    "id": 636,
+    "statement": "The person is far from the boat.",
+    "relation": "far from",
+    "ground_truth": true,
+    "prediction": false,
+    "raw_output": " False.",
+    "image_url": "http://images.cocodataset.org/train2017/000000386880.jpg"
+  }
+]
