@@ -1,0 +1,51 @@
+id,relation,family,gt,pred,failure_mode,confidence,notes
+10,in front of,depth,false,true,viewpoint ambiguity,0.6,Road scene; depth order motorcycle/truck ambiguous from camera vantage
+39,in front of,depth,true,false,geometric reasoning,0.5,Kitchen stacking; oven vs cake depth ordering
+30,touching,topology_contact,true,false,occlusion,0.6,Pizza in hands; point of contact likely occluded
+167,touching,topology_contact,false,true,geometric reasoning,0.5,Suitcase on cart near person; near-but-not-touching
+69,behind,depth,false,true,viewpoint ambiguity,0.6,Book/cat depth ambiguous in cluttered shelf scene
+298,behind,depth,true,false,geometric reasoning,0.5,Book-behind-teddy depth grouping
+25,at the left side of,horizontal,false,true,viewpoint ambiguity,0.7,Left/right of camera; laptop vs cake
+85,at the left side of,horizontal,true,false,viewpoint ambiguity,0.7,Left/right; pizza vs dog
+36,under,vertical,true,false,occlusion,0.5,Under relation; couch partially occludes toy truck
+148,under,vertical,false,true,geometric reasoning,0.5,Handbag-vs-cat vertical placement
+138,on,topology_contact,false,true,lexical ambiguity,0.5,Object pressing through; 'on' vs overlap
+140,on,topology_contact,true,false,lexical ambiguity,0.6,Bench decked in boat; deck 'on' ambiguity
+207,at the right side of,horizontal,true,false,viewpoint ambiguity,0.7,Left/right; cat vs bed
+244,at the right side of,horizontal,true,false,viewpoint ambiguity,0.7,Left/right; cake vs laptop
+576,below,vertical,true,false,geometric reasoning,0.5,Below with wall-mounted clock; vertical estimate
+602,below,vertical,false,true,small object,0.4,Below; object tiny relative to reference (bottle)
+73,on top of,vertical,false,true,grounding failure,0.5,Suitcase/floored person orientation misread
+131,on top of,vertical,false,true,geometric reasoning,0.5,Cat posture on suitcase; on-top vs beside
+94,above,vertical,false,true,geometric reasoning,0.6,Above/laptop-on-desk vertical stack
+200,above,vertical,true,false,geometric reasoning,0.5,Car-vertical-above-cat; scene layout
+114,facing,orientation,false,true,viewpoint ambiguity,0.6,Person body/bearing as seen by camera
+213,facing,orientation,true,false,grounding failure,0.5,Laptop facing; no face cue on object
+33,facing away from,orientation,true,false,viewpoint ambiguity,0.6,Animal body orientation (cats paws) unclear
+34,facing away from,orientation,true,false,viewpoint ambiguity,0.6,Animal orientation relative to toilet
+193,next to,horizontal,true,false,geometric reasoning,0.5,Next-to proximity; book vs dog
+294,next to,horizontal,true,false,geometric reasoning,0.5,Book-bed adjacency estimate
+145,over,vertical,false,true,lexical ambiguity,0.6,'over' (above-floating) over-applied
+196,over,vertical,false,true,lexical ambiguity,0.6,'over' applied to non-overhanging banana
+240,beneath,vertical,true,false,geometric reasoning,0.5,Beneath stacking in counter scene
+436,beneath,vertical,true,false,geometric reasoning,0.5,Surfboard above truck bed; beneath context
+16,at the edge of,topology_contact,false,true,geometric reasoning,0.5,Edge-touch of sink boundary
+31,at the edge of,topology_contact,true,false,grounding failure,0.5,Sheep/edge without strong visual anchor
+102,contains,containment,true,false,grounding failure,0.5,Refrigerator door state; containment
+272,contains,containment,false,true,grounding failure,0.5,Suitcase-cat containment visibility
+125,right of,horizontal,false,true,viewpoint ambiguity,0.7,Left/right; horse vs person
+210,right of,horizontal,true,false,viewpoint ambiguity,0.7,Left/right; pizza vs bottle
+53,at the back of,depth,true,false,viewpoint ambiguity,0.6,'Back of truck' in side-view of zebra
+406,at the back of,depth,true,false,viewpoint ambiguity,0.6,Parking meter at back of truck (side view)
+87,far away from,proximity,false,true,geometric reasoning,0.5,Bus-train distance estimate
+580,far away from,proximity,true,false,geometric reasoning,0.5,Bench-hotdog distance scale
+157,left of,horizontal,true,false,viewpoint ambiguity,0.7,Left/right; chair vs teddy bear
+612,left of,horizontal,false,true,viewpoint ambiguity,0.7,Left/right; banana vs sandwich
+19,parallel to,orientation,false,true,geometric reasoning,0.7,Parallel alignment of vehicles
+508,parallel to,orientation,true,false,geometric reasoning,0.6,Suitcase-couch alignment/orientation
+175,away from,proximity,true,false,geometric reasoning,0.5,Away-from distance in room scene
+1095,away from,proximity,false,true,geometric reasoning,0.5,Bench-umbrella distance
+52,in,containment,false,true,annotation_ambiguity,0.5,Cat near toilet; containment borderline
+687,in,containment,false,true,lexical ambiguity,0.5,'Hot dog in person' unnatural phrasing
+78,far from,proximity,true,false,geometric reasoning,0.5,Bench-person distance
+636,far from,proximity,true,false,geometric reasoning,0.5,Person-boat distance
