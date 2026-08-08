@@ -348,15 +348,67 @@ def save_failure_cases_json(results: list, output_dir: str, num_cases: int = 50)
     return output_file
 
 
+def prefetch_images(records: list, max_workers: int = 8) -> list:
+    """
+    Download all images in parallel to avoid network delays during inference.
+
+    Args:
+        records: List of VSR records with image URLs
+        max_workers: Number of parallel download threads
+
+    Returns:
+        List of PIL Images (same order as records)
+    """
+    import urllib.request
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    from io import BytesIO
+
+    def download_image(idx_url):
+        idx, url = idx_url
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                data = resp.read()
+            img = Image.open(BytesIO(data)).convert("RGB")
+            return idx, img
+        except Exception as e:
+            print(f"  Warning: Failed to download image {idx} ({url}): {e}")
+            return idx, None
+
+    urls = [(i, r["image"]) for i, r in enumerate(records)]
+    images = [None] * len(records)
+
+    print(f"Prefetching {len(urls)} images with {max_workers} threads...")
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures = {executor.submit(download_image, u): u for u in urls}
+        done = 0
+        for future in as_completed(futures):
+            idx, img = future.result()
+            images[idx] = img
+            done += 1
+            if done % 200 == 0:
+                print(f"  Downloaded {done}/{len(urls)} images")
+
+    # Count failures
+    failures = sum(1 for img in images if img is None)
+    if failures:
+        print(f"  Warning: {failures} images failed to download")
+
+    print(f"Prefetch complete: {len(urls) - failures}/{len(urls)} images ready")
+    return images
+
+
 def run_evaluation(
     num_examples: int = None,
     split: str = "test",
     output_dir: str = "results",
     model_name: str = "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
     resume: bool = False,
+    batch_size: int = 8,
 ):
     """
     Run comprehensive baseline evaluation on VSR dataset.
+    Uses batch inference and image prefetching for speed.
 
     Args:
         num_examples: Number of examples to evaluate (None for all)
@@ -364,6 +416,7 @@ def run_evaluation(
         output_dir: Directory to save results
         model_name: Model to use
         resume: If True, load existing checkpoint and continue from there
+        batch_size: Number of examples to process at once
     """
     # Create output directory
     os.makedirs(output_dir, exist_ok=True)
@@ -377,6 +430,9 @@ def run_evaluation(
         print(f"Using {num_examples} examples")
     else:
         print(f"Using all {len(records)} examples")
+
+    # Prefetch all images upfront (parallel downloads)
+    images = prefetch_images(records, max_workers=16)
 
     # Checkpoint file for resume
     checkpoint_file = os.path.join(output_dir, f"checkpoint_{split}_{len(records)}.json")
@@ -393,48 +449,97 @@ def run_evaluation(
             print(f"Continuing from example {len(results) + 1}")
 
     # Initialize model
-    print("Loading SmolVLM2 model...")
+    print(f"Loading SmolVLM2 model (batch_size={batch_size})...")
     classifier = SmolVLMClassifier(model_name=model_name)
 
-    # Run evaluation (skip already-evaluated examples)
+    # Run evaluation in batches
     start_idx = len(results)
     start_time = time.time()
-    checkpoint_interval = 200  # Save checkpoint every 200 examples
+    checkpoint_interval = 200
+
+    # Process in batches
+    batch_images = []
+    batch_statements = []
+    batch_records = []
+
+    def flush_batch():
+        """Process current batch and store results."""
+        nonlocal batch_images, batch_statements, batch_records
+
+        if not batch_images:
+            return
+
+        # Run batch inference
+        raw_outputs = classifier.predict_batch(batch_images, batch_statements)
+
+        # Store results
+        for j, raw_output in enumerate(raw_outputs):
+            record = batch_records[j]
+            prediction = parse_true_false(raw_output)
+            correct = prediction == record["label"] if prediction is not None else False
+
+            global_idx = start_idx + len(results)
+            result = {
+                "id": global_idx,
+                "statement": record["statement"],
+                "relation": record["relation"],
+                "ground_truth": record["label"],
+                "prediction": prediction,
+                "correct": correct,
+                "raw_output": raw_output,
+                "image_url": record.get("image", ""),
+            }
+            results.append(result)
+
+        # Clear batch
+        batch_images = []
+        batch_statements = []
+        batch_records = []
 
     for i in range(start_idx, len(records)):
         record = records[i]
+        img = images[i]
 
-        if (i + 1) % 50 == 0 or i == start_idx:
+        # Skip failed downloads
+        if img is None:
+            result = {
+                "id": i,
+                "statement": record["statement"],
+                "relation": record["relation"],
+                "ground_truth": record["label"],
+                "prediction": None,
+                "correct": False,
+                "raw_output": "IMAGE_DOWNLOAD_FAILED",
+                "image_url": record.get("image", ""),
+            }
+            results.append(result)
+            continue
+
+        # Add to batch
+        batch_images.append(img)
+        batch_statements.append(record["statement"])
+        batch_records.append(record)
+
+        # Flush when batch is full
+        if len(batch_images) >= batch_size:
+            flush_batch()
+
+            # Progress report
             elapsed = time.time() - start_time
-            avg_time = elapsed / max(1, i - start_idx)
-            remaining = avg_time * (len(records) - i - 1)
-            print(f"Processing {i + 1}/{len(records)} "
+            processed = len(results) - start_idx
+            avg_time = elapsed / max(1, processed)
+            remaining = avg_time * (len(records) - start_idx - processed)
+            print(f"Processed {len(results)}/{len(records)} "
                   f"(elapsed: {elapsed:.1f}s, remaining: {remaining:.1f}s)")
 
-        # Get prediction
-        raw_output = classifier.predict(record["image"], record["statement"])
-        prediction = parse_true_false(raw_output)
+            # Checkpoint
+            if len(results) % checkpoint_interval < batch_size:
+                with open(checkpoint_file, "w", encoding="utf-8") as f:
+                    json.dump(results, f, indent=2, ensure_ascii=False, default=str)
+                print(f"  Checkpoint saved ({len(results)} examples)")
 
-        # Determine correctness
-        correct = prediction == record["label"] if prediction is not None else False
-
-        result = {
-            "id": i,
-            "statement": record["statement"],
-            "relation": record["relation"],
-            "ground_truth": record["label"],
-            "prediction": prediction,
-            "correct": correct,
-            "raw_output": raw_output,
-            "image_url": record.get("image", ""),
-        }
-        results.append(result)
-
-        # Save checkpoint every N examples
-        if (i + 1) % checkpoint_interval == 0:
-            with open(checkpoint_file, "w", encoding="utf-8") as f:
-                json.dump(results, f, indent=2, ensure_ascii=False, default=str)
-            print(f"  Checkpoint saved: {checkpoint_file} ({len(results)} examples)")
+    # Flush remaining examples
+    flush_batch()
 
     total_time = time.time() - start_time
     print(f"\nEvaluation completed in {total_time:.1f}s ({total_time/len(records):.2f}s per example)")
@@ -610,6 +715,12 @@ def main():
         action="store_true",
         help="Resume from checkpoint if available",
     )
+    parser.add_argument(
+        "--batch-size",
+        type=int,
+        default=8,
+        help="Batch size for inference (default: 8)",
+    )
 
     args = parser.parse_args()
 
@@ -619,6 +730,7 @@ def main():
         output_dir=args.output_dir,
         model_name=args.model,
         resume=args.resume,
+        batch_size=args.batch_size,
     )
 
 
