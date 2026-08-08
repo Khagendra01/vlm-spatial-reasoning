@@ -45,8 +45,8 @@ def load_vsr(
     records = []
     for example in dataset:
         # Extract fields from the Hugging Face dataset
-        # The cambridgeltl dataset has: image, caption, label, relation
-        image = example.get("image")
+        # The cambridgeltl dataset has: image (filename), image_link (URL), caption, label, relation
+        image = example.get("image_link", example.get("image"))
         caption = example.get("caption", "")
         label = example.get("label", False)
         relation = example.get("relation", "")

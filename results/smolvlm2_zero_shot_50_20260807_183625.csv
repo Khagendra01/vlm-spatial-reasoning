@@ -1,0 +1,51 @@
+id,statement,relation,ground_truth,prediction,correct,raw_output
+0,The person is inside the refrigerator.,inside,True,True,True,True.
+1,The cake consists of the dog.,consists of,True,False,False,False.
+2,The bird is above the cat.,above,False,False,True,False.
+3,The laptop is facing the sandwich.,facing,False,False,True,False.
+4,The elephant is inside the truck.,inside,False,False,True,False.
+5,The cat is at the edge of the dining table.,at the edge of,False,False,True,False.
+6,The bench is touching the dining table.,touching,True,True,True,True.
+7,The motorcycle is in front of the truck.,in front of,True,True,True,True.
+8,The bench is beside the bed.,beside,True,True,True,True.
+9,The bench is behind the teddy bear.,behind,False,False,True,False.
+10,The motorcycle is in front of the truck.,in front of,False,True,False,True.
+11,The bed is at the left side of the bench.,at the left side of,True,True,True,True.
+12,The potted plant is behind the fire hydrant.,behind,True,True,True,True.
+13,The cat is inside the vase.,inside,True,True,True,True.
+14,The airplane is perpendicular to the truck.,perpendicular to,True,False,False,False.
+15,The bowl contains the apple.,contains,False,False,True,False.
+16,The cat is at the edge of the sink.,at the edge of,False,True,False,True.
+17,The potted plant is touching the teddy bear.,touching,True,True,True,True.
+18,The bowl contains the banana.,contains,False,False,True,False.
+19,The truck is parallel to the motorcycle.,parallel to,False,True,False,True.
+20,The bus is away from the cup.,away from,True,True,True,True.
+21,The toilet is in the train.,in,False,False,True,False.
+22,The teddy bear is perpendicular to the cake.,perpendicular to,True,False,False,False.
+23,The cat is on top of the umbrella.,on top of,True,True,True,True.
+24,The cup is beside the sandwich.,beside,True,False,False,False.
+25,The laptop is at the left side of the cake.,at the left side of,False,True,False,True.
+26,The umbrella is attached to the banana.,attached to,False,False,True,False.
+27,The apple is above the orange.,above,False,False,True,False.
+28,The truck is below the elephant.,below,True,True,True,True.
+29,The bicycle is in front of the cat.,in front of,True,True,True,True.
+30,The pizza is touching the person.,touching,True,False,False,False.
+31,The sheep is at the edge of the cake.,at the edge of,True,True,True,True.
+32,The teddy bear is at the side of the person.,at the side of,False,False,True,False.
+33,The cat is facing away from the sink.,facing away from,True,False,False,False.
+34,The cat is facing away from the toilet.,facing away from,True,False,False,False.
+35,The cat is on top of the umbrella.,on top of,False,False,True,False.
+36,The truck is under the couch.,under,True,False,False,False.
+37,The orange is at the right side of the sandwich.,at the right side of,True,True,True,True.
+38,The train contains the bicycle.,contains,True,True,True,True.
+39,The oven is in front of the cake.,in front of,True,False,False,False.
+40,The boat is in the tv.,in,False,False,True,False.
+41,The teddy bear is beneath the dog.,beneath,True,True,True,True.
+42,The bench is part of the train.,part of,True,True,True,True.
+43,The truck is below the elephant.,below,True,True,True,True.
+44,The chair is touching the teddy bear.,touching,False,False,True,False.
+45,The person is alongside the oven.,alongside,True,True,True,True.
+46,The fire hydrant is near the car.,near,False,False,True,False.
+47,The car has as a part the bed.,has as a part,True,True,True,True.
+48,The apple is on the dining table.,on,False,False,True,False.
+49,The chair is behind the cat.,behind,True,True,True,True.

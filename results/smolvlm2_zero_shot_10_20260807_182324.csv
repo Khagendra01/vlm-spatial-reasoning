@@ -1,0 +1,11 @@
+id,statement,relation,ground_truth,prediction,correct,raw_output
+0,The person is inside the refrigerator.,inside,True,True,True,True.
+1,The cake consists of the dog.,consists of,True,False,False,False.
+2,The bird is above the cat.,above,False,False,True,False.
+3,The laptop is facing the sandwich.,facing,False,False,True,False.
+4,The elephant is inside the truck.,inside,False,False,True,False.
+5,The cat is at the edge of the dining table.,at the edge of,False,False,True,False.
+6,The bench is touching the dining table.,touching,True,True,True,True.
+7,The motorcycle is in front of the truck.,in front of,True,True,True,True.
+8,The bench is beside the bed.,beside,True,True,True,True.
+9,The bench is behind the teddy bear.,behind,False,False,True,False.

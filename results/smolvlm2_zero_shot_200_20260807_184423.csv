@@ -1,0 +1,201 @@
+id,statement,relation,ground_truth,prediction,correct,raw_output
+0,The person is inside the refrigerator.,inside,True,True,True,True.
+1,The cake consists of the dog.,consists of,True,False,False,False.
+2,The bird is above the cat.,above,False,False,True,False.
+3,The laptop is facing the sandwich.,facing,False,False,True,False.
+4,The elephant is inside the truck.,inside,False,False,True,False.
+5,The cat is at the edge of the dining table.,at the edge of,False,False,True,False.
+6,The bench is touching the dining table.,touching,True,True,True,True.
+7,The motorcycle is in front of the truck.,in front of,True,True,True,True.
+8,The bench is beside the bed.,beside,True,True,True,True.
+9,The bench is behind the teddy bear.,behind,False,False,True,False.
+10,The motorcycle is in front of the truck.,in front of,False,True,False,True.
+11,The bed is at the left side of the bench.,at the left side of,True,True,True,True.
+12,The potted plant is behind the fire hydrant.,behind,True,True,True,True.
+13,The cat is inside the vase.,inside,True,True,True,True.
+14,The airplane is perpendicular to the truck.,perpendicular to,True,False,False,False.
+15,The bowl contains the apple.,contains,False,False,True,False.
+16,The cat is at the edge of the sink.,at the edge of,False,True,False,True.
+17,The potted plant is touching the teddy bear.,touching,True,True,True,True.
+18,The bowl contains the banana.,contains,False,False,True,False.
+19,The truck is parallel to the motorcycle.,parallel to,False,True,False,True.
+20,The bus is away from the cup.,away from,True,True,True,True.
+21,The toilet is in the train.,in,False,False,True,False.
+22,The teddy bear is perpendicular to the cake.,perpendicular to,True,False,False,False.
+23,The cat is on top of the umbrella.,on top of,True,True,True,True.
+24,The cup is beside the sandwich.,beside,True,False,False,False.
+25,The laptop is at the left side of the cake.,at the left side of,False,True,False,True.
+26,The umbrella is attached to the banana.,attached to,False,False,True,False.
+27,The apple is above the orange.,above,False,False,True,False.
+28,The truck is below the elephant.,below,True,True,True,True.
+29,The bicycle is in front of the cat.,in front of,True,True,True,True.
+30,The pizza is touching the person.,touching,True,False,False,False.
+31,The sheep is at the edge of the cake.,at the edge of,True,True,True,True.
+32,The teddy bear is at the side of the person.,at the side of,False,False,True,False.
+33,The cat is facing away from the sink.,facing away from,True,False,False,False.
+34,The cat is facing away from the toilet.,facing away from,True,False,False,False.
+35,The cat is on top of the umbrella.,on top of,False,False,True,False.
+36,The truck is under the couch.,under,True,False,False,False.
+37,The orange is at the right side of the sandwich.,at the right side of,True,True,True,True.
+38,The train contains the bicycle.,contains,True,True,True,True.
+39,The oven is in front of the cake.,in front of,True,False,False,False.
+40,The boat is in the tv.,in,False,False,True,False.
+41,The teddy bear is beneath the dog.,beneath,True,True,True,True.
+42,The bench is part of the train.,part of,True,True,True,True.
+43,The truck is below the elephant.,below,True,True,True,True.
+44,The chair is touching the teddy bear.,touching,False,False,True,False.
+45,The person is alongside the oven.,alongside,True,True,True,True.
+46,The fire hydrant is near the car.,near,False,False,True,False.
+47,The car has as a part the bed.,has as a part,True,True,True,True.
+48,The apple is on the dining table.,on,False,False,True,False.
+49,The chair is behind the cat.,behind,True,True,True,True.
+50,The cow contains the tv.,contains,True,True,True,True.
+51,The bowl is beneath the spoon.,beneath,False,False,True,False.
+52,The cat is in the toilet.,in,False,True,False,True.
+53,The zebra is at the back of the truck.,at the back of,True,False,False,False.
+54,The bed is beside the person.,beside,True,True,True,True.
+55,The car is far away from the stop sign.,far away from,True,True,True,True.
+56,The laptop is at the left side of the banana.,at the left side of,True,True,True,True.
+57,The bus contains the dog.,contains,False,False,True,False.
+58,The horse is at the back of the truck.,at the back of,True,True,True,True.
+59,The cat is at the left side of the laptop.,at the left side of,False,False,True,False.
+60,The suitcase is far from the cat.,far from,False,False,True,False.
+61,The cake is in front of the dog.,in front of,False,False,True,False.
+62,The teddy bear is in the car.,in,True,True,True,True.
+63,The bench is touching the dining table.,touching,False,False,True,False.
+64,The cat is at the left side of the teddy bear.,at the left side of,False,False,True,False.
+65,The car contains the dog.,contains,False,False,True,False.
+66,The person is touching the pizza.,touching,False,False,True,False.
+67,The dining table is below the truck.,below,False,False,True,False.
+68,The dining table is beneath the pizza.,beneath,True,True,True,True.
+69,The book is behind the cat.,behind,False,True,False,True.
+70,The person is touching the hot dog.,touching,True,True,True,True.
+71,The broccoli is beside the bowl.,beside,False,False,True,False.
+72,The dog is touching the cat.,touching,True,True,True,True.
+73,The suitcase is on top of the person.,on top of,False,True,False,True.
+74,The handbag is attached to the person.,attached to,False,True,False,True.
+75,The person is at the left side of the truck.,at the left side of,True,True,True,True.
+76,The microwave is under the cat.,under,False,False,True,False.
+77,The handbag is beside the sink.,beside,True,True,True,True.
+78,The bench is far from the teddy bear.,far from,True,False,False,False.
+79,The pizza is in the dog.,in,True,True,True,True.
+80,The person is in front of the refrigerator.,in front of,True,True,True,True.
+81,The cat is facing away from the tv.,facing away from,False,True,False,True.
+82,The bed is beneath the suitcase.,beneath,True,True,True,True.
+83,The person is inside the boat.,inside,True,True,True,True.
+84,The clock is at the left side of the bird.,at the left side of,False,False,True,False.
+85,The pizza is at the left side of the dog.,at the left side of,True,False,False,False.
+86,The person is above the cell phone.,above,False,False,True,False.
+87,The bus is far away from the train.,far away from,False,True,False,True.
+88,The laptop is inside the train.,inside,True,True,True,True.
+89,The cat is at the edge of the umbrella.,at the edge of,True,True,True,True.
+90,The person is touching the dining table.,touching,False,False,True,False.
+91,The toilet is below the cat.,below,True,True,True,True.
+92,The dog is in the car.,in,True,True,True,True.
+93,The bed is under the umbrella.,under,True,True,True,True.
+94,The laptop is above the cat.,above,False,True,False,True.
+95,The teddy bear is at the right side of the dog.,at the right side of,False,False,True,False.
+96,The backpack is away from the bed.,away from,False,False,True,False.
+97,The surfboard is on the truck.,on,True,True,True,True.
+98,The pizza is at the edge of the dining table.,at the edge of,False,False,True,False.
+99,The suitcase is beside the cat.,beside,True,False,False,False.
+100,The book is beside the cat.,beside,True,True,True,True.
+101,The cat is in the sink.,in,False,False,True,False.
+102,The refrigerator contains the dog.,contains,True,False,False,False.
+103,The couch is near the dog.,near,True,True,True,True.
+104,The pizza is below the cell phone.,below,False,False,True,False.
+105,The person is above the giraffe.,above,True,True,True,True.
+106,The parking meter is facing away from the person.,facing away from,False,False,True,False.
+107,The dining table is at the right side of the refrigerator.,at the right side of,True,True,True,True.
+108,The cake is ahead of the apple.,ahead of,True,True,True,True.
+109,The bicycle is in front of the umbrella.,in front of,True,True,True,True.
+110,The keyboard is at the right side of the apple.,at the right side of,True,True,True,True.
+111,The person is surrounding the banana.,surrounding,False,False,True,False.
+112,The dog is in the middle of the bed.,in the middle of,True,True,True,True.
+113,The person is touching the cat.,touching,True,True,True,True.
+114,The person is facing the book.,facing,False,True,False,True.
+115,The handbag is on the person.,on,False,False,True,False.
+116,The person is touching the teddy bear.,touching,True,True,True,True.
+117,The teddy bear is beneath the person.,beneath,True,True,True,True.
+118,The cell phone is at the right side of the person.,at the right side of,False,False,True,False.
+119,The dog is on the surfboard.,on,True,True,True,True.
+120,The cake is alongside the laptop.,alongside,True,False,False,False.
+121,The bed is touching the cat.,touching,True,True,True,True.
+122,The tv is across from the boat.,across from,True,True,True,True.
+123,The bed is inside the truck.,inside,True,False,False,False.
+124,The bus is in front of the car.,in front of,False,True,False,True.
+125,The horse is right of the person.,right of,False,True,False,True.
+126,The couch is in front of the bed.,in front of,True,True,True,True.
+127,The cat is close to the tv.,close to,False,False,True,False.
+128,The laptop is off the pizza.,off,False,True,False,True.
+129,The person is beneath the remote.,beneath,False,False,True,False.
+130,The hot dog is in the bowl.,in,True,True,True,True.
+131,The cat is on top of the suitcase.,on top of,False,True,False,True.
+132,The person is against the couch.,against,True,True,True,True.
+133,The chair is touching the bird.,touching,False,False,True,False.
+134,The bench is under the dog.,under,False,False,True,False.
+135,The teddy bear is on top of the cake.,on top of,True,True,True,True.
+136,The hot dog is far away from the bench.,far away from,False,False,True,False.
+137,The person is touching the refrigerator.,touching,False,False,True,False.
+138,The book is on the teddy bear.,on,False,True,False,True.
+139,The pizza is behind the sandwich.,behind,False,False,True,False.
+140,The bench is on the boat.,on,True,False,False,False.
+141,The cat is into the handbag.,into,True,True,True,True.
+142,The horse is behind the cat.,behind,True,True,True,True.
+143,The cow is below the person.,below,True,True,True,True.
+144,The oven is below the pizza.,below,True,True,True,True.
+145,The bench is over the cat.,over,False,True,False,True.
+146,The dog is under the chair.,under,False,False,True,False.
+147,The person is touching the refrigerator.,touching,False,False,True,False.
+148,The handbag is under the cat.,under,False,True,False,True.
+149,The sandwich is touching the person.,touching,True,True,True,True.
+150,The bed is under the teddy bear.,under,True,False,False,False.
+151,The pizza is off the dining table.,off,False,False,True,False.
+152,The boat is on the truck.,on,False,False,True,False.
+153,The cat is in front of the refrigerator.,in front of,True,True,True,True.
+154,The bus is behind the bicycle.,behind,True,True,True,True.
+155,The person is on the horse.,on,True,True,True,True.
+156,The person is facing away from the horse.,facing away from,True,False,False,False.
+157,The chair is left of the teddy bear.,left of,True,False,False,False.
+158,The cow is far away from the truck.,far away from,True,True,True,True.
+159,The teddy bear is next to the wine glass.,next to,False,False,True,False.
+160,The vase is behind the cat.,behind,False,False,True,False.
+161,The cat is at the edge of the laptop.,at the edge of,True,False,False,False.
+162,The laptop is at the edge of the dining table.,at the edge of,False,False,True,False.
+163,The hot dog is far away from the bench.,far away from,False,False,True,False.
+164,The bed is under the suitcase.,under,False,False,True,False.
+165,The elephant is in front of the truck.,in front of,False,False,True,False.
+166,The bed is beside the bench.,beside,True,True,True,True.
+167,The person is touching the suitcase.,touching,False,True,False,True.
+168,The surfboard is connected to the truck.,connected to,False,False,True,False.
+169,The potted plant is at the side of the bench.,at the side of,True,True,True,True.
+170,The person is facing away from the cow.,facing away from,False,False,True,False.
+171,The teddy bear is facing the cow.,facing,True,True,True,True.
+172,The cat is away from the apple.,away from,True,True,True,True.
+173,The cat is touching the keyboard.,touching,False,False,True,False.
+174,The cat is on top of the laptop.,on top of,False,False,True,False.
+175,The person is away from the cake.,away from,True,False,False,False.
+176,The couch is touching the cat.,touching,True,True,True,True.
+177,The bicycle is in front of the cat.,in front of,True,False,False,False.
+178,The toilet is in front of the truck.,in front of,True,False,False,False.
+179,The bicycle is touching the bed.,touching,True,True,True,True.
+180,The suitcase is beneath the cat.,beneath,True,True,True,True.
+181,The cup is at the right side of the cat.,at the right side of,True,True,True,True.
+182,The suitcase is within the cat.,within,False,True,False,True.
+183,The cat is at the pizza.,at,True,True,True,True.
+184,The boat is in the tv.,in,True,True,True,True.
+185,The truck is beneath the couch.,beneath,True,True,True,True.
+186,The couch is on top of the truck.,on top of,True,True,True,True.
+187,The dog is in front of the sports ball.,in front of,True,False,False,False.
+188,The person is touching the dining table.,touching,True,True,True,True.
+189,The bus is parallel to the motorcycle.,parallel to,True,True,True,True.
+190,The banana is at the left side of the cat.,at the left side of,True,False,False,False.
+191,The sheep is inside the bottle.,inside,True,True,True,True.
+192,The bed is adjacent to the couch.,adjacent to,False,False,True,False.
+193,The dog is next to the book.,next to,True,False,False,False.
+194,The couch is at the right side of the umbrella.,at the right side of,False,False,True,False.
+195,The toilet is left of the cat.,left of,True,True,True,True.
+196,The banana is over the person.,over,False,True,False,True.
+197,The person is touching the cow.,touching,False,False,True,False.
+198,The dining table is at the right side of the person.,at the right side of,False,False,True,False.
+199,The keyboard is below the apple.,below,True,True,True,True.
