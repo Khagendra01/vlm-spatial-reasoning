@@ -5,6 +5,7 @@ Loads the model, accepts an image + spatial statement, and returns True/False.
 Supports batch inference for speed.
 """
 
+import gc
 import torch
 from transformers import AutoProcessor, AutoModelForImageTextToText
 from typing import Optional
@@ -32,7 +33,7 @@ class SmolVLMClassifier:
         self,
         model_name: str = "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
         device: Optional[str] = None,
-        max_new_tokens: int = 10,
+        max_new_tokens: int = 5,
     ):
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
         self.max_new_tokens = max_new_tokens
@@ -47,6 +48,7 @@ class SmolVLMClassifier:
             model_name,
             dtype=torch.bfloat16,
             _attn_implementation="eager",
+            low_cpu_mem_usage=True,
         ).to(self.device)
         self.model.eval()
         print(f"Model loaded on {self.device}")
@@ -118,14 +120,14 @@ class SmolVLMClassifier:
         ).to(self.device, dtype=torch.bfloat16)
 
         # Generate for all examples at once
-        with torch.no_grad():
+        with torch.inference_mode():
             generated_ids = self.model.generate(
                 **inputs,
                 do_sample=False,
                 max_new_tokens=self.max_new_tokens,
             )
 
-        # Decode only the generated tokens (not the input prompt)
+        # Trim input tokens from generated output
         input_len = inputs["input_ids"].shape[1]
         generated_ids = generated_ids[:, input_len:]
 
@@ -133,6 +135,11 @@ class SmolVLMClassifier:
             generated_ids,
             skip_special_tokens=True,
         )
+
+        # Free batch memory immediately
+        del inputs, generated_ids
+        gc.collect()
+        torch.cuda.empty_cache()
 
         return [self._extract_answer(text) for text in generated_texts]
 
