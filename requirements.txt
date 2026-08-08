@@ -6,7 +6,8 @@
 # torchvision>=0.15.0
 
 # Core dependencies
-transformers>=4.30.0
+num2words>=0.5.12
+transformers>=4.48.0
 datasets>=2.14.0
 accelerate>=0.21.0
 
