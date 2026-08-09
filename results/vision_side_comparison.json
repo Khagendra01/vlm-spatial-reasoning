@@ -1,0 +1,150 @@
+{
+  "conditions": [
+    "7B_zero-shot",
+    "LM_only_LoRA_control",
+    "projector_lora",
+    "vision_proj_lora"
+  ],
+  "table": {
+    "Overall (all 2195)": {
+      "7B_zero-shot": 0.8091116173120729,
+      "LM_only_LoRA_control": 0.8469248291571754,
+      "projector_lora": 0.8287015945330296,
+      "vision_proj_lora": 0.8309794988610478
+    },
+    "Orientation (4 relations)": {
+      "7B_zero-shot": 0.635036496350365,
+      "LM_only_LoRA_control": 0.656934306569343,
+      "projector_lora": 0.6423357664233577,
+      "vision_proj_lora": 0.6423357664233577
+    },
+    "facing": {
+      "7B_zero-shot": 0.734375,
+      "LM_only_LoRA_control": 0.75,
+      "projector_lora": 0.78125,
+      "vision_proj_lora": 0.765625
+    },
+    "facing away from": {
+      "7B_zero-shot": 0.48717948717948717,
+      "LM_only_LoRA_control": 0.5897435897435898,
+      "projector_lora": 0.5641025641025641,
+      "vision_proj_lora": 0.5128205128205128
+    },
+    "parallel to": {
+      "7B_zero-shot": 0.6363636363636364,
+      "LM_only_LoRA_control": 0.6363636363636364,
+      "projector_lora": 0.5,
+      "vision_proj_lora": 0.6363636363636364
+    },
+    "perpendicular to": {
+      "7B_zero-shot": 0.5833333333333334,
+      "LM_only_LoRA_control": 0.4166666666666667,
+      "projector_lora": 0.4166666666666667,
+      "vision_proj_lora": 0.4166666666666667
+    }
+  },
+  "mcnemar": {
+    "Overall (all 2195)": {
+      "7B_zero-shot": {
+        "p": 2.3234781216063164e-06,
+        "discordant_ctrl": 194,
+        "discordant_new": 111
+      },
+      "projector_lora": {
+        "p": 0.004324802861177767,
+        "discordant_ctrl": 114,
+        "discordant_new": 74
+      },
+      "vision_proj_lora": {
+        "p": 0.012220636571466615,
+        "discordant_ctrl": 110,
+        "discordant_new": 75
+      }
+    },
+    "Orientation (4 relations)": {
+      "7B_zero-shot": {
+        "p": 0.7913664277791806,
+        "discordant_ctrl": 30,
+        "discordant_new": 27
+      },
+      "projector_lora": {
+        "p": 0.8555355519056321,
+        "discordant_ctrl": 16,
+        "discordant_new": 14
+      },
+      "vision_proj_lora": {
+        "p": 0.8505540192127228,
+        "discordant_ctrl": 15,
+        "discordant_new": 13
+      }
+    },
+    "facing": {
+      "7B_zero-shot": {
+        "p": 1.0,
+        "discordant_ctrl": 13,
+        "discordant_new": 12
+      },
+      "projector_lora": {
+        "p": 0.7744140625,
+        "discordant_ctrl": 5,
+        "discordant_new": 7
+      },
+      "vision_proj_lora": {
+        "p": 1.0,
+        "discordant_ctrl": 6,
+        "discordant_new": 7
+      }
+    },
+    "facing away from": {
+      "7B_zero-shot": {
+        "p": 0.480682373046875,
+        "discordant_ctrl": 11,
+        "discordant_new": 7
+      },
+      "projector_lora": {
+        "p": 1.0,
+        "discordant_ctrl": 7,
+        "discordant_new": 6
+      },
+      "vision_proj_lora": {
+        "p": 0.5810546875,
+        "discordant_ctrl": 8,
+        "discordant_new": 5
+      }
+    },
+    "parallel to": {
+      "7B_zero-shot": {
+        "p": 1.0,
+        "discordant_ctrl": 4,
+        "discordant_new": 4
+      },
+      "projector_lora": {
+        "p": 0.25,
+        "discordant_ctrl": 3,
+        "discordant_new": 0
+      },
+      "vision_proj_lora": {
+        "p": 1.0,
+        "discordant_ctrl": 1,
+        "discordant_new": 1
+      }
+    },
+    "perpendicular to": {
+      "7B_zero-shot": {
+        "p": 0.6875,
+        "discordant_ctrl": 2,
+        "discordant_new": 4
+      },
+      "projector_lora": {
+        "p": 1.0,
+        "discordant_ctrl": 1,
+        "discordant_new": 1
+      },
+      "vision_proj_lora": {
+        "p": 1.0,
+        "discordant_ctrl": 0,
+        "discordant_new": 0
+      }
+    }
+  }
+}
