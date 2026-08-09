@@ -1,0 +1,19 @@
+{
+  "total": 8068,
+  "image_test": 4449,
+  "video_test": 3619,
+  "si_factors": {
+    "3d information understanding": 945,
+    "counting & existence": 1702,
+    "spatial relationship reasoning": 1721,
+    "object localization & positioning": 965,
+    "multi-view & cross-image reasoning": 1632,
+    "movement prediction & navigation": 1103
+  },
+  "orientation_heuristic": 3272,
+  "modality": {
+    "multi-image": 2167,
+    "single-image": 2282,
+    "video": 3619
+  }
+}
