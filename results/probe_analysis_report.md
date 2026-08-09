@@ -119,9 +119,14 @@ cannot.
   even if the pixels are.
 - The two-step causal model (perception → representation → reasoning) is
   thus **partially bottlenecked at representation as well as reasoning**.
-  Hard-negative reasoning training remains Priority 1, but a
-  **vision-side LoRA/projector adaptation** is now justified as a complement,
-  since it targets a measured weakness rather than a speculative one.
+- **Status update (object-grounded probe, see `grounded_probe_report.md`):**
+  conditioning the readout on subject/reference object regions does NOT
+  recover orientation signal (T1 grounded CV 57–60% ≈ majority; T2, T3 at
+  chance). The weak decodability is not an artifact of global pooling.
+  Hard-negative training produced a statistically null tradeoff and that
+  branch is closed. The measured evidence now points to the frozen vision
+  representation itself (and the projector interface) as the bottleneck →
+  **vision-side / projector adaptation is the justified next intervention.**
 
 ## Files
 

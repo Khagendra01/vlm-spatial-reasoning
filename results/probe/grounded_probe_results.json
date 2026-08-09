@@ -1,0 +1,692 @@
+{
+  "vit::T1_facing_vs_facingaway::visual": {
+    "n_train": 311,
+    "n_val": 43,
+    "n_test": 99,
+    "majority": 0.6366559485530546,
+    "dim": 5120,
+    "linear": {
+      "cv_acc_mean": 0.5980542754736302,
+      "cv_acc_std": 0.017852990137211183,
+      "val_acc": 0.5116279069767442,
+      "test_acc": 0.6161616161616161,
+      "test_balanced": 0.5791194420226679,
+      "test_ci": [
+        0.5177298522759499,
+        0.7059150540654526
+      ],
+      "per_class": {
+        "facing": 0.7258064516129032,
+        "facing away from": 0.43243243243243246
+      }
+    },
+    "mlp": {
+      "cv_acc_mean": 0.5948284690220174,
+      "cv_acc_std": 0.0439259063474919,
+      "val_acc": 0.5348837209302325,
+      "test_acc": 0.6666666666666666,
+      "test_balanced": 0.6412380122057542,
+      "test_ci": [
+        0.5691185836060462,
+        0.7517632385359663
+      ],
+      "per_class": {
+        "facing": 0.7419354838709677,
+        "facing away from": 0.5405405405405406
+      }
+    }
+  },
+  "vit::T1_facing_vs_facingaway::geometry": {
+    "n_train": 311,
+    "n_val": 43,
+    "n_test": 99,
+    "majority": 0.6366559485530546,
+    "dim": 12,
+    "linear": {
+      "cv_acc_mean": 0.610752688172043,
+      "cv_acc_std": 0.05050330565942957,
+      "val_acc": 0.46511627906976744,
+      "test_acc": 0.6060606060606061,
+      "test_balanced": 0.48931996512641673,
+      "test_ci": [
+        0.5075782136685492,
+        0.6966193095127315
+      ],
+      "per_class": {
+        "facing": 0.9516129032258065,
+        "facing away from": 0.02702702702702703
+      }
+    },
+    "mlp": {
+      "cv_acc_mean": 0.6175115207373272,
+      "cv_acc_std": 0.05008010317750104,
+      "val_acc": 0.5348837209302325,
+      "test_acc": 0.6262626262626263,
+      "test_balanced": 0.5163469921534438,
+      "test_ci": [
+        0.5279226260765785,
+        0.7151696634249464
+      ],
+      "per_class": {
+        "facing": 0.9516129032258065,
+        "facing away from": 0.08108108108108109
+      }
+    }
+  },
+  "vit::T1_facing_vs_facingaway::visual_geometry": {
+    "n_train": 311,
+    "n_val": 43,
+    "n_test": 99,
+    "majority": 0.6366559485530546,
+    "dim": 5132,
+    "linear": {
+      "cv_acc_mean": 0.5884280593958013,
+      "cv_acc_std": 0.021646696322806306,
+      "val_acc": 0.5348837209302325,
+      "test_acc": 0.6363636363636364,
+      "test_balanced": 0.5897994768962511,
+      "test_ci": [
+        0.5381571567598795,
+        0.7243825159017672
+      ],
+      "per_class": {
+        "facing": 0.7741935483870968,
+        "facing away from": 0.40540540540540543
+      }
+    },
+    "mlp": {
+      "cv_acc_mean": 0.5626728110599079,
+      "cv_acc_std": 0.0415104811977458,
+      "val_acc": 0.5581395348837209,
+      "test_acc": 0.5959595959595959,
+      "test_balanced": 0.5357454228421971,
+      "test_ci": [
+        0.4974671538075806,
+        0.6872829862135781
+      ],
+      "per_class": {
+        "facing": 0.7741935483870968,
+        "facing away from": 0.2972972972972973
+      }
+    }
+  },
+  "vit::T2_parallel_vs_perp::visual": {
+    "n_train": 86,
+    "n_val": 16,
+    "n_test": 28,
+    "majority": 0.5697674418604651,
+    "dim": 5120,
+    "linear": {
+      "cv_acc_mean": 0.5117647058823529,
+      "cv_acc_std": 0.07803823036130354,
+      "val_acc": 0.5,
+      "test_acc": 0.5357142857142857,
+      "test_balanced": 0.5104166666666666,
+      "test_ci": [
+        0.3581239514210167,
+        0.7046869626034041
+      ],
+      "per_class": {
+        "parallel to": 0.6875,
+        "perpendicular to": 0.3333333333333333
+      }
+    },
+    "mlp": {
+      "cv_acc_mean": 0.45424836601307195,
+      "cv_acc_std": 0.08126682897971008,
+      "val_acc": 0.4375,
+      "test_acc": 0.4642857142857143,
+      "test_balanced": 0.44791666666666663,
+      "test_ci": [
+        0.29531303739659587,
+        0.6418760485789833
+      ],
+      "per_class": {
+        "parallel to": 0.5625,
+        "perpendicular to": 0.3333333333333333
+      }
+    }
+  },
+  "vit::T2_parallel_vs_perp::geometry": {
+    "n_train": 86,
+    "n_val": 16,
+    "n_test": 28,
+    "majority": 0.5697674418604651,
+    "dim": 12,
+    "linear": {
+      "cv_acc_mean": 0.44183006535947716,
+      "cv_acc_std": 0.12055944889065444,
+      "val_acc": 0.5,
+      "test_acc": 0.5,
+      "test_balanced": 0.46875,
+      "test_ci": [
+        0.3263284683244634,
+        0.6736715316755366
+      ],
+      "per_class": {
+        "parallel to": 0.6875,
+        "perpendicular to": 0.25
+      }
+    },
+    "mlp": {
+      "cv_acc_mean": 0.4542483660130719,
+      "cv_acc_std": 0.07225105153168877,
+      "val_acc": 0.375,
+      "test_acc": 0.4642857142857143,
+      "test_balanced": 0.40625,
+      "test_ci": [
+        0.29531303739659587,
+        0.6418760485789833
+      ],
+      "per_class": {
+        "parallel to": 0.8125,
+        "perpendicular to": 0.0
+      }
+    }
+  },
+  "vit::T2_parallel_vs_perp::visual_geometry": {
+    "n_train": 86,
+    "n_val": 16,
+    "n_test": 28,
+    "majority": 0.5697674418604651,
+    "dim": 5132,
+    "linear": {
+      "cv_acc_mean": 0.5117647058823529,
+      "cv_acc_std": 0.07803823036130354,
+      "val_acc": 0.5,
+      "test_acc": 0.5357142857142857,
+      "test_balanced": 0.5104166666666666,
+      "test_ci": [
+        0.3581239514210167,
+        0.7046869626034041
+      ],
+      "per_class": {
+        "parallel to": 0.6875,
+        "perpendicular to": 0.3333333333333333
+      }
+    },
+    "mlp": {
+      "cv_acc_mean": 0.4294117647058823,
+      "cv_acc_std": 0.09036642056316009,
+      "val_acc": 0.5,
+      "test_acc": 0.6785714285714286,
+      "test_balanced": 0.65625,
+      "test_ci": [
+        0.4933850455563118,
+        0.8206695245657927
+      ],
+      "per_class": {
+        "parallel to": 0.8125,
+        "perpendicular to": 0.5
+      }
+    }
+  },
+  "vit::T3_4way::visual": {
+    "n_train": 397,
+    "n_val": 59,
+    "n_test": 127,
+    "majority": 0.4987405541561713,
+    "dim": 5120,
+    "linear": {
+      "cv_acc_mean": 0.45338607594936703,
+      "cv_acc_std": 0.044222982349925326,
+      "val_acc": 0.3898305084745763,
+      "test_acc": 0.5039370078740157,
+      "test_balanced": 0.4164078392909038,
+      "test_ci": [
+        0.418149182069332,
+        0.5894936471226071
+      ],
+      "per_class": {
+        "facing": 0.6290322580645161,
+        "facing away from": 0.43243243243243246,
+        "parallel to": 0.4375,
+        "perpendicular to": 0.16666666666666666
+      }
+    },
+    "mlp": {
+      "cv_acc_mean": 0.43082278481012654,
+      "cv_acc_std": 0.04519607800542637,
+      "val_acc": 0.3728813559322034,
+      "test_acc": 0.41732283464566927,
+      "test_balanced": 0.3031912961348446,
+      "test_ci": [
+        0.33522000130170465,
+        0.5042805856675773
+      ],
+      "per_class": {
+        "facing": 0.5967741935483871,
+        "facing away from": 0.32432432432432434,
+        "parallel to": 0.125,
+        "perpendicular to": 0.16666666666666666
+      }
+    }
+  },
+  "vit::T3_4way::geometry": {
+    "n_train": 397,
+    "n_val": 59,
+    "n_test": 127,
+    "majority": 0.4987405541561713,
+    "dim": 12,
+    "linear": {
+      "cv_acc_mean": 0.4810443037974683,
+      "cv_acc_std": 0.024291432772416643,
+      "val_acc": 0.3220338983050847,
+      "test_acc": 0.4881889763779528,
+      "test_balanced": 0.2811183158965417,
+      "test_ci": [
+        0.40288415034635855,
+        0.5741873620778246
+      ],
+      "per_class": {
+        "facing": 0.9516129032258065,
+        "facing away from": 0.02702702702702703,
+        "parallel to": 0.0625,
+        "perpendicular to": 0.08333333333333333
+      }
+    },
+    "mlp": {
+      "cv_acc_mean": 0.4610126582278481,
+      "cv_acc_std": 0.018320188487047008,
+      "val_acc": 0.3898305084745763,
+      "test_acc": 0.5196850393700787,
+      "test_balanced": 0.3224625835512932,
+      "test_ci": [
+        0.43349673534507266,
+        0.604717410614622
+      ],
+      "per_class": {
+        "facing": 0.9193548387096774,
+        "facing away from": 0.16216216216216217,
+        "parallel to": 0.125,
+        "perpendicular to": 0.08333333333333333
+      }
+    }
+  },
+  "vit::T3_4way::visual_geometry": {
+    "n_train": 397,
+    "n_val": 59,
+    "n_test": 127,
+    "majority": 0.4987405541561713,
+    "dim": 5132,
+    "linear": {
+      "cv_acc_mean": 0.46344936708860757,
+      "cv_acc_std": 0.0317419418633689,
+      "val_acc": 0.4067796610169492,
+      "test_acc": 0.5275590551181102,
+      "test_balanced": 0.44009735541993605,
+      "test_ci": [
+        0.4412015042102698,
+        0.6122983001333028
+      ],
+      "per_class": {
+        "facing": 0.6612903225806451,
+        "facing away from": 0.43243243243243246,
+        "parallel to": 0.5,
+        "perpendicular to": 0.16666666666666666
+      }
+    },
+    "mlp": {
+      "cv_acc_mean": 0.4687341772151899,
+      "cv_acc_std": 0.06166726933336784,
+      "val_acc": 0.4067796610169492,
+      "test_acc": 0.4566929133858268,
+      "test_balanced": 0.35361722609706475,
+      "test_ci": [
+        0.37260213016613264,
+        0.5433267487225389
+      ],
+      "per_class": {
+        "facing": 0.6774193548387096,
+        "facing away from": 0.21621621621621623,
+        "parallel to": 0.4375,
+        "perpendicular to": 0.08333333333333333
+      }
+    }
+  },
+  "merger::T1_facing_vs_facingaway::visual": {
+    "n_train": 311,
+    "n_val": 43,
+    "n_test": 99,
+    "majority": 0.6366559485530546,
+    "dim": 14336,
+    "linear": {
+      "cv_acc_mean": 0.572452636968766,
+      "cv_acc_std": 0.03618083118674761,
+      "val_acc": 0.5348837209302325,
+      "test_acc": 0.6565656565656566,
+      "test_balanced": 0.6331734960767219,
+      "test_ci": [
+        0.5587543290447314,
+        0.7426801099371592
+      ],
+      "per_class": {
+        "facing": 0.7258064516129032,
+        "facing away from": 0.5405405405405406
+      }
+    },
+    "mlp": {
+      "cv_acc_mean": 0.562621607782898,
+      "cv_acc_std": 0.04557799239726565,
+      "val_acc": 0.6046511627906976,
+      "test_acc": 0.5252525252525253,
+      "test_balanced": 0.4901918047079338,
+      "test_ci": [
+        0.42779134155248744,
+        0.6208271163478176
+      ],
+      "per_class": {
+        "facing": 0.6290322580645161,
+        "facing away from": 0.35135135135135137
+      }
+    }
+  },
+  "merger::T1_facing_vs_facingaway::geometry": {
+    "n_train": 311,
+    "n_val": 43,
+    "n_test": 99,
+    "majority": 0.6366559485530546,
+    "dim": 12,
+    "linear": {
+      "cv_acc_mean": 0.610752688172043,
+      "cv_acc_std": 0.05050330565942957,
+      "val_acc": 0.46511627906976744,
+      "test_acc": 0.6060606060606061,
+      "test_balanced": 0.48931996512641673,
+      "test_ci": [
+        0.5075782136685492,
+        0.6966193095127315
+      ],
+      "per_class": {
+        "facing": 0.9516129032258065,
+        "facing away from": 0.02702702702702703
+      }
+    },
+    "mlp": {
+      "cv_acc_mean": 0.6108038914490528,
+      "cv_acc_std": 0.025434889632398993,
+      "val_acc": 0.4883720930232558,
+      "test_acc": 0.7171717171717171,
+      "test_balanced": 0.6652136006974717,
+      "test_ci": [
+        0.6216369977049233,
+        0.796481740237699
+      ],
+      "per_class": {
+        "facing": 0.8709677419354839,
+        "facing away from": 0.4594594594594595
+      }
+    }
+  },
+  "merger::T1_facing_vs_facingaway::visual_geometry": {
+    "n_train": 311,
+    "n_val": 43,
+    "n_test": 99,
+    "majority": 0.6366559485530546,
+    "dim": 14348,
+    "linear": {
+      "cv_acc_mean": 0.578853046594982,
+      "cv_acc_std": 0.028267733552875065,
+      "val_acc": 0.5581395348837209,
+      "test_acc": 0.6565656565656566,
+      "test_balanced": 0.6331734960767219,
+      "test_ci": [
+        0.5587543290447314,
+        0.7426801099371592
+      ],
+      "per_class": {
+        "facing": 0.7258064516129032,
+        "facing away from": 0.5405405405405406
+      }
+    },
+    "mlp": {
+      "cv_acc_mean": 0.5661034306195596,
+      "cv_acc_std": 0.03402973025902575,
+      "val_acc": 0.6511627906976745,
+      "test_acc": 0.6767676767676768,
+      "test_balanced": 0.6166085440278989,
+      "test_ci": [
+        0.5795278335660973,
+        0.7608013717360372
+      ],
+      "per_class": {
+        "facing": 0.8548387096774194,
+        "facing away from": 0.3783783783783784
+      }
+    }
+  },
+  "merger::T2_parallel_vs_perp::visual": {
+    "n_train": 86,
+    "n_val": 16,
+    "n_test": 28,
+    "majority": 0.5697674418604651,
+    "dim": 14336,
+    "linear": {
+      "cv_acc_mean": 0.5124183006535947,
+      "cv_acc_std": 0.05039041899972912,
+      "val_acc": 0.5,
+      "test_acc": 0.5357142857142857,
+      "test_balanced": 0.5,
+      "test_ci": [
+        0.3581239514210167,
+        0.7046869626034041
+      ],
+      "per_class": {
+        "parallel to": 0.75,
+        "perpendicular to": 0.25
+      }
+    },
+    "mlp": {
+      "cv_acc_mean": 0.4901960784313726,
+      "cv_acc_std": 0.12585730616377425,
+      "val_acc": 0.5,
+      "test_acc": 0.5357142857142857,
+      "test_balanced": 0.5416666666666667,
+      "test_ci": [
+        0.3581239514210167,
+        0.7046869626034041
+      ],
+      "per_class": {
+        "parallel to": 0.5,
+        "perpendicular to": 0.5833333333333334
+      }
+    }
+  },
+  "merger::T2_parallel_vs_perp::geometry": {
+    "n_train": 86,
+    "n_val": 16,
+    "n_test": 28,
+    "majority": 0.5697674418604651,
+    "dim": 12,
+    "linear": {
+      "cv_acc_mean": 0.44183006535947716,
+      "cv_acc_std": 0.12055944889065444,
+      "val_acc": 0.5,
+      "test_acc": 0.5,
+      "test_balanced": 0.46875,
+      "test_ci": [
+        0.3263284683244634,
+        0.6736715316755366
+      ],
+      "per_class": {
+        "parallel to": 0.6875,
+        "perpendicular to": 0.25
+      }
+    },
+    "mlp": {
+      "cv_acc_mean": 0.5,
+      "cv_acc_std": 0.026306682088232825,
+      "val_acc": 0.375,
+      "test_acc": 0.42857142857142855,
+      "test_balanced": 0.41666666666666663,
+      "test_ci": [
+        0.2650829618073122,
+        0.609295210143846
+      ],
+      "per_class": {
+        "parallel to": 0.5,
+        "perpendicular to": 0.3333333333333333
+      }
+    }
+  },
+  "merger::T2_parallel_vs_perp::visual_geometry": {
+    "n_train": 86,
+    "n_val": 16,
+    "n_test": 28,
+    "majority": 0.5697674418604651,
+    "dim": 14348,
+    "linear": {
+      "cv_acc_mean": 0.5130718954248367,
+      "cv_acc_std": 0.07588457659450977,
+      "val_acc": 0.5,
+      "test_acc": 0.5357142857142857,
+      "test_balanced": 0.5,
+      "test_ci": [
+        0.3581239514210167,
+        0.7046869626034041
+      ],
+      "per_class": {
+        "parallel to": 0.75,
+        "perpendicular to": 0.25
+      }
+    },
+    "mlp": {
+      "cv_acc_mean": 0.4431372549019608,
+      "cv_acc_std": 0.14008291058424904,
+      "val_acc": 0.5,
+      "test_acc": 0.5714285714285714,
+      "test_balanced": 0.5833333333333333,
+      "test_ci": [
+        0.390704789856154,
+        0.7349170381926877
+      ],
+      "per_class": {
+        "parallel to": 0.5,
+        "perpendicular to": 0.6666666666666666
+      }
+    }
+  },
+  "merger::T3_4way::visual": {
+    "n_train": 397,
+    "n_val": 59,
+    "n_test": 127,
+    "majority": 0.4987405541561713,
+    "dim": 14336,
+    "linear": {
+      "cv_acc_mean": 0.43851265822784813,
+      "cv_acc_std": 0.0445285438719466,
+      "val_acc": 0.4406779661016949,
+      "test_acc": 0.5196850393700787,
+      "test_balanced": 0.4387895960476606,
+      "test_ci": [
+        0.43349673534507266,
+        0.604717410614622
+      ],
+      "per_class": {
+        "facing": 0.6290322580645161,
+        "facing away from": 0.4594594594594595,
+        "parallel to": 0.5,
+        "perpendicular to": 0.16666666666666666
+      }
+    },
+    "mlp": {
+      "cv_acc_mean": 0.41088607594936716,
+      "cv_acc_std": 0.054220174763513956,
+      "val_acc": 0.4406779661016949,
+      "test_acc": 0.44881889763779526,
+      "test_balanced": 0.3883954519035164,
+      "test_ci": [
+        0.3650835857973957,
+        0.5355596347073979
+      ],
+      "per_class": {
+        "facing": 0.6290322580645161,
+        "facing away from": 0.21621621621621623,
+        "parallel to": 0.375,
+        "perpendicular to": 0.3333333333333333
+      }
+    }
+  },
+  "merger::T3_4way::geometry": {
+    "n_train": 397,
+    "n_val": 59,
+    "n_test": 127,
+    "majority": 0.4987405541561713,
+    "dim": 12,
+    "linear": {
+      "cv_acc_mean": 0.4810443037974683,
+      "cv_acc_std": 0.024291432772416643,
+      "val_acc": 0.3220338983050847,
+      "test_acc": 0.4881889763779528,
+      "test_balanced": 0.2811183158965417,
+      "test_ci": [
+        0.40288415034635855,
+        0.5741873620778246
+      ],
+      "per_class": {
+        "facing": 0.9516129032258065,
+        "facing away from": 0.02702702702702703,
+        "parallel to": 0.0625,
+        "perpendicular to": 0.08333333333333333
+      }
+    },
+    "mlp": {
+      "cv_acc_mean": 0.4761075949367089,
+      "cv_acc_std": 0.010761355013979476,
+      "val_acc": 0.3220338983050847,
+      "test_acc": 0.48031496062992124,
+      "test_balanced": 0.28480547079337404,
+      "test_ci": [
+        0.39528258938537786,
+        0.5665032646549273
+      ],
+      "per_class": {
+        "facing": 0.8064516129032258,
+        "facing away from": 0.2702702702702703,
+        "parallel to": 0.0625,
+        "perpendicular to": 0.0
+      }
+    }
+  },
+  "merger::T3_4way::visual_geometry": {
+    "n_train": 397,
+    "n_val": 59,
+    "n_test": 127,
+    "majority": 0.4987405541561713,
+    "dim": 14348,
+    "linear": {
+      "cv_acc_mean": 0.43857594936708855,
+      "cv_acc_std": 0.04980980489819404,
+      "val_acc": 0.423728813559322,
+      "test_acc": 0.5039370078740157,
+      "test_balanced": 0.43072507991862835,
+      "test_ci": [
+        0.418149182069332,
+        0.5894936471226071
+      ],
+      "per_class": {
+        "facing": 0.5967741935483871,
+        "facing away from": 0.4594594594594595,
+        "parallel to": 0.5,
+        "perpendicular to": 0.16666666666666666
+      }
+    },
+    "mlp": {
+      "cv_acc_mean": 0.4486708860759494,
+      "cv_acc_std": 0.05662714501292941,
+      "val_acc": 0.4406779661016949,
+      "test_acc": 0.5275590551181102,
+      "test_balanced": 0.3857935556524266,
+      "test_ci": [
+        0.4412015042102698,
+        0.6122983001333028
+      ],
+      "per_class": {
+        "facing": 0.7419354838709677,
+        "facing away from": 0.40540540540540543,
+        "parallel to": 0.3125,
+        "perpendicular to": 0.08333333333333333
+      }
+    }
+  }
+}

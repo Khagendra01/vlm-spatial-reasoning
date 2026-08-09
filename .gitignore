@@ -23,3 +23,4 @@ results/checkpoint_*.json
 .DS_Store
 Thumbs.db
 data/image_cache/
+results/probe/patch_embeddings.pkl
