@@ -1,0 +1,46 @@
+{
+ "FF": {
+  "n": 103,
+  "orig_acc": 69,
+  "flip_acc": 68,
+  "consistent": 66,
+  "contradiction": 37,
+  "both_correct": 50,
+  "both_wrong": 16,
+  "flip_na": 0,
+  "orig_na": 0
+ },
+ "FB": {
+  "n": 314,
+  "orig_acc": 248,
+  "flip_acc": 208,
+  "consistent": 212,
+  "contradiction": 102,
+  "both_correct": 177,
+  "both_wrong": 35,
+  "flip_na": 0,
+  "orig_na": 0
+ },
+ "LR": {
+  "n": 245,
+  "orig_acc": 217,
+  "flip_acc": 144,
+  "consistent": 146,
+  "contradiction": 99,
+  "both_correct": 131,
+  "both_wrong": 15,
+  "flip_na": 0,
+  "orig_na": 0
+ },
+ "PP": {
+  "n": 34,
+  "orig_acc": 19,
+  "flip_acc": 14,
+  "consistent": 13,
+  "contradiction": 21,
+  "both_correct": 6,
+  "both_wrong": 7,
+  "flip_na": 0,
+  "orig_na": 0
+ }
+}

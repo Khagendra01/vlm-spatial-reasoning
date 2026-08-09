@@ -1,0 +1,214 @@
+{
+ "stats": {
+  "7B_zero_shot": {
+   "FF": {
+    "n": 103,
+    "orig_acc": 66,
+    "flip_acc": 57,
+    "cons": 38,
+    "contra": 65,
+    "bc": 29,
+    "bw": 9,
+    "na": 0
+   },
+   "FB": {
+    "n": 314,
+    "orig_acc": 239,
+    "flip_acc": 202,
+    "cons": 179,
+    "contra": 135,
+    "bc": 153,
+    "bw": 26,
+    "na": 0
+   },
+   "LR": {
+    "n": 245,
+    "orig_acc": 210,
+    "flip_acc": 145,
+    "cons": 142,
+    "contra": 103,
+    "bc": 126,
+    "bw": 16,
+    "na": 0
+   },
+   "PP": {
+    "n": 34,
+    "orig_acc": 21,
+    "flip_acc": 12,
+    "cons": 7,
+    "contra": 27,
+    "bc": 3,
+    "bw": 4,
+    "na": 0
+   }
+  },
+  "LM_only_LoRA": {
+   "FF": {
+    "n": 103,
+    "orig_acc": 71,
+    "flip_acc": 70,
+    "cons": 68,
+    "contra": 35,
+    "bc": 53,
+    "bw": 15,
+    "na": 0
+   },
+   "FB": {
+    "n": 314,
+    "orig_acc": 260,
+    "flip_acc": 204,
+    "cons": 222,
+    "contra": 92,
+    "bc": 186,
+    "bw": 36,
+    "na": 0
+   },
+   "LR": {
+    "n": 245,
+    "orig_acc": 216,
+    "flip_acc": 144,
+    "cons": 143,
+    "contra": 102,
+    "bc": 129,
+    "bw": 14,
+    "na": 0
+   },
+   "PP": {
+    "n": 34,
+    "orig_acc": 19,
+    "flip_acc": 15,
+    "cons": 12,
+    "contra": 22,
+    "bc": 6,
+    "bw": 6,
+    "na": 0
+   }
+  },
+  "hardneg_LoRA": {
+   "FF": {
+    "n": 103,
+    "orig_acc": 71,
+    "flip_acc": 72,
+    "cons": 80,
+    "contra": 23,
+    "bc": 60,
+    "bw": 20,
+    "na": 0
+   },
+   "FB": {
+    "n": 314,
+    "orig_acc": 257,
+    "flip_acc": 213,
+    "cons": 224,
+    "contra": 90,
+    "bc": 190,
+    "bw": 34,
+    "na": 0
+   },
+   "LR": {
+    "n": 245,
+    "orig_acc": 216,
+    "flip_acc": 134,
+    "cons": 139,
+    "contra": 106,
+    "bc": 122,
+    "bw": 17,
+    "na": 0
+   },
+   "PP": {
+    "n": 34,
+    "orig_acc": 20,
+    "flip_acc": 17,
+    "cons": 15,
+    "contra": 19,
+    "bc": 9,
+    "bw": 6,
+    "na": 0
+   }
+  },
+  "projector_LoRA": {
+   "FF": {
+    "n": 103,
+    "orig_acc": 72,
+    "flip_acc": 69,
+    "cons": 70,
+    "contra": 33,
+    "bc": 54,
+    "bw": 16,
+    "na": 0
+   },
+   "FB": {
+    "n": 314,
+    "orig_acc": 250,
+    "flip_acc": 212,
+    "cons": 208,
+    "contra": 106,
+    "bc": 178,
+    "bw": 30,
+    "na": 0
+   },
+   "LR": {
+    "n": 245,
+    "orig_acc": 215,
+    "flip_acc": 142,
+    "cons": 140,
+    "contra": 105,
+    "bc": 126,
+    "bw": 14,
+    "na": 0
+   },
+   "PP": {
+    "n": 34,
+    "orig_acc": 16,
+    "flip_acc": 17,
+    "cons": 17,
+    "contra": 17,
+    "bc": 8,
+    "bw": 9,
+    "na": 0
+   }
+  },
+  "vision_proj_LoRA": {
+   "FF": {
+    "n": 103,
+    "orig_acc": 69,
+    "flip_acc": 68,
+    "cons": 66,
+    "contra": 37,
+    "bc": 50,
+    "bw": 16,
+    "na": 0
+   },
+   "FB": {
+    "n": 314,
+    "orig_acc": 248,
+    "flip_acc": 208,
+    "cons": 212,
+    "contra": 102,
+    "bc": 177,
+    "bw": 35,
+    "na": 0
+   },
+   "LR": {
+    "n": 245,
+    "orig_acc": 217,
+    "flip_acc": 144,
+    "cons": 146,
+    "contra": 99,
+    "bc": 131,
+    "bw": 15,
+    "na": 0
+   },
+   "PP": {
+    "n": 34,
+    "orig_acc": 19,
+    "flip_acc": 14,
+    "cons": 13,
+    "contra": 21,
+    "bc": 6,
+    "bw": 7,
+    "na": 0
+   }
+  }
+ }
+}
