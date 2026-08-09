@@ -22,3 +22,4 @@ results/checkpoint_*.json
 # OS
 .DS_Store
 Thumbs.db
+data/image_cache/

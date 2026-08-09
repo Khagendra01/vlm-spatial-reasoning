@@ -1,0 +1,365 @@
+{
+  "summary": {},
+  "tasks": {
+    "vit::T1_facing_vs_facingaway": {
+      "n_train": 327,
+      "n_val": 43,
+      "n_test": 103,
+      "train_class_counts": {
+        "0": 210,
+        "1": 117
+      },
+      "majority_baseline": 0.6422018348623854,
+      "test_class_counts": {
+        "0": 64,
+        "1": 39
+      },
+      "linear": {
+        "cv_acc_mean": 0.5626573426573426,
+        "cv_acc_std": 0.05346170997059118,
+        "val_acc": 0.5116279069767442,
+        "val_balanced": 0.49782608695652175,
+        "test_acc": 0.6504854368932039,
+        "test_balanced": 0.6035657051282051,
+        "test_ci": [
+          0.5544984775703553,
+          0.7356506778148132
+        ],
+        "per_class": {
+          "facing": 0.796875,
+          "facing away from": 0.41025641025641024
+        }
+      },
+      "mlp": {
+        "cv_acc_mean": 0.5568764568764569,
+        "cv_acc_std": 0.0756372004018026,
+        "val_acc": 0.4186046511627907,
+        "val_balanced": 0.3978260869565217,
+        "test_acc": 0.5533980582524272,
+        "test_balanced": 0.5204326923076923,
+        "test_ci": [
+          0.45719037245005417,
+          0.645765779460812
+        ],
+        "per_class": {
+          "facing": 0.65625,
+          "facing away from": 0.38461538461538464
+        }
+      },
+      "generative_ref": {
+        "7B_zeroshot_statement_acc": {
+          "facing": 0.734375,
+          "facing away from": 0.48717948717948717
+        },
+        "7B_gen_lora_statement_acc": {
+          "facing": 0.75,
+          "facing away from": 0.5897435897435898
+        }
+      }
+    },
+    "vit::T2_parallel_vs_perp": {
+      "n_train": 96,
+      "n_val": 16,
+      "n_test": 34,
+      "train_class_counts": {
+        "1": 39,
+        "0": 57
+      },
+      "majority_baseline": 0.59375,
+      "test_class_counts": {
+        "1": 12,
+        "0": 22
+      },
+      "linear": {
+        "cv_acc_mean": 0.6031578947368421,
+        "cv_acc_std": 0.11586600341740642,
+        "val_acc": 0.75,
+        "val_balanced": 0.746031746031746,
+        "test_acc": 0.6176470588235294,
+        "test_balanced": 0.6098484848484849,
+        "test_ci": [
+          0.4504071999938267,
+          0.7610003514839122
+        ],
+        "per_class": {
+          "parallel to": 0.6363636363636364,
+          "perpendicular to": 0.5833333333333334
+        }
+      },
+      "mlp": {
+        "cv_acc_mean": 0.5589473684210525,
+        "cv_acc_std": 0.18606286728339283,
+        "val_acc": 0.625,
+        "val_balanced": 0.6190476190476191,
+        "test_acc": 0.6764705882352942,
+        "test_balanced": 0.6931818181818181,
+        "test_ci": [
+          0.5084258404811939,
+          0.8086854867354143
+        ],
+        "per_class": {
+          "parallel to": 0.6363636363636364,
+          "perpendicular to": 0.75
+        }
+      },
+      "generative_ref": {
+        "7B_zeroshot_statement_acc": {
+          "parallel to": 0.6363636363636364,
+          "perpendicular to": 0.5833333333333334
+        },
+        "7B_gen_lora_statement_acc": {
+          "parallel to": 0.6363636363636364,
+          "perpendicular to": 0.4166666666666667
+        }
+      }
+    },
+    "vit::T3_4way": {
+      "n_train": 423,
+      "n_val": 59,
+      "n_test": 137,
+      "train_class_counts": {
+        "0": 210,
+        "3": 39,
+        "1": 117,
+        "2": 57
+      },
+      "majority_baseline": 0.49645390070921985,
+      "test_class_counts": {
+        "0": 64,
+        "3": 12,
+        "2": 22,
+        "1": 39
+      },
+      "linear": {
+        "cv_acc_mean": 0.43733893557422976,
+        "cv_acc_std": 0.025486440453468717,
+        "val_acc": 0.3898305084745763,
+        "val_balanced": 0.3506297446514838,
+        "test_acc": 0.5255474452554745,
+        "test_balanced": 0.40535766317016314,
+        "test_ci": [
+          0.4423782454608223,
+          0.6073229791773529
+        ],
+        "per_class": {
+          "facing": 0.71875,
+          "facing away from": 0.41025641025641024,
+          "parallel to": 0.4090909090909091,
+          "perpendicular to": 0.08333333333333333
+        }
+      },
+      "mlp": {
+        "cv_acc_mean": 0.4280952380952381,
+        "cv_acc_std": 0.03693610572923204,
+        "val_acc": 0.4067796610169492,
+        "val_balanced": 0.3486714975845411,
+        "test_acc": 0.5255474452554745,
+        "test_balanced": 0.4291958041958042,
+        "test_ci": [
+          0.4423782454608223,
+          0.6073229791773529
+        ],
+        "per_class": {
+          "facing": 0.75,
+          "facing away from": 0.3076923076923077,
+          "parallel to": 0.4090909090909091,
+          "perpendicular to": 0.25
+        }
+      },
+      "generative_ref": {
+        "7B_zeroshot_statement_acc": {
+          "facing": 0.734375,
+          "facing away from": 0.48717948717948717,
+          "parallel to": 0.6363636363636364,
+          "perpendicular to": 0.5833333333333334
+        },
+        "7B_gen_lora_statement_acc": {
+          "facing": 0.75,
+          "facing away from": 0.5897435897435898,
+          "parallel to": 0.6363636363636364,
+          "perpendicular to": 0.4166666666666667
+        }
+      }
+    },
+    "merger::T1_facing_vs_facingaway": {
+      "n_train": 327,
+      "n_val": 43,
+      "n_test": 103,
+      "train_class_counts": {
+        "0": 210,
+        "1": 117
+      },
+      "majority_baseline": 0.6422018348623854,
+      "test_class_counts": {
+        "0": 64,
+        "1": 39
+      },
+      "linear": {
+        "cv_acc_mean": 0.5412121212121211,
+        "cv_acc_std": 0.03534906432788637,
+        "val_acc": 0.5348837209302325,
+        "val_balanced": 0.5260869565217392,
+        "test_acc": 0.6893203883495146,
+        "test_balanced": 0.6448317307692308,
+        "test_ci": [
+          0.5944983926937447,
+          0.7705279640811445
+        ],
+        "per_class": {
+          "facing": 0.828125,
+          "facing away from": 0.46153846153846156
+        }
+      },
+      "mlp": {
+        "cv_acc_mean": 0.5719813519813519,
+        "cv_acc_std": 0.07789376945934876,
+        "val_acc": 0.5116279069767442,
+        "val_balanced": 0.4880434782608696,
+        "test_acc": 0.5242718446601942,
+        "test_balanced": 0.4919871794871795,
+        "test_ci": [
+          0.428696500548807,
+          0.6181017503197686
+        ],
+        "per_class": {
+          "facing": 0.625,
+          "facing away from": 0.358974358974359
+        }
+      },
+      "generative_ref": {
+        "7B_zeroshot_statement_acc": {
+          "facing": 0.734375,
+          "facing away from": 0.48717948717948717
+        },
+        "7B_gen_lora_statement_acc": {
+          "facing": 0.75,
+          "facing away from": 0.5897435897435898
+        }
+      }
+    },
+    "merger::T2_parallel_vs_perp": {
+      "n_train": 96,
+      "n_val": 16,
+      "n_test": 34,
+      "train_class_counts": {
+        "1": 39,
+        "0": 57
+      },
+      "majority_baseline": 0.59375,
+      "test_class_counts": {
+        "1": 12,
+        "0": 22
+      },
+      "linear": {
+        "cv_acc_mean": 0.5736842105263158,
+        "cv_acc_std": 0.06315789473684212,
+        "val_acc": 0.6875,
+        "val_balanced": 0.6904761904761905,
+        "test_acc": 0.6470588235294118,
+        "test_balanced": 0.6136363636363636,
+        "test_ci": [
+          0.4791365883001342,
+          0.7851228510470394
+        ],
+        "per_class": {
+          "parallel to": 0.7272727272727273,
+          "perpendicular to": 0.5
+        }
+      },
+      "mlp": {
+        "cv_acc_mean": 0.47894736842105257,
+        "cv_acc_std": 0.13764944032233709,
+        "val_acc": 0.6875,
+        "val_balanced": 0.7063492063492063,
+        "test_acc": 0.6470588235294118,
+        "test_balanced": 0.6325757575757576,
+        "test_ci": [
+          0.4791365883001342,
+          0.7851228510470394
+        ],
+        "per_class": {
+          "parallel to": 0.6818181818181818,
+          "perpendicular to": 0.5833333333333334
+        }
+      },
+      "generative_ref": {
+        "7B_zeroshot_statement_acc": {
+          "parallel to": 0.6363636363636364,
+          "perpendicular to": 0.5833333333333334
+        },
+        "7B_gen_lora_statement_acc": {
+          "parallel to": 0.6363636363636364,
+          "perpendicular to": 0.4166666666666667
+        }
+      }
+    },
+    "merger::T3_4way": {
+      "n_train": 423,
+      "n_val": 59,
+      "n_test": 137,
+      "train_class_counts": {
+        "0": 210,
+        "3": 39,
+        "1": 117,
+        "2": 57
+      },
+      "majority_baseline": 0.49645390070921985,
+      "test_class_counts": {
+        "0": 64,
+        "3": 12,
+        "2": 22,
+        "1": 39
+      },
+      "linear": {
+        "cv_acc_mean": 0.44224089635854347,
+        "cv_acc_std": 0.038094579002372266,
+        "val_acc": 0.3559322033898305,
+        "val_balanced": 0.3119824016563147,
+        "test_acc": 0.5328467153284672,
+        "test_balanced": 0.44017701048951047,
+        "test_ci": [
+          0.4495470105731744,
+          0.6143545639616222
+        ],
+        "per_class": {
+          "facing": 0.71875,
+          "facing away from": 0.4358974358974359,
+          "parallel to": 0.2727272727272727,
+          "perpendicular to": 0.3333333333333333
+        }
+      },
+      "mlp": {
+        "cv_acc_mean": 0.4470588235294118,
+        "cv_acc_std": 0.04809100441585126,
+        "val_acc": 0.3559322033898305,
+        "val_balanced": 0.2855072463768116,
+        "test_acc": 0.4744525547445255,
+        "test_balanced": 0.43217329545454547,
+        "test_ci": [
+          0.39267702082264716,
+          0.5576217545391778
+        ],
+        "per_class": {
+          "facing": 0.546875,
+          "facing away from": 0.3333333333333333,
+          "parallel to": 0.6818181818181818,
+          "perpendicular to": 0.16666666666666666
+        }
+      },
+      "generative_ref": {
+        "7B_zeroshot_statement_acc": {
+          "facing": 0.734375,
+          "facing away from": 0.48717948717948717,
+          "parallel to": 0.6363636363636364,
+          "perpendicular to": 0.5833333333333334
+        },
+        "7B_gen_lora_statement_acc": {
+          "facing": 0.75,
+          "facing away from": 0.5897435897435898,
+          "parallel to": 0.6363636363636364,
+          "perpendicular to": 0.4166666666666667
+        }
+      }
+    }
+  }
+}
