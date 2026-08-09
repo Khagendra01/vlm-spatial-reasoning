@@ -1,0 +1,6 @@
+id,relation,family,gt,pred,failure_mode,confidence,notes
+10,in front of,depth,false,true,occlusion,0.7,It hard to know if that is truck or not but can look like truck but the back of the part that make truck is not visible
+39,in front of,depth,true,false,viewpoint ambiguity,0.7,it is front of the oven from oven perspection but from our perspection it is in the left
+30,touching,topology_contact,true,false,lexical ambiguity,0.7,
+167,touching,topology_contact,false,true,occlusion,0.7,
+69,behind,depth,false,true,lexical ambiguity,0.7,
