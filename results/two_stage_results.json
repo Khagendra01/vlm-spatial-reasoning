@@ -1,0 +1,94 @@
+{
+  "results": {
+    "A_geometry::linear": {
+      "cv_rel_acc": 0.4557911392405063,
+      "cv_rel_std": 0.05016831947356294,
+      "rel_4way_test_acc": 0.48031496062992124,
+      "rel_4way_test_bal": 0.29957679453647196,
+      "val_4way_acc": 0.3559322033898305,
+      "TF_overall": 0.5826771653543307,
+      "TF_per_relation": {
+        "facing": 0.6612903225806451,
+        "facing away from": 0.5675675675675675,
+        "parallel to": 0.25,
+        "perpendicular to": 0.6666666666666666
+      },
+      "n_test": 127
+    },
+    "A_geometry::mlp": {
+      "cv_rel_acc": 0.45832278481012656,
+      "cv_rel_std": 0.04780844415119894,
+      "rel_4way_test_acc": 0.44881889763779526,
+      "rel_4way_test_bal": 0.26937118570183083,
+      "val_4way_acc": 0.3220338983050847,
+      "TF_overall": 0.5826771653543307,
+      "TF_per_relation": {
+        "facing": 0.6935483870967742,
+        "facing away from": 0.5405405405405406,
+        "parallel to": 0.25,
+        "perpendicular to": 0.5833333333333334
+      },
+      "n_test": 127
+    },
+    "B_geometry_visual::linear": {
+      "cv_rel_acc": 0.4410759493670886,
+      "cv_rel_std": 0.045421766997340726,
+      "rel_4way_test_acc": 0.5196850393700787,
+      "rel_4way_test_bal": 0.4476578392909038,
+      "val_4way_acc": 0.4406779661016949,
+      "TF_overall": 0.5590551181102362,
+      "TF_per_relation": {
+        "facing": 0.5967741935483871,
+        "facing away from": 0.4864864864864865,
+        "parallel to": 0.5625,
+        "perpendicular to": 0.5833333333333334
+      },
+      "n_test": 127
+    },
+    "B_geometry_visual::mlp": {
+      "cv_rel_acc": 0.45348101265822793,
+      "cv_rel_std": 0.04218533664419437,
+      "rel_4way_test_acc": 0.48031496062992124,
+      "rel_4way_test_bal": 0.3906885716361523,
+      "val_4way_acc": 0.4915254237288136,
+      "TF_overall": 0.5511811023622047,
+      "TF_per_relation": {
+        "facing": 0.5967741935483871,
+        "facing away from": 0.4594594594594595,
+        "parallel to": 0.5625,
+        "perpendicular to": 0.5833333333333334
+      },
+      "n_test": 127
+    }
+  },
+  "control": {
+    "overall": 0.656934306569343,
+    "facing": 0.75,
+    "facing away from": 0.5897435897435898,
+    "parallel to": 0.6363636363636364,
+    "perpendicular to": 0.4166666666666667
+  },
+  "mcnemar": {
+    "A_geometry::linear": {
+      "p": 0.0002642786618272985,
+      "ctrl_loss": 45,
+      "ctrl_gain": 16
+    },
+    "A_geometry::mlp": {
+      "p": 2.7191876822818543e-05,
+      "ctrl_loss": 47,
+      "ctrl_gain": 14
+    },
+    "B_geometry_visual::linear": {
+      "p": 0.0036899642765400487,
+      "ctrl_loss": 44,
+      "ctrl_gain": 20
+    },
+    "B_geometry_visual::mlp": {
+      "p": 0.00042213032347520506,
+      "ctrl_loss": 47,
+      "ctrl_gain": 18
+    }
+  },
+  "n_no_box": 36
+}

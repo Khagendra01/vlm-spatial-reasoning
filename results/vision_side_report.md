@@ -69,13 +69,16 @@ Paired exact McNemar vs control.
 
 **Refined causal picture:** the orientation ceiling sits in the
 decision-level interaction between visual evidence and language priors —
-the LLM *can* extract more than the probes (73–78% on facing), so the
-features are usable; what is missing is a reliable *object-intrinsic
-direction* readout in the full model, which neither representation
-adaptation nor LM-side training supplies. This points toward structured
-interventions at the reasoning interface (e.g., explicit relational/visual
-reasoning modules, two-stage "localize → then answer" prompting with
-vision-derived geometry) rather than further single-model fine-tuning knobs.
+the generative model outperforms simple probes on some orientation
+relations (73–78% on facing), suggesting that useful signal may emerge
+through multimodal interaction or language priors even though orientation
+is not cleanly decodable from frozen visual features. What is missing is a
+reliable *object-intrinsic direction* readout in the full model, which
+neither representation adaptation nor LM-side training supplies. This
+points toward structured interventions at the reasoning interface (e.g.,
+explicit relational/visual reasoning modules, two-stage "localize → then
+answer" prompting with vision-derived geometry) rather than further
+single-model fine-tuning knobs.
 
 ## Files
 
