@@ -1,0 +1,77 @@
+{
+  "per_relation": {
+    "facing": {
+      "n": 64,
+      "2B_zero": 0.703125,
+      "2B_lora": 0.6875,
+      "7B_zero": 0.734375,
+      "7B_lora": 0.75
+    },
+    "perpendicular to": {
+      "n": 12,
+      "2B_zero": 0.5833333333333334,
+      "2B_lora": 0.5833333333333334,
+      "7B_zero": 0.5833333333333334,
+      "7B_lora": 0.4166666666666667
+    },
+    "parallel to": {
+      "n": 22,
+      "2B_zero": 0.5909090909090909,
+      "2B_lora": 0.5909090909090909,
+      "7B_zero": 0.6363636363636364,
+      "7B_lora": 0.6363636363636364
+    },
+    "facing away from": {
+      "n": 39,
+      "2B_zero": 0.5384615384615384,
+      "2B_lora": 0.5384615384615384,
+      "7B_zero": 0.48717948717948717,
+      "7B_lora": 0.5897435897435898
+    }
+  },
+  "transition_scaling": {
+    "both_wrong": 28,
+    "b2w_7r": 23,
+    "b2r_7w": 22,
+    "both_right": 64
+  },
+  "transition_adaptation": {
+    "both_wrong": 20,
+    "b7w_l7r": 30,
+    "b7r_l7w": 27,
+    "both_right": 60
+  },
+  "persistent_failures": [],
+  "patterns": {
+    "facing away from_label_True": 7,
+    "parallel to_label_True": 3,
+    "facing_label_True": 4,
+    "parallel to_label_False": 1,
+    "facing away from_label_False": 2,
+    "perpendicular to_label_True": 2,
+    "perpendicular to_label_False": 1
+  },
+  "persistent_count": 20,
+  "persistent_ids": [
+    "1093",
+    "1167",
+    "1178",
+    "1202",
+    "1296",
+    "1312",
+    "1384",
+    "1611",
+    "1815",
+    "1905",
+    "1953",
+    "2034",
+    "2059",
+    "22",
+    "239",
+    "375",
+    "558",
+    "564",
+    "676",
+    "937"
+  ]
+}
