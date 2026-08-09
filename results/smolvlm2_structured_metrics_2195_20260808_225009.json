@@ -1,0 +1,912 @@
+{
+  "global": {
+    "total": 2195,
+    "valid": 2195,
+    "invalid": 0,
+    "correct": 1500,
+    "accuracy": 0.683371298405467,
+    "invalid_rate": 0.0,
+    "true_class": {
+      "total": 1181,
+      "correct": 1078,
+      "accuracy": 0.9127857747671465
+    },
+    "false_class": {
+      "total": 1014,
+      "correct": 422,
+      "accuracy": 0.4161735700197239
+    },
+    "prediction_distribution": {
+      "predicted_true": 1670,
+      "predicted_false": 525,
+      "true_ratio": 0.7608200455580866
+    },
+    "confusion_matrix": {
+      "tp": 1078,
+      "fp": 592,
+      "tn": 422,
+      "fn": 103
+    },
+    "precision": 0.6455089820359281,
+    "recall": 0.9127857747671465,
+    "f1": 0.7562258856541565
+  },
+  "by_relation": {
+    "touching": {
+      "n": 273,
+      "correct": 204,
+      "accuracy": 0.7472527472527473,
+      "ci_lower": 0.6925130921741961,
+      "ci_upper": 0.7951303833728315,
+      "true_total": 143,
+      "false_total": 130
+    },
+    "behind": {
+      "n": 150,
+      "correct": 101,
+      "accuracy": 0.6733333333333333,
+      "ci_lower": 0.5947670390048972,
+      "ci_upper": 0.7432429660912535,
+      "true_total": 86,
+      "false_total": 64
+    },
+    "in front of": {
+      "n": 142,
+      "correct": 94,
+      "accuracy": 0.6619718309859155,
+      "ci_lower": 0.5808133488820494,
+      "ci_upper": 0.7345973432661442,
+      "true_total": 84,
+      "false_total": 58
+    },
+    "on": {
+      "n": 117,
+      "correct": 80,
+      "accuracy": 0.6837606837606838,
+      "ci_lower": 0.5948031358796455,
+      "ci_upper": 0.7610345888773917,
+      "true_total": 49,
+      "false_total": 68
+    },
+    "under": {
+      "n": 114,
+      "correct": 77,
+      "accuracy": 0.6754385964912281,
+      "ci_lower": 0.5849888567964521,
+      "ci_upper": 0.7544498473623509,
+      "true_total": 56,
+      "false_total": 58
+    },
+    "on top of": {
+      "n": 105,
+      "correct": 80,
+      "accuracy": 0.7619047619047619,
+      "ci_lower": 0.6721111822411754,
+      "ci_upper": 0.8332103124814305,
+      "true_total": 64,
+      "false_total": 41
+    },
+    "at the left side of": {
+      "n": 96,
+      "correct": 55,
+      "accuracy": 0.5729166666666666,
+      "ci_lower": 0.47304132562163337,
+      "ci_upper": 0.6671807862034976,
+      "true_total": 43,
+      "false_total": 53
+    },
+    "at the right side of": {
+      "n": 80,
+      "correct": 55,
+      "accuracy": 0.6875,
+      "ci_lower": 0.5793201821792608,
+      "ci_upper": 0.7784974167215235,
+      "true_total": 42,
+      "false_total": 38
+    },
+    "contains": {
+      "n": 66,
+      "correct": 52,
+      "accuracy": 0.7878787878787878,
+      "ci_lower": 0.6748670057937918,
+      "ci_upper": 0.8692213312431603,
+      "true_total": 28,
+      "false_total": 38
+    },
+    "above": {
+      "n": 65,
+      "correct": 44,
+      "accuracy": 0.676923076923077,
+      "ci_lower": 0.5561376050627119,
+      "ci_upper": 0.7779627063768827,
+      "true_total": 38,
+      "false_total": 27
+    },
+    "facing": {
+      "n": 64,
+      "correct": 37,
+      "accuracy": 0.578125,
+      "ci_lower": 0.4560981205252726,
+      "ci_upper": 0.6913040633854843,
+      "true_total": 34,
+      "false_total": 30
+    },
+    "below": {
+      "n": 64,
+      "correct": 41,
+      "accuracy": 0.640625,
+      "ci_lower": 0.5182062363615084,
+      "ci_upper": 0.7471176946778538,
+      "true_total": 33,
+      "false_total": 31
+    },
+    "in": {
+      "n": 60,
+      "correct": 49,
+      "accuracy": 0.8166666666666667,
+      "ci_lower": 0.7008000677353371,
+      "ci_upper": 0.8944231096286387,
+      "true_total": 32,
+      "false_total": 28
+    },
+    "next to": {
+      "n": 60,
+      "correct": 42,
+      "accuracy": 0.7,
+      "ci_lower": 0.5749105303360957,
+      "ci_upper": 0.801019897472731,
+      "true_total": 36,
+      "false_total": 24
+    },
+    "beneath": {
+      "n": 53,
+      "correct": 37,
+      "accuracy": 0.6981132075471698,
+      "ci_lower": 0.5646291313003242,
+      "ci_upper": 0.8048185971239281,
+      "true_total": 35,
+      "false_total": 18
+    },
+    "far away from": {
+      "n": 50,
+      "correct": 33,
+      "accuracy": 0.66,
+      "ci_lower": 0.5215356854148285,
+      "ci_upper": 0.7756323036493895,
+      "true_total": 27,
+      "false_total": 23
+    },
+    "left of": {
+      "n": 40,
+      "correct": 25,
+      "accuracy": 0.625,
+      "ci_lower": 0.47032160054531913,
+      "ci_upper": 0.7577722646420829,
+      "true_total": 25,
+      "false_total": 15
+    },
+    "inside": {
+      "n": 39,
+      "correct": 30,
+      "accuracy": 0.7692307692307693,
+      "ci_lower": 0.6166343954261704,
+      "ci_upper": 0.8735433757121625,
+      "true_total": 18,
+      "false_total": 21
+    },
+    "facing away from": {
+      "n": 39,
+      "correct": 21,
+      "accuracy": 0.5384615384615384,
+      "ci_lower": 0.3856918682173881,
+      "ci_upper": 0.6843335276595165,
+      "true_total": 20,
+      "false_total": 19
+    },
+    "at the edge of": {
+      "n": 37,
+      "correct": 24,
+      "accuracy": 0.6486486486486487,
+      "ci_lower": 0.48758729517569566,
+      "ci_upper": 0.7817459336889914,
+      "true_total": 21,
+      "false_total": 16
+    },
+    "beside": {
+      "n": 37,
+      "correct": 31,
+      "accuracy": 0.8378378378378378,
+      "ci_lower": 0.6886320070454415,
+      "ci_upper": 0.923488967647029,
+      "true_total": 28,
+      "false_total": 9
+    },
+    "away from": {
+      "n": 35,
+      "correct": 19,
+      "accuracy": 0.5428571428571428,
+      "ci_lower": 0.38189451340137515,
+      "ci_upper": 0.6953422636623914,
+      "true_total": 21,
+      "false_total": 14
+    },
+    "right of": {
+      "n": 29,
+      "correct": 20,
+      "accuracy": 0.6896551724137931,
+      "ci_lower": 0.5076952952728147,
+      "ci_upper": 0.8272457551023193,
+      "true_total": 17,
+      "false_total": 12
+    },
+    "far from": {
+      "n": 25,
+      "correct": 18,
+      "accuracy": 0.72,
+      "ci_lower": 0.5242302810344169,
+      "ci_upper": 0.8571632616261843,
+      "true_total": 12,
+      "false_total": 13
+    },
+    "over": {
+      "n": 25,
+      "correct": 16,
+      "accuracy": 0.64,
+      "ci_lower": 0.44518154601046633,
+      "ci_upper": 0.7975234356826436,
+      "true_total": 16,
+      "false_total": 9
+    },
+    "near": {
+      "n": 23,
+      "correct": 16,
+      "accuracy": 0.6956521739130435,
+      "ci_lower": 0.49133870939427393,
+      "ci_upper": 0.8439617197902755,
+      "true_total": 14,
+      "false_total": 9
+    },
+    "parallel to": {
+      "n": 22,
+      "correct": 11,
+      "accuracy": 0.5,
+      "ci_lower": 0.3072180469247956,
+      "ci_upper": 0.6927819530752044,
+      "true_total": 11,
+      "false_total": 11
+    },
+    "at the back of": {
+      "n": 22,
+      "correct": 11,
+      "accuracy": 0.5,
+      "ci_lower": 0.3072180469247956,
+      "ci_upper": 0.6927819530752044,
+      "true_total": 12,
+      "false_total": 10
+    },
+    "surrounding": {
+      "n": 20,
+      "correct": 16,
+      "accuracy": 0.8,
+      "ci_lower": 0.5839782779742401,
+      "ci_upper": 0.9193436467288,
+      "true_total": 5,
+      "false_total": 15
+    },
+    "close to": {
+      "n": 20,
+      "correct": 18,
+      "accuracy": 0.9,
+      "ci_lower": 0.6989617935882066,
+      "ci_upper": 0.9721341060158468,
+      "true_total": 15,
+      "false_total": 5
+    },
+    "in the middle of": {
+      "n": 19,
+      "correct": 13,
+      "accuracy": 0.6842105263157895,
+      "ci_lower": 0.4601001017506463,
+      "ci_upper": 0.846358289955714,
+      "true_total": 11,
+      "false_total": 8
+    },
+    "by": {
+      "n": 15,
+      "correct": 12,
+      "accuracy": 0.8,
+      "ci_lower": 0.5481406466534955,
+      "ci_upper": 0.9295257935638959,
+      "true_total": 12,
+      "false_total": 3
+    },
+    "part of": {
+      "n": 14,
+      "correct": 13,
+      "accuracy": 0.9285714285714286,
+      "ci_lower": 0.685307304460422,
+      "ci_upper": 0.9872781138877084,
+      "true_total": 6,
+      "false_total": 8
+    },
+    "off": {
+      "n": 14,
+      "correct": 8,
+      "accuracy": 0.5714285714285714,
+      "ci_lower": 0.32590266902869364,
+      "ci_upper": 0.7861949006959947,
+      "true_total": 6,
+      "false_total": 8
+    },
+    "perpendicular to": {
+      "n": 12,
+      "correct": 4,
+      "accuracy": 0.3333333333333333,
+      "ci_lower": 0.13811783989736134,
+      "ci_upper": 0.609382412602386,
+      "true_total": 4,
+      "false_total": 8
+    },
+    "across from": {
+      "n": 12,
+      "correct": 6,
+      "accuracy": 0.5,
+      "ci_lower": 0.2537781703934222,
+      "ci_upper": 0.7462218296065778,
+      "true_total": 5,
+      "false_total": 7
+    },
+    "adjacent to": {
+      "n": 12,
+      "correct": 11,
+      "accuracy": 0.9166666666666666,
+      "ci_lower": 0.6461140782014047,
+      "ci_upper": 0.9851352905492264,
+      "true_total": 9,
+      "false_total": 3
+    },
+    "attached to": {
+      "n": 11,
+      "correct": 7,
+      "accuracy": 0.6363636363636364,
+      "ci_lower": 0.35379677689163724,
+      "ci_upper": 0.8483377638586862,
+      "true_total": 7,
+      "false_total": 4
+    },
+    "alongside": {
+      "n": 9,
+      "correct": 7,
+      "accuracy": 0.7777777777777778,
+      "ci_lower": 0.4525833436728054,
+      "ci_upper": 0.9367762376877727,
+      "true_total": 7,
+      "false_total": 2
+    },
+    "into": {
+      "n": 9,
+      "correct": 5,
+      "accuracy": 0.5555555555555556,
+      "ci_lower": 0.2666473457440297,
+      "ci_upper": 0.811224570528086,
+      "true_total": 4,
+      "false_total": 5
+    },
+    "opposite to": {
+      "n": 9,
+      "correct": 5,
+      "accuracy": 0.5555555555555556,
+      "ci_lower": 0.2666473457440297,
+      "ci_upper": 0.811224570528086,
+      "true_total": 3,
+      "false_total": 6
+    },
+    "outside": {
+      "n": 9,
+      "correct": 6,
+      "accuracy": 0.6666666666666666,
+      "ci_lower": 0.35419734749908977,
+      "ci_upper": 0.879418401317257,
+      "true_total": 4,
+      "false_total": 5
+    },
+    "at the side of": {
+      "n": 8,
+      "correct": 6,
+      "accuracy": 0.75,
+      "ci_lower": 0.40926987910258916,
+      "ci_upper": 0.9285223111419724,
+      "true_total": 4,
+      "false_total": 4
+    },
+    "has as a part": {
+      "n": 8,
+      "correct": 6,
+      "accuracy": 0.75,
+      "ci_lower": 0.40926987910258916,
+      "ci_upper": 0.9285223111419724,
+      "true_total": 5,
+      "false_total": 3
+    },
+    "ahead of": {
+      "n": 8,
+      "correct": 3,
+      "accuracy": 0.375,
+      "ci_lower": 0.13684175946152105,
+      "ci_upper": 0.6942621454161981,
+      "true_total": 5,
+      "false_total": 3
+    },
+    "against": {
+      "n": 6,
+      "correct": 4,
+      "accuracy": 0.6666666666666666,
+      "ci_lower": 0.29998832134152864,
+      "ci_upper": 0.9032306674407831,
+      "true_total": 3,
+      "false_total": 3
+    },
+    "toward": {
+      "n": 6,
+      "correct": 4,
+      "accuracy": 0.6666666666666666,
+      "ci_lower": 0.29998832134152864,
+      "ci_upper": 0.9032306674407831,
+      "true_total": 3,
+      "false_total": 3
+    },
+    "connected to": {
+      "n": 5,
+      "correct": 4,
+      "accuracy": 0.8,
+      "ci_lower": 0.3755282641185388,
+      "ci_upper": 0.9637768390302125,
+      "true_total": 3,
+      "false_total": 2
+    },
+    "down from": {
+      "n": 5,
+      "correct": 3,
+      "accuracy": 0.6,
+      "ci_lower": 0.23071993220883708,
+      "ci_upper": 0.8823817688407467,
+      "true_total": 2,
+      "false_total": 3
+    },
+    "beyond": {
+      "n": 5,
+      "correct": 2,
+      "accuracy": 0.4,
+      "ci_lower": 0.1176182311592533,
+      "ci_upper": 0.769280067791163,
+      "true_total": 3,
+      "false_total": 2
+    },
+    "consists of": {
+      "n": 4,
+      "correct": 2,
+      "accuracy": 0.5,
+      "ci_lower": 0.15003570882017148,
+      "ci_upper": 0.8499642911798285,
+      "true_total": 2,
+      "false_total": 2
+    },
+    "within": {
+      "n": 4,
+      "correct": 2,
+      "accuracy": 0.5,
+      "ci_lower": 0.15003570882017148,
+      "ci_upper": 0.8499642911798285,
+      "true_total": 1,
+      "false_total": 3
+    },
+    "with": {
+      "n": 4,
+      "correct": 3,
+      "accuracy": 0.75,
+      "ci_lower": 0.3006360524426366,
+      "ci_upper": 0.9544139373553637,
+      "true_total": 2,
+      "false_total": 2
+    },
+    "detached from": {
+      "n": 4,
+      "correct": 0,
+      "accuracy": 0.0,
+      "ci_lower": 0,
+      "ci_upper": 0.48990002040399916,
+      "true_total": 2,
+      "false_total": 2
+    },
+    "across": {
+      "n": 3,
+      "correct": 3,
+      "accuracy": 1.0,
+      "ci_lower": 0.43849391955098227,
+      "ci_upper": 1,
+      "true_total": 0,
+      "false_total": 3
+    },
+    "enclosed by": {
+      "n": 2,
+      "correct": 1,
+      "accuracy": 0.5,
+      "ci_lower": 0.09452865480086614,
+      "ci_upper": 0.9054713451991339,
+      "true_total": 1,
+      "false_total": 1
+    },
+    "along": {
+      "n": 2,
+      "correct": 0,
+      "accuracy": 0.0,
+      "ci_lower": 0,
+      "ci_upper": 0.6576280471103807,
+      "true_total": 0,
+      "false_total": 2
+    },
+    "at": {
+      "n": 1,
+      "correct": 1,
+      "accuracy": 1.0,
+      "ci_lower": 0.20654329147389294,
+      "ci_upper": 1,
+      "true_total": 1,
+      "false_total": 0
+    },
+    "through": {
+      "n": 1,
+      "correct": 0,
+      "accuracy": 0.0,
+      "ci_lower": 0,
+      "ci_upper": 0.7934567085261071,
+      "true_total": 0,
+      "false_total": 1
+    },
+    "around": {
+      "n": 1,
+      "correct": 1,
+      "accuracy": 1.0,
+      "ci_lower": 0.20654329147389294,
+      "ci_upper": 1,
+      "true_total": 1,
+      "false_total": 0
+    },
+    "out of": {
+      "n": 1,
+      "correct": 1,
+      "accuracy": 1.0,
+      "ci_lower": 0.20654329147389294,
+      "ci_upper": 1,
+      "true_total": 0,
+      "false_total": 1
+    }
+  },
+  "by_family": {
+    "containment": {
+      "total": 171,
+      "correct": 134,
+      "accuracy": 0.783625730994152,
+      "ci_lower": 0.7160399620316933,
+      "ci_upper": 0.8387479145377272,
+      "relations_included": [
+        "inside",
+        "contains",
+        "in",
+        "within",
+        "enclosed by"
+      ],
+      "relation_breakdown": {
+        "inside": {
+          "total": 39,
+          "correct": 30
+        },
+        "contains": {
+          "total": 66,
+          "correct": 52
+        },
+        "in": {
+          "total": 60,
+          "correct": 49
+        },
+        "within": {
+          "total": 4,
+          "correct": 2
+        },
+        "enclosed by": {
+          "total": 2,
+          "correct": 1
+        }
+      }
+    },
+    "compositional": {
+      "total": 65,
+      "correct": 50,
+      "accuracy": 0.7692307692307693,
+      "ci_lower": 0.6535506019179673,
+      "ci_upper": 0.8548629154901115,
+      "relations_included": [
+        "consists of",
+        "part of",
+        "has as a part",
+        "surrounding",
+        "in the middle of"
+      ],
+      "relation_breakdown": {
+        "consists of": {
+          "total": 4,
+          "correct": 2
+        },
+        "part of": {
+          "total": 14,
+          "correct": 13
+        },
+        "has as a part": {
+          "total": 8,
+          "correct": 6
+        },
+        "surrounding": {
+          "total": 20,
+          "correct": 16
+        },
+        "in the middle of": {
+          "total": 19,
+          "correct": 13
+        }
+      }
+    },
+    "topology_contact": {
+      "total": 454,
+      "correct": 324,
+      "accuracy": 0.7136563876651982,
+      "ci_lower": 0.670416637417165,
+      "ci_upper": 0.7533106953546933,
+      "relations_included": [
+        "at the edge of",
+        "touching",
+        "attached to",
+        "on",
+        "against",
+        "connected to",
+        "at",
+        "detached from"
+      ],
+      "relation_breakdown": {
+        "at the edge of": {
+          "total": 37,
+          "correct": 24
+        },
+        "touching": {
+          "total": 273,
+          "correct": 204
+        },
+        "attached to": {
+          "total": 11,
+          "correct": 7
+        },
+        "on": {
+          "total": 117,
+          "correct": 80
+        },
+        "against": {
+          "total": 6,
+          "correct": 4
+        },
+        "connected to": {
+          "total": 5,
+          "correct": 4
+        },
+        "at": {
+          "total": 1,
+          "correct": 1
+        },
+        "detached from": {
+          "total": 4,
+          "correct": 0
+        }
+      }
+    },
+    "vertical": {
+      "total": 426,
+      "correct": 295,
+      "accuracy": 0.6924882629107981,
+      "ci_lower": 0.6471086937080917,
+      "ci_upper": 0.7344272023056957,
+      "relations_included": [
+        "above",
+        "on top of",
+        "below",
+        "under",
+        "beneath",
+        "over"
+      ],
+      "relation_breakdown": {
+        "above": {
+          "total": 65,
+          "correct": 44
+        },
+        "on top of": {
+          "total": 105,
+          "correct": 80
+        },
+        "below": {
+          "total": 64,
+          "correct": 41
+        },
+        "under": {
+          "total": 114,
+          "correct": 77
+        },
+        "beneath": {
+          "total": 53,
+          "correct": 37
+        },
+        "over": {
+          "total": 25,
+          "correct": 16
+        }
+      }
+    },
+    "proximity": {
+      "total": 153,
+      "correct": 104,
+      "accuracy": 0.6797385620915033,
+      "ci_lower": 0.6021823867171926,
+      "ci_upper": 0.7484898839048874,
+      "relations_included": [
+        "away from",
+        "near",
+        "far away from",
+        "far from",
+        "close to"
+      ],
+      "relation_breakdown": {
+        "away from": {
+          "total": 35,
+          "correct": 19
+        },
+        "near": {
+          "total": 23,
+          "correct": 16
+        },
+        "far away from": {
+          "total": 50,
+          "correct": 33
+        },
+        "far from": {
+          "total": 25,
+          "correct": 18
+        },
+        "close to": {
+          "total": 20,
+          "correct": 18
+        }
+      }
+    },
+    "horizontal": {
+      "total": 371,
+      "correct": 247,
+      "accuracy": 0.6657681940700808,
+      "ci_lower": 0.6162842317310281,
+      "ci_upper": 0.7118543740160393,
+      "relations_included": [
+        "beside",
+        "at the left side of",
+        "at the side of",
+        "at the right side of",
+        "alongside",
+        "across from",
+        "right of",
+        "left of",
+        "next to"
+      ],
+      "relation_breakdown": {
+        "beside": {
+          "total": 37,
+          "correct": 31
+        },
+        "at the left side of": {
+          "total": 96,
+          "correct": 55
+        },
+        "at the side of": {
+          "total": 8,
+          "correct": 6
+        },
+        "at the right side of": {
+          "total": 80,
+          "correct": 55
+        },
+        "alongside": {
+          "total": 9,
+          "correct": 7
+        },
+        "across from": {
+          "total": 12,
+          "correct": 6
+        },
+        "right of": {
+          "total": 29,
+          "correct": 20
+        },
+        "left of": {
+          "total": 40,
+          "correct": 25
+        },
+        "next to": {
+          "total": 60,
+          "correct": 42
+        }
+      }
+    },
+    "depth": {
+      "total": 322,
+      "correct": 209,
+      "accuracy": 0.6490683229813664,
+      "ci_lower": 0.5954596285052571,
+      "ci_upper": 0.699162052704263,
+      "relations_included": [
+        "in front of",
+        "behind",
+        "at the back of",
+        "ahead of"
+      ],
+      "relation_breakdown": {
+        "in front of": {
+          "total": 142,
+          "correct": 94
+        },
+        "behind": {
+          "total": 150,
+          "correct": 101
+        },
+        "at the back of": {
+          "total": 22,
+          "correct": 11
+        },
+        "ahead of": {
+          "total": 8,
+          "correct": 3
+        }
+      }
+    },
+    "orientation": {
+      "total": 137,
+      "correct": 73,
+      "accuracy": 0.5328467153284672,
+      "ci_lower": 0.4495470105731744,
+      "ci_upper": 0.6143545639616222,
+      "relations_included": [
+        "facing",
+        "perpendicular to",
+        "parallel to",
+        "facing away from"
+      ],
+      "relation_breakdown": {
+        "facing": {
+          "total": 64,
+          "correct": 37
+        },
+        "perpendicular to": {
+          "total": 12,
+          "correct": 4
+        },
+        "parallel to": {
+          "total": 22,
+          "correct": 11
+        },
+        "facing away from": {
+          "total": 39,
+          "correct": 21
+        }
+      }
+    }
+  },
+  "config": {
+    "model": "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
+    "split": "test",
+    "num_examples": 2195,
+    "total_time_seconds": 1172.707765340805,
+    "prompt": "structured_spatial_v1"
+  }
+}

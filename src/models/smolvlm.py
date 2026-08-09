@@ -21,6 +21,24 @@ Is this statement true or false?
 
 Answer with exactly one word: True or False."""
 
+# Structured spatial decomposition prompt (experiment condition)
+STRUCTURED_PROMPT = """Look carefully at the image.
+
+Statement:
+"{statement}"
+
+Determine whether the statement is true by doing the following:
+1. Identify the subject object.
+2. Identify the reference object.
+3. Determine the position and orientation of the subject relative to the reference object.
+4. Pay careful attention to left/right, front/back, viewpoint, and orientation.
+5. Decide whether the stated spatial relationship matches the image.
+
+Answer with exactly one word:
+True
+or
+False"""
+
 
 class SmolVLMClassifier:
     """
@@ -34,10 +52,12 @@ class SmolVLMClassifier:
         model_name: str = "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
         device: Optional[str] = None,
         max_new_tokens: int = 5,
+        prompt_template: str = None,
     ):
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
         self.max_new_tokens = max_new_tokens
         self.model_name = model_name
+        self.prompt_template = prompt_template or SPATIAL_PROMPT
 
         print(f"Loading {model_name}...")
         self.processor = AutoProcessor.from_pretrained(model_name)
@@ -55,7 +75,7 @@ class SmolVLMClassifier:
 
     def predict(self, image, statement: str) -> str:
         """Single example prediction."""
-        prompt = SPATIAL_PROMPT.format(statement=statement)
+        prompt = self.prompt_template.format(statement=statement)
         messages = [
             {
                 "role": "user",
@@ -97,7 +117,7 @@ class SmolVLMClassifier:
         # Build messages for all examples
         batch_messages = []
         for image, statement in zip(images, statements):
-            prompt = SPATIAL_PROMPT.format(statement=statement)
+            prompt = self.prompt_template.format(statement=statement)
             messages = [
                 {
                     "role": "user",

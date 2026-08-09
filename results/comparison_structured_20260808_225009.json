@@ -1,0 +1,13 @@
+{
+  "overall_delta": -0.056492027334851924,
+  "both_right": 1278,
+  "both_wrong": 349,
+  "baseline_only": 346,
+  "structured_only": 222,
+  "mcnemar": {
+    "b": 346,
+    "c": 222,
+    "chi2": 26.635563380281692,
+    "p_value": 2.4567964995725333e-07
+  }
+}
