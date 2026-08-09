@@ -1,0 +1,11 @@
+id,statement,relation,ground_truth,prediction,correct,raw_output,image_url
+0,The person is inside the refrigerator.,inside,True,True,True, True,http://images.cocodataset.org/train2017/000000451431.jpg
+1,The cake consists of the dog.,consists of,True,False,False, False,http://images.cocodataset.org/train2017/000000287427.jpg
+2,The bird is above the cat.,above,False,True,False, True,http://images.cocodataset.org/train2017/000000072556.jpg
+3,The laptop is facing the sandwich.,facing,False,True,False, True,http://images.cocodataset.org/train2017/000000519404.jpg
+4,The elephant is inside the truck.,inside,False,False,True, False,http://images.cocodataset.org/train2017/000000294749.jpg
+5,The cat is at the edge of the dining table.,at the edge of,False,True,False, True,http://images.cocodataset.org/train2017/000000572993.jpg
+6,The bench is touching the dining table.,touching,True,True,True, True,http://images.cocodataset.org/train2017/000000550405.jpg
+7,The motorcycle is in front of the truck.,in front of,True,True,True, True,http://images.cocodataset.org/train2017/000000057381.jpg
+8,The bench is beside the bed.,beside,True,True,True, True,http://images.cocodataset.org/train2017/000000268227.jpg
+9,The bench is behind the teddy bear.,behind,False,False,True, False,http://images.cocodataset.org/train2017/000000395531.jpg

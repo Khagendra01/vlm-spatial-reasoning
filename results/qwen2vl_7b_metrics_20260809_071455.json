@@ -1,0 +1,70 @@
+{
+  "global": {
+    "accuracy": 0.8091116173120729,
+    "correct": 1776,
+    "total": 2195
+  },
+  "by_family": {
+    "horizontal": {
+      "accuracy": 0.8409703504043127,
+      "correct": 312,
+      "total": 371,
+      "ci_lower": 0.8037570224977622,
+      "ci_upper": 0.8781836783108632
+    },
+    "vertical": {
+      "accuracy": 0.852112676056338,
+      "correct": 363,
+      "total": 426,
+      "ci_lower": 0.8184021709451927,
+      "ci_upper": 0.8858231811674833
+    },
+    "depth": {
+      "accuracy": 0.7515527950310559,
+      "correct": 242,
+      "total": 322,
+      "ci_lower": 0.7043546489289093,
+      "ci_upper": 0.7987509411332024
+    },
+    "orientation": {
+      "accuracy": 0.635036496350365,
+      "correct": 87,
+      "total": 137,
+      "ci_lower": 0.554420755567017,
+      "ci_upper": 0.715652237133713
+    },
+    "containment": {
+      "accuracy": 0.8947368421052632,
+      "correct": 153,
+      "total": 171,
+      "ci_lower": 0.84873832049272,
+      "ci_upper": 0.9407353637178063
+    },
+    "proximity": {
+      "accuracy": 0.7843137254901961,
+      "correct": 120,
+      "total": 153,
+      "ci_lower": 0.7191409047466948,
+      "ci_upper": 0.8494865462336973
+    },
+    "topology_contact": {
+      "accuracy": 0.8039647577092511,
+      "correct": 365,
+      "total": 454,
+      "ci_lower": 0.7674461906860172,
+      "ci_upper": 0.8404833247324851
+    },
+    "compositional": {
+      "accuracy": 0.8461538461538461,
+      "correct": 55,
+      "total": 65,
+      "ci_lower": 0.7584401562453715,
+      "ci_upper": 0.9338675360623208
+    }
+  },
+  "config": {
+    "model": "Qwen/Qwen2-VL-7B-Instruct",
+    "num_examples": 2195,
+    "total_time_seconds": 558.0755383968353
+  }
+}

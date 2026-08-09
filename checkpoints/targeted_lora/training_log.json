@@ -1,0 +1,20 @@
+{
+  "manifest": "data/manifests/targeted_train.jsonl",
+  "model": "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
+  "epochs": 2,
+  "lr": 0.0001,
+  "effective_batch_size": 16,
+  "lora_rank": 8,
+  "lora_alpha": 16,
+  "lora_dropout": 0.05,
+  "total_steps": 238,
+  "epoch_losses": [
+    0.5573946326470175,
+    0.4601773198600076
+  ],
+  "total_time_seconds": 6245.767816543579,
+  "train_size": 1900,
+  "eval_size": 100,
+  "device": "NVIDIA RTX A6000",
+  "timestamp": "2026-08-09T05:15:14.682164"
+}

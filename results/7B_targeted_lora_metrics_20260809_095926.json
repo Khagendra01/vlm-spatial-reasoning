@@ -1,0 +1,71 @@
+{
+  "global": {
+    "accuracy": 0.8391799544419134,
+    "correct": 1842,
+    "total": 2195
+  },
+  "by_family": {
+    "horizontal": {
+      "accuracy": 0.8706199460916442,
+      "correct": 323,
+      "total": 371,
+      "ci_lower": 0.8364678717794403,
+      "ci_upper": 0.9047720204038481
+    },
+    "vertical": {
+      "accuracy": 0.852112676056338,
+      "correct": 363,
+      "total": 426,
+      "ci_lower": 0.8184021709451927,
+      "ci_upper": 0.8858231811674833
+    },
+    "depth": {
+      "accuracy": 0.8167701863354038,
+      "correct": 263,
+      "total": 322,
+      "ci_lower": 0.774515377245038,
+      "ci_upper": 0.8590249954257695
+    },
+    "orientation": {
+      "accuracy": 0.6423357664233577,
+      "correct": 88,
+      "total": 137,
+      "ci_lower": 0.562072912733301,
+      "ci_upper": 0.7225986201134144
+    },
+    "containment": {
+      "accuracy": 0.9181286549707602,
+      "correct": 157,
+      "total": 171,
+      "ci_lower": 0.8770349073073418,
+      "ci_upper": 0.9592224026341787
+    },
+    "proximity": {
+      "accuracy": 0.8366013071895425,
+      "correct": 128,
+      "total": 153,
+      "ci_lower": 0.7780152981473957,
+      "ci_upper": 0.8951873162316893
+    },
+    "topology_contact": {
+      "accuracy": 0.8546255506607929,
+      "correct": 388,
+      "total": 454,
+      "ci_lower": 0.8222020335588083,
+      "ci_upper": 0.8870490677627776
+    },
+    "compositional": {
+      "accuracy": 0.8307692307692308,
+      "correct": 54,
+      "total": 65,
+      "ci_lower": 0.7396144903047391,
+      "ci_upper": 0.9219239712337225
+    }
+  },
+  "config": {
+    "model": "7B_targeted_lora",
+    "lora_path": "checkpoints/qwen2vl_7b_targeted_lora/final",
+    "num_examples": 2195,
+    "total_time_seconds": 567.9676134586334
+  }
+}
