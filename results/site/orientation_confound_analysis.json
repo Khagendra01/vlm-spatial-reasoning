@@ -65,6 +65,7 @@
    "delta_pp": -6.338672768878717
   }
  ],
+ "within_source_concentration_note": "No source dataset has n>=30 in both orientation arms: the heuristic is heavily concentrated within sources (orientation-heavy corpora are almost entirely flagged, others almost never). Source indicators therefore absorb most of the orientation variance in the full model. Arms: [('Blink', 35, 16), ('CLEVR', 106, 2), ('CVBench', 16, 19), ('GQA', 41, 20), ('IconQA', 21, 120), ('LogicVista', 28, 9), ('MMBench', 14, 0), ('MME', 26, 20), ('MMERealWorld', 89, 0), ('MMIU', 133, 19), ('MMTBench', 237, 14), ('MMVP', 23, 38), ('MMVet', 9, 2), ('MuirBench', 17, 52), ('SAT', 183, 0), ('SPEC', 102, 31), ('SeedBench', 63, 26), ('SpatialEval', 100, 0), ('ThreeDSRBench', 95, 46), ('VQA', 29, 76), ('VSR', 16, 55), ('VStarBench', 37, 2), ('egoexo4d', 288, 0), ('exoego4d', 316, 0)]",
  "high_precision_exploratory": {
   "n": 177,
   "raw": 0.4406779661016949,

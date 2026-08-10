@@ -105,16 +105,31 @@ was removed. (v) The old 47.3/1,824 numbers survive only in git history and in
 - HardNeg persistent: 20→15 still failing, 5 fixed of 48 ✅ `hardneg_analysis_report.md`
 - Scaling transitions 28/23/22/64; adaptation 20/30/27/60 ✅ `orientation_analysis.json`
 
-## Statistical-family bookkeeping (fixed)
+## Statistical-family bookkeeping (fixed, second pass)
 
-- The test battery is **22 VSR tests** (the per-relation block is 4 relations × 2
-  conditions = 8 tests, not 10; the earlier "5×2 / 24 tests" enumeration was an
-  error and is corrected in App. D).
-- Holm-Bonferroni (m=22, α=0.05): two-stage A-lin/A-MLP/B-MLP (0.006/0.0006/0.008)
-  and consistency zero-shot-vs-LM-only (≤0.002) survive; vision-side overall
-  (0.0043/0.0122) and two-stage B-lin (0.0037) do not — the paper no longer claims
-  they survive adjustment. SITE transfer family (3 tests): Holm p = 0.012/1.0/1.0.
-- Single-checkpoint caveat added to App. D: McNemar tests quantify paired
+- The battery is **22 rows**: 18 accuracy-valid tests + 4 **agreement-based**
+  two-stage rows (IDs 15–18). The committed two-stage pipeline
+  (`two_stage_reasoning.py` line 183) scored agreement with the control's
+  verdicts, not accuracy against ground truth; the two-stage rows are
+  descriptive, excluded from the confirmatory set and from the Holm family,
+  and the main text reports the decomposition as failing to reproduce the
+  generative model's behavior (relation module 44–46% CV vs 49.9% majority;
+  agreement 55.1–58.3% on 127 boxed statements).
+- Holm-Bonferroni (m=18 accuracy-valid tests, α=0.05): only
+  zero-shot-vs-LM-only consistency survives (Holm p=0.0018, conservative
+  p<0.0001 bound); vision-side overall (0.0043/0.0122 → Holm 0.073/0.195)
+  and everything else do not survive; the paper no longer claims they do.
+  SITE transfer family (3 tests): Holm p = 0.012/1.0/1.0.
+- Consistency verdict table now includes expected-under-independence columns
+  (zero-shot facing: observed comp. 36.9% vs 30.2% expected; both-False 63.1%
+  vs 66.5%; both-True 0 vs 3.5 expected) — the "no null model" claim was
+  removed; training trade-off (both-True 0%→24.3% LM-only) disclosed.
+- Minor corrections from the fresh review: 61 unique relations in the test
+  split (64 benchmark-wide); structured-prompt exact McNemar p=2.21e-7
+  (was 2.46e-7, a chi-square value); grounded probe table is CV/test (caption
+  fixed); hardneg manifest audit 451 rows (28 excluded, 21 original-only, 402
+  clean — was "428/24"); high-precision subset 77+99+1=177.
+- Single-checkpoint caveat in App. D: McNemar tests quantify paired
   test-example disagreement, not training-run variability.
 
 ## Known limitations recorded in the paper (App. G)

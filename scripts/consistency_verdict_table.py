@@ -80,6 +80,11 @@ def main():
                 "orig_true_rate": orig_true / n,
                 "flip_true_rate": flip_true / n,
                 "contradiction_rate_strict": both_true / n,  # PP: only both-True is a true contradiction
+                # expected under verdict independence given observed base rates
+                "exp_both_true": orig_true / n * flip_true / n,
+                "exp_both_false": (1 - orig_true / n) * (1 - flip_true / n),
+                "exp_complementary": (orig_true / n) * (1 - flip_true / n)
+                                     + (1 - orig_true / n) * (flip_true / n),
             }
         out[cond] = cond_out
 
@@ -91,28 +96,34 @@ def main():
     L.append("")
     L.append("Strict families (exactly one truth value): complementary "
              "verdicts are the consistent outcome. Original and flipped True "
-             "rates are the observed answer base rates on each member.")
+             "rates are the observed answer base rates on each member. "
+             "'exp' columns give the verdict rates expected under verdict "
+             "independence given the observed base rates (a response-bias "
+             "null).")
     L.append("")
     for cond, d in out.items():
         L.append(f"## {cond}")
         L.append("")
         L.append("| Family | n | both True | both False | complementary | "
-                 "orig True rate | flip True rate |")
-        L.append("|---|---|---|---|---|---|---|")
+                 "orig True rate | flip True rate | exp both-False | "
+                 "exp comp. |")
+        L.append("|---|---|---|---|---|---|---|---|---|")
         for fam in FAMILIES:
             x = d[fam]
             L.append(f"| {FAMILY_NAMES[fam]} | {x['n']} | {x['both_true']} "
                      f"({x['both_true']/x['n']:.1%}) | {x['both_false']} "
                      f"({x['both_false']/x['n']:.1%}) | {x['complementary']} "
                      f"({x['complementary']/x['n']:.1%}) | "
-                     f"{x['orig_true_rate']:.2f} | {x['flip_true_rate']:.2f} |")
+                     f"{x['orig_true_rate']:.2f} | {x['flip_true_rate']:.2f} | "
+                     f"{x['exp_both_false']:.1%} | {x['exp_complementary']:.1%} |")
         if "PP" in d:
             x = d["PP"]
             L.append(f"| parallel/perpendicular (soft; both-True is the true "
                      f"contradiction) | {x['n']} | {x['both_true']} "
                      f"({x['both_true']/x['n']:.1%}) | {x['both_false']} "
                      f"({x['both_false']/x['n']:.1%}) | --- | "
-                     f"{x['orig_true_rate']:.2f} | {x['flip_true_rate']:.2f} |")
+                     f"{x['orig_true_rate']:.2f} | {x['flip_true_rate']:.2f} | "
+                     f"--- | --- |")
         L.append("")
     with open("results/consistency_verdict_table.md", "w", encoding="utf-8") as f:
         f.write("\n".join(L) + "\n")

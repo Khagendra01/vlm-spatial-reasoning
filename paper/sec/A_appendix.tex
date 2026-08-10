@@ -122,7 +122,7 @@ same split. \emph{Hard-negative}: the orientation block of the general manifest
 is replaced by audited-clean originals plus paired hard negatives
 (facing$\leftrightarrow$facing away from; parallel$\leftrightarrow$perpendicular)
 with flipped labels; every included example was audited for label correctness
-(428 train orientation examples audited; 24 rejects excluded). 2B runs split
+(451 train orientation examples audited: 402 clean, 28 excluded, 21 original-only). 2B runs split
 5\% of the manifest for validation (seed 42). All manifests derive exclusively
 from the VSR \emph{train} split; all evaluations use \emph{test} only.
 
@@ -198,7 +198,7 @@ Merger patch-vote & 52.6 & --- & $[44, 61]$ \\
 \end{tabular}
 \end{center}
 
-\textbf{Grounded results} (test acc / balanced acc; majority T1 63.7\%,
+\textbf{Grounded results} (CV acc / test acc; majority T1 63.7\%,
 T2 57.0\%; visual $=[\text{subj},\text{ref},\text{subj}-\text{ref},
 \text{subj}\cdot\text{ref}]$; geometry $=$ 12-d box features; T3 4-way is at
 chance for every readout, test acc 41.7--52.8\% across all 12 cells vs.\
@@ -289,40 +289,43 @@ ID & Comparison & Subset & Discord.\ & $p$ \\
 5 & Projector vs.\ ctrl. & orientation & --- & 0.86 \\
 6 & V+Proj vs.\ ctrl. & orientation & --- & 0.85 \\
 7--14 & Proj./V+Proj vs.\ ctrl. & per-relation (4$\times$2) & --- & 0.25--1.00 \\
-15 & Two-stage A-lin. vs.\ ctrl. & orientation & 45/16 & 0.0003 \\
-16 & Two-stage A-MLP vs.\ ctrl. & orientation & 47/14 & $<$0.0001 \\
-17 & Two-stage B-lin. vs.\ ctrl. & orientation & 44/20 & 0.0037 \\
-18 & Two-stage B-MLP vs.\ ctrl. & orientation & 47/18 & 0.0004 \\
+15 & Two-stage A-lin. vs.\ ctrl. & agreement (127 boxed) & 45/16 & 0.0003 \\
+16 & Two-stage A-MLP vs.\ ctrl. & agreement (127 boxed) & 47/14 & $<$0.0001 \\
+17 & Two-stage B-lin. vs.\ ctrl. & agreement (127 boxed) & 44/20 & 0.0037 \\
+18 & Two-stage B-MLP vs.\ ctrl. & agreement (127 boxed) & 47/18 & 0.0004 \\
 19 & Zero-shot vs.\ LM-only & consistency 662 & 117/43 & $<$0.0001 \\
 20 & HardNeg vs.\ LM-only & consistency 662 & 31/41 & 0.29 \\
 21 & Projector vs.\ LM-only & consistency 662 & 63/48 & 0.18 \\
 22 & V+Proj vs.\ LM-only & consistency 662 & 65/56 & 0.47 \\
 \bottomrule
 \end{tabular}
-\caption{Complete VSR test battery (22 tests). Per-relation cells (IDs 7--14)
+\caption{Complete VSR test battery (22 rows). Per-relation cells (IDs 7--14)
 are enumerated in the committed \texttt{vision\_side\_\allowbreak{}comparison.\allowbreak{}json}:
 projector facing $p{=}0.77$, facing-away $p{=}1.00$, parallel $p{=}0.25$,
 perpendicular $p{=}1.00$; vision+proj facing $p{=}1.00$, facing-away
-$p{=}0.58$, parallel $p{=}1.00$, perpendicular $p{=}1.00$. SITE transfer tests
-(3: all/primary/secondary, \S E) form a separate small family.}
+$p{=}0.58$, parallel $p{=}1.00$, perpendicular $p{=}1.00$. Rows 15--18 are
+\emph{agreement-based}: the committed two-stage pipeline scored agreement
+with the control's verdicts (not accuracy against ground truth), so these
+rows are descriptive and are excluded from the confirmatory set and from the
+Holm family. SITE transfer tests (3: all/primary/secondary, \S E) form a
+separate small family.}
 \label{tab:tests}
 \end{table*}
 
 \textbf{Principal vs.\ exploratory comparisons.} The battery above is fully
-enumerated; no test was run and withheld. We label the
-\emph{principal} (confirmatory) comparisons as: the two-stage decomposition vs.\
-control (IDs 15--18), zero-shot vs.\ LM-only consistency (ID 19), and the SITE
-transfer tests (\S E). All other comparisons --- vision-side conditions, their
-per-relation cells, hard-negative training vs.\ control, and the remaining
-consistency comparisons --- are \emph{exploratory diagnostics} reported with
-exact unadjusted $p$-values. Under a Holm adjustment over the 22 VSR tests
-($\alpha{=}0.05$), the two-stage A-linear/A-MLP and B-MLP comparisons
-(Holm $p{=}0.006$, $0.0006$, $0.008$) and the zero-shot-vs-LM-only consistency
-test (Holm $p{=}0.002$, using the conservative $p{<}0.0001$ bound) remain
-significant; the vision-side overall effects (raw $p{=}0.0043$, $p{=}0.0122$)
-and the two-stage B-linear test (raw $p{=}0.0037$) do not survive a blanket
-adjustment and are therefore not load-bearing. For the 3 SITE transfer tests,
-Holm-adjusted $p$-values are 0.012 (primary), 1.0, 1.0.
+enumerated; no test was run and withheld. The \emph{principal}
+(confirmatory) comparisons are: zero-shot vs.\ LM-only consistency (ID 19)
+and the SITE transfer tests (\S E). All other comparisons --- vision-side
+conditions and their per-relation cells, hard-negative training vs.\ control,
+the remaining consistency comparisons, and the two-stage agreement rows
+(IDs 15--18) --- are \emph{exploratory diagnostics} reported with exact
+unadjusted $p$-values. Under a Holm adjustment over the 18 accuracy-valid
+VSR tests ($\alpha{=}0.05$), only the zero-shot-vs-LM-only consistency test
+survives (Holm $p{=}0.0018$, using the conservative $p{<}0.0001$ bound); the
+vision-side overall effects (raw $p{=}0.0043$, $p{=}0.0122$; Holm $0.073$,
+$0.195$) and all other comparisons do not survive a blanket adjustment and
+are not load-bearing. For the 3 SITE transfer tests, Holm-adjusted $p$-values
+are 0.012 (primary), 1.0, 1.0.
 
 \textbf{Single-checkpoint note.} Every trained condition is a single
 checkpoint. All McNemar tests above quantify paired disagreement on the fixed
@@ -330,6 +333,41 @@ test examples between two conditions; they do not estimate training-run
 variability, and the single-seed results reported here do not estimate
 training-run variability. Adapter-rank claims (e.g., the 1--2pp overall
 differences among trained 7B conditions) should be read in that light.
+
+\textbf{Consistency verdict patterns.} For each strict family and condition,
+the committed verdict table
+(\texttt{results/consistency\_verdict\_table.\allowbreak{}json},
+\texttt{scripts/consistency\_verdict\_table.py}) reports the observed
+both-True / both-False / complementary counts, the original and flipped True
+rates, and the verdict rates expected under verdict independence given those
+base rates:
+
+\begin{table*}[h]
+\centering
+\footnotesize
+\caption{Facing-pair verdict patterns by condition ($n{=}103$); ``exp.'' =
+expected under verdict independence given the observed base rates.}
+\label{tab:verdicts}
+\begin{tabular}{lcccccccc}
+\toprule
+Condition (facing pairs, $n{=}103$) & both-T & both-F & comp.\ & orig-T & flip-T & exp.\ both-F & exp.\ comp. \\
+\midrule
+7B zero-shot & 0 & 65 (63.1\%) & 38 (36.9\%) & 0.20 & 0.17 & 66.5\% & 30.2\% \\
+LM-only LoRA & 25 (24.3\%) & 10 (9.7\%) & 68 (66.0\%) & 0.62 & 0.52 & 18.0\% & 49.4\% \\
+HardNeg LoRA & 18 (17.5\%) & 5 (4.9\%) & 80 (77.7\%) & 0.60 & 0.52 & 19.0\% & 50.2\% \\
+Projector LoRA & 18 (17.5\%) & 15 (14.6\%) & 70 (68.0\%) & 0.53 & 0.50 & 23.5\% & 50.3\% \\
+Vision+Proj LoRA & 14 (13.6\%) & 23 (22.3\%) & 66 (64.1\%) & 0.49 & 0.43 & 27.1\% & 49.4\% \\
+\bottomrule
+\end{tabular}
+\end{table*}
+The zero-shot pattern is dominated by a False-defaulting response bias:
+expected consistency under verdict independence is 30.2\%, below the observed
+36.9\%, so a simple base-rate null does not explain the facing inconsistency;
+conversely, training raises consistency while introducing both-True
+contradictions (0\% $\rightarrow$ 24.3\% LM-only / 17.5\% hard-neg), a
+disclosed specialization trade-off. Full table for left/right
+($n{=}245$), front/behind ($n{=}314$), and parallel/perp (soft, $n{=}34$)
+in the committed JSON.
 
 \textbf{Consistency definitions.} Strict complements (exactly one truth value):
 left$\leftrightarrow$right ($n{=}245$), in front of$\leftrightarrow$behind
@@ -464,7 +502,7 @@ slice as exploratory.
 heuristic to VSR-construct terms only (facing, facing away, parallel,
 perpendicular; word-boundary match on question or option text) yields
 $n{=}177$ examples (77 in the official spatial-relationship category, 99 in
-multi-view/cross-image reasoning): raw accuracy 44.1\% (95\% CI $[37.0, 51.4]$),
+multi-view/cross-image reasoning, 1 in object localization): raw accuracy 44.1\% (95\% CI $[37.0, 51.4]$),
 CAA $-2.3\%$. This subset is explicitly post-hoc and does not replace the
 preregistered frozen definition; it is reported as exploratory only.
 
@@ -554,9 +592,9 @@ Per-relation cells (Table~1 (main)) & \texttt{orientation\_analysis.json} &
 \texttt{4b83729}, \texttt{1314e95} \\
 Probe tables (App.~\ref{app:probes}) & \texttt{probe/*.json} &
 \texttt{9d9c50c}, \texttt{fa9d0be}, \texttt{a0d50ca} \\
-Two-stage (Table~3 (main)) & \texttt{two\_stage\_results.json} &
+Two-stage (App.~D, agreement-based rows 15--18) & \texttt{two\_stage\_results.json} &
 \texttt{1e83604} \\
-Consistency (Fig.~2 (main)) & \texttt{consistency\_stats\_all.json} &
+Consistency (Fig.~4 (main)) & \texttt{consistency\_stats\_all.json} &
 \texttt{6bf8b84} \\
 Vision-side p-values & \texttt{vision\_side\_comparison.json} &
 \texttt{f1bc14f} \\
@@ -585,6 +623,14 @@ hyperparameters. Seeds: 42 defaults in 2B paths; single default seed elsewhere
 by \texttt{scripts/compare\_site\_zeroshot\_lora.py}; VSR/SITE headline
 recomputation by \texttt{scripts/make\_paper\_figures.py} (output archived at
 \texttt{paper/fig/audit\_output.txt}).
+
+\textbf{Two-stage reproducibility caveat.} The two-stage pipeline requires
+per-patch embeddings (\texttt{results/probe/patch\_embeddings.pkl}, 8.2\,GB,
+not committed; regenerable on GPU via
+\texttt{scripts/extract\_patch\_embeddings.py}) and hard-codes a Linux working
+directory. The committed evidence is the aggregate
+\texttt{results/two\_stage\_results.json} (agreement-based, see App.~D); the
+per-example decisions are not committed.
 
 \textbf{SITE secondary-subset audit note (corrected before submission).} An
 earlier derived analysis (\texttt{compare\_site\_zeroshot\_lora.py} v1, which
