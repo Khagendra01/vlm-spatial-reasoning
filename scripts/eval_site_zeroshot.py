@@ -147,6 +147,8 @@ def main():
         "max_new_tokens": args.max_new_tokens,
         "max_new_tokens_previous": 128,
         "efficiency_note": "task requires only a single answer letter; truncation ceiling only, prompt/decoding/parser unchanged",
+        "image_resize_cap_px": 392,
+        "image_resize_note": "this transformers build ignores max_pixels (regression); images resized to <=392px long side, enforcing the intended 28x28 patch grid budget as a CONSTANT protocol parameter; uniform across all examples and subsets",
         "attn": args.attn,
         "subsets": {k: sorted(v) for k, v in frozen.items()},
         "images_only": args.images_only,
@@ -177,7 +179,8 @@ def main():
 
     processor = AutoProcessor.from_pretrained(MODEL)
     model = Qwen2VLForConditionalGeneration.from_pretrained(
-        MODEL, dtype=torch.bfloat16, _attn_implementation=args.attn,
+        MODEL, dtype=torch.bfloat16,
+        _attn_implementation=("sdpa" if args.attn == "flash_attention_2" else args.attn),
         low_cpu_mem_usage=True).to("cuda")
     model.eval()
 
@@ -203,21 +206,20 @@ def main():
                 w.writeheader()
                 w.writerows(results)
 
-    def gen_batch(batch, is_video):
-        msgs, media_ok = [], []
+    def prep_batch(batch, is_video):
+        """CPU-only: load media, build chat content. Returns (msgs, kept)."""
+        msgs, kept = [], []
         for r in batch:
             paths = [MEDIA_ROOT / v for v in r["visual"]]
             if is_video:
                 p = paths[0]
                 if not p.exists():
-                    media_ok.append(False)
                     continue
                 try:
                     video = load_video_frames(p)
                     content = [{"type": "video", "video": video},
                                {"type": "text", "text": build_prompt_video(r)}]
                 except Exception:
-                    media_ok.append(False)
                     continue
             else:
                 imgs = []
@@ -226,7 +228,11 @@ def main():
                         try:
                             im = Image.open(p).convert("RGB")
                             w, h = im.size
-                            s = 2048 / max(w, h)
+                            # NOTE: this transformers build ignores max_pixels
+                            # (regression), so big SITE images explode to
+                            # 13k+ vision tokens. Cap at 392px == the 28x28
+                            # grid max_pixels is meant to enforce.
+                            s = 392 / max(w, h)
                             if s < 1.0:
                                 im = im.resize((max(1, int(w * s)), max(1, int(h * s))))
                             imgs.append(im)
@@ -234,28 +240,21 @@ def main():
                             imgs = None
                             break
                 if not imgs:
-                    media_ok.append(False)
                     continue
                 content = []
-                q = r["question"] or ""
-                opt_text = "\n".join(f"{UPPER[i]}: {r['options'][i]}" for i in range(len(r["options"])))
-                # interleaved: placeholders inside question/options need images inserted
                 prompt = build_prompt_image(r)
-                # build content: images at <image> positions
                 parts = prompt.split("<image>")
                 for j, part in enumerate(parts):
                     if j > 0:
                         content.append({"type": "image", "image": imgs[min(j - 1, len(imgs) - 1)]})
                     if part:
                         content.append({"type": "text", "text": part})
-                media_ok.append(True)
             msgs.append([{"role": "user", "content": content}])
-        if not msgs:
-            return []
-        inputs = processor.apply_chat_template(
-            msgs, add_generation_prompt=True, tokenize=True,
-            return_dict=True, return_tensors="pt")
-        inputs = {k: v.to("cuda") if hasattr(v, "to") else v for k, v in inputs.items()}
+            kept.append(r)
+        return msgs, kept
+
+    def run_inputs(msgs):
+        """GPU: tokenize + generate with OOM scale retry. Returns texts."""
         out = None
         for scale in (None, 336, 224, 160, 96):
             msgs_cur = msgs
@@ -277,7 +276,7 @@ def main():
             try:
                 inputs = processor.apply_chat_template(
                     msgs_cur, add_generation_prompt=True, tokenize=True,
-                    return_dict=True, return_tensors="pt")
+                    return_dict=True, return_tensors="pt", padding=True, truncation=True)
                 inputs = {k: v.to("cuda") if hasattr(v, "to") else v for k, v in inputs.items()}
                 with torch.inference_mode():
                     out = model.generate(**inputs, do_sample=False,
@@ -292,23 +291,38 @@ def main():
         in_len = inputs["input_ids"].shape[1]
         texts = processor.batch_decode(out[:, in_len:], skip_special_tokens=True)
         del inputs, out
-        torch.cuda.empty_cache()
         return texts
 
     def run(batch_recs, is_video, tag, batch_size):
         nonlocal results
-        for start in range(0, len(batch_recs), batch_size):
-            batch = batch_recs[start:start + batch_size]
-            print(f"[{tag}] {start}/{len(batch_recs)} ex={[r['id'] for r in batch]} "
-                  f"({time.time()-t0:.0f}s)", flush=True)
-            try:
-                texts = gen_batch(batch, is_video)
-            except Exception as ex:
-                torch.cuda.empty_cache()
-                print(f"    BATCH EXCEPTION {type(ex).__name__}: {str(ex)[:120]}", flush=True)
-                texts = []
+        import queue, threading
+        batches = [batch_recs[i:i + batch_size]
+                   for i in range(0, len(batch_recs), batch_size)]
+        q = queue.Queue(maxsize=2)
+
+        def prep_worker():
+            for b in batches:
+                try:
+                    q.put((b, prep_batch(b, is_video)))
+                except Exception:
+                    q.put((b, ([], [])))
+        threading.Thread(target=prep_worker, daemon=True).start()
+
+        for bi, b in enumerate(batches):
+            b, (msgs, kept) = q.get()
+            if bi % 10 == 0:
+                print(f"[{tag}] {bi*batch_size}/{len(batch_recs)} "
+                      f"({time.time()-t0:.0f}s)", flush=True)
+            texts = []
+            if msgs:
+                try:
+                    texts = run_inputs(msgs)
+                except Exception as ex:
+                    torch.cuda.empty_cache()
+                    print(f"    BATCH EXCEPTION {type(ex).__name__}: {str(ex)[:120]}", flush=True)
+                    texts = []
             mi = 0
-            for r in batch:
+            for r in kept:
                 all_choices = UPPER[:len(r["options"])]
                 if mi < len(texts):
                     pred = parse_multi_choice_response(texts[mi], all_choices)
@@ -329,13 +343,14 @@ def main():
                 save_partial()
                 print(f"[{tag}] {len(results)} done ({time.time()-t0:.0f}s)", flush=True)
 
-    # single-image examples batch at 8 (fast, memory-safe with max_new_tokens=16);
+    # single-image examples batch at 4 (memory-safe with max_new_tokens=16;
+    # batch 8 OOMs on large SITE images -> OOM-retry spiral)
     # multi-image examples batch at 1 (long sequences, OOM-prone)
     single_recs = [r for r in image_recs if r["modality"] == "single-image"]
     multi_recs = [r for r in image_recs if r["modality"] == "multi-image"]
-    print(f"  single-image: {len(single_recs)} (batch 8) | "
+    print(f"  single-image: {len(single_recs)} (batch 4) | "
           f"multi-image: {len(multi_recs)} (batch 1)")
-    run(single_recs, False, "img-single", 8)
+    run(single_recs, False, "img-single", 4)
     run(multi_recs, False, "img-multi", 1)
     run(video_recs, True, "video", 1)
 
