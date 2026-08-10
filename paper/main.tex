@@ -1,0 +1,219 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+% Conference-style standalone draft. When the official CVPR/ICCV kit is
+% added, replace this preamble with the venue template while keeping the body.
+\usepackage[margin=0.75in]{geometry}
+\usepackage{times}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[capitalize,noabbrev]{cleveref}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\newcommand{\vsr}{VSR}
+\newcommand{\site}{SITE}
+\newcommand{\modelsmall}{SmolVLM2-2.2B-Instruct}
+\newcommand{\modellarge}{Qwen2-VL-7B-Instruct}
+\newcommand{\todo}[1]{\textcolor{red}{[TODO: #1]}}
+\newcommand{\pp}{\,pp}
+
+\title{Beyond Spatial Accuracy: Diagnosing Persistent Orientation Failures in Vision--Language Models}
+
+\author{Anonymous Authors\\
+Anonymous Institution\\
+\texttt{anonymous@anonymous.edu}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Vision--language models (VLMs) have improved rapidly on multimodal reasoning benchmarks, yet aggregate spatial accuracy can obscure systematic weaknesses in specific relation types. We present a fine-grained study of spatial reasoning in VLMs, focusing on object-relative orientation. On the Visual Spatial Reasoning (VSR) benchmark, scaling from a compact model to a 7B VLM substantially improves overall accuracy and several spatial families, including depth, horizontal, and containment relations, while orientation accuracy changes only modestly. Except for structured prompting, which degrades performance, trained and scaled conditions remain concentrated in a narrow 62--66\% orientation band. We test structured prompting, general and targeted LoRA, hard-negative training, projector and vision-side adaptation, representation probing, object-grounded probing, and object-centric two-stage decomposition. None reliably resolves the orientation bottleneck, and clean-label evaluation shows that the effect is not explained by annotation noise alone.
+
+We further show that spatial accuracy and relational consistency are separable. LM-side adaptation substantially improves self-consistency on complementary relations, and hard-negative training raises facing-versus-facing-away consistency from 66.0\% to 77.7\% while leaving facing accuracy unchanged at 68.9\%. Finally, on the independent SITE benchmark, the 7B model performs strongly on the official spatial-relationship-reasoning category, while a non-official keyword-derived subset concentrated on direction and orientation is substantially weaker. VSR-trained LoRA does not improve this orientation subset and significantly degrades SITE's official spatial-relationship category. Together, the results identify object-relative orientation as a persistent bottleneck shaped by both weakly accessible orientation representations and incomplete relational coherence.
+\end{abstract}
+
+\section{Introduction}
+Spatial reasoning is a central capability for multimodal systems that must do more than recognize objects or describe scenes. A useful vision--language model should not only identify a chair and a table, but also determine whether the chair is in front of the table, whether one object is facing another, whether two objects are parallel, or whether a stated relation remains logically consistent when expressed from the opposite reference direction. These abilities matter directly for embodied agents, robotics, scene understanding, navigation, and multimodal assistants that interact with structured physical environments.
+
+Recent VLMs have become markedly stronger on broad multimodal benchmarks, and larger models often improve substantially on visual question answering and general spatial tasks. However, a single aggregate accuracy score can conceal large differences between relation types. In our experiments on VSR, this distinction is striking. Scaling from \modelsmall{} to \modellarge{} increases zero-shot overall accuracy from 74.0\% to 80.9\%. Horizontal reasoning rises from 70.2\% to 84.8\%, depth from 68.9\% to 75.2\%, and containment from 83.4\% to 89.3\%. Orientation, by contrast, moves only from 62.8\% to 63.5\%.
+
+This persistent gap motivates a different question from the usual ``how much does adaptation improve benchmark accuracy?'' Rather than treating all spatial relations as a single capability, we ask why orientation remains difficult when other spatial categories benefit from scaling and task-specific training. We evaluate a controlled sequence of interventions spanning prompting, language-side adaptation, targeted data construction, visual-side adaptation, representation analysis, and architectural decomposition. Structured prompting significantly hurts performance; general and targeted LoRA improve aggregate accuracy but do not remove the orientation ceiling; hard negatives improve a targeted consistency behavior without producing a statistically significant orientation-accuracy gain; and projector or vision-plus-projector LoRA fails to outperform the language-side control.
+
+The effect also survives a clean-label robustness analysis. On the strictest audited orientation subset, the best accuracy reaches 78.5\%, but remains below the same model's containment accuracy of 92.9\% and depth accuracy of 82.3\%. Annotation ambiguity therefore contributes to difficulty but does not account for the full orientation deficit.
+
+We next examine whether the limitation is primarily perceptual, representational, or relational. Frozen visual-feature probes reveal only weak decodability of object-intrinsic orientation, including after object-grounded pooling. Yet the full generative model performs better than simple probes on some facing relations, suggesting that useful signal may emerge through multimodal interaction or language priors rather than existing as a cleanly linearly accessible visual code. At the same time, logical consistency exposes a second failure mode: the zero-shot 7B model is consistent on only 36.9\% of complementary facing/facing-away pairs. LM-side LoRA improves coherence substantially, and hard-negative training further raises facing consistency to 77.7\% while facing accuracy remains unchanged at 68.9\%. Thus accuracy and relational consistency are empirically separable.
+
+Finally, we test whether the phenomenon generalizes beyond VSR. On SITE, \modellarge{} performs strongly on the official spatial-relationship-reasoning category (75.1\% raw accuracy; 59.2\% chance-adjusted accuracy). The weakness is therefore not broad spatial reasoning failure. Instead, performance is substantially lower on a non-official keyword-derived subset concentrated on object- and direction-related orientation questions (47.3\% raw; 22.6\% chance-adjusted). VSR-trained LoRA does not improve this subset and significantly degrades the official spatial-relationship category by 3.5 percentage points. This external evaluation suggests that VSR adaptation is partly benchmark-specific while orientation-related difficulty remains persistent.
+
+Our contributions are fourfold:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Fine-grained spatial diagnosis across scale and adaptation.} We evaluate ten VSR conditions spanning two model scales, structured prompting, general and targeted LoRA, hard-negative training, and vision/projector adaptation. Several spatial families improve substantially, while orientation remains unusually resistant.
+    \item \textbf{Robustness and mechanism analysis.} Clean-label evaluation preserves the orientation gap, while frozen, nonlinear, and object-grounded probes show only weak accessible decodability of object-intrinsic orientation; explicit object-centric decomposition also fails to close the gap.
+    \item \textbf{Accuracy--coherence separation.} We show that relational self-consistency can improve without accuracy gains: hard-negative training increases facing/facing-away consistency from 66.0\% to 77.7\% with facing accuracy unchanged at 68.9\%.
+    \item \textbf{Cross-benchmark validation and transfer.} SITE shows strong official spatial-relationship reasoning but weak performance on orientation-related questions. VSR-trained adaptation fails to improve this subset and significantly harms the official category, revealing limited cross-benchmark transfer.
+\end{itemize}
+
+\section{Related Work}
+\label{sec:related}
+\todo{Add literature review with verified citations for VSR, SITE, VLM spatial reasoning, PEFT/LoRA, representation probing, and relational consistency. No bibliography claims are inserted yet because the frozen repository does not contain the required bibliographic metadata.}
+
+\section{Experimental Setup}
+\label{sec:setup}
+\subsection{Benchmarks}
+\paragraph{VSR.}
+We use VSR as the primary diagnostic benchmark. The held-out test set contains 2,195 examples and 64 spatial relations. We group relations into semantically coherent families; the orientation family contains \emph{facing}, \emph{facing away from}, \emph{parallel to}, and \emph{perpendicular to}, totaling 137 test examples. All main VSR results use the same held-out test set and deterministic True/False parsing.
+
+\paragraph{SITE.}
+We use SITE only for external validation and do not train on SITE. The image evaluation contains 2,591 examples: 1,368 single-image and 1,223 multi-image examples. Our primary SITE subset is the official spatial-relationship-reasoning category ($n=993$). We additionally report a transparently defined, non-official keyword-derived orientation subset ($n=1{,}824$), used only as supporting analysis. SITE results use the benchmark's native multiple-choice format and chance-adjusted accuracy (CAA) in addition to raw accuracy.
+
+\subsection{Models and Conditions}
+Our compact model is \modelsmall{}, and our larger model is \modellarge{}. We evaluate ten canonical VSR conditions: 2B zero-shot, 2B structured prompting, 2B General LoRA, 2B Targeted LoRA, 7B zero-shot, 7B General LoRA, 7B Targeted LoRA, 7B Hard-Neg LoRA, 7B Projector LoRA, and 7B Vision+Projector LoRA.
+
+General LoRA uses a proportional sample across relation families. Targeted LoRA allocates most training examples to weak orientation/depth/horizontal families with rehearsal from the remaining relations. Hard-negative LoRA introduces audited complementary orientation examples, primarily facing/facing-away inversions. Vision-side conditions adapt either the multimodal projector or upper vision blocks together with the projector. The frozen experimental tag \texttt{paper-freeze-v1} records the final result set.
+
+\subsection{Metrics and Statistical Tests}
+For VSR we report accuracy overall and by spatial family. For SITE we report raw accuracy and CAA. Paired condition comparisons use McNemar tests when applicable. Clean-label orientation analysis reports the full orientation set and progressively stricter audited subsets. Logical consistency is evaluated by constructing complementary statements for strict relation pairs (left/right, front/behind, facing/facing-away) and testing whether the model assigns opposite verdicts as required.
+
+\section{Main Results}
+\label{sec:results}
+\subsection{Scaling Improves Spatial Reasoning Unevenly}
+\begin{table*}[t]
+\centering
+\small
+\caption{Canonical VSR test results. Orientation improves little with scale or adaptation compared with several other relation families.}
+\label{tab:vsr-main}
+\begin{tabular}{lcccccc}
+\toprule
+Condition & Overall & Orientation & Depth & Horizontal & Containment & Topology/contact \\
+\midrule
+2B zero-shot & 74.0 & 62.8 & 68.9 & 70.2 & 83.4 & 80.5 \\
+2B structured & 68.3 & 53.3 & 64.9 & 66.7 & 78.7 & 71.7 \\
+2B General LoRA & 76.6 & 62.0 & 71.1 & 74.3 & 87.6 & 81.0 \\
+2B Targeted LoRA & 76.5 & 64.2 & 70.8 & 75.1 & 87.6 & 81.4 \\
+7B zero-shot & 80.9 & 63.5 & 75.2 & 84.8 & 89.3 & 80.3 \\
+7B General LoRA & \textbf{84.7} & 65.7 & \textbf{82.3} & \textbf{87.4} & \textbf{92.9} & 84.4 \\
+7B Targeted LoRA & 83.9 & 64.2 & 81.7 & 87.1 & 91.7 & \textbf{85.3} \\
+7B Hard-Neg LoRA & 84.3 & \textbf{66.4} & 80.7 & 87.1 & 89.9 & 84.6 \\
+7B Projector LoRA & 82.9 & 64.2 & 78.6 & 87.1 & 89.3 & \textbf{85.3} \\
+7B Vision+Projector LoRA & 83.1 & 64.2 & 78.0 & 87.1 & 89.9 & 84.4 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\Cref{tab:vsr-main} reveals the central pattern. Scaling from 2B to 7B lifts zero-shot overall accuracy by 6.9\pp, horizontal by 14.6\pp, depth by 6.3\pp, and containment by 5.9\pp, but orientation by only 0.7\pp. General 7B LoRA further raises overall accuracy to 84.7\%, yet orientation reaches only 65.7\%. Across trained/scaled conditions other than structured prompting, orientation remains in a narrow 62--66\% band.
+
+Structured prompting is a clear negative result: overall accuracy falls from 74.0\% to 68.3\% at 2B, while orientation falls from 62.8\% to 53.3\%. A paired McNemar test on the full test set confirms that the structured prompt is significantly worse than the minimal baseline ($p\approx2.46\times10^{-7}$). Explicit verbal decomposition therefore does not repair the bottleneck in the compact model.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\linewidth]{../results/figures/fig1_scale_conditions.png}
+    \caption{Overall versus orientation performance across model scale and adaptation conditions.}
+    \label{fig:scale}
+\end{figure}
+
+\subsection{Clean-Label Robustness}
+Manual auditing identified ambiguous or questionable orientation examples, so we repeat evaluation on progressively stricter subsets. The best full-set orientation result is 66.4\%; on the strictest 107-example subset, the best result rises to 78.5\% for 7B General LoRA. However, this remains below the same model's containment (92.9\%) and depth (82.3\%) accuracy on the full test set. The orientation effect is therefore not reducible to annotation noise alone.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\linewidth]{../results/figures/fig2_orientation_interventions.png}
+    \caption{Orientation performance across 7B interventions, including clean-label analysis and per-relation behavior.}
+    \label{fig:orientation}
+\end{figure}
+
+\section{Why Does Orientation Remain Difficult?}
+\label{sec:mechanism}
+\subsection{Frozen Representation Probes}
+We probe frozen \modellarge{} visual representations without fine-tuning the generative model. Mean-pooled ViT and post-merger features support only weak relation decoding for facing versus facing-away, parallel versus perpendicular, and a four-way orientation task. Linear and MLP probes generally remain near majority baselines; preserving patch-level structure yields some signal for parallel/perpendicular, but the corresponding test set is small and confidence intervals are wide.
+
+To remove the confound that global features might infer relations without knowing the relevant objects, we additionally extract subject/reference regions and construct grounded visual features from subject, object, difference, and elementwise-product representations. These features do not produce a substantial or consistent gain. We therefore interpret the probes conservatively: object-intrinsic orientation is not cleanly accessible to simple frozen readouts, but the experiments do not prove that the information is absent from the network.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\linewidth]{../results/figures/fig3_probes.png}
+    \caption{Object-grounded representation-probe results for facing/facing-away, parallel/perpendicular, and four-way orientation classification.}
+    \label{fig:probes}
+\end{figure}
+
+\subsection{Visual-Side Adaptation and Object-Centric Decomposition}
+If frozen representations were the sole bottleneck, directly adapting visual or projector components might recover orientation performance. It does not. Projector LoRA and Vision+Projector LoRA both reach 64.2\% orientation accuracy, below the 65.7\% LM-only control, while overall accuracy significantly degrades relative to the control. This suggests that the observed ceiling is not simply unlocked by low-rank adaptation of the visual pathway.
+
+We also test an explicit two-stage object-centric pipeline. Geometry-only classifiers and geometry-plus-visual classifiers substantially underperform the end-to-end 7B LM-only control on orientation. A four-way relation module remains near chance under cross-validation. Two-dimensional box geometry is structurally insufficient for intrinsic facing direction, and the tested region representations do not provide enough additional signal to close the gap.
+
+\subsection{Logical Consistency Reveals a Distinct Failure Mode}
+We construct complementary statements for strict relation families. A coherent model should return opposite truth values for left/right, front/behind, and facing/facing-away formulations of the same object pair. The zero-shot 7B model is consistent on only 58.0\% of left/right pairs, 57.0\% of front/behind pairs, and 36.9\% of facing pairs. Facing consistency is therefore worse than the 50\% expected from independent random binary verdicts.
+
+LM-only LoRA raises facing consistency to 66.0\% and front/behind consistency to 70.7\%; pooled strict-family consistency is significantly better than zero-shot ($p<0.0001$). Hard-negative training further increases facing consistency to 77.7\%. Importantly, facing accuracy is identical for LM-only and hard-negative LoRA at 68.9\%. The additional hard-negative improvement is not significant in the pooled strict-family McNemar comparison ($p=0.29$), but the facing-specific change demonstrates the conceptual separation: raw task accuracy can remain fixed while relational coherence changes substantially.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\linewidth]{../results/figures/fig4_consistency.png}
+    \caption{Self-consistency on complementary facing/facing-away relations across 7B conditions.}
+    \label{fig:consistency}
+\end{figure}
+
+\section{External Validation on SITE}
+\label{sec:site}
+We evaluate the frozen 7B base model on 2,591 SITE image examples using SITE's native multiple-choice protocol. The model is strong on the official spatial-relationship-reasoning category: 75.1\% raw accuracy and 59.2\% CAA. We therefore do \emph{not} claim that SITE confirms broadly weak spatial reasoning.
+
+The supporting orientation analysis uses a transparently defined, non-official keyword heuristic selecting questions involving direction, facing, view, rotation, left/right, and parallel/perpendicular terminology. On this subset, zero-shot performance falls to 47.3\% raw and 22.6\% CAA, compared with 54.2\% raw and 31.1\% CAA over all image examples. This result narrows the cross-benchmark claim: difficulty is concentrated in object/direction-related orientation rather than spatial relationship reasoning broadly.
+
+We then apply the existing VSR-trained 7B General LoRA checkpoint to the exact same SITE examples without SITE training. The adapter is statistically neutral overall (54.2\%$\rightarrow$53.8\%, $p=0.66$), does not improve the orientation subset (47.3\%$\rightarrow$48.0\%, $p=0.50$), and significantly degrades the official spatial-relationship category (75.1\%$\rightarrow$71.6\%, $p=0.004$). VSR gains therefore transfer poorly and can induce negative transfer on the independent benchmark.
+
+\begin{table}[t]
+\centering
+\small
+\caption{SITE image validation. CAA is chance-adjusted accuracy.}
+\label{tab:site}
+\begin{tabular}{lccc}
+\toprule
+Subset & Zero-shot & VSR-LoRA & $\Delta$ \\
+\midrule
+All images & 54.2 / 31.1 & 53.8 / 30.5 & $-0.4$ \\
+Official spatial-rel. & 75.1 / 59.2 & 71.6 / 53.4 & $-3.5$ \\
+Orientation heuristic & 47.3 / 22.6 & 48.0 / 23.6 & $+0.7$ \\
+\bottomrule
+\end{tabular}
+\vspace{1mm}
+\caption*{Entries are raw accuracy / CAA (\%).}
+\end{table}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\linewidth]{../results/figures/fig5_site_external.png}
+    \caption{SITE CAA for zero-shot and VSR-trained LoRA. The official spatial-relationship category degrades significantly under transfer.}
+    \label{fig:site}
+\end{figure}
+
+\section{Discussion}
+\label{sec:discussion}
+\paragraph{Orientation is not equivalent to spatial reasoning broadly.}
+The strongest conclusion is deliberately narrow. The 7B model is highly competitive on several VSR families and strong on SITE's official spatial-relationship category. The persistent weakness concerns object-relative and direction-related orientation. Framing the result this way avoids conflating a specific diagnostic failure with general spatial incompetence.
+
+\paragraph{Representation and coherence both matter.}
+The probe results provide evidence of weak accessible decodability of intrinsic orientation from frozen visual features, while the consistency experiments reveal large logical failures even for relations the model can answer above chance. Neither result alone explains the full phenomenon. Together they support a mixed bottleneck in which orientation information is difficult to extract reliably and relational decisions are not always propagated coherently across complementary formulations.
+
+\paragraph{Task adaptation can specialize rather than generalize.}
+General LoRA improves VSR overall accuracy substantially, but its SITE transfer is neutral overall and significantly negative on the official spatial-reasoning subset. Hard negatives improve a targeted coherence behavior while causing relation-specific tradeoffs. These results caution against interpreting benchmark-specific fine-tuning gains as evidence of a general spatial reasoning improvement.
+
+\paragraph{Negative results are informative.}
+Structured prompting, vision/projector LoRA, object-grounded probes, and explicit two-stage decomposition all fail to deliver the expected orientation gains. Because these interventions target different hypothesized causes, their collective failure constrains plausible explanations more strongly than another small aggregate benchmark improvement would.
+
+\section{Limitations}
+Our main diagnostic dataset contains only 137 orientation examples, and individual relation subsets such as perpendicular are smaller still. Clean-label auditing reduces ambiguity but also decreases sample size. The SITE orientation subset is keyword-derived rather than an official benchmark category and must therefore be treated as supporting evidence, not as the headline SITE result. Our probing methods test accessible decodability under specific linear/MLP and pooling choices; failure to decode does not prove that orientation information is absent. The visual-side adaptation experiments use LoRA rather than full end-to-end retraining. Finally, the study focuses on two model scales and image-based evaluation; video-based spatial reasoning is left for future work.
+
+\section{Conclusion}
+Aggregate spatial accuracy hides a persistent orientation bottleneck in the VLMs studied here. Scaling and standard adaptation substantially improve several spatial families while leaving object-relative orientation comparatively resistant. Clean-label analysis shows that the gap is not solely annotation noise; representation probes suggest that intrinsic orientation is only weakly accessible to simple frozen readouts; and complementary-relation tests reveal that models can be accurate yet logically inconsistent. Hard-negative training improves relational coherence without improving facing accuracy, demonstrating that accuracy and consistency are distinct axes of spatial competence. External evaluation on SITE further shows that VSR-specific adaptation transfers poorly and can negatively transfer to general spatial reasoning. These findings motivate spatial evaluation that reports relation-specific performance and logical coherence rather than relying on aggregate accuracy alone.
+
+\bibliographystyle{ieee_fullname}
+\bibliography{references}
+
+\input{appendix}
+
+\end{document}
