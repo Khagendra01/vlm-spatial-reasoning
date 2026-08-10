@@ -1,0 +1,108 @@
+% ============================= Interventions =============================
+\section{Interventions: What Moves the Bottleneck?}
+\label{sec:interventions}
+
+\subsection{Vision-side adaptation does not help and costs accuracy}
+If the frozen representation is the bottleneck, adapting it should help. We
+train two vision-side LoRAs with the exact control recipe: \emph{Projector}
+(adapts the patch-merger, 152K trainable) and \emph{Vision+Projector} (adds the
+upper eight vision blocks, 1.46M trainable). Neither changes orientation accuracy
+($64.2\%$ both, vs.\ $65.7\%$ control; McNemar $p{=}0.86$ and $p{=}0.85$), while
+\emph{both are significantly worse overall} (82.9\% and 83.1\% vs.\ 84.7\%,
+$p{=}0.0043$ and $p{=}0.0122$). The only movement is a non-significant facing bump
+($75.0\rightarrow78.1\%$ under Projector) at the expense of facing-away
+($59.0\rightarrow56.4\%$) --- a specialization tradeoff, not a fix. 1.46M
+parameters of vision adaptation cannot unlock what frozen features do not
+contain.
+
+\subsection{Explicit two-stage decomposition is significantly worse}
+We test whether ``localize, then classify'' beats the end-to-end generative
+interface: (1) subject/reference boxes from frozen Qwen2-VL grounding; (2) a
+relation module --- linear or MLP(256) --- over 24-d box geometry
+(centers, $\Delta x/\Delta y$, distance, angle, directional bits, sizes,
+overlap, IoU) with and without concatenated frozen region features; 5-fold CV;
+True iff predicted relation equals the claimed one. On the 137 orientation
+statements, every variant is \emph{significantly worse} than the 65.7\% control
+(Table~\ref{tab:twostage}); the 4-way relation classifier itself sits at
+44--46\% vs.\ 50\% chance. Two readings. First, 2D box geometry is silent about
+object-intrinsic direction: ``facing'' is a property of the subject's own
+front/back, not of two boxes' relative layout. Second, the generative model's
+residual signal (facing 75\%) is not reproducible from decomposable parts of the
+frozen representation --- it lives in full multimodal interaction plus language
+priors, exactly what the decomposition strips away.
+
+\begin{table}[t]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{threeparttable}
+\caption{\textbf{Two-stage object-centric reasoning vs.\ generative control}
+(orientation statements, $n{=}137$; control: 7B LM-only LoRA, 65.7\%). All
+variants are significantly worse (exact McNemar).}
+\label{tab:twostage}
+\begin{tabular}{lccc}
+\toprule
+Condition & Overall & discord.\ (L/W) & $p$ \\
+\midrule
+7B LM LoRA (ctrl.) & 65.7 & --- & --- \\
+A geom., linear & 58.3 & 45/16 & 0.0003 \\
+A geom., MLP & 58.3 & 47/14 & $<$0.0001 \\
+B geom.+visual, lin. & 55.9 & 44/20 & 0.0037 \\
+B geom.+visual, MLP & 55.1 & 47/18 & 0.0004 \\
+\bottomrule
+\end{tabular}
+\end{threeparttable}
+\end{table}
+
+\subsection{Hard negatives: a null global tradeoff, a real coherence gain}
+Hard-negative training (complement-paired statements with flipped labels)
+changes nothing globally --- 84.33\% vs.\ 84.69\% control, $p{=}0.508$ --- and
+lifts the orientation family only marginally ($66.4$ vs.\ $65.7$). But two things
+happen beneath the surface. First, it reallocates within the family: facing-away
+$59.0\rightarrow66.7\%$ at the cost of facing $75.0\rightarrow70.3\%$, and it
+fixes 5 of the 48 annotated persistent failures (leaving 15 still failing in all
+three 7B conditions). Second --- and more importantly --- it repairs
+\emph{logical consistency}, to which we now turn.
+
+\subsection{Consistency: the coherence dimension is separable from accuracy}
+We generate, for every test statement in the four complement-able families, the
+flipped complementary statement on the same image and object pair
+(left$\leftrightarrow$right, $n{=}245$; in front of$\leftrightarrow$behind,
+$n{=}314$; facing$\leftrightarrow$facing away, $n{=}103$; parallel$ \leftrightarrow$
+perpendicular soft-complement, $n{=}34$), and run all five 7B conditions on both
+members. A model is \emph{self-consistent} on a pair iff it gives opposite
+verdicts on strict complements.
+
+The zero-shot 7B model is dramatically self-contradictory on the critical family:
+it agrees with itself on only \textbf{36.9\%} of facing pairs --- \emph{worse
+than the 50\% chance baseline} --- while scoring 64.1\% accuracy on those same
+statements. LM-side training repairs this ($\rightarrow$66.0\%), and
+hard-negative training pushes it to \textbf{77.7\%} (Figure~\ref{fig:cons}).
+Crucially, facing \emph{accuracy is identical} for LM-only and hard-negative
+conditions (68.9\% $=$ 68.9\%), so the coherence gain is not bought with
+accuracy. On the paired McNemar test over the 662 strict-complement pairs,
+zero-shot is significantly \emph{less} consistent than LM-only ($p{<}0.0001$,
+117 vs.\ 43 discordant), while hardneg/projector/vision+proj are statistically
+indistinguishable from the control ($p{=}0.29/0.18/0.47$). Parallel/perp (soft
+complements) shows the flip side: zero-shot is conservative (5.9\% both-True
+contradictions), while all trained conditions raise both-True to 32--38\% --- a
+training-induced specialization tradeoff.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig/consistency_facing.pdf}
+\caption{\textbf{Facing-pair self-consistency} (n=103 pairs, 5 conditions).
+Zero-shot agrees with itself on 36.9\% of pairs --- below chance --- despite
+64\% accuracy; hard-negative training reaches 77.7\% at \emph{identical}
+accuracy. Coherence and accuracy are separable failure dimensions.}
+\label{fig:cons}
+\end{figure}
+
+\textbf{Mechanistic reading.} The failure signature of the zero-shot model is not
+``no knowledge of the relation'' (it is above chance and improves with training)
+but \emph{relation-specific affirmation biases}: it commits to the familiar
+template and cannot propagate the entailment to its complement. The overall
+orientation ceiling ($\sim$66\%) is therefore partly a logical-integrity problem
+in the generative interface, not purely perception. This also answers why
+accuracy fails to capture it: a model that is right on both members of a pair
+counts twice in accuracy but is only distinguishable by paired analysis.

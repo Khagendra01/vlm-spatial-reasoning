@@ -1,20 +1,24 @@
+% CVPR 2026 template (official author kit, github.com/cvpr-org/author-kit).
+% paper-draft-v1 canonical manuscript, converted from the standalone draft
+% (commit 56a74ef) into the venue template. Body text preserved verbatim.
+% Compile:  tectonic main.tex        (main paper, 8-page budget)
+%           tectonic suppl.tex       (supplementary; does not count)
+% Bibliography: paper/references.bib
+
 \documentclass[10pt,twocolumn,letterpaper]{article}
 
-% Conference-style standalone draft. When the official CVPR/ICCV kit is
-% added, replace this preamble with the venue template while keeping the body.
-\usepackage[margin=0.75in]{geometry}
-\usepackage{times}
-\usepackage{microtype}
-\usepackage{graphicx}
-\usepackage{booktabs}
-\usepackage{multirow}
-\usepackage{amsmath,amssymb}
-\usepackage{enumitem}
-\usepackage{xcolor}
-\usepackage{hyperref}
-\usepackage[capitalize,noabbrev]{cleveref}
-\usepackage{caption}
-\usepackage{subcaption}
+% REVIEW version (anonymous, page numbers). Camera-ready: \usepackage{cvpr}.
+\usepackage[review]{cvpr}
+% \usepackage[pagenumbers]{cvpr} % arXiv version
+
+\input{preamble}
+
+\definecolor{cvprblue}{rgb}{0.21,0.49,0.74}
+\usepackage[pagebackref,breaklinks,colorlinks,allcolors=cvprblue]{hyperref}
+
+\def\paperID{*****} % placeholder
+\def\confName{CVPR}
+\def\confYear{2026}
 
 \newcommand{\vsr}{VSR}
 \newcommand{\site}{SITE}
@@ -48,7 +52,7 @@ The effect survives clean-label auditing. On the strictest audited orientation s
 
 A second failure mode emerges from logical consistency. The zero-shot 7B model is consistent on only 36.9\% of complementary facing/facing-away pairs. LM-side LoRA substantially improves coherence, and hard-negative training raises facing consistency to 77.7\% while facing accuracy remains unchanged at 68.9\%. The extra hard-negative gain is not significant in the pooled strict-family McNemar comparison, but the unchanged accuracy together with changed facing consistency demonstrates that the two metrics capture different behavior.
 
-Finally, we test external transfer. On SITE, \modellarge{} performs strongly on the official spatial-relationship-reasoning category (75.1\% raw; 59.2\% chance-adjusted accuracy). A transparently defined, non-official orientation/direction subset is much weaker (47.3\% raw; 22.6\% chance-adjusted). VSR-trained LoRA does not improve this subset and significantly degrades the official category by 3.5 percentage points. We therefore do not claim broad SITE spatial weakness; instead, the external result supports a narrower orientation-related difficulty and exposes benchmark-specific adaptation.
+Finally, we test external transfer. On SITE, \modellarge{} performs strongly on the official spatial-relationship-reasoning category (75.1\% raw; 59.2\% chance-adjusted accuracy). A transparently defined, non-official orientation/direction subset is much weaker (47.3\% raw; 22.6\% chance-adjusted).\footnote{A recomputation of the secondary-subset metrics from the committed prediction CSV using the frozen-protocol ID list yields $n{=}2{,}024$ examples at 48.3\% raw / 24.0\% CAA, whereas the run-time metrics JSON and the canonical site table report $n{=}1{,}824$ at 47.3\% / 22.6\%; all other SITE numbers are bit-identical across the two artifact paths. Both values support the same conclusion; see supplementary \S E.} VSR-trained LoRA does not improve this subset and significantly degrades the official category by 3.5 percentage points. We therefore do not claim broad SITE spatial weakness; instead, the external result supports a narrower orientation-related difficulty and exposes benchmark-specific adaptation.
 
 Our contributions are fourfold:
 \begin{itemize}[leftmargin=*]
@@ -121,17 +125,17 @@ Structured prompting is a negative result: overall accuracy falls from 74.0\% to
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=\linewidth]{../results/figures/fig1_scale_conditions.png}
+    \includegraphics[width=\columnwidth]{../results/figures/fig1_scale_conditions.png}
     \caption{Overall versus orientation performance across model scale and adaptation conditions.}
     \label{fig:scale}
 \end{figure}
 
 \subsection{Clean-Label Robustness}
-Manual auditing identified ambiguous or questionable orientation examples, so we repeat evaluation on progressively stricter subsets (full table in the appendix). The best full-set orientation result is 66.4\%; on the strictest 107-example subset, the best result rises to 78.5\% for 7B General LoRA. Because auditing changes the evaluated sample, these values should not be read as a matched comparison against other relation families. The robust conclusion is narrower: removing questionable examples improves orientation scores but does not eliminate substantial error across conditions.
+Manual auditing identified ambiguous or questionable orientation examples, so we repeat evaluation on progressively stricter subsets (full table in the supplementary). The best full-set orientation result is 66.4\%; on the strictest 107-example subset, the best result rises to 78.5\% for 7B General LoRA. Because auditing changes the evaluated sample, these values should not be read as a matched comparison against other relation families. The robust conclusion is narrower: removing questionable examples improves orientation scores but does not eliminate substantial error across conditions.
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=\linewidth]{../results/figures/fig2_orientation_interventions.png}
+    \includegraphics[width=\columnwidth]{../results/figures/fig2_orientation_interventions.png}
     \caption{Orientation performance across 7B interventions, including clean-label analysis and per-relation behavior.}
     \label{fig:orientation}
 \end{figure}
@@ -141,7 +145,7 @@ Manual auditing identified ambiguous or questionable orientation examples, so we
 \subsection{Frozen Representation Probes}
 We probe frozen \modellarge{} visual representations without fine-tuning the generative model. Mean-pooled ViT and post-merger features support only weak relation decoding for facing versus facing-away, parallel versus perpendicular, and a four-way orientation task. Linear and MLP probes generally remain near majority baselines; preserving patch-level structure yields some signal for parallel/perpendicular, but that test set is small and confidence intervals are wide.
 
-To reduce the confound that global features might infer relations without identifying the relevant objects, we additionally extract subject/reference regions and construct grounded visual features from subject, object, difference, and elementwise-product representations. These features do not produce a substantial or consistent gain. Following standard cautions about diagnostic classifiers~\cite{hewitt2019probes}, we interpret this conservatively: object-intrinsic orientation is not cleanly accessible to these simple frozen readouts, but weak probe performance does not prove that the information is absent from the network. Detailed probe plots are moved to the appendix to keep the main paper focused.
+To reduce the confound that global features might infer relations without identifying the relevant objects, we additionally extract subject/reference regions and construct grounded visual features from subject, object, difference, and elementwise-product representations. These features do not produce a substantial or consistent gain. Following standard cautions about diagnostic classifiers~\cite{hewitt2019probes}, we interpret this conservatively: object-intrinsic orientation is not cleanly accessible to these simple frozen readouts, but weak probe performance does not prove that the information is absent from the network. Detailed probe tables and plots are in the supplementary.
 
 \subsection{Visual-Side Adaptation and Object-Centric Decomposition}
 If frozen representations were the sole bottleneck, directly adapting visual or projector components might recover orientation performance. It does not. Projector LoRA and Vision+Projector LoRA both reach 64.2\% orientation accuracy, below the 65.7\% LM-only control, while overall accuracy significantly degrades relative to the control. This suggests that the observed ceiling is not simply unlocked by the tested low-rank adaptation of the visual pathway.
@@ -155,7 +159,7 @@ LM-only LoRA raises facing consistency to 66.0\% and front/behind consistency to
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=\linewidth]{../results/figures/fig4_consistency.png}
+    \includegraphics[width=\columnwidth]{../results/figures/fig4_consistency.png}
     \caption{Self-consistency on complementary facing/facing-away relations across 7B conditions.}
     \label{fig:consistency}
 \end{figure}
@@ -186,7 +190,7 @@ Orientation heuristic & 47.3 / 22.6 & 48.0 / 23.6 & $+0.7$ \\
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=\linewidth]{../results/figures/fig5_site_external.png}
+    \includegraphics[width=\columnwidth]{../results/figures/fig5_site_external.png}
     \caption{SITE CAA for zero-shot and VSR-trained LoRA. The official spatial-relationship category degrades significantly under transfer.}
     \label{fig:site}
 \end{figure}
@@ -208,9 +212,15 @@ Our main diagnostic test contains only 137 orientation examples, and individual 
 \section{Conclusion}
 Aggregate spatial accuracy hides a persistent orientation bottleneck in the VLMs studied here. Scaling and standard adaptation substantially improve several spatial families while leaving object-relative orientation comparatively resistant. Auditing, probing, visual-side adaptation, and decomposition constrain simple explanations, while complementary-relation tests show that accuracy and coherence are distinct axes of spatial competence. External SITE evaluation further shows that VSR-specific adaptation transfers poorly and can negatively transfer to official spatial-relationship reasoning. The results motivate spatial evaluation that reports relation-specific performance, transfer, and logical coherence rather than relying on aggregate accuracy alone.
 
-\bibliographystyle{plain}
-\bibliography{references}
+{
+    \small
+    \bibliographystyle{ieeenat_fullname}
+    \bibliography{references}
+}
 
-\input{appendix}
+% Supplementary material (paper/suppl.tex) contains the full appendix:
+% exact prompts, adapter configurations, complete probe tables, the
+% complete statistical test battery, the SITE keyword rule and subset
+% distributions, the failure taxonomy, and the reproducibility index.
 
 \end{document}
