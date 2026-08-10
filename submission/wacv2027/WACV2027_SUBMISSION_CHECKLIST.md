@@ -10,13 +10,23 @@ PDFs compiled with Tectonic 0.17.0 (XeTeX engine), official WACV 2027 author kit
 
 | # | File | Size | Pages | SHA-256 |
 |---|---|---|---|---|
-| 1 | `main.pdf` | 877,797 B | 8 total: content ≤ 7 pp, references on pp 7–8 (limit: 8 content pp + ref pages) | `2a9ac87b24e5c3935df5e444da0fb7584fc15ca24e49bfccbdf70ad89bca6a28` |
-| 2 | `supplementary.pdf` | 2,076,857 B | 8 (supplement has no page limit) | `13e8b08c6e281fe2a4210b5f2a56ff5463fcbe648cf5302974957b5df63f3984` |
-| 3 | `wacv2027_code.zip` | 721,065 B | — (59 files, ≤ 200 MB limit) | `7b3fb1f09621c4962f2b3a5ce0eb48ec2df2f73abfd719ba34a57377c8223338` |
+| 1 | `main.pdf` | 877,825 B | 8 total: content ≤ 7 pp, references on pp 7–8 (limit: 8 content pp + ref pages) | `bc27ecece8e4a6083b5ea01cf2e8d9be314514cd30c0d7a0abe629b4f0a38c08` |
+| 2 | `supplementary.pdf` | 2,076,681 B | 8 (supplement has no page limit) | `31e36bc6a3674e582af1bb8c7de9215e7f9b816d17fece94326d6f22ea5cee74` |
+| 3 | `wacv2027_code.zip` | 721,068 B | — (59 files, ≤ 200 MB limit) | `81b2ba73455ed7c970b7c9709167bda9b8fe28fbffa313c9ce079aeb85bbd45a` |
 
 SHA-256 values recorded at package build time (Tectonic 0.17.0, reproducible
 builds from `source/`). Re-verify with `Get-FileHash`/`sha256sum` immediately
 before upload — they must match exactly; any difference means the file changed.
+
+Submission-safety calibration (final pass): `paper-freeze-v1` tag name, the
+SITE protocol config hashes (`28f4cc09887477af`, `4d371713c96ee0d9`), and all
+"preregistered" wording removed from the upload artifacts (replaced with
+"frozen experimental snapshot" / "pre-specified", with the protocol content
+unchanged). The uploaded `run_metadata.json` carries placeholder snapshot
+labels (`config-snapshot-a/b`); the private repository copy retains the real
+hashes. The abstract clean-label sentence now reads "the pattern persists after
+excluding examples flagged as ambiguous". No experiments, metrics, figures,
+tables, or statistical results changed.
 
 ## OpenReview upload order (Round 2)
 
