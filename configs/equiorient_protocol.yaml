@@ -1,0 +1,129 @@
+project:
+  name: EquiOrient
+  branch: research/equiorient
+  status: planned_not_executed
+  paper_role: method_solution
+  authority:
+    - research/EQUIORIENT_PROTOCOL_FREEZE.md
+    - configs/equiorient_protocol.yaml
+    - research/EQUIORIENT_STUDY.md
+
+novelty_gate:
+  required_before_confirmatory_training: true
+  artifact: research/EQUIORIENT_NOVELTY_GATE.md
+  allowed_verdicts:
+    - PROCEED
+    - MUTATE
+    - KILL
+  min_close_papers: 20
+
+research_question: >-
+  Can explicit relation-aware latent equivariance teach spatial representations
+  that transform according to known geometry and generalize better to held-out
+  transformations than matched ordinary fine-tuning, augmentation, or
+  output-consistency training?
+
+method:
+  core_form: "z(T(x),a,b) ~= rho_r(T) z(x,a,b)"
+  pair_conditioned: true
+  relation_dependent_action: true
+  representation_level_constraint_required: true
+  generic_output_consistency_is_not_equiorient: true
+
+comparison_hierarchy:
+  - ordinary_spatial_sft_or_lora
+  - matched_transformation_augmentation
+  - output_consistency
+  - latent_invariance_if_semantically_valid
+  - relation_aware_latent_equivariance
+
+transforms:
+  classes:
+    - invariant_relation
+    - relation_permutation
+    - object_local_state_change
+    - viewpoint_frame_change
+    - unsafe
+  pilot_candidates:
+    - horizontal_reflection
+    - vertical_reflection
+    - controlled_subject_rotation
+    - controlled_global_rotation
+  rules:
+    explicit_relation_transform_map: true
+    no_global_label_flip_rule: true
+    unsafe_cases_excluded_before_freeze: true
+    identity_test_required: true
+    inverse_test_required: true
+    composition_test_when_defined: true
+
+pilot:
+  max_backbones: 1
+  seeds: 1
+  target_duration_hours: 48
+  candidate_relation_families:
+    - horizontal_left_right
+    - intrinsic_facing_facing_away
+    - parallel_perpendicular
+  stop_after_report: true
+
+confirmatory:
+  multiple_seeds_required: true
+  same_training_data_across_methods: true
+  matched_compute_budget: true
+  held_out_transform_evaluation_required: true
+  held_out_relation_transfer_desired: true
+  external_validation_after_internal_freeze: true
+
+primary_metrics:
+  - held_out_transform_accuracy
+  - paired_both_correct_rate
+  - expected_change_correctness
+  - latent_equivariance_error
+
+secondary_metrics:
+  - seen_transform_accuracy
+  - relation_family_accuracy
+  - correct_vs_shuffled_visual_dependence
+  - external_transfer
+  - general_capability_preservation
+
+statistics:
+  seed_variability_required: true
+  paired_example_level_tests_allowed: true
+  do_not_conflate_mcnemar_with_seed_variability: true
+  confirmatory_family_must_be_predeclared: true
+  multiplicity_control_required_for_confirmatory_family: true
+
+anti_drift:
+  forbidden_silent_changes:
+    - replace_equivariance_with_invariance
+    - turn_into_deltaA_deltaC_deltaG_paper
+    - add_models_after_unfavorable_results
+    - redefine_transforms_after_test_results
+    - drop_unfavorable_matched_baselines
+    - redefine_held_out_transforms_after_training
+    - claim_firstness_without_new_search
+    - mutate_to_3d_4d_world_model_without_decision_log
+
+kill_conditions:
+  - fatal_prior_work_overlap
+  - gains_explained_by_augmentation_only
+  - no_held_out_transform_generalization
+  - transform_ground_truth_not_reliable
+  - grounding_noise_invalidates_pair_state
+  - severe_general_capability_degradation_without_compelling_tradeoff
+
+implementation:
+  do_not_create_full_training_code_before_novelty_gate: true
+  target_modules:
+    - src/equiorient/transforms.py
+    - src/equiorient/relation_actions.py
+    - src/equiorient/pair_encoder.py
+    - src/equiorient/losses.py
+    - src/equiorient/datasets.py
+    - src/equiorient/evaluation.py
+  target_tests:
+    - tests/test_equiorient_transforms.py
+    - tests/test_relation_actions.py
+    - tests/test_equivariance_metrics.py
