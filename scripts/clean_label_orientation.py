@@ -7,7 +7,8 @@ Exclusion sets (from the 48-annotation audit):
   clear:        + camera_viewpoint_ambiguity (13 total)
   strict:       + intrinsic_orientation_ambiguous, front_back_object_ambiguous,
                  small_occluded_object, subject_reference_inversion,
-                 parallel_perpendicular_geometry (23 total)
+                 parallel_perpendicular_geometry (30 total from the 137-example
+                 orientation test set; resulting strict subset n=107)
 """
 import os, sys, csv
 os.chdir("/home/ubuntu/vlm-spatial-reasoning")
@@ -46,11 +47,11 @@ CONDS = [
 ]
 ORIENT = {"facing", "facing away from", "parallel to", "perpendicular to"}
 
-print(f"{'condition':<26} {'full(137)':>10} {'-q(132)':>9} {'clear(124)':>11} {'strict(114)':>12}")
+print(f"{'condition':<26} {'full(137)':>10} {'-q(132)':>9} {'clear(124)':>11} {'strict(107)':>12}")
 lines = ["# Clean-Label Orientation Robustness (VSR test)", "",
          "Full test (137) vs subsets with annotation-questionable / ambiguous examples removed.",
          "Exclusion sets from the 48-example manual audit (results/orientation_persistent_annotations.csv).",
-         "", "| Condition | full (137) | −questionable (132) | clear (124) | strict (114) |", "|---|---|---|---|---|"]
+         "", "| Condition | full (137) | −questionable (132) | clear (124) | strict (107) |", "|---|---|---|---|---|"]
 for name, path in CONDS:
     rows = {}
     with open(path) as f:
