@@ -1,0 +1,70 @@
+% ============================= Setup =============================
+\section{Setup}
+\label{sec:setup}
+
+\textbf{Benchmark.} We evaluate on VSR~\cite{liu2023vsr}
+(\texttt{cambridgeltl/vsr\_random}): train 7{,}680, validation 1{,}097, test
+2{,}195 statements; 64 relations; near-balanced labels. Each statement is a
+template-generated caption of an image with a True/False label. The
+\textbf{orientation family} (facing, facing away from, parallel to, perpendicular
+to) contains $n{=}137$ test statements --- small, but stable, and we report Wilson
+95\% CIs and paired tests throughout rather than relying on point estimates. All
+training manifests are built from the train split only; every evaluation uses
+test.
+
+\textbf{Models.} (i) SmolVLM2-2.2B-Instruct~\cite{huggingface2025smolvlm2} (2B
+conditions: zero-shot, General LoRA, Targeted LoRA, structured-prompt variant) and
+(ii) Qwen2-VL-7B-Instruct~\cite{wang2024qwen2vl} (7B conditions: zero-shot, LM-only
+General LoRA, Hard-Negative LoRA, Projector LoRA, Vision+Projector LoRA). The
+vision tower is frozen in all training conditions. Two families is a deliberate
+depth-over-breadth choice: every condition shares the same prompt, parser, data
+splits, and metric code, so cross-condition comparisons are internally consistent.
+
+\textbf{Prompt and decoding.} The plain prompt used identically by both families
+and all conditions:
+\begin{quote}
+\small
+``Look at the image carefully.\\
+Statement: ``\{statement\}''\\
+Is this statement true or false?\\
+Answer with exactly one word: True or False.''
+\end{quote}
+Greedy decoding ($\mathrm{do\_sample}{=}$False, temperature 0). The 2B wrapper
+uses $\mathrm{max\_new\_tokens}{=}5$; 7B runs use 128. A structured-decomposition
+prompt (subject/reference identification, then explicit position/orientation
+steps) was additionally tested on 2B only. Outputs are parsed with an anchored
+True/False regex parser (no guessing); invalid rates are 0 on all reported runs.
+Full prompt strings, the parser, and the SITE multiple-choice prompt are in
+App.~A.
+
+\textbf{Fine-tuning.} All LoRA conditions share one recipe: $r{=}8$, $\alpha{=}16$,
+dropout 0.05, AdamW lr $10^{-4}$, weight decay 0.01, linear warmup 10\% of steps,
+2 epochs, bf16, gradient checkpointing, gradient clipping 1.0. Targets differ:
+LM-only adapts the LLM's q/k/v/o ($\sim$0.3M params); Projector adapts
+$\texttt{visual.merger.mlp.0/2}$ (152K); Vision+Projector adds LoRA to vision
+blocks 24--31 (qkv/proj/fc1/fc2, 1.46M total). The 2B General/Targeted LoRAs use
+micro-batch 4 with 4 gradient-accumulation steps (effective 16) and a 5\%
+train/validation split; 7B runs use batch size 1. Manifests: \emph{general}
+(2{,}000 VSR train statements), \emph{targeted} (orientation-over-sampled),
+\emph{hard-negative} (orientation block replaced by audited-clean originals plus
+paired hard negatives: facing$\leftrightarrow$facing-away,
+parallel$\leftrightarrow$perpendicular, label flipped). Training details and
+adapter configs are in App.~B.
+
+\textbf{Statistics.} All pairwise model comparisons are exact McNemar tests
+(binomial test on discordant pairs) on the same 2{,}195 statements; family-level
+tests restrict to family members. Per-relation numbers carry Wilson 95\% CIs
+(App.~D). The complete test battery --- 23 tests --- is enumerated
+in App.~D with every $p$-value; no test was run and withheld.
+
+\textbf{External validation (SITE).} Protocol preregistered and frozen
+(App.~E); evaluation-only (no SITE training). Subsets: primary =
+official \emph{spatial relationship reasoning} category; secondary = heuristic
+orientation-vocabulary keyword subset (non-official, supporting analysis; exact
+keyword rule in App.~E); exploratory = \emph{movement prediction
+\& navigation}. We evaluate the image portion (2{,}591 examples: 1{,}368
+single-image, 1{,}223 multi-image) with the official SITE multiple-choice prompt
+and letter parser, greedy decoding, $\mathrm{max\_new\_tokens}{=}16$ (validated
+125/125 parse-identical), and the official chance-adjusted accuracy metric
+$\mathrm{CAA} = \frac{\sum_i (s_i - 1/k_i)}{\sum_i (1 - 1/k_i)}$, where $k_i$ is
+the number of options.

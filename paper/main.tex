@@ -1,0 +1,45 @@
+% CVPR 2026 template (official author kit, github.com/cvpr-org/author-kit).
+% Main paper — compile with:  tectonic main.tex
+% Supplementary:  tectonic suppl.tex   (separate PDF, does not count toward page limit)
+
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+% REVIEW version (anonymous, page numbers). Switch to \usepackage{cvpr} for camera-ready.
+\usepackage[review]{cvpr}
+% \usepackage[pagenumbers]{cvpr} % arXiv version
+
+\input{preamble}
+
+\definecolor{cvprblue}{rgb}{0.21,0.49,0.74}
+\usepackage[pagebackref,breaklinks,colorlinks,allcolors=cvprblue]{hyperref}
+
+\def\paperID{*****} % placeholder
+\def\confName{CVPR}
+\def\confYear{2026}
+
+\title{The Orientation Bottleneck: Object-Intrinsic Direction Is a Persistent, Benchmark-Independent Weakness of Vision-Language Models}
+
+\author{Anonymous submission\\
+{\tt\small anonymous@example.org}
+}
+
+\begin{document}
+\maketitle
+
+\input{sec/0_abstract}
+\input{sec/1_intro}
+\input{sec/2_related}
+\input{sec/3_setup}
+\input{sec/4_vsr}
+\input{sec/5_probes}
+\input{sec/6_interventions}
+\input{sec/7_site}
+\input{sec/8_discussion}
+
+{
+    \small
+    \bibliographystyle{ieeenat_fullname}
+    \bibliography{main}
+}
+
+\end{document}

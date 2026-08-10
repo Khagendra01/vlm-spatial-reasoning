@@ -1,0 +1,37 @@
+% ============================= Related work =============================
+\section{Related Work}
+\label{sec:related}
+
+\textbf{Spatial reasoning benchmarks.} VSR~\cite{liu2023vsr} contains 8{,}400+
+image-statement pairs covering 64 relations across eight families (horizontal,
+vertical, depth, orientation, containment, proximity, topology/contact,
+compositional). Its paper already notes that orientation-style relations are among
+the hardest. SITE~\cite{wang2025site} (ICCV 2025) assembles 8{,}068 examples from
+20+ source benchmarks under six official categories, with a chance-adjusted
+accuracy (CAA) metric; it is evaluation-only in this work. SpatialEval and
+related probes~\cite{li2024spatialeval} report similar orderings. Our contribution
+is not another ranking but a causal decomposition of one family's failure.
+
+\textbf{VLMs and spatial reasoning.} Qwen2-VL~\cite{wang2024qwen2vl},
+Qwen2.5-VL~\cite{bai2025qwen25vl}, and SmolVLM2~\cite{huggingface2025smolvlm2}
+represent current open families. Prior analyses of VLM spatial failure focus on
+systematic position bias~\cite{kamath2023does} (models preferring one side of an
+image), counting errors, or attention patterns; orientation has been
+under-served. In particular, the \emph{locus} of the failure --- frozen visual
+representation vs.\ multimodal/language behavior --- has not been measured with
+probes plus ablations, which is exactly what we do.
+
+\textbf{Representation probing.} Linear and MLP probes are standard for
+measuring what encoders encode~\cite{alain2016understanding}. Object-grounded and
+patch-vote variants extend this to region-level readouts. We apply them to the
+vision tower of a VLM, which differs from probing CLIP-style encoders because the
+features we probe are the actual conditioning input of the language model.
+
+\textbf{Fine-tuning and consistency.} LoRA~\cite{hu2022lora} is the standard
+cheap adapter; we train LM-side, hard-negative, projector, and vision-block
+variants. Logical consistency of VLMs across complementary statements has been
+studied in the hallucination literature~\cite{li2023evaluating}; our
+complement-flip analysis is the paired-statement analog for spatial relations.
+Hard-negative training is classical~\cite{shrivastava2016training}; applying it to
+complementary spatial statements and measuring \emph{consistency} rather than
+accuracy is, to our knowledge, new.
