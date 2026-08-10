@@ -387,7 +387,9 @@ in \texttt{results/site/vsr\_lora\_predictions.csv}, paired statistics from
 \footnotesize
 \caption{SITE VSR-LoRA transfer check (post-protocol; predictions in
 \texttt{results/site/vsr\_lora\_predictions.csv}, canonical table in
-\texttt{results/tables/site\_validation\_table.md}).}
+\texttt{results/tables/site\_validation\_table.md}). Subsets are defined by the
+frozen protocol IDs (see note below); no keyword reconstruction is used in
+analysis.}
 \label{tab:site-transfer}
 \begin{tabular}{lcccl}
 \toprule
@@ -395,7 +397,8 @@ Subset & Zero-shot & VSR-LoRA & $\Delta$ & McNemar $p$ \\
 \midrule
 All images ($n{=}2{,}591$) & 54.2 / 31.1 & 53.8 / 30.5 & $-0.4$ & 0.66 \\
 Primary: spatial-rel.\ ($n{=}993$) & 75.1 / 59.2 & 71.6 / 53.4 & $-3.5$ & \textbf{0.004} \\
-Secondary: orient.\ kw.\ ($n{=}1{,}824$) & 47.3 / 22.6 & 48.0 / 23.6 & $+0.7$ & 0.50 \\
+Secondary: orient.\ kw.\ ($n{=}2{,}024$) & 48.3 / 24.0 & 48.7 / 24.5 & $+0.4$ & 0.70 \\
+Exploratory: movement ($n{=}248$) & 48.8 / 23.1 & 50.4 / 25.6 & $+1.6$ & 0.64 \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -518,15 +521,20 @@ by \texttt{scripts/compare\_site\_zeroshot\_lora.py}; VSR/SITE headline
 recomputation by \texttt{scripts/make\_paper\_figures.py} (output archived at
 \texttt{paper/fig/audit\_output.txt}).
 
-\textbf{SITE artifact discrepancy.} The run-time metrics JSON
-(\texttt{zeroshot\_image\_metrics.\allowbreak{}json}, commit \texttt{46e3b49})
-and the canonical site table (\texttt{results/tables/site\_validation\_table.md})
-report the secondary subset as $n{=}1{,}824$, raw 47.3\%, CAA 22.6\%; the
-committed prediction CSV, consistent with the frozen protocol's image IDs,
-yields $n{=}2{,}024$, raw 48.3\%, CAA 24.0\%. All other metrics (all/primary/
-modality/source breakdowns) are bit-identical between the two artifacts. The
-main paper reports the canonical-table values (47.3/22.6) and documents this
-recomputation in a footnote; both values support the same conclusion.
+\textbf{SITE secondary-subset audit note (corrected before submission).} An
+earlier derived analysis (\texttt{compare\_site\_zeroshot\_lora.py} v1, which
+fed the initial \texttt{zeroshot\_image\_metrics.json}-adjacent figures and the
+first canonical site table) reconstructed the secondary subset by applying
+\verb|ORIENTATION_KEYWORDS| to the \emph{question text only}, yielding
+$n{=}1{,}824$ (47.3\% raw / 22.6\% CAA). The frozen protocol's preregistered
+definition --- \texttt{results/site/site\_protocol.json}
+$\rightarrow$ \texttt{frozen\_ids.secondary} (3{,}272 examples; 2{,}024 with
+images), intersected with the 2{,}591 evaluated IDs --- is the authoritative
+subset, and all numbers in this paper use it ($n{=}2{,}024$; zero-shot 48.3\% /
+24.0\% CAA; VSR-LoRA 48.7\% / 24.5\%, $p{=}0.70$). The derived question-only
+figure was corrected before submission; both definitions support the same
+conclusion (orientation $\ll$ primary), but only the frozen-ID set matches the
+preregistration. No prediction CSV was modified and no model was rerun.
 
 \textbf{Data licenses/access.} VSR: \texttt{cambridgeltl/vsr\_random} (HF).
 SITE: \texttt{franky-veteran/SITE-Bench}, CC-BY-4.0 (media in ~130\,GB zips;

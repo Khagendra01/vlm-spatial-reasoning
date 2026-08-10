@@ -10,7 +10,8 @@ Outputs: results/tables/vsr_conditions_table.{csv,md}
 """
 import os, sys, csv, json, re
 from collections import defaultdict
-os.chdir("/home/ubuntu/vlm-spatial-reasoning")
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+os.chdir(ROOT)
 sys.path.insert(0, ".")
 
 FAMILY_MAP = {
@@ -91,7 +92,7 @@ def main():
     for r in rows_out:
         lines.append(f"| {r['condition']} | {r['overall']} | {r['orientation']} | "
                      f"{r['depth']} | {r['horizontal']} | {r['containment']} | {r['topology_contact']} |")
-    open("results/tables/vsr_conditions_table.md", "w").write("\n".join(lines) + "\n")
+    open("results/tables/vsr_conditions_table.md", "w", encoding="utf-8").write("\n".join(lines) + "\n")
 
     # ── SITE table from paired comparison ──
     cmp = json.load(open("results/site/vsr_lora_vs_zeroshot.json"))
@@ -115,7 +116,7 @@ def main():
     for r in site_rows:
         lines.append(f"| {r['subset']} | {r['n']} | {r['zero_shot_raw']} ({r['zero_shot_caa']}) | "
                      f"{r['vsr_lora_raw']} ({r['vsr_lora_caa']}) | {r['delta_pp']} | {r['mcnemar_p']} |")
-    open("results/tables/site_validation_table.md", "w").write("\n".join(lines) + "\n")
+    open("results/tables/site_validation_table.md", "w", encoding="utf-8").write("\n".join(lines) + "\n")
     print("\nSaved results/tables/vsr_conditions_table.{csv,md} and site_validation_table.{csv,md}")
 
 if __name__ == "__main__":

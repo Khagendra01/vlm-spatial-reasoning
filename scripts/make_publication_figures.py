@@ -9,7 +9,8 @@ Five publication figures for the VLM spatial reasoning paper.
 5. fig5_site_external.png — SITE zero-shot vs VSR-LoRA (CAA)
 """
 import os, sys, csv, json, re
-os.chdir("/home/ubuntu/vlm-spatial-reasoning")
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+os.chdir(ROOT)
 sys.path.insert(0, ".")
 import matplotlib
 matplotlib.use("Agg")

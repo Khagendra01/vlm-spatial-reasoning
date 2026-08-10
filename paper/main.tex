@@ -53,7 +53,7 @@ The effect survives clean-label auditing. On the strictest audited orientation s
 
 A second failure mode emerges from logical consistency. The zero-shot 7B model is consistent on only 36.9\% of complementary facing/facing-away pairs. LM-side LoRA substantially improves coherence, and hard-negative training raises facing consistency to 77.7\% while facing accuracy remains unchanged at 68.9\%. The extra hard-negative gain is not significant in the pooled strict-family McNemar comparison, but the unchanged accuracy together with changed facing consistency demonstrates that the two metrics capture different behavior.
 
-Finally, we test external transfer. On SITE, \modellarge{} performs strongly on the official spatial-relationship-reasoning category (75.1\% raw; 59.2\% chance-adjusted accuracy). A transparently defined, non-official orientation/direction subset is much weaker (47.3\% raw; 22.6\% chance-adjusted).\footnote{A recomputation of the secondary-subset metrics from the committed prediction CSV using the frozen-protocol ID list yields $n{=}2{,}024$ examples at 48.3\% raw / 24.0\% CAA, whereas the run-time metrics JSON and the canonical site table report $n{=}1{,}824$ at 47.3\% / 22.6\%; all other SITE numbers are bit-identical across the two artifact paths. Both values support the same conclusion; see supplementary \S E.} VSR-trained LoRA does not improve this subset and significantly degrades the official category by 3.5 percentage points. We therefore do not claim broad SITE spatial weakness; instead, the external result supports a narrower orientation-related difficulty and exposes benchmark-specific adaptation.
+Finally, we test external transfer. On SITE, \modellarge{} performs strongly on the official spatial-relationship-reasoning category (75.1\% raw; 59.2\% chance-adjusted accuracy). A transparently defined, non-official orientation/direction subset is much weaker (48.3\% raw; 24.0\% chance-adjusted). VSR-trained LoRA does not improve this subset and significantly degrades the official category by 3.5 percentage points. We therefore do not claim broad SITE spatial weakness; instead, the external result supports a narrower orientation-related difficulty and exposes benchmark-specific adaptation.
 
 Our contributions are fourfold:
 \begin{itemize}[leftmargin=*]
@@ -84,7 +84,7 @@ Diagnostic probes can reveal whether information is accessible from frozen repre
 We use VSR~\cite{liu2023vsr} as the primary diagnostic benchmark. The random-split test set contains 2,195 examples. Our loader exposes 64 relation labels in the evaluated split; the orientation family contains \emph{facing}, \emph{facing away from}, \emph{parallel to}, and \emph{perpendicular to}, totaling 137 test examples. All main VSR results use the same held-out test set and deterministic True/False parsing.
 
 \paragraph{SITE.}
-We use SITE~\cite{wang2025site} only for external validation and do not train on SITE. The image evaluation contains 2,591 examples: 1,368 single-image and 1,223 multi-image examples. Our primary SITE subset is the official spatial-relationship-reasoning category ($n=993$). We additionally report a transparently defined, non-official keyword-derived orientation subset ($n=1{,}824$), used only as supporting analysis. SITE results use the benchmark's native multiple-choice format and chance-adjusted accuracy (CAA) in addition to raw accuracy.
+We use SITE~\cite{wang2025site} only for external validation and do not train on SITE. The image evaluation contains 2,591 examples: 1,368 single-image and 1,223 multi-image examples. Our primary SITE subset is the official spatial-relationship-reasoning category ($n=993$). We additionally report a transparently defined, non-official keyword-derived orientation subset ($n=2{,}024$), used only as supporting analysis. SITE results use the benchmark's native multiple-choice format and chance-adjusted accuracy (CAA) in addition to raw accuracy.
 
 \subsection{Models and Conditions}
 Our compact model is \modelsmall{}, and our larger model is \modellarge{}~\cite{wang2024qwen2vl}. We evaluate ten canonical VSR conditions: 2B zero-shot, 2B structured prompting, 2B General LoRA, 2B Targeted LoRA, 7B zero-shot, 7B General LoRA, 7B Targeted LoRA, 7B Hard-Neg LoRA, 7B Projector LoRA, and 7B Vision+Projector LoRA. LoRA~\cite{hu2021lora} is used for all parameter-efficient adaptation conditions.
@@ -169,9 +169,9 @@ LM-only LoRA raises facing consistency to 66.0\% and front/behind consistency to
 \label{sec:site}
 We evaluate the frozen 7B base model on 2,591 SITE image examples using SITE's native multiple-choice protocol~\cite{wang2025site}. The model is strong on the official spatial-relationship-reasoning category: 75.1\% raw accuracy and 59.2\% CAA. We therefore do \emph{not} claim that SITE confirms broadly weak spatial reasoning.
 
-The supporting orientation analysis uses a transparently defined, non-official keyword heuristic selecting questions involving direction, facing, view, rotation, left/right, and parallel/perpendicular terminology. On this subset, zero-shot performance is 47.3\% raw and 22.6\% CAA, compared with 54.2\% raw and 31.1\% CAA over all image examples. Because this subset is heuristic and overlaps multiple SITE sources/categories, we use it as supporting evidence rather than an official benchmark factor. The external claim is therefore deliberately narrow: orientation/direction-heavy questions are disproportionately difficult in this evaluation, while official general spatial-relationship reasoning is strong.
+The supporting orientation analysis uses a transparently defined, non-official keyword heuristic selecting questions involving direction, facing, view, rotation, left/right, and parallel/perpendicular terminology. On this subset, zero-shot performance is 48.3\% raw and 24.0\% CAA, compared with 54.2\% raw and 31.1\% CAA over all image examples. Because this subset is heuristic and overlaps multiple SITE sources/categories, we use it as supporting evidence rather than an official benchmark factor. The external claim is therefore deliberately narrow: orientation/direction-heavy questions are disproportionately difficult in this evaluation, while official general spatial-relationship reasoning is strong.
 
-We then apply the existing VSR-trained 7B General LoRA checkpoint to the exact same SITE examples without SITE training. The adapter is statistically neutral overall (54.2\%$\rightarrow$53.8\%, $p=0.66$), does not improve the orientation subset (47.3\%$\rightarrow$48.0\%, $p=0.50$), and significantly degrades the official spatial-relationship category (75.1\%$\rightarrow$71.6\%, $p=0.004$). VSR gains therefore transfer poorly and can induce negative transfer on the independent benchmark.
+We then apply the existing VSR-trained 7B General LoRA checkpoint to the exact same SITE examples without SITE training. The adapter is statistically neutral overall (54.2\%$\rightarrow$53.8\%, $p=0.66$), does not improve the orientation subset (48.3\%$\rightarrow$48.7\%, $p=0.70$), and significantly degrades the official spatial-relationship category (75.1\%$\rightarrow$71.6\%, $p=0.004$). VSR gains therefore transfer poorly and can induce negative transfer on the independent benchmark.
 
 \begin{table}[t]
 \centering
@@ -185,7 +185,7 @@ Subset & Zero-shot & VSR-LoRA & $\Delta$ \\
 \midrule
 All images & 54.2 / 31.1 & 53.8 / 30.5 & $-0.4$ \\
 Official spatial-rel. & 75.1 / 59.2 & 71.6 / 53.4 & $-3.5$ \\
-Orient.\ heuristic & 47.3 / 22.6 & 48.0 / 23.6 & $+0.7$ \\
+Orient.\ heuristic & 48.3 / 24.0 & 48.7 / 24.5 & $+0.4$ \\
 \bottomrule
 \end{tabular}
 \end{table}
