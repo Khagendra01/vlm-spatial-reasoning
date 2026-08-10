@@ -1,0 +1,10 @@
+Anonymity scan (upload artifacts only) - C:\Users\Khage\AppData\Local\Temp\opencode\pdv\submission\wacv2027
+
+Hits (all benign, see notes): 13
+  - 28f4cc09887477af / 4d371713c96ee0d9: SITE protocol config hashes (preregistration artifacts, deliberately retained)
+  - numeric floats in JSONs/CSVs: false positives of the hex pattern (p-values, rotation matrices)
+  - github.com/cvpr-org/author-kit: comment inside the OFFICIAL WACV template (wacv.sty), not author content
+  - github.com/wenqi-wang20/SITE-Bench: the SITE benchmark repo (data provenance, required for reproducibility)
+
+Author names / usernames: 0 hits. Emails: 0 hits. Windows paths: 0 hits.
+/home/ubuntu paths: 0 hits. Repo name: 0 hits. Author GitHub: 0 hits.

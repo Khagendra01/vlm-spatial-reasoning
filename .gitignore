@@ -27,3 +27,5 @@ results/probe/patch_embeddings.pkl
 data/site_media/
 paper/build/
 
+submission/wacv2027/source/build/
+
