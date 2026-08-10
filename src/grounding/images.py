@@ -33,6 +33,25 @@ def is_cached(image_link: str) -> bool:
     return cache_path_for(image_link).exists()
 
 
+def ensure_cached(links, strict: bool = True) -> list:
+    """Raise RuntimeError if any link is not in the cache (strict), else
+    return the list of missing links.
+
+    The runner must never silently substitute a missing image (that would
+    silently corrupt the normal/shuffle conditions into text-only rows).
+    Fix path: run scripts/grounding/download_images.py.
+    """
+    missing = [u for u in dict.fromkeys(links) if not is_cached(u)]
+    if strict and missing:
+        raise RuntimeError(
+            f"{len(missing)} required image(s) missing from "
+            f"{config.IMAGE_CACHE_DIR}. Run: "
+            "python scripts/grounding/download_images.py. First few: "
+            + ", ".join(missing[:5])
+        )
+    return missing
+
+
 def load_cached_image(image_link: str) -> Image.Image:
     """Return the cached RGB image or None if not present/unreadable."""
     path = cache_path_for(image_link)

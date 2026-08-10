@@ -132,6 +132,16 @@ def main():
                    for r in ids_payload["examples"] if r["image_available"]}
     print(f"evaluating {len(records)} examples per cell")
 
+    # Hard guard: every required image must be in the cache BEFORE inference.
+    # A missing image must never silently degrade to a text-only row.
+    from src.grounding.images import ensure_cached
+    mapping = shuffle_doc["mapping"]
+    needed = {r["image_link"] for r in records}
+    if "shuffle" in conditions:
+        needed |= {link_lookup[mapping[r["example_id"]]] for r in records}
+    ensure_cached(sorted(needed))
+    print(f"image cache verified: {len(needed)} unique images present")
+
     for ckpt_name in checkpoints:
         ckpt = config.CHECKPOINTS[ckpt_name]
         print(f"\n## checkpoint: {ckpt_name} ({ckpt['label']}) "
