@@ -10,8 +10,8 @@ PDFs compiled with Tectonic 0.17.0 (XeTeX engine), official WACV 2027 author kit
 
 | # | File | Size | Pages | SHA-256 |
 |---|---|---|---|---|
-| 1 | `main.pdf` | 872,659 B | 7 total incl. references (limit: 8 content pages + ref pages) | `a376bcf667d7f71a5c1350a1ac0fa725a3a2d5cf44422bbdf105e2af2a41c04f` |
-| 2 | `supplementary.pdf` | 2,076,855 B | 8 (supplement has no page limit) | `0ce4878f663360238cef492a55af8eb9b6dfa386e31c6bc632a52a30859d84c6` |
+| 1 | `main.pdf` | 877,797 B | 8 total: content ≤ 7 pp, references on pp 7–8 (limit: 8 content pp + ref pages) | `2a9ac87b24e5c3935df5e444da0fb7584fc15ca24e49bfccbdf70ad89bca6a28` |
+| 2 | `supplementary.pdf` | 2,076,857 B | 8 (supplement has no page limit) | `13e8b08c6e281fe2a4210b5f2a56ff5463fcbe648cf5302974957b5df63f3984` |
 | 3 | `wacv2027_code.zip` | 721,065 B | — (59 files, ≤ 200 MB limit) | `7b3fb1f09621c4962f2b3a5ce0eb48ec2df2f73abfd719ba34a57377c8223338` |
 
 SHA-256 values recorded at package build time (Tectonic 0.17.0, reproducible
