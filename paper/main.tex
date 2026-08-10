@@ -15,6 +15,7 @@
 
 \definecolor{cvprblue}{rgb}{0.21,0.49,0.74}
 \usepackage[pagebackref,breaklinks,colorlinks,allcolors=cvprblue]{hyperref}
+\usepackage[capitalize,noabbrev]{cleveref}
 
 \def\paperID{*****} % placeholder
 \def\confName{CVPR}
@@ -174,7 +175,8 @@ We then apply the existing VSR-trained 7B General LoRA checkpoint to the exact s
 
 \begin{table}[t]
 \centering
-\small
+\footnotesize
+\setlength{\tabcolsep}{4pt}
 \caption{SITE image validation. Entries are raw accuracy / CAA (\%).}
 \label{tab:site}
 \begin{tabular}{lccc}
@@ -183,7 +185,7 @@ Subset & Zero-shot & VSR-LoRA & $\Delta$ \\
 \midrule
 All images & 54.2 / 31.1 & 53.8 / 30.5 & $-0.4$ \\
 Official spatial-rel. & 75.1 / 59.2 & 71.6 / 53.4 & $-3.5$ \\
-Orientation heuristic & 47.3 / 22.6 & 48.0 / 23.6 & $+0.7$ \\
+Orient.\ heuristic & 47.3 / 22.6 & 48.0 / 23.6 & $+0.7$ \\
 \bottomrule
 \end{tabular}
 \end{table}
