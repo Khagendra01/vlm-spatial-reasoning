@@ -125,6 +125,9 @@ def main():
                          "(protocol note: 128 -> 16, protocol-neutral efficiency change)")
     ap.add_argument("--images-only", action="store_true",
                     help="evaluate image examples only (stop before videos)")
+    ap.add_argument("--lora", default=None,
+                    help="path to LoRA adapter to load on top of the base model "
+                         "(e.g., the VSR-trained 7B General LoRA); no training on SITE")
     args = ap.parse_args()
 
     proto = json.load(open(OUT_DIR / "site_protocol.json"))
@@ -150,6 +153,7 @@ def main():
         "image_resize_cap_px": 392,
         "image_resize_note": "this transformers build ignores max_pixels (regression); images resized to <=392px long side, enforcing the intended 28x28 patch grid budget as a CONSTANT protocol parameter; uniform across all examples and subsets",
         "attn": args.attn,
+        "lora": args.lora,
         "subsets": {k: sorted(v) for k, v in frozen.items()},
         "images_only": args.images_only,
     }
@@ -182,6 +186,10 @@ def main():
         MODEL, dtype=torch.bfloat16,
         _attn_implementation=("sdpa" if args.attn == "flash_attention_2" else args.attn),
         low_cpu_mem_usage=True).to("cuda")
+    if args.lora:
+        from peft import PeftModel
+        model = PeftModel.from_pretrained(model, args.lora)
+        print(f"LoRA adapter loaded: {args.lora}")
     model.eval()
 
     # split by modality
