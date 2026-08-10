@@ -25,3 +25,10 @@ Thumbs.db
 data/image_cache/
 results/probe/patch_embeddings.pkl
 data/site_media/
+
+# grounding audit: private hashes (recorded, not published)
+results/grounding/private/
+
+# paper build output
+paper/build/
+

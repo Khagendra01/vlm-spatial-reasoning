@@ -1,0 +1,48 @@
+{
+  "authority": "research\\GROUNDING_PROTOCOL_FREEZE.md",
+  "bootstrap_seed": 20260810,
+  "checkpoints": {
+    "general_lora": {
+      "adapter_path": "C:\\Users\\Khage\\Desktop\\VLM-Spatial-Reasoning\\checkpoints\\qwen2vl_7b_general_lora\\final",
+      "model_id": "Qwen/Qwen2-VL-7B-Instruct"
+    },
+    "hardneg_lora": {
+      "adapter_path": "C:\\Users\\Khage\\Desktop\\VLM-Spatial-Reasoning\\checkpoints\\qwen2vl_7b_hardneg_lora\\final",
+      "model_id": "Qwen/Qwen2-VL-7B-Instruct"
+    },
+    "zero_shot": {
+      "adapter_path": null,
+      "model_id": "Qwen/Qwen2-VL-7B-Instruct"
+    }
+  },
+  "conditions": [
+    "normal",
+    "shuffle",
+    "blank",
+    "text_only"
+  ],
+  "decision_log": "research\\DECISION_LOG.md",
+  "env": {
+    "argv": [
+      "scripts/grounding/freeze_protocol.py",
+      "--no-download"
+    ],
+    "cwd": "C:\\Users\\Khage\\Desktop\\VLM-Spatial-Reasoning",
+    "datasets": "4.1.1",
+    "device": "cpu",
+    "peft": "0.17.1",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.10",
+    "torch": "2.8.0+cpu",
+    "torch_cuda": null,
+    "transformers": "4.56.2"
+  },
+  "git_branch": "research/spatial-grounding-audit",
+  "git_commit": "e8ff1820ce2d91893286fad1c83706dddb45f342",
+  "parser_hash": "eb4075c77285da02c52794154760fa969fb21ab3dcceb0820cb7d2ba27d27471",
+  "prompt_hash": "7f29cebb9d06eca06ad0d6c690e4d5a083b71a9c42008f88e92474e3ff0eb98a",
+  "protocol_hash": "9282de73189cd6bbd3498eef0d71739bf637adfa9fe7c274d466815665da3080",
+  "protocol_version": "v0.1",
+  "protocol_yaml": "configs\\grounding_protocol.yaml",
+  "shuffle_seed": 20260810
+}
