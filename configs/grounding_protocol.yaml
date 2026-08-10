@@ -1,0 +1,167 @@
+protocol:
+  name: spatial_grounding_after_lora
+  version: v0.1
+  branch: research/spatial-grounding-audit
+  parent_commit: 3c6bb351edd40b2155a7beac98aeea1cfc7de0ef
+  authority: research/GROUNDING_PROTOCOL_FREEZE.md
+  decision_log: research/DECISION_LOG.md
+
+scientific_targets:
+  primary_question: "When spatial fine-tuning improves accuracy or relational consistency, does it also increase causal sensitivity to the visual evidence that determines the spatial relation?"
+  quantities:
+    delta_A: benchmark_accuracy_change
+    delta_C: semantic_logical_consistency_change
+    delta_G: visual_grounding_evidence_sensitivity_change
+    delta_T: optional_controlled_ood_transfer_change
+
+models:
+  primary:
+    - id: Qwen/Qwen2-VL-7B-Instruct
+      condition: zero_shot
+      role: primary_baseline
+    - id: Qwen/Qwen2-VL-7B-Instruct
+      condition: general_lora
+      role: primary_tuned
+    - id: Qwen/Qwen2-VL-7B-Instruct
+      condition: hardneg_lora
+      role: key_diagnostic
+  replication:
+    - id: HuggingFaceTB/SmolVLM2-2.2B-Instruct
+      condition: zero_shot
+      role: replication_baseline
+    - id: HuggingFaceTB/SmolVLM2-2.2B-Instruct
+      condition: general_lora
+      role: replication_tuned
+  exploratory_only:
+    - 7B_targeted_lora
+    - 7B_projector_lora
+    - 7B_vision_projector_lora
+    - 2B_targeted_lora
+
+comparisons:
+  P1:
+    from: 7B_zero_shot
+    to: 7B_general_lora
+    status: confirmatory_primary
+  D1:
+    from: 7B_general_lora
+    to: 7B_hardneg_lora
+    status: key_diagnostic
+    caveat: "Prior pooled strict-family General-vs-HardNeg consistency McNemar p=0.29; do not claim global significant consistency improvement from this contrast without scoped evidence."
+  R1:
+    from: 2B_zero_shot
+    to: 2B_general_lora
+    status: confirmatory_replication
+
+dataset:
+  id: cambridgeltl/vsr_random
+  split: test
+  exact_ids_file: results/grounding/protocol/vsr_test_ids.json
+  forbid_train_validation_in_confirmatory_eval: true
+
+interventions:
+  evidence_axis:
+    normal:
+      status: confirmatory_reference
+    shuffle:
+      status: confirmatory_primary
+      mapping: deterministic_derangement
+      seed: 20260810
+      forbid_self_pair: true
+      source_split: test
+      same_mapping_all_models: true
+      mapping_output: results/grounding/protocol/shuffle_mapping.json
+    matched_shuffle:
+      status: optional_pre_result_only
+      rule: "May be promoted only if algorithm, fallbacks, IDs, and mapping are frozen before first full Tier-A result is inspected."
+    blank:
+      status: confirmatory_secondary
+      image_spec_output: results/grounding/protocol/blank_image_spec.json
+    text_only:
+      status: exploratory_diagnostic
+  semantic_axis:
+    relation_complement:
+      status: confirmatory_after_validity_freeze
+      validity_table: results/grounding/protocol/semantic_transform_validity.csv
+      forbid_parallel_perpendicular_as_universal_complement: true
+    subject_object_reversal:
+      status: confirmatory_after_parser_audit
+      require_subject_object_parser_audit: true
+  visual_axis:
+    horizontal_reflection:
+      status: confirmatory_after_validity_freeze
+      text_fixed: true
+      forbid_global_label_flip: true
+    controlled_scene_pairs:
+      status: optional_high_value_extension
+      require_pre_eval_design_freeze: true
+
+evidence_hierarchy:
+  - correct_vs_shuffled_same_multimodal_interface
+  - visual_counterfactual_expected_response
+  - original_and_visual_counterfactual_both_correct
+  - blank_image_gap
+  - text_only_behavior
+
+metrics:
+  primary:
+    - normal_accuracy
+    - invalid_output_rate
+    - G_shuffle
+    - delta_G_shuffle
+    - semantic_consistency_C
+    - delta_C
+    - visual_expected_response_rate
+    - visual_counterfactual_both_correct_rate
+  secondary:
+    - G_blank
+    - G_text
+    - condition_specific_lora_gain
+    - wrong_direction_flip_rate
+    - expected_invariant_stability_rate
+  relation_family_breakdown: true
+
+statistics:
+  paired: true
+  methods:
+    - exact_mcnemar
+    - paired_bootstrap_ci
+    - bootstrap_difference_in_differences_ci
+  effect_sizes_required: true
+  multiplicity:
+    global_primary_tests: small_predeclared_set
+    relation_level: secondary_or_corrected
+
+run_fairness:
+  same_prompt_within_backbone_transition: true
+  same_processor_within_backbone_transition: true
+  same_preprocessing_within_backbone_transition: true
+  same_generation_settings_within_backbone_transition: true
+  greedy_decoding: true
+  same_parser_within_backbone_transition: true
+  same_examples_and_interventions: true
+
+pilots:
+  smoke_n: 10
+  engineering_pilot_n: 200
+  forbid_metric_or_seed_selection_from_pilot: true
+
+first_milestone:
+  models:
+    - 7B_zero_shot
+    - 7B_general_lora
+    - 7B_hardneg_lora
+  conditions:
+    - normal
+    - shuffle
+    - blank
+    - text_only
+  no_new_training_required: true
+
+change_control:
+  post_full_result_changes_default_to_exploratory: true
+  verified_bug_fix_exception: true
+  require_decision_log_entry: true
+  forbid_shuffle_seed_change_after_results: true
+  forbid_subset_redefinition_after_results: true
+  forbid_dropping_unfavorable_primary_condition: true
