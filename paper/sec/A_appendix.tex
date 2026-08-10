@@ -218,7 +218,11 @@ Merger MLP & 56.3/52.5 & \textbf{61.1/71.7} & 49.0/53.6 & 50.0/42.9 \\
 \end{center}
 The single above-majority cell (geometry-only merger MLP on T1, 71.7\% test)
 has CV 61.1\% below the 63.7\% majority --- not robust --- and derives from the
-grounding model's own box statistics, not vision-feature content.
+grounding model's own box statistics, not vision-feature content. In short,
+object-box conditioning with the model's own grounding predictions and
+mean-pooled region features does not recover robust orientation decodability
+under the tested readouts. The T2 patch-vote result (73.5\%) is a suggestive
+point estimate with a wide CI overlapping the majority baseline ($n{=}34$).
 
 \textbf{Clear-subset control (canonical, frozen at \texttt{paper-freeze-v1}).}
 The 48-example manual audit identified ambiguous or questionable orientation
@@ -251,8 +255,9 @@ Condition & Full (137) & $-$Questionable (132) & Clear (124) & Strict (107) \\
 \end{table*}
 Because auditing changes the evaluated sample, strict-subset values are not a
 matched comparison against other relation families. The earlier probe-side
-clear/strict check (pre-freeze) additionally showed that label noise does not
-explain the probe null: the best ungrounded probe moved only
+clear/strict check (pre-freeze) additionally suggested that removing
+audit-flagged examples does not change the probe conclusion: the best
+ungrounded probe moved only
 68.9\% $\rightarrow$ 71.1\% $\rightarrow$ 71.6\% (full/clear/strict,
 $n=103/97/88$) and the generative T1 readouts 64.1/66.0/68.2 (zero-shot) and
 68.9/72.2/78.4 (General LoRA); committed in
@@ -279,39 +284,52 @@ ID & Comparison & Subset & Discord.\ & $p$ \\
 \midrule
 1 & HardNeg vs.\ Gen. & overall (2195) & 52/60 & 0.508 \\
 2 & HardNeg vs.\ Gen. & weak families & 20/26 & 0.461 \\
-3 & Projector vs.\ ctrl. & overall & --- & \textbf{0.0043} \\
-4 & V+Proj vs.\ ctrl. & overall & --- & \textbf{0.0122} \\
+3 & Projector vs.\ ctrl. & overall & --- & 0.0043 \\
+4 & V+Proj vs.\ ctrl. & overall & --- & 0.0122 \\
 5 & Projector vs.\ ctrl. & orientation & --- & 0.86 \\
 6 & V+Proj vs.\ ctrl. & orientation & --- & 0.85 \\
-7--16 & Proj./V+Proj vs.\ ctrl. & per-relation (5$\times$2) & --- & 0.25--1.00 \\
-17 & Two-stage A-lin. vs.\ ctrl. & orientation & 45/16 & 0.0003 \\
-18 & Two-stage A-MLP vs.\ ctrl. & orientation & 47/14 & $<$0.0001 \\
-19 & Two-stage B-lin. vs.\ ctrl. & orientation & 44/20 & 0.0037 \\
-20 & Two-stage B-MLP vs.\ ctrl. & orientation & 47/18 & 0.0004 \\
-21 & Zero-shot vs.\ LM-only & consistency 662 & 117/43 & $<$0.0001 \\
-22 & HardNeg vs.\ LM-only & consistency 662 & 31/41 & 0.29 \\
-23 & Projector vs.\ LM-only & consistency 662 & 63/48 & 0.18 \\
-24 & V+Proj vs.\ LM-only & consistency 662 & 65/56 & 0.47 \\
+7--14 & Proj./V+Proj vs.\ ctrl. & per-relation (4$\times$2) & --- & 0.25--1.00 \\
+15 & Two-stage A-lin. vs.\ ctrl. & orientation & 45/16 & 0.0003 \\
+16 & Two-stage A-MLP vs.\ ctrl. & orientation & 47/14 & $<$0.0001 \\
+17 & Two-stage B-lin. vs.\ ctrl. & orientation & 44/20 & 0.0037 \\
+18 & Two-stage B-MLP vs.\ ctrl. & orientation & 47/18 & 0.0004 \\
+19 & Zero-shot vs.\ LM-only & consistency 662 & 117/43 & $<$0.0001 \\
+20 & HardNeg vs.\ LM-only & consistency 662 & 31/41 & 0.29 \\
+21 & Projector vs.\ LM-only & consistency 662 & 63/48 & 0.18 \\
+22 & V+Proj vs.\ LM-only & consistency 662 & 65/56 & 0.47 \\
 \bottomrule
 \end{tabular}
-\caption{Complete test battery. Per-relation cells (IDs 7--16) are enumerated
-in the committed \texttt{vision\_side\_\allowbreak{}comparison.\allowbreak{}json}:
+\caption{Complete VSR test battery (22 tests). Per-relation cells (IDs 7--14)
+are enumerated in the committed \texttt{vision\_side\_\allowbreak{}comparison.\allowbreak{}json}:
 projector facing $p{=}0.77$, facing-away $p{=}1.00$, parallel $p{=}0.25$,
 perpendicular $p{=}1.00$; vision+proj facing $p{=}1.00$, facing-away
-$p{=}0.58$, parallel $p{=}1.00$, perpendicular $p{=}1.00$.}
+$p{=}0.58$, parallel $p{=}1.00$, perpendicular $p{=}1.00$. SITE transfer tests
+(3: all/primary/secondary, \S E) form a separate small family.}
 \label{tab:tests}
 \end{table*}
 
-\textbf{Multiple comparisons.} The battery is fully enumerated above; all
-headline claims are supported by $>$1 independent test and by the external
-validation. We do not adjust for multiplicity: the family is small, exact
-$p$-values are given, and the conclusion rests on the pattern (orientation
-cells never improve; easy families never regress under vision-side training
-without a cost), not on any single threshold crossing. Readers applying a
-Bonferroni correction for 24 tests should note that the two overall
-vision-side results ($p{=}0.0043$, $p{=}0.0122$) and the two-stage results
-(all $p \le 0.004$) survive, while the consistency nulls ($p \ge 0.18$) remain
-nulls.
+\textbf{Principal vs.\ exploratory comparisons.} The battery above is fully
+enumerated; no test was run and withheld. We label the
+\emph{principal} (confirmatory) comparisons as: the two-stage decomposition vs.\
+control (IDs 15--18), zero-shot vs.\ LM-only consistency (ID 19), and the SITE
+transfer tests (\S E). All other comparisons --- vision-side conditions, their
+per-relation cells, hard-negative training vs.\ control, and the remaining
+consistency comparisons --- are \emph{exploratory diagnostics} reported with
+exact unadjusted $p$-values. Under a Holm adjustment over the 22 VSR tests
+($\alpha{=}0.05$), the two-stage A-linear/A-MLP and B-MLP comparisons
+(Holm $p{=}0.006$, $0.0006$, $0.008$) and the zero-shot-vs-LM-only consistency
+test (Holm $p{=}0.002$, using the conservative $p{<}0.0001$ bound) remain
+significant; the vision-side overall effects (raw $p{=}0.0043$, $p{=}0.0122$)
+and the two-stage B-linear test (raw $p{=}0.0037$) do not survive a blanket
+adjustment and are therefore not load-bearing. For the 3 SITE transfer tests,
+Holm-adjusted $p$-values are 0.012 (primary), 1.0, 1.0.
+
+\textbf{Single-checkpoint note.} Every trained condition is a single
+checkpoint. All McNemar tests above quantify paired disagreement on the fixed
+test examples between two conditions; they do not estimate training-run
+variability, and the single-seed results reported here do not estimate
+training-run variability. Adapter-rank claims (e.g., the 1--2pp overall
+differences among trained 7B conditions) should be read in that light.
 
 \textbf{Consistency definitions.} Strict complements (exactly one truth value):
 left$\leftrightarrow$right ($n{=}245$), in front of$\leftrightarrow$behind
@@ -407,6 +425,49 @@ overall, does not improve the orientation subset, and \emph{significantly
 degrades} the official spatial-relationship category --- VSR gains transfer
 poorly and can induce negative transfer.
 
+\textbf{Composition-confound analysis (CPU-only, zero-shot predictions).}
+Because the orientation slice is keyword-derived and heterogeneous, we test
+whether the heuristic flag predicts lower correctness after controlling for
+task composition (logistic regression over the 2,591 zero-shot predictions;
+\texttt{scripts/site\_confound\_analysis.py} $\rightarrow$
+\texttt{results/site/orientation\_confound\_analysis.json}):
+
+\begin{table*}[h]
+\centering
+\footnotesize
+\caption{Composition-confound logistic regressions (2,591 zero-shot SITE
+predictions; outcome = correct).}
+\label{tab:confound}
+\begin{tabular}{lccc}
+\toprule
+Model: correct $\sim$ orient $+$ controls & OR (orient) & 95\% CI & $p$ \\
+\midrule
+Unadjusted & 0.31 & $[0.25, 0.38]$ & $2.4\times10^{-28}$ \\
+$+$ official category & 0.74 & $[0.57, 0.96]$ & 0.023 \\
+$+$ category, source, modality, $n_{options}$ & 0.84 & $[0.60, 1.16]$ & 0.29 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+Within the official \emph{spatial relationship reasoning} category,
+orientation-flagged questions remain descriptively 7.5pp harder than unflagged
+ones (71.3\% vs.\ 78.8\%; $n{=}488/505$). No source dataset has $n{\ge}30$ in
+both arms (orientation-heavy corpora are almost entirely flagged, others almost
+never), so source indicators absorb most of the orientation variance in the
+full model. \textbf{Reading:} the adjusted association is in the expected
+direction but not significant; the low aggregate heuristic score is largely
+explained by task composition. We therefore do not treat SITE as independent
+confirmation of the VSR orientation bottleneck, and the main text reports the
+slice as exploratory.
+
+\textbf{High-precision post-hoc subset (exploratory only).} Restricting the
+heuristic to VSR-construct terms only (facing, facing away, parallel,
+perpendicular; word-boundary match on question or option text) yields
+$n{=}177$ examples (77 in the official spatial-relationship category, 99 in
+multi-view/cross-image reasoning): raw accuracy 44.1\% (95\% CI $[37.0, 51.4]$),
+CAA $-2.3\%$. This subset is explicitly post-hoc and does not replace the
+preregistered frozen definition; it is reported as exploratory only.
+
 % ============================================================
 % F. Failure taxonomy
 % ============================================================
@@ -415,8 +476,11 @@ poorly and can induce negative transfer.
 
 The 48 persistent-failure statements are the union of: wrong in both 7B
 zero-shot and 7B LoRA (20); wrong in $\geq$3 of 4 base conditions (38); wrong
-in both 2B and 7B zero-shot (28). Annotations: single annotator, eight-class
-taxonomy, committed in \texttt{results/failure\_annotations.csv} and
+in both 2B and 7B zero-shot (28). A single-annotator exploratory audit
+(eight-class taxonomy) suggests many persistent errors remain visually
+interpretable while also identifying viewpoint and annotation ambiguities;
+it is qualitative evidence, not a causal localization of the failure.
+Annotations committed in \texttt{results/failure\_annotations.csv} and
 \texttt{results/orientation\_persistent\_annotations.csv}.
 
 \begin{table}[h]
@@ -445,8 +509,9 @@ Subject/reference inversion & 1 & 2.1\% \\
 \centering
 \includegraphics[width=\columnwidth]{fig/representative_failures.png}
 \caption{Representative persistent failures (annotated grid; 15 cases).
-Images: VSR test set. The dominant class is \emph{clear-image reasoning
-failure}: the pose is obvious to a human and the model still errs.}
+Images: VSR test set. Per the single-annotator exploratory audit, the most
+frequent class is \emph{clear-image reasoning failure}: the pose is visually
+interpretable to a human and the model still errs.}
 \label{fig:failures}
 \end{figure}
 

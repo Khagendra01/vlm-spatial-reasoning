@@ -1,0 +1,85 @@
+{
+ "n": 2591,
+ "model_full": {
+  "orient_coef": -0.17780296375014706,
+  "orient_odds_ratio": 0.8371073477327288,
+  "orient_ci_95": [
+   0.602068030240549,
+   1.1639028754743017
+  ],
+  "orient_p": 0.29034632300426566,
+  "nobs": 2591,
+  "pseudo_r2": 0.14634933372666414
+ },
+ "model_category_only": {
+  "orient_coef": -0.2999785405770643,
+  "orient_odds_ratio": 0.7408341183838111,
+  "orient_ci_95": [
+   0.5722045423359431,
+   0.9591590949644992
+  ],
+  "orient_p": 0.02282253251925572
+ },
+ "model_unadjusted": {
+  "orient_coef": -1.182360565209368,
+  "orient_odds_ratio": 0.30655424254772373,
+  "orient_ci_95": [
+   0.24852605305430195,
+   0.3781313969665601
+  ],
+  "orient_p": 2.364418324317009e-28
+ },
+ "within_category": [
+  {
+   "category": "movement prediction & navigation",
+   "orient_pos_n": 186,
+   "orient_pos_acc": 0.4946236559139785,
+   "orient_neg_n": 62,
+   "orient_neg_acc": 0.46774193548387094,
+   "delta_pp": 2.6881720430107556
+  },
+  {
+   "category": "spatial relationship reasoning",
+   "orient_pos_n": 488,
+   "orient_pos_acc": 0.7131147540983607,
+   "orient_neg_n": 505,
+   "orient_neg_acc": 0.7881188118811882,
+   "delta_pp": -7.500405778282748
+  }
+ ],
+ "within_source": [
+  {
+   "source": "SPEC",
+   "orient_pos_n": 102,
+   "orient_pos_acc": 0.5,
+   "orient_neg_n": 31,
+   "orient_neg_acc": 0.5483870967741935,
+   "delta_pp": -4.8387096774193505
+  },
+  {
+   "source": "ThreeDSRBench",
+   "orient_pos_n": 95,
+   "orient_pos_acc": 0.6105263157894737,
+   "orient_neg_n": 46,
+   "orient_neg_acc": 0.6739130434782609,
+   "delta_pp": -6.338672768878717
+  }
+ ],
+ "high_precision_exploratory": {
+  "n": 177,
+  "raw": 0.4406779661016949,
+  "ci_95": [
+   0.369567169971498,
+   0.5143091062835228
+  ],
+  "caa": -0.023255813953488372,
+  "by_category": {
+   "multi-view & cross-image reasoning": 99,
+   "object localization & positioning": 1,
+   "spatial relationship reasoning": 77
+  },
+  "note": "POST-HOC exploratory subset, VSR-construct terms only (facing/facing away/parallel/perpendicular); does NOT replace the preregistered frozen subset",
+  "overlap_with_frozen_secondary": 177,
+  "not_in_frozen_secondary": 0
+ }
+}

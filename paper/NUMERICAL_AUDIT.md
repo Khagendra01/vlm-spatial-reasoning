@@ -85,17 +85,37 @@ was removed. (v) The old 47.3/1,824 numbers survive only in git history and in
   `results/tables/orientation_clean_label_table.md` + `scripts/clean_label_orientation.py` ✅
 - Orientation per-relation (4 conditions): `orientation_analysis.json` + hardneg CSV ✅
 - Deep-dive taxonomy 18/8/6/5/4/4/2/1 = 48; shares 37.5/16.7/12.5/10.4/8.3/8.3/4.2/2.1%
-  ✅ `orientation_persistent_annotations.csv`/report
+  ✅ `orientation_persistent_annotations.csv`/report (single-annotator exploratory)
 - Probes T1/T2/T3 all cells: `results/probe/probe_results.json`, `patch_probe_results.json` ✅
 - Grounded probes incl. 71.7% geometry cell (CV 61.1%): `grounded_probe_results.json` ✅
 - Two-stage 4-way classifier CV 44.1–45.8% (majority 49.9%): `two_stage_results.json` ✅
 - Consistency n: left/right 245, front/behind 314, facing 103, parallel/perp 34;
   front/behind 57.0→70.7%; both-True 5.9/32.4/32.4/14.7/38.2% ✅ `consistency_stats_all.json`
+- Consistency verdict/base-rate table (both-True/both-False/complementary,
+  orig/flip True rates per strict family): `results/consistency_verdict_table.json|.md`
+  + `scripts/consistency_verdict_table.py` ✅ (zero-shot facing: both-True 0/103,
+  both-False 63.1%, complementary 36.9%)
+- SITE confound analysis (logistic: unadjusted OR 0.31 → +category 0.74 p=0.023 →
+  full controls 0.84 p=0.29; within-category spatial-rel. −7.5pp;
+  high-precision VSR-construct subset n=177, 44.1% raw, CAA −2.3%):
+  `results/site/orientation_confound_analysis.json|.md` + `scripts/site_confound_analysis.py` ✅
 - SITE by-source table (22 rows): recomputed from CSV ≡ report ✅
 - SITE secondary by-category: 866/488/346/186/91/47 = 2,024 ✅ (audit output,
   frozen-ID subset; category counts recomputed from the prediction CSVs)
 - HardNeg persistent: 20→15 still failing, 5 fixed of 48 ✅ `hardneg_analysis_report.md`
 - Scaling transitions 28/23/22/64; adaptation 20/30/27/60 ✅ `orientation_analysis.json`
+
+## Statistical-family bookkeeping (fixed)
+
+- The test battery is **22 VSR tests** (the per-relation block is 4 relations × 2
+  conditions = 8 tests, not 10; the earlier "5×2 / 24 tests" enumeration was an
+  error and is corrected in App. D).
+- Holm-Bonferroni (m=22, α=0.05): two-stage A-lin/A-MLP/B-MLP (0.006/0.0006/0.008)
+  and consistency zero-shot-vs-LM-only (≤0.002) survive; vision-side overall
+  (0.0043/0.0122) and two-stage B-lin (0.0037) do not — the paper no longer claims
+  they survive adjustment. SITE transfer family (3 tests): Holm p = 0.012/1.0/1.0.
+- Single-checkpoint caveat added to App. D: McNemar tests quantify paired
+  test-example disagreement, not training-run variability.
 
 ## Known limitations recorded in the paper (App. G)
 
