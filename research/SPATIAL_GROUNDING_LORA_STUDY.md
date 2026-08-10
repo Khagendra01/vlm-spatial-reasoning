@@ -1,400 +1,563 @@
-# Spatial Grounding After Spatial LoRA — Research Plan
+# What Does Spatial Fine-Tuning Actually Teach? — Research Plan
 
 **Branch:** `research/spatial-grounding-audit`  
 **Parent/frozen source:** `master` at `3c6bb351edd40b2155a7beac98aeea1cfc7de0ef`  
-**Status:** PLANNED / NOT YET EXECUTED  
-**Primary benchmark:** VSR (`cambridgeltl/vsr_random`)  
-**Primary models:** SmolVLM2-2.2B-Instruct and Qwen2-VL-7B-Instruct  
-**Primary intervention:** spatial LoRA trained on VSR  
+**Status:** PLANNED / PRIMARY PROTOCOL NOT YET EXECUTED  
+**Primary benchmark:** VSR (`cambridgeltl/vsr_random`, held-out test)  
+**Primary backbone:** `Qwen/Qwen2-VL-7B-Instruct`  
+**Replication backbone:** `HuggingFaceTB/SmolVLM2-2.2B-Instruct`  
+**Primary adaptation:** existing VSR General LoRA  
+**Key diagnostic adaptation:** existing 7B Hard-Negative LoRA  
+
+> **Protocol authority:** actual experimental runs are governed by `research/GROUNDING_PROTOCOL_FREEZE.md` and `configs/grounding_protocol.yaml`. If this narrative plan and the frozen protocol disagree, the frozen protocol wins. Any post-result protocol change must be logged in `research/DECISION_LOG.md` and labeled exploratory unless it fixes a verified bug.
 
 ---
 
-## 1. One-sentence research question
+## 1. Locked scientific question
 
-> **When spatial LoRA improves VSR accuracy, did the model actually become more visually grounded?**
+> **When spatial fine-tuning improves accuracy or relational consistency, does it also increase causal sensitivity to the visual evidence that determines the spatial relation?**
 
-The key distinction is between **benchmark improvement** and **grounding improvement**.
+The paper is not merely a grounding ablation and not merely a consistency study. It asks whether three commonly conflated forms of improvement actually move together:
 
-A model can score higher on VSR after fine-tuning for several reasons:
+```text
+ΔA = change in benchmark accuracy
+ΔC = change in semantic/logical consistency
+ΔG = change in causal visual-grounding / evidence sensitivity
+```
 
-- better use of the image's spatial evidence;
-- stronger linguistic or label priors;
-- better adaptation to VSR templates;
-- improved task-format/calibration behavior;
-- memorization of benchmark-specific regularities;
-- improved logical consistency without improved perception;
-- some combination of the above.
+A fourth quantity is optional and secondary:
 
-This study is designed to isolate whether the gain caused by spatial LoRA is accompanied by a stronger causal dependence on the **correct visual evidence**.
+```text
+ΔT = change in controlled out-of-distribution transfer
+```
+
+The central scientific question is whether spatial adaptation produces:
+
+```text
+ΔA ≈ ΔC ≈ ΔG
+```
+
+or whether these quantities dissociate.
+
+### Working thesis
+
+> **Accuracy gain, consistency gain, and visual-grounding gain are separable outcomes of spatial adaptation rather than interchangeable evidence of improved spatial reasoning.**
+
+This is a hypothesis, not a conclusion. The paper must remain valid if the quantities do move together.
 
 ---
 
 ## 2. Scope boundary
 
-This branch is a **new standalone research project**.
+This is a **new standalone project**. The previous orientation-focused study is frozen as a separate paper direction.
 
-The previous orientation-focused study is considered frozen and complete as an independent paper direction. Its results are useful motivation, but this study must not silently turn back into an orientation-only project.
+The prior paper established useful motivation, including that adaptation can improve relational coherence without a corresponding increase in ordinary facing accuracy. This project does not reopen the prior orientation paper. Instead, it uses existing checkpoints as controlled interventions to ask **what capability changed**.
 
-### Previous study
+### This project is NOT
 
-Main question:
+- another orientation benchmark paper;
+- another generic consistency-training paper;
+- another blank-image ablation paper;
+- a new LoRA method paper;
+- a large scaling study;
+- an attempt to infer exact internal mechanisms from behavioral tests.
 
-> Why does orientation remain a stubborn spatial-reasoning bottleneck?
+### This project IS
 
-It studied scaling, prompting, LM LoRA, hard negatives, projector/vision adaptation, representation probes, logical consistency, two-stage reasoning, clean-label robustness, and SITE transfer.
+A paired before/after behavioral decomposition of spatial adaptation into:
 
-### This study
-
-Main question:
-
-> When explicit spatial task adaptation raises benchmark accuracy, what kind of capability changed?
-
-The unit of analysis is therefore **the before-vs-after capability change caused by spatial LoRA**, measured behaviorally under controlled visual and semantic interventions.
+1. benchmark performance;
+2. semantic/logical coherence;
+3. causal dependence on correct visual evidence;
+4. optional controlled transfer.
 
 ---
 
-## 3. Core experimental design
+## 3. Existing checkpoints create a useful natural experiment
 
-For each model size, compare the **same base model** before and after spatial LoRA on the **same evaluation examples**.
+We already have the expensive training assets needed for the first study.
+
+### Primary 7B sequence
 
 ```text
-                  SAME VSR TEST EXAMPLES
-                          |
-             +------------+------------+
-             |                         |
-          BASE MODEL                LoRA MODEL
-             |                         |
-             +------------+------------+
-                          |
-              IDENTICAL AUDIT CONDITIONS
-                          |
-       +------------------+------------------+
-       |        |         |        |         |
-     normal   text     blank    shuffled   counterfactuals
+7B zero-shot
+     |
+     | VSR General LoRA
+     v
+7B General LoRA
+     |
+     | hard-negative spatial adaptation
+     v
+7B HardNeg LoRA
 ```
 
-Primary treatment/control pairs:
+This gives two scientifically different transitions.
 
-### 2B pair
+### Transition P1 — benchmark-improving adaptation
 
-- Base: `HuggingFaceTB/SmolVLM2-2.2B-Instruct`
-- Tuned: existing **2B General LoRA** checkpoint
+**7B zero-shot → 7B General LoRA**
 
-Current standard VSR test result:
+Existing standard VSR results are approximately:
 
-- base: ~73.99%
-- General LoRA: ~76.63%
-- benchmark gain: ~+2.64 percentage points
+- zero-shot: 80.91%
+- General LoRA: 84.69%
+- ordinary VSR gain: +3.78 pp
 
-### 7B pair
+This is the **primary causal comparison** for asking whether benchmark gain is accompanied by grounding gain.
 
-- Base: `Qwen/Qwen2-VL-7B-Instruct`
-- Tuned: existing **7B General LoRA** checkpoint
+### Transition D1 — consistency-oriented diagnostic
 
-Current standard VSR test result:
+**7B General LoRA → 7B HardNeg LoRA**
 
-- base: ~80.91%
-- General LoRA: ~84.69%
-- benchmark gain: ~+3.78 percentage points
+In the prior facing/facing-away consistency analysis:
 
-These existing checkpoints are sufficient for the **first grounding audit**. Do not retrain before establishing whether the effect exists.
+- original facing-family accuracy: 68.9% → 68.9%
+- facing consistency: 66.0% → 77.7%
+
+This is unusually valuable because it asks whether a behavioral consistency change is accompanied by a visual-evidence-sensitivity change even when ordinary facing accuracy is unchanged.
+
+**Important caveat:** the pooled strict-family McNemar comparison between General and HardNeg was not statistically significant (`p=0.29`). Therefore this transition is a **key diagnostic**, not the sole confirmatory foundation of the paper, and no claim should state that HardNeg globally and significantly improves consistency over General unless a correctly scoped test supports it.
+
+### Replication transition R1
+
+**2B zero-shot → 2B General LoRA**
+
+Existing standard VSR results are approximately:
+
+- zero-shot: 73.99%
+- General LoRA: 76.63%
+- gain: +2.64 pp
+
+This is the planned size replication after the primary 7B protocol is frozen.
+
+### Other existing adapters
+
+Targeted, projector, and vision+projector adapters may be used only as **exploratory extension conditions** unless promoted before the primary full run through a documented protocol revision. They should not be added opportunistically after seeing results merely to improve the story.
 
 ---
 
 ## 4. Primary research questions
 
-### RQ1 — Benchmark learning
+### RQ1 — Accuracy change
 
-How much does spatial LoRA improve ordinary held-out VSR accuracy?
+How much does each adaptation transition change ordinary held-out VSR accuracy?
 
-This is already partially answered by the existing standard evaluations.
+### RQ2 — Correct-scene dependence
 
-### RQ2 — Visual grounding learning
+Does adaptation increase the model's dependence on the **correct image**, rather than merely any image or the VSR statement template?
 
-Does spatial LoRA increase the model's dependence on the correct visual evidence?
+### RQ3 — Semantic coherence
 
-Operationally, this means the tuned model should lose more of its advantage when the correct visual information is removed or corrupted, and should respond appropriately when the image geometry changes.
+Does adaptation improve behavior under logically linked textual transformations while the image is held fixed?
 
-### RQ3 — Counterfactual geometric sensitivity
+### RQ4 — Visual causal sensitivity
 
-Does LoRA improve paired consistency when the relation semantics or image geometry are deliberately changed?
+Does adaptation improve behavior when the **visual world changes while the statement stays fixed** and the correct answer is known to change or remain invariant?
 
-### RQ4 — Transfer
+### RQ5 — Dissociation
 
-Does any learned grounding improvement transfer outside the exact VSR distribution?
+Can `ΔA`, `ΔC`, and `ΔG` move by materially different amounts under the same adaptation?
 
-### RQ5 — Scale
+This is the conceptual center of the paper.
 
-Does the relationship between benchmark gain and grounding gain differ between ~2B and ~7B models?
+### RQ6 — Relation-family heterogeneity
 
-This is a secondary question. The paper should not become a broad scaling study.
+Which spatial relation families show genuine evidence-sensitivity gains versus primarily benchmark/task-policy gains?
+
+### RQ7 — Controlled transfer
+
+Do any grounding improvements survive a small, independently controlled counterfactual scene set outside ordinary VSR?
+
+This is secondary and should not block the first paper-quality result.
 
 ---
 
 ## 5. Main hypotheses
 
-### H1 — Benchmark improvement
+### H1 — General LoRA improves ordinary benchmark accuracy
 
-Spatial LoRA increases ordinary VSR test accuracy for both model sizes.
+Already supported by existing VSR results; the new work asks what that gain consists of.
 
-### H2 — Benchmark gain and grounding gain are not necessarily equal
+### H2 — `ΔA`, `ΔC`, and `ΔG` need not be equal
 
-A model may improve on VSR without becoming equivalently more dependent on correct visual evidence.
+Spatial adaptation may teach better answer policy or relation algebra without proportionally increasing visual evidence use.
 
-### H3 — Some LoRA gains may survive visual ablation
+### H3 — Genuine grounding improvement should be selectively tied to correct visual evidence
 
-If text-only, blank-image, or shuffled-image accuracy also rises strongly after LoRA, part of the benchmark gain is likely attributable to nonvisual task/dataset adaptation.
+If the model becomes more grounded, its advantage should be stronger with the correct image than with deterministically wrong, blank, or absent visual evidence.
 
-### H4 — Genuine grounding should improve paired geometric sensitivity
+### H4 — Semantic consistency and visual causal sensitivity can dissociate
 
-A visually grounded improvement should increase correctness/consistency under interventions whose truth value changes because the geometry changes.
+Passing a textual complement/inverse test does not by itself establish grounding. A grounded model should also respond correctly when the pixels change but the text does not.
 
-### H5 — The effect will vary by relation family
+### H5 — Effects are relation dependent
 
-Spatial relations differ substantially in whether they require object identity, object-intrinsic orientation, depth, topology, containment, or simple relative position. Grounding gains should therefore be analyzed per relation/family rather than only globally.
+Horizontal, vertical, depth, containment, topology/contact, proximity, and orientation relations differ in what evidence they require. Aggregate VSR accuracy may hide heterogeneous capability changes.
+
+### H6 — Hard-negative adaptation is a useful stress test
+
+If HardNeg changes semantic consistency more than visual causal sensitivity, that supports a coherence/policy interpretation. If it also improves visual causal sensitivity, then ordinary accuracy may be missing a genuine capability gain. Either result is scientifically informative.
 
 ---
 
-## 6. Audit conditions
+## 6. Experimental axes: never collapse these together
 
-The audit is split into two tiers.
+The study explicitly separates **semantic** and **visual** interventions.
 
-## Tier A — Visual evidence ablations
+## Axis S — Semantic/logical counterfactuals
 
-These are the first experiments because they are cheap, broad, and directly diagnostic.
+**Pixels remain fixed; language changes.**
+
+Examples:
+
+- relation complement/inversion where logically valid;
+- subject/object reversal with relation-specific expected behavior.
+
+These measure whether the model obeys relational logic and linked-answer constraints.
+
+They primarily contribute to `C` (consistency/coherence), not directly to `G`.
+
+## Axis V — Visual counterfactuals
+
+**Language remains fixed; pixels/world change.**
+
+Examples:
+
+- horizontal reflection for valid left/right cases;
+- later controlled scene edits where a spatial relation is deliberately changed while object identity and wording are held constant.
+
+These are the strongest tests of causal visual evidence sensitivity and contribute to `G`.
+
+## Axis E — Visual evidence ablations/corruptions
+
+**Language remains fixed; meaningful correct-scene evidence is removed or replaced.**
+
+Examples:
+
+- deterministic shuffled/wrong image;
+- matched wrong image if the matching rule is frozen before full evaluation;
+- blank image;
+- text-only as a diagnostic.
+
+These estimate how much performance depends on valid visual evidence but are weaker than clean geometry-changing visual counterfactuals.
+
+---
+
+## 7. Evidence hierarchy
+
+Not all grounding tests are equally strong. The paper should respect this hierarchy.
+
+### Primary evidence
+
+1. **Correct image vs deterministic shuffled/wrong image** under the same multimodal interface.
+2. **Visual counterfactuals** where the text is unchanged and the relation truth is known to change or remain invariant.
+3. **Joint both-correct / expected-change behavior** on original + visual-counterfactual pairs.
+
+### Secondary evidence
+
+4. Blank-image condition.
+5. Normal-vs-ablation performance gaps.
+
+### Exploratory/diagnostic evidence
+
+6. Text-only behavior.
+
+Text-only is useful for template/language priors but should not be presented as the strongest grounding metric because removing the visual pathway can change interface semantics.
+
+---
+
+## 8. Tier A — first experiment: evidence dependence
+
+Tier A is deliberately cheap and broad. It must be completed before new training.
 
 ### A1. Normal
 
-**Input:** correct image + original VSR statement.  
-**Purpose:** standard benchmark performance.
+Correct image + original VSR statement.
 
-This is the reference condition.
+Purpose: reference benchmark condition.
 
-### A2. Text-only
+### A2. Deterministic shuffled image — PRIMARY
 
-**Input:** original statement with no meaningful image evidence.  
-**Purpose:** estimate how much of the task can be solved from linguistic/template priors alone.
-
-Implementation must preserve the model interface as fairly as possible. If a model architecture strictly requires a visual input, prefer a dedicated null-visual implementation rather than silently changing prompt format in a way that confounds the comparison.
-
-Report both accuracy and invalid-output rate.
-
-### A3. Blank image
-
-**Input:** original statement + a constant blank image.  
-**Purpose:** remove semantic visual evidence while keeping the multimodal pathway active.
-
-The blank image must have fixed size/content across examples and models, with the exact generation rule stored in metadata.
-
-### A4. Shuffled image
-
-**Input:** original statement + a different VSR test image.  
-**Purpose:** test whether the model requires the correct scene rather than merely any image.
+Original statement + a different VSR test image.
 
 Requirements:
 
-- deterministic permutation;
-- fixed seed;
-- no example may receive its own image;
-- same permutation for base and LoRA;
-- ideally preserve split only; do not mix train/test;
-- store `source_example_id` and `shuffled_image_example_id`.
+- same held-out split only;
+- deterministic derangement;
+- fixed seed stored in protocol;
+- no self-pairs;
+- same mapping for every compared model condition;
+- store original and replacement example/image IDs;
+- do not regenerate the mapping after seeing results.
 
-A derangement is preferred over naive random sampling.
+This is the primary cheap test of whether the **correct scene** matters while retaining an ordinary image input.
+
+### A3. Matched wrong image — OPTIONAL PRIMARY UPGRADE
+
+If implemented before full Tier-A evaluation, create a deterministic wrong-image match that reduces obvious distribution shift by matching predeclared metadata such as broad relation family and, where feasible, coarse object/statistical properties.
+
+Rules:
+
+- matching algorithm and fallback policy must be frozen before results;
+- replacement image must still be known not to be the original scene;
+- do not hand-pick visually plausible replacements;
+- if matching cannot be made reliable, omit this condition rather than improvise.
+
+### A4. Blank image — SECONDARY
+
+Original statement + fixed constant image.
+
+Purpose: remove semantic evidence while preserving a multimodal call path.
+
+The exact image construction must be fixed and recorded.
+
+### A5. Text-only — EXPLORATORY
+
+Original statement with no meaningful visual evidence, using the fairest architecture-compatible interface.
+
+Purpose: estimate linguistic/template-prior behavior.
+
+Do not treat this as the main causal grounding test.
 
 ---
 
-## Tier B — Paired semantic/geometric counterfactuals
+## 9. Tier B — semantic coherence tests
 
-These are implemented only after Tier A is validated.
+These tests belong to `ΔC`.
 
-### B1. Relation inversion
+### B1. Strict relation complement/inversion
 
-Replace a relation with a logically valid inverse/complement where the transformed truth value is known.
+Use only relation mappings for which the expected truth behavior is logically valid.
 
-Examples of safe inverse/complement families may include:
+Safe examples may include, subject to template verification:
 
 - left ↔ right;
 - above ↔ below;
 - in front of ↔ behind;
-- inside ↔ contains, when grammatical argument structure is handled correctly.
+- compatible containment inverse forms where argument structure is correct.
 
-Do **not** assume every relation has a strict complement.
+Never treat `parallel ↔ perpendicular` as a universal strict complement; oblique configurations make both false possible.
 
-Particularly:
+For every relation pair, store:
 
-- `parallel` ↔ `perpendicular` is not a strict binary complement in arbitrary scenes;
-- symmetric relations require different treatment;
-- soft/ambiguous cases must be excluded from strict paired metrics.
-
-Every transformation needs an explicit validity map and unit tests.
+- transform name;
+- relation family;
+- strict/soft/unsafe status;
+- expected label behavior;
+- eligible example IDs;
+- exclusion reason.
 
 ### B2. Subject/object reversal
 
-Swap the two entities while retaining or appropriately transforming the relation.
+Do not implement with generic string replacement.
 
-Example:
+Create a relation taxonomy:
 
-```text
-Original:    A is left of B.
-Reversal:    B is left of A.
-```
-
-For asymmetric relations, truth should often flip. For symmetric relations it should not.
-
-Create an explicit taxonomy:
-
-- asymmetric;
 - symmetric;
+- asymmetric;
 - inverse-pair;
 - unsafe/ambiguous.
 
-Do not rely on a generic string swap.
+Validate subject/object extraction before using the transform. The historical simple `" is "` parser is not sufficient evidence of correctness for a paper-quality intervention.
 
-### B3. Horizontal image reflection
+### Semantic metrics
 
-Horizontally mirror the image while keeping the text fixed.
+For strict linked pairs report:
 
-This is a high-value visual intervention because the linguistic input is unchanged while image geometry changes.
+- original accuracy;
+- transformed accuracy;
+- expected logical flip/stability rate;
+- both-correct rate;
+- original-only / transformed-only / both-wrong;
+- exact paired tests where appropriate.
 
-For left/right-type relations, the truth value should change under valid reflection cases. For many other relations, it should remain invariant.
+---
+
+## 10. Tier C — visual causal counterfactuals
+
+These tests belong most directly to `ΔG`.
+
+### C1. Horizontal reflection
+
+Mirror the image while keeping the statement fixed.
+
+Primary valid use: left/right-type relations where horizontal reflection has a known truth effect.
 
 Requirements:
 
-- explicit relation-specific expected label behavior;
-- exclude relations where the expected effect is not logically guaranteed;
-- preserve image dimensions and non-geometric content;
-- store transformation metadata and paired-parent ID.
+- relation-specific expected behavior;
+- no global label flip;
+- invariant relations kept separate from flip-expected relations;
+- same transformed pixels for every compared model;
+- transformation metadata saved.
 
-Do **not** globally flip all labels after mirroring.
+### C2. Controlled geometry-changing scene pairs — HIGH-VALUE EXTENSION
 
----
+If Tier A/B/C1 produce a scientifically meaningful signal, add a **small controlled counterfactual set**, not a giant new benchmark.
 
-## 7. Why these conditions answer the question
+Goal: create paired scenes where only the spatial relation of interest changes while nuisance factors remain controlled.
 
-The central logic is causal/behavioral rather than purely correlational.
+Potential relation families:
 
-Suppose LoRA raises normal VSR accuracy.
+- left ↔ right;
+- above ↔ below;
+- front ↔ behind;
+- containment relations where exact labels are unambiguous;
+- facing ↔ facing-away through actual object orientation manipulation.
 
-### Pattern A — likely nonvisual/task adaptation
+Design principles:
 
-```text
-normal gain:      large
-text-only gain:   large
-blank gain:       large
-shuffled gain:    large
-mirror/inverse:   little improvement
-```
+- same object identities within a pair where possible;
+- same statement wording within the visual pair;
+- balanced labels;
+- balanced colors/shapes/backgrounds/viewpoints;
+- irrelevant-edit controls;
+- exact generated ground truth;
+- no use of a model's own predicted labels as ground truth.
 
-Interpretation: benchmark performance improved, but much of the added capability survives when correct visual evidence is absent or wrong.
+Useful controls:
 
-### Pattern B — stronger evidence of visual grounding
+- rotate/change an irrelevant object;
+- background-only change;
+- crop/lighting nuisance change;
+- identity-preserving relation change;
+- invariant relation cases.
 
-```text
-normal gain:      positive
-text-only gain:   small/none
-blank gain:       small/none
-shuffled gain:    small/none
-paired geometric correctness: improves
-```
-
-Interpretation: the tuned model benefits specifically when valid scene information is available and is more sensitive to geometry-changing interventions.
-
-### Pattern C — mixed learning
-
-The most realistic outcome may be a mixture: some task adaptation plus some grounding improvement, varying by relation family.
-
-The paper should support mixed conclusions rather than forcing a binary grounded/not-grounded label.
+A model that reacts to every pixel change is not grounded. We require **relation-specific expected response**.
 
 ---
 
-## 8. Primary metrics
+## 11. Primary model matrix
 
-Let:
+### Confirmatory/core
 
-- `A_base,c` = base accuracy under condition `c`
-- `A_lora,c` = LoRA accuracy under condition `c`
+| Role | Condition | Purpose |
+|---|---|---|
+| Primary baseline | 7B zero-shot | starting capability |
+| Primary tuned | 7B General LoRA | benchmark-improving spatial adaptation |
+| Key diagnostic | 7B HardNeg LoRA | consistency-oriented adaptation contrast |
+| Replication baseline | 2B zero-shot | smaller-backbone replication |
+| Replication tuned | 2B General LoRA | smaller-backbone adaptation |
 
-### 8.1 Benchmark gain
+### Exploratory only unless promoted before full run
 
-```text
-Delta_A = A_lora,normal - A_base,normal
-```
+- 7B Targeted LoRA;
+- 7B Projector LoRA;
+- 7B Vision+Projector LoRA;
+- 2B Targeted LoRA;
+- additional external models.
 
-### 8.2 Visual-ablation gaps
-
-For each model:
-
-```text
-G_text     = A_normal - A_text
-G_blank    = A_normal - A_blank
-G_shuffle  = A_normal - A_shuffle
-```
-
-These quantify how much performance depends on the correct multimodal evidence.
-
-### 8.3 Grounding-gain change after LoRA
-
-For example:
-
-```text
-Delta_G_shuffle = G_shuffle,lora - G_shuffle,base
-Delta_G_text    = G_text,lora    - G_text,base
-Delta_G_blank   = G_blank,lora   - G_blank,base
-```
-
-A positive `Delta_G` means the tuned model has become more dependent on valid visual evidence by this operational measure.
-
-### 8.4 Condition-specific LoRA gain
-
-```text
-Delta_A_condition = A_lora,condition - A_base,condition
-```
-
-Compare the normal gain against ablated gains.
-
-### 8.5 Prediction flip rate
-
-For paired counterfactuals, measure how often the prediction changes when the expected truth value changes.
-
-Flip rate alone is not sufficient because a model can flip in the wrong direction.
-
-### 8.6 Paired correctness
-
-For each original/counterfactual pair, record:
-
-- original correct;
-- transformed correct;
-- both correct;
-- original-only correct;
-- transformed-only correct;
-- both wrong.
-
-**Both-correct rate** is a stricter measure of geometric competence than marginal accuracy.
-
-### 8.7 Expected-change consistency
-
-For transforms with a known label flip:
-
-- did the prediction change in the expected direction?
-
-For invariant transforms:
-
-- did the prediction remain semantically consistent?
-
-### 8.8 Invalid-output rate
-
-Always report malformed/unparseable output separately.
-
-A lower invalid rate can improve benchmark accuracy without demonstrating improved reasoning.
+Do not expand the condition matrix simply because a core result is null.
 
 ---
 
-## 9. Relation-family analysis
+## 12. Core quantities and metrics
 
-Do not rely only on aggregate VSR accuracy.
+Let `A_{m,c}` be accuracy for model condition `m` under evaluation condition `c`.
 
-At minimum report:
+### 12.1 Accuracy change (`ΔA`)
+
+For an adaptation transition `u → v`:
+
+```text
+ΔA = A_v,normal - A_u,normal
+```
+
+### 12.2 Correct-scene dependence
+
+For model `m`:
+
+```text
+G_shuffle(m) = A_m,normal - A_m,shuffle
+G_blank(m)   = A_m,normal - A_m,blank
+G_text(m)    = A_m,normal - A_m,text
+```
+
+The primary ablation gap is `G_shuffle`.
+
+### 12.3 Grounding change (`ΔG`)
+
+For adaptation `u → v`:
+
+```text
+ΔG_shuffle = G_shuffle(v) - G_shuffle(u)
+```
+
+Analogous quantities may be reported for blank/text, but they are secondary/diagnostic.
+
+For visual counterfactuals, define grounding sensitivity using paired expected response rather than only marginal accuracy.
+
+### 12.4 Semantic consistency (`C` and `ΔC`)
+
+For strict semantic pairs, `C` is the proportion obeying the expected linked-answer law.
+
+```text
+ΔC = C_v - C_u
+```
+
+Always distinguish:
+
+- consistency;
+- pair both-correct;
+- marginal accuracy.
+
+Consistency can increase by becoming coherently wrong.
+
+### 12.5 Visual causal sensitivity
+
+For a visual pair whose ground-truth answer should flip:
+
+- expected prediction flip rate;
+- both-correct rate;
+- transformed accuracy;
+- wrong-direction flip rate.
+
+For an invariant visual control:
+
+- expected stability rate;
+- both-correct rate.
+
+### 12.6 Joint grounded consistency
+
+For matched semantic and visual transformations where the transformation laws are known, report the proportion of scene/query units satisfying **both** the semantic law and the visual causal law.
+
+This is a stronger composite diagnostic than ordinary consistency alone.
+
+### 12.7 Invalid output rate
+
+Always report malformed/unparseable output. A drop in invalid outputs can increase benchmark accuracy without demonstrating improved spatial reasoning.
+
+---
+
+## 13. Interpretation matrix
+
+### Case 1 — `ΔA > 0`, `ΔC > 0`, `ΔG ≈ 0`
+
+Evidence consistent with improved task policy/coherence without proportional visual grounding improvement.
+
+### Case 2 — `ΔA > 0`, `ΔC > 0`, `ΔG > 0`
+
+Evidence consistent with adaptation improving both behavior and visual evidence use.
+
+### Case 3 — `ΔA ≈ 0`, `ΔC > 0`, `ΔG ≈ 0`
+
+Coherence-only improvement; especially relevant to the General→HardNeg diagnostic.
+
+### Case 4 — `ΔA ≈ 0`, `ΔC > 0`, `ΔG > 0`
+
+Ordinary accuracy is missing a genuine grounding improvement.
+
+### Case 5 — relation-dependent mixture
+
+Potentially the most informative outcome. Report the heterogeneity rather than forcing a single grounded/not-grounded label.
+
+No single ablation is sufficient to claim an internal mechanism.
+
+---
+
+## 14. Relation-family analysis
+
+At minimum preserve/report:
 
 - orientation;
 - depth;
@@ -404,68 +567,81 @@ At minimum report:
 - topology/contact;
 - proximity where sample size permits.
 
-Also retain per-relation counts and accuracy.
+Keep per-relation counts.
 
-Avoid strong conclusions for very small relations.
+Primary conclusions should not rely on tiny cells. Small relation analyses are exploratory unless predeclared and sufficiently powered.
 
-The existing family map can be reused, but this branch should centralize it rather than duplicating incompatible maps across scripts.
+The relation-family map must be centralized for this project so scripts cannot silently disagree.
 
 ---
 
-## 10. Statistical analysis
+## 15. Statistical plan
 
-Because base and LoRA evaluate the **same examples**, use paired statistics.
+Because conditions are evaluated on matched examples, use paired analyses.
 
 ### Required
 
-- exact/paired McNemar test for paired binary correctness where applicable;
-- paired bootstrap confidence intervals for accuracy differences;
-- bootstrap confidence intervals for grounding-gap differences;
-- report effect sizes, not p-values alone.
+- exact McNemar for paired binary correctness comparisons where applicable;
+- paired/bootstrap confidence intervals for accuracy differences;
+- bootstrap confidence intervals for `ΔG` and other gap differences;
+- confidence intervals for consistency and visual expected-response changes;
+- effect sizes alongside p-values.
 
-### Multiple seeds
+### Confirmatory comparison order
 
-Do not retrain immediately.
-
-Phase 1 uses existing checkpoints to establish whether the phenomenon is meaningful.
-
-If the main result is scientifically interesting, repeat the final General-LoRA condition with **3 training seeds** for both model sizes, or at minimum for the primary model if compute becomes limiting.
-
-Report mean ± standard deviation across seeds and retain paired example-level analyses inside each seed.
+1. 7B zero-shot vs 7B General;
+2. 7B General vs 7B HardNeg as key diagnostic;
+3. 2B zero-shot vs 2B General replication.
 
 ### Multiple comparisons
 
-If many relation-level significance tests are presented, apply an appropriate correction or clearly distinguish primary confirmatory tests from exploratory analyses.
+- define a small set of primary global tests;
+- treat relation-level tests as secondary/exploratory unless predeclared;
+- use an appropriate correction if many inferential relation-level claims are reported.
+
+### Seeds
+
+Do **not** retrain before the first capability decomposition is established.
+
+If a core effect is meaningful:
+
+- replicate General LoRA with 3 training seeds for the primary backbone;
+- ideally also replicate 2B if compute permits;
+- run the same frozen audit on every seed;
+- report mean ± SD across seeds plus within-seed paired analyses.
+
+HardNeg seed replication is optional and only justified if the diagnostic becomes central to the final claim.
 
 ---
 
-## 11. Experimental order
+## 16. Experimental order
 
-## Phase 0 — Branch/reproducibility setup
+### Phase 0 — protocol governance
 
-- [x] Create dedicated research branch.
-- [x] Add this study plan.
-- [ ] Record branch parent commit.
-- [ ] Add experiment config directory/files.
-- [ ] Add tests before final runs.
-- [ ] Freeze prompt/parser/generation settings for each model.
+- [x] dedicated branch;
+- [x] integrated research plan;
+- [x] branch parent recorded;
+- [x] protocol authority defined;
+- [ ] protocol/config committed and reviewed;
+- [ ] prompt/parser/generation settings frozen;
+- [ ] exact evaluation IDs frozen;
+- [ ] implementation tests added.
 
-## Phase 1 — Refactor only what is necessary
+### Phase 1 — minimal evaluator refactor
 
-Goal: avoid duplicating intervention logic separately for 2B and 7B.
+Goal: one intervention/evaluation path across model conditions.
 
-Recommended interface:
+Target interface:
 
 ```python
 predict(image, statement)
 predict_batch(images, statements)
 ```
 
-Create or standardize:
+Recommended modules:
 
 ```text
 src/models/base.py
-src/models/smolvlm.py
 src/models/qwen2vl.py
 src/evaluation/interventions.py
 src/evaluation/grounding_metrics.py
@@ -473,605 +649,415 @@ src/evaluation/pairing.py
 src/evaluation/statistics.py
 ```
 
-Do not rewrite the full repository merely for style.
+Reuse the existing SmolVLM wrapper. Do not rewrite unrelated research code.
 
-## Phase 2 — Tier-A implementation and tests
+### Phase 2 — Tier-A implementation
 
-Implement:
+Implement and test:
 
-- normal;
-- text-only;
-- blank image;
-- deterministic shuffled image.
+1. normal;
+2. deterministic shuffled image;
+3. blank image;
+4. text-only diagnostic;
+5. optional matched-shuffle only if the algorithm is frozen before the full run.
 
-Required tests:
+### Phase 3 — smoke tests
 
-- shuffled mapping contains no self-pairs;
-- shuffled mapping deterministic for fixed seed;
-- blank image exactly reproducible;
-- base and LoRA receive identical example IDs and transforms;
-- parser behavior unchanged;
-- metrics correct on toy examples.
-
-## Phase 3 — 7B pilot
-
-Run first on:
-
-```text
-7B base
-7B General LoRA
-```
-
-Conditions:
-
-```text
-normal
-text-only
-blank
-shuffled
-```
-
-Suggested execution order:
+For 7B zero, General, HardNeg:
 
 1. 10-example smoke;
-2. 100–200-example paired smoke;
-3. full VSR test.
+2. ~200-example paired pilot for engineering validation only;
+3. freeze bug fixes;
+4. full VSR test.
 
-Do not inspect and redesign transforms based on which version produces the preferred result.
+The pilot is not for selecting whichever condition gives the preferred result.
 
-## Phase 4 — First scientific decision point
+### Phase 4 — primary Tier-A analysis
 
 Compute:
 
-- normal LoRA gain;
-- text/blank/shuffle gains;
-- base visual-ablation gaps;
-- LoRA visual-ablation gaps;
-- `Delta_G` values;
-- per-family differences;
+- ordinary accuracy;
+- condition-specific adaptation gains;
+- correct→shuffle gaps;
+- `ΔG_shuffle`;
+- blank/text diagnostics;
+- invalid rate;
+- per-family breakdown;
 - paired CIs/tests.
 
-Decision:
+### Phase 5 — semantic counterfactuals
 
-### If clear signal exists
+Freeze transform validity map and eligible IDs before full evaluation.
 
-Proceed to Tier B counterfactuals.
+Run strict relation/inverse and validated subject/object transformations.
 
-### If null/mixed
+Compute `C` and `ΔC` separately from grounding metrics.
 
-Still report honestly; inspect relation-family heterogeneity before changing the hypothesis.
+### Phase 6 — VSR visual counterfactuals
 
-Do not train a new model simply because the first result is inconvenient.
+Implement validated horizontal reflection and any other VSR-native visual transform whose expected effect is logically guaranteed.
 
-## Phase 5 — Tier-B counterfactual implementation
+### Phase 7 — first synthesis
 
-Implement and validate:
-
-- strict relation inversion;
-- subject/object reversal;
-- horizontal reflection.
-
-Before full evaluation, produce an audit table with:
+For 7B zero → General and General → HardNeg, compare:
 
 ```text
-relation
-transform type
-expected label behavior
-symmetric/asymmetric
-safe/unsafe
-number of eligible examples
+ΔA, ΔC, ΔG
 ```
 
-Manually inspect a stratified sample of transformed examples before running the full suite.
+This is the first point at which the main dissociation hypothesis can be evaluated.
 
-## Phase 6 — Full 7B grounding audit
+### Phase 8 — 2B replication
 
-Run base + General LoRA on all frozen valid conditions.
+Run the frozen protocol on 2B zero + General.
 
-Generate paired prediction tables and canonical metrics.
+Do not change interventions based on 7B results.
 
-## Phase 7 — 2B replication
+### Phase 9 — controlled visual-counterfactual set
 
-Run the exact same frozen audit on:
+Only if it materially sharpens the grounding claim. Keep it small and exact rather than broad and noisy.
 
-```text
-2B base
-2B General LoRA
-```
+### Phase 10 — seed replication
 
-Do not change transformations, prompts, or metrics because of 7B results.
+Run only after the final primary protocol is stable.
 
-## Phase 8 — Seed replication
+### Phase 11 — optional external/reference models
 
-If the phenomenon survives both sizes and is worth publishing:
-
-- retrain General LoRA with multiple seeds;
-- rerun the final frozen audit;
-- aggregate across seeds.
-
-## Phase 9 — OOD transfer
-
-Use a small controlled external audit rather than turning the project into a new benchmark-construction effort.
-
-Potential components:
-
-- simple synthetic scenes with balanced geometry;
-- left/right, above/below, containment, overlap, near/far when unambiguous;
-- balanced object identity/color/shape/background;
-- identical textual templates across counterfactual image pairs.
-
-SITE may be referenced as motivation from the prior project, but this study's main OOD test should be designed specifically to answer **grounding after LoRA**, not merely general external benchmark transfer.
-
-## Phase 10 — Optional frozen strong-model reference
-
-MiMo or another strong external model may be evaluated only after the protocol is frozen.
-
-It is a reference condition, not a judge, and not necessary for the primary causal comparison.
-
-No paid API calls should be made before the evaluation protocol and budget are explicitly frozen.
+Only after core analyses are complete and protocol is frozen.
 
 ---
 
-## 12. Data schema for prediction files
+## 17. Transformation validity rules
 
-Every new prediction row should include at least:
+1. Every transform must specify expected truth behavior.
+2. Ambiguous examples are excluded from strict metrics, not guessed.
+3. No universal label-flip rule across relations.
+4. Symmetric and asymmetric relations are separate.
+5. `parallel ↔ perpendicular` is not a universal strict complement.
+6. Base/tuned models receive identical transformed inputs.
+7. Every transformed row stores parent ID + transform metadata.
+8. Every transformation has unit tests and manual stratified spot checks.
+9. Visual and semantic transformations must never be conflated in analysis.
+10. A change that merely perturbs pixels without a known expected relation effect is a nuisance control, not a grounding success criterion.
+
+---
+
+## 18. Subject/object parsing rule
+
+Before any subject/object reversal experiment:
+
+1. audit parsing over the eligible test set;
+2. record success/failure/ambiguity counts;
+3. verify reconstruction on a sample;
+4. exclude uncertain examples;
+5. store exclusions and reasons.
+
+Do not rely on the historical generic split around `" is "` for a confirmatory counterfactual.
+
+---
+
+## 19. Prediction schema
+
+Every new prediction row should contain at least:
 
 ```text
 example_id
 paired_parent_id
 split
 condition
+intervention_axis
 statement
 original_statement
 relation
+relation_family
 subject
 object
 ground_truth
 expected_transformed_label
+expected_prediction_behavior
 prediction
 correct
 raw_output
 model_id
-model_size
-base_or_lora
+model_revision
+model_condition
 adapter_path
-seed
+adapter_hash
+training_seed
 prompt_version
 parser_version
 image_id
 source_image_id
+replacement_image_id
 transformed_image_id
 transform_name
+transform_version
 transform_metadata
 shuffle_seed
 generation_settings
 run_id
 git_commit
+protocol_version
 ```
 
-Do not rely on timestamps in filenames as the sole provenance mechanism.
+No result file should depend only on a timestamp for provenance.
 
 ---
 
-## 13. Run metadata
+## 20. Run metadata
 
-Every run should save a machine-readable metadata file containing:
+Every run must store:
 
-- git commit hash;
-- branch;
+- git commit + branch;
+- protocol version/hash;
 - model ID/revision;
-- adapter ID/path/hash;
-- dataset ID/revision;
-- split;
+- adapter path/hash;
+- dataset ID/revision/split;
 - exact example IDs;
-- condition;
-- transformation version;
-- random seed;
+- condition/intervention version;
+- all random seeds;
 - prompt text/hash;
 - parser version/hash;
 - generation parameters;
-- dtype;
-- attention implementation;
-- image preprocessing settings;
+- dtype and attention implementation;
+- image preprocessing;
 - package/environment snapshot;
 - start/end timestamps;
-- output file hashes where practical.
+- prediction artifact hash where practical.
 
-Follow the stronger SITE-style reproducibility pattern already established in the previous project.
+Reuse the stronger SITE-style metadata discipline from the prior paper.
 
 ---
 
-## 14. Parser and generation controls
+## 21. Prompt and decoding fairness
 
-The task is binary True/False.
-
-The primary comparison should not be contaminated by different decoding policies between base and LoRA.
-
-For each model pair:
+Within every base/tuned comparison:
 
 - same prompt;
 - same processor path;
 - same image preprocessing;
-- same `max_new_tokens`;
-- same greedy decoding;
+- same generation limit;
+- greedy decoding;
 - same parser;
 - same batch semantics where possible.
 
-Cross-model 2B-vs-7B differences are less important than within-model base-vs-LoRA fairness, but unnecessary differences should still be minimized.
+Cross-model implementation differences matter less than within-model fairness, but unnecessary differences should still be minimized.
 
-The parser must be unit-tested against:
+The parser must have tests for:
 
 - `True`;
 - `False`;
-- common harmless wrappers;
-- outputs containing both words;
-- malformed output;
-- empty output.
+- harmless wrappers;
+- both words present;
+- empty output;
+- malformed output.
 
 ---
 
-## 15. Subject/object parsing warning
+## 22. Anti-cherry-picking / change-control policy
 
-The existing VSR loader historically derives subject/object fields using a simple caption split around `" is "`.
+Before each confirmatory full run, freeze:
 
-That is insufficiently trustworthy for a subject/object reversal experiment without validation.
+- compared model conditions;
+- eligible IDs;
+- intervention definitions;
+- transform validity map;
+- shuffle seed/mapping;
+- prompt/parser/generation parameters;
+- primary metrics;
+- primary statistical tests.
 
-Before B2:
+After full primary results are observed:
 
-1. audit parsing over the full eligible test set;
-2. record success/failure/ambiguous counts;
-3. verify round-trip statement reconstruction where possible;
-4. exclude uncertain examples rather than guessing;
-5. keep an exclusion log.
+- new conditions are exploratory unless fixing a demonstrated bug;
+- bug fixes must document affected examples and old/new behavior;
+- no dropping conditions because they weaken the preferred story;
+- no redefining a relation subset based on observed performance;
+- no changing a shuffle seed after seeing results;
+- no replacing an unfavorable primary metric with a newly invented one.
 
-No counterfactual claim should depend on silently incorrect entity parsing.
-
----
-
-## 16. Transformation validity principles
-
-The study's credibility depends more on intervention correctness than on the number of conditions.
-
-Rules:
-
-1. A transformation must have a clearly specified expected truth behavior.
-2. If the expected label is ambiguous, exclude the example from the strict metric.
-3. Never apply one global label-flip rule to all relations.
-4. Symmetric and asymmetric relations must be handled separately.
-5. Image transforms and text transforms must be independently logged.
-6. All pairings must be deterministic and reproducible.
-7. Base and LoRA must receive exactly the same transformed examples.
-8. Transformation code must have unit tests and manual spot checks.
+Protocol changes are recorded in `research/DECISION_LOG.md`.
 
 ---
 
-## 17. Main analysis table concept
+## 23. What future research agents MAY change
 
-The central table should eventually resemble:
+They may:
 
-| Model | Condition | Base acc | LoRA acc | LoRA gain | Base visual gap | LoRA visual gap | Grounding-gap change |
-|---|---:|---:|---:|---:|---:|---:|---:|
-| 2B | normal | ... | ... | ... | — | — | — |
-| 2B | text-only | ... | ... | ... | ... | ... | ... |
-| 2B | blank | ... | ... | ... | ... | ... | ... |
-| 2B | shuffled | ... | ... | ... | ... | ... | ... |
-| 7B | normal | ... | ... | ... | — | — | — |
-| 7B | text-only | ... | ... | ... | ... | ... | ... |
-| 7B | blank | ... | ... | ... | ... | ... | ... |
-| 7B | shuffled | ... | ... | ... | ... | ... | ... |
+- improve engineering efficiency without changing model inputs/semantics;
+- add tests;
+- fix verified bugs with a logged diff;
+- add exploratory analyses clearly labeled as such;
+- propose a controlled visual-counterfactual dataset design before it is frozen;
+- refine figure/table presentation after metrics are fixed.
 
-Counterfactual results should be a separate paired table rather than forced into the same format.
+They may **not silently change**:
 
----
+- the central `ΔA / ΔC / ΔG` question;
+- the core 7B zero→General comparison;
+- the General→HardNeg diagnostic role;
+- the 2B replication role;
+- the evidence hierarchy;
+- semantic-vs-visual intervention separation;
+- the primary correct-vs-shuffled evidence test;
+- interpretation rules;
+- confirmatory/exploratory labels after results are seen.
 
-## 18. Main figures concept
-
-Potential publication figures:
-
-### Figure 1 — Benchmark gain vs grounding gain
-
-For each model size, show normal LoRA gain beside `Delta_G_text`, `Delta_G_blank`, and `Delta_G_shuffle`.
-
-### Figure 2 — Accuracy by visual condition
-
-Base and LoRA across normal/text/blank/shuffled.
-
-### Figure 3 — Relation-family grounding change
-
-Per-family `Delta_G` with confidence intervals.
-
-### Figure 4 — Paired counterfactual correctness
-
-Base vs LoRA on relation inversion, object reversal, and horizontal reflection.
-
-### Figure 5 — OOD transfer
-
-Only if the controlled OOD audit is completed cleanly.
+Any scientific redesign must be explicit and committed as a protocol revision before the affected full run.
 
 ---
 
-## 19. Interpretation framework
+## 24. Novelty target and literature guardrail
 
-Do not claim internal mechanisms from behavior alone.
+The intended contribution is **not** that consistency can be wrong, that VLMs sometimes ignore images, or that fine-tuning can overfit.
 
-Use cautious language such as:
+The intended contribution is:
 
-### Evidence consistent with stronger visual grounding
+> **A controlled adaptation-delta study testing whether spatial fine-tuning moves benchmark accuracy, relational coherence, and causal visual evidence sensitivity together or independently.**
 
-- normal accuracy increases;
-- shuffled/blank/text-only gains remain small;
-- normal-vs-ablation gap increases;
-- paired geometric counterfactual correctness improves;
-- OOD geometric sensitivity improves.
+The strongest framing is about **what the adaptation changed**, using the same model/checkpoints before and after training.
 
-### Evidence consistent with linguistic/task adaptation
+Before submission, run a fresh literature review focused specifically on:
 
-- LoRA improves text-only strongly;
-- blank/shuffled gains approach the normal gain;
-- geometry-changing interventions remain weak;
-- improvements concentrate in template-heavy relations.
+- spatial fine-tuning + visual grounding;
+- consistency training + evidence sensitivity;
+- behavioral adaptation decomposition;
+- visual counterfactual sensitivity after fine-tuning;
+- spatial negative transfer.
 
-### Evidence consistent with output/calibration learning
-
-- invalid-output rate falls substantially;
-- gains occur uniformly even where information content is unchanged;
-- prediction distribution becomes better matched to dataset priors.
-
-### Evidence consistent with benchmark specialization
-
-- strong in-distribution improvement;
-- weak controlled-OOD transfer;
-- little increase in sensitivity to valid visual interventions.
-
-These categories are behavioral interpretations, not claims about exact internal circuits.
+Do not claim “first” without that final review.
 
 ---
 
-## 20. What would make the paper interesting?
+## 25. Main paper table concept
 
-The study is interesting under more than one outcome.
+| Model condition | VSR accuracy | Semantic consistency | Correct→shuffle gap | Visual-CF expected response | Visual-CF both-correct | Controlled OOD-CF |
+|---|---:|---:|---:|---:|---:|---:|
+| 7B zero-shot | ... | ... | ... | ... | ... | ... |
+| 7B General | ... | ... | ... | ... | ... | ... |
+| 7B HardNeg | ... | ... | ... | ... | ... | ... |
+| 2B zero-shot | ... | ... | ... | ... | ... | ... |
+| 2B General | ... | ... | ... | ... | ... | ... |
 
-### Outcome 1 — Accuracy rises but grounding does not
-
-This supports a cautionary result:
-
-> Fine-tuning can improve spatial benchmark scores without proportionally improving visual-spatial grounding.
-
-### Outcome 2 — Accuracy and grounding both rise
-
-This supports a positive result:
-
-> Spatial LoRA can teach genuinely more visually grounded spatial behavior, and the audit identifies where that improvement occurs.
-
-### Outcome 3 — Mixed relation-dependent result
-
-Potentially the most informative outcome:
-
-> Spatial fine-tuning teaches different things for different relation families; aggregate accuracy hides heterogeneous changes in visual dependence.
-
-### Outcome 4 — Model-size interaction
-
-If 2B and 7B differ materially:
-
-> Model scale changes whether spatial adaptation is absorbed as task-specific behavior or as visually grounded capability.
-
-This should remain secondary unless the effect is large and robust.
+The paper should emphasize transitions (`ΔA`, `ΔC`, `ΔG`), not just absolute rows.
 
 ---
 
-## 21. What we must NOT claim
+## 26. Main figure concept
 
-Do not claim:
-
-- that benchmark accuracy directly equals grounding;
-- that text-only success proves memorization;
-- that shuffled-image failure alone proves geometric reasoning;
-- that behavior identifies the exact internal mechanism;
-- that every relation has a valid binary complement;
-- that horizontal reflection flips every spatial label;
-- that this is the first grounding-ablation study without a final literature re-check;
-- that one training seed establishes a robust fine-tuning effect;
-- that SITE from the previous project directly answers this new grounding question.
-
-Before submission, perform a fresh targeted literature review because this research area is moving rapidly.
-
----
-
-## 22. Novelty target
-
-The intended contribution is **not** merely:
-
-- another VSR benchmark result;
-- another spatial fine-tuning method;
-- another blank-image ablation;
-- another counterfactual benchmark;
-- another orientation study.
-
-The intended contribution is the **paired behavioral decomposition of the capability change caused by explicit spatial-task fine-tuning**:
-
-> Given the same VLM before and after spatial LoRA, how much of the benchmark gain corresponds to increased dependence on correct visual evidence and transferable geometric sensitivity?
-
-The contribution should be framed around the delta caused by adaptation:
+A conceptual figure should place adaptation effects on three axes:
 
 ```text
-benchmark change:  Delta_A
-visual-grounding change: Delta_G
-counterfactual sensitivity change: Delta_C
-OOD transfer change: Delta_T
+              Accuracy ΔA
+                  ^
+                 / \
+                /   \
+               /     \
+   Grounding ΔG ----- Consistency ΔC
 ```
 
-The scientific question is whether these deltas move together.
+Different adaptation transitions may occupy different parts of this space.
+
+Additional figures:
+
+1. normal vs shuffled/blank/text by model condition;
+2. per-family `ΔG_shuffle`;
+3. semantic consistency vs visual causal sensitivity;
+4. visual-counterfactual both-correct rate;
+5. controlled OOD counterfactual result if completed.
 
 ---
 
-## 23. Reproducibility and anti-cherry-picking policy
+## 27. First milestone
 
-Before full runs:
-
-- freeze the evaluation conditions;
-- freeze transformation maps;
-- freeze excluded relations/examples and reasons;
-- freeze prompt/parser/generation parameters;
-- freeze seeds;
-- save exact eligible IDs;
-- commit the protocol.
-
-After seeing full primary results:
-
-- do not redefine conditions to improve the story;
-- new analyses must be labeled exploratory;
-- bug fixes must document old/new outputs and affected examples;
-- no silent reruns replacing unfavorable results.
-
-A small protocol Markdown/JSON should be committed before the first full Tier-A 7B run.
-
----
-
-## 24. Suggested branch file structure
+The first milestone is complete when the **same VSR test examples** have been evaluated for:
 
 ```text
-research/
-└── SPATIAL_GROUNDING_LORA_STUDY.md
-
-configs/
-├── grounding_audit_2b.yaml
-├── grounding_audit_7b.yaml
-└── grounding_protocol.yaml
-
-src/
-├── models/
-│   ├── base.py
-│   ├── smolvlm.py
-│   └── qwen2vl.py
-└── evaluation/
-    ├── interventions.py
-    ├── grounding_metrics.py
-    ├── pairing.py
-    └── statistics.py
-
-scripts/
-├── run_grounding_audit.py
-├── validate_interventions.py
-├── summarize_grounding_results.py
-└── make_grounding_figures.py
-
-results/
-└── grounding/
-    ├── protocol/
-    ├── predictions/
-    ├── metrics/
-    ├── tables/
-    └── figures/
-
-tests/
-├── test_interventions.py
-├── test_pairing.py
-├── test_parser.py
-└── test_grounding_metrics.py
+7B zero-shot
+7B General LoRA
+7B HardNeg LoRA
 ```
 
-This is a target structure; adapt the existing repository incrementally rather than forcing a wholesale rewrite.
+under:
 
----
+```text
+normal
+shuffled image
+blank image
+text-only diagnostic
+```
 
-## 25. Compute strategy
+with:
 
-Current RTX A6000 48 GB is sufficient for the core study.
-
-Use it for:
-
-- 2B/7B inference;
-- existing LoRA checkpoint evaluation;
-- eventual 3-seed LoRA replication;
-- counterfactual audits.
-
-Do not move to a larger GPU merely for convenience.
-
-A larger GPU becomes scientifically justified only if the study later adds a larger model as a distinct scaling experiment.
-
-Primary priority is paired methodology and reproducibility, not model count.
-
----
-
-## 26. Immediate next actions
-
-1. Create/freeze a Tier-A protocol file.
-2. Inspect/refactor the 7B evaluator into a reusable wrapper only as much as needed.
-3. Implement text-only, blank-image, and deterministic shuffled-image conditions.
-4. Add unit tests for transformations and pairing.
-5. Run 10-example 7B base/LoRA smoke tests.
-6. Run ~200-example paired pilot.
-7. Freeze any bug fixes before full evaluation.
-8. Run full 7B base vs General-LoRA Tier-A audit.
-9. Compute `Delta_A`, `G_text`, `G_blank`, `G_shuffle`, and `Delta_G` with paired CIs.
-10. Decide whether to proceed to Tier-B counterfactuals based on scientific informativeness, not whether the result matches the preferred hypothesis.
-11. Implement and validate relation inversion, subject/object reversal, and horizontal reflection.
-12. Run full 7B Tier-B audit.
-13. Replicate the frozen audit on 2B.
-14. Only then perform multi-seed LoRA replication.
-15. Add controlled OOD evaluation if it directly sharpens the grounding claim.
-16. Perform a fresh literature/novelty review before paper drafting.
-
----
-
-## 27. First milestone definition
-
-The first milestone is complete when we have, for the **7B base and 7B General LoRA on the exact same VSR test examples**:
-
-- normal predictions;
-- text-only predictions;
-- blank-image predictions;
-- shuffled-image predictions;
 - deterministic pairing metadata;
-- standard accuracy and invalid rate;
-- visual-ablation gaps;
-- LoRA gains by condition;
-- grounding-gap changes;
-- paired confidence intervals/tests;
+- standard accuracy/invalid rate;
+- correct→shuffle gaps;
+- `ΔG_shuffle` for zero→General and General→HardNeg;
 - per-family breakdown;
-- a short frozen result report.
+- paired confidence intervals/tests;
+- a frozen result report.
 
-No new fine-tuning is required to reach this milestone.
-
----
-
-## 28. Final study success criterion
-
-The project succeeds scientifically if it can answer, with paired and reproducible evidence:
-
-> **Did the spatial capability improvement produced by LoRA correspond to a stronger causal dependence on correct visual-spatial evidence, and if so, for which model sizes and relation families?**
-
-A null answer is still a valid result if the interventions are correct, the comparisons are paired, and the analysis is rigorous.
+No new fine-tuning is required for this milestone.
 
 ---
 
-## 29. Locked working title candidates
+## 28. Second milestone
 
-Primary working title:
+Add validated semantic counterfactuals and visual counterfactuals, then compute for the same transitions:
 
-> **What Does Spatial Fine-Tuning Actually Teach Vision-Language Models? Disentangling Benchmark Gains from Visual-Spatial Grounding**
+```text
+ΔA
+ΔC
+ΔG
+```
+
+The study becomes scientifically decisive when we can say whether those three quantities co-move or dissociate.
+
+---
+
+## 29. Success criteria
+
+The project succeeds even under a null result if the protocol is correct and paired.
+
+Scientifically useful outcomes include:
+
+- accuracy rises while grounding does not;
+- accuracy and grounding both rise;
+- consistency rises while grounding does not;
+- consistency rises and grounding also rises despite unchanged accuracy;
+- strongly relation-dependent changes;
+- model-size differences in how adaptation is absorbed.
+
+Do not define success as obtaining a preferred direction.
+
+---
+
+## 30. Working titles
+
+Primary:
+
+> **What Does Spatial Fine-Tuning Actually Teach? Separating Accuracy, Consistency, and Visual Evidence Sensitivity in Vision-Language Models**
 
 Alternatives:
 
-- **Better at the Benchmark, Better at Seeing? Auditing Visual Grounding After Spatial Fine-Tuning**
-- **Do Spatial LoRA Gains Reflect Visual Grounding? A Paired Behavioral Audit of Vision-Language Models**
-- **From Spatial Benchmark Gains to Visual Grounding: What Changes After LoRA?**
+- **Better, More Consistent, or More Grounded? Auditing Spatial Fine-Tuning in Vision-Language Models**
+- **Seeing or Just Agreeing? Causal Tests of What Spatial Adaptation Changes in VLMs**
+- **Do Spatial Fine-Tuning Gains Reflect Visual Grounding? A Paired Adaptation Audit**
 
-Do not lock the final title until results are known.
+Do not use a result-assuming title such as “Consistent but Not Grounded” before the data support it.
 
 ---
 
-## 30. Current project state at branch creation
+## 31. Current branch state and next action
 
-At the moment this branch is created:
+At this plan revision:
 
-- the prior orientation research is treated as frozen/standalone;
-- both 2B and 7B standard base results exist;
-- both 2B and 7B General-LoRA checkpoints/results exist;
-- the expensive training prerequisite for the first experiment is already complete;
-- Tier-A grounding conditions have not yet been executed as a systematic paired base-vs-LoRA audit;
-- Tier-B transformations require careful implementation/validation;
-- multi-seed replication is deferred until the primary effect is established;
-- the next scientific bottleneck is **evaluation design**, not model training.
+- prior orientation research remains frozen/standalone;
+- existing 2B/7B base and General checkpoints are available;
+- existing 7B HardNeg checkpoint is available;
+- existing logical-consistency results motivate the diagnostic comparison;
+- systematic Tier-A grounding/evidence-dependence results have not yet been run;
+- no new training is needed for the first milestone;
+- the next bottleneck is **protocol-compliant evaluation implementation**.
 
-This document is the working source of truth for the new research branch unless a later committed protocol explicitly supersedes a section.
+**Next action:** implement/freeze the Tier-A protocol exactly as specified by `research/GROUNDING_PROTOCOL_FREEZE.md` and `configs/grounding_protocol.yaml`, then run 7B zero/General/HardNeg engineering smokes before the full paired audit.
