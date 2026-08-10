@@ -29,6 +29,14 @@ Condition & Full (137) & $-$Questionable (132) & Clear (124) & Strict (107) \\
 \end{tabular}
 \end{table*}
 
+\subsection{Representation-Probe Detail}
+\begin{figure*}[h]
+    \centering
+    \includegraphics[width=0.78\textwidth]{../results/figures/fig3_probes.png}
+    \caption{Object-grounded representation-probe results for facing/facing-away, parallel/perpendicular, and four-way orientation classification. This diagnostic figure is kept in the appendix because probe details support the mechanism discussion but are not necessary to establish the primary benchmark result.}
+    \label{fig:probes-appendix}
+\end{figure*}
+
 \subsection{SITE Protocol Notes}
 The SITE image evaluation uses the frozen configuration hash \texttt{28f4cc09887477af}. The protocol uses Qwen2-VL-7B-Instruct, the benchmark's native multiple-choice prompt and parser, greedy decoding, and a 16-token generation ceiling. The 16-token ceiling was validated against the first 125 examples after an earlier 128-token ceiling and did not change parsed answers. The image-only external validation comprises 1,368 single-image and 1,223 multi-image examples.
 
