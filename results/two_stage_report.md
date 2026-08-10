@@ -51,9 +51,11 @@ Paired McNemar vs control (all p-values exact binomial):
 | B linear | **0.0037** | 44 | 20 |
 | B mlp | **0.0004** | 47 | 18 |
 
-The 4-way relation classifier itself is at chance everywhere
-(CV 44–46% vs 50% chance; majority 49.9%). Adding the visual region
-embeddings does not help (B ≈ A; if anything worse).
+The 4-way relation classifier is weak relative to the empirical majority baseline:
+CV accuracy is 44–46% versus a 49.9% majority-class baseline. Uniform random
+chance for four balanced classes would be 25%, so these results should not be
+called “at chance.” Adding the visual region embeddings does not help
+(B ≈ A; if anything worse).
 
 ## Interpretation
 
@@ -67,10 +69,11 @@ Mechanistic reading:
 
 1. **2D box geometry cannot express object-intrinsic direction.** "Facing"
    is a property of the *subject's* front/back orientation; the relative
-   geometry of two boxes is silent about it. The classifier collapses to
-   near-chance on 4-way relation (44–46%), and parallel-to (the one
-   relation that IS expressible via axis alignment) still only reaches 25%
-   with geometry-only — geometry is that weak here.
+   geometry of two boxes is silent about it. The classifier remains near or
+   below the 49.9% majority baseline on 4-way relation classification
+   (44–46% CV), and parallel-to (the one relation that IS expressible via axis
+   alignment) still only reaches 25% with geometry-only — geometry is that
+   weak here.
 2. **The region visual features do not rescue it** (B ≈ A), consistent with
    the object-grounded probe: object-intrinsic orientation is not cleanly
    decodable from frozen region features either.
