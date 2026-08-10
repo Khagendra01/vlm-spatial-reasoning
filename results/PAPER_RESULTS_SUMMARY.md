@@ -10,18 +10,21 @@ All numbers below are reproduced from committed prediction CSVs via
 ## Three defensible claims
 
 ### Claim 1 — Orientation is unusually stubborn.
-It resists scale (2B→7B), structured prompting, LM-side LoRA (general,
-targeted), hard negatives, vision/projector LoRA, representation probing
-(linear, nonlinear, object-grounded), and object-centric two-stage
-decomposition. Across all interventions, VSR test orientation accuracy
-stays in a 62–66% band (majority 63.7%).
+It resists scale (2B→7B), LM-side LoRA (general, targeted), hard negatives,
+vision/projector LoRA, representation probing (linear, nonlinear,
+object-grounded), and object-centric two-stage decomposition. Except for
+structured prompting, which significantly degrades performance, all
+trained/scaled conditions remain within a narrow 62–66% orientation band
+(majority 63.7%).
 
 ### Claim 2 — Accuracy and relational consistency are separable.
-Hard-negative training raised facing↔facing-away self-consistency
-substantially (66.0% → 77.7%, p<0.0001 vs zero-shot) without materially
-changing accuracy (68.9% = 68.9%). The model's failures are not only
-"does not know the relation" — zero-shot contradicts itself on 63% of
-complementary facing pairs.
+LM-side LoRA significantly improves relational consistency over zero-shot
+(p<0.0001 across strict complementary families). Hard-negative training
+further increases facing↔facing-away consistency from 66.0% to 77.7% while
+facing accuracy remains unchanged at 68.9%, although this additional
+consistency gain is not significant in the pooled strict-family McNemar
+comparison. The model's failures are not only "does not know the relation"
+— zero-shot contradicts itself on 63% of complementary facing pairs.
 
 ### Claim 3 — VSR adaptation is benchmark-specific.
 On SITE (2,591 image examples), the VSR-trained 7B General LoRA is
