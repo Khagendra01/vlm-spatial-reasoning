@@ -79,6 +79,36 @@ CHECKPOINTS = {
     },
 }
 
+# --- R1 2B replication checkpoint matrix (frozen Paper-2 contract) ---
+# Same keys as CHECKPOINTS so all analyzers/comparisons (P1 zero->general)
+# work unchanged; distinct labels/model_id recorded in every row + metadata.
+SMOLVLM2_BASE_MODEL_ID = "HuggingFaceTB/SmolVLM2-2.2B-Instruct"
+CHECKPOINTS_2B = {
+    "zero_shot": {
+        "model_id": SMOLVLM2_BASE_MODEL_ID,
+        "adapter_path": None,
+        "role": "primary_baseline",
+        "label": "2B_zero_shot",
+    },
+    "general_lora": {
+        "model_id": SMOLVLM2_BASE_MODEL_ID,
+        "adapter_path": REPO_ROOT / "checkpoints" / "general_lora" / "final",
+        "role": "primary_tuned",
+        "label": "2B_general_lora",
+    },
+}
+
+MODEL_FAMILIES = {
+    "qwen2vl": {"checkpoints": CHECKPOINTS, "classifier": "Qwen2VLClassifier"},
+    "smolvlm2": {"checkpoints": CHECKPOINTS_2B, "classifier": "SmolVLM2Classifier"},
+}
+
+
+def family_registry(family: str) -> dict:
+    if family not in MODEL_FAMILIES:
+        raise ValueError(f"unknown model family {family!r}")
+    return MODEL_FAMILIES[family]["checkpoints"]
+
 # --- Tier-A evidence conditions (confirmatory order from the freeze) ---
 CONDITIONS = ["normal", "shuffle", "blank", "text_only"]
 

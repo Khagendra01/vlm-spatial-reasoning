@@ -40,6 +40,12 @@ from src.grounding.hashing import (adapter_hashes, env_snapshot, git_branch,
 from src.grounding.images import ensure_cached, load_cached_image, preprocess_for_vlm
 from src.grounding.predictions import PREDICTION_FIELDS, write_predictions
 from src.grounding.qwen2vl import Qwen2VLClassifier
+from src.grounding.smolvlm2 import SmolVLM2Classifier
+
+MODEL_FAMILY_CLASSIFIERS = {
+    "qwen2vl": Qwen2VLClassifier,
+    "smolvlm2": SmolVLM2Classifier,
+}
 
 
 def parse_args():
@@ -47,6 +53,8 @@ def parse_args():
     p.add_argument("--tag", default="tierc_run")
     p.add_argument("--checkpoints", default=",".join(config.CHECKPOINTS))
     p.add_argument("--transforms", default=",".join(visual.TRANSFORMS))
+    p.add_argument("--model-family", choices=list(config.MODEL_FAMILIES),
+                   default="qwen2vl")
     p.add_argument("--batch-size", type=int, default=config.DEFAULT_BATCH_SIZE)
     p.add_argument("--attn", choices=["eager", "sdpa"], default="eager")
     p.add_argument("--limit", type=int, default=None)
@@ -172,8 +180,9 @@ def main():
 
     checkpoints = [c.strip() for c in args.checkpoints.split(",") if c.strip()]
     transforms = [t.strip() for t in args.transforms.split(",") if t.strip()]
+    registry = config.family_registry(args.model_family)
     for c in checkpoints:
-        if c not in config.CHECKPOINTS:
+        if c not in registry:
             raise SystemExit(f"unknown checkpoint {c!r}")
     for t in transforms:
         if t not in visual.TRANSFORMS:
@@ -202,13 +211,13 @@ def main():
     print(f"image cache verified: {len(needed)} unique images present")
 
     for ckpt_name in checkpoints:
-        ckpt = config.CHECKPOINTS[ckpt_name]
+        ckpt = registry[ckpt_name]
         print(f"\n## checkpoint: {ckpt_name} ({ckpt['label']}) "
               f"adapter={ckpt['adapter_path']}")
         private = record_private_hashes(f"{run_id}_{ckpt_name}", ckpt)
         adapter_hash = json.dumps(private["adapter_hashes"], sort_keys=True) \
             if private["adapter_hashes"] else ""
-        classifier = Qwen2VLClassifier(
+        classifier = MODEL_FAMILY_CLASSIFIERS[args.model_family](
             model_id=ckpt["model_id"],
             adapter_path=ckpt["adapter_path"],
             attn_implementation=args.attn,
@@ -248,6 +257,8 @@ def main():
         },
         "checkpoints": args.checkpoints,
         "transforms": args.transforms,
+        "model_family": args.model_family,
+        "model_ids": {c: registry[c]["model_id"] for c in checkpoints},
         "limit": args.limit,
         "batch_size": args.batch_size,
         "attn": args.attn,

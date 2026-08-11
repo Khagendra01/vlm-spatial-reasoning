@@ -173,6 +173,20 @@ Tier C additionally reports response rates vs the NORMAL PREDICTION (not vs trut
 
 ---
 
+## 2026-08-11 — R1 (2B replication) execution: model family = SmolVLM2 + 2B General adapter
+
+**Status:** pre-result / confirmatory replication (execution start)
+
+**Decision:** begin R1 under the exact frozen Paper-2 contract. R1 = `HuggingFaceTB/SmolVLM2-2.2B-Instruct` zero-shot → existing 2B General LoRA at `checkpoints/general_lora/final` (verified on-box, base model `HuggingFaceTB/SmolVLM2-2.2B-Instruct`, PEFT LoRA r=8). Run the same predeclared axes without redesigning them after seeing 7B: Tier A evidence dependence (normal/shuffle/blank/text_only) → Tier B semantic consistency (relcomp/sorev/continv) → facing-antonym diagnostic (facingcomp) → Tier C visual reflection (hflip_flip/hflip_invariant). Compare qualitative patterns, not p-value by p-value.
+
+**Implementation (frozen by this entry):** new `CHECKPOINTS_2B` registry reuses the checkpoint keys `zero_shot`/`general_lora` (labels `2B_zero_shot`/`2B_general_lora`) so every analyzer/comparison (P1 zero→general) works unchanged; `--model-family {qwen2vl,smolvlm2}` added to run_tier_a/b/c.py defaulting to `qwen2vl` (master 7B path bit-identical). New `SmolVLM2Classifier` (src/grounding/smolvlm2.py) mirrors the 7B wrapper: bf16 + eager attention, prompt/generation/parse identical, preprocessing 392px cap applied before SmolVLM's own processor rounding (identical across checkpoints). SmolVLM2 load mirrors the reference `src/models/smolvlm.py` (apply_chat_template with padding=True).
+
+**Affected results already seen?** No 2B results seen before this fallback was reviewed; only engineering smoke (tag r1_2b_smoke10, --limit 10) validated the loader.  
+**Expected impact:** R1 qualitative comparison vs 7B: does the adaptation decomposition (§3) generalize to the smaller backbone.  
+**Files/commits:** config.py (CHECKPOINTS_2B/MODEL_FAMILIES/family_registry), smolvlm2.py, run_tier_a/b/c.py (`--model-family`); DECISION_LOG.md.
+
+---
+
 ## Template for future entries
 
 ### YYYY-MM-DD — Decision title
