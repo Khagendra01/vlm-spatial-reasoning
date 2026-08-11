@@ -2,17 +2,20 @@
 
 - **Protocol:** v0.1 (`configs/grounding_protocol.yaml`, hash 018b5dd4ce4b4958...)
 - **Run tag:** tierb_smoke10  |  **Status label:** engineering
-- **Git commit:** 1fa62a03c28b1a502bc7b7784cd811736e10711a  |  branch research/spatial-grounding-audit
-- **Generated:** 2026-08-11T02:18:22+00:00
+- **Git commit:** 234579b0a7a86cd16215e5ab94e4da575f0c4b46  |  branch research/spatial-grounding-audit
+- **Generated:** 2026-08-11T02:30:02+00:00
 - **Normal-condition baseline:** tag full
 
-> Interpretation guardrails (protocol section 16): a model can obey a semantic law while being wrong on the scene. C (obeying the expected linked-answer law) is therefore ALWAYS reported together with both-correct (obey AND normal-correct). Consistency alone is not asserted as proof of grounding, and no internal mechanism is inferred.
+> Interpretation guardrails (protocol section 16): a model can obey a semantic law while being wrong on the scene. C_pair (linked-answer consistency) is therefore ALWAYS reported together with both-correct (obey AND normal-correct), and the transformed-accuracy A_transform is reported separately. Consistency alone is not asserted as proof of grounding, and no internal mechanism is inferred.
 
 ## Definitions
 
-- `C_t(m)` = P(model prediction equals the expected transformed label under transform `t` for checkpoint `m`); invalid outputs count as non-obeying, and the invalid rate is reported separately.
+- `C_pair(m,t)` = P(pair consistency): the model's TWO answers on the same example obey the linked-answer law — flip-law transforms (relcomp, facingcomp): P(transformed answer != normal answer); stability/paraphrase transforms (sorev, continv): P(transformed answer == normal answer). Invalid outputs count as non-consistent, and the invalid rate is reported separately.
+- `A_transform(m,t)` = P(transformed prediction equals the expected transformed label) (transformed-answer accuracy, reported for transparency and diagnostics; previously labeled `C`).
 - `both_correct(m,t)` = P(normal prediction correct AND transformed prediction obeys the law).
-- `DeltaC(u->v) = C_t(v) - C_t(u)` with paired bootstrap CI (n=10000, seed 20260810) and exact McNemar on the obey indicator.
+- `DeltaC_pair(u->v) = C_pair(v) - C_pair(u)` with paired bootstrap CI (n=10000, seed 20260810) and exact McNemar on the pair-consistency indicator. (The transformed-accuracy analogue `DeltaC` is kept in the metrics JSON under `transitions_transformed_accuracy`.)
+
+> Metric note (decision log 2026-08-11): pair consistency compares the model's two answers on the same example. It is NOT the same as transformed-answer accuracy: e.g. a model answering False on both the original and the flipped statement scores A_transform=1 but C_pair=0 for flip laws.
 
 ## Transform definitions (frozen pre-result)
 
@@ -26,91 +29,13 @@ Validity table: `results/grounding/protocol/semantic_transform_validity.csv` (al
 
 ## Transform: relcomp (law: flip_law, n_eligible=10)
 
-| checkpoint | C | both_correct | invalid% |
-|---|---:|---:|---:|
-| zero_shot | 0.6000 | 0.6000 | 0.0000 |
-| general_lora | 0.7000 | 0.6000 | 0.0000 |
-| hardneg_lora | 0.7000 | 0.6000 | 0.0000 |
+| checkpoint | C_pair | A_transform | both_correct | invalid% |
+|---|---:|---:|---:|---:|
+| zero_shot | 0.8000 | 0.6000 | 0.6000 | 0.0000 |
+| general_lora | 0.7000 | 0.7000 | 0.6000 | 0.0000 |
+| hardneg_lora | 0.7000 | 0.7000 | 0.6000 | 0.0000 |
 
-| transition | deltaC | 95% CI | McNemar p |
-|---|---:|---:|---:|
-| P1 (zero_shot->general_lora) | 0.1000 | [0.0000, 0.3000] | 1.0 |
-| D1 (general_lora->hardneg_lora) | 0.0000 | [0.0000, 0.0000] | 1.0 |
-
-### Relation-family breakdown (descriptive; relation-level inference is secondary)
-
-**zero_shot**
-
-| family | n | C | invalid% |
-|---|---:|---:|---:|
-| depth | 5 | 0.6000 | 0.0000 |
-| horizontal | 2 | 1.0000 | 0.0000 |
-| vertical | 3 | 0.3333 | 0.0000 |
-
-**general_lora**
-
-| family | n | C | invalid% |
-|---|---:|---:|---:|
-| depth | 5 | 0.6000 | 0.0000 |
-| horizontal | 2 | 1.0000 | 0.0000 |
-| vertical | 3 | 0.6667 | 0.0000 |
-
-**hardneg_lora**
-
-| family | n | C | invalid% |
-|---|---:|---:|---:|
-| depth | 5 | 0.6000 | 0.0000 |
-| horizontal | 2 | 1.0000 | 0.0000 |
-| vertical | 3 | 0.6667 | 0.0000 |
-
-## Transform: sorev (law: stability_law, n_eligible=10)
-
-| checkpoint | C | both_correct | invalid% |
-|---|---:|---:|---:|
-| zero_shot | 0.9000 | 0.8000 | 0.0000 |
-| general_lora | 0.9000 | 0.9000 | 0.0000 |
-| hardneg_lora | 0.9000 | 0.9000 | 0.0000 |
-
-| transition | deltaC | 95% CI | McNemar p |
-|---|---:|---:|---:|
-| P1 (zero_shot->general_lora) | 0.0000 | [-0.3000, 0.3000] | 1.0 |
-| D1 (general_lora->hardneg_lora) | 0.0000 | [0.0000, 0.0000] | 1.0 |
-
-### Relation-family breakdown (descriptive; relation-level inference is secondary)
-
-**zero_shot**
-
-| family | n | C | invalid% |
-|---|---:|---:|---:|
-| horizontal | 4 | 1.0000 | 0.0000 |
-| proximity | 1 | 1.0000 | 0.0000 |
-| topology_contact | 5 | 0.8000 | 0.0000 |
-
-**general_lora**
-
-| family | n | C | invalid% |
-|---|---:|---:|---:|
-| horizontal | 4 | 1.0000 | 0.0000 |
-| proximity | 1 | 1.0000 | 0.0000 |
-| topology_contact | 5 | 0.8000 | 0.0000 |
-
-**hardneg_lora**
-
-| family | n | C | invalid% |
-|---|---:|---:|---:|
-| horizontal | 4 | 1.0000 | 0.0000 |
-| proximity | 1 | 1.0000 | 0.0000 |
-| topology_contact | 5 | 0.8000 | 0.0000 |
-
-## Transform: continv (law: paraphrase_law, n_eligible=10)
-
-| checkpoint | C | both_correct | invalid% |
-|---|---:|---:|---:|
-| zero_shot | 0.9000 | 0.7000 | 0.0000 |
-| general_lora | 0.8000 | 0.8000 | 0.0000 |
-| hardneg_lora | 0.8000 | 0.8000 | 0.0000 |
-
-| transition | deltaC | 95% CI | McNemar p |
+| transition | deltaC_pair | 95% CI | McNemar p |
 |---|---:|---:|---:|
 | P1 (zero_shot->general_lora) | -0.1000 | [-0.3000, 0.0000] | 1.0 |
 | D1 (general_lora->hardneg_lora) | 0.0000 | [0.0000, 0.0000] | 1.0 |
@@ -119,19 +44,97 @@ Validity table: `results/grounding/protocol/semantic_transform_validity.csv` (al
 
 **zero_shot**
 
-| family | n | C | invalid% |
+| family | n | A_transform | invalid% |
+|---|---:|---:|---:|
+| depth | 5 | 0.6000 | 0.0000 |
+| horizontal | 2 | 1.0000 | 0.0000 |
+| vertical | 3 | 0.3333 | 0.0000 |
+
+**general_lora**
+
+| family | n | A_transform | invalid% |
+|---|---:|---:|---:|
+| depth | 5 | 0.6000 | 0.0000 |
+| horizontal | 2 | 1.0000 | 0.0000 |
+| vertical | 3 | 0.6667 | 0.0000 |
+
+**hardneg_lora**
+
+| family | n | A_transform | invalid% |
+|---|---:|---:|---:|
+| depth | 5 | 0.6000 | 0.0000 |
+| horizontal | 2 | 1.0000 | 0.0000 |
+| vertical | 3 | 0.6667 | 0.0000 |
+
+## Transform: sorev (law: stability_law, n_eligible=10)
+
+| checkpoint | C_pair | A_transform | both_correct | invalid% |
+|---|---:|---:|---:|---:|
+| zero_shot | 0.9000 | 0.9000 | 0.8000 | 0.0000 |
+| general_lora | 0.9000 | 0.9000 | 0.9000 | 0.0000 |
+| hardneg_lora | 0.9000 | 0.9000 | 0.9000 | 0.0000 |
+
+| transition | deltaC_pair | 95% CI | McNemar p |
+|---|---:|---:|---:|
+| P1 (zero_shot->general_lora) | 0.0000 | [-0.3000, 0.3000] | 1.0 |
+| D1 (general_lora->hardneg_lora) | 0.0000 | [0.0000, 0.0000] | 1.0 |
+
+### Relation-family breakdown (descriptive; relation-level inference is secondary)
+
+**zero_shot**
+
+| family | n | A_transform | invalid% |
+|---|---:|---:|---:|
+| horizontal | 4 | 1.0000 | 0.0000 |
+| proximity | 1 | 1.0000 | 0.0000 |
+| topology_contact | 5 | 0.8000 | 0.0000 |
+
+**general_lora**
+
+| family | n | A_transform | invalid% |
+|---|---:|---:|---:|
+| horizontal | 4 | 1.0000 | 0.0000 |
+| proximity | 1 | 1.0000 | 0.0000 |
+| topology_contact | 5 | 0.8000 | 0.0000 |
+
+**hardneg_lora**
+
+| family | n | A_transform | invalid% |
+|---|---:|---:|---:|
+| horizontal | 4 | 1.0000 | 0.0000 |
+| proximity | 1 | 1.0000 | 0.0000 |
+| topology_contact | 5 | 0.8000 | 0.0000 |
+
+## Transform: continv (law: paraphrase_law, n_eligible=10)
+
+| checkpoint | C_pair | A_transform | both_correct | invalid% |
+|---|---:|---:|---:|---:|
+| zero_shot | 0.8000 | 0.9000 | 0.7000 | 0.0000 |
+| general_lora | 1.0000 | 0.8000 | 0.8000 | 0.0000 |
+| hardneg_lora | 1.0000 | 0.8000 | 0.8000 | 0.0000 |
+
+| transition | deltaC_pair | 95% CI | McNemar p |
+|---|---:|---:|---:|
+| P1 (zero_shot->general_lora) | 0.2000 | [0.0000, 0.5000] | 0.5 |
+| D1 (general_lora->hardneg_lora) | 0.0000 | [0.0000, 0.0000] | 1.0 |
+
+### Relation-family breakdown (descriptive; relation-level inference is secondary)
+
+**zero_shot**
+
+| family | n | A_transform | invalid% |
 |---|---:|---:|---:|
 | containment | 10 | 0.9000 | 0.0000 |
 
 **general_lora**
 
-| family | n | C | invalid% |
+| family | n | A_transform | invalid% |
 |---|---:|---:|---:|
 | containment | 10 | 0.8000 | 0.0000 |
 
 **hardneg_lora**
 
-| family | n | C | invalid% |
+| family | n | A_transform | invalid% |
 |---|---:|---:|---:|
 | containment | 10 | 0.8000 | 0.0000 |
 

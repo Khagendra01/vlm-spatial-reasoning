@@ -175,7 +175,7 @@ class TestMetricToys:
         s = transform_summary(rows_t, rows_n)
         assert s["A_transform"] == 1.0   # transformed accuracy, old C
         assert s["C_pair"] == 0.0        # no answer change -> not consistent
-        assert [pair_consistency_indicator(rows_t, rows_n)] == [[False]]
+        assert pair_consistency_indicator(rows_t, rows_n) == [False]
     def test_pair_consistency_flip_changed_answer(self):
         rows_t = [self._law_row("a", True, True, "flip_law")]
         rows_n = [self._row("a", False, None, False)]

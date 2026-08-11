@@ -2,20 +2,21 @@
 
 - **Protocol:** v0.1 (`configs/grounding_protocol.yaml`, hash 018b5dd4ce4b4958...)
 - **Run tag:** tierc_pilot200  |  **Status label:** engineering
-- **Git commit:** 1fa62a03c28b1a502bc7b7784cd811736e10711a  |  branch research/spatial-grounding-audit
-- **Generated:** 2026-08-11T02:18:32+00:00
+- **Git commit:** 234579b0a7a86cd16215e5ab94e4da575f0c4b46  |  branch research/spatial-grounding-audit
+- **Generated:** 2026-08-11T02:31:08+00:00
 - **Normal-condition baseline:** tag full
 
-> Interpretation guardrails (protocol section 8/16): reflected-image behavior is about causal sensitivity to the visual layout. Flip rates and expected-invariant stability rates are reported SEPARATELY and never merged. A model can flip coherently and still be wrong on the scene, so C is ALWAYS reported together with both-correct. No internal mechanism is inferred, and consistency alone is not proof of grounding.
+> Interpretation guardrails (protocol section 8/16): reflected-image behavior is about causal sensitivity to the visual layout. Flip rates and expected-invariant stability rates are reported SEPARATELY and never merged. A model can flip coherently and still be wrong on the scene, so the response rates are ALWAYS reported together with both-correct. No internal mechanism is inferred, and consistency alone is not proof of grounding.
 
 ## Definitions
 
-- `C(m)` = expected-behavior rate: P(prediction equals the expected transformed label) under the image transform; invalid outputs count as non-obeying, and the invalid rate is reported separately.
-- For `hflip_flip` (mirrored left/right relations): C = expected flip rate, `wrong_direction` = P(pred == original label), `change_rate` = any response change, `both_correct` = normal-correct AND obeys the flip.
-- For `hflip_invariant` (vertical/depth controls): C = stability rate, `change_rate` = spurious response change, `both_correct` = normal-correct AND stable.
-- `DeltaC(u->v) = C(v) - C(u)` with paired bootstrap CI (n=10000, seed 20260810) and exact McNemar on the obey indicator.
+- `C_pair(m)` = P(pair consistency): the model's TWO answers on the same example obey the linked-answer law — `hflip_flip`: P(mirrored answer != normal answer) (response flip); `hflip_invariant`: P(mirrored answer == normal answer) (response stability). Invalid outputs count as non-consistent, and the invalid rate is reported separately.
+- `A_transform(m)` = P(transformed prediction equals the expected transformed label) (transformed-answer accuracy; for hflip_flip the expected label is the flipped label, for hflip_invariant the original label).
+- `response_flip` / `response_stability` (paper-facing labels of C_pair per transform): literal answer-change / answer-stability rates comparing the model's two outputs, NOT predictions vs ground truth (decision log 2026-08-11).
+- `both_correct(m)` = P(normal-correct AND transformed answer obeys the law).
+- `DeltaV(u->v) = C_pair(v) - C_pair(u)` with paired bootstrap CI (n=10000, seed 20260810) and exact McNemar on the pair-consistency indicator. (The transformed-accuracy analogue is kept in the metrics JSON under `transitions_transformed_accuracy`.)
 
-> Naming note: the paper-facing quantity for this visual axis is `DeltaV` (reported below as deltaV). The metrics JSON retains the generic key `delta_C` (same value, no numbers changed); `DeltaC` is reserved for the semantic axis (Tier B).
+> Naming note: `DeltaV` is the paper-facing quantity for this visual axis (reported below as deltaV). The metrics JSON retains the generic key `delta_C` (same value, no numbers changed); `DeltaC` is reserved for the semantic axis (Tier B).
 
 ## Transform definitions (frozen pre-result)
 
@@ -28,69 +29,73 @@ Validity table: `results/grounding/protocol/visual_transform_validity.csv` (all 
 
 ## Transform: hflip_flip (law: flip_expected, n_eligible=200)
 
-| checkpoint | C | both_correct | wrong_dir | change | invalid% |
-|---|---:|---:|---:|---:|---:|
-| zero_shot | 0.6200 | 0.5200 | 0.3800 | 0.6200 | 0.0000 |
-| general_lora | 0.6500 | 0.5850 | 0.3500 | 0.6500 | 0.0000 |
-| hardneg_lora | 0.6600 | 0.6100 | 0.3400 | 0.6600 | 0.0000 |
+| checkpoint | C_pair | A_transform | both_correct | invalid% |
+|---|---:|---:|---:|---:|
+| zero_shot | 0.6150 | 0.6200 | 0.5200 | 0.0000 |
+| general_lora | 0.6900 | 0.6500 | 0.5850 | 0.0000 |
+| hardneg_lora | 0.7000 | 0.6600 | 0.6100 | 0.0000 |
+
+`response_flip` (per checkpoint, = C_pair by definition): zero_shot 0.6150, general_lora 0.6900, hardneg_lora 0.7000
 
 | transition | deltaV | 95% CI | McNemar p |
 |---|---:|---:|---:|
-| P1 (zero_shot->general_lora) | 0.0300 | [-0.0050, 0.0650] | 0.179565 |
-| D1 (general_lora->hardneg_lora) | 0.0100 | [-0.0150, 0.0400] | 0.726562 |
+| P1 (zero_shot->general_lora) | 0.0750 | [0.0200, 0.1350] | 0.016674 |
+| D1 (general_lora->hardneg_lora) | 0.0100 | [-0.0250, 0.0450] | 0.790527 |
 
 ### Relation-family breakdown (descriptive; relation-level inference is secondary)
 
 **zero_shot**
 
-| family | n | C | invalid% |
+| family | n | A_transform | invalid% |
 |---|---:|---:|---:|
 | horizontal | 200 | 0.6200 | 0.0000 |
 
 **general_lora**
 
-| family | n | C | invalid% |
+| family | n | A_transform | invalid% |
 |---|---:|---:|---:|
 | horizontal | 200 | 0.6500 | 0.0000 |
 
 **hardneg_lora**
 
-| family | n | C | invalid% |
+| family | n | A_transform | invalid% |
 |---|---:|---:|---:|
 | horizontal | 200 | 0.6600 | 0.0000 |
 
 ## Transform: hflip_invariant (law: expected_invariant, n_eligible=200)
 
-| checkpoint | C | both_correct | wrong_dir | change | invalid% |
-|---|---:|---:|---:|---:|---:|
-| zero_shot | 0.7250 | 0.6800 | 0.7250 | 0.2750 | 0.0000 |
-| general_lora | 0.8750 | 0.8200 | 0.8750 | 0.1250 | 0.0000 |
-| hardneg_lora | 0.8550 | 0.8250 | 0.8550 | 0.1450 | 0.0000 |
+| checkpoint | C_pair | A_transform | both_correct | invalid% |
+|---|---:|---:|---:|---:|
+| zero_shot | 0.8900 | 0.7250 | 0.6800 | 0.0000 |
+| general_lora | 0.9100 | 0.8750 | 0.8200 | 0.0000 |
+| hardneg_lora | 0.9300 | 0.8550 | 0.8250 | 0.0000 |
+
+`response_stability` (per checkpoint, = C_pair by definition): zero_shot 0.8900, general_lora 0.9100, hardneg_lora 0.9300
 
 | transition | deltaV | 95% CI | McNemar p |
 |---|---:|---:|---:|
-| P1 (zero_shot->general_lora) | 0.1500 | [0.0900, 0.2150] | 5e-06 |
-| D1 (general_lora->hardneg_lora) | -0.0200 | [-0.0600, 0.0200] | 0.454498 |
+| P1 (zero_shot->general_lora) | 0.0200 | [-0.0300, 0.0750] | 0.571588 |
+| D1 (general_lora->hardneg_lora) | 0.0200 | [-0.0200, 0.0600] | 0.480682 |
 
 ### Relation-family breakdown (descriptive; relation-level inference is secondary)
 
 **zero_shot**
 
-| family | n | C | invalid% |
+| family | n | A_transform | invalid% |
 |---|---:|---:|---:|
 | depth | 143 | 0.7133 | 0.0000 |
 | vertical | 57 | 0.7544 | 0.0000 |
 
 **general_lora**
 
-| family | n | C | invalid% |
+| family | n | A_transform | invalid% |
 |---|---:|---:|---:|
 | depth | 143 | 0.8601 | 0.0000 |
 | vertical | 57 | 0.9123 | 0.0000 |
 
 **hardneg_lora**
 
-| family | n | C | invalid% |
+| family | n | A_transform | invalid% |
 |---|---:|---:|---:|
 | depth | 143 | 0.8322 | 0.0000 |
 | vertical | 57 | 0.9123 | 0.0000 |

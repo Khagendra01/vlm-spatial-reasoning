@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-11T02:18:15+00:00",
+  "generated_at": "2026-08-11T02:30:09+00:00",
   "git_branch": "research/spatial-grounding-audit",
-  "git_commit": "1fa62a03c28b1a502bc7b7784cd811736e10711a",
+  "git_commit": "234579b0a7a86cd16215e5ab94e4da575f0c4b46",
   "normal_tag": "full",
   "status": "confirmatory",
   "tag": "tierb_full",
@@ -96,7 +96,9 @@
       },
       "summary_by_checkpoint": {
         "general_lora": {
+          "A_transform": 0.911243,
           "C": 0.911243,
+          "C_pair": 0.905325,
           "C_valid": 0.911243,
           "both_correct": 0.852071,
           "invalid": 0,
@@ -105,7 +107,9 @@
           "obey": 154
         },
         "hardneg_lora": {
+          "A_transform": 0.923077,
           "C": 0.923077,
+          "C_pair": 0.905325,
           "C_valid": 0.923077,
           "both_correct": 0.857988,
           "invalid": 0,
@@ -114,7 +118,9 @@
           "obey": 156
         },
         "zero_shot": {
+          "A_transform": 0.857988,
           "C": 0.857988,
+          "C_pair": 0.899408,
           "C_valid": 0.857988,
           "both_correct": 0.816568,
           "invalid": 0,
@@ -124,6 +130,59 @@
         }
       },
       "transitions": {
+        "D1": {
+          "C_u": 0.905325,
+          "C_v": 0.905325,
+          "delta_C": 0.0,
+          "delta_c_ci": {
+            "ci_lower": -0.029586,
+            "ci_upper": 0.029586,
+            "mean": 0.0,
+            "n": 169,
+            "n_iter": 10000,
+            "seed": 20260810
+          },
+          "from": "general_lora",
+          "mcnemar": {
+            "b": 3,
+            "c": 3,
+            "discordant_n": 6,
+            "exact_p": 1.0,
+            "mcnemar_odds_ratio": 1.0
+          },
+          "n": 169,
+          "to": "hardneg_lora"
+        },
+        "P1": {
+          "C_u": 0.899408,
+          "C_v": 0.905325,
+          "delta_C": 0.005917,
+          "delta_c_ci": {
+            "ci_lower": -0.04142,
+            "ci_upper": 0.053254,
+            "mean": 0.005917,
+            "n": 169,
+            "n_iter": 10000,
+            "seed": 20260810
+          },
+          "from": "zero_shot",
+          "mcnemar": {
+            "b": 9,
+            "c": 8,
+            "discordant_n": 17,
+            "exact_p": 1.0,
+            "mcnemar_odds_ratio": 1.125
+          },
+          "n": 169,
+          "to": "general_lora"
+        },
+        "checkpoints": [
+          "zero_shot",
+          "general_lora",
+          "hardneg_lora"
+        ]
+      },
+      "transitions_transformed_accuracy": {
         "D1": {
           "C_u": 0.911243,
           "C_v": 0.923077,
@@ -357,7 +416,9 @@
       },
       "summary_by_checkpoint": {
         "general_lora": {
+          "A_transform": 0.671171,
           "C": 0.671171,
+          "C_pair": 0.677177,
           "C_valid": 0.671171,
           "both_correct": 0.587087,
           "invalid": 0,
@@ -366,7 +427,9 @@
           "obey": 447
         },
         "hardneg_lora": {
+          "A_transform": 0.681682,
           "C": 0.681682,
+          "C_pair": 0.687688,
           "C_valid": 0.681682,
           "both_correct": 0.608108,
           "invalid": 0,
@@ -375,7 +438,9 @@
           "obey": 454
         },
         "zero_shot": {
+          "A_transform": 0.629129,
           "C": 0.629129,
+          "C_pair": 0.506006,
           "C_valid": 0.629129,
           "both_correct": 0.445946,
           "invalid": 0,
@@ -385,6 +450,59 @@
         }
       },
       "transitions": {
+        "D1": {
+          "C_u": 0.677177,
+          "C_v": 0.687688,
+          "delta_C": 0.010511,
+          "delta_c_ci": {
+            "ci_lower": -0.012012,
+            "ci_upper": 0.033033,
+            "mean": 0.010511,
+            "n": 666,
+            "n_iter": 10000,
+            "seed": 20260810
+          },
+          "from": "general_lora",
+          "mcnemar": {
+            "b": 34,
+            "c": 27,
+            "discordant_n": 61,
+            "exact_p": 0.442626,
+            "mcnemar_odds_ratio": 1.2592592592592593
+          },
+          "n": 666,
+          "to": "hardneg_lora"
+        },
+        "P1": {
+          "C_u": 0.506006,
+          "C_v": 0.677177,
+          "delta_C": 0.171171,
+          "delta_c_ci": {
+            "ci_lower": 0.135135,
+            "ci_upper": 0.207207,
+            "mean": 0.171171,
+            "n": 666,
+            "n_iter": 10000,
+            "seed": 20260810
+          },
+          "from": "zero_shot",
+          "mcnemar": {
+            "b": 140,
+            "c": 26,
+            "discordant_n": 166,
+            "exact_p": 0.0,
+            "mcnemar_odds_ratio": 5.384615384615385
+          },
+          "n": 666,
+          "to": "general_lora"
+        },
+        "checkpoints": [
+          "zero_shot",
+          "general_lora",
+          "hardneg_lora"
+        ]
+      },
+      "transitions_transformed_accuracy": {
         "D1": {
           "C_u": 0.671171,
           "C_v": 0.681682,
@@ -759,7 +877,9 @@
       },
       "summary_by_checkpoint": {
         "general_lora": {
+          "A_transform": 0.832504,
           "C": 0.832504,
+          "C_pair": 0.837479,
           "C_valid": 0.832504,
           "both_correct": 0.752902,
           "invalid": 0,
@@ -768,7 +888,9 @@
           "obey": 502
         },
         "hardneg_lora": {
+          "A_transform": 0.84743,
           "C": 0.84743,
+          "C_pair": 0.852405,
           "C_valid": 0.84743,
           "both_correct": 0.766169,
           "invalid": 0,
@@ -777,7 +899,9 @@
           "obey": 511
         },
         "zero_shot": {
+          "A_transform": 0.772803,
           "C": 0.772803,
+          "C_pair": 0.819237,
           "C_valid": 0.772803,
           "both_correct": 0.679934,
           "invalid": 0,
@@ -787,6 +911,59 @@
         }
       },
       "transitions": {
+        "D1": {
+          "C_u": 0.837479,
+          "C_v": 0.852405,
+          "delta_C": 0.014925,
+          "delta_c_ci": {
+            "ci_lower": -0.008292,
+            "ci_upper": 0.038143,
+            "mean": 0.014925,
+            "n": 603,
+            "n_iter": 10000,
+            "seed": 20260810
+          },
+          "from": "general_lora",
+          "mcnemar": {
+            "b": 31,
+            "c": 22,
+            "discordant_n": 53,
+            "exact_p": 0.271679,
+            "mcnemar_odds_ratio": 1.4090909090909092
+          },
+          "n": 603,
+          "to": "hardneg_lora"
+        },
+        "P1": {
+          "C_u": 0.819237,
+          "C_v": 0.837479,
+          "delta_C": 0.018242,
+          "delta_c_ci": {
+            "ci_lower": -0.018242,
+            "ci_upper": 0.053068,
+            "mean": 0.018242,
+            "n": 603,
+            "n_iter": 10000,
+            "seed": 20260810
+          },
+          "from": "zero_shot",
+          "mcnemar": {
+            "b": 65,
+            "c": 54,
+            "discordant_n": 119,
+            "exact_p": 0.359358,
+            "mcnemar_odds_ratio": 1.2037037037037037
+          },
+          "n": 603,
+          "to": "general_lora"
+        },
+        "checkpoints": [
+          "zero_shot",
+          "general_lora",
+          "hardneg_lora"
+        ]
+      },
+      "transitions_transformed_accuracy": {
         "D1": {
           "C_u": 0.832504,
           "C_v": 0.84743,

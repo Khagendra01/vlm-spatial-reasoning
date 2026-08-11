@@ -163,3 +163,49 @@ class TestDirectionMetrics:
         d = direction_summary(rows_t, rows_n)
         assert d["C"] == 0.0
         assert d["invalid_rate"] == 1.0
+
+    def test_response_flip_vs_normal_prediction(self):
+        rows_t = [
+            self._row("a", True, True, False, True),
+            self._row("b", False, True, False, True),
+            self._row("c", False, False, True, True),
+        ]
+        rows_n = [
+            self._row("a", False, None, None, True),
+            self._row("b", True, None, None, True),
+            self._row("c", False, None, None, True),
+        ]
+        d = direction_summary(rows_t, rows_n)
+        # a: True->False flips; b: False->True flips; c: False->False stays
+        assert d["response_flip"] == pytest.approx(2 / 3)
+        assert d["response_rate"] == pytest.approx(2 / 3)
+        assert d["response_stability"] is None
+
+    def test_response_stability_vs_normal_prediction(self):
+        def row(eid, pred, truth, expected, ncorr):
+            r = self._row(eid, pred, truth, expected, ncorr)
+            r["expected_prediction_behavior"] = "expected_invariant"
+            r["relation_family"] = "vertical"
+            return r
+        rows_t = [
+            row("a", True, True, True, True),
+            row("b", True, True, True, True),
+            row("c", False, True, True, True),
+        ]
+        rows_n = [
+            row("a", True, None, None, True),
+            row("b", False, None, None, True),
+            row("c", False, None, None, True),
+        ]
+        d = direction_summary(rows_t, rows_n)
+        # a: True->True stays; b: True->False changed; c: False->False stays
+        assert d["response_stability"] == pytest.approx(2 / 3)
+        assert d["response_rate"] == pytest.approx(2 / 3)
+        assert d["response_flip"] is None
+
+    def test_response_indicators_invalid_side(self):
+        rows_t = [self._row("a", True, True, False, True)]
+        rows_n = [self._row("a", None, None, None, True)]
+        d = direction_summary(rows_t, rows_n)
+        assert d["response_flip"] == 0.0  # normal-side invalid -> not a flip
+        assert d["response_rate"] == 0.0
