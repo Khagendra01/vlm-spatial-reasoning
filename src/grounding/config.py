@@ -114,8 +114,14 @@ SNAPSHOT_FILE = PROTOCOL_DIR / "run_config_snapshot.json"
 SEMANTIC_VALIDITY_FILE = PROTOCOL_DIR / "semantic_transform_validity.csv"
 SEMANTIC_ELIGIBLE_FILE = PROTOCOL_DIR / "semantic_eligible_ids.json"
 
+# --- Tier-C1 visual artifacts (validity table + eligible IDs, frozen pre-result) ---
+VISUAL_VALIDITY_FILE = PROTOCOL_DIR / "visual_transform_validity.csv"
+VISUAL_ELIGIBLE_FILE = PROTOCOL_DIR / "visual_eligible_ids.json"
+VISUAL_SPOT_DIR = PROTOCOL_DIR / "visual_spot"
+
 TRANSFORM_VERSION = "tier_a_v0.1"
 TRANSFORM_VERSION_TIER_B = "tier_b_v0.1"
+TRANSFORM_VERSION_TIER_C = "tier_c_v0.1"
 
 # --- comparisons (primary order, frozen) ---
 COMPARISONS = {

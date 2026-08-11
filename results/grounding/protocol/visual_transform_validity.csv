@@ -1,0 +1,123 @@
+transform,relation,status,expected_truth_behavior,reason,eligible_n,excluded_n
+hflip_flip,above,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,65
+hflip_flip,across,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,3
+hflip_flip,across from,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,12
+hflip_flip,adjacent to,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,12
+hflip_flip,against,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,6
+hflip_flip,ahead of,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,8
+hflip_flip,along,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,2
+hflip_flip,alongside,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,9
+hflip_flip,around,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,1
+hflip_flip,at,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,1
+hflip_flip,at the back of,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,22
+hflip_flip,at the edge of,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,37
+hflip_flip,at the left side of,strict_included,flip_expected,mirror flips the left/right axis,96,0
+hflip_flip,at the right side of,strict_included,flip_expected,mirror flips the left/right axis,80,0
+hflip_flip,at the side of,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,8
+hflip_flip,attached to,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,11
+hflip_flip,away from,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,35
+hflip_flip,behind,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,150
+hflip_flip,below,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,64
+hflip_flip,beneath,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,53
+hflip_flip,beside,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,37
+hflip_flip,beyond,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,5
+hflip_flip,by,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,15
+hflip_flip,close to,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,20
+hflip_flip,connected to,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,5
+hflip_flip,consists of,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,4
+hflip_flip,contains,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,66
+hflip_flip,detached from,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,4
+hflip_flip,down from,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,5
+hflip_flip,enclosed by,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,2
+hflip_flip,facing,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,64
+hflip_flip,facing away from,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,39
+hflip_flip,far away from,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,50
+hflip_flip,far from,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,25
+hflip_flip,has as a part,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,8
+hflip_flip,in,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,60
+hflip_flip,in front of,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,142
+hflip_flip,in the middle of,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,19
+hflip_flip,inside,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,39
+hflip_flip,into,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,9
+hflip_flip,left of,strict_included,flip_expected,mirror flips the left/right axis,40,0
+hflip_flip,near,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,23
+hflip_flip,next to,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,60
+hflip_flip,off,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,14
+hflip_flip,on,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,117
+hflip_flip,on top of,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,105
+hflip_flip,opposite to,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,9
+hflip_flip,out of,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,1
+hflip_flip,outside,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,9
+hflip_flip,over,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,25
+hflip_flip,parallel to,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,22
+hflip_flip,part of,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,14
+hflip_flip,perpendicular to,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,12
+hflip_flip,right of,strict_included,flip_expected,mirror flips the left/right axis,29,0
+hflip_flip,surrounding,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,20
+hflip_flip,through,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,1
+hflip_flip,touching,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,273
+hflip_flip,toward,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,6
+hflip_flip,under,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,114
+hflip_flip,with,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,4
+hflip_flip,within,not_in_scope,flip_expected,not a mirrored-axis left/right relation,0,4
+hflip_invariant,above,strict_included,expected_invariant,horizontal mirror preserves vertical/depth ordering,65,0
+hflip_invariant,across,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,3
+hflip_invariant,across from,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,12
+hflip_invariant,adjacent to,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,12
+hflip_invariant,against,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,6
+hflip_invariant,ahead of,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,8
+hflip_invariant,along,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,2
+hflip_invariant,alongside,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,9
+hflip_invariant,around,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,1
+hflip_invariant,at,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,1
+hflip_invariant,at the back of,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,22
+hflip_invariant,at the edge of,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,37
+hflip_invariant,at the left side of,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,96
+hflip_invariant,at the right side of,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,80
+hflip_invariant,at the side of,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,8
+hflip_invariant,attached to,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,11
+hflip_invariant,away from,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,35
+hflip_invariant,behind,strict_included,expected_invariant,horizontal mirror preserves vertical/depth ordering,150,0
+hflip_invariant,below,strict_included,expected_invariant,horizontal mirror preserves vertical/depth ordering,64,0
+hflip_invariant,beneath,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,53
+hflip_invariant,beside,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,37
+hflip_invariant,beyond,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,5
+hflip_invariant,by,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,15
+hflip_invariant,close to,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,20
+hflip_invariant,connected to,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,5
+hflip_invariant,consists of,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,4
+hflip_invariant,contains,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,66
+hflip_invariant,detached from,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,4
+hflip_invariant,down from,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,5
+hflip_invariant,enclosed by,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,2
+hflip_invariant,facing,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,64
+hflip_invariant,facing away from,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,39
+hflip_invariant,far away from,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,50
+hflip_invariant,far from,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,25
+hflip_invariant,has as a part,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,8
+hflip_invariant,in,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,60
+hflip_invariant,in front of,strict_included,expected_invariant,horizontal mirror preserves vertical/depth ordering,142,0
+hflip_invariant,in the middle of,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,19
+hflip_invariant,inside,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,39
+hflip_invariant,into,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,9
+hflip_invariant,left of,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,40
+hflip_invariant,near,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,23
+hflip_invariant,next to,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,60
+hflip_invariant,off,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,14
+hflip_invariant,on,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,117
+hflip_invariant,on top of,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,105
+hflip_invariant,opposite to,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,9
+hflip_invariant,out of,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,1
+hflip_invariant,outside,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,9
+hflip_invariant,over,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,25
+hflip_invariant,parallel to,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,22
+hflip_invariant,part of,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,14
+hflip_invariant,perpendicular to,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,12
+hflip_invariant,right of,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,29
+hflip_invariant,surrounding,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,20
+hflip_invariant,through,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,1
+hflip_invariant,touching,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,273
+hflip_invariant,toward,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,6
+hflip_invariant,under,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,114
+hflip_invariant,with,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,4
+hflip_invariant,within,not_in_scope,expected_invariant,not a guaranteed-invariant vertical/depth relation,0,4
