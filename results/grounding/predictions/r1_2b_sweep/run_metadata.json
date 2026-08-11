@@ -1,0 +1,59 @@
+{
+  "attn": "eager",
+  "batch_size": 8,
+  "checkpoints": "general_lora",
+  "conditions": "normal",
+  "env": {
+    "argv": [
+      "scripts/grounding/run_tier_a.py",
+      "--tag",
+      "r1_2b_sweep",
+      "--limit",
+      "32",
+      "--checkpoints",
+      "general_lora",
+      "--model-family",
+      "smolvlm2",
+      "--batch-size",
+      "8",
+      "--attn",
+      "eager",
+      "--conditions",
+      "normal"
+    ],
+    "cwd": "/home/ubuntu/vlm-spatial-reasoning",
+    "datasets": "5.0.1",
+    "device": "cuda",
+    "peft": "0.20.0",
+    "platform": "Linux-6.17.0-35-generic-x86_64-with-glibc2.35",
+    "python": "3.12.13",
+    "torch": "2.12.1+cu130",
+    "torch_cuda": "13.0",
+    "transformers": "5.14.1"
+  },
+  "generation": {
+    "do_sample": false,
+    "max_new_tokens": 5
+  },
+  "git_branch": "research/spatial-grounding-audit",
+  "git_commit": "c0c9afeef0a41cba6b196be4ea0e5a3b6aac1b5a",
+  "ids_file": "results/grounding/protocol/vsr_test_ids.json",
+  "ids_file_sha256": "dfbbc956915c17fd853d23855ea1e307bc12c78ab88ce971ccaa83079c6039dc",
+  "limit": 32,
+  "model_family": "smolvlm2",
+  "model_ids": {
+    "general_lora": "HuggingFaceTB/SmolVLM2-2.2B-Instruct"
+  },
+  "parser_hash": "eb4075c77285da02c52794154760fa969fb21ab3dcceb0820cb7d2ba27d27471",
+  "preprocessing": {
+    "cap_long_side_px": 392,
+    "note": "uniform across conditions (TECHNIQUES.md §4)"
+  },
+  "prompt_hash": "7f29cebb9d06eca06ad0d6c690e4d5a083b71a9c42008f88e92474e3ff0eb98a",
+  "protocol_hash": "018b5dd4ce4b4958b065ac41b8a59a9903083ab39801da80019fe62780e41824",
+  "quantize": "none",
+  "run_id": "tier_a_r1_2b_sweep",
+  "shuffle_mapping_sha256": "d0ca3efb893c3338c12823430a9c1007d019eb79f432c51851ff7c318e1eb171",
+  "started_at": "2026-08-11T03:15:20+00:00",
+  "tag": "r1_2b_sweep"
+}

@@ -38,6 +38,8 @@ def parse_args():
     p.add_argument("--normal-tag", default="full")
     p.add_argument("--checkpoints", default=",".join(config.CHECKPOINTS))
     p.add_argument("--transforms", default=",".join(TRANSFORMS))
+    p.add_argument("--out-tag", default=None,
+                   help="output prefix for metrics/report files (default: --tag)")
     return p.parse_args()
 
 
@@ -100,9 +102,10 @@ def main():
                   f"CI=[{ci['ci_lower']:.4f},{ci['ci_upper']:.4f}] "
                   f"mcnemar_p={tr['mcnemar']['exact_p']}")
 
-    metrics_path = out_dir / f"tier_b_metrics_{args.tag}.json"
+    out_tag = args.out_tag or args.tag
+    metrics_path = out_dir / f"tier_b_metrics_{out_tag}.json"
     write_json(metrics_path, all_metrics)
-    report_path = out_dir / f"tier_b_report_{args.tag}.md"
+    report_path = out_dir / f"tier_b_report_{out_tag}.md"
     write_report(report_path, all_metrics, args)
     print(f"metrics: {metrics_path}")
     print(f"report : {report_path}")

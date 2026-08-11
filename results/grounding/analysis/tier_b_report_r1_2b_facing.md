@@ -2,8 +2,8 @@
 
 - **Protocol:** v0.1 (`configs/grounding_protocol.yaml`, hash 018b5dd4ce4b4958...)
 - **Run tag:** r1_2b_full  |  **Status label:** confirmatory
-- **Git commit:** 5cc3a4f64f0d09e02b3a49ba7234826aa61d42c9  |  branch research/spatial-grounding-audit
-- **Generated:** 2026-08-11T05:27:33+00:00
+- **Git commit:** b2c4bcf56962788e103845b20c72a3d6dc80ec5f  |  branch research/spatial-grounding-audit
+- **Generated:** 2026-08-11T05:33:12+00:00
 - **Normal-condition baseline:** tag r1_2b_full
 
 > Interpretation guardrails (protocol section 16): a model can obey a semantic law while being wrong on the scene. C_pair (linked-answer consistency) is therefore ALWAYS reported together with both-correct (obey AND normal-correct), and the transformed-accuracy A_transform is reported separately. Consistency alone is not asserted as proof of grounding, and no internal mechanism is inferred.
