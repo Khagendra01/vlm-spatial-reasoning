@@ -39,6 +39,7 @@ def parse_args():
     p.add_argument("--status", default="engineering",
                    choices=["engineering", "confirmatory"],
                    help="engineering for smoke/pilot, confirmatory for full run")
+    p.add_argument("--checkpoints", default=",".join(config.CHECKPOINTS))
     return p.parse_args()
 
 
@@ -60,7 +61,7 @@ def collect(pred_dir: Path, checkpoints, conditions) -> dict:
 
 def run_analysis(args):
     pred_dir = config.PREDICTIONS_DIR / args.tag
-    checkpoints = list(config.CHECKPOINTS)
+    checkpoints = [c.strip() for c in args.checkpoints.split(",") if c.strip()]
     conditions = config.CONDITIONS
     data = collect(pred_dir, checkpoints, conditions)
 
