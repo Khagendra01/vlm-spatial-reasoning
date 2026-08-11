@@ -77,6 +77,26 @@ CHECKPOINTS = {
         "role": "key_diagnostic",
         "label": "7B_hardneg_lora",
     },
+    # campaign seeds (retrains of general_lora, seed A=101/B=202/C=303);
+    # dirs appear as training completes; predictors load adapters on demand.
+    "r1_seedA": {
+        "model_id": BASE_MODEL_ID,
+        "adapter_path": REPO_ROOT / "checkpoints" / "seed_campaign" / "qwen2vl_7b_general_lora_seedA" / "final",
+        "role": "campaign_seed",
+        "label": "7B_R1_seedA",
+    },
+    "r1_seedB": {
+        "model_id": BASE_MODEL_ID,
+        "adapter_path": REPO_ROOT / "checkpoints" / "seed_campaign" / "qwen2vl_7b_general_lora_seedB" / "final",
+        "role": "campaign_seed",
+        "label": "7B_R1_seedB",
+    },
+    "r1_seedC": {
+        "model_id": BASE_MODEL_ID,
+        "adapter_path": REPO_ROOT / "checkpoints" / "seed_campaign" / "qwen2vl_7b_general_lora_seedC" / "final",
+        "role": "campaign_seed",
+        "label": "7B_R1_seedC",
+    },
 }
 
 # --- R1 2B replication checkpoint matrix (frozen Paper-2 contract) ---
@@ -95,6 +115,26 @@ CHECKPOINTS_2B = {
         "adapter_path": REPO_ROOT / "checkpoints" / "general_lora" / "final",
         "role": "primary_tuned",
         "label": "2B_general_lora",
+    },
+    # campaign seeds (retrains of general_lora, seed A=101/B=202/C=303);
+    # dirs appear as training completes; predictors load adapters on demand.
+    "r1_seedA": {
+        "model_id": SMOLVLM2_BASE_MODEL_ID,
+        "adapter_path": REPO_ROOT / "checkpoints" / "seed_campaign" / "smolvlm2_2b_general_lora_seedA" / "final",
+        "role": "campaign_seed",
+        "label": "2B_R1_seedA",
+    },
+    "r1_seedB": {
+        "model_id": SMOLVLM2_BASE_MODEL_ID,
+        "adapter_path": REPO_ROOT / "checkpoints" / "seed_campaign" / "smolvlm2_2b_general_lora_seedB" / "final",
+        "role": "campaign_seed",
+        "label": "2B_R1_seedB",
+    },
+    "r1_seedC": {
+        "model_id": SMOLVLM2_BASE_MODEL_ID,
+        "adapter_path": REPO_ROOT / "checkpoints" / "seed_campaign" / "smolvlm2_2b_general_lora_seedC" / "final",
+        "role": "campaign_seed",
+        "label": "2B_R1_seedC",
     },
 }
 

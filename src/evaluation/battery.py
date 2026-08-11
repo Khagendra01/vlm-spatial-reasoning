@@ -1,4 +1,17 @@
-"""Frozen battery row builders for the seed campaign (configs/seed_campaign/).
+"""
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+DEPRECATED / DRIFTED (protocol correction 2026-08-11, SPATIAL_REASONING_
+DECISION_LOG "battery drift" entry). Code audit found this battery diverges
+from the frozen Paper-2 protocol: the wrong-image 2px substitution is
+mislabeled "with_sample", the shuffle mapping was re-hashed (no longer the
+frozen protocol permutation), and the heavy battery (with_sample,
+with_shuffle) is not part of the frozen protocol. Retained VERBATIM as audit
+history only. The corrected seed-campaign battery = the legacy Tier-A/B/C
+drivers via scripts/grounding/run_seed_battery.py. Do NOT use this module
+for any reportable campaign result.
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Frozen battery row builders for the seed campaign (configs/seed_campaign/).
 
 Conditions (frozen 2026-08-11, user-approved): normal, with_sample (2px),
 with_shuffle, relcomp (strict complement pairs, semantic distance 0 < 0.3),

@@ -153,7 +153,21 @@ def main():
     ap.add_argument("--tag", required=True)
     ap.add_argument("--conditions", default=",".join(CONDITIONS))
     ap.add_argument("--batch-size", type=int, default=8)
+    ap.add_argument("--allow-drifted", action="store_true",
+                    help="run the drifted heavy battery anyway (results must NOT"
+                         " be reported as the campaign battery)")
     args = ap.parse_args()
+
+    if not args.allow_drifted:
+        raise SystemExit(
+            "DRIFTED BATTERY DRIVER DEPRECATED (protocol correction 2026-08-11; "
+            "see SPATIAL_REASONING_DECISION_LOG 'battery drift' entry). This "
+            "script builds rows from the drifted heavy battery (wrong-image 2px "
+            "with_sample, re-hashed shuffle, uniform-392 rescale) and must not "
+            "be used for the seed campaign. Use "
+            "scripts/grounding/run_seed_battery.py (corrected battery = frozen "
+            "Paper-2 Tier-A/B/C protocol). Pass --allow-drifted only for "
+            "historical reproduction.")
 
     adapter_path = None if args.adapter.lower() in ("none", "zeroshot", "") else args.adapter
     conditions = [c for c in args.conditions.split(",") if c]

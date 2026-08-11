@@ -77,3 +77,66 @@ A local Windows machine (RTX 3060 Ti, 8 GB) was used for authoring/prep work:
   cloud box (A6000); local box is prep/analysis only.
 - Handoff: handoff.md (full resume checklist + exact commands). Aborted run
   logs committed for audit (results/seed_campaign/runs/smolvlm2_2b_seedA.log).
+
+---
+
+## 2026-08-11 - Protocol correction: drifted battery retracted, frozen legacy Tier-A/B/C battery reinstated (FROZEN BEFORE EVALUATION)
+
+**Discovery (code audit).** The battery committed for the seed campaign
+(`results/seed_campaign/rows/*.jsonl`, `src/evaluation/battery.py`,
+`scripts/eval_seed_battery.py`, plus `shuffle_mapping.json` in
+`results/seed_campaign/`) drifts from the frozen Paper-2 protocol despite the
+labeling in `configs/seed_campaign/SEED_CAMPAIGN.json`:
+
+1. The condition labeled `with_sample` applies a **wrong-image** substitution
+   (2px-shifted off-by-one image indices) instead of the frozen Paper-2
+   WITH_SAMPLE mask sampling.
+2. The shuffles were **re-hashed** with a different seed/domain than the
+   frozen protocol permutation (`results/grounding/protocol/shuffle_mapping
+   .json`, verified at load by `src/grounding/shuffle.py`), so
+   `with_shuffle` rows do not implement the protocol's wrong_image_shuffle.
+3. The uniform **392px evaluation cap** is not part of the frozen protocol
+   (G1: same-size no-rescale; G2: 2x upscale; hflip: no-rescale), and the
+   heavy-battery extras (with_sample, with_shuffle) are not protocol
+   conditions.
+
+**Decision.** Retract the drifted battery from any reportable result. No
+fresh-seed output was produced by it (nothing farther than engineering
+counts), so nothing needs to be deleted: the drifted files are preserved
+verbatim as audit history (no deletion, no rewrite; `--allow-drifted` escape
+hatch only). The corrected battery is the **already-committed legacy
+Tier-A/B/C protocol**, reused unmodified:
+
+- Tier-A: `normal` (2195) + wrong_image_shuffle via the legacy shuffle
+  derangement (frozen `shuffle_mapping.json`, verified on load).
+- Tier-B: `relcomp` (strict complement pairs, 0 < semantic dist < 0.3, run
+  with its eligible-id inclusion) and `facingcomp` (facing-antonym pairs,
+  must run alone per its freeze).
+- Tier-C: `hflip_flip` (reflection; image+language flip, L/R truth flips)
+  and `hflip_invariant` (reflection; vertical/depth truth stable), via the
+  PIL FLIP_LEFT_RIGHT lane with language held.
+
+Configuration pins (from committed run metadata): batch-size 8 for both
+families; attn **eager** for 7B; attn **sdpa** for 2B (amendment recorded
+above in this log; probe verified 0/32 outputs differ eager vs sdpa).
+
+**Regression mandate.** `scripts/grounding/regress_seed_battery.py` reruns
+the corrected battery on the existing adapters (7B: zero_shot /
+general_lora / hardneg_lora; 2B: zero_shot / general_lora) and must
+reproduce the already-committed legacy Tier-A/B/C metric files before any
+fresh-seed battery evaluation. The corrected battery is then frozen in a new
+commit, and ONLY afterwards are the campaign(checkpoint x condition) cells
+evaluated.
+
+**Frozen bound artifacts (all already committed).** the legacy drivers
+(`scripts/grounding/run_tier_{a,b,c}.py`, `analyze_tier_{a,b,c}.py`),
+`src/grounding/{shuffle,semantic,visual,eligibility,config}.py`, `results/
+grounding/protocol/` IDs + shuffle permutation, `results/grounding/analysis/
+tier_*_metrics_*.json` regression targets, this entry + deprecation marks.
+
+**Status at this entry (untouched by evaluation):**
+- Training pipeline continues (2B seedA final; seedB training in progress;
+  seeds C + 7B A/B/C queued) with all hyperparameters inputs unchanged.
+- No fresh-seed battery evaluation has been run or inspected.
+
+At commit: ff51ab55 (research/spatial-grounding-audit).
