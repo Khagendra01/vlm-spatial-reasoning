@@ -153,6 +153,15 @@ def main():
     print(f"git: {git_branch()} @ {git_commit()}  protocol hash: {config.protocol_hash()}")
     print("=" * 70)
 
+    checkpoints = [c.strip() for c in args.checkpoints.split(",") if c.strip()]
+    transforms = [t.strip() for t in args.transforms.split(",") if t.strip()]
+    for c in checkpoints:
+        if c not in config.CHECKPOINTS:
+            raise SystemExit(f"unknown checkpoint {c!r}")
+    for t in transforms:
+        if t not in semantic.TRANSFORMS and t != semantic.FACING_TRANSFORM:
+            raise SystemExit(f"unknown transform {t!r}")
+
     # frozen Tier-B artifacts must exist
     eligible_doc_path = config.SEMANTIC_ELIGIBLE_FILE
     validity_path = config.SEMANTIC_VALIDITY_FILE
@@ -176,15 +185,6 @@ def main():
     payload = load_ids_payload()
     records = [r for r in payload["examples"] if r["image_available"]]
     records_by_id = {r["example_id"]: r for r in records}
-
-    checkpoints = [c.strip() for c in args.checkpoints.split(",") if c.strip()]
-    transforms = [t.strip() for t in args.transforms.split(",") if t.strip()]
-    for c in checkpoints:
-        if c not in config.CHECKPOINTS:
-            raise SystemExit(f"unknown checkpoint {c!r}")
-    for t in transforms:
-        if t not in semantic.TRANSFORMS and t != semantic.FACING_TRANSFORM:
-            raise SystemExit(f"unknown transform {t!r}")
 
     # per-transform eligible rows (frozen artifact is the ONLY source)
     semantic.audit_parser(records)

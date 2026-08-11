@@ -90,7 +90,7 @@ def main():
             if name in ("checkpoints",):
                 continue
             ci = tr["delta_c_ci"]
-            print(f"  {name}: deltaC={tr['delta_C']:.4f} "
+            print(f"  {name}: deltaV={tr['delta_C']:.4f} "
                   f"CI=[{ci['ci_lower']:.4f},{ci['ci_upper']:.4f}] "
                   f"mcnemar_p={tr['mcnemar']['exact_p']}")
 
@@ -134,8 +134,13 @@ def write_report(path, m, args):
         "- For `hflip_invariant` (vertical/depth controls): C = stability "
         "rate, `change_rate` = spurious response change, `both_correct` = "
         "normal-correct AND stable.",
-        "- `DeltaC(u->v)` = C(v) - C(u) with paired bootstrap CI "
+        "- `DeltaC(u->v) = C(v) - C(u)` with paired bootstrap CI "
         "(n=10000, seed 20260810) and exact McNemar on the obey indicator.",
+        "",
+        "> Naming note: the paper-facing quantity for this visual axis is "
+        "`DeltaV` (reported below as deltaV). The metrics JSON retains the "
+        "generic key `delta_C` (same value, no numbers changed); `DeltaC` is "
+        "reserved for the semantic axis (Tier B).",
         "",
         "## Transform definitions (frozen pre-result)",
         "",
@@ -167,7 +172,7 @@ def write_report(path, m, args):
                 f"{d['wrong_direction']:.4f} | {d['change_rate']:.4f} | "
                 f"{s['invalid_rate']:.4f} |"
             )
-        lines += ["", "| transition | deltaC | 95% CI | McNemar p |", "|---|---:|---:|---:|"]
+        lines += ["", "| transition | deltaV | 95% CI | McNemar p |", "|---|---:|---:|---:|"]
         for name, tr in data["transitions"].items():
             if name in ("checkpoints",):
                 continue

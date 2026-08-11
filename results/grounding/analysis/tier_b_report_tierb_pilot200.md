@@ -2,8 +2,8 @@
 
 - **Protocol:** v0.1 (`configs/grounding_protocol.yaml`, hash 018b5dd4ce4b4958...)
 - **Run tag:** tierb_pilot200  |  **Status label:** engineering
-- **Git commit:** 38ad6fbc3e13cd785730b656c19512866d0845fd  |  branch research/spatial-grounding-audit
-- **Generated:** 2026-08-11T01:20:10+00:00
+- **Git commit:** 1fa62a03c28b1a502bc7b7784cd811736e10711a  |  branch research/spatial-grounding-audit
+- **Generated:** 2026-08-11T02:18:19+00:00
 - **Normal-condition baseline:** tag full
 
 > Interpretation guardrails (protocol section 16): a model can obey a semantic law while being wrong on the scene. C (obeying the expected linked-answer law) is therefore ALWAYS reported together with both-correct (obey AND normal-correct). Consistency alone is not asserted as proof of grounding, and no internal mechanism is inferred.
@@ -76,6 +76,8 @@ Validity table: `results/grounding/protocol/semantic_transform_validity.csv` (al
 | P1 (zero_shot->general_lora) | -0.0050 | [-0.0600, 0.0500] | 1.0 |
 | D1 (general_lora->hardneg_lora) | 0.0350 | [0.0050, 0.0700] | 0.06543 |
 
+> Note: D1: positive point estimate with CONFLICTING inferential evidence (bootstrap CI excludes 0, McNemar p=0.0654); NOT labeled significant.
+
 ### Relation-family breakdown (descriptive; relation-level inference is secondary)
 
 **zero_shot**
@@ -117,6 +119,8 @@ Validity table: `results/grounding/protocol/semantic_transform_validity.csv` (al
 |---|---:|---:|---:|
 | P1 (zero_shot->general_lora) | 0.0533 | [0.0059, 0.1065] | 0.063568 |
 | D1 (general_lora->hardneg_lora) | 0.0118 | [-0.0118, 0.0355] | 0.625 |
+
+> Note: P1: positive point estimate with CONFLICTING inferential evidence (bootstrap CI excludes 0, McNemar p=0.0636); NOT labeled significant.
 
 ### Relation-family breakdown (descriptive; relation-level inference is secondary)
 

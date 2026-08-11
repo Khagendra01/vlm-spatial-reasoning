@@ -172,6 +172,7 @@ def write_report(path, m, args):
                 f"| {c} | {s['C']:.4f} | {s['both_correct']:.4f} | {s['invalid_rate']:.4f} |"
             )
         lines += ["", "| transition | deltaC | 95% CI | McNemar p |", "|---|---:|---:|---:|"]
+        notes = []
         for name, tr in data["transitions"].items():
             if name in ("checkpoints",):
                 continue
@@ -181,6 +182,16 @@ def write_report(path, m, args):
                 f"[{ci['ci_lower']:.4f}, {ci['ci_upper']:.4f}] | "
                 f"{tr['mcnemar']['exact_p']} |"
             )
+            ci_excl_zero = ci["ci_lower"] > 0 or ci["ci_upper"] < 0
+            if ci_excl_zero and tr["mcnemar"]["exact_p"] >= 0.05:
+                notes.append(
+                    f"{name}: positive point estimate with CONFLICTING "
+                    f"inferential evidence (bootstrap CI excludes 0, McNemar "
+                    f"p={tr['mcnemar']['exact_p']:.4f}); NOT labeled "
+                    f"significant."
+                )
+        for note in notes:
+            lines += ["", f"> Note: {note}"]
         lines += ["", "### Relation-family breakdown (descriptive; relation-level inference is secondary)", ""]
         for c in data["family_breakdown"]:
             lines += [f"**{c}**", "",

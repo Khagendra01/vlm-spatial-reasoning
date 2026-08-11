@@ -1,0 +1,157 @@
+{
+  "generated_at": "2026-08-11T02:18:25+00:00",
+  "git_branch": "research/spatial-grounding-audit",
+  "git_commit": "1fa62a03c28b1a502bc7b7784cd811736e10711a",
+  "normal_tag": "full",
+  "status": "confirmatory",
+  "tag": "facing_full",
+  "transforms": {
+    "facingcomp": {
+      "family_breakdown": {
+        "general_lora": {
+          "orientation": {
+            "C": 0.708738,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 103,
+            "obey": 73
+          }
+        },
+        "hardneg_lora": {
+          "orientation": {
+            "C": 0.76699,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 103,
+            "obey": 79
+          }
+        },
+        "zero_shot": {
+          "orientation": {
+            "C": 0.563107,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 103,
+            "obey": 58
+          }
+        }
+      },
+      "law": "flip_law",
+      "n_eligible": 103,
+      "relation_breakdown": {
+        "general_lora": {
+          "facing": {
+            "C": 0.75,
+            "n": 64
+          },
+          "facing away from": {
+            "C": 0.641026,
+            "n": 39
+          }
+        },
+        "hardneg_lora": {
+          "facing": {
+            "C": 0.765625,
+            "n": 64
+          },
+          "facing away from": {
+            "C": 0.769231,
+            "n": 39
+          }
+        },
+        "zero_shot": {
+          "facing": {
+            "C": 0.578125,
+            "n": 64
+          },
+          "facing away from": {
+            "C": 0.538462,
+            "n": 39
+          }
+        }
+      },
+      "summary_by_checkpoint": {
+        "general_lora": {
+          "C": 0.708738,
+          "C_valid": 0.708738,
+          "both_correct": 0.572816,
+          "invalid": 0,
+          "invalid_rate": 0.0,
+          "n": 103,
+          "obey": 73
+        },
+        "hardneg_lora": {
+          "C": 0.76699,
+          "C_valid": 0.76699,
+          "both_correct": 0.61165,
+          "invalid": 0,
+          "invalid_rate": 0.0,
+          "n": 103,
+          "obey": 79
+        },
+        "zero_shot": {
+          "C": 0.563107,
+          "C_valid": 0.563107,
+          "both_correct": 0.262136,
+          "invalid": 0,
+          "invalid_rate": 0.0,
+          "n": 103,
+          "obey": 58
+        }
+      },
+      "transitions": {
+        "D1": {
+          "C_u": 0.708738,
+          "C_v": 0.76699,
+          "delta_C": 0.058252,
+          "delta_c_ci": {
+            "ci_lower": 0.0,
+            "ci_upper": 0.126214,
+            "mean": 0.058252,
+            "n": 103,
+            "n_iter": 10000,
+            "seed": 20260810
+          },
+          "from": "general_lora",
+          "mcnemar": {
+            "b": 9,
+            "c": 3,
+            "discordant_n": 12,
+            "exact_p": 0.145996,
+            "mcnemar_odds_ratio": 3.0
+          },
+          "n": 103,
+          "to": "hardneg_lora"
+        },
+        "P1": {
+          "C_u": 0.563107,
+          "C_v": 0.708738,
+          "delta_C": 0.145631,
+          "delta_c_ci": {
+            "ci_lower": 0.038835,
+            "ci_upper": 0.252427,
+            "mean": 0.145631,
+            "n": 103,
+            "n_iter": 10000,
+            "seed": 20260810
+          },
+          "from": "zero_shot",
+          "mcnemar": {
+            "b": 23,
+            "c": 8,
+            "discordant_n": 31,
+            "exact_p": 0.010674,
+            "mcnemar_odds_ratio": 2.875
+          },
+          "n": 103,
+          "to": "general_lora"
+        },
+        "checkpoints": [
+          "zero_shot",
+          "general_lora",
+          "hardneg_lora"
+        ]
+      }
+    }
+  }
+}
