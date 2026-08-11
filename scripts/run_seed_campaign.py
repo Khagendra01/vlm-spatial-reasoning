@@ -204,7 +204,10 @@ def train_7b(seed: int, output_dir: str):
     eval_ds = split["test"]
     print(f"Train: {len(train_ds)}, Eval: {len(eval_ds)} (split frozen at seed=42)")
 
-    loader = DataLoader(train_ds, batch_size=1, shuffle=True, collate_fn=collate_batch, num_workers=0)
+    def collate_fn(batch):
+        return collate_batch(processor, batch)
+
+    loader = DataLoader(train_ds, batch_size=1, shuffle=True, collate_fn=collate_fn, num_workers=0)
     optimizer = torch.optim.AdamW(model.parameters(), lr=1e-4, weight_decay=0.01)
     total_steps = len(loader) * 2
     scheduler = get_linear_schedule_with_warmup(optimizer, total_steps // 10, total_steps)
