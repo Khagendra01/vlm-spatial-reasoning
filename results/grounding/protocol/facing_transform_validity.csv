@@ -1,0 +1,62 @@
+transform,relation,status,expected_truth_behavior,reason,eligible_n,excluded_n
+facingcomp,above,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,65
+facingcomp,across,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,3
+facingcomp,across from,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,12
+facingcomp,adjacent to,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,12
+facingcomp,against,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,6
+facingcomp,ahead of,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,8
+facingcomp,along,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,2
+facingcomp,alongside,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,9
+facingcomp,around,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,1
+facingcomp,at,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,1
+facingcomp,at the back of,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,22
+facingcomp,at the edge of,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,37
+facingcomp,at the left side of,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,96
+facingcomp,at the right side of,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,80
+facingcomp,at the side of,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,8
+facingcomp,attached to,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,11
+facingcomp,away from,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,35
+facingcomp,behind,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,150
+facingcomp,below,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,64
+facingcomp,beneath,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,53
+facingcomp,beside,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,37
+facingcomp,beyond,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,5
+facingcomp,by,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,15
+facingcomp,close to,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,20
+facingcomp,connected to,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,5
+facingcomp,consists of,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,4
+facingcomp,contains,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,66
+facingcomp,detached from,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,4
+facingcomp,down from,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,5
+facingcomp,enclosed by,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,2
+facingcomp,facing,strict_included,flip_law,Paper-1 strict complement construct; dedicated D1 diagnostic (decision log 2026-08-11),64,0
+facingcomp,facing away from,strict_included,flip_law,Paper-1 strict complement construct; dedicated D1 diagnostic (decision log 2026-08-11),39,0
+facingcomp,far away from,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,50
+facingcomp,far from,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,25
+facingcomp,has as a part,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,8
+facingcomp,in,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,60
+facingcomp,in front of,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,142
+facingcomp,in the middle of,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,19
+facingcomp,inside,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,39
+facingcomp,into,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,9
+facingcomp,left of,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,40
+facingcomp,near,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,23
+facingcomp,next to,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,60
+facingcomp,off,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,14
+facingcomp,on,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,117
+facingcomp,on top of,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,105
+facingcomp,opposite to,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,9
+facingcomp,out of,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,1
+facingcomp,outside,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,9
+facingcomp,over,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,25
+facingcomp,parallel to,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,22
+facingcomp,part of,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,14
+facingcomp,perpendicular to,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,12
+facingcomp,right of,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,29
+facingcomp,surrounding,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,20
+facingcomp,through,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,1
+facingcomp,touching,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,273
+facingcomp,toward,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,6
+facingcomp,under,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,114
+facingcomp,with,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,4
+facingcomp,within,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,4
