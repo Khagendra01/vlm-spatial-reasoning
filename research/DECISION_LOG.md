@@ -92,6 +92,47 @@ Any material change after results are observed must be logged here. The goal is 
 
 ---
 
+## 2026-08-11 — Baseline reconciliation: 392px cap explains Paper-1 vs Paper-2 normal accuracy
+
+**Status:** verified analysis (bug-fix class: root cause of a numerical discrepancy, no protocol values changed)
+
+**Old rule:** implicit assumption that the Tier-A normal condition replicates the Paper-1 evaluation contract.
+
+**New rule:** the Tier-A/Paper-2 contract intentionally differs from Paper-1 in exactly one behaviorally relevant way — the uniform 392px long-side image cap (docs/TECHNIQUES.md section 4, config.MAX_LONG_SIDE, recorded in every run's metadata). Any cross-paper comparison of absolute normal accuracy must state this contract difference. The cap is a within-run constant across checkpoints and conditions (run fairness preserved), so all Tier-A/B/C paired and difference metrics remain valid.
+
+**Reason (evidence):** Paper-1 zero-shot normal = 0.80911 (1776/2195, results/qwen2vl_7b_metrics_20260809_064919.json). Tier-A full zero-shot normal = 0.76993 (1690/2195). Raw-output comparison aligned by dataset index: 208/2195 examples changed prediction; 0 examples shared the same raw output with a different parsed label (parser contributes nothing). A GPU reproduction of all 208 disagreements under four contract variants (zero-shot Qwen2-VL-7B, current transformers 5.14.1):
+- Paper-1 exact (raw image, padding=True): 201/208 match Paper-1;
+- Tier-A exact (392-cap, padding+truncation): 204/208 match Tier-A;
+- raw image + truncation: 201/208 match Paper-1 (truncation inert);
+- 392-cap without truncation: 204/208 match Tier-A.
+The 392px cap alone reproduces ~97% of the discrepancy; the residual ~3% is unpinnable (Paper-1 env recorded only as transformers>=4.48.0, no exact versions).
+
+**Affected results already seen?** All Tier-A/B/C absolute accuracies; none of the paired ΔA/ΔG/ΔC differences (checkpoint-equal contract, fairness by construction). Tier-A normal 0.76993 must NOT be compared to Paper-1 0.80911 without citing this cap difference.
+
+**Expected impact:** documentation only. Options deferred to principal: (a) keep 392px contract as canonical Paper-2 and cite the reconciliation; (b) re-run Tier A/B/C under the full-resolution Paper-1 contract for direct comparability (new freeze + runs required, no change to any existing numbers).
+
+**Files/commits:** evidence at /tmp/opencode/repro_summary.json, disagreement IDs /tmp/opencode/disagreement_ids.json; reconciliation record results/grounding/analysis/baseline_reconciliation.md.
+
+---
+
+## 2026-08-11 — Facing/facing-away D1 diagnostic (protocol implementation correction)
+
+**Status:** pre-result protocol implementation correction (frozen before any facingcomp prediction is inspected)
+
+**Old rule:** the Tier-B relcomp validity table soft-excludes `facing <-> facing away from` (oblique orientations make the pair non-exhaustive), so the implemented Tier-B strict-complement transform set contains only depth/horizontal/vertical complements and does not include the orientation construct that motivated HardNeg's inclusion in Paper 2.
+
+**New rule:** a dedicated `facingcomp` transform (flip law: `facing <-> facing away from`, expected = NOT original label) is frozen with its own validity table (`results/grounding/protocol/facing_transform_validity.csv`) and eligible-ID document (`results/grounding/protocol/facing_eligible_ids.json`), both committed before any facingcomp prediction is inspected. Existing Tier-B artifacts and results remain unchanged; the two files are separate from `semantic_transform_validity.csv`/`semantic_eligible_ids.json`.
+
+**Reason:** Paper 1 treated facing/facing-away as a strict complementary family and found the General-vs-HardNeg facing/facing-away consistency dissociation that motivated HardNeg's inclusion. The implemented Tier-B relation-complement eligibility table inadvertently omitted this orientation complement. This is a predeclared diagnostic, not a post-hoc addition after an unfavorable result: the whole reason HardNeg was put into the protocol before experimentation was this exact facing contrast. The conceptual difference (Paper-1 strict-complement treatment vs Tier-B soft exclusion) is documented here and in the freeze files so Paper 2 states it explicitly.
+
+**Affected results already seen?** None for facingcomp (frozen pre-result). Existing Tier-B/C results are unaffected and unchanged.
+
+**Expected impact:** direct measurement of the original D1 facing construct: P1 zero->General and D1 General->HardNeg flip-law compliance on facing/facing-away examples only, alongside both-correct and invalid rates.
+
+**Files/commits:** freeze commit (facing artifacts) precedes any facingcomp run.
+
+---
+
 ## Template for future entries
 
 ### YYYY-MM-DD — Decision title

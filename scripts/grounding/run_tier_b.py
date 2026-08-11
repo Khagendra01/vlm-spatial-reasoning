@@ -154,16 +154,24 @@ def main():
     print("=" * 70)
 
     # frozen Tier-B artifacts must exist
-    if not config.SEMANTIC_ELIGIBLE_FILE.exists():
+    eligible_doc_path = config.SEMANTIC_ELIGIBLE_FILE
+    validity_path = config.SEMANTIC_VALIDITY_FILE
+    if "facingcomp" in transforms:
+        if set(transforms) != {"facingcomp"}:
+            raise SystemExit("facingcomp must be run alone (dedicated freeze)")
+        eligible_doc_path = config.SEMANTIC_FACING_ELIGIBLE_FILE
+        validity_path = config.SEMANTIC_FACING_VALIDITY_FILE
+    if not eligible_doc_path.exists():
         raise SystemExit(
-            f"missing frozen artifact {config.SEMANTIC_ELIGIBLE_FILE}; "
-            "run scripts/grounding/freeze_tier_b.py first (pre-result)"
+            f"missing frozen artifact {eligible_doc_path}; "
+            "run scripts/grounding/freeze_tier_b.py (or freeze_facing.py "
+            "for facingcomp) first (pre-result)"
         )
-    eligible_doc = json.load(open(config.SEMANTIC_ELIGIBLE_FILE, encoding="utf-8"))
-    print(f"validity file: {config.SEMANTIC_VALIDITY_FILE} "
-          f"(sha256 {config.sha256_file(config.SEMANTIC_VALIDITY_FILE)[:12]}...)")
-    print(f"eligible file: {config.SEMANTIC_ELIGIBLE_FILE} "
-          f"(sha256 {config.sha256_file(config.SEMANTIC_ELIGIBLE_FILE)[:12]}...)")
+    eligible_doc = json.load(open(eligible_doc_path, encoding="utf-8"))
+    print(f"validity file: {validity_path} "
+          f"(sha256 {config.sha256_file(validity_path)[:12]}...)")
+    print(f"eligible file: {eligible_doc_path} "
+          f"(sha256 {config.sha256_file(eligible_doc_path)[:12]}...)")
 
     payload = load_ids_payload()
     records = [r for r in payload["examples"] if r["image_available"]]
@@ -175,7 +183,7 @@ def main():
         if c not in config.CHECKPOINTS:
             raise SystemExit(f"unknown checkpoint {c!r}")
     for t in transforms:
-        if t not in semantic.TRANSFORMS:
+        if t not in semantic.TRANSFORMS and t != semantic.FACING_TRANSFORM:
             raise SystemExit(f"unknown transform {t!r}")
 
     # per-transform eligible rows (frozen artifact is the ONLY source)
@@ -236,10 +244,10 @@ def main():
         "parser_hash": config.parser_hash(),
         "ids_file": str(config.IDS_FILE.relative_to(config.REPO_ROOT)),
         "ids_file_sha256": payload.get("file_sha256"),
-        "semantic_validity_file": str(config.SEMANTIC_VALIDITY_FILE.relative_to(config.REPO_ROOT)),
-        "semantic_validity_sha256": config.sha256_file(config.SEMANTIC_VALIDITY_FILE),
-        "semantic_eligible_file": str(config.SEMANTIC_ELIGIBLE_FILE.relative_to(config.REPO_ROOT)),
-        "semantic_eligible_sha256": config.sha256_file(config.SEMANTIC_ELIGIBLE_FILE),
+        "semantic_validity_file": str(validity_path.relative_to(config.REPO_ROOT)),
+        "semantic_validity_sha256": config.sha256_file(validity_path),
+        "semantic_eligible_file": str(eligible_doc_path.relative_to(config.REPO_ROOT)),
+        "semantic_eligible_sha256": config.sha256_file(eligible_doc_path),
         "checkpoints": args.checkpoints,
         "transforms": args.transforms,
         "limit": args.limit,

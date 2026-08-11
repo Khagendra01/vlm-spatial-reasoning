@@ -114,6 +114,10 @@ SNAPSHOT_FILE = PROTOCOL_DIR / "run_config_snapshot.json"
 SEMANTIC_VALIDITY_FILE = PROTOCOL_DIR / "semantic_transform_validity.csv"
 SEMANTIC_ELIGIBLE_FILE = PROTOCOL_DIR / "semantic_eligible_ids.json"
 
+# --- facing/facing-away D1 diagnostic (dedicated freeze, pre-result) ---
+SEMANTIC_FACING_VALIDITY_FILE = PROTOCOL_DIR / "facing_transform_validity.csv"
+SEMANTIC_FACING_ELIGIBLE_FILE = PROTOCOL_DIR / "facing_eligible_ids.json"
+
 # --- Tier-C1 visual artifacts (validity table + eligible IDs, frozen pre-result) ---
 VISUAL_VALIDITY_FILE = PROTOCOL_DIR / "visual_transform_validity.csv"
 VISUAL_ELIGIBLE_FILE = PROTOCOL_DIR / "visual_eligible_ids.json"

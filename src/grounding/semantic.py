@@ -142,6 +142,25 @@ LAW_NAMES = {
 }
 
 # --------------------------------------------------------------------------
+# Facing/facing-away D1 diagnostic (dedicated transform, frozen pre-result)
+# --------------------------------------------------------------------------
+# Paper 1 treated facing <-> facing away from as a strict complementary pair
+# and found the General-vs-HardNeg facing consistency dissociation that
+# motivated HardNeg's inclusion in Paper 2. The Tier-B relcomp validity table
+# deliberately soft-excluded this pair (oblique orientations make it
+# non-exhaustive), so the Tier-B D1 result does not test that construct.
+# Decision log 2026-08-11 freezes a DEDICATED facingcomp transform so the
+# original D1 diagnostic is evaluated directly. The semantic-transform
+# validity table and eligible IDs are separate from the Tier-B artifacts and
+# are committed before any facingcomp prediction is inspected.
+FACING_COMPLEMENT_PAIRS = {
+    "facing": "facing away from",
+    "facing away from": "facing",
+}
+FACING_TRANSFORM = "facingcomp"
+LAW_NAMES[FACING_TRANSFORM] = "flip_law"
+
+# --------------------------------------------------------------------------
 # Subject/object parser audit (study plan section 18)
 # --------------------------------------------------------------------------
 
@@ -313,6 +332,34 @@ def build_transform(record: dict, transform: str) -> dict:
             },
         }
 
+    if transform == FACING_TRANSFORM:
+        if relation not in FACING_COMPLEMENT_PAIRS:
+            return None
+        comp = FACING_COMPLEMENT_PAIRS[relation]
+        statement = reconstruct_statement(s, comp, o)
+        if canonicalize_statement(statement) == canonicalize_statement(base["original_statement"]):
+            return None
+        return {
+            **base,
+            "statement": statement,
+            "expected_transformed_label": (not label),
+            "expected_prediction_behavior": LAW_NAMES[FACING_TRANSFORM],
+            "transform_name": FACING_TRANSFORM,
+            "transform_metadata": {
+                "axis": "semantic",
+                "transform": FACING_TRANSFORM,
+                "law": LAW_NAMES[FACING_TRANSFORM],
+                "original_relation": relation,
+                "complement_relation": comp,
+                "note": ("dedicated D1 diagnostic; Paper-1 treated facing <-> "
+                         "facing away from as a strict complement pair; the "
+                         "Tier-B relcomp table soft-excludes it (oblique "
+                         "orientations) but this transform applies the "
+                         "Paper-1 construct directly (decision log "
+                         "2026-08-11)"),
+            },
+        }
+
     return None
 
 
@@ -462,4 +509,103 @@ def write_freeze_files(records: list, force: bool = False) -> dict:
         "eligible_sha256": config.sha256_file(config.SEMANTIC_ELIGIBLE_FILE),
         "parser_audit": doc["parser_audit"],
         "n_eligible": {t: doc["transforms"][t]["n_eligible"] for t in TRANSFORMS},
+    }
+
+
+# --------------------------------------------------------------------------
+# Facing freeze artifacts (dedicated files; the Tier-B artifacts are NOT
+# regenerated or modified by these builders)
+# --------------------------------------------------------------------------
+
+def build_facing_validity_table(records: list) -> list:
+    """facingcomp validity rows: all relations x facingcomp classification."""
+    audit_parser(records)
+    rows = []
+    eligible_ids = set()
+    for rec in records:
+        if build_transform(rec, FACING_TRANSFORM) is not None:
+            eligible_ids.add(rec["example_id"])
+    for relation in sorted({r["relation"] for r in records}):
+        n_el = sum(1 for r in records
+                   if r["relation"] == relation and r["example_id"] in eligible_ids)
+        n_ex = sum(1 for r in records
+                   if r["relation"] == relation and r["example_id"] not in eligible_ids)
+        if relation in FACING_COMPLEMENT_PAIRS:
+            status, reason = "strict_included", (
+                "Paper-1 strict complement construct; dedicated D1 diagnostic "
+                "(decision log 2026-08-11)")
+        else:
+            status, reason = "not_in_scope", (
+                "not a facing/facing-away relation (dedicated transform scope)")
+        rows.append({
+            "transform": FACING_TRANSFORM,
+            "relation": relation,
+            "status": status,
+            "expected_truth_behavior": LAW_NAMES[FACING_TRANSFORM],
+            "reason": reason,
+            "eligible_n": n_el,
+            "excluded_n": n_ex,
+        })
+    return rows
+
+
+def build_facing_eligible_doc(records: list) -> dict:
+    """facingcomp eligible-ID document (frozen before any facing prediction)."""
+    audit_parser(records)
+    out = {
+        "protocol_version": "v0.1",
+        "authority": str(config.PROTOCOL_AUTHORITY.relative_to(config.REPO_ROOT)),
+        "freeze_note": ("dedicated facing/facing-away D1 diagnostic; frozen "
+                        "before any facingcomp prediction is inspected "
+                        "(decision log 2026-08-11); Tier-B artifacts "
+                        "unchanged"),
+        "parser_audit": audit_parser(records),
+        "transforms": {},
+    }
+    entries = {}
+    for rec in records:
+        row = build_transform(rec, FACING_TRANSFORM)
+        if row is None:
+            continue
+        entries[rec["example_id"]] = {
+            "relation": row["relation"],
+            "family": row["family"],
+            "subject": row["subject"],
+            "object": row["object"],
+            "original_label": bool(row["label"]),
+            "expected_transformed_label": bool(row["expected_transformed_label"]),
+            "expected_prediction_behavior": row["expected_prediction_behavior"],
+            "transformed_statement": row["statement"],
+        }
+    out["transforms"][FACING_TRANSFORM] = {
+        "law": LAW_NAMES[FACING_TRANSFORM],
+        "n_eligible": len(entries),
+        "entries": entries,
+    }
+    return out
+
+
+def write_facing_freeze_files(records: list, force: bool = False) -> dict:
+    """Write the two frozen facing artifacts; refuse to overwrite unless forced."""
+    if config.SEMANTIC_FACING_ELIGIBLE_FILE.exists() and not force:
+        raise FileExistsError(
+            f"{config.SEMANTIC_FACING_ELIGIBLE_FILE} already exists; use "
+            "--force only with a decision-log entry"
+        )
+    rows = build_facing_validity_table(records)
+    config.PROTOCOL_DIR.mkdir(parents=True, exist_ok=True)
+    with open(config.SEMANTIC_FACING_VALIDITY_FILE, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
+        w.writeheader()
+        w.writerows(rows)
+    doc = build_facing_eligible_doc(records)
+    with open(config.SEMANTIC_FACING_ELIGIBLE_FILE, "w", encoding="utf-8") as f:
+        json.dump(doc, f, indent=2, sort_keys=True)
+    return {
+        "validity_file": str(config.SEMANTIC_FACING_VALIDITY_FILE.relative_to(config.REPO_ROOT)),
+        "validity_sha256": config.sha256_file(config.SEMANTIC_FACING_VALIDITY_FILE),
+        "eligible_file": str(config.SEMANTIC_FACING_ELIGIBLE_FILE.relative_to(config.REPO_ROOT)),
+        "eligible_sha256": config.sha256_file(config.SEMANTIC_FACING_ELIGIBLE_FILE),
+        "parser_audit": doc["parser_audit"],
+        "n_eligible": {FACING_TRANSFORM: doc["transforms"][FACING_TRANSFORM]["n_eligible"]},
     }
