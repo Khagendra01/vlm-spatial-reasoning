@@ -24,7 +24,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 from src.grounding import config
 from src.grounding.predictions import read_predictions, verify_paired_ids
 from src.grounding.semantic_metrics import (family_breakdown, relation_breakdown,
-                                            transitions_matrix, transform_summary)
+                                            transitions_matrix, transform_summary,
+                                            pair_consistency_indicators)
 from src.grounding.visual import TRANSFORMS, BEHAVIOR_NAMES
 from src.grounding.visual_metrics import direction_summary
 from src.grounding.hashing import git_branch, git_commit, utc_now_iso, write_json
@@ -68,7 +69,9 @@ def main():
         rows = {c: read_predictions(files[c]) for c in ckpts}
 
         summaries = {c: transform_summary(rows[c], normal_rows[c]) for c in ckpts}
-        trans = transitions_matrix(rows)
+        cons = pair_consistency_indicators(rows, normal_rows)
+        trans = transitions_matrix(rows, indicator=cons)
+        trans_obey = transitions_matrix(rows)
         directions = {c: direction_summary(rows[c], normal_rows[c]) for c in ckpts}
         all_metrics["transforms"][t] = {
             "law": BEHAVIOR_NAMES[t],
@@ -76,6 +79,7 @@ def main():
             "summary_by_checkpoint": summaries,
             "direction_by_checkpoint": directions,
             "transitions": trans,
+            "transitions_transformed_accuracy": trans_obey,
             "family_breakdown": {c: family_breakdown(rows[c]) for c in ckpts},
             "relation_breakdown": {c: relation_breakdown(rows[c]) for c in ckpts},
         }
@@ -83,14 +87,16 @@ def main():
         for c in ckpts:
             s = summaries[c]
             d = directions[c]
-            print(f"  {c}: C={s['C']:.4f} both_correct={s['both_correct']:.4f} "
-                  f"wrong_dir={d['wrong_direction']:.4f} "
-                  f"change={d['change_rate']:.4f} invalid={s['invalid_rate']:.4f}")
+            rf = f"flip={d['response_flip']:.4f}" if d['response_flip'] is not None else ""
+            rs = f"stability={d['response_stability']:.4f}" if d['response_stability'] is not None else ""
+            print(f"  {c}: C_pair={s['C_pair']:.4f} A_transform={s['A_transform']:.4f} "
+                  f"{rf} {rs} both_correct={s['both_correct']:.4f} "
+                  f"invalid={s['invalid_rate']:.4f}")
         for name, tr in trans.items():
             if name in ("checkpoints",):
                 continue
             ci = tr["delta_c_ci"]
-            print(f"  {name}: deltaV={tr['delta_C']:.4f} "
+            print(f"  {name}: deltaV_pair={tr['delta_C']:.4f} "
                   f"CI=[{ci['ci_lower']:.4f},{ci['ci_upper']:.4f}] "
                   f"mcnemar_p={tr['mcnemar']['exact_p']}")
 
@@ -118,27 +124,35 @@ def write_report(path, m, args):
         "behavior is about causal sensitivity to the visual layout. Flip "
         "rates and expected-invariant stability rates are reported SEPARATELY "
         "and never merged. A model can flip coherently and still be wrong on "
-        "the scene, so C is ALWAYS reported together with both-correct. No "
-        "internal mechanism is inferred, and consistency alone is not proof "
-        "of grounding.",
+        "the scene, so the response rates are ALWAYS reported together with "
+        "both-correct. No internal mechanism is inferred, and consistency "
+        "alone is not proof of grounding.",
         "",
         "## Definitions",
         "",
-        "- `C(m)` = expected-behavior rate: P(prediction equals the expected "
-        "transformed label) under the image transform; invalid outputs count "
-        "as non-obeying, and the invalid rate is reported separately.",
-        "- For `hflip_flip` (mirrored left/right relations): C = expected "
-        "flip rate, `wrong_direction` = P(pred == original label), "
-        "`change_rate` = any response change, `both_correct` = normal-correct "
-        "AND obeys the flip.",
-        "- For `hflip_invariant` (vertical/depth controls): C = stability "
-        "rate, `change_rate` = spurious response change, `both_correct` = "
-        "normal-correct AND stable.",
-        "- `DeltaC(u->v) = C(v) - C(u)` with paired bootstrap CI "
-        "(n=10000, seed 20260810) and exact McNemar on the obey indicator.",
+        "- `C_pair(m)` = P(pair consistency): the model's TWO answers on the "
+        "same example obey the linked-answer law — `hflip_flip`: "
+        "P(mirrored answer != normal answer) (response flip); "
+        "`hflip_invariant`: P(mirrored answer == normal answer) (response "
+        "stability). Invalid outputs count as non-consistent, and the "
+        "invalid rate is reported separately.",
+        "- `A_transform(m)` = P(transformed prediction equals the expected "
+        "transformed label) (transformed-answer accuracy; for hflip_flip the "
+        "expected label is the flipped label, for hflip_invariant the "
+        "original label).",
+        "- `response_flip` / `response_stability` (paper-facing labels of "
+        "C_pair per transform): literal answer-change / answer-stability "
+        "rates comparing the model's two outputs, NOT predictions vs ground "
+        "truth (decision log 2026-08-11).",
+        "- `both_correct(m)` = P(normal-correct AND transformed answer obeys "
+        "the law).",
+        "- `DeltaV(u->v) = C_pair(v) - C_pair(u)` with paired bootstrap CI "
+        "(n=10000, seed 20260810) and exact McNemar on the pair-consistency "
+        "indicator. (The transformed-accuracy analogue is kept in the "
+        "metrics JSON under `transitions_transformed_accuracy`.)",
         "",
-        "> Naming note: the paper-facing quantity for this visual axis is "
-        "`DeltaV` (reported below as deltaV). The metrics JSON retains the "
+        "> Naming note: `DeltaV` is the paper-facing quantity for this visual "
+        "axis (reported below as deltaV). The metrics JSON retains the "
         "generic key `delta_C` (same value, no numbers changed); `DeltaC` is "
         "reserved for the semantic axis (Tier B).",
         "",
@@ -158,21 +172,32 @@ def write_report(path, m, args):
         "",
     ]
     for t, data in m["transforms"].items():
+        flip = t == "hflip_flip"
         lines += [
             f"## Transform: {t} (law: {data['law']}, n_eligible={data['n_eligible']})",
             "",
-            "| checkpoint | C | both_correct | wrong_dir | change | invalid% |",
-            "|---|---:|---:|---:|---:|---:|",
+            "| checkpoint | C_pair | A_transform | both_correct | invalid% |",
+            "|---|---:|---:|---:|---:|",
         ]
         for c in data["summary_by_checkpoint"]:
             s = data["summary_by_checkpoint"][c]
             d = data["direction_by_checkpoint"][c]
+            resp = d["response_flip"] if flip else d["response_stability"]
+            label = "response_flip" if flip else "response_stability"
             lines.append(
-                f"| {c} | {s['C']:.4f} | {s['both_correct']:.4f} | "
-                f"{d['wrong_direction']:.4f} | {d['change_rate']:.4f} | "
-                f"{s['invalid_rate']:.4f} |"
+                f"| {c} | {s['C_pair']:.4f} | {s['A_transform']:.4f} | "
+                f"{s['both_correct']:.4f} | {s['invalid_rate']:.4f} |"
             )
-        lines += ["", "| transition | deltaV | 95% CI | McNemar p |", "|---|---:|---:|---:|"]
+        lines += [
+            "",
+            f"`{label}` (per checkpoint, = C_pair by definition): " + ", ".join(
+                f"{c} {data['direction_by_checkpoint'][c][label]:.4f}"
+                for c in data["summary_by_checkpoint"]
+            ),
+            "",
+            "| transition | deltaV | 95% CI | McNemar p |",
+            "|---|---:|---:|---:|",
+        ]
         for name, tr in data["transitions"].items():
             if name in ("checkpoints",):
                 continue
@@ -185,7 +210,7 @@ def write_report(path, m, args):
         lines += ["", "### Relation-family breakdown (descriptive; relation-level inference is secondary)", ""]
         for c in data["family_breakdown"]:
             lines += [f"**{c}**", "",
-                      "| family | n | C | invalid% |", "|---|---:|---:|---:|"]
+                      "| family | n | A_transform | invalid% |", "|---|---:|---:|---:|"]
             for fam, fb in data["family_breakdown"][c].items():
                 lines.append(f"| {fam} | {fb['n']} | {fb['C']:.4f} | {fb['invalid_rate']:.4f} |")
             lines += [""]

@@ -25,7 +25,8 @@ from src.grounding import config
 from src.grounding.predictions import read_predictions, verify_paired_ids
 from src.grounding.semantic import TRANSFORMS, LAW_NAMES, FACING_TRANSFORM
 from src.grounding.semantic_metrics import (family_breakdown, relation_breakdown,
-                                            transitions_matrix, transform_summary)
+                                            transitions_matrix, transform_summary,
+                                            pair_consistency_indicators)
 from src.grounding.hashing import git_branch, git_commit, utc_now_iso, write_json
 
 
@@ -74,25 +75,28 @@ def main():
         rows = {c: read_predictions(files[c]) for c in ckpts}
 
         summaries = {c: transform_summary(rows[c], normal_rows[c]) for c in ckpts}
-        trans = transitions_matrix(rows)
+        cons = pair_consistency_indicators(rows, normal_rows)
+        trans = transitions_matrix(rows, indicator=cons)
+        trans_obey = transitions_matrix(rows)
         all_metrics["transforms"][t] = {
             "law": LAW_NAMES[t],
             "n_eligible": summaries[ckpts[0]]["n"],
             "summary_by_checkpoint": summaries,
             "transitions": trans,
+            "transitions_transformed_accuracy": trans_obey,
             "family_breakdown": {c: family_breakdown(rows[c]) for c in ckpts},
             "relation_breakdown": {c: relation_breakdown(rows[c]) for c in ckpts},
         }
         print(f"[{t}] law={LAW_NAMES[t]} n={summaries[ckpts[0]]['n']}")
         for c in ckpts:
             s = summaries[c]
-            print(f"  {c}: C={s['C']:.4f} both_correct={s['both_correct']:.4f} "
-                  f"invalid={s['invalid_rate']:.4f}")
+            print(f"  {c}: C_pair={s['C_pair']:.4f} A_transform={s['A_transform']:.4f} "
+                  f"both_correct={s['both_correct']:.4f} invalid={s['invalid_rate']:.4f}")
         for name, tr in trans.items():
             if name in ("checkpoints",):
                 continue
             ci = tr["delta_c_ci"]
-            print(f"  {name}: deltaC={tr['delta_C']:.4f} "
+            print(f"  {name}: deltaC_pair={tr['delta_C']:.4f} "
                   f"CI=[{ci['ci_lower']:.4f},{ci['ci_upper']:.4f}] "
                   f"mcnemar_p={tr['mcnemar']['exact_p']}")
 
@@ -114,9 +118,10 @@ def write_report(path, m, args):
     ]
     if facing_only:
         transform_rows = [
-            "| facingcomp | flip_law | expected = NOT original label "
-            "(facing <-> facing away from; dedicated Paper-1 D1 construct, "
-            "decision log 2026-08-11) |",
+            "| facingcomp | flip_law (antonym) | expected = NOT original label "
+            "(facing <-> facing away from; facing-antonym flip-law compliance, "
+            "Paper-1 antonym construct; NOT a universal strict logical "
+            "complement, decision log 2026-08-11) |",
         ]
     validity_ref = ("Validity table: `results/grounding/protocol/semantic_transform_validity.csv` "
                     "(all 61 relations classified; strict/soft/unsafe/not_in_scope with "
@@ -137,20 +142,35 @@ def write_report(path, m, args):
         f"- **Normal-condition baseline:** tag {m['normal_tag']}",
         "",
         "> Interpretation guardrails (protocol section 16): a model can obey a "
-        "semantic law while being wrong on the scene. C (obeying the expected "
-        "linked-answer law) is therefore ALWAYS reported together with "
-        "both-correct (obey AND normal-correct). Consistency alone is not "
+        "semantic law while being wrong on the scene. C_pair (linked-answer "
+        "consistency) is therefore ALWAYS reported together with "
+        "both-correct (obey AND normal-correct), and the transformed-accuracy "
+        "A_transform is reported separately. Consistency alone is not "
         "asserted as proof of grounding, and no internal mechanism is inferred.",
         "",
         "## Definitions",
         "",
-        "- `C_t(m)` = P(model prediction equals the expected transformed label "
-        "under transform `t` for checkpoint `m`); invalid outputs count as "
-        "non-obeying, and the invalid rate is reported separately.",
+        "- `C_pair(m,t)` = P(pair consistency): the model's TWO answers on the "
+        "same example obey the linked-answer law — flip-law transforms "
+        "(relcomp, facingcomp): P(transformed answer != normal answer); "
+        "stability/paraphrase transforms (sorev, continv): P(transformed "
+        "answer == normal answer). Invalid outputs count as non-consistent, "
+        "and the invalid rate is reported separately.",
+        "- `A_transform(m,t)` = P(transformed prediction equals the expected "
+        "transformed label) (transformed-answer accuracy, reported for "
+        "transparency and diagnostics; previously labeled `C`).",
         "- `both_correct(m,t)` = P(normal prediction correct AND transformed "
         "prediction obeys the law).",
-        "- `DeltaC(u->v) = C_t(v) - C_t(u)` with paired bootstrap CI "
-        "(n=10000, seed 20260810) and exact McNemar on the obey indicator.",
+        "- `DeltaC_pair(u->v) = C_pair(v) - C_pair(u)` with paired bootstrap CI "
+        "(n=10000, seed 20260810) and exact McNemar on the pair-consistency "
+        "indicator. (The transformed-accuracy analogue `DeltaC` is kept in the "
+        "metrics JSON under `transitions_transformed_accuracy`.)",
+        "",
+        "> Metric note (decision log 2026-08-11): pair consistency compares "
+        "the model's two answers on the same example. It is NOT the same as "
+        "transformed-answer accuracy: e.g. a model answering False on both "
+        "the original and the flipped statement scores A_transform=1 but "
+        "C_pair=0 for flip laws.",
         "",
         "## Transform definitions (frozen pre-result)",
         "",
@@ -163,15 +183,16 @@ def write_report(path, m, args):
         lines += [
             f"## Transform: {t} (law: {data['law']}, n_eligible={data['n_eligible']})",
             "",
-            "| checkpoint | C | both_correct | invalid% |",
-            "|---|---:|---:|---:|",
+            "| checkpoint | C_pair | A_transform | both_correct | invalid% |",
+            "|---|---:|---:|---:|---:|",
         ]
         for c in data["summary_by_checkpoint"]:
             s = data["summary_by_checkpoint"][c]
             lines.append(
-                f"| {c} | {s['C']:.4f} | {s['both_correct']:.4f} | {s['invalid_rate']:.4f} |"
+                f"| {c} | {s['C_pair']:.4f} | {s['A_transform']:.4f} | "
+                f"{s['both_correct']:.4f} | {s['invalid_rate']:.4f} |"
             )
-        lines += ["", "| transition | deltaC | 95% CI | McNemar p |", "|---|---:|---:|---:|"]
+        lines += ["", "| transition | deltaC_pair | 95% CI | McNemar p |", "|---|---:|---:|---:|"]
         notes = []
         for name, tr in data["transitions"].items():
             if name in ("checkpoints",):
@@ -195,7 +216,7 @@ def write_report(path, m, args):
         lines += ["", "### Relation-family breakdown (descriptive; relation-level inference is secondary)", ""]
         for c in data["family_breakdown"]:
             lines += [f"**{c}**", "",
-                      "| family | n | C | invalid% |", "|---|---:|---:|---:|"]
+                      "| family | n | A_transform | invalid% |", "|---|---:|---:|---:|"]
             for fam, fb in data["family_breakdown"][c].items():
                 lines.append(f"| {fam} | {fb['n']} | {fb['C']:.4f} | {fb['invalid_rate']:.4f} |")
             lines += [""]

@@ -29,8 +29,8 @@ facingcomp,contains,not_in_scope,flip_law,not a facing/facing-away relation (ded
 facingcomp,detached from,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,4
 facingcomp,down from,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,5
 facingcomp,enclosed by,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,2
-facingcomp,facing,strict_included,flip_law,Paper-1 strict complement construct; dedicated D1 diagnostic (decision log 2026-08-11),64,0
-facingcomp,facing away from,strict_included,flip_law,Paper-1 strict complement construct; dedicated D1 diagnostic (decision log 2026-08-11),39,0
+facingcomp,facing,strict_included,flip_law,facing-antonym flip-law compliance (Paper-1 antonym construct; NOT a universal strict logical complement; decision log 2026-08-11),64,0
+facingcomp,facing away from,strict_included,flip_law,facing-antonym flip-law compliance (Paper-1 antonym construct; NOT a universal strict logical complement; decision log 2026-08-11),39,0
 facingcomp,far away from,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,50
 facingcomp,far from,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,25
 facingcomp,has as a part,not_in_scope,flip_law,not a facing/facing-away relation (dedicated transform scope),0,8

@@ -11,7 +11,9 @@ import pytest
 
 from src.grounding import config, semantic
 from src.grounding.semantic_metrics import (family_breakdown, obey_indicator,
-                                            transitions_matrix, transform_summary)
+                                            transitions_matrix, transform_summary,
+                                            pair_consistency_indicator,
+                                            pair_consistency_indicators)
 
 
 class TestComplementMap:
@@ -161,3 +163,60 @@ class TestMetricToys:
         fb = family_breakdown(rows)
         assert fb["horizontal"]["n"] == 1
         assert fb["horizontal"]["C"] == 1.0
+
+    def _law_row(self, eid, pred, expected, law):
+        row = self._row(eid, pred, expected)
+        row["expected_prediction_behavior"] = law
+        return row
+
+    def test_pair_consistency_flip_unchanged_answer(self):
+        rows_t = [self._law_row("a", False, False, "flip_law")]
+        rows_n = [self._row("a", False, None, False)]
+        s = transform_summary(rows_t, rows_n)
+        assert s["A_transform"] == 1.0   # transformed accuracy, old C
+        assert s["C_pair"] == 0.0        # no answer change -> not consistent
+        assert [pair_consistency_indicator(rows_t, rows_n)] == [[False]]
+    def test_pair_consistency_flip_changed_answer(self):
+        rows_t = [self._law_row("a", True, True, "flip_law")]
+        rows_n = [self._row("a", False, None, False)]
+        assert transform_summary(rows_t, rows_n)["C_pair"] == 1.0
+        assert pair_consistency_indicator(rows_t, rows_n) == [True]
+
+    def test_pair_consistency_stability_kept_answer(self):
+        rows_t = [self._law_row("a", False, False, "stability_law")]
+        rows_n = [self._row("a", False, None, False)]
+        assert transform_summary(rows_t, rows_n)["C_pair"] == 1.0
+
+    def test_pair_consistency_stability_changed_answer(self):
+        rows_t = [self._law_row("a", True, False, "stability_law")]
+        rows_n = [self._row("a", False, None, False)]
+        s = transform_summary(rows_t, rows_n)
+        assert s["A_transform"] == 0.0   # wrong vs expected label
+        assert s["C_pair"] == 0.0        # answer changed -> not consistent
+        assert s["both_correct"] == 0.0
+
+    def test_pair_consistency_paraphrase_law(self):
+        rows_t = [self._law_row("a", True, True, "paraphrase_law")]
+        rows_n = [self._row("a", True, None, True)]
+        assert transform_summary(rows_t, rows_n)["C_pair"] == 1.0
+
+    def test_pair_consistency_invalid_counts_non_consistent(self):
+        rows_t = [self._law_row("a", None, False, "flip_law")]
+        rows_n = [self._row("a", False, None, False)]
+        assert pair_consistency_indicator(rows_t, rows_n) == [False]
+
+    def test_pair_consistency_transitions(self):
+        rows = {
+            "zero_shot": [self._law_row("a", False, False, "flip_law")],
+            "general_lora": [self._law_row("a", True, True, "flip_law")],
+            "hardneg_lora": [self._law_row("a", True, True, "flip_law")],
+        }
+        normal = {
+            "zero_shot": [self._row("a", False, None, False)],
+            "general_lora": [self._row("a", False, None, False)],
+            "hardneg_lora": [self._row("a", False, None, False)],
+        }
+        cons = pair_consistency_indicators(rows, normal)
+        tr = transitions_matrix(rows, indicator=cons)
+        assert tr["P1"]["delta_C"] == pytest.approx(1.0)   # C_pair 0 -> 1
+        assert tr["D1"]["delta_C"] == pytest.approx(0.0)

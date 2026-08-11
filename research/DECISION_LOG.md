@@ -109,7 +109,7 @@ The 392px cap alone reproduces ~97% of the discrepancy; the residual ~3% is unpi
 
 **Affected results already seen?** All Tier-A/B/C absolute accuracies; none of the paired ΔA/ΔG/ΔC differences (checkpoint-equal contract, fairness by construction). Tier-A normal 0.76993 must NOT be compared to Paper-1 0.80911 without citing this cap difference.
 
-**Expected impact:** documentation only. Options deferred to principal: (a) keep 392px contract as canonical Paper-2 and cite the reconciliation; (b) re-run Tier A/B/C under the full-resolution Paper-1 contract for direct comparability (new freeze + runs required, no change to any existing numbers).
+**Expected impact:** documentation only. Every checkpoint in Paper 2 receives the same frozen preprocessing, so the Paper-2 paired comparisons are valid FOR THE FROZEN 392px EVALUATION CONTRACT; no claim is made that adaptation effects are resolution-independent (a different resolution could in principle interact with adaptation). Options deferred to principal: (a) keep 392px contract as canonical Paper-2 and cite the reconciliation; (b) re-run Tier A/B/C under the full-resolution Paper-1 contract for direct comparability (new freeze + runs required, no change to any existing numbers).
 
 **Files/commits:** evidence at /tmp/opencode/repro_summary.json, disagreement IDs /tmp/opencode/disagreement_ids.json; reconciliation record results/grounding/analysis/baseline_reconciliation.md.
 
@@ -130,6 +130,46 @@ The 392px cap alone reproduces ~97% of the discrepancy; the residual ~3% is unpi
 **Expected impact:** direct measurement of the original D1 facing construct: P1 zero->General and D1 General->HardNeg flip-law compliance on facing/facing-away examples only, alongside both-correct and invalid rates.
 
 **Files/commits:** freeze commit (facing artifacts) precedes any facingcomp run.
+
+---
+
+## 2026-08-11 — Pair-consistency metric correction (Tier B/C linked-answer law)
+
+**Status:** verified implementation/metric correction (change-control rule permits verified bug fixes; no new inference, no changed IDs, no changed seeds)
+
+**Old rule:** Tier-B `C` was computed as P(transformed prediction == expected transformed ground-truth label) — i.e. transformed-answer accuracy — and Tier-C `change_rate` was computed as prediction != original ground_truth. Neither is the frozen protocol's linked-answer (pair) consistency, which compares the model's TWO answers on the same example.
+
+**New rule:** for every Tier-B transform and Tier-C transform, three quantities are computed and reported separately:
+- **Pair consistency** `C_pair` — flip-law transforms: P(pred_transformed != pred_normal); stability/paraphrase/invariant transforms: P(pred_transformed == pred_normal). This is the paper-facing ΔC quantity: ΔC_pair = C_pair(after) − C_pair(before).
+- **Transformed accuracy** `A_transform` (kept; previously labeled `C`) — P(pred_transformed == expected transformed label).
+- **Both-correct** `B` — P(normal correct AND transformed correct). Unchanged definition; for Tier B/C it equals the previously reported both_correct.
+Tier C additionally reports response rates vs the NORMAL PREDICTION (not vs truth): `response_flip` (mirrored left/right: P(pred_mirror != pred_normal)) and `response_stability` (vertical/depth: P(pred_mirror == pred_normal)).
+
+**Reason:** the existing implementation did not implement the protocol's consistency-vs-both-correct distinction: e.g., a model answering False on both "left of"(T) and "right of"(F) scored C=1 under the old rule despite not flipping; a correct flip scoring C=0. Invalid outputs count as non-consistent everywhere; invalid rates stay reported separately. Nothing in the raw predictions changes; only analysis definitions are corrected, and the previous quantities remain available in the metrics JSON under `delta_C`/`C` (transformed accuracy) alongside `delta_C_pair`/`C_pair`.
+
+**Affected results already seen?** Analysis reports only (Tier-B/C/facing regenerated). Raw predictions, IDs, freeze artifacts unchanged. The facing numbers 56.3/70.9/76.7 were transformed-label correctness; the Paper-1-facing comparisons now use C_pair.
+
+**Expected impact:** ΔC paper-facing quantities switch to pair consistency; Tier-A ΔA/ΔG unaffected.
+
+**Files/commits:** semantic_metrics.py, visual_metrics.py, analyze_tier_b.py, analyze_tier_c.py, regenerated analysis JSONs/reports.
+
+---
+
+## 2026-08-11 — facingcomp naming rule (permanent wording lock)
+
+**Status:** verified wording rule (locks terminology for all future facingcomp reporting)
+
+**Old rule:** facingcomp could be described with "strict complement" language.
+
+**New rule:** the facingcomp metric is ALWAYS reported as "facing-antonym flip-law compliance" (or "facing/facing-away relation-specific consistency"). It is NEVER called "strict logical complement accuracy". Reason: the Tier-B relcomp table soft-excluded facing/facing-away because oblique orientations can make the pair non-exhaustive, and the VSR paper describes facing -> facing away from as an antonym transformation for a prompting baseline, not a universally exhaustive logical complement in every natural scene.
+
+**D1 phrasing rule:** HardNeg is NEVER said to "significantly improve facing coherence over General". The allowed statement is: "Hard-negative adaptation is directionally associated with greater facing-antonym consistency than General LoRA, but the General->HardNeg contrast is not statistically significant at this sample size" (p=.146, CI touches zero at n=103).
+
+**Affected results already seen?** No result values change; wording-only refresh of the facing freeze files and reports (hashes change, values identical; the 103 eligible IDs and parser audit are unchanged).
+
+**Expected impact:** paper-safe terminology for Paper 2.
+
+**Files/commits:** DECISION_LOG.md; facing freeze files (re-generated wording-only, sha changes recorded); semantic.py metadata; facing reports.
 
 ---
 

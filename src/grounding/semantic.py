@@ -351,11 +351,13 @@ def build_transform(record: dict, transform: str) -> dict:
                 "law": LAW_NAMES[FACING_TRANSFORM],
                 "original_relation": relation,
                 "complement_relation": comp,
-                "note": ("dedicated D1 diagnostic; Paper-1 treated facing <-> "
-                         "facing away from as a strict complement pair; the "
+                "note": ("facing-antonym flip-law compliance diagnostic; "
+                         "Paper-1 treated facing <-> "
+                         "facing away from as an antonym complement pair; the "
                          "Tier-B relcomp table soft-excludes it (oblique "
                          "orientations) but this transform applies the "
-                         "Paper-1 construct directly (decision log "
+                         "Paper-1 antonym construct directly; NOT a "
+                         "universal strict logical complement (decision log "
                          "2026-08-11)"),
             },
         }
@@ -532,8 +534,9 @@ def build_facing_validity_table(records: list) -> list:
                    if r["relation"] == relation and r["example_id"] not in eligible_ids)
         if relation in FACING_COMPLEMENT_PAIRS:
             status, reason = "strict_included", (
-                "Paper-1 strict complement construct; dedicated D1 diagnostic "
-                "(decision log 2026-08-11)")
+                "facing-antonym flip-law compliance (Paper-1 antonym "
+                "construct; NOT a universal strict logical complement; "
+                "decision log 2026-08-11)")
         else:
             status, reason = "not_in_scope", (
                 "not a facing/facing-away relation (dedicated transform scope)")

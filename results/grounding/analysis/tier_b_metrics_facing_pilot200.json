@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-11T02:12:01+00:00",
+  "generated_at": "2026-08-11T02:28:46+00:00",
   "git_branch": "research/spatial-grounding-audit",
-  "git_commit": "1fa62a03c28b1a502bc7b7784cd811736e10711a",
+  "git_commit": "6246df28a55a33c50f5b99dd8274880a4c213370",
   "normal_tag": "full",
   "status": "engineering",
   "tag": "facing_pilot200",
@@ -72,7 +72,9 @@
       },
       "summary_by_checkpoint": {
         "general_lora": {
+          "A_transform": 0.708738,
           "C": 0.708738,
+          "C_pair": 0.708738,
           "C_valid": 0.708738,
           "both_correct": 0.572816,
           "invalid": 0,
@@ -81,7 +83,9 @@
           "obey": 73
         },
         "hardneg_lora": {
+          "A_transform": 0.76699,
           "C": 0.76699,
+          "C_pair": 0.737864,
           "C_valid": 0.76699,
           "both_correct": 0.61165,
           "invalid": 0,
@@ -90,7 +94,9 @@
           "obey": 79
         },
         "zero_shot": {
+          "A_transform": 0.563107,
           "C": 0.563107,
+          "C_pair": 0.349515,
           "C_valid": 0.563107,
           "both_correct": 0.262136,
           "invalid": 0,
@@ -100,6 +106,59 @@
         }
       },
       "transitions": {
+        "D1": {
+          "C_u": 0.708738,
+          "C_v": 0.737864,
+          "delta_C": 0.029126,
+          "delta_c_ci": {
+            "ci_lower": -0.058252,
+            "ci_upper": 0.116505,
+            "mean": 0.029126,
+            "n": 103,
+            "n_iter": 10000,
+            "seed": 20260810
+          },
+          "from": "general_lora",
+          "mcnemar": {
+            "b": 12,
+            "c": 9,
+            "discordant_n": 21,
+            "exact_p": 0.663624,
+            "mcnemar_odds_ratio": 1.3333333333333333
+          },
+          "n": 103,
+          "to": "hardneg_lora"
+        },
+        "P1": {
+          "C_u": 0.349515,
+          "C_v": 0.708738,
+          "delta_C": 0.359223,
+          "delta_c_ci": {
+            "ci_lower": 0.242718,
+            "ci_upper": 0.475728,
+            "mean": 0.359223,
+            "n": 103,
+            "n_iter": 10000,
+            "seed": 20260810
+          },
+          "from": "zero_shot",
+          "mcnemar": {
+            "b": 43,
+            "c": 6,
+            "discordant_n": 49,
+            "exact_p": 0.0,
+            "mcnemar_odds_ratio": 7.166666666666667
+          },
+          "n": 103,
+          "to": "general_lora"
+        },
+        "checkpoints": [
+          "zero_shot",
+          "general_lora",
+          "hardneg_lora"
+        ]
+      },
+      "transitions_transformed_accuracy": {
         "D1": {
           "C_u": 0.708738,
           "C_v": 0.76699,
