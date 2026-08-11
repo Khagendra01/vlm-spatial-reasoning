@@ -82,6 +82,8 @@ def main():
             print(f"  {c}: C={s['C']:.4f} both_correct={s['both_correct']:.4f} "
                   f"invalid={s['invalid_rate']:.4f}")
         for name, tr in trans.items():
+            if name in ("checkpoints",):
+                continue
             ci = tr["delta_c_ci"]
             print(f"  {name}: deltaC={tr['delta_C']:.4f} "
                   f"CI=[{ci['ci_lower']:.4f},{ci['ci_upper']:.4f}] "
@@ -150,6 +152,8 @@ def write_report(path, m, args):
             )
         lines += ["", "| transition | deltaC | 95% CI | McNemar p |", "|---|---:|---:|---:|"]
         for name, tr in data["transitions"].items():
+            if name in ("checkpoints",):
+                continue
             ci = tr["delta_c_ci"]
             lines.append(
                 f"| {name} ({tr['from']}->{tr['to']}) | {tr['delta_C']:.4f} | "

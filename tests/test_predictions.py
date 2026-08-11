@@ -92,6 +92,32 @@ class TestCsvRoundTrip:
         assert back[2]["prediction"] is False  # i=2 -> parsed False
         assert back[0]["condition"] == "text_only"
 
+    def test_expected_transformed_label_type_recovery(self, tmp_path):
+        # regression: read_predictions must convert expected_transformed_label
+        # to a real bool, otherwise bool("False") == True corrupts obey metrics
+        rows = [{"example_id": "vsr_test:0001", "paired_parent_id": "vsr_test:0001",
+                 "split": "test", "condition": "hflip_flip", "intervention_axis": "visual",
+                 "statement": "s", "original_statement": "s", "relation": "left of",
+                 "relation_family": "horizontal", "subject": "a", "object": "b",
+                 "ground_truth": True, "expected_transformed_label": False,
+                 "expected_prediction_behavior": "flip_expected", "prediction": True,
+                 "correct": False, "raw_output": "True", "model_id": "m",
+                 "model_revision": None, "model_condition": "zero_shot",
+                 "adapter_path": "", "adapter_hash": "", "training_seed": None,
+                 "prompt_version": "p", "parser_version": "q", "image_id": "i",
+                 "source_image_id": "i", "replacement_image_id": None,
+                 "transformed_image_id": "i", "transform_name": "hflip",
+                 "transform_version": "tier_c_v0.1", "transform_metadata": "{}",
+                 "shuffle_seed": None, "generation_settings": "{}", "run_id": "r",
+                 "git_commit": "g", "protocol_version": "v0.1"}]
+        path = tmp_path / "et.csv"
+        write_predictions(path, rows)
+        back = read_predictions(path)[0]
+        assert back["expected_transformed_label"] is False
+        assert back["ground_truth"] is True
+        assert back["prediction"] is True
+        assert back["correct"] is False
+
     def test_paired_ids_equal(self, tmp_path):
         rows_a = [build_prediction_row(_record(f"vsr_test:{i:04d}"),
                                        _input_row(f"vsr_test:{i:04d}"),

@@ -134,6 +134,8 @@ def read_predictions(path) -> list:
         row["ground_truth"] = _to_bool_or_none(row.get("ground_truth"))
         row["prediction"] = _to_bool_or_none(row.get("prediction"))
         row["correct"] = _to_bool_or_none(row.get("correct"))
+        row["expected_transformed_label"] = _to_bool_or_none(
+            row.get("expected_transformed_label"))
         if "label" in row:
             row["label"] = _to_bool_or_none(row.get("label"))
     return raw

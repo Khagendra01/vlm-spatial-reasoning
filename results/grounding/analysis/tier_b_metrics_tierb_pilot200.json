@@ -1,0 +1,844 @@
+{
+  "generated_at": "2026-08-11T01:20:10+00:00",
+  "git_branch": "research/spatial-grounding-audit",
+  "git_commit": "38ad6fbc3e13cd785730b656c19512866d0845fd",
+  "normal_tag": "full",
+  "status": "engineering",
+  "tag": "tierb_pilot200",
+  "transforms": {
+    "continv": {
+      "family_breakdown": {
+        "general_lora": {
+          "containment": {
+            "C": 0.911243,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 169,
+            "obey": 154
+          }
+        },
+        "hardneg_lora": {
+          "containment": {
+            "C": 0.923077,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 169,
+            "obey": 156
+          }
+        },
+        "zero_shot": {
+          "containment": {
+            "C": 0.857988,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 169,
+            "obey": 145
+          }
+        }
+      },
+      "law": "paraphrase_law",
+      "n_eligible": 169,
+      "relation_breakdown": {
+        "general_lora": {
+          "contains": {
+            "C": 0.939394,
+            "n": 66
+          },
+          "in": {
+            "C": 0.916667,
+            "n": 60
+          },
+          "inside": {
+            "C": 0.846154,
+            "n": 39
+          },
+          "within": {
+            "C": 1.0,
+            "n": 4
+          }
+        },
+        "hardneg_lora": {
+          "contains": {
+            "C": 0.939394,
+            "n": 66
+          },
+          "in": {
+            "C": 0.916667,
+            "n": 60
+          },
+          "inside": {
+            "C": 0.897436,
+            "n": 39
+          },
+          "within": {
+            "C": 1.0,
+            "n": 4
+          }
+        },
+        "zero_shot": {
+          "contains": {
+            "C": 0.833333,
+            "n": 66
+          },
+          "in": {
+            "C": 0.916667,
+            "n": 60
+          },
+          "inside": {
+            "C": 0.846154,
+            "n": 39
+          },
+          "within": {
+            "C": 0.5,
+            "n": 4
+          }
+        }
+      },
+      "summary_by_checkpoint": {
+        "general_lora": {
+          "C": 0.911243,
+          "C_valid": 0.911243,
+          "both_correct": 0.852071,
+          "invalid": 0,
+          "invalid_rate": 0.0,
+          "n": 169,
+          "obey": 154
+        },
+        "hardneg_lora": {
+          "C": 0.923077,
+          "C_valid": 0.923077,
+          "both_correct": 0.857988,
+          "invalid": 0,
+          "invalid_rate": 0.0,
+          "n": 169,
+          "obey": 156
+        },
+        "zero_shot": {
+          "C": 0.857988,
+          "C_valid": 0.857988,
+          "both_correct": 0.816568,
+          "invalid": 0,
+          "invalid_rate": 0.0,
+          "n": 169,
+          "obey": 145
+        }
+      },
+      "transitions": {
+        "D1": {
+          "C_u": 0.911243,
+          "C_v": 0.923077,
+          "delta_C": 0.011834,
+          "delta_c_ci": {
+            "ci_lower": -0.011834,
+            "ci_upper": 0.035503,
+            "mean": 0.011834,
+            "n": 169,
+            "n_iter": 10000,
+            "seed": 20260810
+          },
+          "from": "general_lora",
+          "mcnemar": {
+            "b": 3,
+            "c": 1,
+            "discordant_n": 4,
+            "exact_p": 0.625,
+            "mcnemar_odds_ratio": 3.0
+          },
+          "n": 169,
+          "to": "hardneg_lora"
+        },
+        "P1": {
+          "C_u": 0.857988,
+          "C_v": 0.911243,
+          "delta_C": 0.053254,
+          "delta_c_ci": {
+            "ci_lower": 0.005917,
+            "ci_upper": 0.106509,
+            "mean": 0.053254,
+            "n": 169,
+            "n_iter": 10000,
+            "seed": 20260810
+          },
+          "from": "zero_shot",
+          "mcnemar": {
+            "b": 14,
+            "c": 5,
+            "discordant_n": 19,
+            "exact_p": 0.063568,
+            "mcnemar_odds_ratio": 2.8
+          },
+          "n": 169,
+          "to": "general_lora"
+        },
+        "checkpoints": [
+          "zero_shot",
+          "general_lora",
+          "hardneg_lora"
+        ]
+      }
+    },
+    "relcomp": {
+      "family_breakdown": {
+        "general_lora": {
+          "depth": {
+            "C": 0.695652,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 92,
+            "obey": 64
+          },
+          "horizontal": {
+            "C": 0.594595,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 74,
+            "obey": 44
+          },
+          "vertical": {
+            "C": 0.647059,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 34,
+            "obey": 22
+          }
+        },
+        "hardneg_lora": {
+          "depth": {
+            "C": 0.728261,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 92,
+            "obey": 67
+          },
+          "horizontal": {
+            "C": 0.608108,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 74,
+            "obey": 45
+          },
+          "vertical": {
+            "C": 0.647059,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 34,
+            "obey": 22
+          }
+        },
+        "zero_shot": {
+          "depth": {
+            "C": 0.673913,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 92,
+            "obey": 62
+          },
+          "horizontal": {
+            "C": 0.581081,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 74,
+            "obey": 43
+          },
+          "vertical": {
+            "C": 0.617647,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 34,
+            "obey": 21
+          }
+        }
+      },
+      "law": "flip_law",
+      "n_eligible": 200,
+      "relation_breakdown": {
+        "general_lora": {
+          "above": {
+            "C": 0.666667,
+            "n": 21
+          },
+          "at the left side of": {
+            "C": 0.586207,
+            "n": 29
+          },
+          "at the right side of": {
+            "C": 0.44,
+            "n": 25
+          },
+          "behind": {
+            "C": 0.674419,
+            "n": 43
+          },
+          "below": {
+            "C": 0.615385,
+            "n": 13
+          },
+          "in front of": {
+            "C": 0.714286,
+            "n": 49
+          },
+          "left of": {
+            "C": 0.8,
+            "n": 10
+          },
+          "right of": {
+            "C": 0.8,
+            "n": 10
+          }
+        },
+        "hardneg_lora": {
+          "above": {
+            "C": 0.619048,
+            "n": 21
+          },
+          "at the left side of": {
+            "C": 0.586207,
+            "n": 29
+          },
+          "at the right side of": {
+            "C": 0.52,
+            "n": 25
+          },
+          "behind": {
+            "C": 0.72093,
+            "n": 43
+          },
+          "below": {
+            "C": 0.692308,
+            "n": 13
+          },
+          "in front of": {
+            "C": 0.734694,
+            "n": 49
+          },
+          "left of": {
+            "C": 0.8,
+            "n": 10
+          },
+          "right of": {
+            "C": 0.7,
+            "n": 10
+          }
+        },
+        "zero_shot": {
+          "above": {
+            "C": 0.619048,
+            "n": 21
+          },
+          "at the left side of": {
+            "C": 0.586207,
+            "n": 29
+          },
+          "at the right side of": {
+            "C": 0.44,
+            "n": 25
+          },
+          "behind": {
+            "C": 0.604651,
+            "n": 43
+          },
+          "below": {
+            "C": 0.615385,
+            "n": 13
+          },
+          "in front of": {
+            "C": 0.734694,
+            "n": 49
+          },
+          "left of": {
+            "C": 0.7,
+            "n": 10
+          },
+          "right of": {
+            "C": 0.8,
+            "n": 10
+          }
+        }
+      },
+      "summary_by_checkpoint": {
+        "general_lora": {
+          "C": 0.65,
+          "C_valid": 0.65,
+          "both_correct": 0.595,
+          "invalid": 0,
+          "invalid_rate": 0.0,
+          "n": 200,
+          "obey": 130
+        },
+        "hardneg_lora": {
+          "C": 0.67,
+          "C_valid": 0.67,
+          "both_correct": 0.63,
+          "invalid": 0,
+          "invalid_rate": 0.0,
+          "n": 200,
+          "obey": 134
+        },
+        "zero_shot": {
+          "C": 0.63,
+          "C_valid": 0.63,
+          "both_correct": 0.43,
+          "invalid": 0,
+          "invalid_rate": 0.0,
+          "n": 200,
+          "obey": 126
+        }
+      },
+      "transitions": {
+        "D1": {
+          "C_u": 0.65,
+          "C_v": 0.67,
+          "delta_C": 0.02,
+          "delta_c_ci": {
+            "ci_lower": -0.01,
+            "ci_upper": 0.05,
+            "mean": 0.02,
+            "n": 200,
+            "n_iter": 10000,
+            "seed": 20260810
+          },
+          "from": "general_lora",
+          "mcnemar": {
+            "b": 7,
+            "c": 3,
+            "discordant_n": 10,
+            "exact_p": 0.34375,
+            "mcnemar_odds_ratio": 2.3333333333333335
+          },
+          "n": 200,
+          "to": "hardneg_lora"
+        },
+        "P1": {
+          "C_u": 0.63,
+          "C_v": 0.65,
+          "delta_C": 0.02,
+          "delta_c_ci": {
+            "ci_lower": -0.015,
+            "ci_upper": 0.055,
+            "mean": 0.02,
+            "n": 200,
+            "n_iter": 10000,
+            "seed": 20260810
+          },
+          "from": "zero_shot",
+          "mcnemar": {
+            "b": 9,
+            "c": 5,
+            "discordant_n": 14,
+            "exact_p": 0.42395,
+            "mcnemar_odds_ratio": 1.8
+          },
+          "n": 200,
+          "to": "general_lora"
+        },
+        "checkpoints": [
+          "zero_shot",
+          "general_lora",
+          "hardneg_lora"
+        ]
+      }
+    },
+    "sorev": {
+      "family_breakdown": {
+        "general_lora": {
+          "horizontal": {
+            "C": 0.725,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 40,
+            "obey": 29
+          },
+          "other": {
+            "C": 0.583333,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 12,
+            "obey": 7
+          },
+          "proximity": {
+            "C": 0.913043,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 46,
+            "obey": 42
+          },
+          "topology_contact": {
+            "C": 0.77451,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 102,
+            "obey": 79
+          }
+        },
+        "hardneg_lora": {
+          "horizontal": {
+            "C": 0.75,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 40,
+            "obey": 30
+          },
+          "other": {
+            "C": 0.583333,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 12,
+            "obey": 7
+          },
+          "proximity": {
+            "C": 0.934783,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 46,
+            "obey": 43
+          },
+          "topology_contact": {
+            "C": 0.823529,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 102,
+            "obey": 84
+          }
+        },
+        "zero_shot": {
+          "horizontal": {
+            "C": 0.8,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 40,
+            "obey": 32
+          },
+          "other": {
+            "C": 0.75,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 12,
+            "obey": 9
+          },
+          "proximity": {
+            "C": 0.76087,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 46,
+            "obey": 35
+          },
+          "topology_contact": {
+            "C": 0.803922,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 102,
+            "obey": 82
+          }
+        }
+      },
+      "law": "stability_law",
+      "n_eligible": 200,
+      "relation_breakdown": {
+        "general_lora": {
+          "across from": {
+            "C": 1.0,
+            "n": 5
+          },
+          "adjacent to": {
+            "C": 0.75,
+            "n": 4
+          },
+          "against": {
+            "C": 0.5,
+            "n": 2
+          },
+          "alongside": {
+            "C": 0.833333,
+            "n": 6
+          },
+          "at the side of": {
+            "C": 0.333333,
+            "n": 3
+          },
+          "attached to": {
+            "C": 0.5,
+            "n": 4
+          },
+          "away from": {
+            "C": 0.818182,
+            "n": 11
+          },
+          "beside": {
+            "C": 0.75,
+            "n": 12
+          },
+          "close to": {
+            "C": 1.0,
+            "n": 5
+          },
+          "connected to": {
+            "C": 1.0,
+            "n": 1
+          },
+          "detached from": {
+            "C": 1.0,
+            "n": 2
+          },
+          "far away from": {
+            "C": 0.882353,
+            "n": 17
+          },
+          "far from": {
+            "C": 1.0,
+            "n": 5
+          },
+          "near": {
+            "C": 1.0,
+            "n": 8
+          },
+          "next to": {
+            "C": 0.642857,
+            "n": 14
+          },
+          "opposite to": {
+            "C": 0.333333,
+            "n": 6
+          },
+          "touching": {
+            "C": 0.784946,
+            "n": 93
+          },
+          "with": {
+            "C": 1.0,
+            "n": 2
+          }
+        },
+        "hardneg_lora": {
+          "across from": {
+            "C": 0.8,
+            "n": 5
+          },
+          "adjacent to": {
+            "C": 0.75,
+            "n": 4
+          },
+          "against": {
+            "C": 1.0,
+            "n": 2
+          },
+          "alongside": {
+            "C": 0.833333,
+            "n": 6
+          },
+          "at the side of": {
+            "C": 0.333333,
+            "n": 3
+          },
+          "attached to": {
+            "C": 0.5,
+            "n": 4
+          },
+          "away from": {
+            "C": 0.818182,
+            "n": 11
+          },
+          "beside": {
+            "C": 0.833333,
+            "n": 12
+          },
+          "close to": {
+            "C": 1.0,
+            "n": 5
+          },
+          "connected to": {
+            "C": 1.0,
+            "n": 1
+          },
+          "detached from": {
+            "C": 1.0,
+            "n": 2
+          },
+          "far away from": {
+            "C": 0.941176,
+            "n": 17
+          },
+          "far from": {
+            "C": 1.0,
+            "n": 5
+          },
+          "near": {
+            "C": 1.0,
+            "n": 8
+          },
+          "next to": {
+            "C": 0.714286,
+            "n": 14
+          },
+          "opposite to": {
+            "C": 0.333333,
+            "n": 6
+          },
+          "touching": {
+            "C": 0.827957,
+            "n": 93
+          },
+          "with": {
+            "C": 1.0,
+            "n": 2
+          }
+        },
+        "zero_shot": {
+          "across from": {
+            "C": 0.6,
+            "n": 5
+          },
+          "adjacent to": {
+            "C": 1.0,
+            "n": 4
+          },
+          "against": {
+            "C": 0.5,
+            "n": 2
+          },
+          "alongside": {
+            "C": 0.833333,
+            "n": 6
+          },
+          "at the side of": {
+            "C": 0.333333,
+            "n": 3
+          },
+          "attached to": {
+            "C": 0.5,
+            "n": 4
+          },
+          "away from": {
+            "C": 0.727273,
+            "n": 11
+          },
+          "beside": {
+            "C": 0.833333,
+            "n": 12
+          },
+          "close to": {
+            "C": 1.0,
+            "n": 5
+          },
+          "connected to": {
+            "C": 1.0,
+            "n": 1
+          },
+          "detached from": {
+            "C": 1.0,
+            "n": 2
+          },
+          "far away from": {
+            "C": 0.647059,
+            "n": 17
+          },
+          "far from": {
+            "C": 0.8,
+            "n": 5
+          },
+          "near": {
+            "C": 0.875,
+            "n": 8
+          },
+          "next to": {
+            "C": 0.928571,
+            "n": 14
+          },
+          "opposite to": {
+            "C": 0.666667,
+            "n": 6
+          },
+          "touching": {
+            "C": 0.817204,
+            "n": 93
+          },
+          "with": {
+            "C": 0.5,
+            "n": 2
+          }
+        }
+      },
+      "summary_by_checkpoint": {
+        "general_lora": {
+          "C": 0.785,
+          "C_valid": 0.785,
+          "both_correct": 0.715,
+          "invalid": 0,
+          "invalid_rate": 0.0,
+          "n": 200,
+          "obey": 157
+        },
+        "hardneg_lora": {
+          "C": 0.82,
+          "C_valid": 0.82,
+          "both_correct": 0.735,
+          "invalid": 0,
+          "invalid_rate": 0.0,
+          "n": 200,
+          "obey": 164
+        },
+        "zero_shot": {
+          "C": 0.79,
+          "C_valid": 0.79,
+          "both_correct": 0.69,
+          "invalid": 0,
+          "invalid_rate": 0.0,
+          "n": 200,
+          "obey": 158
+        }
+      },
+      "transitions": {
+        "D1": {
+          "C_u": 0.785,
+          "C_v": 0.82,
+          "delta_C": 0.035,
+          "delta_c_ci": {
+            "ci_lower": 0.005,
+            "ci_upper": 0.07,
+            "mean": 0.035,
+            "n": 200,
+            "n_iter": 10000,
+            "seed": 20260810
+          },
+          "from": "general_lora",
+          "mcnemar": {
+            "b": 9,
+            "c": 2,
+            "discordant_n": 11,
+            "exact_p": 0.06543,
+            "mcnemar_odds_ratio": 4.5
+          },
+          "n": 200,
+          "to": "hardneg_lora"
+        },
+        "P1": {
+          "C_u": 0.79,
+          "C_v": 0.785,
+          "delta_C": -0.005,
+          "delta_c_ci": {
+            "ci_lower": -0.06,
+            "ci_upper": 0.05,
+            "mean": -0.005,
+            "n": 200,
+            "n_iter": 10000,
+            "seed": 20260810
+          },
+          "from": "zero_shot",
+          "mcnemar": {
+            "b": 14,
+            "c": 15,
+            "discordant_n": 29,
+            "exact_p": 1.0,
+            "mcnemar_odds_ratio": 0.9333333333333333
+          },
+          "n": 200,
+          "to": "general_lora"
+        },
+        "checkpoints": [
+          "zero_shot",
+          "general_lora",
+          "hardneg_lora"
+        ]
+      }
+    }
+  }
+}

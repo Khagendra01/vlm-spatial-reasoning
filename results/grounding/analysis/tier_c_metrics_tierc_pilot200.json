@@ -1,0 +1,443 @@
+{
+  "generated_at": "2026-08-11T01:20:24+00:00",
+  "git_branch": "research/spatial-grounding-audit",
+  "git_commit": "38ad6fbc3e13cd785730b656c19512866d0845fd",
+  "normal_tag": "full",
+  "status": "engineering",
+  "tag": "tierc_pilot200",
+  "transforms": {
+    "hflip_flip": {
+      "direction_by_checkpoint": {
+        "general_lora": {
+          "C": 0.65,
+          "both_correct": 0.585,
+          "change_rate": 0.65,
+          "invalid": 0,
+          "invalid_rate": 0.0,
+          "law": "flip_expected",
+          "n": 200,
+          "obey": 130,
+          "wrong_direction": 0.35
+        },
+        "hardneg_lora": {
+          "C": 0.66,
+          "both_correct": 0.61,
+          "change_rate": 0.66,
+          "invalid": 0,
+          "invalid_rate": 0.0,
+          "law": "flip_expected",
+          "n": 200,
+          "obey": 132,
+          "wrong_direction": 0.34
+        },
+        "zero_shot": {
+          "C": 0.62,
+          "both_correct": 0.52,
+          "change_rate": 0.62,
+          "invalid": 0,
+          "invalid_rate": 0.0,
+          "law": "flip_expected",
+          "n": 200,
+          "obey": 124,
+          "wrong_direction": 0.38
+        }
+      },
+      "family_breakdown": {
+        "general_lora": {
+          "horizontal": {
+            "C": 0.65,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 200,
+            "obey": 130
+          }
+        },
+        "hardneg_lora": {
+          "horizontal": {
+            "C": 0.66,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 200,
+            "obey": 132
+          }
+        },
+        "zero_shot": {
+          "horizontal": {
+            "C": 0.62,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 200,
+            "obey": 124
+          }
+        }
+      },
+      "law": "flip_expected",
+      "n_eligible": 200,
+      "relation_breakdown": {
+        "general_lora": {
+          "at the left side of": {
+            "C": 0.614458,
+            "n": 83
+          },
+          "at the right side of": {
+            "C": 0.65625,
+            "n": 64
+          },
+          "left of": {
+            "C": 0.666667,
+            "n": 33
+          },
+          "right of": {
+            "C": 0.75,
+            "n": 20
+          }
+        },
+        "hardneg_lora": {
+          "at the left side of": {
+            "C": 0.614458,
+            "n": 83
+          },
+          "at the right side of": {
+            "C": 0.6875,
+            "n": 64
+          },
+          "left of": {
+            "C": 0.666667,
+            "n": 33
+          },
+          "right of": {
+            "C": 0.75,
+            "n": 20
+          }
+        },
+        "zero_shot": {
+          "at the left side of": {
+            "C": 0.554217,
+            "n": 83
+          },
+          "at the right side of": {
+            "C": 0.640625,
+            "n": 64
+          },
+          "left of": {
+            "C": 0.666667,
+            "n": 33
+          },
+          "right of": {
+            "C": 0.75,
+            "n": 20
+          }
+        }
+      },
+      "summary_by_checkpoint": {
+        "general_lora": {
+          "C": 0.65,
+          "C_valid": 0.65,
+          "both_correct": 0.585,
+          "invalid": 0,
+          "invalid_rate": 0.0,
+          "n": 200,
+          "obey": 130
+        },
+        "hardneg_lora": {
+          "C": 0.66,
+          "C_valid": 0.66,
+          "both_correct": 0.61,
+          "invalid": 0,
+          "invalid_rate": 0.0,
+          "n": 200,
+          "obey": 132
+        },
+        "zero_shot": {
+          "C": 0.62,
+          "C_valid": 0.62,
+          "both_correct": 0.52,
+          "invalid": 0,
+          "invalid_rate": 0.0,
+          "n": 200,
+          "obey": 124
+        }
+      },
+      "transitions": {
+        "D1": {
+          "C_u": 0.65,
+          "C_v": 0.66,
+          "delta_C": 0.01,
+          "delta_c_ci": {
+            "ci_lower": -0.015,
+            "ci_upper": 0.04,
+            "mean": 0.01,
+            "n": 200,
+            "n_iter": 10000,
+            "seed": 20260810
+          },
+          "from": "general_lora",
+          "mcnemar": {
+            "b": 5,
+            "c": 3,
+            "discordant_n": 8,
+            "exact_p": 0.726562,
+            "mcnemar_odds_ratio": 1.6666666666666667
+          },
+          "n": 200,
+          "to": "hardneg_lora"
+        },
+        "P1": {
+          "C_u": 0.62,
+          "C_v": 0.65,
+          "delta_C": 0.03,
+          "delta_c_ci": {
+            "ci_lower": -0.005,
+            "ci_upper": 0.065,
+            "mean": 0.03,
+            "n": 200,
+            "n_iter": 10000,
+            "seed": 20260810
+          },
+          "from": "zero_shot",
+          "mcnemar": {
+            "b": 10,
+            "c": 4,
+            "discordant_n": 14,
+            "exact_p": 0.179565,
+            "mcnemar_odds_ratio": 2.5
+          },
+          "n": 200,
+          "to": "general_lora"
+        },
+        "checkpoints": [
+          "zero_shot",
+          "general_lora",
+          "hardneg_lora"
+        ]
+      }
+    },
+    "hflip_invariant": {
+      "direction_by_checkpoint": {
+        "general_lora": {
+          "C": 0.875,
+          "both_correct": 0.82,
+          "change_rate": 0.125,
+          "invalid": 0,
+          "invalid_rate": 0.0,
+          "law": "expected_invariant",
+          "n": 200,
+          "obey": 175,
+          "wrong_direction": 0.875
+        },
+        "hardneg_lora": {
+          "C": 0.855,
+          "both_correct": 0.825,
+          "change_rate": 0.145,
+          "invalid": 0,
+          "invalid_rate": 0.0,
+          "law": "expected_invariant",
+          "n": 200,
+          "obey": 171,
+          "wrong_direction": 0.855
+        },
+        "zero_shot": {
+          "C": 0.725,
+          "both_correct": 0.68,
+          "change_rate": 0.275,
+          "invalid": 0,
+          "invalid_rate": 0.0,
+          "law": "expected_invariant",
+          "n": 200,
+          "obey": 145,
+          "wrong_direction": 0.725
+        }
+      },
+      "family_breakdown": {
+        "general_lora": {
+          "depth": {
+            "C": 0.86014,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 143,
+            "obey": 123
+          },
+          "vertical": {
+            "C": 0.912281,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 57,
+            "obey": 52
+          }
+        },
+        "hardneg_lora": {
+          "depth": {
+            "C": 0.832168,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 143,
+            "obey": 119
+          },
+          "vertical": {
+            "C": 0.912281,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 57,
+            "obey": 52
+          }
+        },
+        "zero_shot": {
+          "depth": {
+            "C": 0.713287,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 143,
+            "obey": 102
+          },
+          "vertical": {
+            "C": 0.754386,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 57,
+            "obey": 43
+          }
+        }
+      },
+      "law": "expected_invariant",
+      "n_eligible": 200,
+      "relation_breakdown": {
+        "general_lora": {
+          "above": {
+            "C": 0.878788,
+            "n": 33
+          },
+          "behind": {
+            "C": 0.880597,
+            "n": 67
+          },
+          "below": {
+            "C": 0.958333,
+            "n": 24
+          },
+          "in front of": {
+            "C": 0.842105,
+            "n": 76
+          }
+        },
+        "hardneg_lora": {
+          "above": {
+            "C": 0.878788,
+            "n": 33
+          },
+          "behind": {
+            "C": 0.865672,
+            "n": 67
+          },
+          "below": {
+            "C": 0.958333,
+            "n": 24
+          },
+          "in front of": {
+            "C": 0.802632,
+            "n": 76
+          }
+        },
+        "zero_shot": {
+          "above": {
+            "C": 0.787879,
+            "n": 33
+          },
+          "behind": {
+            "C": 0.820896,
+            "n": 67
+          },
+          "below": {
+            "C": 0.708333,
+            "n": 24
+          },
+          "in front of": {
+            "C": 0.618421,
+            "n": 76
+          }
+        }
+      },
+      "summary_by_checkpoint": {
+        "general_lora": {
+          "C": 0.875,
+          "C_valid": 0.875,
+          "both_correct": 0.82,
+          "invalid": 0,
+          "invalid_rate": 0.0,
+          "n": 200,
+          "obey": 175
+        },
+        "hardneg_lora": {
+          "C": 0.855,
+          "C_valid": 0.855,
+          "both_correct": 0.825,
+          "invalid": 0,
+          "invalid_rate": 0.0,
+          "n": 200,
+          "obey": 171
+        },
+        "zero_shot": {
+          "C": 0.725,
+          "C_valid": 0.725,
+          "both_correct": 0.68,
+          "invalid": 0,
+          "invalid_rate": 0.0,
+          "n": 200,
+          "obey": 145
+        }
+      },
+      "transitions": {
+        "D1": {
+          "C_u": 0.875,
+          "C_v": 0.855,
+          "delta_C": -0.02,
+          "delta_c_ci": {
+            "ci_lower": -0.06,
+            "ci_upper": 0.02,
+            "mean": -0.02,
+            "n": 200,
+            "n_iter": 10000,
+            "seed": 20260810
+          },
+          "from": "general_lora",
+          "mcnemar": {
+            "b": 6,
+            "c": 10,
+            "discordant_n": 16,
+            "exact_p": 0.454498,
+            "mcnemar_odds_ratio": 0.6
+          },
+          "n": 200,
+          "to": "hardneg_lora"
+        },
+        "P1": {
+          "C_u": 0.725,
+          "C_v": 0.875,
+          "delta_C": 0.15,
+          "delta_c_ci": {
+            "ci_lower": 0.09,
+            "ci_upper": 0.215,
+            "mean": 0.15,
+            "n": 200,
+            "n_iter": 10000,
+            "seed": 20260810
+          },
+          "from": "zero_shot",
+          "mcnemar": {
+            "b": 37,
+            "c": 7,
+            "discordant_n": 44,
+            "exact_p": 5e-06,
+            "mcnemar_odds_ratio": 5.285714285714286
+          },
+          "n": 200,
+          "to": "general_lora"
+        },
+        "checkpoints": [
+          "zero_shot",
+          "general_lora",
+          "hardneg_lora"
+        ]
+      }
+    }
+  }
+}
