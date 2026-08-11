@@ -1,0 +1,4 @@
+Manifest: 2000 examples (campaign seed 101)
+Loading processor + model (bf16, eager)...
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Fetching 5 files: 100%|██████████| 5/5 [00:00<00:00, 778.40it/s]
+Loading weights:   0%|          | 0/730 [00:00<?, ?it/s]Loading weights:  62%|██████▏   | 450/730 [00:00<00:00, 4498.88it/s]Loading weights: 100%|██████████| 730/730 [00:00<00:00, 4493.79it/s]

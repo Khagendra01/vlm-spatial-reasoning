@@ -1,0 +1,137 @@
+{
+  "campaign_id": "seed_campaign_r1",
+  "created_by": "opencode (user-directed)",
+  "created_at": "2026-08-11T00:00:00",
+  "status": "FROZEN_BEFORE_TRAINING",
+  "approval": "User approved all three campaign decisions on 2026-08-11: (1) implement + pre-register battery, (2) split frozen at 42 with train-time RNG varying per seed, (3) full 3x2 campaign in background runs.",
+  "purpose": "Re-train the two general-VSR LoRA backbones (Qwen2-VL-7B-Instruct, SmolVLM2-2.2B-Instruct) under three fresh random seeds each, using training-run inputs identical to the seed-0 runs EXCEPT the seed, to study seed variance of the results and to produce seed-quality verdicts. Seed-0 artifacts live in checkpoints/qwen2vl_7b_general_lora/final and checkpoints/general_lora/final (master).",
+
+  "seeds": {
+    "A": 101,
+    "B": 202,
+    "C": 303
+  },
+
+  "rng_semantics": {
+    "split_seed_frozen": 42,
+    "note": "The 95/5 train/val split mapping is FROZEN at seed=42 for every campaign run (manifest-identical assignment; only train-time RNG varies). Per-run: torch.manual_seed(SEED), torch.cuda.manual_seed_all(SEED), numpy.random.seed(SEED) are set at driver start, before model/LoRA init and DataLoader creation. The seed therefore controls: LoRA adapter init draws, DataLoader shuffle order, dropout masks. It does NOT change the manifest or the split assignment."
+  },
+
+  "backbones": [
+    {
+      "backbone": "qwen2vl_7b",
+      "model": "Qwen/Qwen2-VL-7B-Instruct",
+      "manifest": "data/manifests/general_train.jsonl",
+      "seed_source": "scripts/run_7b_pipeline.py PHASE 2 (train_lora for 'general', verbatim copy in scripts/run_seed_campaign.py)",
+      "epochs": 2,
+      "lr": 0.0001,
+      "weight_decay": 0.01,
+      "micro_batch_size": 1,
+      "grad_accum": 1,
+      "effective_batch_size": 1,
+      "warmup_steps": "total_steps // 10",
+      "scheduler": "get_linear_schedule_with_warmup",
+      "lora": {"rank": 8, "alpha": 16, "dropout": 0.05, "target_modules": ["q_proj", "v_proj", "k_proj", "o_proj"], "bias": "none", "task_type": "CAUSAL_LM"},
+      "grad_clip": 1.0,
+      "max_length": 2048,
+      "dtype": "bfloat16 AMP autocast",
+      "attention": "eager",
+      "gradient_checkpointing": true,
+      "enable_input_require_grads": true,
+      "train_test_split": {"test_size": 0.05, "seed": 42},
+      "prompt": "Look at the image carefully.\\n\\nStatement: \\\"{statement}\\\"\\n\\nIs this statement true or false?\\n\\nAnswer with exactly one word: True or False.",
+      "answer_tokens": {"true": " True", "false": " False"},
+      "labels": "prompt tokens masked -100, only answer tokens supervised",
+      "preprocessing": "raw PIL image (from data/image_cache md5 URL cache) passed to Qwen2-VL processor defaults; no manual size cap at training time (matches seed-0 training; the 392px cap is an EVALUATION contract only)",
+      "image_missing_policy": "example skipped if cache image absent (seed-0 policy)",
+      "num_examples_manifest": 2000,
+      "data": "VSR test split rows sampled into general_train.jsonl by src/training/build_train_sets.py (legacy; not rebuilt)",
+      "output": "checkpoints/seed_campaign/qwen2vl_7b_general_lora_seed{SEED_TAG}/final",
+      "training_log": "checkpoints/seed_campaign/qwen2vl_7b_general_lora_seed{SEED_TAG}/training_log.json",
+      "legacy_reference_run": "checkpoints/qwen2vl_7b_general_lora/final (master; seed-0)"
+    },
+    {
+      "backbone": "smolvlm2_2b",
+      "model": "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
+      "manifest": "data/manifests/general_train.jsonl",
+      "seed_source": "src/training/lora.py train() invoked with explicit manifest-identical args (see rng_semantics)",
+      "epochs": 2,
+      "lr": 0.0001,
+      "weight_decay": 0.01,
+      "micro_batch_size": 1,
+      "grad_accum": 16,
+      "effective_batch_size": 16,
+      "note": "micro=1/accum=16 frozen to match the CLI defaults with which the seed-0 run was invoked (README: python -m src.training.lora --manifest data/manifests/general_train.jsonl --output checkpoints/general_lora). Seed-0 training_log.json records effective_batch_size=16 and total_steps=238; 1900/1 micro-batches x 2 epochs / 16 accum = 237.5 -> 238 matches this configuration.",
+      "warmup_ratio": 0.1,
+      "scheduler": "get_linear_schedule_with_warmup",
+      "lora": {"rank": 8, "alpha": 16, "dropout": 0.05, "target_modules": ["q_proj", "v_proj", "k_proj", "o_proj"], "bias": "none", "task_type": "CAUSAL_LM"},
+      "grad_clip": 1.0,
+      "max_length": 2048,
+      "dtype": "bfloat16 AMP autocast",
+      "attention": "eager",
+      "gradient_checkpointing": true,
+      "enable_input_require_grads": true,
+      "train_test_split": {"test_size": 0.05, "seed": 42},
+      "collator": "src/training/collator.py VSRDataCollator: apply_chat_template prompt (add_generation_prompt), answer tokens appended, labels masked to answer only",
+      "preprocessing": "raw PIL image via src/training/collator.py._load_image (md5 URL cache) passed to SmolVLM2 processor defaults; no manual size cap at training time",
+      "image_missing_policy": "example dropped by collator (returns None)",
+      "checkpointing": "checkpoint-{step} saves every eval_every=100 optimizer steps + final/ (legacy lora.py behavior)",
+      "num_examples_manifest": 2000,
+      "data": "VSR test split rows sampled into general_train.jsonl by src/training/build_train_sets.py (legacy; not rebuilt)",
+      "output": "checkpoints/seed_campaign/smolvlm2_2b_general_lora_seed{SEED_TAG}/final",
+      "training_log": "checkpoints/seed_campaign/smolvlm2_2b_general_lora_seed{SEED_TAG}/training_log.json",
+      "legacy_reference_run": "checkpoints/general_lora/final (master; seed-0, training_log.json: total_time 6253s, epoch_losses [0.513, 0.414])"
+    }
+  ],
+
+  "battery": {
+    "jitter_tolerance_px": 2,
+    "relcomp_semantic_distance_threshold": 0.3,
+    "image_contract": "392px long-side cap (uniform; docs/TECHNIQUES.md 4; src/grounding/config.py MAX_LONG_SIDE=392) applied to ALL conditions incl. normal",
+    "sampling_policy": "constant, without replacement (fixed row order produced by each condition builder; no randomized sampling in the battery)",
+    "prompt": "identical to training prompt (see backbones)",
+    "inference": "greedy (do_sample=False), answer-token probe / one-word True|False classification",
+    "conditions": [
+      {"id": "normal", "description": "VSR test rows, image 392px cap, statements/labels as-is. Reference condition."},
+      {"id": "with_sample", "description": "Rows duplicated with a numerically-distinct 2px-resized copy of the same image (numerical identity jitter within 2px tolerance); statement/label unchanged."},
+      {"id": "with_shuffle", "description": "Same rows+images as normal, row order shuffled (constant, without replacement, fixed permutation recorded per run); tests order-invariance."},
+      {"id": "relcomp", "description": "Relation-comparison condition: relation pairs whose normalized semantic distance < 0.3 (per VSR relation hierarchy/embeddings used by the legacy hardneg manifest builder); statement uses the comparison relation."},
+      {"id": "facing", "description": "Orientation-facing subset (statements with facing/facing-away semantics; rows shared with the grounding facing analysis)."},
+      {"id": "hflip", "description": "Horizontal-flip image variant built by the legacy hardneg manifest builder (flip + label inversion contract of that builder)."},
+      {"id": "hflip_inv", "description": "hflip variant where the statement is additionally inverted/negated (per legacy hardneg builder's inverse variant)."}
+    ],
+    "builders": {
+      "normal": "existing eval drivers",
+      "with_sample": "PIL resize by 2px on the 392px image",
+      "with_shuffle": "fixed permutation derived from the row index (deterministic)",
+      "relcomp": "scripts/build_hardneg_manifest.py machinery (reused; semantics: semantic distance < 0.3)",
+      "facing": "row filter on relation semantics + 392px contract (reuses grounding facing rows)",
+      "hflip": "scripts/build_hardneg_manifest.py machinery",
+      "hflip_inv": "scripts/build_hardneg_manifest.py machinery"
+    },
+    "outputs": "results/seed_campaign/{backbone}/seed{SEED_TAG}/{condition}_metrics_{timestamp}.json + {condition}_predictions_{timestamp}.csv (mirror of legacy results naming)"
+  },
+
+  "artifact_paths": {
+    "configs": "configs/seed_campaign/",
+    "checkpoints": "checkpoints/seed_campaign/",
+    "results": "results/seed_campaign/{backbone}/seed{SEED_TAG}/",
+    "analysis": "results/seed_campaign/ANALYSIS.md",
+    "decision_log": "SPATIAL_REASONING_DECISION_LOG.md"
+  },
+
+  "analysis_plan": {
+    "per_seed": ["report metrics per condition incl. accuracy, agreement with seed-0, per-family breakdown"],
+    "across_seeds": ["mean +/- std per condition per backbone; compare to seed-0 values; seed-quality verdict (distance from seed-0 / spread)"],
+    "family_drift": ["per-family (orientation/depth/horizontal/...) accuracy across seeds; adaptation curves from training logs"],
+    "systematic_conditions": ["extreme-accuracy conditions (>=0.99 or <=0.01) inspected per seed; hflip/hflip_inv behavior"],
+    "verdicts": ["per-seed PASS/REVIEW/FAIL vs seed-0 reference values recorded in this campaign"],
+    "deliverables": ["frozen configs (this file), 6 adapters + training logs, battery metrics, analysis report, decision-log stamps"]
+  },
+
+  "drift_notes": [
+    "The HEAVY eval battery (conditions above) had NO implementation anywhere in the repo (verified: master + all remote branches); it existed only as a spec (aftertrain.md). The full battery was therefore implemented + PRE-REGISTERED in this campaign (configs/seed_campaign/BATTERY_JUSTIFICATION.md).",
+    "Seed-0 training runs were unseeded (no manual_seed); the campaign adds explicit per-run seeds - this is the ONLY intentional difference from the legacy training runs.",
+    "2B split-seed ambiguity (train() defaults micro=4/accum=4 vs CLI defaults micro=1/accum=16) resolved in favor of the CLI defaults that the seed-0 run used (see smolvlm2_2b note); effective_batch_size=16 identical either way."
+  ]
+}
