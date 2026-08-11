@@ -43,5 +43,5 @@ ipykernel>=6.25.0
 
 # Optional: for specific experiments
 # deepspeed>=0.10.0
-# peft>=0.4.0
+peft>=0.14.0  # required by src/training/lora.py + seed-campaign drivers (unconditional import)
 # bitsandbytes>=0.41.0

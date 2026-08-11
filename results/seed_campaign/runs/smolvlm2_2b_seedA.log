@@ -1,0 +1,21 @@
+
+============================================================
+LoRA TRAINING
+============================================================
+  Manifest: data/manifests/general_train.jsonl
+  Output:   checkpoints/seed_campaign/smolvlm2_2b_general_lora_seedA
+  Model:    HuggingFaceTB/SmolVLM2-2.2B-Instruct
+  Epochs:   2
+  LR:       0.0001
+  Micro BS: 1
+  Grad Accum: 16
+  Effective BS: 16
+  LoRA:     rank=8, alpha=16, dropout=0.05
+  Max Length: 2048
+  Device:   NVIDIA GeForce RTX 3060 Ti
+  VRAM:     8.6 GB
+============================================================
+
+Loaded 2000 training examples
+Loading processor...
+Loading model...

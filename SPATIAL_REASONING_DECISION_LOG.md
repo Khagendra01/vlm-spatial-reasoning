@@ -58,3 +58,22 @@ configs/seed_campaign/RUN_STATUS.md (full resumption checklist, machine
 config notes, pending-work list). Battery drivers were implemented but not
 runtime-validated; battery evals + analysis remain pending. Campaign spec,
 recipes, seed semantics and progress state are unchanged (frozen entry above).
+
+---
+
+## 2026-08-11 - Local prep session + second handoff (Windows box; 2B seedA aborted)
+
+A local Windows machine (RTX 3060 Ti, 8 GB) was used for authoring/prep work:
+- Battery rows built + validated + committed (commit 43e0aa0): counts
+  2195/2195/2195/666/103/103/103; fixes to src/evaluation/battery.py
+  (frozen vsr_test_ids.json id loader; entries-dict eligible-ids shape).
+- Local env brought up: CUDA torch 2.8.0+cu128 on the 3060 Ti, image cache
+  (1874 unique images, 0 missing), SmolVLM2-2.2B cached, peft/num2words deps.
+- 2B seedA (seed=101) training was STARTED locally and ABORTED at ~2h
+  (no checkpoint saved; driver saves first at step 100/238). Reason: 3060 Ti
+  throughput >65 s/step (est. 5-8 h/seed) vs 26 s/step on the A6000; running
+  all campaign seeds on one machine also keeps the seed-0 (A6000) comparison
+  free of a hardware confound. Decision: ALL training/eval moves to the GPU
+  cloud box (A6000); local box is prep/analysis only.
+- Handoff: handoff.md (full resume checklist + exact commands). Aborted run
+  logs committed for audit (results/seed_campaign/runs/smolvlm2_2b_seedA.log).
