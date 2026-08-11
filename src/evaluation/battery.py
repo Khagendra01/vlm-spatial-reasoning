@@ -27,17 +27,47 @@ from datasets import load_dataset
 
 
 def _load_test_rows() -> list:
-    """VSR test rows with the HF `id` preserved (legacy load_vsr drops it)."""
-    ds = load_dataset("cambridgeltl/vsr_random", split="test")
-    rows = []
-    for ex in ds:
-        rows.append({
-            "id": ex.get("id"),
-            "image": ex.get("image_link", ex.get("image", "")),
-            "statement": ex.get("caption", ""),
-            "label": bool(ex.get("label", False)),
-            "relation": ex.get("relation", ""),
-        })
+    """VSR test rows with the frozen `vsr_test:<index>` id scheme.
+
+    Authoritative source: results/grounding/protocol/vsr_test_ids.json
+    (frozen at protocol freeze time: 2195 examples, dataset-index order,
+    id scheme `vsr_test:<dataset_index>`). The HF hub copy of the test
+    split has NO `id` column (verified 2026-08-11), so the frozen file is
+    required for row identity; the hub dataset is used only as a
+    cross-check (count + spot equality) and never for row content.
+    """
+    frozen = PROTOCOL_DIR / "vsr_test_ids.json"
+    if not frozen.exists():
+        raise FileNotFoundError(
+            f"frozen id manifest missing: {frozen} "
+            "(commit includes results/grounding/protocol/vsr_test_ids.json)")
+    manifest = json.load(open(frozen))["examples"]
+    if len(manifest) != 2195:
+        raise ValueError(f"frozen id manifest has {len(manifest)} examples, expected 2195")
+    rows = [{
+        "id": m["example_id"],
+        "image": m.get("image_link", ""),
+        "statement": m["statement"],
+        "label": bool(m["label"]),
+        "relation": m.get("relation", ""),
+    } for m in sorted(manifest, key=lambda m: m["dataset_index"])]
+    # cross-check against the hub dataset (positional alignment by index)
+    try:
+        ds = load_dataset("cambridgeltl/vsr_random", split="test")
+        if len(ds) != len(rows):
+            raise ValueError(
+                f"hub test split count {len(ds)} != frozen manifest {len(rows)}")
+        for i in (0, 1, len(rows) // 2, len(rows) - 1):
+            hub = ds[i]
+            frz = rows[i]
+            if (frz["statement"] != hub.get("caption", "")
+                    or bool(frz["label"]) != bool(hub.get("label", False))
+                    or frz["image"] != hub.get("image_link", "")):
+                raise ValueError(
+                    f"frozen manifest row {i} diverges from hub dataset: "
+                    f"{frz} vs {hub}")
+    except Exception as e:
+        raise RuntimeError(f"hub cross-check failed: {e}") from e
     return rows
 
 CAMPAIGN_ID = "seed_campaign_r1"
@@ -88,6 +118,14 @@ def _eligible_ids(transform_file: str, transform_name: str) -> list:
     """Extract the frozen eligible-ID list (handles dict wrappers)."""
     d = json.load(open(PROTOCOL_DIR / transform_file))["transforms"][transform_name]
     if isinstance(d, dict):
+        # canonical protocol shape: {"entries": {id: meta, ...} | [id, ...],
+        #                            "law": ..., "n_eligible": N}
+        if "entries" in d:
+            e = d["entries"]
+            if isinstance(e, dict):
+                return list(e.keys())
+            if isinstance(e, list):
+                return e
         vals = {k: v for k, v in d.items() if isinstance(v, list)}
         if vals:
             return vals[max(vals, key=lambda k: len(vals[k]))]
