@@ -110,7 +110,12 @@ BLANK_SPEC_FILE = PROTOCOL_DIR / "blank_image_spec.json"
 BLANK_IMAGE_FILE = PROTOCOL_DIR / "blank_image.png"
 SNAPSHOT_FILE = PROTOCOL_DIR / "run_config_snapshot.json"
 
+# --- Tier-B semantic artifacts (validity table + eligible IDs, frozen pre-result) ---
+SEMANTIC_VALIDITY_FILE = PROTOCOL_DIR / "semantic_transform_validity.csv"
+SEMANTIC_ELIGIBLE_FILE = PROTOCOL_DIR / "semantic_eligible_ids.json"
+
 TRANSFORM_VERSION = "tier_a_v0.1"
+TRANSFORM_VERSION_TIER_B = "tier_b_v0.1"
 
 # --- comparisons (primary order, frozen) ---
 COMPARISONS = {
