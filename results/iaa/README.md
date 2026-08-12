@@ -58,14 +58,18 @@ Instead of editing the CSVs by hand, use the annotation server — every
 rating click and note edit is saved instantly, and you can close the tab /
 reboot and resume where you left off:
 
-    python scripts/iaa_tool.py --port 5000
-    # open http://127.0.0.1:5000
+    python scripts/iaa_tool.py --port 5000 --rater-id rater2   # completed pass
+    python scripts/iaa_tool.py --port 5001 --rater-id rater3   # fresh pass (redo)
 
 - Sheet 1 (`/sheet/clean`): 137 examples, binary clean/ambiguous flag.
 - Sheet 2 (`/sheet/taxonomy`): 48 examples, eight-class taxonomy.
+- Each `--rater-id` is its own slot: fresh slots start at 0/137 and write to
+  `results/iaa/<rater-id>_clean_labels.csv` / `<rater-id>_taxonomy.csv`,
+  so existing slots are never overwritten.
 - Shortcuts: `1..N` select option, `n` next, `p` prev, `r` jump to next
   unrated. Notes autosave ~0.8 s after you stop typing.
-- Outputs are written exactly where `scripts/compute_iaa.py` expects them
-  (`results/iaa/rater2_clean_labels.csv`,
-  `results/iaa/rater2_taxonomy.csv`), so when you are done simply run:
-  `python scripts/compute_iaa.py`
+- When a slot is finished, point `scripts/compute_iaa.py` at it:
+    python scripts/compute_iaa.py \
+      --rater2-clean results/iaa/rater3_clean_labels.csv \
+      --rater2-taxo   results/iaa/rater3_taxonomy.csv \
+      --out-prefix llm_rater3

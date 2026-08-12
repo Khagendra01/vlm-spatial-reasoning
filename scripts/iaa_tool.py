@@ -3,9 +3,13 @@
 BLIND annotation web server for the second, independent human rater (IAA).
 
 Auto-saves everything: every rating click and every note edit is persisted
-immediately to results/iaa/rater2_clean_labels.csv / rater2_taxonomy.csv
+immediately to results/iaa/<rater-id>_clean_labels.csv / <rater-id>_taxonomy.csv
 (upsert — re-rating a case overwrites its row, never duplicates). You can
 close the browser or reboot and resume exactly where you left off.
+
+Rater slots: each server instance owns ONE slot (--rater-id), so a fresh
+pass starts at 0/137 and writes to its own files. Existing slots:
+  rater2 = completed human pass (137/137, 48/48).
 
 Sheets (exported by scripts/export_iaa_sheets.py):
   - clean:    137 orientation test examples, binary clean/ambiguous flag
@@ -16,7 +20,7 @@ image. Ground truth, model predictions, and the first annotator's labels are
 never loaded into this server.
 
 Usage:
-    python scripts/iaa_tool.py [--port 5000] [--host 127.0.0.1]
+    python scripts/iaa_tool.py [--port 5000] [--host 127.0.0.1] [--rater-id rater2]
     open http://127.0.0.1:5000
 
 Keyboard shortcuts (annotation page):
@@ -40,18 +44,20 @@ ROOT = Path(__file__).resolve().parent.parent
 IAA = ROOT / "results" / "iaa"
 IMGDIR = IAA / "images"
 
+RATER_ID = "rater2"  # set from --rater-id in main(); used in SHEETS below
+
 SHEETS = {
     "clean": {
         "title": "Clean / ambiguous flag (n=137)",
         "sheet": IAA / "blind_clean_label_sheet.csv",
-        "out": IAA / "rater2_clean_labels.csv",
+        "out": IAA / f"{RATER_ID}_clean_labels.csv",
         "rating_col": "rating_clean",
         "options": ["clean", "ambiguous"],
     },
     "taxonomy": {
         "title": "Failure taxonomy (n=48)",
         "sheet": IAA / "blind_failure_taxonomy_sheet.csv",
-        "out": IAA / "rater2_taxonomy.csv",
+        "out": IAA / f"{RATER_ID}_taxonomy.csv",
         "rating_col": "class",
         "options": [
             "clear_image_model_reasoning_failure",
@@ -439,7 +445,14 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Blind IAA annotation server")
     parser.add_argument("--port", type=int, default=5000)
     parser.add_argument("--host", default="127.0.0.1")
+    parser.add_argument("--rater-id", default="rater2",
+                        help="slot name; writes results/iaa/<rater-id>_*.csv "
+                             "and tracks that slot's own progress")
     args = parser.parse_args()
+
+    # rebind the output files (and progress) to this rater's slot
+    for name, cfg in SHEETS.items():
+        cfg["out"] = IAA / f"{args.rater_id}_{'clean_labels' if name == 'clean' else 'taxonomy'}.csv"
 
     for cfg in SHEETS.values():
         if not cfg["sheet"].exists():
@@ -448,7 +461,7 @@ if __name__ == "__main__":
                 "scripts/export_iaa_sheets.py first.")
 
     print("\n  Blind IAA annotation server (auto-save ON)")
-    print(f"  Open http://{args.host}:{args.port}")
+    print(f"  Slot: {args.rater_id}   Open http://{args.host}:{args.port}")
     print(f"  Ratings -> {SHEETS['clean']['out'].name} / "
           f"{SHEETS['taxonomy']['out'].name} (saved on every click)\n")
     app.run(host=args.host, port=args.port, debug=False, threaded=True)
