@@ -119,3 +119,11 @@ python scripts/eval_seed_battery.py --backbone smolvlm2_2b \
 - `configs/seed_campaign/BATTERY_JUSTIFICATION.md` (contract constants)
 - `configs/seed_campaign/RUN_STATUS.md` (A6000 machine config + key invariants)
 - `SPATIAL_REASONING_DECISION_LOG.md` (freeze + closure entries)
+
+## 2026-08-12 machine decommission (cloud box terminated)
+
+- All repo content pushed (branch `research/spatial-grounding-audit`, commits up to c46b447 + weights commit).
+- Trained weights in git: seed-0 (general_lora 2B, qwen2vl_7b_* variants) + campaign smolvlm2_2b_general_lora_seedA (checkpoint-100/200/final + training_log.json). Campaign seedB/C 2B + all 7B legs produced NO checkpoints (deadlock rc/TypeError pre-ff51ab5; deadlock investigation open - see DECISION_LOG 2026-08-12 entry).
+- Env: requirements.freeze.txt = exact pip versions on this box (torch/transformers/peft pins matter for the first-backward deadlock repro).
+- NOT in git (recreate on new box): HF hub model cache (SmolVLM2-2.2B-Instruct, Qwen2-VL-7B-Instruct ~7GB), data/image_cache (539MB COCO training images; regenerable via collator urllib fallback or `load_manifest` fetch), grounding image cache (~1874 unique images; re-download via run_tier_a image cache verification), results/grounding/private/ hashes (gitignored by design).
+- Resume on new box: pip install -r requirements.freeze.txt, python scripts/grounding/freeze_protocol.py (ids), then run_seed_campaign.py legs via the queue pattern; battery = scripts/grounding/run_seed_battery.py gated by regress_seed_battery.py.

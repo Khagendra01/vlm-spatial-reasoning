@@ -1,0 +1,48 @@
+{
+  "crop_size": null,
+  "data_format": "channels_first",
+  "default_to_square": true,
+  "device": null,
+  "do_center_crop": null,
+  "do_convert_rgb": true,
+  "do_image_splitting": true,
+  "do_normalize": true,
+  "do_pad": true,
+  "do_rescale": true,
+  "do_resize": true,
+  "do_sample_frames": false,
+  "fps": 1,
+  "image_mean": [
+    0.5,
+    0.5,
+    0.5
+  ],
+  "image_processor_type": "SmolVLMImageProcessor",
+  "image_std": [
+    0.5,
+    0.5,
+    0.5
+  ],
+  "input_data_format": null,
+  "max_image_size": {
+    "longest_edge": 384
+  },
+  "num_frames": 64,
+  "processor_class": "SmolVLMProcessor",
+  "resample": 1,
+  "rescale_factor": 0.00392156862745098,
+  "return_metadata": false,
+  "size": {
+    "longest_edge": 1536
+  },
+  "size_divisor": null,
+  "video_metadata": null,
+  "video_processor_type": "SmolVLMVideoProcessor",
+  "video_sampling": {
+    "fps": 1,
+    "max_frames": 64,
+    "video_size": {
+      "longest_edge": 1536
+    }
+  }
+}
