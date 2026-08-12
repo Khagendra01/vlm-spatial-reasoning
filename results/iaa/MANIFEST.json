@@ -1,6 +1,6 @@
 {
   "resource": "VSR orientation multi-rater audit resource",
-  "version": "iaa-v2",
+  "version": "iaa-v3",
   "created": "2026-08-12",
   "schema": "https://github.com/Khagendra01/vlm-spatial-reasoning (paper-draft-v1)",
   "layers": [
@@ -37,6 +37,22 @@
         "results/mimo/audit_mimo_clean.csv",
         "results/mimo/audit_mimo_taxo.csv"
       ]
+    },
+    {
+      "id": "llm_gpt56_audit",
+      "description": "GPT-5.6 Sol audit-reliability check (corrected one-item CLEAN/AMBIGUOUS 137 run + 48 taxonomy); modest human alignment (kappa 0.336 vs human A)",
+      "files": [
+        "results/iaa/gpt56_clean_137.csv",
+        "results/iaa/gpt56_taxo_48.csv"
+      ]
+    },
+    {
+      "id": "llm_gemini_audit",
+      "description": "Gemini Spark audit-reliability check (one-item CLEAN/AMBIGUOUS 137 run + 48 taxonomy); binary CLEAN collapse 126/137, taxonomy collapse toward clear_image_model_reasoning_failure",
+      "files": [
+        "results/iaa/gemini_clean_137.csv",
+        "results/iaa/gemini_taxo_48.csv"
+      ]
     }
   ],
   "agreement_statistics": [
@@ -46,7 +62,8 @@
     "results/iaa/rater2_rater3_binary137.json      (human A vs human B, full 137)",
     "results/iaa/human_mimo_results.json           (human A vs MiMo audit)",
     "results/iaa/llm_mimo_results.json             (automated audit vs MiMo audit)",
-    "results/iaa/consensus_subsets.json            (annotator-dependence of clean-label table)"
+    "results/iaa/consensus_subsets.json            (annotator-dependence of clean-label table)",
+    "results/iaa/model_auditor_agreement.json      (GPT-5.6/Gemini vs human A/B; kappa + clean rates)"
   ],
   "protocol_tooling": [
     "scripts/export_iaa_sheets.py",

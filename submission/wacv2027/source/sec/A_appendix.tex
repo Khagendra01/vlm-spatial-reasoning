@@ -782,24 +782,74 @@ to the taxonomy-derived masks: under the human binary consensus mask it
 reaches 69.3\%. Overall the human re-audits provide partial but
 aggregate-level corroboration, so the clean-label analysis should be read as
 annotator-specific exploratory evidence rather than a ruling on label noise.
+Human raters support the aggregate sensitivity conclusion, but per-item
+exclusion decisions are annotator-dependent, and automated auditors vary
+substantially in calibration (below).
 No reported accuracy number is altered by this protocol.
 
-\textbf{LLM audit reliability note.} We also ran the audit prompts through a
-second LLM (MiMo-V2.5, image-grounded; \texttt{results/mimo/audit\_mimo\_*.csv}).
-Its labels collapsed to a single dominant class (43/48 taxonomy cases and
-132/137 binary flags), yielding no agreement with either the automated
-first-pass labels or either human re-audit ($\kappa{=}0.00$; $\alpha\approx-0.1$;
-\texttt{results/iaa/human\_mimo\_results.json},
-\texttt{results/iaa/llm\_mimo\_results.json}). We report this as evidence
-that naive LLM audit prompting can degenerate to the first option, and we do
-not substitute it for the human re-audit.
+\textbf{LLM audit reliability is itself model-dependent.} Three additional
+image-grounded LLM auditors ran the same audit prompts
+(\texttt{results/iaa/gpt56\_clean\_137.csv},
+\texttt{results/iaa/gpt56\_taxo\_48.csv},
+\texttt{results/iaa/gemini\_clean\_137.csv},
+\texttt{results/iaa/gemini\_taxo\_48.csv};
+agreement statistics in
+\texttt{results/iaa/model\_auditor\_agreement.json}).
+MiMo-V2.5's labels collapsed to a single dominant class (43/48 taxonomy cases
+and 132/137 binary flags), yielding no agreement with either the automated
+first-pass labels or either human re-audit ($\kappa{=}0.00$;
+$\alpha\approx-0.1$; \texttt{results/iaa/human\_mimo\_results.json},
+\texttt{results/iaa/llm\_mimo\_results.json}). GPT-5.6 Sol produces a
+non-degenerate partition close to the humans' CLEAN base rate (55.5\% vs.\
+54.7\%/56.2\%) with modest per-item alignment ($\kappa{=}0.34$/0.28 vs.\ human
+A/B), while Gemini Spark collapses toward CLEAN (126/137; 92.0\% CLEAN rate)
+and agrees with the humans essentially at chance
+($\kappa{=}0.03$/$-0.03$; Table~\ref{tab:auditor-matrix}).
+
+\begin{table}[h]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{Binary clean/ambiguous audit agreement ($n{=}137$). Entries are
+exact agreement (\%) with Cohen's $\kappa$ in parentheses; CLEAN-rate column
+shows each auditor's base rate.}
+\label{tab:auditor-matrix}
+\begin{tabular}{lccccr}
+\toprule
+Auditor & Human A & Human B & GPT-5.6 & Gemini & CLEAN \\
+\midrule
+Human A & --- & 82.5 (0.65) & 67.2 (0.34) & 55.5 (0.03) & 54.7 \\
+Human B & & --- & 64.2 (0.28) & 54.0 ($-0.03$) & 56.2 \\
+GPT-5.6 Sol & & & --- & 57.7 (0.07) & 55.5 \\
+Gemini Spark & & & & --- & 92.0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The taxonomy audit shows the same divergence plus a second failure mode:
+Gemini's 48-item taxonomy concentrates on
+\emph{clear\_image\_model\_reasoning\_failure} (25/48) and never uses three of
+the eight classes, whereas GPT-5.6 distributes labels across all eight
+(exact-class agreement with humans: GPT-5.6 41.7\%/37.5\%, Gemini
+31.2\%/27.1\%, human A--B 85.4\%). MiMo's taxonomy collapse (43/48 to one
+class) and Gemini's two collapses (binary and taxonomy) are distinct
+failure modes of automated auditing: passing format checks---valid labels,
+all IDs present, no duplicates---is insufficient; audit pipelines need
+inter-rater agreement and label-distribution diagnostics. We therefore treat
+all LLM-generated ambiguity labels as sensitivity tools, not authoritative
+ground truth. Protocol caveats: the GPT-5.6 original interactive pass used
+contact-sheet batches (disclosed in its report) and was redone
+one-item-per-request as \texttt{gpt56\_clean\_137.csv}; the Gemini run is
+one-item-per-request (run \texttt{run\_gemini\_spark\_clean\_137\_001}). Both
+are recorded as exploratory external evidence; the frozen v1 automated audit
+plus the two human re-audits remain the primary audit evidence in this paper.
 
 \textbf{Released resource.} The layered multi-rater data --- the automated
-audit, two independent human re-audits, and the second-LLM audit-reliability
-check, together with all per-item agreement statistics --- is versioned and
-released as a citable artifact under \texttt{results/iaa/}
-(\texttt{MANIFEST.json}, ratings CSVs, agreement JSONs, and the blind-rating
-tooling).
+audit, two independent human re-audits, and three LLM audit-reliability
+checks (MiMo-V2.5, GPT-5.6 Sol, Gemini Spark), together with all per-item
+agreement statistics --- is versioned and released as a citable artifact
+under \texttt{results/iaa/} (\texttt{MANIFEST.json}, ratings CSVs, agreement
+JSONs, and the blind-rating tooling).
 
 % ============================================================
 % G. Reproducibility and artifact index
@@ -840,9 +890,14 @@ Human re-audits + inter-source agreement (App.~\ref{app:taxonomy}) &
 \texttt{iaa/iaa\_results.json},
 \texttt{iaa/consensus\_subsets.json},
 \texttt{iaa/human\_mimo\_results.json},
+\texttt{iaa/model\_auditor\_agreement.json},
 \texttt{iaa/MANIFEST.json} (released multi-rater resource),
 \texttt{tables/orientation\_clean\_label\_table\_human\{,2\}.md} &
 --- \\
+LLM auditor reliability (MiMo / GPT-5.6 / Gemini; App.~\ref{app:taxonomy}) &
+\texttt{iaa/gpt56\_clean\_137.csv}, \texttt{iaa/gpt56\_taxo\_48.csv},
+\texttt{iaa/gemini\_clean\_137.csv}, \texttt{iaa/gemini\_taxo\_48.csv},
+\texttt{mimo/audit\_mimo\_*.csv} & --- \\
 Bootstrap family contrasts (\S D) & \texttt{bootstrap\_family\_contrast.json} & --- \\
 MiMo format sensitivity (\S A) & \texttt{mimo/mimo\_parseable\_sensitivity.json} & --- \\
 \bottomrule

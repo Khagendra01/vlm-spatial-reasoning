@@ -1,0 +1,112 @@
+{
+  "resource": "model auditor agreement vs human re-audits",
+  "version": "iaa-v3",
+  "binary_clean_ambiguity_137": {
+    "clean_rates": {
+      "human_a": 0.5474,
+      "human_b": 0.562,
+      "gpt56": 0.5547,
+      "gemini": 0.9197
+    },
+    "pairs": {
+      "human_a__human_b": {
+        "n": 137,
+        "agreement": 0.825,
+        "kappa": 0.645
+      },
+      "gpt56__human_a": {
+        "n": 137,
+        "agreement": 0.672,
+        "kappa": 0.336
+      },
+      "gpt56__human_b": {
+        "n": 137,
+        "agreement": 0.642,
+        "kappa": 0.275
+      },
+      "gemini__human_a": {
+        "n": 137,
+        "agreement": 0.555,
+        "kappa": 0.032
+      },
+      "gemini__human_b": {
+        "n": 137,
+        "agreement": 0.54,
+        "kappa": -0.027
+      },
+      "gpt56__gemini": {
+        "n": 137,
+        "agreement": 0.577,
+        "kappa": 0.068
+      }
+    }
+  },
+  "taxonomy_48_exact_class": {
+    "pairs": {
+      "human_a__human_b": {
+        "n": 48,
+        "agreement": 0.854
+      },
+      "gpt56__human_a": {
+        "n": 48,
+        "agreement": 0.417
+      },
+      "gpt56__human_b": {
+        "n": 48,
+        "agreement": 0.375
+      },
+      "gemini__human_a": {
+        "n": 48,
+        "agreement": 0.312
+      },
+      "gemini__human_b": {
+        "n": 48,
+        "agreement": 0.271
+      },
+      "gpt56__gemini": {
+        "n": 48,
+        "agreement": 0.396
+      }
+    },
+    "distributions": {
+      "human_a": {
+        "PARALLEL_PERPENDICULAR_GEOMETRY": 3,
+        "INTRINSIC_ORIENTATION_AMBIGUOUS": 4,
+        "ANNOTATION_QUESTIONABLE": 11,
+        "CLEAR_IMAGE_MODEL_REASONING_FAILURE": 18,
+        "FRONT_BACK_OBJECT_AMBIGUOUS": 1,
+        "SMALL_OCCLUDED_OBJECT": 11
+      },
+      "human_b": {
+        "PARALLEL_PERPENDICULAR_GEOMETRY": 3,
+        "INTRINSIC_ORIENTATION_AMBIGUOUS": 4,
+        "ANNOTATION_QUESTIONABLE": 9,
+        "CLEAR_IMAGE_MODEL_REASONING_FAILURE": 15,
+        "SMALL_OCCLUDED_OBJECT": 13,
+        "FRONT_BACK_OBJECT_AMBIGUOUS": 1,
+        "CAMERA_VIEWPOINT_AMBIGUITY": 3
+      },
+      "gpt56": {
+        "PARALLEL_PERPENDICULAR_GEOMETRY": 13,
+        "INTRINSIC_ORIENTATION_AMBIGUOUS": 3,
+        "ANNOTATION_QUESTIONABLE": 5,
+        "CLEAR_IMAGE_MODEL_REASONING_FAILURE": 7,
+        "SUBJECT_REFERENCE_INVERSION": 5,
+        "FRONT_BACK_OBJECT_AMBIGUOUS": 6,
+        "CAMERA_VIEWPOINT_AMBIGUITY": 3,
+        "SMALL_OCCLUDED_OBJECT": 6
+      },
+      "gemini": {
+        "PARALLEL_PERPENDICULAR_GEOMETRY": 14,
+        "SUBJECT_REFERENCE_INVERSION": 3,
+        "FRONT_BACK_OBJECT_AMBIGUOUS": 1,
+        "CLEAR_IMAGE_MODEL_REASONING_FAILURE": 25,
+        "INTRINSIC_ORIENTATION_AMBIGUOUS": 5
+      }
+    }
+  },
+  "protocol_notes": {
+    "gpt56": "Corrected one-item-per-request CLEAN/AMBIGUOUS run (run_id gpt56sol_clean_ambiguity_137_20260812); original interactive run was contact-sheet batched and is retained separately as exploratory only.",
+    "gemini": "One-item-per-request run (run_id run_gemini_spark_clean_137_001, latency_ms 150)."
+  }
+}
