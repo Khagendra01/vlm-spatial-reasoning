@@ -1,0 +1,23 @@
+{
+  "package": "vsr-full-external-evaluation",
+  "version": "vsr-full-v1",
+  "source": "results/mimo/mimo_v25_zeroshot_predictions.csv (ids/statements/relations/image_urls only)",
+  "items": 2195,
+  "consistency_pairs": 696,
+  "consistency_families": {
+    "FB": 314,
+    "FF": 103,
+    "LR": 245,
+    "PP": 34
+  },
+  "blindness": {
+    "ground_truth_included": false,
+    "model_predictions_included": false,
+    "prior_rater_labels_included": false
+  },
+  "frozen_prompt_sha256": "7f29cebb9d06eca06ad0d6c690e4d5a083b71a9c42008f88e92474e3ff0eb98a",
+  "images": {
+    "committed": false,
+    "source": "image_url column (COCO train2017)"
+  }
+}

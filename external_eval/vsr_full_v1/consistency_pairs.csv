@@ -1,0 +1,697 @@
+pair_id,family,item_id,statement_a,statement_b,image_url
+FB-29,FB,29,The bicycle is in front of the cat.,The bicycle is behind the cat.,http://images.cocodataset.org/train2017/000000193488.jpg
+FB-9,FB,9,The bench is behind the teddy bear.,The bench is in front of the teddy bear.,http://images.cocodataset.org/train2017/000000395531.jpg
+FB-7,FB,7,The motorcycle is in front of the truck.,The motorcycle is behind the truck.,http://images.cocodataset.org/train2017/000000057381.jpg
+PP-22,PP,22,The teddy bear is perpendicular to the cake.,The teddy bear is parallel to the cake.,http://images.cocodataset.org/train2017/000000033372.jpg
+FF-3,FF,3,The laptop is facing the sandwich.,The laptop is facing away from the sandwich.,http://images.cocodataset.org/train2017/000000519404.jpg
+FF-33,FF,33,The cat is facing away from the sink.,The cat is facing the sink.,http://images.cocodataset.org/train2017/000000508846.jpg
+LR-25,LR,25,The laptop is at the left side of the cake.,The laptop is at the right side of the left side of the cake.,http://images.cocodataset.org/train2017/000000512569.jpg
+PP-14,PP,14,The airplane is perpendicular to the truck.,The airplane is parallel to the truck.,http://images.cocodataset.org/train2017/000000538194.jpg
+PP-19,PP,19,The truck is parallel to the motorcycle.,The truck is perpendicular to the motorcycle.,http://images.cocodataset.org/train2017/000000302514.jpg
+FB-49,FB,49,The chair is behind the cat.,The chair is in front of the cat.,http://images.cocodataset.org/train2017/000000421689.jpg
+FB-53,FB,53,The zebra is at the back of the truck.,The zebra is in front of the back of the truck.,http://images.cocodataset.org/train2017/000000319902.jpg
+FB-61,FB,61,The cake is in front of the dog.,The cake is behind the dog.,http://images.cocodataset.org/train2017/000000113326.jpg
+FF-34,FF,34,The cat is facing away from the toilet.,The cat is facing the toilet.,http://images.cocodataset.org/train2017/000000455365.jpg
+FB-39,FB,39,The oven is in front of the cake.,The oven is behind the cake.,http://images.cocodataset.org/train2017/000000185777.jpg
+FB-58,FB,58,The horse is at the back of the truck.,The horse is in front of the back of the truck.,http://images.cocodataset.org/train2017/000000295460.jpg
+LR-56,LR,56,The laptop is at the left side of the banana.,The laptop is at the right side of the left side of the banana.,http://images.cocodataset.org/train2017/000000093469.jpg
+LR-59,LR,59,The cat is at the left side of the laptop.,The cat is at the right side of the left side of the laptop.,http://images.cocodataset.org/train2017/000000232394.jpg
+FB-12,FB,12,The potted plant is behind the fire hydrant.,The potted plant is in front of the fire hydrant.,http://images.cocodataset.org/train2017/000000408351.jpg
+LR-75,LR,75,The person is at the left side of the truck.,The person is at the right side of the left side of the truck.,http://images.cocodataset.org/train2017/000000570956.jpg
+FF-81,FF,81,The cat is facing away from the tv.,The cat is facing the tv.,http://images.cocodataset.org/train2017/000000469661.jpg
+FB-69,FB,69,The book is behind the cat.,The book is in front of the cat.,http://images.cocodataset.org/train2017/000000014766.jpg
+LR-107,LR,107,The dining table is at the right side of the refrigerator.,The dining table is at the left side of the right side of the refrigerator.,http://images.cocodataset.org/train2017/000000240709.jpg
+FF-114,FF,114,The person is facing the book.,The person is facing away from the book.,http://images.cocodataset.org/train2017/000000040114.jpg
+FB-10,FB,10,The motorcycle is in front of the truck.,The motorcycle is behind the truck.,http://images.cocodataset.org/train2017/000000120207.jpg
+LR-110,LR,110,The keyboard is at the right side of the apple.,The keyboard is at the left side of the right side of the apple.,http://images.cocodataset.org/train2017/000000511644.jpg
+LR-84,LR,84,The clock is at the left side of the bird.,The clock is at the right side of the left side of the bird.,http://images.cocodataset.org/train2017/000000171067.jpg
+FB-109,FB,109,The bicycle is in front of the umbrella.,The bicycle is behind the umbrella.,http://images.cocodataset.org/train2017/000000205613.jpg
+LR-95,LR,95,The teddy bear is at the right side of the dog.,The teddy bear is at the left side of the right side of the dog.,http://images.cocodataset.org/train2017/000000157616.jpg
+LR-85,LR,85,The pizza is at the left side of the dog.,The pizza is at the right side of the left side of the dog.,http://images.cocodataset.org/train2017/000000508555.jpg
+LR-118,LR,118,The cell phone is at the right side of the person.,The cell phone is at the left side of the right side of the person.,http://images.cocodataset.org/train2017/000000109488.jpg
+FB-124,FB,124,The bus is in front of the car.,The bus is behind the car.,http://images.cocodataset.org/train2017/000000244421.jpg
+FB-139,FB,139,The pizza is behind the sandwich.,The pizza is in front of the sandwich.,http://images.cocodataset.org/train2017/000000501756.jpg
+LR-64,LR,64,The cat is at the left side of the teddy bear.,The cat is at the right side of the left side of the teddy bear.,http://images.cocodataset.org/train2017/000000555951.jpg
+FB-126,FB,126,The couch is in front of the bed.,The couch is behind the bed.,http://images.cocodataset.org/train2017/000000305660.jpg
+LR-125,LR,125,The horse is right of the person.,The horse is left of the person.,http://images.cocodataset.org/train2017/000000532748.jpg
+FB-142,FB,142,The horse is behind the cat.,The horse is in front of the cat.,http://images.cocodataset.org/train2017/000000485148.jpg
+FF-156,FF,156,The person is facing away from the horse.,The person is facing the horse.,http://images.cocodataset.org/train2017/000000004972.jpg
+FB-154,FB,154,The bus is behind the bicycle.,The bus is in front of the bicycle.,http://images.cocodataset.org/train2017/000000469728.jpg
+FB-160,FB,160,The vase is behind the cat.,The vase is in front of the cat.,http://images.cocodataset.org/train2017/000000261225.jpg
+FB-80,FB,80,The person is in front of the refrigerator.,The person is behind the refrigerator.,http://images.cocodataset.org/train2017/000000261305.jpg
+FB-165,FB,165,The elephant is in front of the truck.,The elephant is behind the truck.,http://images.cocodataset.org/train2017/000000027989.jpg
+FF-170,FF,170,The person is facing away from the cow.,The person is facing the cow.,http://images.cocodataset.org/train2017/000000221771.jpg
+FF-171,FF,171,The teddy bear is facing the cow.,The teddy bear is facing away from the cow.,http://images.cocodataset.org/train2017/000000459644.jpg
+FB-177,FB,177,The bicycle is in front of the cat.,The bicycle is behind the cat.,http://images.cocodataset.org/val2017/000000109055.jpg
+FB-153,FB,153,The cat is in front of the refrigerator.,The cat is behind the refrigerator.,http://images.cocodataset.org/train2017/000000117774.jpg
+FB-187,FB,187,The dog is in front of the sports ball.,The dog is behind the sports ball.,http://images.cocodataset.org/train2017/000000284772.jpg
+LR-194,LR,194,The couch is at the right side of the umbrella.,The couch is at the left side of the right side of the umbrella.,http://images.cocodataset.org/train2017/000000428329.jpg
+FF-106,FF,106,The parking meter is facing away from the person.,The parking meter is facing the person.,http://images.cocodataset.org/train2017/000000567205.jpg
+FB-206,FB,206,The suitcase is in front of the person.,The suitcase is behind the person.,http://images.cocodataset.org/train2017/000000261779.jpg
+LR-207,LR,207,The cat is at the right side of the bed.,The cat is at the left side of the right side of the bed.,http://images.cocodataset.org/val2017/000000134882.jpg
+PP-189,PP,189,The bus is parallel to the motorcycle.,The bus is perpendicular to the motorcycle.,http://images.cocodataset.org/train2017/000000087705.jpg
+LR-190,LR,190,The banana is at the left side of the cat.,The banana is at the right side of the left side of the cat.,http://images.cocodataset.org/train2017/000000259475.jpg
+LR-11,LR,11,The bed is at the left side of the bench.,The bed is at the right side of the left side of the bench.,http://images.cocodataset.org/train2017/000000262118.jpg
+LR-195,LR,195,The toilet is left of the cat.,The toilet is right of the cat.,http://images.cocodataset.org/train2017/000000063950.jpg
+FF-211,FF,211,The bus is facing away from the cow.,The bus is facing the cow.,http://images.cocodataset.org/train2017/000000162355.jpg
+FF-213,FF,213,The laptop is facing the sandwich.,The laptop is facing away from the sandwich.,http://images.cocodataset.org/train2017/000000302643.jpg
+FF-239,FF,239,The cat is facing away from the toilet.,The cat is facing the toilet.,http://images.cocodataset.org/train2017/000000518156.jpg
+FB-232,FB,232,The person is behind the bear.,The person is in front of the bear.,http://images.cocodataset.org/train2017/000000497662.jpg
+LR-215,LR,215,The person is at the right side of the cake.,The person is at the left side of the right side of the cake.,http://images.cocodataset.org/train2017/000000046441.jpg
+FB-248,FB,248,The truck is in front of the giraffe.,The truck is behind the giraffe.,http://images.cocodataset.org/train2017/000000053748.jpg
+LR-247,LR,247,The teddy bear is at the left side of the cat.,The teddy bear is at the right side of the left side of the cat.,http://images.cocodataset.org/train2017/000000484174.jpg
+LR-181,LR,181,The cup is at the right side of the cat.,The cup is at the left side of the right side of the cat.,http://images.cocodataset.org/train2017/000000248461.jpg
+FF-250,FF,250,The laptop is facing the chair.,The laptop is facing away from the chair.,http://images.cocodataset.org/train2017/000000066376.jpg
+FB-256,FB,256,The sink is in front of the person.,The sink is behind the person.,http://images.cocodataset.org/train2017/000000571334.jpg
+FB-260,FB,260,The hot dog is in front of the banana.,The hot dog is behind the banana.,http://images.cocodataset.org/train2017/000000029794.jpg
+FB-264,FB,264,The cow is in front of the person.,The cow is behind the person.,http://images.cocodataset.org/train2017/000000316536.jpg
+LR-251,LR,251,The person is right of the refrigerator.,The person is left of the refrigerator.,http://images.cocodataset.org/train2017/000000462151.jpg
+LR-210,LR,210,The pizza is right of the bottle.,The pizza is left of the bottle.,http://images.cocodataset.org/train2017/000000342259.jpg
+FB-267,FB,267,The bus is in front of the boat.,The bus is behind the boat.,http://images.cocodataset.org/val2017/000000449432.jpg
+FF-230,FF,230,The teddy bear is facing away from the book.,The teddy bear is facing the book.,http://images.cocodataset.org/train2017/000000089870.jpg
+LR-273,LR,273,The cake is at the right side of the apple.,The cake is at the left side of the right side of the apple.,http://images.cocodataset.org/train2017/000000071664.jpg
+LR-244,LR,244,The cake is at the right side of the laptop.,The cake is at the left side of the right side of the laptop.,http://images.cocodataset.org/train2017/000000393375.jpg
+LR-157,LR,157,The chair is left of the teddy bear.,The chair is right of the teddy bear.,http://images.cocodataset.org/train2017/000000531568.jpg
+FB-271,FB,271,The microwave is behind the person.,The microwave is in front of the person.,http://images.cocodataset.org/train2017/000000264255.jpg
+FB-279,FB,279,The dining table is in front of the person.,The dining table is behind the person.,http://images.cocodataset.org/train2017/000000126625.jpg
+FB-282,FB,282,The chair is behind the person.,The chair is in front of the person.,http://images.cocodataset.org/train2017/000000540765.jpg
+LR-288,LR,288,The bench is right of the bed.,The bench is left of the bed.,http://images.cocodataset.org/train2017/000000262118.jpg
+LR-284,LR,284,The laptop is at the right side of the apple.,The laptop is at the left side of the right side of the apple.,http://images.cocodataset.org/train2017/000000579201.jpg
+FF-280,FF,280,The person is facing the teddy bear.,The person is facing away from the teddy bear.,http://images.cocodataset.org/train2017/000000041753.jpg
+FB-278,FB,278,The car is behind the teddy bear.,The car is in front of the teddy bear.,http://images.cocodataset.org/train2017/000000151764.jpg
+LR-302,LR,302,The broccoli is at the right side of the pizza.,The broccoli is at the left side of the right side of the pizza.,http://images.cocodataset.org/train2017/000000055707.jpg
+FB-309,FB,309,The person is behind the cat.,The person is in front of the cat.,http://images.cocodataset.org/train2017/000000228915.jpg
+FB-301,FB,301,The car is in front of the truck.,The car is behind the truck.,http://images.cocodataset.org/train2017/000000279073.jpg
+FB-312,FB,312,The dining table is behind the cat.,The dining table is in front of the cat.,http://images.cocodataset.org/train2017/000000452072.jpg
+FB-315,FB,315,The boat is behind the bicycle.,The boat is in front of the bicycle.,http://images.cocodataset.org/train2017/000000390298.jpg
+FB-297,FB,297,The dining table is behind the person.,The dining table is in front of the person.,http://images.cocodataset.org/train2017/000000160459.jpg
+FB-291,FB,291,The book is behind the bus.,The book is in front of the bus.,http://images.cocodataset.org/train2017/000000160407.jpg
+FB-339,FB,339,The bed is in front of the couch.,The bed is behind the couch.,http://images.cocodataset.org/train2017/000000456302.jpg
+FB-323,FB,323,The cat is in front of the bicycle.,The cat is behind the bicycle.,http://images.cocodataset.org/train2017/000000446409.jpg
+FF-357,FF,357,The person is facing the bear.,The person is facing away from the bear.,http://images.cocodataset.org/train2017/000000541911.jpg
+LR-342,LR,342,The umbrella is at the right side of the cat.,The umbrella is at the left side of the right side of the cat.,http://images.cocodataset.org/train2017/000000158354.jpg
+FB-350,FB,350,The dining table is behind the suitcase.,The dining table is in front of the suitcase.,http://images.cocodataset.org/train2017/000000108751.jpg
+FB-348,FB,348,The teddy bear is behind the potted plant.,The teddy bear is in front of the potted plant.,http://images.cocodataset.org/train2017/000000082512.jpg
+FF-362,FF,362,The cat is facing the keyboard.,The cat is facing away from the keyboard.,http://images.cocodataset.org/train2017/000000530730.jpg
+FF-359,FF,359,The zebra is facing the car.,The zebra is facing away from the car.,http://images.cocodataset.org/train2017/000000473587.jpg
+FF-356,FF,356,The dog is facing the boat.,The dog is facing away from the boat.,http://images.cocodataset.org/train2017/000000030667.jpg
+FF-364,FF,364,The cat is facing the tv.,The cat is facing away from the tv.,http://images.cocodataset.org/val2017/000000476810.jpg
+FF-375,FF,375,The zebra is facing the person.,The zebra is facing away from the person.,http://images.cocodataset.org/train2017/000000263512.jpg
+LR-363,LR,363,The sandwich is at the right side of the bowl.,The sandwich is at the left side of the right side of the bowl.,http://images.cocodataset.org/train2017/000000116182.jpg
+LR-369,LR,369,The person is at the left side of the broccoli.,The person is at the right side of the left side of the broccoli.,http://images.cocodataset.org/train2017/000000379552.jpg
+LR-380,LR,380,The tv is at the left side of the cat.,The tv is at the right side of the left side of the cat.,http://images.cocodataset.org/train2017/000000037907.jpg
+FB-298,FB,298,The book is behind the teddy bear.,The book is in front of the teddy bear.,http://images.cocodataset.org/train2017/000000514292.jpg
+FF-382,FF,382,The elephant is facing away from the bus.,The elephant is facing the bus.,http://images.cocodataset.org/train2017/000000149551.jpg
+FF-385,FF,385,The person is facing the teddy bear.,The person is facing away from the teddy bear.,http://images.cocodataset.org/train2017/000000317797.jpg
+LR-389,LR,389,The cat is left of the potted plant.,The cat is right of the potted plant.,http://images.cocodataset.org/train2017/000000372870.jpg
+LR-259,LR,259,The laptop is at the left side of the donut.,The laptop is at the right side of the left side of the donut.,http://images.cocodataset.org/train2017/000000002570.jpg
+FB-361,FB,361,The laptop is behind the sandwich.,The laptop is in front of the sandwich.,http://images.cocodataset.org/train2017/000000028320.jpg
+LR-390,LR,390,The dog is at the right side of the horse.,The dog is at the left side of the right side of the horse.,http://images.cocodataset.org/train2017/000000471929.jpg
+FB-381,FB,381,The person is behind the cup.,The person is in front of the cup.,http://images.cocodataset.org/train2017/000000486576.jpg
+FB-408,FB,408,The horse is in front of the person.,The horse is behind the person.,http://images.cocodataset.org/train2017/000000532748.jpg
+PP-394,PP,394,The horse is parallel to the cow.,The horse is perpendicular to the cow.,http://images.cocodataset.org/train2017/000000441774.jpg
+FB-401,FB,401,The bench is behind the teddy bear.,The bench is in front of the teddy bear.,http://images.cocodataset.org/train2017/000000002839.jpg
+FB-403,FB,403,The hot dog is in front of the banana.,The hot dog is behind the banana.,http://images.cocodataset.org/train2017/000000165639.jpg
+FB-397,FB,397,The suitcase is in front of the refrigerator.,The suitcase is behind the refrigerator.,http://images.cocodataset.org/train2017/000000561393.jpg
+FF-410,FF,410,The teddy bear is facing the person.,The teddy bear is facing away from the person.,http://images.cocodataset.org/val2017/000000439773.jpg
+FB-406,FB,406,The parking meter is at the back of the truck.,The parking meter is in front of the back of the truck.,http://images.cocodataset.org/train2017/000000019185.jpg
+FB-434,FB,434,The skateboard is behind the bed.,The skateboard is in front of the bed.,http://images.cocodataset.org/train2017/000000030895.jpg
+FB-178,FB,178,The toilet is in front of the truck.,The toilet is behind the truck.,http://images.cocodataset.org/train2017/000000127871.jpg
+LR-404,LR,404,The umbrella is at the right side of the cat.,The umbrella is at the left side of the right side of the cat.,http://images.cocodataset.org/train2017/000000466789.jpg
+FB-399,FB,399,The bus is in front of the traffic light.,The bus is behind the traffic light.,http://images.cocodataset.org/train2017/000000303765.jpg
+FB-446,FB,446,The refrigerator is behind the person.,The refrigerator is in front of the person.,http://images.cocodataset.org/train2017/000000272253.jpg
+PP-426,PP,426,The car is perpendicular to the motorcycle.,The car is parallel to the motorcycle.,http://images.cocodataset.org/train2017/000000253054.jpg
+LR-470,LR,470,The person is at the right side of the chair.,The person is at the left side of the right side of the chair.,http://images.cocodataset.org/train2017/000000356764.jpg
+FB-421,FB,421,The person is in front of the bear.,The person is behind the bear.,http://images.cocodataset.org/train2017/000000290967.jpg
+FF-439,FF,439,The bench is facing away from the car.,The bench is facing the car.,http://images.cocodataset.org/train2017/000000506483.jpg
+FB-420,FB,420,The cake is in front of the truck.,The cake is behind the truck.,http://images.cocodataset.org/train2017/000000214873.jpg
+FB-471,FB,471,The dog is in front of the suitcase.,The dog is behind the suitcase.,http://images.cocodataset.org/train2017/000000402297.jpg
+FB-472,FB,472,The suitcase is in front of the bench.,The suitcase is behind the bench.,http://images.cocodataset.org/train2017/000000256533.jpg
+FB-468,FB,468,The dining table is in front of the cat.,The dining table is behind the cat.,http://images.cocodataset.org/train2017/000000349511.jpg
+FB-467,FB,467,The laptop is behind the cat.,The laptop is in front of the cat.,http://images.cocodataset.org/train2017/000000119360.jpg
+FB-482,FB,482,The person is behind the donut.,The person is in front of the donut.,http://images.cocodataset.org/train2017/000000051522.jpg
+LR-485,LR,485,The book is at the right side of the teddy bear.,The book is at the left side of the right side of the teddy bear.,http://images.cocodataset.org/train2017/000000503996.jpg
+LR-474,LR,474,The orange is at the left side of the bowl.,The orange is at the right side of the left side of the bowl.,http://images.cocodataset.org/train2017/000000553586.jpg
+LR-483,LR,483,The handbag is right of the bed.,The handbag is left of the bed.,http://images.cocodataset.org/train2017/000000069214.jpg
+FB-480,FB,480,The zebra is at the back of the truck.,The zebra is in front of the back of the truck.,http://images.cocodataset.org/train2017/000000341457.jpg
+FB-469,FB,469,The wine glass is in front of the person.,The wine glass is behind the person.,http://images.cocodataset.org/train2017/000000072872.jpg
+LR-37,LR,37,The orange is at the right side of the sandwich.,The orange is at the left side of the right side of the sandwich.,http://images.cocodataset.org/train2017/000000260248.jpg
+FF-424,FF,424,The bed is facing the tv.,The bed is facing away from the tv.,http://images.cocodataset.org/train2017/000000146850.jpg
+FB-510,FB,510,The surfboard is in front of the bicycle.,The surfboard is behind the bicycle.,http://images.cocodataset.org/train2017/000000515743.jpg
+FB-464,FB,464,The cup is behind the hot dog.,The cup is in front of the hot dog.,http://images.cocodataset.org/train2017/000000289199.jpg
+FB-487,FB,487,The refrigerator is behind the person.,The refrigerator is in front of the person.,http://images.cocodataset.org/train2017/000000041710.jpg
+FF-513,FF,513,The cat is facing the laptop.,The cat is facing away from the laptop.,http://images.cocodataset.org/train2017/000000573877.jpg
+FB-495,FB,495,The person is in front of the dog.,The person is behind the dog.,http://images.cocodataset.org/train2017/000000378466.jpg
+FB-518,FB,518,The orange is in front of the banana.,The orange is behind the banana.,http://images.cocodataset.org/train2017/000000238989.jpg
+FB-504,FB,504,The refrigerator is behind the dining table.,The refrigerator is in front of the dining table.,http://images.cocodataset.org/train2017/000000243442.jpg
+FB-524,FB,524,The cup is in front of the pizza.,The cup is behind the pizza.,http://images.cocodataset.org/val2017/000000520871.jpg
+PP-508,PP,508,The suitcase is parallel to the couch.,The suitcase is perpendicular to the couch.,http://images.cocodataset.org/train2017/000000479539.jpg
+LR-538,LR,538,The laptop is left of the tv.,The laptop is right of the tv.,http://images.cocodataset.org/train2017/000000407386.jpg
+PP-544,PP,544,The skateboard is parallel to the couch.,The skateboard is perpendicular to the couch.,http://images.cocodataset.org/train2017/000000170584.jpg
+FB-530,FB,530,The zebra is behind the person.,The zebra is in front of the person.,http://images.cocodataset.org/train2017/000000171805.jpg
+FF-523,FF,523,The teddy bear is facing the book.,The teddy bear is facing away from the book.,http://images.cocodataset.org/train2017/000000361778.jpg
+FB-476,FB,476,The laptop is in front of the teddy bear.,The laptop is behind the teddy bear.,http://images.cocodataset.org/train2017/000000402858.jpg
+LR-548,LR,548,The laptop is left of the sandwich.,The laptop is right of the sandwich.,http://images.cocodataset.org/train2017/000000349230.jpg
+LR-545,LR,545,The potted plant is right of the bench.,The potted plant is left of the bench.,http://images.cocodataset.org/val2017/000000437514.jpg
+LR-198,LR,198,The dining table is at the right side of the person.,The dining table is at the left side of the right side of the person.,http://images.cocodataset.org/train2017/000000362966.jpg
+FB-557,FB,557,The sink is behind the person.,The sink is in front of the person.,http://images.cocodataset.org/train2017/000000107565.jpg
+FF-558,FF,558,The bird is facing away from the cat.,The bird is facing the cat.,http://images.cocodataset.org/train2017/000000072556.jpg
+PP-565,PP,565,The dog is perpendicular to the couch.,The dog is parallel to the couch.,http://images.cocodataset.org/train2017/000000170898.jpg
+FF-564,FF,564,The sheep is facing away from the person.,The sheep is facing the person.,http://images.cocodataset.org/train2017/000000091656.jpg
+LR-553,LR,553,The potted plant is right of the train.,The potted plant is left of the train.,http://images.cocodataset.org/train2017/000000518546.jpg
+FB-556,FB,556,The truck is at the back of the surfboard.,The truck is in front of the back of the surfboard.,http://images.cocodataset.org/train2017/000000209791.jpg
+LR-585,LR,585,The bed is left of the bench.,The bed is right of the bench.,http://images.cocodataset.org/train2017/000000075458.jpg
+FF-594,FF,594,The book is facing the cat.,The book is facing away from the cat.,http://images.cocodataset.org/train2017/000000499656.jpg
+LR-574,LR,574,The book is at the left side of the pizza.,The book is at the right side of the left side of the pizza.,http://images.cocodataset.org/train2017/000000469936.jpg
+FF-582,FF,582,The banana is facing the cat.,The banana is facing away from the cat.,http://images.cocodataset.org/train2017/000000481313.jpg
+FB-600,FB,600,The laptop is in front of the tv.,The laptop is behind the tv.,http://images.cocodataset.org/train2017/000000046002.jpg
+LR-520,LR,520,The orange is at the right side of the bird.,The orange is at the left side of the right side of the bird.,http://images.cocodataset.org/train2017/000000514600.jpg
+FB-608,FB,608,The person is behind the couch.,The person is in front of the couch.,http://images.cocodataset.org/train2017/000000348288.jpg
+LR-612,LR,612,The banana is left of the sandwich.,The banana is right of the sandwich.,http://images.cocodataset.org/train2017/000000557005.jpg
+FB-583,FB,583,The pizza is in front of the person.,The pizza is behind the person.,http://images.cocodataset.org/train2017/000000328270.jpg
+FB-595,FB,595,The oven is in front of the person.,The oven is behind the person.,http://images.cocodataset.org/train2017/000000451274.jpg
+LR-621,LR,621,The sandwich is at the left side of the bowl.,The sandwich is at the right side of the left side of the bowl.,http://images.cocodataset.org/train2017/000000375086.jpg
+LR-642,LR,642,The cat is left of the couch.,The cat is right of the couch.,http://images.cocodataset.org/train2017/000000040419.jpg
+LR-645,LR,645,The dog is at the right side of the laptop.,The dog is at the left side of the right side of the laptop.,http://images.cocodataset.org/train2017/000000351914.jpg
+FB-638,FB,638,The person is behind the oven.,The person is in front of the oven.,http://images.cocodataset.org/train2017/000000462151.jpg
+LR-616,LR,616,The microwave is at the left side of the person.,The microwave is at the right side of the left side of the person.,http://images.cocodataset.org/train2017/000000364937.jpg
+FB-552,FB,552,The couch is behind the suitcase.,The couch is in front of the suitcase.,http://images.cocodataset.org/train2017/000000042667.jpg
+FB-653,FB,653,The cake is in front of the person.,The cake is behind the person.,http://images.cocodataset.org/train2017/000000348941.jpg
+FB-659,FB,659,The handbag is in front of the teddy bear.,The handbag is behind the teddy bear.,http://images.cocodataset.org/train2017/000000010547.jpg
+FF-657,FF,657,The teddy bear is facing the cow.,The teddy bear is facing away from the cow.,http://images.cocodataset.org/train2017/000000285618.jpg
+FB-656,FB,656,The truck is behind the oven.,The truck is in front of the oven.,http://images.cocodataset.org/train2017/000000197266.jpg
+FB-666,FB,666,The couch is in front of the person.,The couch is behind the person.,http://images.cocodataset.org/train2017/000000142481.jpg
+FB-333,FB,333,The fire hydrant is behind the bird.,The fire hydrant is in front of the bird.,http://images.cocodataset.org/train2017/000000572804.jpg
+FB-651,FB,651,The bicycle is behind the train.,The bicycle is in front of the train.,http://images.cocodataset.org/train2017/000000116006.jpg
+LR-672,LR,672,The teddy bear is at the left side of the book.,The teddy bear is at the right side of the left side of the book.,http://images.cocodataset.org/train2017/000000127654.jpg
+LR-618,LR,618,The dining table is at the left side of the oven.,The dining table is at the right side of the left side of the oven.,http://images.cocodataset.org/train2017/000000097427.jpg
+FB-681,FB,681,The car is behind the suitcase.,The car is in front of the suitcase.,http://images.cocodataset.org/train2017/000000159850.jpg
+PP-676,PP,676,The boat is parallel to the truck.,The boat is perpendicular to the truck.,http://images.cocodataset.org/train2017/000000267363.jpg
+LR-679,LR,679,The motorcycle is at the right side of the truck.,The motorcycle is at the left side of the right side of the truck.,http://images.cocodataset.org/train2017/000000106810.jpg
+FB-695,FB,695,The keyboard is at the back of the dog.,The keyboard is in front of the back of the dog.,http://images.cocodataset.org/train2017/000000077769.jpg
+PP-617,PP,617,The bench is parallel to the person.,The bench is perpendicular to the person.,http://images.cocodataset.org/train2017/000000012704.jpg
+FB-671,FB,671,The mouse is behind the teddy bear.,The mouse is in front of the teddy bear.,http://images.cocodataset.org/train2017/000000196226.jpg
+LR-682,LR,682,The cat is at the left side of the teddy bear.,The cat is at the right side of the left side of the teddy bear.,http://images.cocodataset.org/train2017/000000219418.jpg
+LR-698,LR,698,The person is at the left side of the dining table.,The person is at the right side of the left side of the dining table.,http://images.cocodataset.org/train2017/000000224045.jpg
+LR-494,LR,494,The truck is at the left side of the bed.,The truck is at the right side of the left side of the bed.,http://images.cocodataset.org/train2017/000000172006.jpg
+LR-697,LR,697,The person is left of the refrigerator.,The person is right of the refrigerator.,http://images.cocodataset.org/train2017/000000410805.jpg
+FB-702,FB,702,The skateboard is in front of the dog.,The skateboard is behind the dog.,http://images.cocodataset.org/train2017/000000518613.jpg
+LR-689,LR,689,The chair is at the right side of the laptop.,The chair is at the left side of the right side of the laptop.,http://images.cocodataset.org/train2017/000000427726.jpg
+FB-700,FB,700,The teddy bear is behind the potted plant.,The teddy bear is in front of the potted plant.,http://images.cocodataset.org/val2017/000000175443.jpg
+LR-704,LR,704,The person is at the left side of the couch.,The person is at the right side of the left side of the couch.,http://images.cocodataset.org/train2017/000000277533.jpg
+LR-714,LR,714,The person is right of the teddy bear.,The person is left of the teddy bear.,http://images.cocodataset.org/train2017/000000230004.jpg
+LR-717,LR,717,The teddy bear is left of the cup.,The teddy bear is right of the cup.,http://images.cocodataset.org/train2017/000000185326.jpg
+LR-712,LR,712,The cow is at the left side of the car.,The cow is at the right side of the left side of the car.,http://images.cocodataset.org/train2017/000000343504.jpg
+LR-711,LR,711,The chair is at the left side of the pizza.,The chair is at the right side of the left side of the pizza.,http://images.cocodataset.org/train2017/000000285484.jpg
+FB-720,FB,720,The teddy bear is in front of the bus.,The teddy bear is behind the bus.,http://images.cocodataset.org/train2017/000000355857.jpg
+PP-728,PP,728,The bed is perpendicular to the person.,The bed is parallel to the person.,http://images.cocodataset.org/train2017/000000207826.jpg
+FB-723,FB,723,The person is behind the oven.,The person is in front of the oven.,http://images.cocodataset.org/train2017/000000270922.jpg
+LR-721,LR,721,The person is at the left side of the bed.,The person is at the right side of the left side of the bed.,http://images.cocodataset.org/train2017/000000303047.jpg
+LR-491,LR,491,The laptop is at the left side of the teddy bear.,The laptop is at the right side of the left side of the teddy bear.,http://images.cocodataset.org/train2017/000000488977.jpg
+LR-705,LR,705,The cat is at the left side of the pizza.,The cat is at the right side of the left side of the pizza.,http://images.cocodataset.org/train2017/000000363325.jpg
+FF-738,FF,738,The laptop is facing the cat.,The laptop is facing away from the cat.,http://images.cocodataset.org/train2017/000000501126.jpg
+FB-733,FB,733,The potted plant is behind the cat.,The potted plant is in front of the cat.,http://images.cocodataset.org/train2017/000000314504.jpg
+FB-735,FB,735,The teddy bear is in front of the bus.,The teddy bear is behind the bus.,http://images.cocodataset.org/train2017/000000205283.jpg
+LR-737,LR,737,The couch is left of the bed.,The couch is right of the bed.,http://images.cocodataset.org/train2017/000000334215.jpg
+FF-739,FF,739,The cat is facing the refrigerator.,The cat is facing away from the refrigerator.,http://images.cocodataset.org/train2017/000000477647.jpg
+FB-751,FB,751,The laptop is in front of the cat.,The laptop is behind the cat.,http://images.cocodataset.org/train2017/000000357470.jpg
+FB-754,FB,754,The dining table is in front of the cat.,The dining table is behind the cat.,http://images.cocodataset.org/train2017/000000193254.jpg
+FF-757,FF,757,The person is facing away from the laptop.,The person is facing the laptop.,http://images.cocodataset.org/train2017/000000021365.jpg
+LR-741,LR,741,The teddy bear is at the left side of the dog.,The teddy bear is at the right side of the left side of the dog.,http://images.cocodataset.org/train2017/000000139355.jpg
+FB-554,FB,554,The bed is at the back of the couch.,The bed is in front of the back of the couch.,http://images.cocodataset.org/train2017/000000208557.jpg
+FF-756,FF,756,The person is facing the car.,The person is facing away from the car.,http://images.cocodataset.org/train2017/000000132841.jpg
+LR-762,LR,762,The person is at the right side of the dining table.,The person is at the left side of the right side of the dining table.,http://images.cocodataset.org/train2017/000000057639.jpg
+FB-759,FB,759,The boat is behind the bicycle.,The boat is in front of the bicycle.,http://images.cocodataset.org/train2017/000000356622.jpg
+FB-796,FB,796,The horse is in front of the bench.,The horse is behind the bench.,http://images.cocodataset.org/train2017/000000566276.jpg
+FB-690,FB,690,The dining table is in front of the truck.,The dining table is behind the truck.,http://images.cocodataset.org/train2017/000000219784.jpg
+FB-772,FB,772,The person is in front of the refrigerator.,The person is behind the refrigerator.,http://images.cocodataset.org/train2017/000000321633.jpg
+FB-804,FB,804,The cup is in front of the cow.,The cup is behind the cow.,http://images.cocodataset.org/train2017/000000298981.jpg
+FF-805,FF,805,The person is facing the frisbee.,The person is facing away from the frisbee.,http://images.cocodataset.org/train2017/000000468612.jpg
+FB-815,FB,815,The toilet is at the back of the truck.,The toilet is in front of the back of the truck.,http://images.cocodataset.org/train2017/000000127871.jpg
+FB-817,FB,817,The boat is behind the dining table.,The boat is in front of the dining table.,http://images.cocodataset.org/train2017/000000112363.jpg
+LR-570,LR,570,The donut is at the right side of the bowl.,The donut is at the left side of the right side of the bowl.,http://images.cocodataset.org/train2017/000000435620.jpg
+LR-819,LR,819,The apple is left of the banana.,The apple is right of the banana.,http://images.cocodataset.org/train2017/000000125499.jpg
+LR-798,LR,798,The teddy bear is at the left side of the couch.,The teddy bear is at the right side of the left side of the couch.,http://images.cocodataset.org/train2017/000000178818.jpg
+LR-802,LR,802,The laptop is at the left side of the dog.,The laptop is at the right side of the left side of the dog.,http://images.cocodataset.org/train2017/000000025994.jpg
+PP-780,PP,780,The motorcycle is parallel to the bus.,The motorcycle is perpendicular to the bus.,http://images.cocodataset.org/train2017/000000308175.jpg
+PP-834,PP,834,The bus is perpendicular to the car.,The bus is parallel to the car.,http://images.cocodataset.org/train2017/000000499267.jpg
+LR-821,LR,821,The donut is left of the cup.,The donut is right of the cup.,http://images.cocodataset.org/train2017/000000316482.jpg
+FB-832,FB,832,The cat is in front of the chair.,The cat is behind the chair.,http://images.cocodataset.org/train2017/000000549649.jpg
+LR-816,LR,816,The umbrella is left of the train.,The umbrella is right of the train.,http://images.cocodataset.org/train2017/000000296797.jpg
+FB-843,FB,843,The giraffe is in front of the truck.,The giraffe is behind the truck.,http://images.cocodataset.org/train2017/000000060513.jpg
+FB-844,FB,844,The sandwich is in front of the pizza.,The sandwich is behind the pizza.,http://images.cocodataset.org/train2017/000000220111.jpg
+FB-846,FB,846,The pizza is behind the bowl.,The pizza is in front of the bowl.,http://images.cocodataset.org/train2017/000000237818.jpg
+FB-853,FB,853,The umbrella is behind the cat.,The umbrella is in front of the cat.,http://images.cocodataset.org/train2017/000000249952.jpg
+FF-858,FF,858,The cat is facing away from the toilet.,The cat is facing the toilet.,http://images.cocodataset.org/train2017/000000572075.jpg
+FB-855,FB,855,The potted plant is in front of the teddy bear.,The potted plant is behind the teddy bear.,http://images.cocodataset.org/train2017/000000413603.jpg
+FF-859,FF,859,The cat is facing the sink.,The cat is facing away from the sink.,http://images.cocodataset.org/train2017/000000463825.jpg
+FF-860,FF,860,The zebra is facing the person.,The zebra is facing away from the person.,http://images.cocodataset.org/train2017/000000484066.jpg
+FB-857,FB,857,The horse is behind the person.,The horse is in front of the person.,http://images.cocodataset.org/train2017/000000422755.jpg
+LR-865,LR,865,The teddy bear is at the left side of the dog.,The teddy bear is at the right side of the left side of the dog.,http://images.cocodataset.org/train2017/000000529411.jpg
+LR-630,LR,630,The sandwich is at the left side of the laptop.,The sandwich is at the right side of the left side of the laptop.,http://images.cocodataset.org/train2017/000000511523.jpg
+FB-863,FB,863,The pizza is behind the sandwich.,The pizza is in front of the sandwich.,http://images.cocodataset.org/train2017/000000278638.jpg
+LR-866,LR,866,The person is left of the teddy bear.,The person is right of the teddy bear.,http://images.cocodataset.org/train2017/000000215396.jpg
+FB-861,FB,861,The laptop is behind the sandwich.,The laptop is in front of the sandwich.,http://images.cocodataset.org/train2017/000000013140.jpg
+LR-833,LR,833,The person is at the left side of the couch.,The person is at the right side of the left side of the couch.,http://images.cocodataset.org/train2017/000000527691.jpg
+FB-842,FB,842,The potted plant is behind the cat.,The potted plant is in front of the cat.,http://images.cocodataset.org/train2017/000000410704.jpg
+LR-888,LR,888,The hair drier is left of the person.,The hair drier is right of the person.,http://images.cocodataset.org/train2017/000000375483.jpg
+FB-678,FB,678,The bus is in front of the motorcycle.,The bus is behind the motorcycle.,http://images.cocodataset.org/train2017/000000328372.jpg
+FB-894,FB,894,The refrigerator is behind the cat.,The refrigerator is in front of the cat.,http://images.cocodataset.org/train2017/000000139721.jpg
+FB-886,FB,886,The car is in front of the truck.,The car is behind the truck.,http://images.cocodataset.org/train2017/000000500954.jpg
+FB-895,FB,895,The laptop is behind the potted plant.,The laptop is in front of the potted plant.,http://images.cocodataset.org/train2017/000000293249.jpg
+FB-897,FB,897,The teddy bear is in front of the car.,The teddy bear is behind the car.,http://images.cocodataset.org/train2017/000000151764.jpg
+LR-875,LR,875,The umbrella is at the left side of the cat.,The umbrella is at the right side of the left side of the cat.,http://images.cocodataset.org/train2017/000000029145.jpg
+LR-898,LR,898,The bed is at the left side of the couch.,The bed is at the right side of the left side of the couch.,http://images.cocodataset.org/train2017/000000131352.jpg
+FB-901,FB,901,The dining table is in front of the person.,The dining table is behind the person.,http://images.cocodataset.org/train2017/000000079058.jpg
+FB-909,FB,909,The apple is in front of the orange.,The apple is behind the orange.,http://images.cocodataset.org/train2017/000000341985.jpg
+LR-910,LR,910,The person is at the right side of the oven.,The person is at the left side of the right side of the oven.,http://images.cocodataset.org/train2017/000000121046.jpg
+FF-911,FF,911,The cat is facing away from the cake.,The cat is facing the cake.,http://images.cocodataset.org/train2017/000000447741.jpg
+LR-900,LR,900,The person is at the right side of the cake.,The person is at the left side of the right side of the cake.,http://images.cocodataset.org/train2017/000000271759.jpg
+FB-919,FB,919,The microwave is behind the cat.,The microwave is in front of the cat.,http://images.cocodataset.org/train2017/000000288106.jpg
+LR-912,LR,912,The hot dog is right of the cup.,The hot dog is left of the cup.,http://images.cocodataset.org/train2017/000000289199.jpg
+LR-726,LR,726,The train is right of the bus.,The train is left of the bus.,http://images.cocodataset.org/train2017/000000419439.jpg
+LR-920,LR,920,The car is left of the surfboard.,The car is right of the surfboard.,http://images.cocodataset.org/train2017/000000525695.jpg
+FB-916,FB,916,The umbrella is behind the couch.,The umbrella is in front of the couch.,http://images.cocodataset.org/train2017/000000428329.jpg
+LR-917,LR,917,The person is at the left side of the keyboard.,The person is at the right side of the left side of the keyboard.,http://images.cocodataset.org/train2017/000000544046.jpg
+FB-933,FB,933,The hot dog is in front of the bowl.,The hot dog is behind the bowl.,http://images.cocodataset.org/train2017/000000203756.jpg
+LR-924,LR,924,The chair is at the left side of the tv.,The chair is at the right side of the left side of the tv.,http://images.cocodataset.org/train2017/000000036962.jpg
+PP-934,PP,934,The motorcycle is parallel to the car.,The motorcycle is perpendicular to the car.,http://images.cocodataset.org/train2017/000000449889.jpg
+LR-943,LR,943,The umbrella is at the right side of the cat.,The umbrella is at the left side of the right side of the cat.,http://images.cocodataset.org/train2017/000000565110.jpg
+FB-949,FB,949,The truck is behind the motorcycle.,The truck is in front of the motorcycle.,http://images.cocodataset.org/train2017/000000369763.jpg
+LR-947,LR,947,The person is at the left side of the refrigerator.,The person is at the right side of the left side of the refrigerator.,http://images.cocodataset.org/train2017/000000242203.jpg
+LR-732,LR,732,The cow is right of the clock.,The cow is left of the clock.,http://images.cocodataset.org/train2017/000000449845.jpg
+LR-954,LR,954,The person is at the right side of the cake.,The person is at the left side of the right side of the cake.,http://images.cocodataset.org/train2017/000000324156.jpg
+FB-938,FB,938,The truck is behind the oven.,The truck is in front of the oven.,http://images.cocodataset.org/train2017/000000352127.jpg
+FF-959,FF,959,The cat is facing away from the toilet.,The cat is facing the toilet.,http://images.cocodataset.org/train2017/000000439364.jpg
+FB-951,FB,951,The person is behind the dining table.,The person is in front of the dining table.,http://images.cocodataset.org/train2017/000000348973.jpg
+LR-956,LR,956,The cat is left of the sink.,The cat is right of the sink.,http://images.cocodataset.org/val2017/000000094336.jpg
+LR-962,LR,962,The person is at the left side of the suitcase.,The person is at the right side of the left side of the suitcase.,http://images.cocodataset.org/train2017/000000246863.jpg
+LR-965,LR,965,The couch is at the right side of the bench.,The couch is at the left side of the right side of the bench.,http://images.cocodataset.org/train2017/000000541721.jpg
+PP-937,PP,937,The zebra is perpendicular to the horse.,The zebra is parallel to the horse.,http://images.cocodataset.org/train2017/000000302924.jpg
+LR-970,LR,970,The bed is left of the refrigerator.,The bed is right of the refrigerator.,http://images.cocodataset.org/train2017/000000169891.jpg
+FB-967,FB,967,The zebra is in front of the truck.,The zebra is behind the truck.,http://images.cocodataset.org/train2017/000000319902.jpg
+LR-872,LR,872,The motorcycle is at the left side of the car.,The motorcycle is at the right side of the left side of the car.,http://images.cocodataset.org/train2017/000000443589.jpg
+FF-868,FF,868,The person is facing away from the bear.,The person is facing the bear.,http://images.cocodataset.org/train2017/000000073197.jpg
+FB-977,FB,977,The oven is behind the dog.,The oven is in front of the dog.,http://images.cocodataset.org/train2017/000000401045.jpg
+FF-986,FF,986,The dog is facing the cake.,The dog is facing away from the cake.,http://images.cocodataset.org/train2017/000000373396.jpg
+FB-960,FB,960,The potted plant is at the back of the bus.,The potted plant is in front of the back of the bus.,http://images.cocodataset.org/train2017/000000185502.jpg
+FB-979,FB,979,The person is behind the bear.,The person is in front of the bear.,http://images.cocodataset.org/train2017/000000283942.jpg
+FB-999,FB,999,The laptop is in front of the cat.,The laptop is behind the cat.,http://images.cocodataset.org/train2017/000000369208.jpg
+LR-958,LR,958,The keyboard is at the right side of the person.,The keyboard is at the left side of the right side of the person.,http://images.cocodataset.org/train2017/000000481124.jpg
+FB-993,FB,993,The bowl is in front of the sandwich.,The bowl is behind the sandwich.,http://images.cocodataset.org/train2017/000000568572.jpg
+PP-984,PP,984,The motorcycle is parallel to the bus.,The motorcycle is perpendicular to the bus.,http://images.cocodataset.org/train2017/000000142774.jpg
+LR-1014,LR,1014,The cell phone is at the right side of the person.,The cell phone is at the left side of the right side of the person.,http://images.cocodataset.org/train2017/000000476363.jpg
+FB-1001,FB,1001,The banana is behind the orange.,The banana is in front of the orange.,http://images.cocodataset.org/train2017/000000540164.jpg
+LR-814,LR,814,The bed is left of the tv.,The bed is right of the tv.,http://images.cocodataset.org/train2017/000000109106.jpg
+FB-996,FB,996,The couch is behind the teddy bear.,The couch is in front of the teddy bear.,http://images.cocodataset.org/train2017/000000394271.jpg
+FB-1002,FB,1002,The cat is in front of the bicycle.,The cat is behind the bicycle.,http://images.cocodataset.org/val2017/000000101762.jpg
+PP-1020,PP,1020,The boat is parallel to the truck.,The boat is perpendicular to the truck.,http://images.cocodataset.org/train2017/000000562291.jpg
+LR-966,LR,966,The wine glass is at the left side of the pizza.,The wine glass is at the right side of the left side of the pizza.,http://images.cocodataset.org/train2017/000000481886.jpg
+FF-1019,FF,1019,The person is facing the banana.,The person is facing away from the banana.,http://images.cocodataset.org/val2017/000000550714.jpg
+LR-1025,LR,1025,The laptop is at the left side of the person.,The laptop is at the right side of the left side of the person.,http://images.cocodataset.org/train2017/000000508749.jpg
+PP-1035,PP,1035,The skateboard is parallel to the couch.,The skateboard is perpendicular to the couch.,http://images.cocodataset.org/train2017/000000391685.jpg
+LR-1024,LR,1024,The person is at the left side of the remote.,The person is at the right side of the left side of the remote.,http://images.cocodataset.org/train2017/000000089930.jpg
+FB-1038,FB,1038,The motorcycle is in front of the bus.,The motorcycle is behind the bus.,http://images.cocodataset.org/train2017/000000440586.jpg
+LR-1039,LR,1039,The oven is at the left side of the person.,The oven is at the right side of the left side of the person.,http://images.cocodataset.org/train2017/000000265810.jpg
+FB-1041,FB,1041,The person is in front of the toaster.,The person is behind the toaster.,http://images.cocodataset.org/train2017/000000147073.jpg
+FB-1037,FB,1037,The bus is behind the teddy bear.,The bus is in front of the teddy bear.,http://images.cocodataset.org/train2017/000000355857.jpg
+FB-1044,FB,1044,The wine glass is in front of the person.,The wine glass is behind the person.,http://images.cocodataset.org/train2017/000000456991.jpg
+FF-1042,FF,1042,The dog is facing away from the fire hydrant.,The dog is facing the fire hydrant.,http://images.cocodataset.org/train2017/000000198935.jpg
+FB-1049,FB,1049,The cow is in front of the sheep.,The cow is behind the sheep.,http://images.cocodataset.org/train2017/000000076970.jpg
+FB-818,FB,818,The parking meter is at the back of the car.,The parking meter is in front of the back of the car.,http://images.cocodataset.org/train2017/000000355462.jpg
+LR-989,LR,989,The parking meter is at the left side of the car.,The parking meter is at the right side of the left side of the car.,http://images.cocodataset.org/train2017/000000422469.jpg
+LR-1052,LR,1052,The person is at the left side of the cell phone.,The person is at the right side of the left side of the cell phone.,http://images.cocodataset.org/val2017/000000450686.jpg
+FB-1054,FB,1054,The dog is in front of the bed.,The dog is behind the bed.,http://images.cocodataset.org/train2017/000000153150.jpg
+FB-1051,FB,1051,The person is in front of the bear.,The person is behind the bear.,http://images.cocodataset.org/train2017/000000071224.jpg
+FB-1036,FB,1036,The parking meter is behind the truck.,The parking meter is in front of the truck.,http://images.cocodataset.org/train2017/000000064089.jpg
+LR-1057,LR,1057,The zebra is at the right side of the car.,The zebra is at the left side of the right side of the car.,http://images.cocodataset.org/train2017/000000473587.jpg
+FF-1018,FF,1018,The car is facing away from the pizza.,The car is facing the pizza.,http://images.cocodataset.org/train2017/000000079798.jpg
+LR-1046,LR,1046,The bowl is at the right side of the sandwich.,The bowl is at the left side of the right side of the sandwich.,http://images.cocodataset.org/train2017/000000274203.jpg
+LR-1067,LR,1067,The bottle is at the right side of the wine glass.,The bottle is at the left side of the right side of the wine glass.,http://images.cocodataset.org/train2017/000000571786.jpg
+FF-1078,FF,1078,The dog is facing the horse.,The dog is facing away from the horse.,http://images.cocodataset.org/train2017/000000331503.jpg
+FB-1060,FB,1060,The microwave is in front of the person.,The microwave is behind the person.,http://images.cocodataset.org/val2017/000000173008.jpg
+FB-1085,FB,1085,The person is behind the cow.,The person is in front of the cow.,http://images.cocodataset.org/train2017/000000234615.jpg
+FB-1077,FB,1077,The umbrella is behind the motorcycle.,The umbrella is in front of the motorcycle.,http://images.cocodataset.org/train2017/000000091636.jpg
+FB-1068,FB,1068,The oven is behind the person.,The oven is in front of the person.,http://images.cocodataset.org/train2017/000000430643.jpg
+LR-1090,LR,1090,The person is at the right side of the microwave.,The person is at the left side of the right side of the microwave.,http://images.cocodataset.org/train2017/000000536999.jpg
+LR-1081,LR,1081,The couch is at the right side of the person.,The couch is at the left side of the right side of the person.,http://images.cocodataset.org/train2017/000000367471.jpg
+LR-1094,LR,1094,The cat is right of the umbrella.,The cat is left of the umbrella.,http://images.cocodataset.org/train2017/000000038837.jpg
+LR-1100,LR,1100,The laptop is at the right side of the sandwich.,The laptop is at the left side of the right side of the sandwich.,http://images.cocodataset.org/train2017/000000336762.jpg
+FB-1107,FB,1107,The bus is in front of the person.,The bus is behind the person.,http://images.cocodataset.org/train2017/000000507502.jpg
+FF-1093,FF,1093,The laptop is facing away from the chair.,The laptop is facing the chair.,http://images.cocodataset.org/train2017/000000131011.jpg
+FB-1111,FB,1111,The train is behind the motorcycle.,The train is in front of the motorcycle.,http://images.cocodataset.org/train2017/000000338407.jpg
+FF-1132,FF,1132,The person is facing the book.,The person is facing away from the book.,http://images.cocodataset.org/train2017/000000527224.jpg
+FB-1127,FB,1127,The refrigerator is behind the dog.,The refrigerator is in front of the dog.,http://images.cocodataset.org/train2017/000000333848.jpg
+LR-1121,LR,1121,The cat is at the left side of the teddy bear.,The cat is at the right side of the left side of the teddy bear.,http://images.cocodataset.org/train2017/000000318089.jpg
+LR-836,LR,836,The apple is at the right side of the bird.,The apple is at the left side of the right side of the bird.,http://images.cocodataset.org/train2017/000000444080.jpg
+LR-1104,LR,1104,The boat is left of the potted plant.,The boat is right of the potted plant.,http://images.cocodataset.org/train2017/000000112363.jpg
+FB-1119,FB,1119,The teddy bear is behind the car.,The teddy bear is in front of the car.,http://images.cocodataset.org/train2017/000000171107.jpg
+FB-1135,FB,1135,The tv is behind the person.,The tv is in front of the person.,http://images.cocodataset.org/train2017/000000138064.jpg
+FB-1156,FB,1156,The pizza is in front of the dog.,The pizza is behind the dog.,http://images.cocodataset.org/train2017/000000508555.jpg
+FF-1158,FF,1158,The refrigerator is facing the cat.,The refrigerator is facing away from the cat.,http://images.cocodataset.org/train2017/000000477647.jpg
+LR-1155,LR,1155,The horse is at the right side of the person.,The horse is at the left side of the right side of the person.,http://images.cocodataset.org/train2017/000000495665.jpg
+FB-1133,FB,1133,The teddy bear is behind the book.,The teddy bear is in front of the book.,http://images.cocodataset.org/train2017/000000127654.jpg
+LR-1157,LR,1157,The horse is at the right side of the person.,The horse is at the left side of the right side of the person.,http://images.cocodataset.org/train2017/000000532748.jpg
+FB-1165,FB,1165,The car is in front of the motorcycle.,The car is behind the motorcycle.,http://images.cocodataset.org/train2017/000000009801.jpg
+FF-1167,FF,1167,The dog is facing away from the horse.,The dog is facing the horse.,http://images.cocodataset.org/val2017/000000049269.jpg
+LR-1103,LR,1103,The dining table is at the left side of the person.,The dining table is at the right side of the left side of the person.,http://images.cocodataset.org/train2017/000000061315.jpg
+FB-1176,FB,1176,The dining table is in front of the cat.,The dining table is behind the cat.,http://images.cocodataset.org/train2017/000000548661.jpg
+FB-1170,FB,1170,The cat is in front of the backpack.,The cat is behind the backpack.,http://images.cocodataset.org/train2017/000000151497.jpg
+FB-1164,FB,1164,The hot dog is in front of the bowl.,The hot dog is behind the bowl.,http://images.cocodataset.org/train2017/000000483996.jpg
+LR-1180,LR,1180,The bench is at the left side of the person.,The bench is at the right side of the left side of the person.,http://images.cocodataset.org/train2017/000000058836.jpg
+LR-878,LR,878,The bed is at the right side of the dining table.,The bed is at the left side of the right side of the dining table.,http://images.cocodataset.org/train2017/000000457906.jpg
+FB-1194,FB,1194,The cat is in front of the potted plant.,The cat is behind the potted plant.,http://images.cocodataset.org/train2017/000000148705.jpg
+FB-1173,FB,1173,The car is in front of the cat.,The car is behind the cat.,http://images.cocodataset.org/train2017/000000206255.jpg
+FB-1196,FB,1196,The person is behind the elephant.,The person is in front of the elephant.,http://images.cocodataset.org/train2017/000000041649.jpg
+PP-1178,PP,1178,The bench is parallel to the person.,The bench is perpendicular to the person.,http://images.cocodataset.org/train2017/000000385504.jpg
+FB-1198,FB,1198,The bird is at the back of the person.,The bird is in front of the back of the person.,http://images.cocodataset.org/train2017/000000371256.jpg
+LR-1168,LR,1168,The backpack is at the right side of the cat.,The backpack is at the left side of the right side of the cat.,http://images.cocodataset.org/train2017/000000151497.jpg
+LR-1204,LR,1204,The person is at the left side of the oven.,The person is at the right side of the left side of the oven.,http://images.cocodataset.org/val2017/000000280930.jpg
+FB-1211,FB,1211,The refrigerator is behind the person.,The refrigerator is in front of the person.,http://images.cocodataset.org/train2017/000000160267.jpg
+FF-1219,FF,1219,The person is facing away from the keyboard.,The person is facing the keyboard.,http://images.cocodataset.org/train2017/000000544046.jpg
+LR-1210,LR,1210,The sandwich is at the left side of the laptop.,The sandwich is at the right side of the left side of the laptop.,http://images.cocodataset.org/train2017/000000349230.jpg
+FF-1202,FF,1202,The bird is facing the elephant.,The bird is facing away from the elephant.,http://images.cocodataset.org/train2017/000000099628.jpg
+FB-1203,FB,1203,The dog is behind the apple.,The dog is in front of the apple.,http://images.cocodataset.org/train2017/000000019528.jpg
+LR-1231,LR,1231,The teddy bear is at the left side of the dog.,The teddy bear is at the right side of the left side of the dog.,http://images.cocodataset.org/train2017/000000537636.jpg
+LR-1230,LR,1230,The microwave is at the right side of the person.,The microwave is at the left side of the right side of the person.,http://images.cocodataset.org/train2017/000000469793.jpg
+FF-1234,FF,1234,The person is facing the refrigerator.,The person is facing away from the refrigerator.,http://images.cocodataset.org/train2017/000000214305.jpg
+LR-1233,LR,1233,The car is left of the parking meter.,The car is right of the parking meter.,http://images.cocodataset.org/train2017/000000385172.jpg
+FB-1235,FB,1235,The person is at the back of the cow.,The person is in front of the back of the cow.,http://images.cocodataset.org/train2017/000000076970.jpg
+FF-1243,FF,1243,The cat is facing the teddy bear.,The cat is facing away from the teddy bear.,http://images.cocodataset.org/train2017/000000104510.jpg
+LR-1226,LR,1226,The person is at the right side of the refrigerator.,The person is at the left side of the right side of the refrigerator.,http://images.cocodataset.org/train2017/000000066273.jpg
+FB-1245,FB,1245,The motorcycle is behind the parking meter.,The motorcycle is in front of the parking meter.,http://images.cocodataset.org/train2017/000000222716.jpg
+LR-1026,LR,1026,The wine glass is at the right side of the teddy bear.,The wine glass is at the left side of the right side of the teddy bear.,http://images.cocodataset.org/train2017/000000444343.jpg
+FB-1251,FB,1251,The refrigerator is behind the person.,The refrigerator is in front of the person.,http://images.cocodataset.org/train2017/000000315030.jpg
+FB-1254,FB,1254,The sandwich is in front of the dog.,The sandwich is behind the dog.,http://images.cocodataset.org/train2017/000000567106.jpg
+FB-1244,FB,1244,The sheep is behind the cow.,The sheep is in front of the cow.,http://images.cocodataset.org/train2017/000000378214.jpg
+LR-1256,LR,1256,The person is at the right side of the cell phone.,The person is at the left side of the right side of the cell phone.,http://images.cocodataset.org/train2017/000000248170.jpg
+LR-1260,LR,1260,The person is at the right side of the dining table.,The person is at the left side of the right side of the dining table.,http://images.cocodataset.org/train2017/000000529234.jpg
+FB-1253,FB,1253,The chair is behind the hot dog.,The chair is in front of the hot dog.,http://images.cocodataset.org/train2017/000000311448.jpg
+FB-1263,FB,1263,The couch is at the back of the laptop.,The couch is in front of the back of the laptop.,http://images.cocodataset.org/train2017/000000518324.jpg
+FF-1266,FF,1266,The cat is facing away from the bed.,The cat is facing the bed.,http://images.cocodataset.org/train2017/000000175383.jpg
+LR-1264,LR,1264,The orange is at the left side of the book.,The orange is at the right side of the left side of the book.,http://images.cocodataset.org/train2017/000000377611.jpg
+FB-987,FB,987,The orange is in front of the banana.,The orange is behind the banana.,http://images.cocodataset.org/train2017/000000038668.jpg
+LR-1272,LR,1272,The teddy bear is at the left side of the car.,The teddy bear is at the right side of the left side of the car.,http://images.cocodataset.org/train2017/000000407422.jpg
+FB-1045,FB,1045,The zebra is behind the person.,The zebra is in front of the person.,http://images.cocodataset.org/train2017/000000236925.jpg
+FB-1279,FB,1279,The person is behind the keyboard.,The person is in front of the keyboard.,http://images.cocodataset.org/train2017/000000076738.jpg
+LR-1281,LR,1281,The laptop is at the left side of the cat.,The laptop is at the right side of the left side of the cat.,http://images.cocodataset.org/train2017/000000068136.jpg
+FB-1273,FB,1273,The cat is behind the laptop.,The cat is in front of the laptop.,http://images.cocodataset.org/train2017/000000360805.jpg
+LR-1222,LR,1222,The oven is right of the cat.,The oven is left of the cat.,http://images.cocodataset.org/train2017/000000020087.jpg
+LR-1114,LR,1114,The cake is at the right side of the laptop.,The cake is at the left side of the right side of the laptop.,http://images.cocodataset.org/train2017/000000349230.jpg
+FB-1298,FB,1298,The refrigerator is behind the dog.,The refrigerator is in front of the dog.,http://images.cocodataset.org/train2017/000000567106.jpg
+LR-1295,LR,1295,The person is at the left side of the couch.,The person is at the right side of the left side of the couch.,http://images.cocodataset.org/train2017/000000300280.jpg
+LR-1299,LR,1299,The vase is left of the dog.,The vase is right of the dog.,http://images.cocodataset.org/train2017/000000117108.jpg
+FB-1290,FB,1290,The person is in front of the train.,The person is behind the train.,http://images.cocodataset.org/train2017/000000111347.jpg
+FF-1296,FF,1296,The horse is facing away from the zebra.,The horse is facing the zebra.,http://images.cocodataset.org/train2017/000000568005.jpg
+LR-1285,LR,1285,The motorcycle is at the left side of the train.,The motorcycle is at the right side of the left side of the train.,http://images.cocodataset.org/train2017/000000338407.jpg
+FB-1304,FB,1304,The person is in front of the tv.,The person is behind the tv.,http://images.cocodataset.org/train2017/000000580651.jpg
+LR-1274,LR,1274,The cup is at the left side of the orange.,The cup is at the right side of the left side of the orange.,http://images.cocodataset.org/val2017/000000351609.jpg
+FB-1306,FB,1306,The person is in front of the couch.,The person is behind the couch.,http://images.cocodataset.org/train2017/000000485350.jpg
+LR-1151,LR,1151,The cup is at the left side of the bowl.,The cup is at the right side of the left side of the bowl.,http://images.cocodataset.org/train2017/000000278646.jpg
+LR-1305,LR,1305,The potted plant is at the left side of the bench.,The potted plant is at the right side of the left side of the bench.,http://images.cocodataset.org/train2017/000000333538.jpg
+FF-1312,FF,1312,The hair drier is facing away from the person.,The hair drier is facing the person.,http://images.cocodataset.org/train2017/000000092020.jpg
+LR-1322,LR,1322,The laptop is at the left side of the cat.,The laptop is at the right side of the left side of the cat.,http://images.cocodataset.org/val2017/000000403817.jpg
+FF-1308,FF,1308,The tv is facing the toilet.,The tv is facing away from the toilet.,http://images.cocodataset.org/train2017/000000028149.jpg
+LR-1307,LR,1307,The cup is left of the donut.,The cup is right of the donut.,http://images.cocodataset.org/train2017/000000224306.jpg
+FB-1333,FB,1333,The motorcycle is behind the dog.,The motorcycle is in front of the dog.,http://images.cocodataset.org/train2017/000000251716.jpg
+FF-1329,FF,1329,The oven is facing the tv.,The oven is facing away from the tv.,http://images.cocodataset.org/train2017/000000164587.jpg
+FB-1326,FB,1326,The giraffe is in front of the person.,The giraffe is behind the person.,http://images.cocodataset.org/train2017/000000523966.jpg
+LR-1334,LR,1334,The cat is at the right side of the laptop.,The cat is at the left side of the right side of the laptop.,http://images.cocodataset.org/train2017/000000390129.jpg
+FF-1338,FF,1338,The cat is facing the keyboard.,The cat is facing away from the keyboard.,http://images.cocodataset.org/train2017/000000078741.jpg
+LR-1345,LR,1345,The dog is at the left side of the car.,The dog is at the right side of the left side of the car.,http://images.cocodataset.org/train2017/000000467187.jpg
+LR-1353,LR,1353,The laptop is at the left side of the couch.,The laptop is at the right side of the left side of the couch.,http://images.cocodataset.org/train2017/000000096728.jpg
+FB-1344,FB,1344,The laptop is behind the cat.,The laptop is in front of the cat.,http://images.cocodataset.org/train2017/000000198981.jpg
+LR-1350,LR,1350,The keyboard is left of the pizza.,The keyboard is right of the pizza.,http://images.cocodataset.org/train2017/000000320471.jpg
+LR-1317,LR,1317,The bus is at the left side of the stop sign.,The bus is at the right side of the left side of the stop sign.,http://images.cocodataset.org/train2017/000000425381.jpg
+FF-1342,FF,1342,The cell phone is facing the person.,The cell phone is facing away from the person.,http://images.cocodataset.org/train2017/000000125698.jpg
+LR-1358,LR,1358,The skateboard is at the left side of the dog.,The skateboard is at the right side of the left side of the dog.,http://images.cocodataset.org/train2017/000000251368.jpg
+FB-1362,FB,1362,The broccoli is behind the sandwich.,The broccoli is in front of the sandwich.,http://images.cocodataset.org/train2017/000000242619.jpg
+LR-1179,LR,1179,The cake is at the right side of the laptop.,The cake is at the left side of the right side of the laptop.,http://images.cocodataset.org/train2017/000000531049.jpg
+FF-1375,FF,1375,The cat is facing away from the refrigerator.,The cat is facing the refrigerator.,http://images.cocodataset.org/train2017/000000423921.jpg
+LR-1195,LR,1195,The toaster is left of the bowl.,The toaster is right of the bowl.,http://images.cocodataset.org/train2017/000000515202.jpg
+LR-1370,LR,1370,The bowl is right of the hot dog.,The bowl is left of the hot dog.,http://images.cocodataset.org/train2017/000000557186.jpg
+LR-1364,LR,1364,The teddy bear is left of the cup.,The teddy bear is right of the cup.,http://images.cocodataset.org/train2017/000000188053.jpg
+FB-1365,FB,1365,The banana is in front of the broccoli.,The banana is behind the broccoli.,http://images.cocodataset.org/train2017/000000547743.jpg
+FF-1369,FF,1369,The laptop is facing the cat.,The laptop is facing away from the cat.,http://images.cocodataset.org/train2017/000000453400.jpg
+LR-1356,LR,1356,The oven is at the left side of the person.,The oven is at the right side of the left side of the person.,http://images.cocodataset.org/train2017/000000562247.jpg
+LR-1367,LR,1367,The horse is at the right side of the truck.,The horse is at the left side of the right side of the truck.,http://images.cocodataset.org/train2017/000000017311.jpg
+FB-1390,FB,1390,The person is in front of the oven.,The person is behind the oven.,http://images.cocodataset.org/val2017/000000552775.jpg
+LR-1383,LR,1383,The cow is left of the car.,The cow is right of the car.,http://images.cocodataset.org/train2017/000000185360.jpg
+PP-1380,PP,1380,The train is parallel to the boat.,The train is perpendicular to the boat.,http://images.cocodataset.org/train2017/000000507535.jpg
+LR-1183,LR,1183,The banana is left of the person.,The banana is right of the person.,http://images.cocodataset.org/train2017/000000084959.jpg
+LR-1386,LR,1386,The banana is at the left side of the orange.,The banana is at the right side of the left side of the orange.,http://images.cocodataset.org/train2017/000000500228.jpg
+FF-1376,FF,1376,The laptop is facing the cat.,The laptop is facing away from the cat.,http://images.cocodataset.org/train2017/000000491250.jpg
+FB-1357,FB,1357,The bench is in front of the bicycle.,The bench is behind the bicycle.,http://images.cocodataset.org/train2017/000000281764.jpg
+PP-1384,PP,1384,The person is parallel to the snowboard.,The person is perpendicular to the snowboard.,http://images.cocodataset.org/train2017/000000409025.jpg
+FB-1395,FB,1395,The boat is in front of the dining table.,The boat is behind the dining table.,http://images.cocodataset.org/train2017/000000329421.jpg
+LR-1391,LR,1391,The umbrella is at the left side of the couch.,The umbrella is at the right side of the left side of the couch.,http://images.cocodataset.org/train2017/000000123916.jpg
+FF-1400,FF,1400,The cat is facing away from the suitcase.,The cat is facing the suitcase.,http://images.cocodataset.org/train2017/000000159118.jpg
+FF-1405,FF,1405,The teddy bear is facing the book.,The teddy bear is facing away from the book.,http://images.cocodataset.org/train2017/000000369653.jpg
+FB-1429,FB,1429,The skateboard is behind the bed.,The skateboard is in front of the bed.,http://images.cocodataset.org/train2017/000000512582.jpg
+FB-1428,FB,1428,The dog is in front of the couch.,The dog is behind the couch.,http://images.cocodataset.org/train2017/000000512183.jpg
+FB-1426,FB,1426,The person is behind the cake.,The person is in front of the cake.,http://images.cocodataset.org/train2017/000000449279.jpg
+LR-1392,LR,1392,The surfboard is left of the bed.,The surfboard is right of the bed.,http://images.cocodataset.org/train2017/000000016458.jpg
+FB-1430,FB,1430,The truck is in front of the boat.,The truck is behind the boat.,http://images.cocodataset.org/train2017/000000266353.jpg
+LR-1437,LR,1437,The orange is at the left side of the laptop.,The orange is at the right side of the left side of the laptop.,http://images.cocodataset.org/train2017/000000144430.jpg
+LR-1440,LR,1440,The dining table is right of the bed.,The dining table is left of the bed.,http://images.cocodataset.org/train2017/000000447151.jpg
+FB-1441,FB,1441,The person is behind the bear.,The person is in front of the bear.,http://images.cocodataset.org/train2017/000000491505.jpg
+FB-1434,FB,1434,The person is behind the teddy bear.,The person is in front of the teddy bear.,http://images.cocodataset.org/train2017/000000050403.jpg
+FF-1450,FF,1450,The person is facing the bear.,The person is facing away from the bear.,http://images.cocodataset.org/val2017/000000390826.jpg
+FB-1445,FB,1445,The truck is behind the sheep.,The truck is in front of the sheep.,http://images.cocodataset.org/train2017/000000184679.jpg
+FB-1452,FB,1452,The person is in front of the toilet.,The person is behind the toilet.,http://images.cocodataset.org/train2017/000000184866.jpg
+FB-1448,FB,1448,The sandwich is in front of the laptop.,The sandwich is behind the laptop.,http://images.cocodataset.org/train2017/000000343655.jpg
+FB-1424,FB,1424,The stop sign is behind the car.,The stop sign is in front of the car.,http://images.cocodataset.org/train2017/000000391392.jpg
+FB-1447,FB,1447,The cat is behind the laptop.,The cat is in front of the laptop.,http://images.cocodataset.org/train2017/000000333758.jpg
+FB-1420,FB,1420,The laptop is behind the pizza.,The laptop is in front of the pizza.,http://images.cocodataset.org/train2017/000000073353.jpg
+FB-1469,FB,1469,The cow is behind the sheep.,The cow is in front of the sheep.,http://images.cocodataset.org/train2017/000000459736.jpg
+FB-1470,FB,1470,The apple is behind the banana.,The apple is in front of the banana.,http://images.cocodataset.org/train2017/000000058008.jpg
+FB-1467,FB,1467,The refrigerator is behind the person.,The refrigerator is in front of the person.,http://images.cocodataset.org/train2017/000000328810.jpg
+FB-1479,FB,1479,The dog is behind the donut.,The dog is in front of the donut.,http://images.cocodataset.org/train2017/000000108113.jpg
+FB-1458,FB,1458,The person is in front of the oven.,The person is behind the oven.,http://images.cocodataset.org/train2017/000000171584.jpg
+FF-1490,FF,1490,The laptop is facing away from the person.,The laptop is facing the person.,http://images.cocodataset.org/train2017/000000517967.jpg
+LR-1494,LR,1494,The cat is at the right side of the backpack.,The cat is at the left side of the right side of the backpack.,http://images.cocodataset.org/train2017/000000127799.jpg
+LR-1499,LR,1499,The toilet is at the left side of the dog.,The toilet is at the right side of the left side of the dog.,http://images.cocodataset.org/train2017/000000145544.jpg
+FB-1496,FB,1496,The handbag is behind the bed.,The handbag is in front of the bed.,http://images.cocodataset.org/train2017/000000336182.jpg
+FB-1502,FB,1502,The train is behind the person.,The train is in front of the person.,http://images.cocodataset.org/val2017/000000250127.jpg
+FB-1500,FB,1500,The tv is in front of the teddy bear.,The tv is behind the teddy bear.,http://images.cocodataset.org/train2017/000000272510.jpg
+LR-1501,LR,1501,The donut is at the right side of the person.,The donut is at the left side of the right side of the person.,http://images.cocodataset.org/train2017/000000121068.jpg
+LR-1486,LR,1486,The person is at the left side of the umbrella.,The person is at the right side of the left side of the umbrella.,http://images.cocodataset.org/train2017/000000080200.jpg
+FB-1493,FB,1493,The cat is at the back of the motorcycle.,The cat is in front of the back of the motorcycle.,http://images.cocodataset.org/train2017/000000546264.jpg
+LR-1507,LR,1507,The person is at the right side of the bench.,The person is at the left side of the right side of the bench.,http://images.cocodataset.org/train2017/000000569332.jpg
+LR-1511,LR,1511,The sheep is right of the person.,The sheep is left of the person.,http://images.cocodataset.org/train2017/000000496636.jpg
+LR-1510,LR,1510,The cat is at the left side of the person.,The cat is at the right side of the left side of the person.,http://images.cocodataset.org/train2017/000000233005.jpg
+LR-1246,LR,1246,The sandwich is at the left side of the cup.,The sandwich is at the right side of the left side of the cup.,http://images.cocodataset.org/train2017/000000319122.jpg
+LR-1512,LR,1512,The vase is at the right side of the cat.,The vase is at the left side of the right side of the cat.,http://images.cocodataset.org/train2017/000000152724.jpg
+FB-1529,FB,1529,The bed is behind the dog.,The bed is in front of the dog.,http://images.cocodataset.org/val2017/000000267300.jpg
+LR-1506,LR,1506,The laptop is right of the couch.,The laptop is left of the couch.,http://images.cocodataset.org/train2017/000000275855.jpg
+FB-1542,FB,1542,The donut is in front of the person.,The donut is behind the person.,http://images.cocodataset.org/train2017/000000023218.jpg
+LR-1528,LR,1528,The person is at the right side of the giraffe.,The person is at the left side of the right side of the giraffe.,http://images.cocodataset.org/train2017/000000511654.jpg
+LR-1414,LR,1414,The car is at the left side of the cat.,The car is at the right side of the left side of the cat.,http://images.cocodataset.org/train2017/000000365353.jpg
+LR-1557,LR,1557,The person is at the left side of the pizza.,The person is at the right side of the left side of the pizza.,http://images.cocodataset.org/val2017/000000027696.jpg
+FB-1555,FB,1555,The cow is at the back of the person.,The cow is in front of the back of the person.,http://images.cocodataset.org/train2017/000000221771.jpg
+FF-1559,FF,1559,The cat is facing the laptop.,The cat is facing away from the laptop.,http://images.cocodataset.org/train2017/000000369208.jpg
+FB-1547,FB,1547,The bed is behind the couch.,The bed is in front of the couch.,http://images.cocodataset.org/train2017/000000553968.jpg
+FB-1575,FB,1575,The keyboard is in front of the cat.,The keyboard is behind the cat.,http://images.cocodataset.org/train2017/000000350481.jpg
+FB-1572,FB,1572,The motorcycle is behind the dining table.,The motorcycle is in front of the dining table.,http://images.cocodataset.org/train2017/000000125407.jpg
+LR-1578,LR,1578,The cat is at the right side of the toilet.,The cat is at the left side of the right side of the toilet.,http://images.cocodataset.org/train2017/000000194313.jpg
+FF-1592,FF,1592,The dog is facing away from the person.,The dog is facing the person.,http://images.cocodataset.org/train2017/000000542165.jpg
+FB-1563,FB,1563,The bicycle is behind the chair.,The bicycle is in front of the chair.,http://images.cocodataset.org/train2017/000000257036.jpg
+FB-1590,FB,1590,The car is at the back of the person.,The car is in front of the back of the person.,http://images.cocodataset.org/train2017/000000194510.jpg
+FB-1591,FB,1591,The potted plant is behind the person.,The potted plant is in front of the person.,http://images.cocodataset.org/train2017/000000478298.jpg
+FB-1593,FB,1593,The cat is at the back of the laptop.,The cat is in front of the back of the laptop.,http://images.cocodataset.org/train2017/000000360805.jpg
+FB-1604,FB,1604,The sink is in front of the cat.,The sink is behind the cat.,http://images.cocodataset.org/train2017/000000020087.jpg
+FF-1611,FF,1611,The cat is facing the backpack.,The cat is facing away from the backpack.,http://images.cocodataset.org/train2017/000000207093.jpg
+FB-1612,FB,1612,The cup is behind the sandwich.,The cup is in front of the sandwich.,http://images.cocodataset.org/train2017/000000349230.jpg
+FF-1617,FF,1617,The cow is facing the bench.,The cow is facing away from the bench.,http://images.cocodataset.org/train2017/000000182032.jpg
+FB-1599,FB,1599,The truck is in front of the car.,The truck is behind the car.,http://images.cocodataset.org/train2017/000000413277.jpg
+LR-1565,LR,1565,The dog is at the right side of the horse.,The dog is at the left side of the right side of the horse.,http://images.cocodataset.org/train2017/000000422185.jpg
+FB-1616,FB,1616,The couch is behind the dining table.,The couch is in front of the dining table.,http://images.cocodataset.org/train2017/000000305685.jpg
+FB-1623,FB,1623,The pizza is in front of the person.,The pizza is behind the person.,http://images.cocodataset.org/train2017/000000534161.jpg
+PP-1608,PP,1608,The book is parallel to the bed.,The book is perpendicular to the bed.,http://images.cocodataset.org/train2017/000000364725.jpg
+LR-1328,LR,1328,The boat is at the left side of the dining table.,The boat is at the right side of the left side of the dining table.,http://images.cocodataset.org/train2017/000000133650.jpg
+FB-1408,FB,1408,The car is at the back of the bicycle.,The car is in front of the back of the bicycle.,http://images.cocodataset.org/train2017/000000124462.jpg
+FB-1618,FB,1618,The cat is in front of the bicycle.,The cat is behind the bicycle.,http://images.cocodataset.org/train2017/000000171809.jpg
+LR-1625,LR,1625,The cat is at the right side of the potted plant.,The cat is at the left side of the right side of the potted plant.,http://images.cocodataset.org/train2017/000000127809.jpg
+FB-1628,FB,1628,The motorcycle is behind the fire hydrant.,The motorcycle is in front of the fire hydrant.,http://images.cocodataset.org/train2017/000000183964.jpg
+LR-1633,LR,1633,The teddy bear is right of the suitcase.,The teddy bear is left of the suitcase.,http://images.cocodataset.org/train2017/000000248168.jpg
+LR-1638,LR,1638,The person is at the left side of the oven.,The person is at the right side of the left side of the oven.,http://images.cocodataset.org/train2017/000000564915.jpg
+FB-1632,FB,1632,The truck is behind the motorcycle.,The truck is in front of the motorcycle.,http://images.cocodataset.org/train2017/000000178890.jpg
+FB-1411,FB,1411,The cow is in front of the sheep.,The cow is behind the sheep.,http://images.cocodataset.org/train2017/000000378214.jpg
+FB-1634,FB,1634,The truck is behind the cake.,The truck is in front of the cake.,http://images.cocodataset.org/train2017/000000184176.jpg
+FB-1639,FB,1639,The person is behind the keyboard.,The person is in front of the keyboard.,http://images.cocodataset.org/train2017/000000477136.jpg
+FB-1654,FB,1654,The bird is behind the elephant.,The bird is in front of the elephant.,http://images.cocodataset.org/train2017/000000109265.jpg
+FB-1643,FB,1643,The dining table is in front of the person.,The dining table is behind the person.,http://images.cocodataset.org/train2017/000000207475.jpg
+FB-1651,FB,1651,The teddy bear is behind the person.,The teddy bear is in front of the person.,http://images.cocodataset.org/train2017/000000055389.jpg
+FF-1457,FF,1457,The cow is facing the chair.,The cow is facing away from the chair.,http://images.cocodataset.org/train2017/000000316536.jpg
+FB-1664,FB,1664,The suitcase is in front of the refrigerator.,The suitcase is behind the refrigerator.,http://images.cocodataset.org/train2017/000000321879.jpg
+PP-1662,PP,1662,The car is parallel to the motorcycle.,The car is perpendicular to the motorcycle.,http://images.cocodataset.org/train2017/000000326689.jpg
+FB-1665,FB,1665,The refrigerator is in front of the person.,The refrigerator is behind the person.,http://images.cocodataset.org/train2017/000000452909.jpg
+PP-1663,PP,1663,The knife is perpendicular to the carrot.,The knife is parallel to the carrot.,http://images.cocodataset.org/train2017/000000213881.jpg
+LR-1666,LR,1666,The cat is at the left side of the teddy bear.,The cat is at the right side of the left side of the teddy bear.,http://images.cocodataset.org/train2017/000000383494.jpg
+LR-1454,LR,1454,The chair is at the left side of the pizza.,The chair is at the right side of the left side of the pizza.,http://images.cocodataset.org/train2017/000000134769.jpg
+FB-1672,FB,1672,The couch is behind the person.,The couch is in front of the person.,http://images.cocodataset.org/train2017/000000546210.jpg
+LR-1655,LR,1655,The cat is right of the dining table.,The cat is left of the dining table.,http://images.cocodataset.org/train2017/000000184116.jpg
+FB-1678,FB,1678,The oven is at the back of the person.,The oven is in front of the back of the person.,http://images.cocodataset.org/train2017/000000168173.jpg
+FB-1683,FB,1683,The boat is behind the dining table.,The boat is in front of the dining table.,http://images.cocodataset.org/train2017/000000554518.jpg
+FB-1687,FB,1687,The teddy bear is behind the book.,The teddy bear is in front of the book.,http://images.cocodataset.org/train2017/000000419443.jpg
+FB-1692,FB,1692,The cow is in front of the bench.,The cow is behind the bench.,http://images.cocodataset.org/train2017/000000044621.jpg
+FF-1650,FF,1650,The chair is facing the hot dog.,The chair is facing away from the hot dog.,http://images.cocodataset.org/train2017/000000257073.jpg
+FB-1667,FB,1667,The elephant is behind the person.,The elephant is in front of the person.,http://images.cocodataset.org/train2017/000000060568.jpg
+FB-1695,FB,1695,The bed is behind the bicycle.,The bed is in front of the bicycle.,http://images.cocodataset.org/val2017/000000274687.jpg
+LR-1673,LR,1673,The bicycle is left of the person.,The bicycle is right of the person.,http://images.cocodataset.org/train2017/000000008794.jpg
+LR-1693,LR,1693,The person is at the right side of the laptop.,The person is at the left side of the right side of the laptop.,http://images.cocodataset.org/train2017/000000504027.jpg
+PP-1682,PP,1682,The cow is perpendicular to the motorcycle.,The cow is parallel to the motorcycle.,http://images.cocodataset.org/train2017/000000186275.jpg
+FB-1701,FB,1701,The person is behind the donut.,The person is in front of the donut.,http://images.cocodataset.org/train2017/000000555909.jpg
+FB-1729,FB,1729,The dining table is in front of the refrigerator.,The dining table is behind the refrigerator.,http://images.cocodataset.org/train2017/000000240727.jpg
+LR-1703,LR,1703,The person is at the left side of the oven.,The person is at the right side of the left side of the oven.,http://images.cocodataset.org/train2017/000000451274.jpg
+FB-1742,FB,1742,The potted plant is in front of the teddy bear.,The potted plant is behind the teddy bear.,http://images.cocodataset.org/train2017/000000082512.jpg
+LR-1698,LR,1698,The dog is at the right side of the toilet.,The dog is at the left side of the right side of the toilet.,http://images.cocodataset.org/train2017/000000039913.jpg
+LR-1741,LR,1741,The chair is at the left side of the tv.,The chair is at the right side of the left side of the tv.,http://images.cocodataset.org/train2017/000000058254.jpg
+LR-1704,LR,1704,The teddy bear is right of the dog.,The teddy bear is left of the dog.,http://images.cocodataset.org/train2017/000000529411.jpg
+FF-1760,FF,1760,The person is facing the bed.,The person is facing away from the bed.,http://images.cocodataset.org/train2017/000000514254.jpg
+FB-1748,FB,1748,The person is in front of the dining table.,The person is behind the dining table.,http://images.cocodataset.org/train2017/000000199913.jpg
+FB-1753,FB,1753,The horse is in front of the train.,The horse is behind the train.,http://images.cocodataset.org/train2017/000000318671.jpg
+FB-1762,FB,1762,The bus is behind the dining table.,The bus is in front of the dining table.,http://images.cocodataset.org/train2017/000000159403.jpg
+LR-1712,LR,1712,The dining table is left of the person.,The dining table is right of the person.,http://images.cocodataset.org/train2017/000000570968.jpg
+FB-1543,FB,1543,The person is behind the zebra.,The person is in front of the zebra.,http://images.cocodataset.org/val2017/000000025096.jpg
+FB-1711,FB,1711,The clock is in front of the cow.,The clock is behind the cow.,http://images.cocodataset.org/val2017/000000180383.jpg
+FB-1772,FB,1772,The laptop is in front of the cat.,The laptop is behind the cat.,http://images.cocodataset.org/train2017/000000407386.jpg
+FB-1764,FB,1764,The person is in front of the donut.,The person is behind the donut.,http://images.cocodataset.org/train2017/000000092054.jpg
+FB-1763,FB,1763,The chair is behind the hot dog.,The chair is in front of the hot dog.,http://images.cocodataset.org/train2017/000000393428.jpg
+LR-1646,LR,1646,The dog is at the right side of the horse.,The dog is at the left side of the right side of the horse.,http://images.cocodataset.org/train2017/000000300322.jpg
+FF-1773,FF,1773,The cat is facing away from the bed.,The cat is facing the bed.,http://images.cocodataset.org/train2017/000000293276.jpg
+LR-1545,LR,1545,The pizza is left of the person.,The pizza is right of the person.,http://images.cocodataset.org/train2017/000000293014.jpg
+FB-1786,FB,1786,The motorcycle is behind the parking meter.,The motorcycle is in front of the parking meter.,http://images.cocodataset.org/train2017/000000115626.jpg
+FF-1792,FF,1792,The cat is facing the person.,The cat is facing away from the person.,http://images.cocodataset.org/train2017/000000434385.jpg
+PP-1775,PP,1775,The book is perpendicular to the bed.,The book is parallel to the bed.,http://images.cocodataset.org/train2017/000000420450.jpg
+LR-1791,LR,1791,The teddy bear is at the left side of the dog.,The teddy bear is at the right side of the left side of the dog.,http://images.cocodataset.org/train2017/000000463670.jpg
+LR-1767,LR,1767,The keyboard is left of the cat.,The keyboard is right of the cat.,http://images.cocodataset.org/train2017/000000501278.jpg
+LR-1795,LR,1795,The bench is at the left side of the cat.,The bench is at the right side of the left side of the cat.,http://images.cocodataset.org/train2017/000000411668.jpg
+FB-1796,FB,1796,The cake is in front of the oven.,The cake is behind the oven.,http://images.cocodataset.org/train2017/000000185777.jpg
+FB-1803,FB,1803,The book is in front of the teddy bear.,The book is behind the teddy bear.,http://images.cocodataset.org/train2017/000000368811.jpg
+FB-1811,FB,1811,The pizza is behind the car.,The pizza is in front of the car.,http://images.cocodataset.org/train2017/000000419860.jpg
+FF-1822,FF,1822,The cat is facing the tv.,The cat is facing away from the tv.,http://images.cocodataset.org/train2017/000000070033.jpg
+FF-1816,FF,1816,The book is facing the cat.,The book is facing away from the cat.,http://images.cocodataset.org/train2017/000000481313.jpg
+LR-1818,LR,1818,The zebra is at the left side of the person.,The zebra is at the right side of the left side of the person.,http://images.cocodataset.org/train2017/000000171805.jpg
+LR-1826,LR,1826,The banana is at the left side of the donut.,The banana is at the right side of the left side of the donut.,http://images.cocodataset.org/train2017/000000535013.jpg
+LR-1833,LR,1833,The person is at the right side of the bench.,The person is at the left side of the right side of the bench.,http://images.cocodataset.org/train2017/000000574804.jpg
+PP-1815,PP,1815,The bicycle is parallel to the motorcycle.,The bicycle is perpendicular to the motorcycle.,http://images.cocodataset.org/train2017/000000223930.jpg
+FB-1813,FB,1813,The couch is in front of the backpack.,The couch is behind the backpack.,http://images.cocodataset.org/train2017/000000433110.jpg
+FB-1812,FB,1812,The couch is behind the banana.,The couch is in front of the banana.,http://images.cocodataset.org/train2017/000000481313.jpg
+FB-1835,FB,1835,The dog is in front of the motorcycle.,The dog is behind the motorcycle.,http://images.cocodataset.org/train2017/000000253260.jpg
+LR-1829,LR,1829,The giraffe is at the right side of the person.,The giraffe is at the left side of the right side of the person.,http://images.cocodataset.org/train2017/000000517318.jpg
+FB-1855,FB,1855,The umbrella is in front of the potted plant.,The umbrella is behind the potted plant.,http://images.cocodataset.org/train2017/000000482848.jpg
+FB-1861,FB,1861,The cat is in front of the tv.,The cat is behind the tv.,http://images.cocodataset.org/train2017/000000351550.jpg
+LR-1747,LR,1747,The dining table is at the left side of the person.,The dining table is at the right side of the left side of the person.,http://images.cocodataset.org/train2017/000000451240.jpg
+FB-1675,FB,1675,The orange is behind the apple.,The orange is in front of the apple.,http://images.cocodataset.org/train2017/000000079172.jpg
+FB-1866,FB,1866,The microwave is behind the person.,The microwave is in front of the person.,http://images.cocodataset.org/train2017/000000255849.jpg
+FB-1869,FB,1869,The orange is in front of the banana.,The orange is behind the banana.,http://images.cocodataset.org/train2017/000000207738.jpg
+LR-1865,LR,1865,The person is at the right side of the pizza.,The person is at the left side of the right side of the pizza.,http://images.cocodataset.org/train2017/000000072536.jpg
+LR-1860,LR,1860,The apple is at the left side of the person.,The apple is at the right side of the left side of the person.,http://images.cocodataset.org/val2017/000000473406.jpg
+PP-1839,PP,1839,The train is perpendicular to the bus.,The train is parallel to the bus.,http://images.cocodataset.org/train2017/000000409009.jpg
+FB-1890,FB,1890,The person is behind the keyboard.,The person is in front of the keyboard.,http://images.cocodataset.org/train2017/000000062703.jpg
+FB-1900,FB,1900,The airplane is behind the car.,The airplane is in front of the car.,http://images.cocodataset.org/train2017/000000445408.jpg
+FB-1881,FB,1881,The sandwich is in front of the person.,The sandwich is behind the person.,http://images.cocodataset.org/train2017/000000299643.jpg
+FF-1877,FF,1877,The laptop is facing the person.,The laptop is facing away from the person.,http://images.cocodataset.org/train2017/000000578572.jpg
+LR-1897,LR,1897,The bed is at the right side of the surfboard.,The bed is at the left side of the right side of the surfboard.,http://images.cocodataset.org/train2017/000000016458.jpg
+FF-1893,FF,1893,The teddy bear is facing the dog.,The teddy bear is facing away from the dog.,http://images.cocodataset.org/train2017/000000135202.jpg
+FF-1910,FF,1910,The person is facing away from the toaster.,The person is facing the toaster.,http://images.cocodataset.org/train2017/000000174496.jpg
+FB-1909,FB,1909,The bench is in front of the refrigerator.,The bench is behind the refrigerator.,http://images.cocodataset.org/train2017/000000497591.jpg
+FB-1915,FB,1915,The oven is behind the cake.,The oven is in front of the cake.,http://images.cocodataset.org/train2017/000000504747.jpg
+FF-1911,FF,1911,The bench is facing away from the parking meter.,The bench is facing the parking meter.,http://images.cocodataset.org/val2017/000000333956.jpg
+FF-1905,FF,1905,The teddy bear is facing the person.,The teddy bear is facing away from the person.,http://images.cocodataset.org/train2017/000000002839.jpg
+LR-1644,LR,1644,The parking meter is at the left side of the car.,The parking meter is at the right side of the left side of the car.,http://images.cocodataset.org/train2017/000000428769.jpg
+FB-1856,FB,1856,The wine glass is behind the sandwich.,The wine glass is in front of the sandwich.,http://images.cocodataset.org/val2017/000000567825.jpg
+FF-1934,FF,1934,The person is facing the laptop.,The person is facing away from the laptop.,http://images.cocodataset.org/train2017/000000294083.jpg
+FB-1920,FB,1920,The truck is behind the dog.,The truck is in front of the dog.,http://images.cocodataset.org/train2017/000000192799.jpg
+FB-1926,FB,1926,The tv is behind the airplane.,The tv is in front of the airplane.,http://images.cocodataset.org/train2017/000000379612.jpg
+PP-1942,PP,1942,The motorcycle is parallel to the bus.,The motorcycle is perpendicular to the bus.,http://images.cocodataset.org/train2017/000000055303.jpg
+LR-1876,LR,1876,The person is right of the keyboard.,The person is left of the keyboard.,http://images.cocodataset.org/train2017/000000499024.jpg
+FB-1935,FB,1935,The fire hydrant is behind the dog.,The fire hydrant is in front of the dog.,http://images.cocodataset.org/train2017/000000548734.jpg
+LR-1954,LR,1954,The carrot is at the left side of the cat.,The carrot is at the right side of the left side of the cat.,http://images.cocodataset.org/train2017/000000249644.jpg
+LR-1937,LR,1937,The orange is at the right side of the umbrella.,The orange is at the left side of the right side of the umbrella.,http://images.cocodataset.org/train2017/000000423065.jpg
+FF-1939,FF,1939,The person is facing away from the refrigerator.,The person is facing the refrigerator.,http://images.cocodataset.org/train2017/000000272253.jpg
+LR-1957,LR,1957,The person is at the right side of the laptop.,The person is at the left side of the right side of the laptop.,http://images.cocodataset.org/val2017/000000345252.jpg
+FB-1959,FB,1959,The person is at the back of the dining table.,The person is in front of the back of the dining table.,http://images.cocodataset.org/train2017/000000143154.jpg
+LR-1963,LR,1963,The cat is left of the sink.,The cat is right of the sink.,http://images.cocodataset.org/train2017/000000196307.jpg
+FB-1965,FB,1965,The parking meter is in front of the bus.,The parking meter is behind the bus.,http://images.cocodataset.org/val2017/000000372317.jpg
+LR-1962,LR,1962,The potted plant is right of the train.,The potted plant is left of the train.,http://images.cocodataset.org/train2017/000000153832.jpg
+FB-1984,FB,1984,The truck is at the back of the motorcycle.,The truck is in front of the back of the motorcycle.,http://images.cocodataset.org/train2017/000000301453.jpg
+LR-1978,LR,1978,The cake is at the left side of the person.,The cake is at the right side of the left side of the person.,http://images.cocodataset.org/train2017/000000074959.jpg
+LR-1956,LR,1956,The laptop is at the right side of the person.,The laptop is at the left side of the right side of the person.,http://images.cocodataset.org/train2017/000000165040.jpg
+FB-1958,FB,1958,The potted plant is in front of the bench.,The potted plant is behind the bench.,http://images.cocodataset.org/train2017/000000295686.jpg
+FB-1990,FB,1990,The keyboard is behind the cup.,The keyboard is in front of the cup.,http://images.cocodataset.org/train2017/000000561729.jpg
+FB-1630,FB,1630,The airplane is behind the person.,The airplane is in front of the person.,http://images.cocodataset.org/train2017/000000543517.jpg
+LR-1971,LR,1971,The person is at the right side of the pizza.,The person is at the left side of the right side of the pizza.,http://images.cocodataset.org/train2017/000000225517.jpg
+FB-1993,FB,1993,The couch is in front of the suitcase.,The couch is behind the suitcase.,http://images.cocodataset.org/train2017/000000053037.jpg
+LR-2006,LR,2006,The banana is left of the sandwich.,The banana is right of the sandwich.,http://images.cocodataset.org/train2017/000000029994.jpg
+FB-1986,FB,1986,The parking meter is behind the motorcycle.,The parking meter is in front of the motorcycle.,http://images.cocodataset.org/train2017/000000469770.jpg
+FF-2000,FF,2000,The cat is facing away from the tv.,The cat is facing the tv.,http://images.cocodataset.org/train2017/000000087456.jpg
+FF-1949,FF,1949,The cow is facing the dog.,The cow is facing away from the dog.,http://images.cocodataset.org/train2017/000000036345.jpg
+FF-1997,FF,1997,The cat is facing away from the toilet.,The cat is facing the toilet.,http://images.cocodataset.org/train2017/000000439486.jpg
+FF-1953,FF,1953,The cow is facing away from the person.,The cow is facing the person.,http://images.cocodataset.org/train2017/000000146236.jpg
+FF-1999,FF,1999,The refrigerator is facing the person.,The refrigerator is facing away from the person.,http://images.cocodataset.org/train2017/000000116334.jpg
+LR-1951,LR,1951,The person is at the left side of the couch.,The person is at the right side of the left side of the couch.,http://images.cocodataset.org/train2017/000000209493.jpg
+FF-2015,FF,2015,The couch is facing away from the laptop.,The couch is facing the laptop.,http://images.cocodataset.org/train2017/000000455975.jpg
+LR-2012,LR,2012,The person is at the left side of the couch.,The person is at the right side of the left side of the couch.,http://images.cocodataset.org/train2017/000000022462.jpg
+LR-2027,LR,2027,The person is left of the toilet.,The person is right of the toilet.,http://images.cocodataset.org/train2017/000000174071.jpg
+LR-2036,LR,2036,The person is at the right side of the donut.,The person is at the left side of the right side of the donut.,http://images.cocodataset.org/train2017/000000413791.jpg
+FF-2034,FF,2034,The bench is facing away from the parking meter.,The bench is facing the parking meter.,http://images.cocodataset.org/train2017/000000544094.jpg
+LR-2024,LR,2024,The sink is at the left side of the cat.,The sink is at the right side of the left side of the cat.,http://images.cocodataset.org/train2017/000000178299.jpg
+PP-2009,PP,2009,The dining table is parallel to the bench.,The dining table is perpendicular to the bench.,http://images.cocodataset.org/train2017/000000472930.jpg
+FB-2061,FB,2061,The dog is in front of the bed.,The dog is behind the bed.,http://images.cocodataset.org/train2017/000000086215.jpg
+PP-2059,PP,2059,The car is perpendicular to the motorcycle.,The car is parallel to the motorcycle.,http://images.cocodataset.org/train2017/000000385145.jpg
+FB-2067,FB,2067,The remote is in front of the person.,The remote is behind the person.,http://images.cocodataset.org/train2017/000000502933.jpg
+FB-2056,FB,2056,The person is behind the dog.,The person is in front of the dog.,http://images.cocodataset.org/train2017/000000320379.jpg
+LR-2048,LR,2048,The person is right of the refrigerator.,The person is left of the refrigerator.,http://images.cocodataset.org/train2017/000000204987.jpg
+LR-2053,LR,2053,The cow is right of the clock.,The cow is left of the clock.,http://images.cocodataset.org/train2017/000000087264.jpg
+FB-2079,FB,2079,The pizza is behind the sandwich.,The pizza is in front of the sandwich.,http://images.cocodataset.org/train2017/000000040934.jpg
+FB-1834,FB,1834,The person is in front of the stop sign.,The person is behind the stop sign.,http://images.cocodataset.org/train2017/000000170180.jpg
+LR-2085,LR,2085,The person is at the left side of the dining table.,The person is at the right side of the left side of the dining table.,http://images.cocodataset.org/train2017/000000172987.jpg
+LR-2094,LR,2094,The cow is right of the bench.,The cow is left of the bench.,http://images.cocodataset.org/train2017/000000423455.jpg
+FB-2072,FB,2072,The cat is in front of the person.,The cat is behind the person.,http://images.cocodataset.org/train2017/000000465779.jpg
+FB-2096,FB,2096,The parking meter is behind the car.,The parking meter is in front of the car.,http://images.cocodataset.org/train2017/000000372390.jpg
+FB-2088,FB,2088,The teddy bear is at the back of the cat.,The teddy bear is in front of the back of the cat.,http://images.cocodataset.org/train2017/000000360178.jpg
+FF-1810,FF,1810,The bus is facing the dining table.,The bus is facing away from the dining table.,http://images.cocodataset.org/train2017/000000131361.jpg
+LR-2099,LR,2099,The donut is at the right side of the dog.,The donut is at the left side of the right side of the dog.,http://images.cocodataset.org/train2017/000000108113.jpg
+LR-2068,LR,2068,The bowl is left of the pizza.,The bowl is right of the pizza.,http://images.cocodataset.org/train2017/000000526536.jpg
+FF-2100,FF,2100,The bird is facing the book.,The bird is facing away from the book.,http://images.cocodataset.org/train2017/000000176180.jpg
+FF-1928,FF,1928,The umbrella is facing the bed.,The umbrella is facing away from the bed.,http://images.cocodataset.org/train2017/000000553361.jpg
+LR-2040,LR,2040,The hot dog is at the right side of the cup.,The hot dog is at the left side of the right side of the cup.,http://images.cocodataset.org/train2017/000000384463.jpg
+LR-2117,LR,2117,The bowl is right of the hot dog.,The bowl is left of the hot dog.,http://images.cocodataset.org/train2017/000000453907.jpg
+LR-2092,LR,2092,The bed is at the right side of the surfboard.,The bed is at the left side of the right side of the surfboard.,http://images.cocodataset.org/val2017/000000073946.jpg
+FB-2114,FB,2114,The person is behind the pizza.,The person is in front of the pizza.,http://images.cocodataset.org/train2017/000000154846.jpg
+FB-2116,FB,2116,The parking meter is in front of the car.,The parking meter is behind the car.,http://images.cocodataset.org/train2017/000000427103.jpg
+FB-2111,FB,2111,The book is in front of the train.,The book is behind the train.,http://images.cocodataset.org/train2017/000000253004.jpg
+FB-2103,FB,2103,The umbrella is behind the cat.,The umbrella is in front of the cat.,http://images.cocodataset.org/train2017/000000541158.jpg
+FB-2135,FB,2135,The couch is behind the person.,The couch is in front of the person.,http://images.cocodataset.org/train2017/000000090523.jpg
+LR-2128,LR,2128,The donut is at the right side of the person.,The donut is at the left side of the right side of the person.,http://images.cocodataset.org/train2017/000000248276.jpg
+LR-2146,LR,2146,The laptop is left of the sandwich.,The laptop is right of the sandwich.,http://images.cocodataset.org/train2017/000000028320.jpg
+FB-2120,FB,2120,The bowl is in front of the apple.,The bowl is behind the apple.,http://images.cocodataset.org/train2017/000000326594.jpg
+FB-2147,FB,2147,The refrigerator is behind the cat.,The refrigerator is in front of the cat.,http://images.cocodataset.org/train2017/000000141376.jpg
+LR-2149,LR,2149,The oven is right of the cake.,The oven is left of the cake.,http://images.cocodataset.org/train2017/000000524196.jpg
+LR-2140,LR,2140,The banana is at the right side of the cake.,The banana is at the left side of the right side of the cake.,http://images.cocodataset.org/train2017/000000285512.jpg
+PP-2124,PP,2124,The motorcycle is parallel to the car.,The motorcycle is perpendicular to the car.,http://images.cocodataset.org/train2017/000000540187.jpg
+FF-2160,FF,2160,The person is facing the dining table.,The person is facing away from the dining table.,http://images.cocodataset.org/train2017/000000042042.jpg
+FB-2153,FB,2153,The cake is in front of the oven.,The cake is behind the oven.,http://images.cocodataset.org/train2017/000000315768.jpg
+LR-2162,LR,2162,The dog is at the left side of the car.,The dog is at the right side of the left side of the car.,http://images.cocodataset.org/train2017/000000160211.jpg
+PP-2141,PP,2141,The bed is parallel to the bicycle.,The bed is perpendicular to the bicycle.,http://images.cocodataset.org/train2017/000000002139.jpg
+LR-2163,LR,2163,The person is left of the dining table.,The person is right of the dining table.,http://images.cocodataset.org/train2017/000000448113.jpg
+LR-2167,LR,2167,The couch is right of the person.,The couch is left of the person.,http://images.cocodataset.org/train2017/000000041552.jpg
+FF-2151,FF,2151,The bear is facing the person.,The bear is facing away from the person.,http://images.cocodataset.org/train2017/000000015391.jpg
+FB-2133,FB,2133,The book is in front of the teddy bear.,The book is behind the teddy bear.,http://images.cocodataset.org/train2017/000000361778.jpg
+FF-2165,FF,2165,The cat is facing the laptop.,The cat is facing away from the laptop.,http://images.cocodataset.org/train2017/000000407386.jpg
+LR-2171,LR,2171,The dining table is at the right side of the teddy bear.,The dining table is at the left side of the right side of the teddy bear.,http://images.cocodataset.org/train2017/000000108484.jpg
+FB-2028,FB,2028,The refrigerator is behind the orange.,The refrigerator is in front of the orange.,http://images.cocodataset.org/train2017/000000526364.jpg
+FB-2180,FB,2180,The oven is behind the person.,The oven is in front of the person.,http://images.cocodataset.org/train2017/000000578974.jpg
+FF-2189,FF,2189,The bear is facing the teddy bear.,The bear is facing away from the teddy bear.,http://images.cocodataset.org/train2017/000000107571.jpg
+FB-2176,FB,2176,The couch is behind the dining table.,The couch is in front of the dining table.,http://images.cocodataset.org/train2017/000000201530.jpg
+FB-2187,FB,2187,The person is in front of the parking meter.,The person is behind the parking meter.,http://images.cocodataset.org/train2017/000000431795.jpg
+FB-2023,FB,2023,The motorcycle is behind the bird.,The motorcycle is in front of the bird.,http://images.cocodataset.org/train2017/000000155777.jpg
+LR-2169,LR,2169,The cat is right of the dining table.,The cat is left of the dining table.,http://images.cocodataset.org/train2017/000000320089.jpg
+FB-2190,FB,2190,The truck is in front of the airplane.,The truck is behind the airplane.,http://images.cocodataset.org/train2017/000000135057.jpg
+FB-2183,FB,2183,The bed is behind the bench.,The bed is in front of the bench.,http://images.cocodataset.org/train2017/000000017921.jpg
+FB-2084,FB,2084,The train is in front of the car.,The train is behind the car.,http://images.cocodataset.org/train2017/000000324275.jpg
+FB-2008,FB,2008,The zebra is behind the horse.,The zebra is in front of the horse.,http://images.cocodataset.org/train2017/000000568005.jpg
+LR-2122,LR,2122,The wine glass is at the right side of the sandwich.,The wine glass is at the left side of the right side of the sandwich.,http://images.cocodataset.org/train2017/000000268787.jpg
+FB-2109,FB,2109,The car is in front of the bus.,The car is behind the bus.,http://images.cocodataset.org/train2017/000000557191.jpg
