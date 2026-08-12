@@ -11,8 +11,15 @@ It contains:
   the human and MiMo audit protocol.
 - `taxonomy_48.csv`: the 48 persistent-failure examples used for the
   eight-class failure taxonomy. The model should select one taxonomy class.
-- `images/`: local copies of the 137 referenced images. The taxonomy sheet
-  references a subset of these files.
+- `images/`: NOT committed (kept out of git to avoid repository bloat).
+  The input CSVs reference files like `images/id3.jpg`; obtain them before
+  running: fetch each `image_url` listed in
+  `results/iaa/blind_clean_label_sheet.csv` / `blind_failure_taxonomy_sheet.csv`
+  (COCO train2017) into `results/iaa/images/` (gitignored, kept local), or
+  restore the package's own copy from any local checkout of the
+  `external-eval/flagship-v1` release before the image purge (commit
+  `a06cc49` tree). `MANIFEST.json` records the per-file SHA-256 hashes so a
+  regenerated copy can be verified byte-for-byte.
 - `prompts.md`: frozen prompts and exact output rules.
 - `results_template.csv` and `taxonomy_results_template.csv`: append-only
   result formats for GPT, Gemini, or another vision model.

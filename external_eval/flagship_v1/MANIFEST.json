@@ -14,6 +14,10 @@
     "model_predictions_included": false,
     "prior_rater_labels_included": false
   },
+  "storage": {
+    "images_committed": false,
+    "note": "Image files are intentionally not tracked in git. The files.sha256 entries below are the canonical byte-level record of the images used at evaluation time; regenerate local copies by fetching each image_url from results/iaa/blind_clean_label_sheet.csv / blind_failure_taxonomy_sheet.csv (COCO train2017) and verify against these hashes."
+  },
   "files": {
     "images/id1018.jpg": {
       "bytes": 115879,
