@@ -1,0 +1,350 @@
+{
+  "note": "human-audit versioned table",
+  "exclusion_masks": {
+    "full": [],
+    "human_minus_q": [
+      33,
+      34,
+      239,
+      356,
+      439,
+      565,
+      1266,
+      1608,
+      1611,
+      2059,
+      2151
+    ],
+    "human_clear": [
+      33,
+      34,
+      239,
+      356,
+      439,
+      565,
+      1266,
+      1608,
+      1611,
+      2059,
+      2151
+    ],
+    "human_strict": [
+      14,
+      19,
+      22,
+      33,
+      34,
+      213,
+      239,
+      250,
+      356,
+      439,
+      508,
+      564,
+      565,
+      582,
+      834,
+      937,
+      1035,
+      1178,
+      1202,
+      1266,
+      1384,
+      1400,
+      1405,
+      1559,
+      1608,
+      1611,
+      1905,
+      2034,
+      2059,
+      2151
+    ],
+    "human_binary": [
+      3,
+      19,
+      81,
+      170,
+      239,
+      250,
+      356,
+      357,
+      359,
+      364,
+      394,
+      426,
+      439,
+      508,
+      544,
+      564,
+      565,
+      594,
+      617,
+      657,
+      676,
+      728,
+      738,
+      780,
+      805,
+      834,
+      858,
+      934,
+      959,
+      1018,
+      1020,
+      1078,
+      1093,
+      1234,
+      1243,
+      1266,
+      1308,
+      1342,
+      1380,
+      1384,
+      1405,
+      1450,
+      1457,
+      1592,
+      1608,
+      1617,
+      1650,
+      1773,
+      1775,
+      1792,
+      1810,
+      1839,
+      1905,
+      1910,
+      1911,
+      1928,
+      1942,
+      2015,
+      2034,
+      2059,
+      2151,
+      2189
+    ]
+  },
+  "table": {
+    "2B zero-shot": {
+      "full": {
+        "n": 137,
+        "accuracy": 0.6277
+      },
+      "human_minus_q": {
+        "n": 126,
+        "accuracy": 0.6746
+      },
+      "human_clear": {
+        "n": 126,
+        "accuracy": 0.6746
+      },
+      "human_strict": {
+        "n": 107,
+        "accuracy": 0.7664
+      },
+      "human_binary": {
+        "n": 75,
+        "accuracy": 0.6533
+      }
+    },
+    "2B structured": {
+      "full": {
+        "n": 137,
+        "accuracy": 0.5328
+      },
+      "human_minus_q": {
+        "n": 126,
+        "accuracy": 0.5317
+      },
+      "human_clear": {
+        "n": 126,
+        "accuracy": 0.5317
+      },
+      "human_strict": {
+        "n": 107,
+        "accuracy": 0.514
+      },
+      "human_binary": {
+        "n": 75,
+        "accuracy": 0.6667
+      }
+    },
+    "2B General LoRA": {
+      "full": {
+        "n": 137,
+        "accuracy": 0.6204
+      },
+      "human_minus_q": {
+        "n": 126,
+        "accuracy": 0.6667
+      },
+      "human_clear": {
+        "n": 126,
+        "accuracy": 0.6667
+      },
+      "human_strict": {
+        "n": 107,
+        "accuracy": 0.7477
+      },
+      "human_binary": {
+        "n": 75,
+        "accuracy": 0.6667
+      }
+    },
+    "2B Targeted LoRA": {
+      "full": {
+        "n": 137,
+        "accuracy": 0.6423
+      },
+      "human_minus_q": {
+        "n": 126,
+        "accuracy": 0.6905
+      },
+      "human_clear": {
+        "n": 126,
+        "accuracy": 0.6905
+      },
+      "human_strict": {
+        "n": 107,
+        "accuracy": 0.7757
+      },
+      "human_binary": {
+        "n": 75,
+        "accuracy": 0.6533
+      }
+    },
+    "7B zero-shot": {
+      "full": {
+        "n": 137,
+        "accuracy": 0.635
+      },
+      "human_minus_q": {
+        "n": 126,
+        "accuracy": 0.6587
+      },
+      "human_clear": {
+        "n": 126,
+        "accuracy": 0.6587
+      },
+      "human_strict": {
+        "n": 107,
+        "accuracy": 0.7477
+      },
+      "human_binary": {
+        "n": 75,
+        "accuracy": 0.5467
+      }
+    },
+    "7B General LoRA": {
+      "full": {
+        "n": 137,
+        "accuracy": 0.6569
+      },
+      "human_minus_q": {
+        "n": 126,
+        "accuracy": 0.6825
+      },
+      "human_clear": {
+        "n": 126,
+        "accuracy": 0.6825
+      },
+      "human_strict": {
+        "n": 107,
+        "accuracy": 0.729
+      },
+      "human_binary": {
+        "n": 75,
+        "accuracy": 0.6667
+      }
+    },
+    "7B Targeted LoRA": {
+      "full": {
+        "n": 137,
+        "accuracy": 0.6423
+      },
+      "human_minus_q": {
+        "n": 126,
+        "accuracy": 0.6508
+      },
+      "human_clear": {
+        "n": 126,
+        "accuracy": 0.6508
+      },
+      "human_strict": {
+        "n": 107,
+        "accuracy": 0.6916
+      },
+      "human_binary": {
+        "n": 75,
+        "accuracy": 0.5733
+      }
+    },
+    "7B Hard-Neg LoRA": {
+      "full": {
+        "n": 137,
+        "accuracy": 0.6642
+      },
+      "human_minus_q": {
+        "n": 126,
+        "accuracy": 0.6825
+      },
+      "human_clear": {
+        "n": 126,
+        "accuracy": 0.6825
+      },
+      "human_strict": {
+        "n": 107,
+        "accuracy": 0.729
+      },
+      "human_binary": {
+        "n": 75,
+        "accuracy": 0.6533
+      }
+    },
+    "7B Projector LoRA": {
+      "full": {
+        "n": 137,
+        "accuracy": 0.6423
+      },
+      "human_minus_q": {
+        "n": 126,
+        "accuracy": 0.6508
+      },
+      "human_clear": {
+        "n": 126,
+        "accuracy": 0.6508
+      },
+      "human_strict": {
+        "n": 107,
+        "accuracy": 0.7103
+      },
+      "human_binary": {
+        "n": 75,
+        "accuracy": 0.6133
+      }
+    },
+    "7B Vision+Projector LoRA": {
+      "full": {
+        "n": 137,
+        "accuracy": 0.6423
+      },
+      "human_minus_q": {
+        "n": 126,
+        "accuracy": 0.6746
+      },
+      "human_clear": {
+        "n": 126,
+        "accuracy": 0.6746
+      },
+      "human_strict": {
+        "n": 107,
+        "accuracy": 0.729
+      },
+      "human_binary": {
+        "n": 75,
+        "accuracy": 0.64
+      }
+    }
+  }
+}

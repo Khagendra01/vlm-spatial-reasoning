@@ -57,6 +57,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 RESULTS = ROOT / "results"
 MIMO_DIR = RESULTS / "mimo"
+IAA = RESULTS / "iaa"
 CANON_CSV = RESULTS / "smolvlm2_baseline_2195_20260808_214536.csv"
 CACHE_DIR = ROOT / "data" / "image_cache"
 
@@ -91,6 +92,69 @@ FAMILY = {
 GO_INPUT = 0.14 / 1e6      # USD per input token (OpenCode Go, MiMo-V2.5)
 GO_OUTPUT = 0.28 / 1e6     # USD per output token
 GO_CACHED = 0.0028 / 1e6   # USD per cached-read token
+
+# ---------------------------------------------------------------------------
+# image-grounded AUDIT prompts (used ONLY by --task audit; the frozen VSR
+# prompt above is used for the accuracy evaluation)
+# ---------------------------------------------------------------------------
+AUDIT_CLEAN_PROMPT = (
+    'Look at the image and read the spatial statement carefully.\n\n'
+    'Statement: "{statement}"\n\n'
+    'Decide whether a human can confidently determine whether this statement '
+    'is true or false FROM THE IMAGE ALONE.\n'
+    '- Answer "clean" if the image clearly supports a confident true/false '
+    'judgement, even if the answer is hard.\n'
+    '- Answer "ambiguous" if the statement cannot be confidently judged from '
+    'the image: the annotation seems wrong, the camera viewpoint hides the '
+    'relevant geometry, the objects have no meaningful orientation, the '
+    'reference object is not clearly visible, or the objects are too small '
+    'or occluded.\n'
+    'Answer with exactly one word: clean or ambiguous.')
+
+AUDIT_TAXO_PROMPT = (
+    'Look at the image and read the spatial statement carefully.\n\n'
+    'Statement: "{statement}"\n\n'
+    'This example is a case where vision-language models failed. Choose the '
+    'single best reason from exactly these eight classes:\n'
+    '1. clear_image_model_reasoning_failure - the image is visually clear '
+    'and the statement is judgeable; a failure is a reasoning failure, not '
+    'an image/annotation problem.\n'
+    '2. camera_viewpoint_ambiguity - camera angle or depth separation makes '
+    'the relation hard to judge.\n'
+    '3. parallel_perpendicular_geometry - requires geometric assessment of '
+    'alignment between objects.\n'
+    '4. annotation_questionable - the claimed truth value of the statement '
+    'seems wrong or undecidable given the image.\n'
+    '5. intrinsic_orientation_ambiguous - the subject object has no '
+    'meaningful intrinsic orientation.\n'
+    '6. front_back_object_ambiguous - the reference object is barely visible '
+    'or its position must be inferred.\n'
+    '7. small_occluded_object - the relevant object is small or partially '
+    'occluded.\n'
+    '8. subject_reference_inversion - the statement subject/reference roles '
+    'are easy to confuse.\n'
+    'Answer with exactly one class name.')
+
+AUDIT_BINARY_ALLOWED = {"clean", "ambiguous"}
+AUDIT_TAXO_ALLOWED = {
+    "clear_image_model_reasoning_failure", "camera_viewpoint_ambiguity",
+    "parallel_perpendicular_geometry", "annotation_questionable",
+    "intrinsic_orientation_ambiguous", "front_back_object_ambiguous",
+    "small_occluded_object", "subject_reference_inversion",
+}
+
+
+def parse_audit_answer(raw, allowed):
+    """Single-word audit answer; falls back to a trailing allowed token."""
+    if raw is None:
+        return None, False
+    s = raw.strip().lower().strip('."\'`')
+    if s in allowed:
+        return s, False
+    for token in sorted(allowed, key=len, reverse=True):
+        if s.endswith(token) or token in s.split():
+            return token, True
+    return None, True
 
 
 def cache_path(url):
@@ -270,8 +334,8 @@ def save_rows(csv_path, rows, fieldnames):
 USAGE = {"calls": 0, "prompt": 0, "completion": 0, "cached": 0}
 
 
-def run_requests(items, client, task, out_csv, fieldnames, limit=None,
-                 raw_log=None):
+def run_requests(items, client, task, out_csv, fieldnames, prompt,
+                 answer_parser, limit=None, raw_log=None):
     """items: list of dicts with 'id', 'statement', 'image_url'. Returns rows."""
     done = load_done(out_csv)
     todo = [it for it in items if it["id"] not in done]
@@ -288,9 +352,9 @@ def run_requests(items, client, task, out_csv, fieldnames, limit=None,
             existing = list(csv.DictReader(f))
     t0 = time.time()
     for i, it in enumerate(todo):
-        text = FROZEN_PROMPT.format(statement=it["statement"])
+        text = prompt.format(statement=it["statement"])
         raw, usage = client.chat(it["image_url"], text)
-        pred, thinking = extract_final_answer(raw)
+        pred, thinking = answer_parser(raw)
         gt = it.get("label", it.get("flip_label"))
         rows.append({"id": it["id"], "statement": it["statement"],
                      "relation": it.get("relation", ""),
@@ -339,7 +403,8 @@ def write_usage_report():
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--task", choices=["vsr", "consistency"], default="vsr")
+    ap.add_argument("--task", choices=["vsr", "consistency", "audit"],
+                    default="vsr")
     ap.add_argument("--validate", action="store_true",
                     help="run on VSR TRAIN examples only (never the test set)")
     ap.add_argument("--validate-n", type=int, default=30)
@@ -408,7 +473,7 @@ def main():
                       "prediction", "correct", "raw_output", "image_url",
                       "thinking_likely"]
         run_requests(records, client, "vsr", out_csv, fieldnames,
-                     limit=args.limit)
+                     FROZEN_PROMPT, extract_final_answer, limit=args.limit)
         # metrics (overall + orientation family; full family table comes from
         # scripts/mimo_analysis.py)
         rows = []
@@ -435,6 +500,40 @@ def main():
                       "statement", "ground_truth", "prediction", "correct",
                       "raw_output", "image_url", "thinking_likely"]
         run_requests(flips, client, "consistency", out_csv, fieldnames,
+                     FROZEN_PROMPT, extract_final_answer, limit=args.limit)
+        write_usage_report()
+
+    elif args.task == "audit":
+        # image-grounded audit: binary clean/ambiguous on the 137 orientation
+        # examples + eight-class taxonomy on the 48 persistent failures.
+        # Sheets are the same blind ones the human rater used, so agreement
+        # is directly computable (scripts/compute_iaa.py).
+        clean_items, taxo_items = [], []
+        with open(IAA / "blind_clean_label_sheet.csv", newline="",
+                  encoding="utf-8") as f:
+            for r in csv.DictReader(f):
+                clean_items.append({"id": int(r["id"]),
+                                    "statement": r["statement"],
+                                    "relation": r["relation"],
+                                    "image_url": r["image_url"]})
+        with open(IAA / "blind_failure_taxonomy_sheet.csv", newline="",
+                  encoding="utf-8") as f:
+            for r in csv.DictReader(f):
+                taxo_items.append({"id": int(r["id"]),
+                                   "statement": r["statement"],
+                                   "relation": r["relation"],
+                                   "image_url": r["image_url"]})
+        out_clean = MIMO_DIR / "audit_mimo_clean.csv"
+        out_taxo = MIMO_DIR / "audit_mimo_taxo.csv"
+        fn = ["id", "statement", "relation", "ground_truth", "prediction",
+              "correct", "raw_output", "image_url", "thinking_likely"]
+        run_requests(clean_items, client, "audit-clean", out_clean, fn,
+                     AUDIT_CLEAN_PROMPT,
+                     lambda raw: parse_audit_answer(raw, AUDIT_BINARY_ALLOWED),
+                     limit=args.limit)
+        run_requests(taxo_items, client, "audit-taxo", out_taxo, fn,
+                     AUDIT_TAXO_PROMPT,
+                     lambda raw: parse_audit_answer(raw, AUDIT_TAXO_ALLOWED),
                      limit=args.limit)
         write_usage_report()
 

@@ -120,46 +120,69 @@ def fmt(x, nd=3):
 
 
 def main():
-    if not (RATER2_CLEAN.exists() and RATER2_TAXO.exists()):
+    import argparse
+    ap = argparse.ArgumentParser(description="IAA between two label sources")
+    ap.add_argument("--rater1-taxo",
+                    default=str(RATER1_TAXO),
+                    help="first label source (eight-class taxonomy CSV)")
+    ap.add_argument("--rater2-clean",
+                    default=str(RATER2_CLEAN),
+                    help="second label source (binary clean/ambiguous CSV)")
+    ap.add_argument("--rater2-taxo",
+                    default=str(RATER2_TAXO),
+                    help="second label source (eight-class taxonomy CSV)")
+    ap.add_argument("--rater1-taxo-col", default="annotation",
+                    help="taxonomy column in the first source")
+    ap.add_argument("--rater2-clean-col", default="rating_clean",
+                    help="binary column in the second source")
+    ap.add_argument("--rater2-taxo-col", default="class",
+                    help="taxonomy column in the second source")
+    ap.add_argument("--out-prefix", default="iaa",
+                    help="output file prefix (results/iaa/<prefix>_results.json)")
+    args = ap.parse_args()
+
+    rater1_taxo = Path(args.rater1_taxo)
+    rater2_clean = Path(args.rater2_clean)
+    rater2_taxo = Path(args.rater2_taxo)
+
+    if not (rater2_clean.exists() and rater2_taxo.exists()):
         print("=" * 70)
-        print("IAA computation skipped: rater-2 files not found.")
-        print("Expected (exported by scripts/export_iaa_sheets.py):")
-        print(f"  {RATER2_CLEAN.relative_to(ROOT)}")
-        print(f"  {RATER2_TAXO.relative_to(ROOT)}")
-        print("The second rater must be an independent HUMAN rater; the blind")
-        print("rating protocol is in results/iaa/README.md. No results are")
-        print("written when rater-2 data is absent (nothing is fabricated).")
+        print("IAA computation skipped: second label source not found.")
+        print(f"Expected: {rater2_clean}")
+        print(f"          {rater2_taxo}")
+        print("No results are written when the second source is absent "
+              "(nothing is fabricated).")
         print("=" * 70)
         return
 
-    # ---- rater 1 (committed audit) ----
-    r1_rows = read_csv(RATER1_TAXO, "id")
+    # ---- rater 1 ----
+    r1_rows = read_csv(rater1_taxo, "id")
     r1_ids = sorted(r1_rows, key=int)
-    r1_taxo = [r1_rows[i]["annotation"].strip() for i in r1_ids]
+    r1_taxo = [r1_rows[i][args.rater1_taxo_col].strip() for i in r1_ids]
     r1_bin = ["clean" if t == CLEAN_CLASS else "ambiguous" for t in r1_taxo]
 
     # ---- rater 2 (blind) ----
-    r2_clean = read_csv(RATER2_CLEAN, "id")
-    r2_taxo = read_csv(RATER2_TAXO, "id")
+    r2_clean = read_csv(rater2_clean, "id")
+    r2_taxo = read_csv(rater2_taxo, "id")
 
     # ---- binary clean/ambiguous (n = intersection of doubly rated units) ----
     clean_ids = sorted(set(r1_ids) & set(r2_clean), key=int)
     c_a = [r1_bin[r1_ids.index(i)] for i in clean_ids]
-    c_b = [r2_clean[i]["rating_clean"].strip() for i in clean_ids]
+    c_b = [r2_clean[i][args.rater2_clean_col].strip() for i in clean_ids]
     valid = all(v in {"clean", "ambiguous"} for v in c_b)
     if not valid:
-        sys.exit("ERROR: rater2_clean_labels.csv contains invalid ratings; "
-                 "allowed values: clean, ambiguous")
+        sys.exit("ERROR: second source contains invalid clean/ambiguous "
+                 "ratings; allowed values: clean, ambiguous")
     p_o, kappa, p_e = cohen_kappa(c_a, c_b)
     ci_k = bootstrap_ci(c_a, c_b, lambda x, y: cohen_kappa(x, y)[1])
 
     # ---- eight-class taxonomy (n = intersection) ----
     taxo_ids = sorted(set(r1_ids) & set(r2_taxo), key=int)
     t_a = [r1_taxo[r1_ids.index(i)] for i in taxo_ids]
-    t_b = [r2_taxo[i]["class"].strip() for i in taxo_ids]
+    t_b = [r2_taxo[i][args.rater2_taxo_col].strip() for i in taxo_ids]
     invalid = sorted(set(t_b) - set(TAXONOMY_CLASSES))
     if invalid:
-        sys.exit(f"ERROR: rater2_taxonomy.csv contains invalid classes: {invalid}")
+        sys.exit(f"ERROR: second source contains invalid taxonomy classes: {invalid}")
     alpha = krippendorff_alpha_nominal(t_a, t_b)
     ci_a = bootstrap_ci(t_a, t_b, krippendorff_alpha_nominal)
     pct_taxo = sum(1 for a, b in zip(t_a, t_b) if a == b) / len(t_a)
@@ -176,13 +199,11 @@ def main():
     out = {
         "schema_version": "iaa-v1",
         "method": {
-            "rater1": "committed single-annotator audit "
-                      "(results/orientation_persistent_annotations.csv)",
-            "rater2": "independent blind human rater "
-                      "(results/iaa/rater2_clean_labels.csv, "
-                      "results/iaa/rater2_taxonomy.csv)",
-            "binary_flag": "clean vs ambiguous derived from rater1 taxonomy "
-                           "(only clear_image_model_reasoning_failure = clean)",
+            "rater1": "first label source: " + str(rater1_taxo),
+            "rater2": "second label source: " + str(rater2_clean) + ", "
+                      + str(rater2_taxo),
+            "binary_flag": "clean vs ambiguous derived from the first source's "
+                           "taxonomy (only clear_image_model_reasoning_failure = clean)",
             "statistics": {
                 "clean_flag": "Cohen's kappa, percent agreement",
                 "taxonomy": "Krippendorff's alpha (nominal, two raters)",
@@ -206,17 +227,15 @@ def main():
             "confusion_matrix": conf_taxo,
         },
         "caveats": [
-            "n is the intersection of units rated by both annotators "
-            "(48 persistent-failure cases)",
+            "n is the intersection of units rated by both annotators",
             "kappa/alpha are undefined or unstable when one class dominates; "
             "CIs are bootstrap approximations at this sample size",
-            "these statistics are ADDITIVE evidence for the single-annotator "
-            "audit; they do not replace or alter any reported clean-label "
-            "accuracy in the paper (Table 2 main / Table 7 supplementary)",
+            "these statistics are ADDITIVE evidence; they do not replace or "
+            "alter any reported accuracy number in the paper",
         ],
     }
 
-    with open(IAA / "iaa_results.json", "w", encoding="utf-8") as f:
+    with open(IAA / f"{args.out_prefix}_results.json", "w", encoding="utf-8") as f:
         json.dump(out, f, indent=2)
 
     pct_ag = sum(1 for a, b in zip(c_a, c_b) if a == b) / len(c_a)
@@ -262,7 +281,7 @@ not yet available. Per standard conventions (e.g., Landis & Koch 1977 for
 kappa), values below 0.41 are commonly read as slight-to-fair agreement and
 should be reported as such; at n = {len(clean_ids)} the bootstrap CIs are wide.
 """
-    (IAA / "iaa_summary.md").write_text(summary, encoding="utf-8")
+    (IAA / f"{args.out_prefix}_summary.md").write_text(summary, encoding="utf-8")
 
     print("=" * 70)
     print("IAA results")
@@ -273,8 +292,8 @@ should be reported as such; at n = {len(clean_ids)} the bootstrap CIs are wide.
     print(f"eight-class taxonomy  n={len(taxo_ids)}  "
           f"agreement={pct_taxo:.1%}  alpha={alpha_s}  "
           f"95% CI {ci_a_s}")
-    print(f"\nwrote {IAA / 'iaa_results.json'}")
-    print(f"wrote {IAA / 'iaa_summary.md'}")
+    print(f"\nwrote {IAA / (args.out_prefix + '_results.json')}")
+    print(f"wrote {IAA / (args.out_prefix + '_summary.md')}")
 
 
 if __name__ == "__main__":
