@@ -638,8 +638,9 @@ persistent failures.
 
 \textbf{Human re-audit and inter-source agreement (additive reliability evidence).}
 Because the clean-label audit (\S\ref{app:probes}) and the taxonomy above
-originate from an automated (LLM-generated) audit, an independent human
-annotator re-rated the same examples from the images under a blind protocol:
+originate from an automated (LLM-generated) audit, two independent human
+annotators re-rated the same examples from the images under a blind protocol
+(rater slots in \texttt{scripts/iaa\_tool.py}):
 \texttt{scripts/export\_iaa\_sheets.py} exports two rating sheets (the
 137-example orientation test set for the binary clean/ambiguous flag, and
 the 48 persistent-failure cases for the eight-class taxonomy) containing
@@ -650,6 +651,16 @@ by \texttt{scripts/compute\_iaa.py} (Cohen's kappa for the binary flag,
 Krippendorff's alpha, nominal, for the taxonomy, both with bootstrap 95\%
 confidence intervals; \texttt{results/iaa/iaa\_results.json}).
 
+\textbf{Human--human agreement.} The two human annotators agree
+substantially: on the full 137-example binary flag, 82.5\% agreement
+($\kappa{=}0.65$, CI $[0.51, 0.77]$); on the 48-case audited subset,
+70.8\% agreement ($\kappa{=}0.44$, CI $[0.21, 0.67]$). On the eight-class
+taxonomy the exact-class agreement is 85.4\% (Krippendorff's
+$\alpha{=}0.81$, CI $[0.68, 0.92]$; committed at
+\texttt{results/iaa/rater2\_rater3\_*}). The binary clean/ambiguous judgment
+is therefore the fuzzier of the two tasks, while the failure taxonomy is
+reliably rateable by humans.
+
 \textbf{Results (human vs.\ automated audit).} On the 48 cases rated by both
 sources (the persistent-failure set; the remaining 89 orientation examples
 were never flagged by the automated audit and are excluded from the
@@ -657,31 +668,33 @@ agreement statistics), the binary clean/ambiguous flag agrees on 32/48 cases
 (66.7\%; $\kappa{=}0.36$, bootstrap 95\% CI $[0.13, 0.59]$). On the
 eight-class taxonomy the exact-class agreement is 15/48 (31.2\%;
 $\alpha{=}0.14$, CI $[-0.03, 0.28]$). The disagreement is systematic rather
-than random: the human annotator never used \emph{camera-viewpoint
-ambiguity} or \emph{subject/reference inversion}, over-used \emph{annotation
-questionable} (11 vs.\ 5) and \emph{small/occluded object} (11 vs.\ 2), and
-flagged 62 of the 137 orientation examples as ambiguous, versus 30 excluded
-by the automated audit's strict set. Part of the disagreement on
-\emph{annotation questionable} is attributable to the blind protocol itself:
-judging whether a ground-truth label is wrong requires the label, which was
-withheld.
+than random: the human annotators never used \emph{subject/reference
+inversion} (one used \emph{camera-viewpoint ambiguity} only three times),
+over-used \emph{annotation questionable} (11 and 9 vs.\ 5) and
+\emph{small/occluded object} (11 and 13 vs.\ 2), and flagged 62 and 60 of the
+137 orientation examples as ambiguous, versus 30 excluded by the automated
+audit's strict set. Part of the disagreement on \emph{annotation
+questionable} is attributable to the blind protocol itself: judging whether a
+ground-truth label is wrong requires the label, which was withheld.
 
 \textbf{Consequences.} The frozen automated-audit table
 (Table~\ref{tab:cleanlabel}) is retained unchanged; we do not redefine the
-exclusion sets to manufacture agreement. The human re-audit table
-(Table~\ref{tab:cleanlabel-human}) reproduces the qualitative conclusions
-despite low per-item agreement, so the sensitivity result is robust at the
-aggregate level while per-item flags are annotator-specific. An
-annotator-dependence analysis (\texttt{results/iaa/consensus\_subsets.json},
+exclusion sets to manufacture agreement. Both human re-audits reproduce the
+qualitative conclusions (Table~\ref{tab:cleanlabel-human} shows the first
+human's masks; the second human's strict mask gives the same pattern), so
+the sensitivity result is robust at the aggregate level across two
+independent humans despite the automated audit's low per-item agreement with
+either of them. An annotator-dependence analysis
+(\texttt{results/iaa/consensus\_subsets.json},
 \texttt{scripts/iaa\_consensus\_subsets.py}) shows the same pattern: under
-the human's binary masks the clean-subset gains largely vanish (7B General
+the humans' binary masks the clean-subset gains largely vanish (7B General
 LoRA 66.7\% and 7B zero-shot 54.7\% on $n{=}75$), while under the consensus
 union mask ($n{=}62$) the trained conditions again improve (7B General LoRA
 77.4\%, 7B Hard-Neg 74.2\%, 2B zero-shot 72.6\%) but 7B zero-shot does not
 (58.1\%). The statement that 2B structured prompting shows no clean-subset
 gain (53.3\% on both full and strict sets) is specific to the taxonomy-derived
 masks: under the human binary consensus mask it reaches 69.3\%. Overall the
-human re-audit provides partial but aggregate-level corroboration, so the
+human re-audits provide partial but aggregate-level corroboration, so the
 clean-label analysis should be read as annotator-specific exploratory
 evidence rather than a ruling on label noise. No reported accuracy number is
 altered by this protocol.

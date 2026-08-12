@@ -1,0 +1,129 @@
+{
+  "schema_version": "iaa-v1",
+  "method": {
+    "rater1": "first label source: results\\iaa\\rater2_taxonomy.csv",
+    "rater2": "second label source: results\\iaa\\rater3_clean_labels.csv, results\\iaa\\rater3_taxonomy.csv",
+    "binary_flag": "clean vs ambiguous derived from the first source's taxonomy (only clear_image_model_reasoning_failure = clean)",
+    "statistics": {
+      "clean_flag": "Cohen's kappa, percent agreement",
+      "taxonomy": "Krippendorff's alpha (nominal, two raters)",
+      "ci": "nonparametric bootstrap over units, percentile 95% CI, 2000 resamples, seed 20260811"
+    }
+  },
+  "clean_flag": {
+    "n": 48,
+    "percent_agreement": 0.708,
+    "cohens_kappa": 0.44,
+    "kappa_95ci": [
+      0.211,
+      0.67
+    ],
+    "p_e": 0.479,
+    "confusion_matrix": {
+      "clean": {
+        "clean": 16,
+        "ambiguous": 2
+      },
+      "ambiguous": {
+        "clean": 12,
+        "ambiguous": 18
+      }
+    }
+  },
+  "taxonomy": {
+    "n": 48,
+    "percent_agreement": 0.854,
+    "krippendorff_alpha": 0.811,
+    "alpha_95ci": [
+      0.678,
+      0.919
+    ],
+    "confusion_matrix": {
+      "clear_image_model_reasoning_failure": {
+        "clear_image_model_reasoning_failure": 15,
+        "camera_viewpoint_ambiguity": 1,
+        "parallel_perpendicular_geometry": 0,
+        "annotation_questionable": 0,
+        "intrinsic_orientation_ambiguous": 0,
+        "front_back_object_ambiguous": 1,
+        "small_occluded_object": 1,
+        "subject_reference_inversion": 0
+      },
+      "camera_viewpoint_ambiguity": {
+        "clear_image_model_reasoning_failure": 0,
+        "camera_viewpoint_ambiguity": 0,
+        "parallel_perpendicular_geometry": 0,
+        "annotation_questionable": 0,
+        "intrinsic_orientation_ambiguous": 0,
+        "front_back_object_ambiguous": 0,
+        "small_occluded_object": 0,
+        "subject_reference_inversion": 0
+      },
+      "parallel_perpendicular_geometry": {
+        "clear_image_model_reasoning_failure": 0,
+        "camera_viewpoint_ambiguity": 0,
+        "parallel_perpendicular_geometry": 3,
+        "annotation_questionable": 0,
+        "intrinsic_orientation_ambiguous": 0,
+        "front_back_object_ambiguous": 0,
+        "small_occluded_object": 0,
+        "subject_reference_inversion": 0
+      },
+      "annotation_questionable": {
+        "clear_image_model_reasoning_failure": 0,
+        "camera_viewpoint_ambiguity": 1,
+        "parallel_perpendicular_geometry": 0,
+        "annotation_questionable": 9,
+        "intrinsic_orientation_ambiguous": 0,
+        "front_back_object_ambiguous": 0,
+        "small_occluded_object": 1,
+        "subject_reference_inversion": 0
+      },
+      "intrinsic_orientation_ambiguous": {
+        "clear_image_model_reasoning_failure": 0,
+        "camera_viewpoint_ambiguity": 0,
+        "parallel_perpendicular_geometry": 0,
+        "annotation_questionable": 0,
+        "intrinsic_orientation_ambiguous": 4,
+        "front_back_object_ambiguous": 0,
+        "small_occluded_object": 0,
+        "subject_reference_inversion": 0
+      },
+      "front_back_object_ambiguous": {
+        "clear_image_model_reasoning_failure": 0,
+        "camera_viewpoint_ambiguity": 0,
+        "parallel_perpendicular_geometry": 0,
+        "annotation_questionable": 0,
+        "intrinsic_orientation_ambiguous": 0,
+        "front_back_object_ambiguous": 0,
+        "small_occluded_object": 1,
+        "subject_reference_inversion": 0
+      },
+      "small_occluded_object": {
+        "clear_image_model_reasoning_failure": 0,
+        "camera_viewpoint_ambiguity": 1,
+        "parallel_perpendicular_geometry": 0,
+        "annotation_questionable": 0,
+        "intrinsic_orientation_ambiguous": 0,
+        "front_back_object_ambiguous": 0,
+        "small_occluded_object": 10,
+        "subject_reference_inversion": 0
+      },
+      "subject_reference_inversion": {
+        "clear_image_model_reasoning_failure": 0,
+        "camera_viewpoint_ambiguity": 0,
+        "parallel_perpendicular_geometry": 0,
+        "annotation_questionable": 0,
+        "intrinsic_orientation_ambiguous": 0,
+        "front_back_object_ambiguous": 0,
+        "small_occluded_object": 0,
+        "subject_reference_inversion": 0
+      }
+    }
+  },
+  "caveats": [
+    "n is the intersection of units rated by both annotators",
+    "kappa/alpha are undefined or unstable when one class dominates; CIs are bootstrap approximations at this sample size",
+    "these statistics are ADDITIVE evidence; they do not replace or alter any reported accuracy number in the paper"
+  ]
+}

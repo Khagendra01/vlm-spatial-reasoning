@@ -1,0 +1,11 @@
+{
+  "n": 137,
+  "percent_agreement": 0.8248,
+  "cohens_kappa": 0.6455,
+  "kappa_95ci": [
+    0.5062,
+    0.7665
+  ],
+  "p_e": 0.5059,
+  "note": "both humans rated all 137 orientation examples (binary flag)"
+}
