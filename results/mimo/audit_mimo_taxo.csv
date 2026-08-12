@@ -1,0 +1,49 @@
+id,statement,relation,ground_truth,prediction,correct,raw_output,image_url,thinking_likely,retries
+19,The truck is parallel to the motorcycle.,parallel to,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000302514.jpg,0,0
+14,The airplane is perpendicular to the truck.,perpendicular to,None,parallel_perpendicular_geometry,,parallel_perpendicular_geometry,http://images.cocodataset.org/train2017/000000538194.jpg,0,0
+356,The dog is facing the boat.,facing,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000030667.jpg,0,0
+114,The person is facing the book.,facing,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000040114.jpg,0,0
+362,The cat is facing the keyboard.,facing,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000530730.jpg,0,0
+213,The laptop is facing the sandwich.,facing,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000302643.jpg,0,0
+375,The zebra is facing the person.,facing,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000263512.jpg,0,0
+424,The bed is facing the tv.,facing,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000146850.jpg,0,0
+565,The dog is perpendicular to the couch.,perpendicular to,None,parallel_perpendicular_geometry,,parallel_perpendicular_geometry,http://images.cocodataset.org/train2017/000000170898.jpg,0,0
+558,The bird is facing away from the cat.,facing away from,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000072556.jpg,0,0
+582,The banana is facing the cat.,facing,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000481313.jpg,0,0
+676,The boat is parallel to the truck.,parallel to,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000267363.jpg,0,0
+22,The teddy bear is perpendicular to the cake.,perpendicular to,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000033372.jpg,0,0
+239,The cat is facing away from the toilet.,facing away from,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000518156.jpg,0,0
+33,The cat is facing away from the sink.,facing away from,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000508846.jpg,0,0
+657,The teddy bear is facing the cow.,facing,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000285618.jpg,0,0
+868,The person is facing away from the bear.,facing away from,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000073197.jpg,0,0
+937,The zebra is perpendicular to the horse.,perpendicular to,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000302924.jpg,0,0
+1093,The laptop is facing away from the chair.,facing away from,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000131011.jpg,0,0
+1178,The bench is parallel to the person.,parallel to,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000385504.jpg,0,0
+1035,The skateboard is parallel to the couch.,parallel to,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000391685.jpg,0,0
+1167,The dog is facing away from the horse.,facing away from,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/val2017/000000049269.jpg,0,0
+1296,The horse is facing away from the zebra.,facing away from,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000568005.jpg,0,0
+1202,The bird is facing the elephant.,facing,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000099628.jpg,0,0
+1266,The cat is facing away from the bed.,facing away from,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000175383.jpg,0,0
+250,The laptop is facing the chair.,facing,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000066376.jpg,0,0
+1384,The person is parallel to the snowboard.,parallel to,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000409025.jpg,0,0
+156,The person is facing away from the horse.,facing away from,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000004972.jpg,0,0
+34,The cat is facing away from the toilet.,facing away from,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000455365.jpg,0,0
+834,The bus is perpendicular to the car.,perpendicular to,None,parallel_perpendicular_geometry,,parallel_perpendicular_geometry,http://images.cocodataset.org/train2017/000000499267.jpg,0,0
+1312,The hair drier is facing away from the person.,facing away from,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000092020.jpg,0,0
+1815,The bicycle is parallel to the motorcycle.,parallel to,None,parallel_perpendicular_geometry,,parallel_perpendicular_geometry,http://images.cocodataset.org/train2017/000000223930.jpg,0,0
+1905,The teddy bear is facing the person.,facing,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000002839.jpg,0,0
+1559,The cat is facing the laptop.,facing,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000369208.jpg,0,0
+1953,The cow is facing away from the person.,facing away from,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000146236.jpg,0,0
+1405,The teddy bear is facing the book.,facing,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000369653.jpg,0,0
+1662,The car is parallel to the motorcycle.,parallel to,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000326689.jpg,0,0
+1608,The book is parallel to the bed.,parallel to,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000364725.jpg,0,0
+2034,The bench is facing away from the parking meter.,facing away from,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000544094.jpg,0,0
+1939,The person is facing away from the refrigerator.,facing away from,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000272253.jpg,0,0
+1400,The cat is facing away from the suitcase.,facing away from,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000159118.jpg,0,0
+439,The bench is facing away from the car.,facing away from,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000506483.jpg,0,0
+2059,The car is perpendicular to the motorcycle.,perpendicular to,None,parallel_perpendicular_geometry,,parallel_perpendicular_geometry,http://images.cocodataset.org/train2017/000000385145.jpg,0,0
+564,The sheep is facing away from the person.,facing away from,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000091656.jpg,0,0
+2151,The bear is facing the person.,facing,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000015391.jpg,0,0
+508,The suitcase is parallel to the couch.,parallel to,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000479539.jpg,0,0
+1611,The cat is facing the backpack.,facing,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000207093.jpg,0,0
+1490,The laptop is facing away from the person.,facing away from,None,clear_image_model_reasoning_failure,,clear_image_model_reasoning_failure,http://images.cocodataset.org/train2017/000000517967.jpg,0,0

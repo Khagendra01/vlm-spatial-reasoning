@@ -1,0 +1,138 @@
+id,statement,relation,ground_truth,prediction,correct,raw_output,image_url,thinking_likely,retries
+156,The person is facing away from the horse.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000004972.jpg,0,0
+81,The cat is facing away from the tv.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000469661.jpg,0,0
+114,The person is facing the book.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000040114.jpg,0,0
+34,The cat is facing away from the toilet.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000455365.jpg,0,0
+3,The laptop is facing the sandwich.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000519404.jpg,0,0
+106,The parking meter is facing away from the person.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000567205.jpg,0,0
+14,The airplane is perpendicular to the truck.,perpendicular to,None,clean,,clean,http://images.cocodataset.org/train2017/000000538194.jpg,0,0
+171,The teddy bear is facing the cow.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000459644.jpg,0,0
+22,The teddy bear is perpendicular to the cake.,perpendicular to,None,clean,,clean,http://images.cocodataset.org/train2017/000000033372.jpg,0,0
+170,The person is facing away from the cow.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000221771.jpg,0,0
+33,The cat is facing away from the sink.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000508846.jpg,0,0
+19,The truck is parallel to the motorcycle.,parallel to,None,clean,,clean,http://images.cocodataset.org/train2017/000000302514.jpg,0,0
+213,The laptop is facing the sandwich.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000302643.jpg,0,0
+356,The dog is facing the boat.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000030667.jpg,0,0
+189,The bus is parallel to the motorcycle.,parallel to,None,clean,,clean,http://images.cocodataset.org/train2017/000000087705.jpg,0,0
+239,The cat is facing away from the toilet.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000518156.jpg,0,0
+280,The person is facing the teddy bear.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000041753.jpg,0,0
+357,The person is facing the bear.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000541911.jpg,0,0
+211,The bus is facing away from the cow.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000162355.jpg,0,0
+230,The teddy bear is facing away from the book.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000089870.jpg,0,0
+250,The laptop is facing the chair.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000066376.jpg,0,0
+410,The teddy bear is facing the person.,facing,None,clean,,clean,http://images.cocodataset.org/val2017/000000439773.jpg,0,0
+362,The cat is facing the keyboard.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000530730.jpg,0,0
+394,The horse is parallel to the cow.,parallel to,None,ambiguous,,ambiguous,http://images.cocodataset.org/train2017/000000441774.jpg,0,0
+424,The bed is facing the tv.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000146850.jpg,0,0
+375,The zebra is facing the person.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000263512.jpg,0,0
+364,The cat is facing the tv.,facing,None,clean,,clean,http://images.cocodataset.org/val2017/000000476810.jpg,0,0
+359,The zebra is facing the car.,facing,None,ambiguous,,ambiguous,http://images.cocodataset.org/train2017/000000473587.jpg,0,0
+426,The car is perpendicular to the motorcycle.,perpendicular to,None,clean,,clean,http://images.cocodataset.org/train2017/000000253054.jpg,0,0
+508,The suitcase is parallel to the couch.,parallel to,None,clean,,clean,http://images.cocodataset.org/train2017/000000479539.jpg,0,0
+513,The cat is facing the laptop.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000573877.jpg,0,0
+439,The bench is facing away from the car.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000506483.jpg,0,0
+564,The sheep is facing away from the person.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000091656.jpg,0,0
+382,The elephant is facing away from the bus.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000149551.jpg,0,0
+617,The bench is parallel to the person.,parallel to,None,clean,,clean,http://images.cocodataset.org/train2017/000000012704.jpg,0,0
+544,The skateboard is parallel to the couch.,parallel to,None,clean,,clean,http://images.cocodataset.org/train2017/000000170584.jpg,0,0
+565,The dog is perpendicular to the couch.,perpendicular to,None,clean,,clean,http://images.cocodataset.org/train2017/000000170898.jpg,0,0
+582,The banana is facing the cat.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000481313.jpg,0,0
+594,The book is facing the cat.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000499656.jpg,0,0
+523,The teddy bear is facing the book.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000361778.jpg,0,0
+676,The boat is parallel to the truck.,parallel to,None,clean,,clean,http://images.cocodataset.org/train2017/000000267363.jpg,0,0
+385,The person is facing the teddy bear.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000317797.jpg,0,0
+558,The bird is facing away from the cat.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000072556.jpg,0,0
+657,The teddy bear is facing the cow.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000285618.jpg,0,0
+739,The cat is facing the refrigerator.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000477647.jpg,0,0
+756,The person is facing the car.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000132841.jpg,0,0
+859,The cat is facing the sink.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000463825.jpg,0,0
+728,The bed is perpendicular to the person.,perpendicular to,None,clean,,clean,http://images.cocodataset.org/train2017/000000207826.jpg,0,0
+757,The person is facing away from the laptop.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000021365.jpg,0,0
+738,The laptop is facing the cat.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000501126.jpg,0,0
+868,The person is facing away from the bear.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000073197.jpg,0,0
+834,The bus is perpendicular to the car.,perpendicular to,None,clean,,clean,http://images.cocodataset.org/train2017/000000499267.jpg,0,0
+984,The motorcycle is parallel to the bus.,parallel to,None,clean,,clean,http://images.cocodataset.org/train2017/000000142774.jpg,0,0
+986,The dog is facing the cake.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000373396.jpg,0,0
+1018,The car is facing away from the pizza.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000079798.jpg,0,0
+934,The motorcycle is parallel to the car.,parallel to,None,clean,,clean,http://images.cocodataset.org/train2017/000000449889.jpg,0,0
+805,The person is facing the frisbee.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000468612.jpg,0,0
+780,The motorcycle is parallel to the bus.,parallel to,None,clean,,clean,http://images.cocodataset.org/train2017/000000308175.jpg,0,0
+937,The zebra is perpendicular to the horse.,perpendicular to,None,clean,,clean,http://images.cocodataset.org/train2017/000000302924.jpg,0,0
+911,The cat is facing away from the cake.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000447741.jpg,0,0
+858,The cat is facing away from the toilet.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000572075.jpg,0,0
+1020,The boat is parallel to the truck.,parallel to,None,clean,,clean,http://images.cocodataset.org/train2017/000000562291.jpg,0,0
+860,The zebra is facing the person.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000484066.jpg,0,0
+1042,The dog is facing away from the fire hydrant.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000198935.jpg,0,0
+1078,The dog is facing the horse.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000331503.jpg,0,0
+1093,The laptop is facing away from the chair.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000131011.jpg,0,0
+1158,The refrigerator is facing the cat.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000477647.jpg,0,0
+1167,The dog is facing away from the horse.,facing away from,None,clean,,clean,http://images.cocodataset.org/val2017/000000049269.jpg,0,0
+1234,The person is facing the refrigerator.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000214305.jpg,0,0
+959,The cat is facing away from the toilet.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000439364.jpg,0,0
+1035,The skateboard is parallel to the couch.,parallel to,None,clean,,clean,http://images.cocodataset.org/train2017/000000391685.jpg,0,0
+1219,The person is facing away from the keyboard.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000544046.jpg,0,0
+1132,The person is facing the book.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000527224.jpg,0,0
+1178,The bench is parallel to the person.,parallel to,None,clean,,clean,http://images.cocodataset.org/train2017/000000385504.jpg,0,0
+1243,The cat is facing the teddy bear.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000104510.jpg,0,0
+1202,The bird is facing the elephant.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000099628.jpg,0,0
+1375,The cat is facing away from the refrigerator.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000423921.jpg,0,0
+1329,The oven is facing the tv.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000164587.jpg,0,0
+1338,The cat is facing the keyboard.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000078741.jpg,0,0
+1312,The hair drier is facing away from the person.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000092020.jpg,0,0
+1380,The train is parallel to the boat.,parallel to,None,clean,,clean,http://images.cocodataset.org/train2017/000000507535.jpg,0,0
+1376,The laptop is facing the cat.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000491250.jpg,0,0
+1400,The cat is facing away from the suitcase.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000159118.jpg,0,0
+1384,The person is parallel to the snowboard.,parallel to,None,clean,,clean,http://images.cocodataset.org/train2017/000000409025.jpg,0,0
+1405,The teddy bear is facing the book.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000369653.jpg,0,0
+1457,The cow is facing the chair.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000316536.jpg,0,0
+1450,The person is facing the bear.,facing,None,clean,,clean,http://images.cocodataset.org/val2017/000000390826.jpg,0,0
+1490,The laptop is facing away from the person.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000517967.jpg,0,0
+1592,The dog is facing away from the person.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000542165.jpg,0,0
+1608,The book is parallel to the bed.,parallel to,None,clean,,clean,http://images.cocodataset.org/train2017/000000364725.jpg,0,0
+1650,The chair is facing the hot dog.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000257073.jpg,0,0
+1559,The cat is facing the laptop.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000369208.jpg,0,0
+1682,The cow is perpendicular to the motorcycle.,perpendicular to,None,clean,,clean,http://images.cocodataset.org/train2017/000000186275.jpg,0,0
+1760,The person is facing the bed.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000514254.jpg,0,0
+1611,The cat is facing the backpack.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000207093.jpg,0,0
+1617,The cow is facing the bench.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000182032.jpg,0,0
+1773,The cat is facing away from the bed.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000293276.jpg,0,0
+1662,The car is parallel to the motorcycle.,parallel to,None,clean,,clean,http://images.cocodataset.org/train2017/000000326689.jpg,0,0
+1792,The cat is facing the person.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000434385.jpg,0,0
+1816,The book is facing the cat.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000481313.jpg,0,0
+1019,The person is facing the banana.,facing,None,clean,,clean,http://images.cocodataset.org/val2017/000000550714.jpg,0,0
+1815,The bicycle is parallel to the motorcycle.,parallel to,None,clean,,clean,http://images.cocodataset.org/train2017/000000223930.jpg,0,0
+1266,The cat is facing away from the bed.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000175383.jpg,0,0
+1810,The bus is facing the dining table.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000131361.jpg,0,0
+1296,The horse is facing away from the zebra.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000568005.jpg,0,0
+1663,The knife is perpendicular to the carrot.,perpendicular to,None,clean,,clean,http://images.cocodataset.org/train2017/000000213881.jpg,0,0
+1822,The cat is facing the tv.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000070033.jpg,0,0
+1308,The tv is facing the toilet.,facing,None,ambiguous,,ambiguous,http://images.cocodataset.org/train2017/000000028149.jpg,0,0
+1934,The person is facing the laptop.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000294083.jpg,0,0
+1369,The laptop is facing the cat.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000453400.jpg,0,0
+1342,The cell phone is facing the person.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000125698.jpg,0,0
+1928,The umbrella is facing the bed.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000553361.jpg,0,0
+1905,The teddy bear is facing the person.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000002839.jpg,0,0
+1939,The person is facing away from the refrigerator.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000272253.jpg,0,0
+1893,The teddy bear is facing the dog.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000135202.jpg,0,0
+1839,The train is perpendicular to the bus.,perpendicular to,None,ambiguous,,ambiguous,http://images.cocodataset.org/train2017/000000409009.jpg,0,0
+1910,The person is facing away from the toaster.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000174496.jpg,0,0
+2009,The dining table is parallel to the bench.,parallel to,None,clean,,clean,http://images.cocodataset.org/train2017/000000472930.jpg,0,0
+1999,The refrigerator is facing the person.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000116334.jpg,0,0
+1877,The laptop is facing the person.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000578572.jpg,0,0
+2000,The cat is facing away from the tv.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000087456.jpg,0,0
+1949,The cow is facing the dog.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000036345.jpg,0,0
+1775,The book is perpendicular to the bed.,perpendicular to,None,clean,,clean,http://images.cocodataset.org/train2017/000000420450.jpg,0,0
+1911,The bench is facing away from the parking meter.,facing away from,None,ambiguous,,ambiguous,http://images.cocodataset.org/val2017/000000333956.jpg,0,0
+2059,The car is perpendicular to the motorcycle.,perpendicular to,None,clean,,clean,http://images.cocodataset.org/train2017/000000385145.jpg,0,0
+2100,The bird is facing the book.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000176180.jpg,0,0
+2124,The motorcycle is parallel to the car.,parallel to,None,clean,,clean,http://images.cocodataset.org/train2017/000000540187.jpg,0,0
+2034,The bench is facing away from the parking meter.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000544094.jpg,0,0
+2015,The couch is facing away from the laptop.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000455975.jpg,0,0
+1953,The cow is facing away from the person.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000146236.jpg,0,0
+2160,The person is facing the dining table.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000042042.jpg,0,0
+2189,The bear is facing the teddy bear.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000107571.jpg,0,0
+2165,The cat is facing the laptop.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000407386.jpg,0,0
+1942,The motorcycle is parallel to the bus.,parallel to,None,clean,,clean,http://images.cocodataset.org/train2017/000000055303.jpg,0,0
+1997,The cat is facing away from the toilet.,facing away from,None,clean,,clean,http://images.cocodataset.org/train2017/000000439486.jpg,0,0
+2151,The bear is facing the person.,facing,None,clean,,clean,http://images.cocodataset.org/train2017/000000015391.jpg,0,0
+2141,The bed is parallel to the bicycle.,parallel to,None,clean,,clean,http://images.cocodataset.org/train2017/000000002139.jpg,0,0

@@ -43,12 +43,14 @@ Environment:
 """
 import argparse
 import base64
+import concurrent.futures
 import csv
 import hashlib
 import json
 import os
 import re
 import sys
+import threading
 import time
 import urllib.request
 from collections import defaultdict
@@ -225,7 +227,7 @@ def build_flips(records):
         subj, _, ref = p
         flips.append({
             "id": r["id"], "orig_idx": r["id"], "family": FAMILY[rel],
-            "orig_rel": rel,
+            "orig_rel": rel, "relation": rel,
             "flip_rel": COMPLEMENTS[rel],
             "statement": f"The {subj} is {COMPLEMENTS[rel]} the {ref}.",
             "orig_label": r["label"], "flip_label": not r["label"],
@@ -240,11 +242,13 @@ class MimoClient:
         self.model = model
         self.api_key = api_key
 
-    def chat(self, image_url, text, max_tokens=16):
-        """One image + text request. Returns (content, usage_dict) or raises."""
+    def chat(self, image_source, text, max_tokens=64):
+        """One image + text request. image_source is a data: URI or http URL.
+        Returns (content, usage_dict) or raises. max_tokens=64 leaves room
+        for a leaked chain-of-thought to still end in the True/False verdict."""
         content = [
             {"type": "image_url",
-             "image_url": {"url": image_url}},
+             "image_url": {"url": image_source}},
             {"type": "text", "text": text},
         ]
         body = {
@@ -253,17 +257,24 @@ class MimoClient:
             "temperature": 0,
             "top_p": 1.0,
             "max_tokens": max_tokens,
+            # disable MiMo's thinking mode (verified empirically: with
+            # chat_template_kwargs / thinking.type=disabled the gateway
+            # returns content-only output, zero reasoning tokens,
+            # deterministic across re-runs; send both knobs because some
+            # backend instances honor only one)
+            "chat_template_kwargs": {"enable_thinking": False},
+            "thinking": {"type": "disabled"},
         }
-        # best-effort thinking disable (validated in --validate; harmless if
-        # the gateway ignores unknown fields)
-        body["extra_body"] = {"enable_thinking": False}
         data = json.dumps(body).encode("utf-8")
         last_err = None
         for attempt in range(6):
             req = urllib.request.Request(
                 self.base_url, data=data,
                 headers={"Content-Type": "application/json",
-                         "Authorization": f"Bearer {self.api_key}"})
+                         "Authorization": f"Bearer {self.api_key}",
+                         # gateway 403s the default Python-urllib user agent
+                         "User-Agent": ("Mozilla/5.0 (Windows NT 10.0; Win64; "
+                                        "x64) AppleWebKit/537.36")})
             try:
                 with urllib.request.urlopen(req, timeout=90) as resp:
                     js = json.loads(resp.read().decode("utf-8"))
@@ -285,7 +296,8 @@ class MimoClient:
     def list_models(self):
         url = self.base_url.rsplit("/chat/completions", 1)[0] + "/models"
         req = urllib.request.Request(
-            url, headers={"Authorization": f"Bearer {self.api_key}"})
+            url, headers={"Authorization": f"Bearer {self.api_key}",
+                          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"})
         with urllib.request.urlopen(req, timeout=60) as resp:
             return json.loads(resp.read().decode("utf-8"))
 
@@ -313,6 +325,23 @@ def extract_final_answer(raw):
     return None, True
 
 
+def image_source_for(image_url, mode):
+    """Image reference for the API call.
+
+    b64 (default): base64 data URI from the local cache — deterministic and
+    immune to the gateway's server-side URL fetching, which we observed to
+    fail intermittently on COCO URLs (leaking thinking-style text and
+    producing no answer). url: pass the canonical image URL through.
+    """
+    if mode == "url":
+        return image_url
+    p = cache_path(image_url)
+    if p.exists() and p.stat().st_size > 0:
+        data = base64.b64encode(p.read_bytes()).decode("ascii")
+        return f"data:image/jpeg;base64,{data}"
+    return image_url  # fall back to URL if not cached
+
+
 def load_done(csv_path):
     done = set()
     if csv_path.exists():
@@ -325,59 +354,112 @@ def load_done(csv_path):
 def save_rows(csv_path, rows, fieldnames):
     tmp = csv_path.with_suffix(".csv.tmp")
     with open(tmp, "w", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=fieldnames)
+        w = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
         w.writeheader()
         w.writerows(rows)
     tmp.replace(csv_path)
 
 
 USAGE = {"calls": 0, "prompt": 0, "completion": 0, "cached": 0}
+_usage_lock = threading.Lock()
+_log_lock = threading.Lock()
+BACKOFF = [5, 20, 60]  # seconds; bad routing usually clears in minutes
 
 
-def run_requests(items, client, task, out_csv, fieldnames, prompt,
-                 answer_parser, limit=None, raw_log=None):
-    """items: list of dicts with 'id', 'statement', 'image_url'. Returns rows."""
-    done = load_done(out_csv)
-    todo = [it for it in items if it["id"] not in done]
-    if limit:
-        todo = todo[:limit]
-    print(f"{task}: {len(todo)} pending (of {len(items)})", flush=True)
-    if not todo:
-        print("nothing to do — all ids already in", out_csv, flush=True)
-        return
-    rows = []
-    existing = []
-    if out_csv.exists():
-        with open(out_csv, newline="", encoding="utf-8") as f:
-            existing = list(csv.DictReader(f))
-    t0 = time.time()
-    for i, it in enumerate(todo):
-        text = prompt.format(statement=it["statement"])
-        raw, usage = client.chat(it["image_url"], text)
-        pred, thinking = answer_parser(raw)
-        gt = it.get("label", it.get("flip_label"))
-        rows.append({"id": it["id"], "statement": it["statement"],
-                     "relation": it.get("relation", ""),
-                     "ground_truth": str(gt),
-                     "prediction": pred,
-                     "correct": (pred == gt) if pred is not None and gt is not None
-                                else "",
-                     "raw_output": raw,
-                     "image_url": it["image_url"],
-                     "thinking_likely": "1" if thinking else "0"})
+def _add_usage(usage):
+    with _usage_lock:
         USAGE["calls"] += 1
         USAGE["prompt"] += usage["prompt"]
         USAGE["completion"] += usage["completion"]
         USAGE["cached"] += usage["cached"]
-        if raw_log is not None:
+
+
+def _process_item(it, client, prompt, answer_parser, image_mode, raw_log):
+    """One item: request with retry-until-verdict. Returns a row dict."""
+    text = prompt.format(statement=it["statement"])
+    pred, thinking, n_retries, raw = None, False, 0, None
+    for attempt in range(4):
+        # alternate transport on retries (url <-> b64): if the gateway's
+        # URL fetch or a cached bad response poisons one path, the other
+        # path usually yields a clean deterministic answer
+        mode = image_mode if attempt % 2 == 0 else \
+            ("b64" if image_mode == "url" else "url")
+        raw, usage = client.chat(image_source_for(it["image_url"], mode),
+                                 text)
+        pred, thinking = answer_parser(raw)
+        _add_usage(usage)
+        if pred is not None or attempt == 3:
+            break
+        n_retries += 1
+        time.sleep(BACKOFF[attempt])
+    if raw_log is not None:
+        with _log_lock:
             raw_log.write(f"=== id {it['id']} | {it['statement']}\n{raw}\n\n")
             raw_log.flush()
-        if (i + 1) % 50 == 0 or i == len(todo) - 1:
-            elapsed = time.time() - t0
-            rate = (i + 1) / elapsed
-            print(f"  [{i+1}/{len(todo)}] {rate:.2f} req/s | "
-                  f"pred={pred} | {elapsed:.0f}s", flush=True)
-            save_rows(out_csv, existing + rows, fieldnames)  # incremental resume
+    gt = it.get("label", it.get("flip_label"))
+    row = {"id": it["id"], "statement": it["statement"],
+           "relation": it.get("relation", ""),
+           "ground_truth": str(gt),
+           "prediction": pred,
+           "correct": (pred == gt) if pred is not None and gt is not None
+                      else "",
+           "raw_output": raw,
+           "image_url": it["image_url"],
+           "thinking_likely": "1" if thinking else "0",
+           "retries": n_retries}
+    # carry through task-specific metadata (consistency flips)
+    for k in ("orig_idx", "family", "orig_rel", "flip_rel",
+              "orig_label", "flip_label"):
+        if k in it:
+            row[k] = it[k]
+    return row
+
+
+def run_requests(items, client, task, out_csv, fieldnames, prompt,
+                 answer_parser, image_mode="b64", limit=None, raw_log=None,
+                 concurrency=12):
+    """items: list of dicts with 'id', 'statement', 'image_url'.
+    Concurrent (ThreadPoolExecutor) with per-request retry; incremental
+    resume-safe saves; thread-safe usage accounting."""
+    done = load_done(out_csv)
+    todo = [it for it in items if it["id"] not in done]
+    if limit:
+        todo = todo[:limit]
+    print(f"{task}: {len(todo)} pending (of {len(items)}) | "
+          f"concurrency={concurrency}", flush=True)
+    if not todo:
+        print("nothing to do — all ids already in", out_csv, flush=True)
+        return
+    existing = []
+    if out_csv.exists():
+        with open(out_csv, newline="", encoding="utf-8") as f:
+            existing = list(csv.DictReader(f))
+    rows = []
+    t0 = time.time()
+    done_count = 0
+    with concurrent.futures.ThreadPoolExecutor(max_workers=concurrency) as ex:
+        futs = {ex.submit(_process_item, it, client, prompt, answer_parser,
+                          image_mode, raw_log): it for it in todo}
+        for fut in concurrent.futures.as_completed(futs):
+            it = futs[fut]
+            try:
+                rows.append(fut.result())
+            except Exception as e:
+                rows.append({"id": it["id"], "statement": it["statement"],
+                             "relation": it.get("relation", ""),
+                             "ground_truth": str(it.get("label",
+                                                       it.get("flip_label", ""))),
+                             "prediction": None, "correct": "",
+                             "raw_output": f"ERROR: {e}", "image_url":
+                             it["image_url"], "thinking_likely": "1",
+                             "retries": 3})
+            done_count += 1
+            if done_count % 50 == 0 or done_count == len(todo):
+                elapsed = time.time() - t0
+                print(f"  [{done_count}/{len(todo)}] "
+                      f"{done_count/elapsed:.1f} req/s | {elapsed:.0f}s",
+                      flush=True)
+                save_rows(out_csv, existing + rows, fieldnames)
     save_rows(out_csv, existing + rows, fieldnames)
     print(f"saved {len(rows)} rows -> {out_csv}", flush=True)
 
@@ -414,10 +496,14 @@ def main():
                     default=os.environ.get("MIMO_BASE_URL",
                                            "https://opencode.ai/zen/go/v1/chat/completions"))
     ap.add_argument("--model", default=os.environ.get("MIMO_MODEL", "mimo-v2.5"))
-    ap.add_argument("--image-mode", choices=["url", "b64", "url-then-b64"],
-                    default="url-then-b64",
-                    help="url: pass the canonical image URL; b64: base64 from "
-                         "the local cache (fallback if the gateway rejects urls)")
+    ap.add_argument("--image-mode", choices=["url", "b64"],
+                    default="url",
+                    help="url (default): pass the canonical image URL through "
+                         "(no upload); retries automatically alternate to b64 "
+                         "from the local cache if the gateway misbehaves. "
+                         "b64: always send base64 data URIs.")
+    ap.add_argument("--concurrency", type=int, default=12,
+                    help="parallel API requests (rate limit is ~30k req/5h)")
     args = ap.parse_args()
 
     api_key = os.environ.get("OPENCODE_GO_API_KEY") or os.environ.get("OPENAI_API_KEY")
@@ -439,20 +525,29 @@ def main():
         print(f"--- validation on {len(ex)} TRAIN examples ---")
         raw_log = open(MIMO_DIR / "raw_validation_outputs.txt", "w", encoding="utf-8")
         for i, e in enumerate(ex):
-            raw, usage = client.chat(e["image_url"],
-                                     FROZEN_PROMPT.format(statement=e["statement"]))
-            pred, thinking = extract_final_answer(raw)
-            USAGE["calls"] += 1
-            USAGE["prompt"] += usage["prompt"]
-            USAGE["completion"] += usage["completion"]
-            USAGE["cached"] += usage["cached"]
+            pred, thinking, n_retries = None, False, 0
+            BACKOFF = [5, 20, 60]
+            for attempt in range(4):
+                raw, usage = client.chat(
+                    image_source_for(e["image_url"], args.image_mode),
+                    FROZEN_PROMPT.format(statement=e["statement"]))
+                pred, thinking = extract_final_answer(raw)
+                USAGE["calls"] += 1
+                USAGE["prompt"] += usage["prompt"]
+                USAGE["completion"] += usage["completion"]
+                USAGE["cached"] += usage["cached"]
+                if pred is not None or attempt == 3:
+                    break
+                n_retries += 1
+                time.sleep(BACKOFF[attempt])
             raw_log.write(f"=== id {i} | {e['statement']}\n{raw}\n\n")
             raw_log.flush()
-            print(f"  [{i+1}/{len(ex)}] thinking={thinking} parsed={pred} | "
-                  f"raw={raw[:80]!r}", flush=True)
+            print(f"  [{i+1}/{len(ex)}] thinking={thinking} parsed={pred} "
+                  f"retries={n_retries} | raw={raw[:80]!r}", flush=True)
             if i < 10:
-                raw2, _ = client.chat(e["image_url"],
-                                      FROZEN_PROMPT.format(statement=e["statement"]))
+                raw2, _ = client.chat(
+                    image_source_for(e["image_url"], args.image_mode),
+                    FROZEN_PROMPT.format(statement=e["statement"]))
                 same = (extract_final_answer(raw2)[0] == pred)
                 print(f"      determinism re-run: {'SAME' if same else 'DIFFERENT'}"
                       f" | raw2={raw2[:60]!r}", flush=True)
@@ -470,10 +565,9 @@ def main():
     if args.task == "vsr":
         out_csv = MIMO_DIR / "mimo_v25_zeroshot_predictions.csv"
         fieldnames = ["id", "statement", "relation", "ground_truth",
-                      "prediction", "correct", "raw_output", "image_url",
-                      "thinking_likely"]
+                      "prediction", "correct", "raw_output", "image_url", "thinking_likely", "retries"]
         run_requests(records, client, "vsr", out_csv, fieldnames,
-                     FROZEN_PROMPT, extract_final_answer, limit=args.limit)
+                     FROZEN_PROMPT, extract_final_answer, args.image_mode, args.limit, None, args.concurrency)
         # metrics (overall + orientation family; full family table comes from
         # scripts/mimo_analysis.py)
         rows = []
@@ -497,10 +591,12 @@ def main():
         flips = build_flips(records)
         out_csv = MIMO_DIR / "consistency_flips_mimo.csv"
         fieldnames = ["id", "orig_idx", "family", "orig_rel", "flip_rel",
+                      "orig_label", "flip_label",
                       "statement", "ground_truth", "prediction", "correct",
-                      "raw_output", "image_url", "thinking_likely"]
+                      "raw_output", "image_url", "thinking_likely", "retries"]
         run_requests(flips, client, "consistency", out_csv, fieldnames,
-                     FROZEN_PROMPT, extract_final_answer, limit=args.limit)
+                     FROZEN_PROMPT, extract_final_answer, args.image_mode,
+                     args.limit, None, args.concurrency)
         write_usage_report()
 
     elif args.task == "audit":
@@ -526,15 +622,15 @@ def main():
         out_clean = MIMO_DIR / "audit_mimo_clean.csv"
         out_taxo = MIMO_DIR / "audit_mimo_taxo.csv"
         fn = ["id", "statement", "relation", "ground_truth", "prediction",
-              "correct", "raw_output", "image_url", "thinking_likely"]
+              "correct", "raw_output", "image_url", "thinking_likely", "retries"]
         run_requests(clean_items, client, "audit-clean", out_clean, fn,
                      AUDIT_CLEAN_PROMPT,
                      lambda raw: parse_audit_answer(raw, AUDIT_BINARY_ALLOWED),
-                     limit=args.limit)
+                     args.image_mode, args.limit, None, args.concurrency)
         run_requests(taxo_items, client, "audit-taxo", out_taxo, fn,
                      AUDIT_TAXO_PROMPT,
                      lambda raw: parse_audit_answer(raw, AUDIT_TAXO_ALLOWED),
-                     limit=args.limit)
+                     args.image_mode, args.limit, None, args.concurrency)
         write_usage_report()
 
 

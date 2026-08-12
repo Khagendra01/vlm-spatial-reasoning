@@ -1,0 +1,17 @@
+{
+  "provider": "OpenCode Go (opencode.ai/zen/go/v1)",
+  "model": "mimo-v2.5",
+  "prices_per_1M": {
+    "input": 0.14,
+    "output": 0.28,
+    "cached_read": 0.0028
+  },
+  "usage": {
+    "calls": 872,
+    "prompt": 497805,
+    "completion": 28198,
+    "cached": 470912
+  },
+  "estimated_usd": 0.0789,
+  "note": "estimate at OpenCode Go listed prices; the subscription ($5 first month, then $10/month) includes $60/month of usage."
+}

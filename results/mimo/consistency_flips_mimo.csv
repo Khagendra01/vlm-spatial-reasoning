@@ -1,0 +1,1531 @@
+id,orig_idx,family,orig_rel,flip_rel,orig_label,flip_label,statement,ground_truth,prediction,correct,raw_output,image_url,thinking_likely,retries
+29,29,FB,in front of,behind,True,False,The bicycle is behind the cat.,False,False,True,False,http://images.cocodataset.org/train2017/000000193488.jpg,0,0
+9,9,FB,behind,in front of,False,True,The bench is in front of the teddy bear.,True,False,False,False,http://images.cocodataset.org/train2017/000000395531.jpg,0,0
+7,7,FB,in front of,behind,True,False,The motorcycle is behind the truck.,False,False,True,False,http://images.cocodataset.org/train2017/000000057381.jpg,0,0
+22,22,PP,perpendicular to,parallel to,True,False,The teddy bear is parallel to the cake.,False,False,True,"The statement ""The teddy bear is parallel to the cake"" is **False**.
+
+**Reasoning:**
+In the context of the image, the teddy bear is a three-dimensional object sitting **on top** of the cake. The term ""parallel"" describes the relationship between two flat surfaces or lines that remain",http://images.cocodataset.org/train2017/000000033372.jpg,1,0
+3,3,FF,facing,facing away from,False,True,The laptop is facing away from the sandwich.,True,True,True,"The statement ""The laptop is facing away from the sandwich"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The laptop is the open computer on the desk in the foreground. The sandwich is the food item being held by the woman in the black jacket in the background.
+2",http://images.cocodataset.org/train2017/000000519404.jpg,1,0
+33,33,FF,facing away from,facing,True,False,The cat is facing the sink.,False,False,True,False,http://images.cocodataset.org/train2017/000000508846.jpg,0,0
+25,25,LR,at the left side of,at the right side of,False,True,The laptop is at the right side of the left side of the cake.,True,False,False,False,http://images.cocodataset.org/train2017/000000512569.jpg,0,0
+14,14,PP,perpendicular to,parallel to,True,False,The airplane is parallel to the truck.,False,True,False,"The statement ""The airplane is parallel to the truck"" is **True**.
+
+**Reasoning:**
+1.  **Orientation:** The airplane is parked at the gate, aligned with the terminal building. The catering truck is positioned alongside the fuselage to load supplies. Both vehicles are oriented in the same direction (long",http://images.cocodataset.org/train2017/000000538194.jpg,1,0
+19,19,PP,parallel to,perpendicular to,False,True,The truck is perpendicular to the motorcycle.,True,False,False,"The statement ""The truck is perpendicular to the motorcycle"" is **False**.
+
+**Reasoning:**
+1.  **Orientation:** The motorcycle is positioned diagonally in the foreground, facing towards the front-left. The dark blue truck (SUV) in the background is positioned horizontally, facing towards the left.
+2",http://images.cocodataset.org/train2017/000000302514.jpg,1,0
+49,49,FB,behind,in front of,True,False,The chair is in front of the cat.,False,False,True,False,http://images.cocodataset.org/train2017/000000421689.jpg,0,0
+53,53,FB,at the back of,in front of,True,False,The zebra is in front of the back of the truck.,False,True,False,True,http://images.cocodataset.org/train2017/000000319902.jpg,0,0
+61,61,FB,in front of,behind,False,True,The cake is behind the dog.,True,False,False,False,http://images.cocodataset.org/train2017/000000113326.jpg,0,0
+34,34,FF,facing away from,facing,True,False,The cat is facing the toilet.,False,False,True,False,http://images.cocodataset.org/train2017/000000455365.jpg,0,0
+39,39,FB,in front of,behind,True,False,The oven is behind the cake.,False,False,True,"The statement ""The oven is behind the cake"" is **False**.
+
+**Reasoning:**
+In the image, the woman is holding the cake (in a skillet) in front of her body. The oven is located to her right (the viewer's right). From the camera's perspective, the cake is in",http://images.cocodataset.org/train2017/000000185777.jpg,1,0
+58,58,FB,at the back of,in front of,True,False,The horse is in front of the back of the truck.,False,True,False,"The statement ""The horse is in front of the back of the truck"" is **True**.
+
+**Reasoning:**
+1.  **Identify the ""back of the truck"":** The vehicle is a Land Rover with a canvas top. The man is leaning against the rear corner (the back) of the",http://images.cocodataset.org/train2017/000000295460.jpg,1,0
+56,56,LR,at the left side of,at the right side of,True,False,The laptop is at the right side of the left side of the banana.,False,False,True,"The statement ""The laptop is at the right side of the left side of the banana"" is **False**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a laptop on the left side of the frame and a bunch of bananas on the right side of the frame.
+2.",http://images.cocodataset.org/train2017/000000093469.jpg,1,0
+59,59,LR,at the left side of,at the right side of,False,True,The cat is at the right side of the left side of the laptop.,True,False,False,False,http://images.cocodataset.org/train2017/000000232394.jpg,0,0
+12,12,FB,behind,in front of,True,False,The potted plant is in front of the fire hydrant.,False,False,True,False,http://images.cocodataset.org/train2017/000000408351.jpg,0,0
+75,75,LR,at the left side of,at the right side of,True,False,The person is at the right side of the left side of the truck.,False,True,False,"The statement ""The person is at the right side of the left side of the truck"" is **True**.
+
+**Reasoning:**
+1.  **Identify the ""left side of the truck"":** The image shows the driver's side of the vehicle (indicated by the steering wheel position and the sliding",http://images.cocodataset.org/train2017/000000570956.jpg,1,0
+81,81,FF,facing away from,facing,False,True,The cat is facing the tv.,True,True,True,"The user wants to know if the statement ""The cat is facing the tv"" is true based on the image.
+
+1.  **Analyze the image content**: The image shows a television screen displaying a football match. In the foreground, silhouetted against the bright screen, is a black cat.
+2.",http://images.cocodataset.org/train2017/000000469661.jpg,1,0
+69,69,FB,behind,in front of,False,True,The book is in front of the cat.,True,False,False,False,http://images.cocodataset.org/train2017/000000014766.jpg,0,0
+107,107,LR,at the right side of,at the left side of,True,False,The dining table is at the left side of the right side of the refrigerator.,False,True,False,True,http://images.cocodataset.org/train2017/000000240709.jpg,0,0
+114,114,FF,facing,facing away from,False,True,The person is facing away from the book.,True,False,False,False,http://images.cocodataset.org/train2017/000000040114.jpg,0,0
+10,10,FB,in front of,behind,False,True,The motorcycle is behind the truck.,True,False,False,False,http://images.cocodataset.org/train2017/000000120207.jpg,0,1
+110,110,LR,at the right side of,at the left side of,True,False,The keyboard is at the left side of the right side of the apple.,False,True,False,True,http://images.cocodataset.org/train2017/000000511644.jpg,0,0
+84,84,LR,at the left side of,at the right side of,False,True,The clock is at the right side of the left side of the bird.,True,False,False,"The statement ""The clock is at the right side of the left side of the bird"" is **False**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a blue bird perched on a balcony and a clock face below it.
+2.  **Analyze the spatial relationship",http://images.cocodataset.org/train2017/000000171067.jpg,1,0
+109,109,FB,in front of,behind,True,False,The bicycle is behind the umbrella.,False,False,True,False,http://images.cocodataset.org/train2017/000000205613.jpg,0,0
+95,95,LR,at the right side of,at the left side of,False,True,The teddy bear is at the left side of the right side of the dog.,True,False,False,False,http://images.cocodataset.org/train2017/000000157616.jpg,0,0
+85,85,LR,at the left side of,at the right side of,True,False,The pizza is at the right side of the left side of the dog.,False,True,False,"The statement ""The pizza is at the right side of the left side of the dog"" is **True**.
+
+**Reasoning:**
+1.  **""The left side of the dog""**: In the image, the dog is facing the camera. The dog's left side corresponds to the **right side of",http://images.cocodataset.org/train2017/000000508555.jpg,1,0
+118,118,LR,at the right side of,at the left side of,False,True,The cell phone is at the left side of the right side of the person.,True,True,True,"The statement ""The cell phone is at the left side of the right side of the person"" is **True**.
+
+**Reasoning:**
+1.  **Identify the ""right side of the person"":** The image shows a hand holding the phone. Based on the thumb position (on the left side of",http://images.cocodataset.org/train2017/000000109488.jpg,1,0
+124,124,FB,in front of,behind,False,True,The bus is behind the car.,True,True,True,True,http://images.cocodataset.org/train2017/000000244421.jpg,0,0
+139,139,FB,behind,in front of,False,True,The pizza is in front of the sandwich.,True,False,False,False,http://images.cocodataset.org/train2017/000000501756.jpg,0,0
+64,64,LR,at the left side of,at the right side of,False,True,The cat is at the right side of the left side of the teddy bear.,True,True,True,"The statement ""The cat is at the right side of the left side of the teddy bear"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a teddy bear in the foreground and a cat in the background.
+2.  **Locate the """,http://images.cocodataset.org/train2017/000000555951.jpg,1,1
+126,126,FB,in front of,behind,True,False,The couch is behind the bed.,False,True,False,True,http://images.cocodataset.org/train2017/000000305660.jpg,0,0
+125,125,LR,right of,left of,False,True,The horse is left of the person.,True,True,True,True,http://images.cocodataset.org/train2017/000000532748.jpg,0,0
+142,142,FB,behind,in front of,True,False,The horse is in front of the cat.,False,True,False,True,http://images.cocodataset.org/train2017/000000485148.jpg,0,0
+156,156,FF,facing away from,facing,True,False,The person is facing the horse.,False,False,True,False,http://images.cocodataset.org/train2017/000000004972.jpg,0,0
+154,154,FB,behind,in front of,True,False,The bus is in front of the bicycle.,False,False,True,False,http://images.cocodataset.org/train2017/000000469728.jpg,0,0
+160,160,FB,behind,in front of,False,True,The vase is in front of the cat.,True,False,False,False,http://images.cocodataset.org/train2017/000000261225.jpg,0,0
+80,80,FB,in front of,behind,True,False,The person is behind the refrigerator.,False,False,True,False,http://images.cocodataset.org/train2017/000000261305.jpg,0,0
+165,165,FB,in front of,behind,False,True,The elephant is behind the truck.,True,False,False,False,http://images.cocodataset.org/train2017/000000027989.jpg,0,0
+170,170,FF,facing away from,facing,False,True,The person is facing the cow.,True,True,True,True,http://images.cocodataset.org/train2017/000000221771.jpg,0,0
+171,171,FF,facing,facing away from,True,False,The teddy bear is facing away from the cow.,False,False,True,"The statement is **False**.
+
+The animal in the image is a deer (likely a Sika deer, common in places like Nara, Japan), not a cow. Additionally, the teddy bear is facing towards the deer, not away from it.",http://images.cocodataset.org/train2017/000000459644.jpg,1,0
+177,177,FB,in front of,behind,True,False,The bicycle is behind the cat.,False,False,True,False,http://images.cocodataset.org/val2017/000000109055.jpg,0,0
+153,153,FB,in front of,behind,True,False,The cat is behind the refrigerator.,False,False,True,False,http://images.cocodataset.org/train2017/000000117774.jpg,0,0
+187,187,FB,in front of,behind,True,False,The dog is behind the sports ball.,False,False,True,False,http://images.cocodataset.org/train2017/000000284772.jpg,0,0
+194,194,LR,at the right side of,at the left side of,False,True,The couch is at the left side of the right side of the umbrella.,True,True,True,"The statement ""The couch is at the left side of the right side of the umbrella"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a large beige umbrella and a brown wicker couch.
+2.  **Analyze the spatial relationship:** The umbrella is",http://images.cocodataset.org/train2017/000000428329.jpg,1,0
+106,106,FF,facing away from,facing,False,True,The parking meter is facing the person.,True,False,False,False,http://images.cocodataset.org/train2017/000000567205.jpg,0,0
+206,206,FB,in front of,behind,False,True,The suitcase is behind the person.,True,False,False,False,http://images.cocodataset.org/train2017/000000261779.jpg,0,0
+207,207,LR,at the right side of,at the left side of,True,False,The cat is at the left side of the right side of the bed.,False,True,False,"The statement ""The cat is at the left side of the right side of the bed"" is **True**.
+
+**Reasoning:**
+1.  **Analyze the Bed's Layout:** The bed is positioned with a bookshelf on the left side of the image. This establishes the ""left side of the bed",http://images.cocodataset.org/val2017/000000134882.jpg,1,0
+189,189,PP,parallel to,perpendicular to,True,False,The bus is perpendicular to the motorcycle.,False,False,True,"The user wants me to determine if the statement ""The bus is perpendicular to the motorcycle"" is true or false based on the image.
+
+1.  **Analyze the orientation of the motorcycle:** The motorcycle is positioned in the foreground, angled slightly towards the left. We can see its rear and right side. It is",http://images.cocodataset.org/train2017/000000087705.jpg,1,0
+190,190,LR,at the left side of,at the right side of,True,False,The banana is at the right side of the left side of the cat.,False,False,True,"The statement ""The banana is at the right side of the left side of the cat"" is **False**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a large bunch of bananas and a cat.
+2.  **Determine relative positions:** The cat is positioned in the",http://images.cocodataset.org/train2017/000000259475.jpg,1,0
+11,11,LR,at the left side of,at the right side of,True,False,The bed is at the right side of the left side of the bench.,False,False,True,"The statement ""The bed is at the right side of the left side of the bench"" is **False**.
+
+The bed is located to the **left** of the bench. The phrase ""right side of the left side"" implies a location towards the center or right, which contradicts the bed's position on the",http://images.cocodataset.org/train2017/000000262118.jpg,1,2
+195,195,LR,left of,right of,True,False,The toilet is right of the cat.,False,False,True,False,http://images.cocodataset.org/train2017/000000063950.jpg,0,0
+211,211,FF,facing away from,facing,True,False,The bus is facing the cow.,False,False,True,"The statement ""The bus is facing the cow"" is **False**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a cow on the left side of the road and a bus on the right side.
+2.  **Determine the bus's orientation:** The bus is moving",http://images.cocodataset.org/train2017/000000162355.jpg,1,0
+213,213,FF,facing,facing away from,True,False,The laptop is facing away from the sandwich.,False,False,True,False,http://images.cocodataset.org/train2017/000000302643.jpg,0,0
+239,239,FF,facing away from,facing,True,False,The cat is facing the toilet.,False,False,True,False,http://images.cocodataset.org/train2017/000000518156.jpg,0,0
+232,232,FB,behind,in front of,True,False,The person is in front of the bear.,False,False,True,False,http://images.cocodataset.org/train2017/000000497662.jpg,0,0
+215,215,LR,at the right side of,at the left side of,False,True,The person is at the left side of the right side of the cake.,True,True,True,"The statement ""The person is at the left side of the right side of the cake"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The ""cake"" (or pastry) is located on a plate in the bottom right corner of the image. The ""person"" is",http://images.cocodataset.org/train2017/000000046441.jpg,1,0
+248,248,FB,in front of,behind,True,False,The truck is behind the giraffe.,False,False,True,False,http://images.cocodataset.org/train2017/000000053748.jpg,0,0
+247,247,LR,at the left side of,at the right side of,True,False,The teddy bear is at the right side of the left side of the cat.,False,False,True,"The statement ""The teddy bear is at the right side of the left side of the cat"" is **False**.
+
+Here is the reasoning:
+1.  **Identify the objects**: The image shows a cat on the left and a teddy bear on the right.
+2.  **Analyze the spatial",http://images.cocodataset.org/train2017/000000484174.jpg,1,0
+181,181,LR,at the right side of,at the left side of,True,False,The cup is at the left side of the right side of the cat.,False,True,False,"The statement ""The cup is at the left side of the right side of the cat"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a cat lying down with a red 7-Eleven cup positioned on the right side of the image (and the",http://images.cocodataset.org/train2017/000000248461.jpg,1,1
+250,250,FF,facing,facing away from,True,False,The laptop is facing away from the chair.,False,False,True,False,http://images.cocodataset.org/train2017/000000066376.jpg,0,0
+256,256,FB,in front of,behind,True,False,The sink is behind the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000571334.jpg,0,0
+260,260,FB,in front of,behind,True,False,The hot dog is behind the banana.,False,False,True,False,http://images.cocodataset.org/train2017/000000029794.jpg,0,0
+264,264,FB,in front of,behind,True,False,The cow is behind the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000316536.jpg,0,0
+251,251,LR,right of,left of,False,True,The person is left of the refrigerator.,True,False,False,False,http://images.cocodataset.org/train2017/000000462151.jpg,0,0
+210,210,LR,right of,left of,True,False,The pizza is left of the bottle.,False,False,True,False,http://images.cocodataset.org/train2017/000000342259.jpg,0,0
+267,267,FB,in front of,behind,True,False,The bus is behind the boat.,False,False,True,False,http://images.cocodataset.org/val2017/000000449432.jpg,0,0
+230,230,FF,facing away from,facing,False,True,The teddy bear is facing the book.,True,True,True,True,http://images.cocodataset.org/train2017/000000089870.jpg,0,0
+273,273,LR,at the right side of,at the left side of,False,True,The cake is at the left side of the right side of the apple.,True,True,True,"The statement ""The cake is at the left side of the right side of the apple"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** There is a whole apple in the top right corner and a cake in the center.
+2.  **Analyze the spatial relationship:**",http://images.cocodataset.org/train2017/000000071664.jpg,1,0
+244,244,LR,at the right side of,at the left side of,True,False,The cake is at the left side of the right side of the laptop.,False,True,False,"The statement ""The cake is at the left side of the right side of the laptop"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The laptop is on the left side of the image. The cake (muffin) is in the center.
+2.  **",http://images.cocodataset.org/train2017/000000393375.jpg,1,0
+157,157,LR,left of,right of,True,False,The chair is right of the teddy bear.,False,False,True,False,http://images.cocodataset.org/train2017/000000531568.jpg,0,1
+271,271,FB,behind,in front of,False,True,The microwave is in front of the person.,True,False,False,False,http://images.cocodataset.org/train2017/000000264255.jpg,0,0
+279,279,FB,in front of,behind,False,True,The dining table is behind the person.,True,True,True,True,http://images.cocodataset.org/train2017/000000126625.jpg,0,0
+282,282,FB,behind,in front of,True,False,The chair is in front of the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000540765.jpg,0,0
+288,288,LR,right of,left of,True,False,The bench is left of the bed.,False,False,True,False,http://images.cocodataset.org/train2017/000000262118.jpg,0,0
+284,284,LR,at the right side of,at the left side of,False,True,The laptop is at the left side of the right side of the apple.,True,False,False,False,http://images.cocodataset.org/train2017/000000579201.jpg,0,0
+280,280,FF,facing,facing away from,True,False,The person is facing away from the teddy bear.,False,False,True,False,http://images.cocodataset.org/train2017/000000041753.jpg,0,0
+278,278,FB,behind,in front of,False,True,The car is in front of the teddy bear.,True,False,False,False,http://images.cocodataset.org/train2017/000000151764.jpg,0,0
+302,302,LR,at the right side of,at the left side of,False,True,The broccoli is at the left side of the right side of the pizza.,True,False,False,False,http://images.cocodataset.org/train2017/000000055707.jpg,0,0
+309,309,FB,behind,in front of,True,False,The person is in front of the cat.,False,False,True,False,http://images.cocodataset.org/train2017/000000228915.jpg,0,0
+301,301,FB,in front of,behind,False,True,The car is behind the truck.,True,False,False,False,http://images.cocodataset.org/train2017/000000279073.jpg,0,0
+312,312,FB,behind,in front of,True,False,The dining table is in front of the cat.,False,False,True,"The statement is **False**.
+
+**Reasoning:**
+In the image, the cat is positioned in the immediate foreground, very close to the camera. The table (which appears to be a desk) is located behind the cat, further away from the camera. Spatially, the cat is in front of the table",http://images.cocodataset.org/train2017/000000452072.jpg,1,0
+315,315,FB,behind,in front of,True,False,The boat is in front of the bicycle.,False,False,True,False,http://images.cocodataset.org/train2017/000000390298.jpg,0,0
+297,297,FB,behind,in front of,True,False,The dining table is in front of the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000160459.jpg,0,0
+291,291,FB,behind,in front of,False,True,The book is in front of the bus.,True,False,False,"The user wants me to determine if the statement ""The book is in front of the bus"" is true or false based on the image.
+
+1.  **Analyze the image content**: The image shows a group of five people standing in a line in front of a large white bus. The bus has text on it",http://images.cocodataset.org/train2017/000000160407.jpg,1,0
+339,339,FB,in front of,behind,False,True,The bed is behind the couch.,True,False,False,False,http://images.cocodataset.org/train2017/000000456302.jpg,0,0
+323,323,FB,in front of,behind,True,False,The cat is behind the bicycle.,False,False,True,False,http://images.cocodataset.org/train2017/000000446409.jpg,0,0
+357,357,FF,facing,facing away from,True,False,The person is facing away from the bear.,False,False,True,False,http://images.cocodataset.org/train2017/000000541911.jpg,0,0
+342,342,LR,at the right side of,at the left side of,False,True,The umbrella is at the left side of the right side of the cat.,True,True,True,"The statement ""The umbrella is at the left side of the right side of the cat"" is **True**.
+
+**Reasoning:**
+1.  **""The right side of the cat""**: In the image, the cat is facing the camera. The cat's right side corresponds to the **left side of",http://images.cocodataset.org/train2017/000000158354.jpg,1,0
+350,350,FB,behind,in front of,False,True,The dining table is in front of the suitcase.,True,True,True,True,http://images.cocodataset.org/train2017/000000108751.jpg,0,0
+348,348,FB,behind,in front of,True,False,The teddy bear is in front of the potted plant.,False,False,True,False,http://images.cocodataset.org/train2017/000000082512.jpg,0,0
+362,362,FF,facing,facing away from,False,True,The cat is facing away from the keyboard.,True,False,False,False,http://images.cocodataset.org/train2017/000000530730.jpg,0,0
+359,359,FF,facing,facing away from,False,True,The zebra is facing away from the car.,True,False,False,False,http://images.cocodataset.org/train2017/000000473587.jpg,0,0
+356,356,FF,facing,facing away from,True,False,The dog is facing away from the boat.,False,False,True,"The statement ""The dog is facing away from the boat"" is **False**.
+
+**Reasoning:**
+1.  **Orientation:** The dog is positioned in the center of the boat, facing towards the front (bow) where the other passengers' legs are located. It is facing *into* the boat's",http://images.cocodataset.org/train2017/000000030667.jpg,1,0
+364,364,FF,facing,facing away from,False,True,The cat is facing away from the tv.,True,False,False,"The user wants me to determine if the statement ""The cat is facing away from the tv"" is true or false based on the image.
+
+1.  **Analyze the image content**:
+    *   **Subject**: A black and white tuxedo cat.
+    *   **Object**: A black remote control",http://images.cocodataset.org/val2017/000000476810.jpg,1,0
+375,375,FF,facing,facing away from,True,False,The zebra is facing away from the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000263512.jpg,0,0
+363,363,LR,at the right side of,at the left side of,False,True,The sandwich is at the left side of the right side of the bowl.,True,False,False,False,http://images.cocodataset.org/train2017/000000116182.jpg,0,0
+369,369,LR,at the left side of,at the right side of,False,True,The person is at the right side of the left side of the broccoli.,True,True,True,"The statement ""The person is at the right side of the left side of the broccoli"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a hand (the person) and a bowl of broccoli.
+2.  **Locate the ""left side of the",http://images.cocodataset.org/train2017/000000379552.jpg,1,0
+380,380,LR,at the left side of,at the right side of,True,False,The tv is at the right side of the left side of the cat.,False,False,True,"The statement ""The tv is at the right side of the left side of the cat"" is **False**.
+
+Here is the reasoning:
+1.  **Identify the objects**: The image shows a TV on the left and a cat on the right.
+2.  **Analyze the spatial relationship**: The TV",http://images.cocodataset.org/train2017/000000037907.jpg,1,0
+298,298,FB,behind,in front of,True,False,The book is in front of the teddy bear.,False,False,True,False,http://images.cocodataset.org/train2017/000000514292.jpg,0,0
+382,382,FF,facing away from,facing,True,False,The elephant is facing the bus.,False,False,True,False,http://images.cocodataset.org/train2017/000000149551.jpg,0,0
+385,385,FF,facing,facing away from,False,True,The person is facing away from the teddy bear.,True,False,False,False,http://images.cocodataset.org/train2017/000000317797.jpg,0,0
+389,389,LR,left of,right of,True,False,The cat is right of the potted plant.,False,False,True,False,http://images.cocodataset.org/train2017/000000372870.jpg,0,0
+259,259,LR,at the left side of,at the right side of,False,True,The laptop is at the right side of the left side of the donut.,True,False,False,"The statement ""The laptop is at the right side of the left side of the donut"" is **False**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a donut in the foreground and a black Dell laptop in the background.
+2.  **Analyze the spatial",http://images.cocodataset.org/train2017/000000002570.jpg,1,1
+361,361,FB,behind,in front of,True,False,The laptop is in front of the sandwich.,False,False,True,False,http://images.cocodataset.org/train2017/000000028320.jpg,0,0
+390,390,LR,at the right side of,at the left side of,False,True,The dog is at the left side of the right side of the horse.,True,True,True,"The statement ""The dog is at the left side of the right side of the horse"" is **True**.
+
+**Reasoning:**
+1.  **Identify the subjects:** The image shows a dog on the left and a horse on the right.
+2.  **Analyze the phrase ""right side of",http://images.cocodataset.org/train2017/000000471929.jpg,1,0
+381,381,FB,behind,in front of,False,True,The person is in front of the cup.,True,True,True,"The user wants to know if the statement ""The person is in front of the cup"" is true based on the image.
+
+1.  **Identify the person**: The main subject is a man standing in the center-left of the room, facing towards the right side of the image (towards the TV).
+2",http://images.cocodataset.org/train2017/000000486576.jpg,1,0
+408,408,FB,in front of,behind,True,False,The horse is behind the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000532748.jpg,0,0
+394,394,PP,parallel to,perpendicular to,False,True,The horse is perpendicular to the cow.,True,False,False,"The statement ""The horse is perpendicular to the cow"" is **False**.
+
+**Reasoning:**
+1.  **Identification**: The image shows a close-up of a brown horse in the foreground and a blurred animal in the background. The background animal has a white muzzle and greyish fur, which is characteristic of",http://images.cocodataset.org/train2017/000000441774.jpg,1,0
+401,401,FB,behind,in front of,True,False,The bench is in front of the teddy bear.,False,False,True,False,http://images.cocodataset.org/train2017/000000002839.jpg,0,0
+403,403,FB,in front of,behind,False,True,The hot dog is behind the banana.,True,False,False,False,http://images.cocodataset.org/train2017/000000165639.jpg,0,0
+397,397,FB,in front of,behind,True,False,The suitcase is behind the refrigerator.,False,False,True,False,http://images.cocodataset.org/train2017/000000561393.jpg,0,0
+410,410,FF,facing,facing away from,False,True,The teddy bear is facing away from the person.,True,True,True,True,http://images.cocodataset.org/val2017/000000439773.jpg,0,0
+406,406,FB,at the back of,in front of,True,False,The parking meter is in front of the back of the truck.,False,True,False,True,http://images.cocodataset.org/train2017/000000019185.jpg,0,0
+434,434,FB,behind,in front of,True,False,The skateboard is in front of the bed.,False,False,True,False,http://images.cocodataset.org/train2017/000000030895.jpg,0,0
+178,178,FB,in front of,behind,True,False,The toilet is behind the truck.,False,False,True,False,http://images.cocodataset.org/train2017/000000127871.jpg,0,0
+404,404,LR,at the right side of,at the left side of,False,True,The umbrella is at the left side of the right side of the cat.,True,True,True,"The statement ""The umbrella is at the left side of the right side of the cat"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a cat lying on cobblestones and a black umbrella (or umbrella tip) on the left side of the image.
+",http://images.cocodataset.org/train2017/000000466789.jpg,1,0
+399,399,FB,in front of,behind,False,True,The bus is behind the traffic light.,True,False,False,"The user wants me to determine if the statement ""The bus is behind the traffic light"" is true or false based on the image.
+
+1.  **Analyze the image content**:
+    *   **Foreground**: A large, black traffic light structure dominates the center and right side of the image. It features a",http://images.cocodataset.org/train2017/000000303765.jpg,1,1
+446,446,FB,behind,in front of,True,False,The refrigerator is in front of the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000272253.jpg,0,0
+426,426,PP,perpendicular to,parallel to,False,True,The car is parallel to the motorcycle.,True,False,False,"The user wants me to determine if the statement ""The car is parallel to the motorcycle"" is true or false based on the image.
+
+1.  **Identify the objects:**
+    *   **Motorcycle:** There is a police motorcycle in the foreground, angled slightly towards the left.
+    *   **Car",http://images.cocodataset.org/train2017/000000253054.jpg,1,0
+470,470,LR,at the right side of,at the left side of,False,True,The person is at the left side of the right side of the chair.,True,True,True,"The statement ""The person is at the left side of the right side of the chair"" is **True**.
+
+**Reasoning:**
+1.  **Identify the Chair's Sides:** The chair has a left side (where the blue elephant is) and a right side (where the zebra is).
+",http://images.cocodataset.org/train2017/000000356764.jpg,1,0
+421,421,FB,in front of,behind,True,False,The person is behind the bear.,False,False,True,False,http://images.cocodataset.org/train2017/000000290967.jpg,0,0
+439,439,FF,facing away from,facing,False,True,The bench is facing the car.,True,False,False,"The statement ""The bench is facing the car"" is **False**.
+
+**Reasoning:**
+1.  **Orientation of the Bench:** The wooden bench is positioned horizontally across the image. Its backrest (the slatted part) is at the top, and the seat is at the bottom. This means the",http://images.cocodataset.org/train2017/000000506483.jpg,1,0
+420,420,FB,in front of,behind,True,False,The cake is behind the truck.,False,False,True,False,http://images.cocodataset.org/train2017/000000214873.jpg,0,0
+471,471,FB,in front of,behind,True,False,The dog is behind the suitcase.,False,False,True,False,http://images.cocodataset.org/train2017/000000402297.jpg,0,0
+472,472,FB,in front of,behind,True,False,The suitcase is behind the bench.,False,False,True,False,http://images.cocodataset.org/train2017/000000256533.jpg,0,0
+468,468,FB,in front of,behind,True,False,The dining table is behind the cat.,False,False,True,False,http://images.cocodataset.org/train2017/000000349511.jpg,0,0
+467,467,FB,behind,in front of,False,True,The laptop is in front of the cat.,True,False,False,False,http://images.cocodataset.org/train2017/000000119360.jpg,0,0
+482,482,FB,behind,in front of,True,False,The person is in front of the donut.,False,False,True,False,http://images.cocodataset.org/train2017/000000051522.jpg,0,0
+485,485,LR,at the right side of,at the left side of,True,False,The book is at the left side of the right side of the teddy bear.,False,True,False,"The statement ""The book is at the left side of the right side of the teddy bear"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a teddy bear in the center. To the viewer's right of the bear, there is a table.",http://images.cocodataset.org/train2017/000000503996.jpg,1,0
+474,474,LR,at the left side of,at the right side of,True,False,The orange is at the right side of the left side of the bowl.,False,True,False,"The statement ""The orange is at the right side of the left side of the bowl"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a white bowl containing fruit. The most prominent fruit is a large orange wedge.
+2.  **Analyze the spatial",http://images.cocodataset.org/train2017/000000553586.jpg,1,0
+483,483,LR,right of,left of,True,False,The handbag is left of the bed.,False,False,True,False,http://images.cocodataset.org/train2017/000000069214.jpg,0,0
+480,480,FB,at the back of,in front of,False,True,The zebra is in front of the back of the truck.,True,True,True,"The statement ""The zebra is in front of the back of the truck"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a zebra in the foreground and a vehicle (a truck or utility cart) in the background on the right side.
+2.",http://images.cocodataset.org/train2017/000000341457.jpg,1,1
+469,469,FB,in front of,behind,False,True,The wine glass is behind the person.,True,False,False,False,http://images.cocodataset.org/train2017/000000072872.jpg,0,0
+37,37,LR,at the right side of,at the left side of,True,False,The orange is at the left side of the right side of the sandwich.,False,,,"The user wants me to verify a spatial statement about the image.
+
+1.  **Identify the objects:**
+    *   **Sandwich:** Located in the bottom-left compartment of the lunchbox.
+    *   **Orange:** There are mandarin orange segments in the bottom-right compartment.
+
+2.  **An",http://images.cocodataset.org/train2017/000000260248.jpg,1,3
+424,424,FF,facing,facing away from,False,True,The bed is facing away from the tv.,True,False,False,"The statement ""The bed is facing away from the tv"" is **False**.
+
+**Reasoning:**
+1.  **Orientation of the Bed:** The bed is positioned with its headboard against the left wall and its foot towards the right wall. This means the bed is oriented horizontally across the room.
+2.",http://images.cocodataset.org/train2017/000000146850.jpg,1,0
+510,510,FB,in front of,behind,False,True,The surfboard is behind the bicycle.,True,True,True,True,http://images.cocodataset.org/train2017/000000515743.jpg,0,0
+464,464,FB,behind,in front of,False,True,The cup is in front of the hot dog.,True,False,False,False,http://images.cocodataset.org/train2017/000000289199.jpg,0,0
+487,487,FB,behind,in front of,True,False,The refrigerator is in front of the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000041710.jpg,0,0
+513,513,FF,facing,facing away from,True,False,The cat is facing away from the laptop.,False,False,True,False,http://images.cocodataset.org/train2017/000000573877.jpg,0,0
+495,495,FB,in front of,behind,True,False,The person is behind the dog.,False,False,True,False,http://images.cocodataset.org/train2017/000000378466.jpg,0,0
+518,518,FB,in front of,behind,False,True,The orange is behind the banana.,True,False,False,False,http://images.cocodataset.org/train2017/000000238989.jpg,0,0
+504,504,FB,behind,in front of,False,True,The refrigerator is in front of the dining table.,True,False,False,False,http://images.cocodataset.org/train2017/000000243442.jpg,0,0
+524,524,FB,in front of,behind,False,True,The cup is behind the pizza.,True,True,True,True,http://images.cocodataset.org/val2017/000000520871.jpg,0,0
+508,508,PP,parallel to,perpendicular to,True,False,The suitcase is perpendicular to the couch.,False,False,True,"The statement is **False**.
+
+**Reasoning:**
+1.  **Identify the objects:** The ""couch"" is the large, light-colored sofa in the center of the room. The ""suitcase"" refers to the brown, rectangular object (likely a vintage suitcase or trunk) resting on the right",http://images.cocodataset.org/train2017/000000479539.jpg,1,0
+538,538,LR,left of,right of,True,False,The laptop is right of the tv.,False,False,True,False,http://images.cocodataset.org/train2017/000000407386.jpg,0,0
+544,544,PP,parallel to,perpendicular to,True,False,The skateboard is perpendicular to the couch.,False,False,True,False,http://images.cocodataset.org/train2017/000000170584.jpg,0,0
+530,530,FB,behind,in front of,True,False,The zebra is in front of the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000171805.jpg,0,0
+523,523,FF,facing,facing away from,False,True,The teddy bear is facing away from the book.,True,False,False,False,http://images.cocodataset.org/train2017/000000361778.jpg,0,0
+476,476,FB,in front of,behind,True,False,The laptop is behind the teddy bear.,False,False,True,False,http://images.cocodataset.org/train2017/000000402858.jpg,0,0
+548,548,LR,left of,right of,True,False,The laptop is right of the sandwich.,False,False,True,False,http://images.cocodataset.org/train2017/000000349230.jpg,0,0
+545,545,LR,right of,left of,True,False,The potted plant is left of the bench.,False,False,True,False,http://images.cocodataset.org/val2017/000000437514.jpg,0,0
+198,198,LR,at the right side of,at the left side of,False,True,The dining table is at the left side of the right side of the person.,True,,,"The statement ""The dining table is at the left side of the right side of the person"" is a convoluted way of describing the spatial relationship between the person and the table.
+
+1.  **Identify the Person:** The person is represented by the hand visible on the left side of the image.
+2.",http://images.cocodataset.org/train2017/000000362966.jpg,1,3
+557,557,FB,behind,in front of,True,False,The sink is in front of the person.,False,True,False,True,http://images.cocodataset.org/train2017/000000107565.jpg,0,0
+558,558,FF,facing away from,facing,True,False,The bird is facing the cat.,False,False,True,False,http://images.cocodataset.org/train2017/000000072556.jpg,0,0
+565,565,PP,perpendicular to,parallel to,False,True,The dog is parallel to the couch.,True,True,True,"The statement ""The dog is parallel to the couch"" is **True**.
+
+**Reasoning:**
+1.  **Orientation:** The dog is lying horizontally across the image, stretching from left to right.
+2.  **Couch Alignment:** The couch (specifically the seat cushion and the backrest) also",http://images.cocodataset.org/train2017/000000170898.jpg,1,0
+564,564,FF,facing away from,facing,False,True,The sheep is facing the person.,True,False,False,False,http://images.cocodataset.org/train2017/000000091656.jpg,0,0
+553,553,LR,right of,left of,True,False,The potted plant is left of the train.,False,False,True,False,http://images.cocodataset.org/train2017/000000518546.jpg,0,0
+556,556,FB,at the back of,in front of,False,True,The truck is in front of the back of the surfboard.,True,False,False,False,http://images.cocodataset.org/train2017/000000209791.jpg,0,0
+585,585,LR,left of,right of,False,True,The bed is right of the bench.,True,True,True,True,http://images.cocodataset.org/train2017/000000075458.jpg,0,0
+594,594,FF,facing,facing away from,True,False,The book is facing away from the cat.,False,False,True,False,http://images.cocodataset.org/train2017/000000499656.jpg,0,0
+574,574,LR,at the left side of,at the right side of,True,False,The book is at the right side of the left side of the pizza.,False,False,True,False,http://images.cocodataset.org/train2017/000000469936.jpg,0,0
+582,582,FF,facing,facing away from,False,True,The banana is facing away from the cat.,True,False,False,"The user wants me to determine if the statement ""The banana is facing away from the cat"" is true or false based on the image.
+
+1.  **Analyze the image content**:
+    *   There is a cat sleeping on the right side of the couch.
+    *   There is a banana lying on",http://images.cocodataset.org/train2017/000000481313.jpg,1,0
+600,600,FB,in front of,behind,True,False,The laptop is behind the tv.,False,False,True,False,http://images.cocodataset.org/train2017/000000046002.jpg,0,0
+520,520,LR,at the right side of,at the left side of,False,True,The orange is at the left side of the right side of the bird.,True,True,True,"The statement ""The orange is at the left side of the right side of the bird"" is **True**.
+
+**Reasoning:**
+1.  **""The right side of the bird""**: The bird is facing to the right, so its right side (its front) is the right side of the image",http://images.cocodataset.org/train2017/000000514600.jpg,1,1
+608,608,FB,behind,in front of,True,False,The person is in front of the couch.,False,False,True,False,http://images.cocodataset.org/train2017/000000348288.jpg,0,0
+612,612,LR,left of,right of,False,True,The banana is right of the sandwich.,True,False,False,False,http://images.cocodataset.org/train2017/000000557005.jpg,0,0
+583,583,FB,in front of,behind,False,True,The pizza is behind the person.,True,False,False,False,http://images.cocodataset.org/train2017/000000328270.jpg,0,0
+595,595,FB,in front of,behind,True,False,The oven is behind the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000451274.jpg,0,0
+621,621,LR,at the left side of,at the right side of,False,True,The sandwich is at the right side of the left side of the bowl.,True,False,False,"The statement is **False**.
+
+The image shows a plate (not a bowl) containing a sandwich and an avocado. The sandwich is located on the left side of the plate. The phrase ""at the right side of the left side"" implies a position to the right of the sandwich (towards the center or right",http://images.cocodataset.org/train2017/000000375086.jpg,1,0
+642,642,LR,left of,right of,False,True,The cat is right of the couch.,True,False,False,False,http://images.cocodataset.org/train2017/000000040419.jpg,0,0
+645,645,LR,at the right side of,at the left side of,True,False,The dog is at the left side of the right side of the laptop.,False,True,False,"The statement ""The dog is at the left side of the right side of the laptop"" is **True**.
+
+**Reasoning:**
+1.  **""The right side of the laptop""**: This refers to the area to the right of the laptop. In the image, the laptop is on the left,",http://images.cocodataset.org/train2017/000000351914.jpg,1,0
+638,638,FB,behind,in front of,False,True,The person is in front of the oven.,True,True,True,True,http://images.cocodataset.org/train2017/000000462151.jpg,0,0
+616,616,LR,at the left side of,at the right side of,False,True,The microwave is at the right side of the left side of the person.,True,True,True,"The statement ""The microwave is at the right side of the left side of the person"" is **True**.
+
+**Reasoning:**
+1.  **Identify the person's side:** In the image, a hand is visible on the left side of the frame, holding the microwave. This indicates the person is",http://images.cocodataset.org/train2017/000000364937.jpg,1,1
+552,552,FB,behind,in front of,False,True,The couch is in front of the suitcase.,True,False,False,False,http://images.cocodataset.org/train2017/000000042667.jpg,0,2
+653,653,FB,in front of,behind,True,False,The cake is behind the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000348941.jpg,0,0
+659,659,FB,in front of,behind,True,False,The handbag is behind the teddy bear.,False,False,True,False,http://images.cocodataset.org/train2017/000000010547.jpg,0,0
+657,657,FF,facing,facing away from,False,True,The teddy bear is facing away from the cow.,True,False,False,False,http://images.cocodataset.org/train2017/000000285618.jpg,0,0
+656,656,FB,behind,in front of,True,False,The truck is in front of the oven.,False,False,True,False,http://images.cocodataset.org/train2017/000000197266.jpg,0,0
+666,666,FB,in front of,behind,False,True,The couch is behind the person.,True,True,True,True,http://images.cocodataset.org/train2017/000000142481.jpg,0,0
+333,333,FB,behind,in front of,False,True,The fire hydrant is in front of the bird.,True,False,False,False,http://images.cocodataset.org/train2017/000000572804.jpg,0,3
+651,651,FB,behind,in front of,True,False,The bicycle is in front of the train.,False,False,True,False,http://images.cocodataset.org/train2017/000000116006.jpg,0,0
+672,672,LR,at the left side of,at the right side of,False,True,The teddy bear is at the right side of the left side of the book.,True,True,True,"The statement ""The teddy bear is at the right side of the left side of the book"" is **True**.
+
+**Reasoning:**
+1.  **""The left side of the book""**: The book is open, and the page on the left (from the viewer's perspective) is the white",http://images.cocodataset.org/train2017/000000127654.jpg,1,0
+618,618,LR,at the left side of,at the right side of,True,False,The dining table is at the right side of the left side of the oven.,False,False,True,"The statement claims that the dining table is located to the right of the oven's left side. In the image, the dining table is on the far left, while the oven is on the far right. Therefore, the table is to the left of the oven, not the right.
+
+False",http://images.cocodataset.org/train2017/000000097427.jpg,1,2
+681,681,FB,behind,in front of,False,True,The car is in front of the suitcase.,True,False,False,False,http://images.cocodataset.org/train2017/000000159850.jpg,0,0
+676,676,PP,parallel to,perpendicular to,True,False,The boat is perpendicular to the truck.,False,False,True,"The statement ""The boat is perpendicular to the truck"" is **False**.
+
+**Reasoning:**
+1.  **Orientation of the Truck:** The truck is positioned in the foreground, facing towards the left side of the image. Its side profile is visible, meaning its longitudinal axis runs horizontally across the frame.
+2",http://images.cocodataset.org/train2017/000000267363.jpg,1,0
+679,679,LR,at the right side of,at the left side of,False,True,The motorcycle is at the left side of the right side of the truck.,True,True,True,"The statement ""The motorcycle is at the left side of the right side of the truck"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a silver pickup truck on the left and a motorcycle on the right.
+2.  **Analyze the spatial relationship:**",http://images.cocodataset.org/train2017/000000106810.jpg,1,0
+695,695,FB,at the back of,in front of,True,False,The keyboard is in front of the back of the dog.,False,False,True,False,http://images.cocodataset.org/train2017/000000077769.jpg,0,0
+617,617,PP,parallel to,perpendicular to,False,True,The bench is perpendicular to the person.,True,False,False,"The statement ""The bench is perpendicular to the person"" is **False**.
+
+**Reasoning:**
+In the image, the person is sitting on the bench. The bench is oriented horizontally (left to right), and the person is also oriented horizontally along the length of the bench. Since they are aligned in the same",http://images.cocodataset.org/train2017/000000012704.jpg,1,0
+671,671,FB,behind,in front of,True,False,The mouse is in front of the teddy bear.,False,False,True,"The user wants to know if the statement ""The mouse is in front of the teddy bear"" is true or false based on the image.
+
+1.  **Identify the objects:**
+    *   **Teddy Bear:** There is a large brown teddy bear in the foreground, taking up a significant portion",http://images.cocodataset.org/train2017/000000196226.jpg,1,1
+682,682,LR,at the left side of,at the right side of,True,False,The cat is at the right side of the left side of the teddy bear.,False,False,True,"The statement ""The cat is at the right side of the left side of the teddy bear"" is **False**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a green teddy bear on the left and an orange cat on the right.
+2.  **Analyze",http://images.cocodataset.org/train2017/000000219418.jpg,1,0
+698,698,LR,at the left side of,at the right side of,True,False,The person is at the right side of the left side of the dining table.,False,True,False,True,http://images.cocodataset.org/train2017/000000224045.jpg,0,0
+494,494,LR,at the left side of,at the right side of,True,False,The truck is at the right side of the left side of the bed.,False,,,"The user wants me to verify a statement about the spatial relationship of objects in the image.
+
+1.  **Identify the objects:**
+    *   **The bed:** The large bunk bed is the central object in the image.
+    *   **The truck:** There is a yellow toy truck visible in the bottom",http://images.cocodataset.org/train2017/000000172006.jpg,1,3
+697,697,LR,left of,right of,True,False,The person is right of the refrigerator.,False,False,True,False,http://images.cocodataset.org/train2017/000000410805.jpg,0,0
+702,702,FB,in front of,behind,False,True,The skateboard is behind the dog.,True,False,False,False,http://images.cocodataset.org/train2017/000000518613.jpg,0,0
+689,689,LR,at the right side of,at the left side of,False,True,The chair is at the left side of the right side of the laptop.,True,True,True,"The statement ""The chair is at the left side of the right side of the laptop"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a white laptop sitting on a wooden chair.
+2.  **Locate the ""right side of the laptop"":**",http://images.cocodataset.org/train2017/000000427726.jpg,1,1
+700,700,FB,behind,in front of,False,True,The teddy bear is in front of the potted plant.,True,True,True,True,http://images.cocodataset.org/val2017/000000175443.jpg,0,0
+704,704,LR,at the left side of,at the right side of,True,False,The person is at the right side of the left side of the couch.,False,True,False,True,http://images.cocodataset.org/train2017/000000277533.jpg,0,0
+714,714,LR,right of,left of,False,True,The person is left of the teddy bear.,True,False,False,"The statement ""The person is left of the teddy bear"" is **False**.
+
+**Reasoning:**
+1.  **Visual Position:** In the image, the person's hand is positioned on the right side of the frame, while the teddy bear is centered and extends to the left. Therefore, the",http://images.cocodataset.org/train2017/000000230004.jpg,1,0
+717,717,LR,left of,right of,False,True,The teddy bear is right of the cup.,True,True,True,True,http://images.cocodataset.org/train2017/000000185326.jpg,0,0
+712,712,LR,at the left side of,at the right side of,False,True,The cow is at the right side of the left side of the car.,True,True,True,"The statement ""The cow is at the right side of the left side of the car"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** There is a light blue car on the left side of the image and a large brown cow in the center.
+2.  **An",http://images.cocodataset.org/train2017/000000343504.jpg,1,0
+711,711,LR,at the left side of,at the right side of,False,True,The chair is at the right side of the left side of the pizza.,True,True,True,"The statement ""The chair is at the right side of the left side of the pizza"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a wooden chair and a pizza (on a baking sheet).
+2.  **Determine relative positions:** The pizza is",http://images.cocodataset.org/train2017/000000285484.jpg,1,0
+720,720,FB,in front of,behind,True,False,The teddy bear is behind the bus.,False,False,True,False,http://images.cocodataset.org/train2017/000000355857.jpg,0,0
+728,728,PP,perpendicular to,parallel to,False,True,The bed is parallel to the person.,True,False,False,"The statement ""The bed is parallel to the person"" is **False**.
+
+**Reasoning:**
+In the image, the person is lying down on the bed. The bed (specifically the headboard and the mattress) is oriented horizontally across the frame. The person's body is also oriented horizontally, lying flat",http://images.cocodataset.org/train2017/000000207826.jpg,1,0
+723,723,FB,behind,in front of,True,False,The person is in front of the oven.,False,True,False,True,http://images.cocodataset.org/train2017/000000270922.jpg,0,0
+721,721,LR,at the left side of,at the right side of,False,True,The person is at the right side of the left side of the bed.,True,True,True,"The statement ""The person is at the right side of the left side of the bed"" is **True**.
+
+**Reasoning:**
+1.  **Identify the ""left side of the bed"":** In the image, the bed is covered with a black and white patterned sheet. The ""left side",http://images.cocodataset.org/train2017/000000303047.jpg,1,0
+491,491,LR,at the left side of,at the right side of,True,False,The laptop is at the right side of the left side of the teddy bear.,False,,,"The statement claims that the laptop is located at the ""right side of the left side of the teddy bear."" This phrasing is ambiguous and likely a trick. Let's break it down:
+
+1.  **Identify the objects:** The image shows a laptop on the left and a white teddy bear (or",http://images.cocodataset.org/train2017/000000488977.jpg,1,3
+705,705,LR,at the left side of,at the right side of,True,False,The cat is at the right side of the left side of the pizza.,False,True,False,"The statement ""The cat is at the right side of the left side of the pizza"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a cat on the left side and a pizza on the right side.
+2.  **Locate the ""left side",http://images.cocodataset.org/train2017/000000363325.jpg,1,1
+738,738,FF,facing,facing away from,False,True,The laptop is facing away from the cat.,True,False,False,False,http://images.cocodataset.org/train2017/000000501126.jpg,0,0
+733,733,FB,behind,in front of,True,False,The potted plant is in front of the cat.,False,False,True,False,http://images.cocodataset.org/train2017/000000314504.jpg,0,0
+735,735,FB,in front of,behind,False,True,The teddy bear is behind the bus.,True,False,False,False,http://images.cocodataset.org/train2017/000000205283.jpg,0,0
+737,737,LR,left of,right of,True,False,The couch is right of the bed.,False,False,True,False,http://images.cocodataset.org/train2017/000000334215.jpg,0,0
+739,739,FF,facing,facing away from,True,False,The cat is facing away from the refrigerator.,False,False,True,False,http://images.cocodataset.org/train2017/000000477647.jpg,0,0
+751,751,FB,in front of,behind,True,False,The laptop is behind the cat.,False,False,True,False,http://images.cocodataset.org/train2017/000000357470.jpg,0,0
+754,754,FB,in front of,behind,False,True,The dining table is behind the cat.,True,False,False,False,http://images.cocodataset.org/train2017/000000193254.jpg,0,0
+757,757,FF,facing away from,facing,False,True,The person is facing the laptop.,True,True,True,True,http://images.cocodataset.org/train2017/000000021365.jpg,0,0
+741,741,LR,at the left side of,at the right side of,True,False,The teddy bear is at the right side of the left side of the dog.,False,True,False,"The statement ""The teddy bear is at the right side of the left side of the dog"" is **True**.
+
+**Reasoning:**
+1.  **Identify the subjects:** The image shows a dog on the left and a teddy bear on the right.
+2.  **Analyze the phrase",http://images.cocodataset.org/train2017/000000139355.jpg,1,0
+554,554,FB,at the back of,in front of,False,True,The bed is in front of the back of the couch.,True,,,"The user wants me to determine the truth value of the statement ""The bed is in front of the back of the couch"" based on the provided image.
+
+1.  **Identify the objects:**
+    *   **Bed:** Visible in the bottom-left corner of the image (white bedding).
+    *   **",http://images.cocodataset.org/train2017/000000208557.jpg,1,3
+756,756,FF,facing,facing away from,True,False,The person is facing away from the car.,False,False,True,"The statement ""The person is facing away from the car"" is **False**.
+
+The person in the image is leaning over the front of the car with their head and upper body directed into the engine bay. This means they are facing the car and the engine, not away from it. While their back is visible to",http://images.cocodataset.org/train2017/000000132841.jpg,1,0
+762,762,LR,at the right side of,at the left side of,False,True,The person is at the left side of the right side of the dining table.,True,True,True,"The statement ""The person is at the left side of the right side of the dining table"" is **True**.
+
+**Reasoning:**
+1.  **Identify the table:** The wooden surface in the foreground is the dining table.
+2.  **Identify the ""right side"" of the table:**",http://images.cocodataset.org/train2017/000000057639.jpg,1,0
+759,759,FB,behind,in front of,False,True,The boat is in front of the bicycle.,True,False,False,"The statement ""The boat is in front of the bicycle"" is **False**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a homemade raft (the ""boat"") floating on water. On top of this raft, there is a bicycle being pedaled by a man in a",http://images.cocodataset.org/train2017/000000356622.jpg,1,0
+796,796,FB,in front of,behind,False,True,The horse is behind the bench.,True,False,False,False,http://images.cocodataset.org/train2017/000000566276.jpg,0,0
+690,690,FB,in front of,behind,False,True,The dining table is behind the truck.,True,False,False,False,http://images.cocodataset.org/train2017/000000219784.jpg,0,2
+772,772,FB,in front of,behind,True,False,The person is behind the refrigerator.,False,False,True,False,http://images.cocodataset.org/train2017/000000321633.jpg,0,0
+804,804,FB,in front of,behind,True,False,The cup is behind the cow.,False,False,True,False,http://images.cocodataset.org/train2017/000000298981.jpg,0,0
+805,805,FF,facing,facing away from,False,True,The person is facing away from the frisbee.,True,False,False,False,http://images.cocodataset.org/train2017/000000468612.jpg,0,0
+815,815,FB,at the back of,in front of,True,False,The toilet is in front of the back of the truck.,False,True,False,True,http://images.cocodataset.org/train2017/000000127871.jpg,0,0
+817,817,FB,behind,in front of,False,True,The boat is in front of the dining table.,True,False,False,False,http://images.cocodataset.org/train2017/000000112363.jpg,0,0
+570,570,LR,at the right side of,at the left side of,False,True,The donut is at the left side of the right side of the bowl.,True,False,False,"The statement is **False**.
+
+The reasoning is as follows:
+1.  **Identify the objects**: The image contains a small white bowl with fruit in the upper-left area and a large croissant sandwich (referred to as a ""donut"" in the statement) in the lower-center area.
+2.",http://images.cocodataset.org/train2017/000000435620.jpg,1,3
+819,819,LR,left of,right of,True,False,The apple is right of the banana.,False,False,True,False,http://images.cocodataset.org/train2017/000000125499.jpg,0,0
+798,798,LR,at the left side of,at the right side of,False,True,The teddy bear is at the right side of the left side of the couch.,True,True,True,True,http://images.cocodataset.org/train2017/000000178818.jpg,0,0
+802,802,LR,at the left side of,at the right side of,False,True,The laptop is at the right side of the left side of the dog.,True,True,True,"The statement ""The laptop is at the right side of the left side of the dog"" is **True**.
+
+**Reasoning:**
+1.  **""The left side of the dog""**: In the image, the dog is facing towards the right. Its left side (its left flank) is the side",http://images.cocodataset.org/train2017/000000025994.jpg,1,0
+780,780,PP,parallel to,perpendicular to,False,True,The motorcycle is perpendicular to the bus.,True,False,False,"The user wants me to determine if the statement ""The motorcycle is perpendicular to the bus"" is true or false based on the image.
+
+1.  **Identify the motorcycle**: The main subject is a bright yellow/green motorcycle (an NHS ambulance bike) in the foreground. It is angled slightly towards the left of",http://images.cocodataset.org/train2017/000000308175.jpg,1,0
+834,834,PP,perpendicular to,parallel to,True,False,The bus is parallel to the car.,False,False,True,"The user wants me to determine if the statement ""The bus is parallel to the car"" is true or false based on the image.
+
+1.  **Analyze the image content**:
+    *   **Foreground**: There is a car (specifically the rear window and roof of a silver/grey vehicle) at",http://images.cocodataset.org/train2017/000000499267.jpg,1,0
+821,821,LR,left of,right of,True,False,The donut is right of the cup.,False,False,True,False,http://images.cocodataset.org/train2017/000000316482.jpg,0,0
+832,832,FB,in front of,behind,True,False,The cat is behind the chair.,False,False,True,False,http://images.cocodataset.org/train2017/000000549649.jpg,0,0
+816,816,LR,left of,right of,False,True,The umbrella is right of the train.,True,False,False,False,http://images.cocodataset.org/train2017/000000296797.jpg,0,1
+843,843,FB,in front of,behind,False,True,The giraffe is behind the truck.,True,False,False,False,http://images.cocodataset.org/train2017/000000060513.jpg,0,0
+844,844,FB,in front of,behind,True,False,The sandwich is behind the pizza.,False,False,True,False,http://images.cocodataset.org/train2017/000000220111.jpg,0,0
+846,846,FB,behind,in front of,True,False,The pizza is in front of the bowl.,False,False,True,False,http://images.cocodataset.org/train2017/000000237818.jpg,0,0
+853,853,FB,behind,in front of,False,True,The umbrella is in front of the cat.,True,False,False,False,http://images.cocodataset.org/train2017/000000249952.jpg,0,0
+858,858,FF,facing away from,facing,False,True,The cat is facing the toilet.,True,True,True,True,http://images.cocodataset.org/train2017/000000572075.jpg,0,0
+855,855,FB,in front of,behind,False,True,The potted plant is behind the teddy bear.,True,True,True,True,http://images.cocodataset.org/train2017/000000413603.jpg,0,0
+859,859,FF,facing,facing away from,False,True,The cat is facing away from the sink.,True,False,False,False,http://images.cocodataset.org/train2017/000000463825.jpg,0,0
+860,860,FF,facing,facing away from,False,True,The zebra is facing away from the person.,True,False,False,False,http://images.cocodataset.org/train2017/000000484066.jpg,0,0
+857,857,FB,behind,in front of,False,True,The horse is in front of the person.,True,False,False,False,http://images.cocodataset.org/train2017/000000422755.jpg,0,1
+865,865,LR,at the left side of,at the right side of,True,False,The teddy bear is at the right side of the left side of the dog.,False,True,False,"The statement ""The teddy bear is at the right side of the left side of the dog"" is **True**.
+
+**Reasoning:**
+1.  **""The left side of the dog""**: In the image, the dog is facing the camera. The dog's left side (its left front leg",http://images.cocodataset.org/train2017/000000529411.jpg,1,0
+630,630,LR,at the left side of,at the right side of,False,True,The sandwich is at the right side of the left side of the laptop.,True,,,"The user wants me to evaluate the truthfulness of the statement: ""The sandwich is at the right side of the left side of the laptop.""
+
+1.  **Analyze the image content**:
+    *   **Foreground**: A large sandwich (focaccia bread with fillings) sits on a wrapper.
+",http://images.cocodataset.org/train2017/000000511523.jpg,1,3
+863,863,FB,behind,in front of,False,True,The pizza is in front of the sandwich.,True,False,False,False,http://images.cocodataset.org/train2017/000000278638.jpg,0,0
+866,866,LR,left of,right of,True,False,The person is right of the teddy bear.,False,False,True,False,http://images.cocodataset.org/train2017/000000215396.jpg,0,0
+861,861,FB,behind,in front of,False,True,The laptop is in front of the sandwich.,True,False,False,False,http://images.cocodataset.org/train2017/000000013140.jpg,0,0
+833,833,LR,at the left side of,at the right side of,True,False,The person is at the right side of the left side of the couch.,False,True,False,"The statement ""The person is at the right side of the left side of the couch"" is **True**.
+
+**Reasoning:**
+1.  **Identify the couch:** The couch is the large piece of furniture with the red and black patterned cover on the right side of the image.
+2. ",http://images.cocodataset.org/train2017/000000527691.jpg,1,0
+842,842,FB,behind,in front of,False,True,The potted plant is in front of the cat.,True,False,False,False,http://images.cocodataset.org/train2017/000000410704.jpg,0,0
+888,888,LR,left of,right of,True,False,The hair drier is right of the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000375483.jpg,0,0
+678,678,FB,in front of,behind,True,False,The bus is behind the motorcycle.,False,,,"The user wants me to determine the truth value of the statement ""The bus is behind the motorcycle"" based on the image.
+
+1.  **Identify the objects:** I see a large double-decker bus (SBS Transit) dominating the foreground and left side of the image. I see a motorcycle (sco",http://images.cocodataset.org/train2017/000000328372.jpg,1,3
+894,894,FB,behind,in front of,True,False,The refrigerator is in front of the cat.,False,False,True,False,http://images.cocodataset.org/train2017/000000139721.jpg,0,0
+886,886,FB,in front of,behind,True,False,The car is behind the truck.,False,False,True,False,http://images.cocodataset.org/train2017/000000500954.jpg,0,0
+895,895,FB,behind,in front of,True,False,The laptop is in front of the potted plant.,False,False,True,False,http://images.cocodataset.org/train2017/000000293249.jpg,0,0
+897,897,FB,in front of,behind,False,True,The teddy bear is behind the car.,True,False,False,False,http://images.cocodataset.org/train2017/000000151764.jpg,0,0
+875,875,LR,at the left side of,at the right side of,False,True,The umbrella is at the right side of the left side of the cat.,True,False,False,"The statement ""The umbrella is at the right side of the left side of the cat"" is **False**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a person's face on the left and an orange cat on the right. An umbrella is visible in the background, primarily",http://images.cocodataset.org/train2017/000000029145.jpg,1,0
+898,898,LR,at the left side of,at the right side of,False,True,The bed is at the right side of the left side of the couch.,True,False,False,"The statement ""The bed is at the right side of the left side of the couch"" is **False**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows two beds. The one on the left has striped bedding, and the one on the right has floral bedding. There is",http://images.cocodataset.org/train2017/000000131352.jpg,1,0
+901,901,FB,in front of,behind,True,False,The dining table is behind the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000079058.jpg,0,0
+909,909,FB,in front of,behind,True,False,The apple is behind the orange.,False,False,True,False,http://images.cocodataset.org/train2017/000000341985.jpg,0,0
+910,910,LR,at the right side of,at the left side of,False,True,The person is at the left side of the right side of the oven.,True,True,True,"The statement ""The person is at the left side of the right side of the oven"" is **True**.
+
+**Reasoning:**
+1.  **Identify the oven:** The oven (specifically the black range/stove unit) is located on the right side of the image.
+2.  **Ident",http://images.cocodataset.org/train2017/000000121046.jpg,1,0
+911,911,FF,facing away from,facing,False,True,The cat is facing the cake.,True,False,False,False,http://images.cocodataset.org/train2017/000000447741.jpg,0,0
+900,900,LR,at the right side of,at the left side of,True,False,The person is at the left side of the right side of the cake.,False,True,False,"The statement ""The person is at the left side of the right side of the cake"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a person (an elderly woman) and a large rectangular cake.
+2.  **Determine positions:** The cake is",http://images.cocodataset.org/train2017/000000271759.jpg,1,0
+919,919,FB,behind,in front of,False,True,The microwave is in front of the cat.,True,False,False,False,http://images.cocodataset.org/train2017/000000288106.jpg,0,0
+912,912,LR,right of,left of,True,False,The hot dog is left of the cup.,False,False,True,False,http://images.cocodataset.org/train2017/000000289199.jpg,0,0
+726,726,LR,right of,left of,True,False,The train is left of the bus.,False,False,True,False,http://images.cocodataset.org/train2017/000000419439.jpg,0,3
+920,920,LR,left of,right of,False,True,The car is right of the surfboard.,True,True,True,True,http://images.cocodataset.org/train2017/000000525695.jpg,0,0
+916,916,FB,behind,in front of,True,False,The umbrella is in front of the couch.,False,True,False,True,http://images.cocodataset.org/train2017/000000428329.jpg,0,0
+917,917,LR,at the left side of,at the right side of,True,False,The person is at the right side of the left side of the keyboard.,False,True,False,"The statement ""The person is at the right side of the left side of the keyboard"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a girl (the person) and a computer keyboard.
+2.  **Locate the keyboard:** The keyboard is on",http://images.cocodataset.org/train2017/000000544046.jpg,1,0
+933,933,FB,in front of,behind,True,False,The hot dog is behind the bowl.,False,False,True,False,http://images.cocodataset.org/train2017/000000203756.jpg,0,0
+924,924,LR,at the left side of,at the right side of,True,False,The chair is at the right side of the left side of the tv.,False,True,False,"The statement ""The chair is at the right side of the left side of the tv"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a wooden chair on the left and a television on the right.
+2.  **Analyze the spatial relationship:** The",http://images.cocodataset.org/train2017/000000036962.jpg,1,0
+934,934,PP,parallel to,perpendicular to,False,True,The motorcycle is perpendicular to the car.,True,False,False,"The user wants me to determine if the statement ""The motorcycle is perpendicular to the car"" is true or false based on the image.
+
+1.  **Analyze the orientation of the motorcycle**: The motorcycle is in the foreground, angled towards the right side of the image. It is not facing directly towards the camera,",http://images.cocodataset.org/train2017/000000449889.jpg,1,0
+943,943,LR,at the right side of,at the left side of,True,False,The umbrella is at the left side of the right side of the cat.,False,True,False,"The statement ""The umbrella is at the left side of the right side of the cat"" is **True**.
+
+**Reasoning:**
+1.  **""The right side of the cat""**: This refers to the area to the right of the cat (from the viewer's perspective). The cat is positioned on",http://images.cocodataset.org/train2017/000000565110.jpg,1,0
+949,949,FB,behind,in front of,True,False,The truck is in front of the motorcycle.,False,False,True,False,http://images.cocodataset.org/train2017/000000369763.jpg,0,0
+947,947,LR,at the left side of,at the right side of,False,True,The person is at the right side of the left side of the refrigerator.,True,False,False,"The statement claims that a person is located at the right side of the left side of the refrigerator. Looking at the image, there is no person visible in the kitchen scene. The area described (the space between the stove and the refrigerator) is empty. Therefore, the statement is false.
+
+False",http://images.cocodataset.org/train2017/000000242203.jpg,1,0
+732,732,LR,right of,left of,True,False,The cow is left of the clock.,False,,,"The user wants me to determine the truth value of the statement ""The cow is left of the clock"" based on the provided image.
+
+1.  **Identify the objects:**
+    *   **Cow:** There is a large black and white cow standing in the center-right of the image.
+    *   **",http://images.cocodataset.org/train2017/000000449845.jpg,1,3
+954,954,LR,at the right side of,at the left side of,True,False,The person is at the left side of the right side of the cake.,False,True,False,"The statement ""The person is at the left side of the right side of the cake"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a cake in the center, a black dog on the left, and a person (a little girl) on the right",http://images.cocodataset.org/train2017/000000324156.jpg,1,0
+938,938,FB,behind,in front of,False,True,The truck is in front of the oven.,True,False,False,"The statement ""The truck is in front of the oven"" is **False**.
+
+**Reasoning:**
+The image shows a truck with a large graphic or advertisement on its side. This graphic depicts a kitchen scene with chefs and ovens. The truck itself is the physical object in the foreground, while the ""oven",http://images.cocodataset.org/train2017/000000352127.jpg,1,0
+959,959,FF,facing away from,facing,False,True,The cat is facing the toilet.,True,True,True,True,http://images.cocodataset.org/train2017/000000439364.jpg,0,0
+951,951,FB,behind,in front of,True,False,The person is in front of the dining table.,False,True,False,True,http://images.cocodataset.org/train2017/000000348973.jpg,0,0
+956,956,LR,left of,right of,False,True,The cat is right of the sink.,True,False,False,False,http://images.cocodataset.org/val2017/000000094336.jpg,0,0
+962,962,LR,at the left side of,at the right side of,False,True,The person is at the right side of the left side of the suitcase.,True,True,True,"The statement ""The person is at the right side of the left side of the suitcase"" is **True**.
+
+**Reasoning:**
+1.  **""The left side of the suitcase""**: In the image, the suitcase is open. The left side of the suitcase (from the viewer's perspective) is",http://images.cocodataset.org/train2017/000000246863.jpg,1,0
+965,965,LR,at the right side of,at the left side of,True,False,The couch is at the left side of the right side of the bench.,False,False,True,"The statement ""The couch is at the left side of the right side of the bench"" is **False**.
+
+The bench is located on the left side of the image, and the couch is located on the right side of the image. Therefore, the couch is to the right of the bench, not to the left",http://images.cocodataset.org/train2017/000000541721.jpg,1,0
+937,937,PP,perpendicular to,parallel to,False,True,The zebra is parallel to the horse.,True,False,False,"The statement ""The zebra is parallel to the horse"" is **False**.
+
+**Reasoning:**
+1.  **Orientation:** The zebra is positioned on the left side of the image, facing towards the right (its head is angled towards the center). The horse is positioned on the right side of the",http://images.cocodataset.org/train2017/000000302924.jpg,1,0
+970,970,LR,left of,right of,False,True,The bed is right of the refrigerator.,True,True,True,True,http://images.cocodataset.org/train2017/000000169891.jpg,0,0
+967,967,FB,in front of,behind,True,False,The zebra is behind the truck.,False,False,True,False,http://images.cocodataset.org/train2017/000000319902.jpg,0,0
+872,872,LR,at the left side of,at the right side of,False,True,The motorcycle is at the right side of the left side of the car.,True,True,True,"The statement ""The motorcycle is at the right side of the left side of the car"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a motorcycle in the center and a white vehicle (a trailer or van, referred to as ""the car"") on the",http://images.cocodataset.org/train2017/000000443589.jpg,1,0
+868,868,FF,facing away from,facing,True,False,The person is facing the bear.,False,False,True,"The user wants me to determine if the statement ""The person is facing the bear"" is true or false based on the image.
+
+1.  **Analyze the image content**:
+    *   There is a young boy sitting in the lap of a large, black stuffed bear.
+    *   The bear is positioned",http://images.cocodataset.org/train2017/000000073197.jpg,1,0
+977,977,FB,behind,in front of,True,False,The oven is in front of the dog.,False,False,True,False,http://images.cocodataset.org/train2017/000000401045.jpg,0,0
+986,986,FF,facing,facing away from,True,False,The dog is facing away from the cake.,False,False,True,False,http://images.cocodataset.org/train2017/000000373396.jpg,0,0
+960,960,FB,at the back of,in front of,True,False,The potted plant is in front of the back of the bus.,False,True,False,True,http://images.cocodataset.org/train2017/000000185502.jpg,0,1
+979,979,FB,behind,in front of,False,True,The person is in front of the bear.,True,True,True,True,http://images.cocodataset.org/train2017/000000283942.jpg,0,0
+999,999,FB,in front of,behind,True,False,The laptop is behind the cat.,False,False,True,False,http://images.cocodataset.org/train2017/000000369208.jpg,0,0
+958,958,LR,at the right side of,at the left side of,False,True,The keyboard is at the left side of the right side of the person.,True,True,True,True,http://images.cocodataset.org/train2017/000000481124.jpg,0,0
+993,993,FB,in front of,behind,False,True,The bowl is behind the sandwich.,True,False,False,False,http://images.cocodataset.org/train2017/000000568572.jpg,0,0
+984,984,PP,parallel to,perpendicular to,True,False,The motorcycle is perpendicular to the bus.,False,False,True,"The statement ""The motorcycle is perpendicular to the bus"" is **False**.
+
+**Reasoning:**
+1.  **Orientation of the Bus:** The bus is positioned on the road and is facing directly towards the camera (the viewer). We can clearly see its front windshield, headlights, and license plate. This means",http://images.cocodataset.org/train2017/000000142774.jpg,1,0
+1014,1014,LR,at the right side of,at the left side of,True,False,The cell phone is at the left side of the right side of the person.,False,True,False,"The statement ""The cell phone is at the left side of the right side of the person"" is **True**.
+
+Here is the reasoning:
+1.  **Identify the person's orientation**: The person is facing towards the left side of the image (his profile is visible, looking left).
+2.  **",http://images.cocodataset.org/train2017/000000476363.jpg,1,0
+1001,1001,FB,behind,in front of,True,False,The banana is in front of the orange.,False,False,True,False,http://images.cocodataset.org/train2017/000000540164.jpg,0,0
+814,814,LR,left of,right of,False,True,The bed is right of the tv.,True,,,"The user wants me to determine the truth value of the statement ""The bed is right of the tv"" based on the image.
+
+1.  **Identify the objects:**
+    *   **TV:** There is a television screen visible in the background on the left side of the image.
+    *   **Bed",http://images.cocodataset.org/train2017/000000109106.jpg,1,3
+996,996,FB,behind,in front of,False,True,The couch is in front of the teddy bear.,True,True,True,"The user wants to know if the statement ""The couch is in front of the teddy bear"" is true based on the image.
+
+1.  **Identify the couch:** There is a large maroon sofa in the center of the living room.
+2.  **Identify the teddy bear:** There is",http://images.cocodataset.org/train2017/000000394271.jpg,1,0
+1002,1002,FB,in front of,behind,False,True,The cat is behind the bicycle.,True,True,True,True,http://images.cocodataset.org/val2017/000000101762.jpg,0,0
+1020,1020,PP,parallel to,perpendicular to,False,True,The boat is perpendicular to the truck.,True,True,True,"The user wants me to determine if the statement ""The boat is perpendicular to the truck"" is true based on the image.
+
+1.  **Identify the objects:**
+    *   **Boat:** There is a large cruise ship named ""Queen Victoria"" in the background. It is oriented horizontally across the image",http://images.cocodataset.org/train2017/000000562291.jpg,1,0
+966,966,LR,at the left side of,at the right side of,False,True,The wine glass is at the right side of the left side of the pizza.,True,False,False,"The statement ""The wine glass is at the right side of the left side of the pizza"" is **False**.
+
+The phrase ""right side of the left side of the pizza"" refers to the left half of the pizza. The wine glass is located to the right of the entire pizza, not on its left side",http://images.cocodataset.org/train2017/000000481886.jpg,1,1
+1019,1019,FF,facing,facing away from,True,False,The person is facing away from the banana.,False,False,True,False,http://images.cocodataset.org/val2017/000000550714.jpg,0,0
+1025,1025,LR,at the left side of,at the right side of,False,True,The laptop is at the right side of the left side of the person.,True,True,True,"The statement ""The laptop is at the right side of the left side of the person"" is **True**.
+
+**Reasoning:**
+1.  **Identify the person's orientation:** The person is positioned on the left side of the image, facing towards the right (profile view).
+2.  **Ident",http://images.cocodataset.org/train2017/000000508749.jpg,1,0
+1035,1035,PP,parallel to,perpendicular to,False,True,The skateboard is perpendicular to the couch.,True,False,False,"The statement ""The skateboard is perpendicular to the couch"" is **False**.
+
+**Reasoning:**
+1.  **Orientation of the Couch:** The couch is positioned horizontally across the background of the image, running from left to right.
+2.  **Orientation of the Skateboard:** The skateboard is positioned in the",http://images.cocodataset.org/train2017/000000391685.jpg,1,0
+1024,1024,LR,at the left side of,at the right side of,False,True,The person is at the right side of the left side of the remote.,True,True,True,"The statement ""The person is at the right side of the left side of the remote"" is **True**.
+
+**Reasoning:**
+1.  **Identify the ""left side of the remote"":** In the image, the remote is oriented vertically. The ""left side"" refers to the left edge of",http://images.cocodataset.org/train2017/000000089930.jpg,1,0
+1038,1038,FB,in front of,behind,False,True,The motorcycle is behind the bus.,True,False,False,False,http://images.cocodataset.org/train2017/000000440586.jpg,0,0
+1039,1039,LR,at the left side of,at the right side of,True,False,The oven is at the right side of the left side of the person.,False,True,False,"The statement ""The oven is at the right side of the left side of the person"" is **True**.
+
+**Reasoning:**
+1.  **Identify the person's orientation:** The woman in the image is facing the camera. Therefore, her **left side** corresponds to the **right side of the",http://images.cocodataset.org/train2017/000000265810.jpg,1,0
+1041,1041,FB,in front of,behind,True,False,The person is behind the toaster.,False,False,True,"The statement ""The person is behind the toaster"" is **False**.
+
+**Reasoning:**
+1.  **Visual Evidence:** The image shows a man walking on a sidewalk in the foreground. Behind him is a wall with a large mural of a toaster painted on it.
+2.  **Spatial Relationship:** The",http://images.cocodataset.org/train2017/000000147073.jpg,1,0
+1037,1037,FB,behind,in front of,True,False,The bus is in front of the teddy bear.,False,False,True,False,http://images.cocodataset.org/train2017/000000355857.jpg,0,0
+1044,1044,FB,in front of,behind,True,False,The wine glass is behind the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000456991.jpg,0,0
+1042,1042,FF,facing away from,facing,False,True,The dog is facing the fire hydrant.,True,False,False,False,http://images.cocodataset.org/train2017/000000198935.jpg,0,0
+1049,1049,FB,in front of,behind,False,True,The cow is behind the sheep.,True,False,False,False,http://images.cocodataset.org/train2017/000000076970.jpg,0,0
+818,818,FB,at the back of,in front of,False,True,The parking meter is in front of the back of the car.,True,,,"The user wants me to determine the truth value of the statement ""The parking meter is in front of the back of the car"" based on the image.
+
+1.  **Analyze the image content**:
+    *   **Foreground**: A parking meter is clearly visible. It is the closest object to the camera.
+",http://images.cocodataset.org/train2017/000000355462.jpg,1,3
+989,989,LR,at the left side of,at the right side of,True,False,The parking meter is at the right side of the left side of the car.,False,True,False,"The statement ""The parking meter is at the right side of the left side of the car"" is **True**.
+
+**Reasoning:**
+1.  **Identify the car's orientation:** The car is facing towards the left side of the image. This means the ""left side of the car"" (the",http://images.cocodataset.org/train2017/000000422469.jpg,1,1
+1052,1052,LR,at the left side of,at the right side of,False,True,The person is at the right side of the left side of the cell phone.,True,True,True,"The statement ""The person is at the right side of the left side of the cell phone"" is **True**.
+
+**Reasoning:**
+1.  **""The left side of the cell phone""**: This refers to the left half of the phone (from the viewer's perspective).
+2.  **""",http://images.cocodataset.org/val2017/000000450686.jpg,1,0
+1054,1054,FB,in front of,behind,False,True,The dog is behind the bed.,True,False,False,False,http://images.cocodataset.org/train2017/000000153150.jpg,0,0
+1051,1051,FB,in front of,behind,False,True,The person is behind the bear.,True,False,False,False,http://images.cocodataset.org/train2017/000000071224.jpg,0,0
+1036,1036,FB,behind,in front of,False,True,The parking meter is in front of the truck.,True,True,True,True,http://images.cocodataset.org/train2017/000000064089.jpg,0,1
+1057,1057,LR,at the right side of,at the left side of,False,True,The zebra is at the left side of the right side of the car.,True,False,False,False,http://images.cocodataset.org/train2017/000000473587.jpg,0,0
+1018,1018,FF,facing away from,facing,False,True,The car is facing the pizza.,True,False,False,False,http://images.cocodataset.org/train2017/000000079798.jpg,0,0
+1046,1046,LR,at the right side of,at the left side of,True,False,The bowl is at the left side of the right side of the sandwich.,False,False,True,"The statement ""The bowl is at the left side of the right side of the sandwich"" is **False**.
+
+Here is the reasoning:
+1.  **Identify the objects**: The image shows a sandwich on a plate on the left and a bowl of soup on the right.
+2.  **Analyze the",http://images.cocodataset.org/train2017/000000274203.jpg,1,0
+1067,1067,LR,at the right side of,at the left side of,True,False,The bottle is at the left side of the right side of the wine glass.,False,False,True,"The statement ""The bottle is at the left side of the right side of the wine glass"" is **False**.
+
+Here is the reasoning:
+1.  **Identify the objects**: The image shows a wine glass on the left and a beer bottle on the right.
+2.  **Analyze the spatial relationship",http://images.cocodataset.org/train2017/000000571786.jpg,1,0
+1078,1078,FF,facing,facing away from,True,False,The dog is facing away from the horse.,False,False,True,False,http://images.cocodataset.org/train2017/000000331503.jpg,0,0
+1060,1060,FB,in front of,behind,False,True,The microwave is behind the person.,True,True,True,True,http://images.cocodataset.org/val2017/000000173008.jpg,0,0
+1085,1085,FB,behind,in front of,True,False,The person is in front of the cow.,False,False,True,False,http://images.cocodataset.org/train2017/000000234615.jpg,0,0
+1077,1077,FB,behind,in front of,True,False,The umbrella is in front of the motorcycle.,False,False,True,False,http://images.cocodataset.org/train2017/000000091636.jpg,0,0
+1068,1068,FB,behind,in front of,False,True,The oven is in front of the person.,True,False,False,"The user wants me to identify if the statement ""The oven is in front of the person"" is true or false based on the image.
+
+1.  **Analyze the image content**: The image shows a chef cooking on a large, flat metal surface. This is a teppanyaki grill (a type of",http://images.cocodataset.org/train2017/000000430643.jpg,1,0
+1090,1090,LR,at the right side of,at the left side of,False,True,The person is at the left side of the right side of the microwave.,True,True,True,"The statement ""The person is at the left side of the right side of the microwave"" is **True**.
+
+**Reasoning:**
+1.  **""The right side of the microwave""**: This refers to the right-hand portion of the appliance, which contains the control panel and keypad.
+2.  **",http://images.cocodataset.org/train2017/000000536999.jpg,1,0
+1081,1081,LR,at the right side of,at the left side of,False,True,The couch is at the left side of the right side of the person.,True,True,True,"The statement ""The couch is at the left side of the right side of the person"" is **True**.
+
+**Reasoning:**
+1.  **""The right side of the person""**: From the viewer's perspective, the right side of the image contains the girl's left arm, the book, and",http://images.cocodataset.org/train2017/000000367471.jpg,1,0
+1094,1094,LR,right of,left of,True,False,The cat is left of the umbrella.,False,False,True,False,http://images.cocodataset.org/train2017/000000038837.jpg,0,0
+1100,1100,LR,at the right side of,at the left side of,True,False,The laptop is at the left side of the right side of the sandwich.,False,False,True,"The statement ""The laptop is at the left side of the right side of the sandwich"" is **False**.
+
+Here is the reasoning:
+1.  **Identify the objects**: The image shows a sandwich on the left and a laptop on the right.
+2.  **Analyze the spatial relationship**: The laptop",http://images.cocodataset.org/train2017/000000336762.jpg,1,0
+1107,1107,FB,in front of,behind,True,False,The bus is behind the person.,False,True,False,True,http://images.cocodataset.org/train2017/000000507502.jpg,0,0
+1093,1093,FF,facing away from,facing,True,False,The laptop is facing the chair.,False,False,True,"The statement ""The laptop is facing the chair"" is **False**.
+
+**Reasoning:**
+1.  **Laptop Orientation:** The laptop is open and positioned on the desk. The screen is facing outwards towards the viewer (the camera), and the keyboard is facing inwards towards the back of the desk",http://images.cocodataset.org/train2017/000000131011.jpg,1,0
+1111,1111,FB,behind,in front of,True,False,The train is in front of the motorcycle.,False,False,True,False,http://images.cocodataset.org/train2017/000000338407.jpg,0,0
+1132,1132,FF,facing,facing away from,True,False,The person is facing away from the book.,False,False,True,False,http://images.cocodataset.org/train2017/000000527224.jpg,0,0
+1127,1127,FB,behind,in front of,False,True,The refrigerator is in front of the dog.,True,False,False,False,http://images.cocodataset.org/train2017/000000333848.jpg,0,0
+1121,1121,LR,at the left side of,at the right side of,True,False,The cat is at the right side of the left side of the teddy bear.,False,True,False,"The statement ""The cat is at the right side of the left side of the teddy bear"" is **True**.
+
+Here is the reasoning:
+1.  **Identify the objects**: There is a cat on the left side of the image and a large teddy bear on the right side of the image.
+",http://images.cocodataset.org/train2017/000000318089.jpg,1,0
+836,836,LR,at the right side of,at the left side of,False,True,The apple is at the left side of the right side of the bird.,True,,,"The statement ""The apple is at the left side of the right side of the bird"" is a convoluted way of describing the spatial relationship between the apple and the bird.
+
+1.  **Identify the objects**: The image shows a Rainbow Lorikeet (the bird) and a piece of apple.
+2",http://images.cocodataset.org/train2017/000000444080.jpg,1,3
+1104,1104,LR,left of,right of,True,False,The boat is right of the potted plant.,False,False,True,False,http://images.cocodataset.org/train2017/000000112363.jpg,0,0
+1119,1119,FB,behind,in front of,True,False,The teddy bear is in front of the car.,False,False,True,False,http://images.cocodataset.org/train2017/000000171107.jpg,0,0
+1135,1135,FB,behind,in front of,False,True,The tv is in front of the person.,True,True,True,True,http://images.cocodataset.org/train2017/000000138064.jpg,0,0
+1156,1156,FB,in front of,behind,True,False,The pizza is behind the dog.,False,False,True,False,http://images.cocodataset.org/train2017/000000508555.jpg,0,0
+1158,1158,FF,facing,facing away from,True,False,The refrigerator is facing away from the cat.,False,False,True,False,http://images.cocodataset.org/train2017/000000477647.jpg,0,0
+1155,1155,LR,at the right side of,at the left side of,False,True,The horse is at the left side of the right side of the person.,True,True,True,"The statement ""The horse is at the left side of the right side of the person"" is **True**.
+
+**Reasoning:**
+1.  **Identify the person's orientation:** The man in the image is facing towards the left side of the frame (his profile is visible, looking left).
+2.",http://images.cocodataset.org/train2017/000000495665.jpg,1,0
+1133,1133,FB,behind,in front of,True,False,The teddy bear is in front of the book.,False,False,True,False,http://images.cocodataset.org/train2017/000000127654.jpg,0,0
+1157,1157,LR,at the right side of,at the left side of,False,True,The horse is at the left side of the right side of the person.,True,True,True,"The statement ""The horse is at the left side of the right side of the person"" is **True**.
+
+**Reasoning:**
+1.  **Identify the person's orientation:** The person is facing the camera (the viewer).
+2.  **Determine the person's sides:** Because the person is",http://images.cocodataset.org/train2017/000000532748.jpg,1,0
+1165,1165,FB,in front of,behind,False,True,The car is behind the motorcycle.,True,True,True,True,http://images.cocodataset.org/train2017/000000009801.jpg,0,0
+1167,1167,FF,facing away from,facing,True,False,The dog is facing the horse.,False,False,True,False,http://images.cocodataset.org/val2017/000000049269.jpg,0,0
+1103,1103,LR,at the left side of,at the right side of,True,False,The dining table is at the right side of the left side of the person.,False,False,True,"The statement is **False**.
+
+**Reasoning:**
+1.  **Identify the person:** The child is the person in the image.
+2.  **Identify the ""left side of the person"":** From the viewer's perspective, the ""left side of the person"" refers to the left side",http://images.cocodataset.org/train2017/000000061315.jpg,1,1
+1176,1176,FB,in front of,behind,False,True,The dining table is behind the cat.,True,True,True,True,http://images.cocodataset.org/train2017/000000548661.jpg,0,0
+1170,1170,FB,in front of,behind,True,False,The cat is behind the backpack.,False,False,True,False,http://images.cocodataset.org/train2017/000000151497.jpg,0,0
+1164,1164,FB,in front of,behind,True,False,The hot dog is behind the bowl.,False,False,True,False,http://images.cocodataset.org/train2017/000000483996.jpg,0,0
+1180,1180,LR,at the left side of,at the right side of,False,True,The bench is at the right side of the left side of the person.,True,False,False,"The statement ""The bench is at the right side of the left side of the person"" is **False**.
+
+Here is the reasoning:
+1.  **Identify the person's orientation**: The person (Donna Summer) is facing the viewer. Therefore, her ""left side"" corresponds to the **right side",http://images.cocodataset.org/train2017/000000058836.jpg,1,0
+878,878,LR,at the right side of,at the left side of,True,False,The bed is at the left side of the right side of the dining table.,False,,,"The statement claims that the bed is located to the left of the right side of the dining table. In the image, the dining table is in the foreground, and the bed is situated in the background on the right side of the frame. Since the bed is positioned to the right of the table (and specifically to the",http://images.cocodataset.org/train2017/000000457906.jpg,1,3
+1194,1194,FB,in front of,behind,False,True,The cat is behind the potted plant.,True,False,False,False,http://images.cocodataset.org/train2017/000000148705.jpg,0,0
+1173,1173,FB,in front of,behind,True,False,The car is behind the cat.,False,False,True,False,http://images.cocodataset.org/train2017/000000206255.jpg,0,1
+1196,1196,FB,behind,in front of,False,True,The person is in front of the elephant.,True,True,True,True,http://images.cocodataset.org/train2017/000000041649.jpg,0,0
+1178,1178,PP,parallel to,perpendicular to,True,False,The bench is perpendicular to the person.,False,False,True,"The statement ""The bench is perpendicular to the person"" is **False**.
+
+**Reasoning:**
+In the image, the woman is sitting on the bench. Her body is oriented in the same direction as the bench (facing forward, parallel to the length of the seat). If the bench were perpendicular to her",http://images.cocodataset.org/train2017/000000385504.jpg,1,0
+1198,1198,FB,at the back of,in front of,True,False,The bird is in front of the back of the person.,False,True,False,True,http://images.cocodataset.org/train2017/000000371256.jpg,0,0
+1168,1168,LR,at the right side of,at the left side of,True,False,The backpack is at the left side of the right side of the cat.,False,True,False,"The statement ""The backpack is at the left side of the right side of the cat"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a cat and a backpack.
+2.  **Determine relative positions:** From the viewer's perspective, the cat is",http://images.cocodataset.org/train2017/000000151497.jpg,1,1
+1204,1204,LR,at the left side of,at the right side of,False,True,The person is at the right side of the left side of the oven.,True,True,True,"The statement ""The person is at the right side of the left side of the oven"" is **True**.
+
+**Reasoning:**
+1.  **Identify the oven:** The oven is the white appliance located on the left side of the image.
+2.  **Identify the ""left side of the",http://images.cocodataset.org/val2017/000000280930.jpg,1,0
+1211,1211,FB,behind,in front of,False,True,The refrigerator is in front of the person.,True,False,False,"The statement ""The refrigerator is in front of the person"" is **False**.
+
+**Reasoning:**
+1.  **Identify the person:** The person is the chef wearing a white uniform, positioned on the right side of the image.
+2.  **Identify the refrigerator:** The refrigerator is the white",http://images.cocodataset.org/train2017/000000160267.jpg,1,0
+1219,1219,FF,facing away from,facing,True,False,The person is facing the keyboard.,False,False,True,False,http://images.cocodataset.org/train2017/000000544046.jpg,0,0
+1210,1210,LR,at the left side of,at the right side of,False,True,The sandwich is at the right side of the left side of the laptop.,True,False,False,False,http://images.cocodataset.org/train2017/000000349230.jpg,0,1
+1202,1202,FF,facing,facing away from,True,False,The bird is facing away from the elephant.,False,True,False,True,http://images.cocodataset.org/train2017/000000099628.jpg,0,0
+1203,1203,FB,behind,in front of,False,True,The dog is in front of the apple.,True,False,False,False,http://images.cocodataset.org/train2017/000000019528.jpg,0,0
+1231,1231,LR,at the left side of,at the right side of,True,False,The teddy bear is at the right side of the left side of the dog.,False,False,True,False,http://images.cocodataset.org/train2017/000000537636.jpg,0,0
+1230,1230,LR,at the right side of,at the left side of,False,True,The microwave is at the left side of the right side of the person.,True,True,True,"The statement ""The microwave is at the left side of the right side of the person"" is **True**.
+
+**Reasoning:**
+1.  **Identify the person's orientation:** The person is facing the right side of the image (profile view).
+2.  **Identify the ""right side of",http://images.cocodataset.org/train2017/000000469793.jpg,1,0
+1234,1234,FF,facing,facing away from,False,True,The person is facing away from the refrigerator.,True,False,False,"The statement is **False**.
+
+**Reasoning:**
+1.  **Identify the person:** The person in the image is the young boy sitting at the table.
+2.  **Identify the refrigerator:** The large white appliance visible in the background behind the boy is a refrigerator.
+3.  **D",http://images.cocodataset.org/train2017/000000214305.jpg,1,0
+1233,1233,LR,left of,right of,True,False,The car is right of the parking meter.,False,False,True,False,http://images.cocodataset.org/train2017/000000385172.jpg,0,0
+1235,1235,FB,at the back of,in front of,False,True,The person is in front of the back of the cow.,True,False,False,"The statement ""The person is in front of the back of the cow"" is **False**.
+
+**Reasoning:**
+1.  **Identify the animals:** The image contains a large sheep in the center and a smaller animal (likely a goat or calf) on the left. There is no cow visible in",http://images.cocodataset.org/train2017/000000076970.jpg,1,0
+1243,1243,FF,facing,facing away from,False,True,The cat is facing away from the teddy bear.,True,False,False,"The user wants me to determine if the statement ""The cat is facing away from the teddy bear"" is true or false based on the image.
+
+1.  **Analyze the image content**:
+    *   **Subject**: A tortoiseshell cat is standing on a bed or sofa.
+    *  ",http://images.cocodataset.org/train2017/000000104510.jpg,1,0
+1226,1226,LR,at the right side of,at the left side of,True,False,The person is at the left side of the right side of the refrigerator.,False,True,False,"The statement ""The person is at the left side of the right side of the refrigerator"" is **True**.
+
+**Reasoning:**
+1.  **Identify the refrigerator:** The refrigerator is the large white appliance located on the far left side of the image.
+2.  **Identify the ""right side",http://images.cocodataset.org/train2017/000000066273.jpg,1,0
+1245,1245,FB,behind,in front of,True,False,The motorcycle is in front of the parking meter.,False,False,True,False,http://images.cocodataset.org/train2017/000000222716.jpg,0,0
+1026,1026,LR,at the right side of,at the left side of,True,False,The wine glass is at the left side of the right side of the teddy bear.,False,,,"The statement claims that the wine glass is located on the left side of the right side of the teddy bear. In the image, the teddy bear is positioned on the left side of the right-hand photo. The person holding the wine glass is sitting to the right of the teddy bear. Therefore, the wine",http://images.cocodataset.org/train2017/000000444343.jpg,1,3
+1251,1251,FB,behind,in front of,True,False,The refrigerator is in front of the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000315030.jpg,0,0
+1254,1254,FB,in front of,behind,True,False,The sandwich is behind the dog.,False,False,True,False,http://images.cocodataset.org/train2017/000000567106.jpg,0,0
+1244,1244,FB,behind,in front of,True,False,The sheep is in front of the cow.,False,False,True,False,http://images.cocodataset.org/train2017/000000378214.jpg,0,0
+1256,1256,LR,at the right side of,at the left side of,True,False,The person is at the left side of the right side of the cell phone.,False,True,False,"The statement ""The person is at the left side of the right side of the cell phone"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The cell phone is located on the far left side of the table. The person is sitting in the center of the image.
+2",http://images.cocodataset.org/train2017/000000248170.jpg,1,0
+1260,1260,LR,at the right side of,at the left side of,True,False,The person is at the left side of the right side of the dining table.,False,True,False,"The statement ""The person is at the left side of the right side of the dining table"" is **True**.
+
+**Reasoning:**
+1.  **Identify the person:** The person (visible by their arm and torso) is located in the **top-right** quadrant of the image.
+2. ",http://images.cocodataset.org/train2017/000000529234.jpg,1,0
+1253,1253,FB,behind,in front of,False,True,The chair is in front of the hot dog.,True,False,False,"The statement ""The chair is in front of the hot dog"" is **False**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a plate of food (containing pita sandwiches and salad) resting on a dark, textured surface. This surface is likely a table or a",http://images.cocodataset.org/train2017/000000311448.jpg,1,0
+1263,1263,FB,at the back of,in front of,True,False,The couch is in front of the back of the laptop.,False,False,True,False,http://images.cocodataset.org/train2017/000000518324.jpg,0,0
+1266,1266,FF,facing away from,facing,True,False,The cat is facing the bed.,False,False,True,False,http://images.cocodataset.org/train2017/000000175383.jpg,0,0
+1264,1264,LR,at the left side of,at the right side of,True,False,The orange is at the right side of the left side of the book.,False,True,False,"The statement ""The orange is at the right side of the left side of the book"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a spiral notebook (referred to as ""the book"") on the right side of the desk and an orange in the",http://images.cocodataset.org/train2017/000000377611.jpg,1,0
+987,987,FB,in front of,behind,False,True,The orange is behind the banana.,True,True,True,True,http://images.cocodataset.org/train2017/000000038668.jpg,0,2
+1272,1272,LR,at the left side of,at the right side of,True,False,The teddy bear is at the right side of the left side of the car.,False,True,False,"The statement ""The teddy bear is at the right side of the left side of the car"" is **True**.
+
+**Reasoning:**
+1.  **""The left side of the car""**: The image shows the driver's side of the taxi (indicated by the steering wheel and door handles),",http://images.cocodataset.org/train2017/000000407422.jpg,1,0
+1045,1045,FB,behind,in front of,False,True,The zebra is in front of the person.,True,True,True,"The user wants to know if the statement ""The zebra is in front of the person"" is true based on the image.
+
+1.  **Identify the subjects:** The image shows a zebra standing on a road and a silver car to the left.
+2.  **Locate the person:** A person",http://images.cocodataset.org/train2017/000000236925.jpg,1,3
+1279,1279,FB,behind,in front of,True,False,The person is in front of the keyboard.,False,True,False,True,http://images.cocodataset.org/train2017/000000076738.jpg,0,0
+1281,1281,LR,at the left side of,at the right side of,False,True,The laptop is at the right side of the left side of the cat.,True,True,True,"The statement ""The laptop is at the right side of the left side of the cat"" is **True**.
+
+**Reasoning:**
+1.  **Identify the ""left side of the cat"":** The cat is facing the camera. Anatomically, the cat's left side is on the right side",http://images.cocodataset.org/train2017/000000068136.jpg,1,0
+1273,1273,FB,behind,in front of,False,True,The cat is in front of the laptop.,True,True,True,True,http://images.cocodataset.org/train2017/000000360805.jpg,0,0
+1222,1222,LR,right of,left of,True,False,The oven is left of the cat.,False,False,True,False,http://images.cocodataset.org/train2017/000000020087.jpg,0,2
+1114,1114,LR,at the right side of,at the left side of,True,False,The cake is at the left side of the right side of the laptop.,False,True,False,True,http://images.cocodataset.org/train2017/000000349230.jpg,0,3
+1298,1298,FB,behind,in front of,True,False,The refrigerator is in front of the dog.,False,False,True,False,http://images.cocodataset.org/train2017/000000567106.jpg,0,0
+1295,1295,LR,at the left side of,at the right side of,True,False,The person is at the right side of the left side of the couch.,False,True,False,"The statement ""The person is at the right side of the left side of the couch"" is **True**.
+
+**Reasoning:**
+1.  **""The left side of the couch""**: From the viewer's perspective, the couch is divided into a left half and a right half. The person is sitting",http://images.cocodataset.org/train2017/000000300280.jpg,1,0
+1299,1299,LR,left of,right of,True,False,The vase is right of the dog.,False,False,True,False,http://images.cocodataset.org/train2017/000000117108.jpg,0,0
+1290,1290,FB,in front of,behind,True,False,The person is behind the train.,False,False,True,False,http://images.cocodataset.org/train2017/000000111347.jpg,0,0
+1296,1296,FF,facing away from,facing,True,False,The horse is facing the zebra.,False,False,True,"The user wants me to determine if the statement ""The horse is facing the zebra"" is true or false based on the image.
+
+1.  **Identify the objects:** There are two marionettes hanging from a light fixture. On the left is a white horse. On the right is a zebra.
+",http://images.cocodataset.org/train2017/000000568005.jpg,1,0
+1285,1285,LR,at the left side of,at the right side of,False,True,The motorcycle is at the right side of the left side of the train.,True,True,True,"The statement ""The motorcycle is at the right side of the left side of the train"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a motorcycle in the foreground and a train (tanker car) in the background.
+2.  **Determine relative",http://images.cocodataset.org/train2017/000000338407.jpg,1,0
+1304,1304,FB,in front of,behind,False,True,The person is behind the tv.,True,False,False,False,http://images.cocodataset.org/train2017/000000580651.jpg,0,0
+1274,1274,LR,at the left side of,at the right side of,False,True,The cup is at the right side of the left side of the orange.,True,False,False,"The statement ""The cup is at the right side of the left side of the orange"" is **False**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a bowl of peeled oranges (tangerines) on the left and a black wire basket (referred to as """,http://images.cocodataset.org/val2017/000000351609.jpg,1,1
+1306,1306,FB,in front of,behind,True,False,The person is behind the couch.,False,False,True,False,http://images.cocodataset.org/train2017/000000485350.jpg,0,0
+1151,1151,LR,at the left side of,at the right side of,True,False,The cup is at the right side of the left side of the bowl.,False,False,True,"The statement ""The cup is at the right side of the left side of the bowl"" is **False**.
+
+The cup is located to the left of the bowl. The phrase ""right side of the left side of the bowl"" refers to the left side of the bowl itself (or the area immediately to its left",http://images.cocodataset.org/train2017/000000278646.jpg,1,3
+1305,1305,LR,at the left side of,at the right side of,True,False,The potted plant is at the right side of the left side of the bench.,False,False,True,"The statement is **False**.
+
+The potted plant (the Christmas tree) is located to the left of the bench. The phrase ""at the right side of the left side of the bench"" implies a location on the bench itself (specifically the left seat), which is where the woman is sitting, not where",http://images.cocodataset.org/train2017/000000333538.jpg,1,0
+1312,1312,FF,facing away from,facing,True,False,The hair drier is facing the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000092020.jpg,0,0
+1322,1322,LR,at the left side of,at the right side of,False,True,The laptop is at the right side of the left side of the cat.,True,False,False,False,http://images.cocodataset.org/val2017/000000403817.jpg,0,0
+1308,1308,FF,facing,facing away from,False,True,The tv is facing away from the toilet.,True,False,False,"The statement is **False**.
+
+**Reasoning:**
+1.  **Identify the TV:** The large black screen is a television embedded in the mirror.
+2.  **Identify the Toilet:** The reflection in the mirror shows a white, rectangular object on the floor behind the viewer. This is a **",http://images.cocodataset.org/train2017/000000028149.jpg,1,0
+1307,1307,LR,left of,right of,True,False,The cup is right of the donut.,False,False,True,False,http://images.cocodataset.org/train2017/000000224306.jpg,0,0
+1333,1333,FB,behind,in front of,False,True,The motorcycle is in front of the dog.,True,False,False,False,http://images.cocodataset.org/train2017/000000251716.jpg,0,0
+1329,1329,FF,facing,facing away from,False,True,The oven is facing away from the tv.,True,False,False,"The statement ""The oven is facing away from the tv"" is **False**.
+
+**Reasoning:**
+1.  **TV Orientation:** The television is located on the counter in the background. Its screen is facing forward, towards the viewer and the man in the kitchen.
+2.  **Oven Orientation:**",http://images.cocodataset.org/train2017/000000164587.jpg,1,0
+1326,1326,FB,in front of,behind,False,True,The giraffe is behind the person.,True,True,True,True,http://images.cocodataset.org/train2017/000000523966.jpg,0,0
+1334,1334,LR,at the right side of,at the left side of,False,True,The cat is at the left side of the right side of the laptop.,True,True,True,"The statement ""The cat is at the left side of the right side of the laptop"" is **True**.
+
+**Reasoning:**
+1.  **""The right side of the laptop""**: This refers to the right half of the laptop (the right side of the keyboard and screen).
+2.  **",http://images.cocodataset.org/train2017/000000390129.jpg,1,0
+1338,1338,FF,facing,facing away from,False,True,The cat is facing away from the keyboard.,True,False,False,False,http://images.cocodataset.org/train2017/000000078741.jpg,0,0
+1345,1345,LR,at the left side of,at the right side of,True,False,The dog is at the right side of the left side of the car.,False,False,True,"The statement is **False**.
+
+**Reasoning:**
+1.  **Identify the Mirror:** The image shows the passenger-side wing mirror of a car (indicated by the mirror's shape and the fact that the car body is visible on the right side of the mirror housing). In a standard Left-Hand",http://images.cocodataset.org/train2017/000000467187.jpg,1,0
+1353,1353,LR,at the left side of,at the right side of,False,True,The laptop is at the right side of the left side of the couch.,True,True,True,"The statement ""The laptop is at the right side of the left side of the couch"" is **True**.
+
+**Reasoning:**
+1.  **Identify the couch:** The red seating furniture is the couch.
+2.  **Identify the ""left side of the couch"":** From the viewer's",http://images.cocodataset.org/train2017/000000096728.jpg,1,0
+1344,1344,FB,behind,in front of,True,False,The laptop is in front of the cat.,False,False,True,False,http://images.cocodataset.org/train2017/000000198981.jpg,0,0
+1350,1350,LR,left of,right of,False,True,The keyboard is right of the pizza.,True,False,False,False,http://images.cocodataset.org/train2017/000000320471.jpg,0,0
+1317,1317,LR,at the left side of,at the right side of,False,True,The bus is at the right side of the left side of the stop sign.,True,False,False,"The statement ""The bus is at the right side of the left side of the stop sign"" is **False**.
+
+**Reasoning:**
+1.  **Analyze the spatial layout:** In the image, the red stop sign is located on the left side of the frame, and the yellow bus is located on",http://images.cocodataset.org/train2017/000000425381.jpg,1,1
+1342,1342,FF,facing,facing away from,True,False,The cell phone is facing away from the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000125698.jpg,0,0
+1358,1358,LR,at the left side of,at the right side of,True,False,The skateboard is at the right side of the left side of the dog.,False,True,False,"The statement ""The skateboard is at the right side of the left side of the dog"" is **True**.
+
+**Reasoning:**
+1.  **Identify the dog's orientation:** The dog is facing the camera. From the dog's perspective, its **left side** is on the **right side of",http://images.cocodataset.org/train2017/000000251368.jpg,1,0
+1362,1362,FB,behind,in front of,True,False,The broccoli is in front of the sandwich.,False,False,True,False,http://images.cocodataset.org/train2017/000000242619.jpg,0,0
+1179,1179,LR,at the right side of,at the left side of,True,False,The cake is at the left side of the right side of the laptop.,False,,,"The statement claims that the cake is located at the ""left side of the right side of the laptop.""
+
+1.  **Identify the objects:** The image shows a laptop on the far left side and a large cake occupying the center and right side.
+2.  **Analyze the spatial relationship:** The laptop is",http://images.cocodataset.org/train2017/000000531049.jpg,1,3
+1375,1375,FF,facing away from,facing,True,False,The cat is facing the refrigerator.,False,False,True,False,http://images.cocodataset.org/train2017/000000423921.jpg,0,0
+1195,1195,LR,left of,right of,False,True,The toaster is right of the bowl.,True,,,"The user wants me to verify the spatial relationship between the toaster and the bowl in the image.
+
+1.  **Identify the objects**:
+    *   **Bowl**: There is a green bowl filled with sliced bananas in the foreground, positioned roughly in the center of the image.
+    *   **Toaster",http://images.cocodataset.org/train2017/000000515202.jpg,1,3
+1370,1370,LR,right of,left of,False,True,The bowl is left of the hot dog.,True,False,False,False,http://images.cocodataset.org/train2017/000000557186.jpg,0,0
+1364,1364,LR,left of,right of,True,False,The teddy bear is right of the cup.,False,False,True,False,http://images.cocodataset.org/train2017/000000188053.jpg,0,0
+1365,1365,FB,in front of,behind,False,True,The banana is behind the broccoli.,True,False,False,False,http://images.cocodataset.org/train2017/000000547743.jpg,0,0
+1369,1369,FF,facing,facing away from,True,False,The laptop is facing away from the cat.,False,False,True,False,http://images.cocodataset.org/train2017/000000453400.jpg,0,0
+1356,1356,LR,at the left side of,at the right side of,False,True,The oven is at the right side of the left side of the person.,True,True,True,"The statement ""The oven is at the right side of the left side of the person"" is **True**.
+
+**Reasoning:**
+1.  **Identify the person's orientation:** The person is positioned on the left side of the image, facing towards the right side of the image (towards the oven",http://images.cocodataset.org/train2017/000000562247.jpg,1,0
+1367,1367,LR,at the right side of,at the left side of,True,False,The horse is at the left side of the right side of the truck.,False,True,False,"The statement ""The horse is at the left side of the right side of the truck"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a red Coca-Cola truck on the left and a brown horse on the right.
+2.  **Analyze the spatial",http://images.cocodataset.org/train2017/000000017311.jpg,1,0
+1390,1390,FB,in front of,behind,True,False,The person is behind the oven.,False,False,True,False,http://images.cocodataset.org/val2017/000000552775.jpg,0,0
+1383,1383,LR,left of,right of,True,False,The cow is right of the car.,False,False,True,False,http://images.cocodataset.org/train2017/000000185360.jpg,0,0
+1380,1380,PP,parallel to,perpendicular to,False,True,The train is perpendicular to the boat.,True,False,False,"The statement ""The train is perpendicular to the boat"" is **False**.
+
+**Reasoning:**
+1.  **Identify the objects:** The ""train"" refers to the red railway caboose on the left side of the image. The ""boat"" refers to the white and blue boat on a trailer in",http://images.cocodataset.org/train2017/000000507535.jpg,1,0
+1183,1183,LR,left of,right of,True,False,The banana is right of the person.,False,,,"The user wants me to determine the truth value of the statement ""The banana is right of the person"" based on the image.
+
+1.  **Identify the person:** The main subject is a young boy dressed as a chef, standing in the kitchen. He is positioned in the center-left of the image, facing",http://images.cocodataset.org/train2017/000000084959.jpg,1,3
+1386,1386,LR,at the left side of,at the right side of,True,False,The banana is at the right side of the left side of the orange.,False,True,False,"The statement ""The banana is at the right side of the left side of the orange"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a bunch of bananas on the left and an orange on the right.
+2.  **Analyze the phrase ""the",http://images.cocodataset.org/train2017/000000500228.jpg,1,0
+1376,1376,FF,facing,facing away from,False,True,The laptop is facing away from the cat.,True,False,False,False,http://images.cocodataset.org/train2017/000000491250.jpg,0,0
+1357,1357,FB,in front of,behind,True,False,The bench is behind the bicycle.,False,False,True,False,http://images.cocodataset.org/train2017/000000281764.jpg,0,0
+1384,1384,PP,parallel to,perpendicular to,False,True,The person is perpendicular to the snowboard.,True,False,False,"The statement ""The person is perpendicular to the snowboard"" is **False**.
+
+**Reasoning:**
+In the image, the person is sitting on the snow with their legs extended forward, and the snowboard is attached to their feet. The person's legs and torso are roughly parallel to the snowboard, not",http://images.cocodataset.org/train2017/000000409025.jpg,1,0
+1395,1395,FB,in front of,behind,True,False,The boat is behind the dining table.,False,False,True,False,http://images.cocodataset.org/train2017/000000329421.jpg,0,0
+1391,1391,LR,at the left side of,at the right side of,True,False,The umbrella is at the right side of the left side of the couch.,False,True,False,True,http://images.cocodataset.org/train2017/000000123916.jpg,0,0
+1400,1400,FF,facing away from,facing,True,False,The cat is facing the suitcase.,False,False,True,False,http://images.cocodataset.org/train2017/000000159118.jpg,0,0
+1405,1405,FF,facing,facing away from,True,False,The teddy bear is facing away from the book.,False,False,True,"The statement is **False**.
+
+**Reasoning:**
+The teddy bear is positioned to the right of the book. Its eye is visible and appears to be looking towards the left, where the book is located. Since the bear is looking in the direction of the book, it is facing towards it, not away",http://images.cocodataset.org/train2017/000000369653.jpg,1,0
+1429,1429,FB,behind,in front of,False,True,The skateboard is in front of the bed.,True,False,False,False,http://images.cocodataset.org/train2017/000000512582.jpg,0,0
+1428,1428,FB,in front of,behind,False,True,The dog is behind the couch.,True,False,False,False,http://images.cocodataset.org/train2017/000000512183.jpg,0,0
+1426,1426,FB,behind,in front of,True,False,The person is in front of the cake.,False,False,True,False,http://images.cocodataset.org/train2017/000000449279.jpg,0,0
+1392,1392,LR,left of,right of,True,False,The surfboard is right of the bed.,False,False,True,False,http://images.cocodataset.org/train2017/000000016458.jpg,0,1
+1430,1430,FB,in front of,behind,True,False,The truck is behind the boat.,False,False,True,False,http://images.cocodataset.org/train2017/000000266353.jpg,0,0
+1437,1437,LR,at the left side of,at the right side of,True,False,The orange is at the right side of the left side of the laptop.,False,False,True,False,http://images.cocodataset.org/train2017/000000144430.jpg,0,0
+1440,1440,LR,right of,left of,False,True,The dining table is left of the bed.,True,True,True,True,http://images.cocodataset.org/train2017/000000447151.jpg,0,0
+1441,1441,FB,behind,in front of,False,True,The person is in front of the bear.,True,False,False,False,http://images.cocodataset.org/train2017/000000491505.jpg,0,0
+1434,1434,FB,behind,in front of,True,False,The person is in front of the teddy bear.,False,False,True,"The statement ""The person is in front of the teddy bear"" is **False**.
+
+**Reasoning:**
+In the image, the teddy bear is positioned in the foreground, closer to the camera. The person's hands and body are visible behind the teddy bear, holding it or resting near it.",http://images.cocodataset.org/train2017/000000050403.jpg,1,0
+1450,1450,FF,facing,facing away from,False,True,The person is facing away from the bear.,True,False,False,False,http://images.cocodataset.org/val2017/000000390826.jpg,0,0
+1445,1445,FB,behind,in front of,False,True,The truck is in front of the sheep.,True,False,False,False,http://images.cocodataset.org/train2017/000000184679.jpg,0,0
+1452,1452,FB,in front of,behind,False,True,The person is behind the toilet.,True,False,False,False,http://images.cocodataset.org/train2017/000000184866.jpg,0,0
+1448,1448,FB,in front of,behind,False,True,The sandwich is behind the laptop.,True,False,False,False,http://images.cocodataset.org/train2017/000000343655.jpg,0,0
+1424,1424,FB,behind,in front of,True,False,The stop sign is in front of the car.,False,False,True,"The statement is **False**.
+
+**Reasoning:**
+The image shows a view through a car's side-view mirror. In a mirror reflection, objects that appear in the glass are located **behind** the car. The stop sign is visible in the reflection, which means it is located behind the vehicle, not",http://images.cocodataset.org/train2017/000000391392.jpg,1,0
+1447,1447,FB,behind,in front of,True,False,The cat is in front of the laptop.,False,False,True,False,http://images.cocodataset.org/train2017/000000333758.jpg,0,0
+1420,1420,FB,behind,in front of,True,False,The laptop is in front of the pizza.,False,False,True,False,http://images.cocodataset.org/train2017/000000073353.jpg,0,0
+1469,1469,FB,behind,in front of,False,True,The cow is in front of the sheep.,True,False,False,False,http://images.cocodataset.org/train2017/000000459736.jpg,0,0
+1470,1470,FB,behind,in front of,True,False,The apple is in front of the banana.,False,False,True,False,http://images.cocodataset.org/train2017/000000058008.jpg,0,0
+1467,1467,FB,behind,in front of,False,True,The refrigerator is in front of the person.,True,True,True,True,http://images.cocodataset.org/train2017/000000328810.jpg,0,0
+1479,1479,FB,behind,in front of,False,True,The dog is in front of the donut.,True,True,True,True,http://images.cocodataset.org/train2017/000000108113.jpg,0,0
+1458,1458,FB,in front of,behind,True,False,The person is behind the oven.,False,False,True,False,http://images.cocodataset.org/train2017/000000171584.jpg,0,0
+1490,1490,FF,facing away from,facing,True,False,The laptop is facing the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000517967.jpg,0,0
+1494,1494,LR,at the right side of,at the left side of,False,True,The cat is at the left side of the right side of the backpack.,True,True,True,"The statement ""The cat is at the left side of the right side of the backpack"" is **True**.
+
+**Reasoning:**
+1.  **Identify the Backpack:** The black backpack is located in the background, behind the laptop.
+2.  **Identify the ""Right Side of the Backpack"":",http://images.cocodataset.org/train2017/000000127799.jpg,1,0
+1499,1499,LR,at the left side of,at the right side of,False,True,The toilet is at the right side of the left side of the dog.,True,True,True,"The statement ""The toilet is at the right side of the left side of the dog"" is **True**.
+
+**Reasoning:**
+1.  **Identify the Dog's Orientation:** The dog is positioned on the right side of the image, facing towards the left (into the toilet bowl). This means the",http://images.cocodataset.org/train2017/000000145544.jpg,1,0
+1496,1496,FB,behind,in front of,True,False,The handbag is in front of the bed.,False,False,True,False,http://images.cocodataset.org/train2017/000000336182.jpg,0,0
+1502,1502,FB,behind,in front of,True,False,The train is in front of the person.,False,False,True,False,http://images.cocodataset.org/val2017/000000250127.jpg,0,0
+1500,1500,FB,in front of,behind,False,True,The tv is behind the teddy bear.,True,False,False,False,http://images.cocodataset.org/train2017/000000272510.jpg,0,0
+1501,1501,LR,at the right side of,at the left side of,True,False,The donut is at the left side of the right side of the person.,False,True,False,"The statement ""The donut is at the left side of the right side of the person"" is **True**.
+
+**Reasoning:**
+1.  **""The right side of the person""**: The boy is facing to the right of the image. Therefore, the ""right side of the person"" refers",http://images.cocodataset.org/train2017/000000121068.jpg,1,0
+1486,1486,LR,at the left side of,at the right side of,True,False,The person is at the right side of the left side of the umbrella.,False,True,False,"The statement ""The person is at the right side of the left side of the umbrella"" is **True**.
+
+Here is the reasoning:
+1.  **Identify the objects**: The image shows a person (a child) and an umbrella in a bathtub.
+2.  **Determine relative positions**: The person",http://images.cocodataset.org/train2017/000000080200.jpg,1,0
+1493,1493,FB,at the back of,in front of,True,False,The cat is in front of the back of the motorcycle.,False,True,False,"The statement ""The cat is in front of the back of the motorcycle"" is **True**.
+
+The cat is lying on the motorcycle's seat. The ""back of the motorcycle"" refers to the rear section (tail or fender). Since the seat is located forward of the rear section, the cat is positioned in",http://images.cocodataset.org/train2017/000000546264.jpg,1,1
+1507,1507,LR,at the right side of,at the left side of,True,False,The person is at the left side of the right side of the bench.,False,True,False,True,http://images.cocodataset.org/train2017/000000569332.jpg,0,0
+1511,1511,LR,right of,left of,True,False,The sheep is left of the person.,False,True,False,True,http://images.cocodataset.org/train2017/000000496636.jpg,0,0
+1510,1510,LR,at the left side of,at the right side of,False,True,The cat is at the right side of the left side of the person.,True,True,True,"The statement ""The cat is at the right side of the left side of the person"" is **True**.
+
+**Reasoning:**
+1.  **Identify the person's orientation:** The person's hand is visible on the right side of the image, reaching in from the right edge. This indicates the person",http://images.cocodataset.org/train2017/000000233005.jpg,1,0
+1246,1246,LR,at the left side of,at the right side of,False,True,The sandwich is at the right side of the left side of the cup.,True,,,"The user wants me to evaluate the truthfulness of the statement: ""The sandwich is at the right side of the left side of the cup.""
+
+1.  **Identify the objects:**
+    *   **Sandwich:** There is a large burger/sandwich on the right side of the main plate in the",http://images.cocodataset.org/train2017/000000319122.jpg,1,3
+1512,1512,LR,at the right side of,at the left side of,False,True,The vase is at the left side of the right side of the cat.,True,True,True,"The statement ""The vase is at the left side of the right side of the cat"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a cat (the brown furry object) inside a green vase.
+2.  **Locate the ""right side of",http://images.cocodataset.org/train2017/000000152724.jpg,1,0
+1529,1529,FB,behind,in front of,False,True,The bed is in front of the dog.,True,False,False,False,http://images.cocodataset.org/val2017/000000267300.jpg,0,0
+1506,1506,LR,right of,left of,True,False,The laptop is left of the couch.,False,False,True,False,http://images.cocodataset.org/train2017/000000275855.jpg,0,0
+1542,1542,FB,in front of,behind,True,False,The donut is behind the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000023218.jpg,0,0
+1528,1528,LR,at the right side of,at the left side of,True,False,The person is at the left side of the right side of the giraffe.,False,True,False,"The statement ""The person is at the left side of the right side of the giraffe"" is **True**.
+
+**Reasoning:**
+1.  **Identify the Giraffe's Right Side:** The giraffe is facing the right side of the image. From the giraffe's perspective, its right side",http://images.cocodataset.org/train2017/000000511654.jpg,1,0
+1414,1414,LR,at the left side of,at the right side of,False,True,The car is at the right side of the left side of the cat.,True,True,True,"The statement ""The car is at the right side of the left side of the cat"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a cat lying underneath a car. The car (specifically the bumper and exhaust pipe) is located in the upper portion",http://images.cocodataset.org/train2017/000000365353.jpg,1,2
+1557,1557,LR,at the left side of,at the right side of,False,True,The person is at the right side of the left side of the pizza.,True,True,True,"The statement ""The person is at the right side of the left side of the pizza"" is **True**.
+
+**Reasoning:**
+1.  **Identify the ""left side of the pizza"":** This refers to the left half of the pizza from the viewer's perspective.
+2.  **Identify",http://images.cocodataset.org/val2017/000000027696.jpg,1,0
+1555,1555,FB,at the back of,in front of,False,True,The cow is in front of the back of the person.,True,True,True,"The statement ""The cow is in front of the back of the person"" is **True**.
+
+**Reasoning:**
+1.  **Perspective:** The image is taken from a first-person perspective (Point of View). We see the person's arm and shoulder in the foreground on the left, extending into the",http://images.cocodataset.org/train2017/000000221771.jpg,1,0
+1559,1559,FF,facing,facing away from,True,False,The cat is facing away from the laptop.,False,False,True,False,http://images.cocodataset.org/train2017/000000369208.jpg,0,0
+1547,1547,FB,behind,in front of,True,False,The bed is in front of the couch.,False,False,True,False,http://images.cocodataset.org/train2017/000000553968.jpg,0,0
+1575,1575,FB,in front of,behind,True,False,The keyboard is behind the cat.,False,False,True,False,http://images.cocodataset.org/train2017/000000350481.jpg,0,0
+1572,1572,FB,behind,in front of,True,False,The motorcycle is in front of the dining table.,False,False,True,False,http://images.cocodataset.org/train2017/000000125407.jpg,0,0
+1578,1578,LR,at the right side of,at the left side of,True,False,The cat is at the left side of the right side of the toilet.,False,True,False,True,http://images.cocodataset.org/train2017/000000194313.jpg,0,0
+1592,1592,FF,facing away from,facing,False,True,The dog is facing the person.,True,True,True,True,http://images.cocodataset.org/train2017/000000542165.jpg,0,0
+1563,1563,FB,behind,in front of,False,True,The bicycle is in front of the chair.,True,True,True,True,http://images.cocodataset.org/train2017/000000257036.jpg,0,1
+1590,1590,FB,at the back of,in front of,True,False,The car is in front of the back of the person.,False,False,True,"The statement ""The car is in front of the back of the person"" is **False**.
+
+**Reasoning:**
+1.  **Identify the person and their orientation:** The man in the blue jacket is standing in the foreground, facing towards the left side of the image (profile view). His back is",http://images.cocodataset.org/train2017/000000194510.jpg,1,1
+1591,1591,FB,behind,in front of,True,False,The potted plant is in front of the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000478298.jpg,0,0
+1593,1593,FB,at the back of,in front of,False,True,The cat is in front of the back of the laptop.,True,True,True,True,http://images.cocodataset.org/train2017/000000360805.jpg,0,0
+1604,1604,FB,in front of,behind,True,False,The sink is behind the cat.,False,True,False,True,http://images.cocodataset.org/train2017/000000020087.jpg,0,0
+1611,1611,FF,facing,facing away from,True,False,The cat is facing away from the backpack.,False,False,True,False,http://images.cocodataset.org/train2017/000000207093.jpg,0,0
+1612,1612,FB,behind,in front of,True,False,The cup is in front of the sandwich.,False,False,True,False,http://images.cocodataset.org/train2017/000000349230.jpg,0,0
+1617,1617,FF,facing,facing away from,True,False,The cow is facing away from the bench.,False,False,True,False,http://images.cocodataset.org/train2017/000000182032.jpg,0,0
+1599,1599,FB,in front of,behind,False,True,The truck is behind the car.,True,False,False,"The statement ""The truck is behind the car"" is **False**.
+
+**Reasoning:**
+1.  **Identification:** The image shows a large red utility truck (likely a fire department vehicle) in the foreground and a black sedan (car) in the background.
+2.  **Spatial Relationship:** The truck",http://images.cocodataset.org/train2017/000000413277.jpg,1,0
+1565,1565,LR,at the right side of,at the left side of,True,False,The dog is at the left side of the right side of the horse.,False,True,False,"The statement ""The dog is at the left side of the right side of the horse"" is **True**.
+
+**Reasoning:**
+1.  **Identify the subjects:** The image shows a horse on the left and a dog on the right.
+2.  **Analyze the phrase ""right side of",http://images.cocodataset.org/train2017/000000422185.jpg,1,2
+1616,1616,FB,behind,in front of,True,False,The couch is in front of the dining table.,False,False,True,"The statement ""The couch is in front of the dining table"" is **False**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a large wooden table (referred to as a dining table) in the center of the room. In the background, against the wall between the",http://images.cocodataset.org/train2017/000000305685.jpg,1,0
+1623,1623,FB,in front of,behind,True,False,The pizza is behind the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000534161.jpg,0,0
+1608,1608,PP,parallel to,perpendicular to,False,True,The book is perpendicular to the bed.,True,False,False,"The statement ""The book is perpendicular to the bed"" is **False**.
+
+**Reasoning:**
+1.  **Orientation:** The book is lying open with its pages facing upwards. This means the book is roughly **parallel** to the surface of the bed (the quilt), not perpendicular (at a 9",http://images.cocodataset.org/train2017/000000364725.jpg,1,0
+1328,1328,LR,at the left side of,at the right side of,False,True,The boat is at the right side of the left side of the dining table.,True,,,"The statement claims that the boat is located to the right of the left side of the dining table. In the image, the dining table is in the foreground, and the boat (specifically the hull and mast structure) is visible in the background, primarily on the left side of the image. Since the boat is positioned",http://images.cocodataset.org/train2017/000000133650.jpg,1,3
+1408,1408,FB,at the back of,in front of,False,True,The car is in front of the back of the bicycle.,True,,,"The user wants me to determine the truth value of the statement ""The car is in front of the back of the bicycle"" based on the image.
+
+1.  **Analyze the spatial relationship between the car and the bicycle:**
+    *   The image shows a black Subaru car parked in a driveway or garage.
+",http://images.cocodataset.org/train2017/000000124462.jpg,1,3
+1618,1618,FB,in front of,behind,True,False,The cat is behind the bicycle.,False,False,True,False,http://images.cocodataset.org/train2017/000000171809.jpg,0,0
+1625,1625,LR,at the right side of,at the left side of,False,True,The cat is at the left side of the right side of the potted plant.,True,True,True,"The statement ""The cat is at the left side of the right side of the potted plant"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a black cat sitting inside a white pot containing a green plant.
+2.  **Analyze the spatial relationship",http://images.cocodataset.org/train2017/000000127809.jpg,1,0
+1628,1628,FB,behind,in front of,True,False,The motorcycle is in front of the fire hydrant.,False,False,True,False,http://images.cocodataset.org/train2017/000000183964.jpg,0,0
+1633,1633,LR,right of,left of,True,False,The teddy bear is left of the suitcase.,False,False,True,False,http://images.cocodataset.org/train2017/000000248168.jpg,0,0
+1638,1638,LR,at the left side of,at the right side of,False,True,The person is at the right side of the left side of the oven.,True,True,True,"The statement ""The person is at the right side of the left side of the oven"" is **True**.
+
+**Reasoning:**
+1.  **Identify the oven:** The oven is the appliance located on the left side of the image (part of the play kitchen).
+2.  **Identify the",http://images.cocodataset.org/train2017/000000564915.jpg,1,0
+1632,1632,FB,behind,in front of,True,False,The truck is in front of the motorcycle.,False,False,True,False,http://images.cocodataset.org/train2017/000000178890.jpg,0,0
+1411,1411,FB,in front of,behind,True,False,The cow is behind the sheep.,False,,,"The user wants me to determine the truth value of the statement ""The cow is behind the sheep"" based on the provided image.
+
+1.  **Identify the subjects**: I see a large brown cow in the foreground on the left side of the image. I see a white sheep in the background on the right side",http://images.cocodataset.org/train2017/000000378214.jpg,1,3
+1634,1634,FB,behind,in front of,False,True,The truck is in front of the cake.,True,False,False,False,http://images.cocodataset.org/train2017/000000184176.jpg,0,0
+1639,1639,FB,behind,in front of,False,True,The person is in front of the keyboard.,True,True,True,"The user wants to know if the statement ""The person is in front of the keyboard"" is true based on the image.
+
+1.  **Analyze the spatial arrangement**: The image shows a desk setup. The keyboard is placed on the desk surface. The person is seated at the desk, positioned behind the keyboard relative",http://images.cocodataset.org/train2017/000000477136.jpg,1,0
+1654,1654,FB,behind,in front of,True,False,The bird is in front of the elephant.,False,False,True,False,http://images.cocodataset.org/train2017/000000109265.jpg,0,0
+1643,1643,FB,in front of,behind,True,False,The dining table is behind the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000207475.jpg,0,0
+1651,1651,FB,behind,in front of,False,True,The teddy bear is in front of the person.,True,True,True,True,http://images.cocodataset.org/train2017/000000055389.jpg,0,0
+1457,1457,FF,facing,facing away from,False,True,The cow is facing away from the chair.,True,,,"The user wants me to determine the truth value of the statement ""The cow is facing away from the chair"" based on the image.
+
+1.  **Analyze the image content**:
+    *   The image shows a man milking a cow.
+    *   The man is sitting on a small wooden stool (",http://images.cocodataset.org/train2017/000000316536.jpg,1,3
+1664,1664,FB,in front of,behind,False,True,The suitcase is behind the refrigerator.,True,False,False,False,http://images.cocodataset.org/train2017/000000321879.jpg,0,0
+1662,1662,PP,parallel to,perpendicular to,True,False,The car is perpendicular to the motorcycle.,False,False,True,False,http://images.cocodataset.org/train2017/000000326689.jpg,0,0
+1665,1665,FB,in front of,behind,True,False,The refrigerator is behind the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000452909.jpg,0,0
+1663,1663,PP,perpendicular to,parallel to,False,True,The knife is parallel to the carrot.,True,False,False,False,http://images.cocodataset.org/train2017/000000213881.jpg,0,0
+1666,1666,LR,at the left side of,at the right side of,False,True,The cat is at the right side of the left side of the teddy bear.,True,True,True,"The statement ""The cat is at the right side of the left side of the teddy bear"" is **True**.
+
+**Reasoning:**
+1.  **""The left side of the teddy bear""**: From the viewer's perspective, the left side of the image contains the teddy bear's right",http://images.cocodataset.org/train2017/000000383494.jpg,1,0
+1454,1454,LR,at the left side of,at the right side of,True,False,The chair is at the right side of the left side of the pizza.,False,,,"The statement claims that the chair is located at the right side of the left side of the pizza. The ""left side of the pizza"" refers to the left half of the image. The chair is visible in the background on the left side of the image, positioned behind the pizza. Since the chair is located within the",http://images.cocodataset.org/train2017/000000134769.jpg,1,3
+1672,1672,FB,behind,in front of,False,True,The couch is in front of the person.,True,False,False,False,http://images.cocodataset.org/train2017/000000546210.jpg,0,0
+1655,1655,LR,right of,left of,True,False,The cat is left of the dining table.,False,False,True,False,http://images.cocodataset.org/train2017/000000184116.jpg,0,0
+1678,1678,FB,at the back of,in front of,True,False,The oven is in front of the back of the person.,False,False,True,"The statement is **False**.
+
+**Reasoning:**
+1.  **Identify the person and their orientation:** The chef is standing at the counter, facing towards the left side of the image. His back is facing the right side of the image.
+2.  **Locate the oven:** The white microwave",http://images.cocodataset.org/train2017/000000168173.jpg,1,0
+1683,1683,FB,behind,in front of,True,False,The boat is in front of the dining table.,False,False,True,False,http://images.cocodataset.org/train2017/000000554518.jpg,0,0
+1687,1687,FB,behind,in front of,False,True,The teddy bear is in front of the book.,True,False,False,False,http://images.cocodataset.org/train2017/000000419443.jpg,0,0
+1692,1692,FB,in front of,behind,True,False,The cow is behind the bench.,False,False,True,False,http://images.cocodataset.org/train2017/000000044621.jpg,0,0
+1650,1650,FF,facing,facing away from,False,True,The chair is facing away from the hot dog.,True,False,False,"The statement is **False**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a hot dog in the foreground and a wooden chair (stool) in the background, positioned behind the table.
+2.  **Determine orientation:** The chair is facing the table where the hot",http://images.cocodataset.org/train2017/000000257073.jpg,1,1
+1667,1667,FB,behind,in front of,True,False,The elephant is in front of the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000060568.jpg,0,0
+1695,1695,FB,behind,in front of,True,False,The bed is in front of the bicycle.,False,False,True,False,http://images.cocodataset.org/val2017/000000274687.jpg,0,0
+1673,1673,LR,left of,right of,False,True,The bicycle is right of the person.,True,False,False,False,http://images.cocodataset.org/train2017/000000008794.jpg,0,0
+1693,1693,LR,at the right side of,at the left side of,False,True,The person is at the left side of the right side of the laptop.,True,True,True,"The statement ""The person is at the left side of the right side of the laptop"" is **True**.
+
+**Reasoning:**
+1.  **""The right side of the laptop""**: This refers to the right half of the laptop (from the viewer's perspective).
+2.  **""The person",http://images.cocodataset.org/train2017/000000504027.jpg,1,0
+1682,1682,PP,perpendicular to,parallel to,False,True,The cow is parallel to the motorcycle.,True,False,False,"The statement ""The cow is parallel to the motorcycle"" is **False**.
+
+**Reasoning:**
+1.  **Orientation of the Cow:** The cow is positioned in the foreground and is facing towards the left side of the image. Its body is aligned roughly parallel to the picture plane (left-to-right).
+2",http://images.cocodataset.org/train2017/000000186275.jpg,1,0
+1701,1701,FB,behind,in front of,True,False,The person is in front of the donut.,False,False,True,False,http://images.cocodataset.org/train2017/000000555909.jpg,0,0
+1729,1729,FB,in front of,behind,True,False,The dining table is behind the refrigerator.,False,False,True,False,http://images.cocodataset.org/train2017/000000240727.jpg,0,0
+1703,1703,LR,at the left side of,at the right side of,False,True,The person is at the right side of the left side of the oven.,True,True,True,True,http://images.cocodataset.org/train2017/000000451274.jpg,0,0
+1742,1742,FB,in front of,behind,True,False,The potted plant is behind the teddy bear.,False,False,True,False,http://images.cocodataset.org/train2017/000000082512.jpg,0,0
+1698,1698,LR,at the right side of,at the left side of,True,False,The dog is at the left side of the right side of the toilet.,False,True,False,"The statement ""The dog is at the left side of the right side of the toilet"" is **True**.
+
+**Reasoning:**
+1.  **""The right side of the toilet""**: From the viewer's perspective, the toilet is on the left and the dog is on the right. Therefore, the",http://images.cocodataset.org/train2017/000000039913.jpg,1,0
+1741,1741,LR,at the left side of,at the right side of,False,True,The chair is at the right side of the left side of the tv.,True,False,False,"The statement ""The chair is at the right side of the left side of the tv"" is **False**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a television in the background and a chair to the right of the television.
+2.  **Analyze the spatial relationship",http://images.cocodataset.org/train2017/000000058254.jpg,1,0
+1704,1704,LR,right of,left of,False,True,The teddy bear is left of the dog.,True,True,True,True,http://images.cocodataset.org/train2017/000000529411.jpg,0,0
+1760,1760,FF,facing,facing away from,True,False,The person is facing away from the bed.,False,False,True,False,http://images.cocodataset.org/train2017/000000514254.jpg,0,0
+1748,1748,FB,in front of,behind,False,True,The person is behind the dining table.,True,True,True,True,http://images.cocodataset.org/train2017/000000199913.jpg,0,0
+1753,1753,FB,in front of,behind,True,False,The horse is behind the train.,False,False,True,False,http://images.cocodataset.org/train2017/000000318671.jpg,0,0
+1762,1762,FB,behind,in front of,True,False,The bus is in front of the dining table.,False,False,True,False,http://images.cocodataset.org/train2017/000000159403.jpg,0,0
+1712,1712,LR,left of,right of,True,False,The dining table is right of the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000570968.jpg,0,1
+1543,1543,FB,behind,in front of,False,True,The person is in front of the zebra.,True,,,"The user wants me to determine the truth value of the statement ""The person is in front of the zebra"" based on the image.
+
+1.  **Identify the person:** There is a young boy in the image, wearing a blue shirt, positioned in the upper-left to center area of the frame.
+2",http://images.cocodataset.org/val2017/000000025096.jpg,1,3
+1711,1711,FB,in front of,behind,True,False,The clock is behind the cow.,False,False,True,False,http://images.cocodataset.org/val2017/000000180383.jpg,0,1
+1772,1772,FB,in front of,behind,True,False,The laptop is behind the cat.,False,False,True,False,http://images.cocodataset.org/train2017/000000407386.jpg,0,0
+1764,1764,FB,in front of,behind,True,False,The person is behind the donut.,False,True,False,True,http://images.cocodataset.org/train2017/000000092054.jpg,0,0
+1763,1763,FB,behind,in front of,True,False,The chair is in front of the hot dog.,False,False,True,False,http://images.cocodataset.org/train2017/000000393428.jpg,0,0
+1646,1646,LR,at the right side of,at the left side of,True,False,The dog is at the left side of the right side of the horse.,False,True,False,"The statement ""The dog is at the left side of the right side of the horse"" is **True**.
+
+**Reasoning:**
+1.  **Identify the subjects:** The image contains a horse on the left and a dog on the right.
+2.  **Analyze the phrase ""right side of",http://images.cocodataset.org/train2017/000000300322.jpg,1,2
+1773,1773,FF,facing away from,facing,False,True,The cat is facing the bed.,True,False,False,False,http://images.cocodataset.org/train2017/000000293276.jpg,0,0
+1545,1545,LR,left of,right of,False,True,The pizza is right of the person.,True,False,False,"The statement ""The pizza is right of the person"" is **False**.
+
+**Reasoning:**
+1.  **Relative Position:** In the image, the pizza is located in the foreground, directly in front of the person's torso. It is not positioned to the side (left or right) of the person",http://images.cocodataset.org/train2017/000000293014.jpg,1,3
+1786,1786,FB,behind,in front of,False,True,The motorcycle is in front of the parking meter.,True,False,False,False,http://images.cocodataset.org/train2017/000000115626.jpg,0,0
+1792,1792,FF,facing,facing away from,True,False,The cat is facing away from the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000434385.jpg,0,0
+1775,1775,PP,perpendicular to,parallel to,False,True,The book is parallel to the bed.,True,False,False,False,http://images.cocodataset.org/train2017/000000420450.jpg,0,0
+1791,1791,LR,at the left side of,at the right side of,False,True,The teddy bear is at the right side of the left side of the dog.,True,True,True,"The statement ""The teddy bear is at the right side of the left side of the dog"" is **True**.
+
+**Reasoning:**
+1.  **""The left side of the dog""**: In the image, the dog is facing the right. The ""left side"" of the dog refers to",http://images.cocodataset.org/train2017/000000463670.jpg,1,0
+1767,1767,LR,left of,right of,True,False,The keyboard is right of the cat.,False,False,True,False,http://images.cocodataset.org/train2017/000000501278.jpg,0,0
+1795,1795,LR,at the left side of,at the right side of,False,True,The bench is at the right side of the left side of the cat.,True,False,False,"The statement ""The bench is at the right side of the left side of the cat"" is **False**.
+
+**Reasoning:**
+1.  **Analyze the spatial relationship:** The cat is sitting on the bench. Therefore, the bench is underneath the cat, not to its side.
+2.  **",http://images.cocodataset.org/train2017/000000411668.jpg,1,0
+1796,1796,FB,in front of,behind,True,False,The cake is behind the oven.,False,False,True,False,http://images.cocodataset.org/train2017/000000185777.jpg,0,0
+1803,1803,FB,in front of,behind,True,False,The book is behind the teddy bear.,False,False,True,False,http://images.cocodataset.org/train2017/000000368811.jpg,0,0
+1811,1811,FB,behind,in front of,True,False,The pizza is in front of the car.,False,True,False,True,http://images.cocodataset.org/train2017/000000419860.jpg,0,0
+1822,1822,FF,facing,facing away from,True,False,The cat is facing away from the tv.,False,False,True,False,http://images.cocodataset.org/train2017/000000070033.jpg,0,0
+1816,1816,FF,facing,facing away from,False,True,The book is facing away from the cat.,True,False,False,"The statement ""The book is facing away from the cat"" is **False**.
+
+**Reasoning:**
+1.  **Orientation of the Book:** The book is lying flat on the couch. The spine of the book is visible on the left side, and the front cover (with the red and white design)",http://images.cocodataset.org/train2017/000000481313.jpg,1,0
+1818,1818,LR,at the left side of,at the right side of,True,False,The zebra is at the right side of the left side of the person.,False,True,False,"The statement ""The zebra is at the right side of the left side of the person"" is **True**.
+
+Here is the reasoning:
+1.  **Identify the person's left side**: The person is facing the camera. His left side corresponds to the **right side of the image** (from the",http://images.cocodataset.org/train2017/000000171805.jpg,1,0
+1826,1826,LR,at the left side of,at the right side of,True,False,The banana is at the right side of the left side of the donut.,False,False,True,"The statement ""The banana is at the right side of the left side of the donut"" is **False**.
+
+Here is the reasoning:
+1.  **Identify the objects**: The image shows a banana on the left, a donut in the center, and a glass of juice on the right.
+2",http://images.cocodataset.org/train2017/000000535013.jpg,1,0
+1833,1833,LR,at the right side of,at the left side of,False,True,The person is at the left side of the right side of the bench.,True,True,True,"The statement ""The person is at the left side of the right side of the bench"" is **True**.
+
+**Reasoning:**
+1.  **Identify the bench:** The wooden bench is located on the right side of the image.
+2.  **Identify the ""right side of the bench"":",http://images.cocodataset.org/train2017/000000574804.jpg,1,0
+1815,1815,PP,parallel to,perpendicular to,True,False,The bicycle is perpendicular to the motorcycle.,False,False,True,"The statement ""The bicycle is perpendicular to the motorcycle"" is **False**.
+
+**Reasoning:**
+1.  **Orientation of the Motorcycle:** The motorcycle is parked parallel to the brick wall in the background. Its longitudinal axis (the line running from the front wheel to the rear wheel) runs horizontally across the image",http://images.cocodataset.org/train2017/000000223930.jpg,1,0
+1813,1813,FB,in front of,behind,False,True,The couch is behind the backpack.,True,True,True,True,http://images.cocodataset.org/train2017/000000433110.jpg,0,0
+1812,1812,FB,behind,in front of,False,True,The couch is in front of the banana.,True,False,False,False,http://images.cocodataset.org/train2017/000000481313.jpg,0,0
+1835,1835,FB,in front of,behind,False,True,The dog is behind the motorcycle.,True,True,True,True,http://images.cocodataset.org/train2017/000000253260.jpg,0,0
+1829,1829,LR,at the right side of,at the left side of,True,False,The giraffe is at the left side of the right side of the person.,False,True,False,"The statement ""The giraffe is at the left side of the right side of the person"" is **True**.
+
+Here is the reasoning:
+1.  **""The right side of the person""**: In the image, the person is facing the giraffe (to the right). Therefore, the person's right",http://images.cocodataset.org/train2017/000000517318.jpg,1,0
+1855,1855,FB,in front of,behind,False,True,The umbrella is behind the potted plant.,True,False,False,"The statement ""The umbrella is behind the potted plant"" is **False**.
+
+**Reasoning:**
+1.  **Identify the objects:** The ""potted plant"" is the large green plant in the white pot on the left side of the image. The ""umbrella"" refers to the blue object",http://images.cocodataset.org/train2017/000000482848.jpg,1,0
+1861,1861,FB,in front of,behind,False,True,The cat is behind the tv.,True,False,False,False,http://images.cocodataset.org/train2017/000000351550.jpg,0,0
+1747,1747,LR,at the left side of,at the right side of,True,False,The dining table is at the right side of the left side of the person.,False,True,False,"The statement ""The dining table is at the right side of the left side of the person"" is **True**.
+
+**Reasoning:**
+1.  **Identify the person's orientation:** The woman in the image is facing the camera. Therefore, her **left side** corresponds to the **right side of",http://images.cocodataset.org/train2017/000000451240.jpg,1,0
+1675,1675,FB,behind,in front of,False,True,The orange is in front of the apple.,True,False,False,"The statement ""The orange is in front of the apple"" is **False**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a display of fruit. On the left side, there is a box filled with oranges. On the right side, there is a box filled with apples",http://images.cocodataset.org/train2017/000000079172.jpg,1,2
+1866,1866,FB,behind,in front of,True,False,The microwave is in front of the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000255849.jpg,0,0
+1869,1869,FB,in front of,behind,False,True,The orange is behind the banana.,True,True,True,True,http://images.cocodataset.org/train2017/000000207738.jpg,0,0
+1865,1865,LR,at the right side of,at the left side of,True,False,The person is at the left side of the right side of the pizza.,False,True,False,"The statement ""The person is at the left side of the right side of the pizza"" is **True**.
+
+**Reasoning:**
+1.  **Identify the person's location:** The person (specifically their hands and torso) is located on the **right side** of the image.
+2. ",http://images.cocodataset.org/train2017/000000072536.jpg,1,0
+1860,1860,LR,at the left side of,at the right side of,True,False,The apple is at the right side of the left side of the person.,False,True,False,"The statement ""The apple is at the right side of the left side of the person"" is **True**.
+
+**Reasoning:**
+1.  **Identify the person's orientation:** The child is facing the camera. Therefore, the child's **left side** corresponds to the **right side of the image",http://images.cocodataset.org/val2017/000000473406.jpg,1,0
+1839,1839,PP,perpendicular to,parallel to,False,True,The train is parallel to the bus.,True,False,False,"The user wants me to determine if the statement ""The train is parallel to the bus"" is true or false based on the image.
+
+1.  **Identify the objects:**
+    *   **Train:** There is a large white Shinkansen (bullet train) occupying the majority of the image, positioned on",http://images.cocodataset.org/train2017/000000409009.jpg,1,0
+1890,1890,FB,behind,in front of,True,False,The person is in front of the keyboard.,False,True,False,True,http://images.cocodataset.org/train2017/000000062703.jpg,0,0
+1900,1900,FB,behind,in front of,True,False,The airplane is in front of the car.,False,False,True,False,http://images.cocodataset.org/train2017/000000445408.jpg,0,0
+1881,1881,FB,in front of,behind,True,False,The sandwich is behind the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000299643.jpg,0,0
+1877,1877,FF,facing,facing away from,True,False,The laptop is facing away from the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000578572.jpg,0,0
+1897,1897,LR,at the right side of,at the left side of,True,False,The bed is at the left side of the right side of the surfboard.,False,True,False,"The statement ""The bed is at the left side of the right side of the surfboard"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a surfboard held vertically in the center and a bed located in the bottom right corner.
+2.  **An",http://images.cocodataset.org/train2017/000000016458.jpg,1,0
+1893,1893,FF,facing,facing away from,False,True,The teddy bear is facing away from the dog.,True,False,False,False,http://images.cocodataset.org/train2017/000000135202.jpg,0,0
+1910,1910,FF,facing away from,facing,False,True,The person is facing the toaster.,True,True,True,True,http://images.cocodataset.org/train2017/000000174496.jpg,0,0
+1909,1909,FB,in front of,behind,True,False,The bench is behind the refrigerator.,False,False,True,False,http://images.cocodataset.org/train2017/000000497591.jpg,0,0
+1915,1915,FB,behind,in front of,False,True,The oven is in front of the cake.,True,False,False,False,http://images.cocodataset.org/train2017/000000504747.jpg,0,0
+1911,1911,FF,facing away from,facing,True,False,The bench is facing the parking meter.,False,True,False,"The user wants me to determine if the statement ""The bench is facing the parking meter"" is true based on the image.
+
+1.  **Analyze the image content:**
+    *   **Foreground:** A large, grey parking meter is the central subject. It is facing the camera.
+    *   **Background",http://images.cocodataset.org/val2017/000000333956.jpg,1,0
+1905,1905,FF,facing,facing away from,True,False,The teddy bear is facing away from the person.,False,True,False,True,http://images.cocodataset.org/train2017/000000002839.jpg,0,0
+1644,1644,LR,at the left side of,at the right side of,False,True,The parking meter is at the right side of the left side of the car.,True,False,False,False,http://images.cocodataset.org/train2017/000000428769.jpg,0,1
+1856,1856,FB,behind,in front of,True,False,The wine glass is in front of the sandwich.,False,False,True,False,http://images.cocodataset.org/val2017/000000567825.jpg,0,0
+1934,1934,FF,facing,facing away from,True,False,The person is facing away from the laptop.,False,False,True,False,http://images.cocodataset.org/train2017/000000294083.jpg,0,0
+1920,1920,FB,behind,in front of,True,False,The truck is in front of the dog.,False,False,True,False,http://images.cocodataset.org/train2017/000000192799.jpg,0,0
+1926,1926,FB,behind,in front of,False,True,The tv is in front of the airplane.,True,True,True,"The statement ""The tv is in front of the airplane"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a television set in the foreground and a framed picture of an airplane hanging on the wall in the background.
+2.  **Determine spatial relationship:**",http://images.cocodataset.org/train2017/000000379612.jpg,1,0
+1942,1942,PP,parallel to,perpendicular to,False,True,The motorcycle is perpendicular to the bus.,True,False,False,"The user wants me to determine if the statement ""The motorcycle is perpendicular to the bus"" is true or false based on the image.
+
+1.  **Identify the motorcycle**: There is a prominent yellow motorcycle in the foreground, ridden by a paramedic. It is angled diagonally, facing towards the left of the",http://images.cocodataset.org/train2017/000000055303.jpg,1,0
+1876,1876,LR,right of,left of,False,True,The person is left of the keyboard.,True,True,True,"The user wants to know if the statement ""The person is left of the keyboard"" is true based on the image.
+
+1.  **Identify the objects**: The image shows a person (a man) and a keyboard.
+2.  **Locate the keyboard**: The keyboard is in the immediate foreground, at",http://images.cocodataset.org/train2017/000000499024.jpg,1,1
+1935,1935,FB,behind,in front of,True,False,The fire hydrant is in front of the dog.,False,False,True,False,http://images.cocodataset.org/train2017/000000548734.jpg,0,0
+1954,1954,LR,at the left side of,at the right side of,False,True,The carrot is at the right side of the left side of the cat.,True,True,True,"The statement ""The carrot is at the right side of the left side of the cat"" is **True**.
+
+**Reasoning:**
+1.  **""The left side of the cat""**: This refers to the left side of the image (the cat's right side), which is the grey fur area.
+",http://images.cocodataset.org/train2017/000000249644.jpg,1,0
+1937,1937,LR,at the right side of,at the left side of,False,True,The orange is at the left side of the right side of the umbrella.,True,False,False,"The statement is **False**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a green alien figure holding a blue cocktail umbrella. The alien has two orange hands (or ""oranges"" as referred to in the statement).
+2.  **Locate the ""right side of",http://images.cocodataset.org/train2017/000000423065.jpg,1,0
+1939,1939,FF,facing away from,facing,True,False,The person is facing the refrigerator.,False,False,True,False,http://images.cocodataset.org/train2017/000000272253.jpg,0,0
+1957,1957,LR,at the right side of,at the left side of,True,False,The person is at the left side of the right side of the laptop.,False,True,False,"The statement ""The person is at the left side of the right side of the laptop"" is **True**.
+
+**Reasoning:**
+1.  **Identify the laptop:** The laptop is the silver device with the open screen located on the left side of the desk.
+2.  **Identify the """,http://images.cocodataset.org/val2017/000000345252.jpg,1,0
+1959,1959,FB,at the back of,in front of,True,False,The person is in front of the back of the dining table.,False,False,True,False,http://images.cocodataset.org/train2017/000000143154.jpg,0,0
+1963,1963,LR,left of,right of,True,False,The cat is right of the sink.,False,False,True,False,http://images.cocodataset.org/train2017/000000196307.jpg,0,0
+1965,1965,FB,in front of,behind,True,False,The parking meter is behind the bus.,False,False,True,False,http://images.cocodataset.org/val2017/000000372317.jpg,0,0
+1962,1962,LR,right of,left of,False,True,The potted plant is left of the train.,True,True,True,True,http://images.cocodataset.org/train2017/000000153832.jpg,0,0
+1984,1984,FB,at the back of,in front of,False,True,The truck is in front of the back of the motorcycle.,True,False,False,False,http://images.cocodataset.org/train2017/000000301453.jpg,0,0
+1978,1978,LR,at the left side of,at the right side of,True,False,The cake is at the right side of the left side of the person.,False,True,False,"The statement ""The cake is at the right side of the left side of the person"" is **True**.
+
+**Reasoning:**
+1.  **Identify the person's orientation:** The person is facing towards the left side of the image (profile view).
+2.  **Identify the ""left side",http://images.cocodataset.org/train2017/000000074959.jpg,1,0
+1956,1956,LR,at the right side of,at the left side of,False,True,The laptop is at the left side of the right side of the person.,True,True,True,"The statement ""The laptop is at the left side of the right side of the person"" is **True**.
+
+**Reasoning:**
+1.  **Orientation**: The person is lying in bed facing the desk, so their ""right side"" corresponds to the right side of the image.
+2.  **Location",http://images.cocodataset.org/train2017/000000165040.jpg,1,0
+1958,1958,FB,in front of,behind,False,True,The potted plant is behind the bench.,True,False,False,False,http://images.cocodataset.org/train2017/000000295686.jpg,0,1
+1990,1990,FB,behind,in front of,False,True,The keyboard is in front of the cup.,True,False,False,False,http://images.cocodataset.org/train2017/000000561729.jpg,0,0
+1630,1630,FB,behind,in front of,False,True,The airplane is in front of the person.,True,,,"The user wants me to determine the truth value of the statement ""The airplane is in front of the person"" based on the provided image.
+
+1.  **Analyze the image content**: The image shows a large blue and yellow airplane, specifically a C-130 Hercules used by the Blue Angels (known as",http://images.cocodataset.org/train2017/000000543517.jpg,1,3
+1971,1971,LR,at the right side of,at the left side of,True,False,The person is at the left side of the right side of the pizza.,False,True,False,"The statement ""The person is at the left side of the right side of the pizza"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** There is a pizza on the left side of the stove and a person standing on the right side of the image.
+2.  **",http://images.cocodataset.org/train2017/000000225517.jpg,1,0
+1993,1993,FB,in front of,behind,True,False,The couch is behind the suitcase.,False,False,True,False,http://images.cocodataset.org/train2017/000000053037.jpg,0,0
+2006,2006,LR,left of,right of,True,False,The banana is right of the sandwich.,False,False,True,False,http://images.cocodataset.org/train2017/000000029994.jpg,0,0
+1986,1986,FB,behind,in front of,True,False,The parking meter is in front of the motorcycle.,False,False,True,False,http://images.cocodataset.org/train2017/000000469770.jpg,0,0
+2000,2000,FF,facing away from,facing,False,True,The cat is facing the tv.,True,True,True,True,http://images.cocodataset.org/train2017/000000087456.jpg,0,0
+1949,1949,FF,facing,facing away from,True,False,The cow is facing away from the dog.,False,False,True,False,http://images.cocodataset.org/train2017/000000036345.jpg,0,0
+1997,1997,FF,facing away from,facing,False,True,The cat is facing the toilet.,True,False,False,False,http://images.cocodataset.org/train2017/000000439486.jpg,0,0
+1953,1953,FF,facing away from,facing,True,False,The cow is facing the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000146236.jpg,0,0
+1999,1999,FF,facing,facing away from,True,False,The refrigerator is facing away from the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000116334.jpg,0,0
+1951,1951,LR,at the left side of,at the right side of,False,True,The person is at the right side of the left side of the couch.,True,True,True,"The statement ""The person is at the right side of the left side of the couch"" is **True**.
+
+**Reasoning:**
+1.  **Identify the couch:** The couch is the large piece of furniture with brown cushions and a patterned seat.
+2.  **Identify the ""left side",http://images.cocodataset.org/train2017/000000209493.jpg,1,0
+2015,2015,FF,facing away from,facing,False,True,The couch is facing the laptop.,True,False,False,False,http://images.cocodataset.org/train2017/000000455975.jpg,0,0
+2012,2012,LR,at the left side of,at the right side of,False,True,The person is at the right side of the left side of the couch.,True,True,True,"The statement ""The person is at the right side of the left side of the couch"" is **True**.
+
+**Reasoning:**
+1.  **Identify the couch's orientation:** The couch is positioned horizontally across the image. The ""left side of the couch"" refers to the left half of the image",http://images.cocodataset.org/train2017/000000022462.jpg,1,0
+2027,2027,LR,left of,right of,True,False,The person is right of the toilet.,False,False,True,False,http://images.cocodataset.org/train2017/000000174071.jpg,0,0
+2036,2036,LR,at the right side of,at the left side of,True,False,The person is at the left side of the right side of the donut.,False,False,True,"The statement ""The person is at the left side of the right side of the donut"" is **False**.
+
+**Reasoning:**
+1.  **Identify the objects:** The image shows a person (on the right side of the frame) holding a donut (in their hand, on the left",http://images.cocodataset.org/train2017/000000413791.jpg,1,0
+2034,2034,FF,facing away from,facing,False,True,The bench is facing the parking meter.,True,False,False,False,http://images.cocodataset.org/train2017/000000544094.jpg,0,0
+2024,2024,LR,at the left side of,at the right side of,False,True,The sink is at the right side of the left side of the cat.,True,False,False,"The statement ""The sink is at the right side of the left side of the cat"" is **False**.
+
+**Reasoning:**
+1.  **""The left side of the cat""**: This refers to the cat's left side. Since the cat is facing the camera, its left side is on the",http://images.cocodataset.org/train2017/000000178299.jpg,1,0
+2009,2009,PP,parallel to,perpendicular to,True,False,The dining table is perpendicular to the bench.,False,False,True,"The user wants me to determine if the statement ""The dining table is perpendicular to the bench"" is true or false based on the image.
+
+1.  **Identify the objects:**
+    *   **Dining table:** There is a large wooden table in the foreground inside the room.
+    *   **B",http://images.cocodataset.org/train2017/000000472930.jpg,1,0
+2061,2061,FB,in front of,behind,True,False,The dog is behind the bed.,False,False,True,False,http://images.cocodataset.org/train2017/000000086215.jpg,0,0
+2059,2059,PP,perpendicular to,parallel to,True,False,The car is parallel to the motorcycle.,False,False,True,"The user wants me to determine if the statement ""The car is parallel to the motorcycle"" is true or false based on the image.
+
+1.  **Identify the objects:**
+    *   **Car:** There is a black car (likely a taxi) in the background, driving on the road.
+    *",http://images.cocodataset.org/train2017/000000385145.jpg,1,0
+2067,2067,FB,in front of,behind,True,False,The remote is behind the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000502933.jpg,0,0
+2056,2056,FB,behind,in front of,False,True,The person is in front of the dog.,True,False,False,False,http://images.cocodataset.org/train2017/000000320379.jpg,0,0
+2048,2048,LR,right of,left of,True,False,The person is left of the refrigerator.,False,False,True,False,http://images.cocodataset.org/train2017/000000204987.jpg,0,0
+2053,2053,LR,right of,left of,False,True,The cow is left of the clock.,True,False,False,False,http://images.cocodataset.org/train2017/000000087264.jpg,0,0
+2079,2079,FB,behind,in front of,False,True,The pizza is in front of the sandwich.,True,False,False,False,http://images.cocodataset.org/train2017/000000040934.jpg,0,0
+1834,1834,FB,in front of,behind,False,True,The person is behind the stop sign.,True,False,False,"The user wants me to determine if the statement ""The person is behind the stop sign"" is true or false based on the image.
+
+1.  **Analyze the image content**: The image shows a vintage, painted metal cutout of a girl holding a sign.
+2.  **Analyze the sign**: The",http://images.cocodataset.org/train2017/000000170180.jpg,1,3
+2085,2085,LR,at the left side of,at the right side of,False,True,The person is at the right side of the left side of the dining table.,True,True,True,"The statement ""The person is at the right side of the left side of the dining table"" is **True**.
+
+**Reasoning:**
+1.  **Identify the person's location:** The person (indicated by the hand and arm) is positioned on the **right side** of the image.
+2",http://images.cocodataset.org/train2017/000000172987.jpg,1,0
+2094,2094,LR,right of,left of,False,True,The cow is left of the bench.,True,True,True,True,http://images.cocodataset.org/train2017/000000423455.jpg,0,0
+2072,2072,FB,in front of,behind,True,False,The cat is behind the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000465779.jpg,0,0
+2096,2096,FB,behind,in front of,False,True,The parking meter is in front of the car.,True,True,True,True,http://images.cocodataset.org/train2017/000000372390.jpg,0,0
+2088,2088,FB,at the back of,in front of,False,True,The teddy bear is in front of the back of the cat.,True,False,False,False,http://images.cocodataset.org/train2017/000000360178.jpg,0,0
+1810,1810,FF,facing,facing away from,False,True,The bus is facing away from the dining table.,True,,,"The user wants me to determine the truth value of the statement ""The bus is facing away from the dining table"" based on the image.
+
+1.  **Analyze the image content:**
+    *   **Foreground:** A man is sitting at a table (dining table) with a plate of pastries (",http://images.cocodataset.org/train2017/000000131361.jpg,1,3
+2099,2099,LR,at the right side of,at the left side of,True,False,The donut is at the left side of the right side of the dog.,False,False,True,False,http://images.cocodataset.org/train2017/000000108113.jpg,0,0
+2068,2068,LR,left of,right of,True,False,The bowl is right of the pizza.,False,False,True,False,http://images.cocodataset.org/train2017/000000526536.jpg,0,0
+2100,2100,FF,facing,facing away from,True,False,The bird is facing away from the book.,False,False,True,False,http://images.cocodataset.org/train2017/000000176180.jpg,0,0
+1928,1928,FF,facing,facing away from,False,True,The umbrella is facing away from the bed.,True,,,"The user wants me to determine the truth value of the statement ""The umbrella is facing away from the bed"" based on the provided image.
+
+1.  **Identify the objects:**
+    *   **Bed:** There is a white wooden bed on the left side of the image.
+    *   **Umb",http://images.cocodataset.org/train2017/000000553361.jpg,1,3
+2040,2040,LR,at the right side of,at the left side of,False,True,The hot dog is at the left side of the right side of the cup.,True,False,False,False,http://images.cocodataset.org/train2017/000000384463.jpg,0,2
+2117,2117,LR,right of,left of,True,False,The bowl is left of the hot dog.,False,False,True,False,http://images.cocodataset.org/train2017/000000453907.jpg,0,0
+2092,2092,LR,at the right side of,at the left side of,False,True,The bed is at the left side of the right side of the surfboard.,True,True,True,"The statement ""The bed is at the left side of the right side of the surfboard"" is **True**.
+
+**Reasoning:**
+1.  **Identify the objects:** The surfboard is in the center of the image. The bed (indicated by the white sheet and wooden frame) is located",http://images.cocodataset.org/val2017/000000073946.jpg,1,0
+2114,2114,FB,behind,in front of,True,False,The person is in front of the pizza.,False,False,True,False,http://images.cocodataset.org/train2017/000000154846.jpg,0,0
+2116,2116,FB,in front of,behind,True,False,The parking meter is behind the car.,False,False,True,False,http://images.cocodataset.org/train2017/000000427103.jpg,0,0
+2111,2111,FB,in front of,behind,False,True,The book is behind the train.,True,False,False,False,http://images.cocodataset.org/train2017/000000253004.jpg,0,0
+2103,2103,FB,behind,in front of,True,False,The umbrella is in front of the cat.,False,False,True,False,http://images.cocodataset.org/train2017/000000541158.jpg,0,0
+2135,2135,FB,behind,in front of,True,False,The couch is in front of the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000090523.jpg,0,0
+2128,2128,LR,at the right side of,at the left side of,False,True,The donut is at the left side of the right side of the person.,True,True,True,"The statement ""The donut is at the left side of the right side of the person"" is **True**.
+
+**Reasoning:**
+1.  **Identify the ""right side of the person"":** In the image, the person's right hand (identifiable by the thumb position on the left side",http://images.cocodataset.org/train2017/000000248276.jpg,1,0
+2146,2146,LR,left of,right of,False,True,The laptop is right of the sandwich.,True,True,True,True,http://images.cocodataset.org/train2017/000000028320.jpg,0,0
+2120,2120,FB,in front of,behind,True,False,The bowl is behind the apple.,False,False,True,False,http://images.cocodataset.org/train2017/000000326594.jpg,0,0
+2147,2147,FB,behind,in front of,True,False,The refrigerator is in front of the cat.,False,False,True,False,http://images.cocodataset.org/train2017/000000141376.jpg,0,0
+2149,2149,LR,right of,left of,True,False,The oven is left of the cake.,False,False,True,False,http://images.cocodataset.org/train2017/000000524196.jpg,0,0
+2140,2140,LR,at the right side of,at the left side of,True,False,The banana is at the left side of the right side of the cake.,False,True,False,True,http://images.cocodataset.org/train2017/000000285512.jpg,0,0
+2124,2124,PP,parallel to,perpendicular to,True,False,The motorcycle is perpendicular to the car.,False,False,True,False,http://images.cocodataset.org/train2017/000000540187.jpg,0,0
+2160,2160,FF,facing,facing away from,True,False,The person is facing away from the dining table.,False,False,True,False,http://images.cocodataset.org/train2017/000000042042.jpg,0,0
+2153,2153,FB,in front of,behind,False,True,The cake is behind the oven.,True,False,False,False,http://images.cocodataset.org/train2017/000000315768.jpg,0,0
+2162,2162,LR,at the left side of,at the right side of,False,True,The dog is at the right side of the left side of the car.,True,False,False,"The statement is **False**.
+
+**Reasoning:**
+The image shows a reflection in a car's side-view mirror. The text ""OBJECTS IN MIRROR ARE CLOSER THAN THEY APPEAR"" is readable (not reversed), which indicates that this is the **passenger-side mirror** (the right side",http://images.cocodataset.org/train2017/000000160211.jpg,1,0
+2141,2141,PP,parallel to,perpendicular to,True,False,The bed is perpendicular to the bicycle.,False,False,True,"The statement ""The bed is perpendicular to the bicycle"" is **False**.
+
+**Reasoning:**
+1.  **Orientation:** The bicycle is positioned with its side facing the camera (profile view), meaning its length runs horizontally across the image (left to right).
+2.  **Bed Position:** The bed is",http://images.cocodataset.org/train2017/000000002139.jpg,1,0
+2163,2163,LR,left of,right of,False,True,The person is right of the dining table.,True,True,True,True,http://images.cocodataset.org/train2017/000000448113.jpg,0,0
+2167,2167,LR,right of,left of,False,True,The couch is left of the person.,True,False,False,False,http://images.cocodataset.org/train2017/000000041552.jpg,0,0
+2151,2151,FF,facing,facing away from,False,True,The bear is facing away from the person.,True,False,False,False,http://images.cocodataset.org/train2017/000000015391.jpg,0,0
+2133,2133,FB,in front of,behind,False,True,The book is behind the teddy bear.,True,False,False,False,http://images.cocodataset.org/train2017/000000361778.jpg,0,0
+2165,2165,FF,facing,facing away from,True,False,The cat is facing away from the laptop.,False,False,True,False,http://images.cocodataset.org/train2017/000000407386.jpg,0,0
+2171,2171,LR,at the right side of,at the left side of,True,False,The dining table is at the left side of the right side of the teddy bear.,False,True,False,"The statement ""The dining table is at the left side of the right side of the teddy bear"" is **True**.
+
+**Reasoning:**
+1.  **""The right side of the teddy bear""**: This refers to the teddy bear's right side. Since the bear is facing the camera",http://images.cocodataset.org/train2017/000000108484.jpg,1,0
+2028,2028,FB,behind,in front of,False,True,The refrigerator is in front of the orange.,True,,,"The user wants me to determine the truth value of the statement ""The refrigerator is in front of the orange"" based on the provided image.
+
+1.  **Identify the objects:**
+    *   **Refrigerator:** There is a large white refrigerator on the left side of the image.
+    *  ",http://images.cocodataset.org/train2017/000000526364.jpg,1,3
+2180,2180,FB,behind,in front of,True,False,The oven is in front of the person.,False,False,True,False,http://images.cocodataset.org/train2017/000000578974.jpg,0,0
+2189,2189,FF,facing,facing away from,False,True,The bear is facing away from the teddy bear.,True,False,False,False,http://images.cocodataset.org/train2017/000000107571.jpg,0,0
+2176,2176,FB,behind,in front of,True,False,The couch is in front of the dining table.,False,False,True,False,http://images.cocodataset.org/train2017/000000201530.jpg,0,0
+2187,2187,FB,in front of,behind,False,True,The person is behind the parking meter.,True,False,False,False,http://images.cocodataset.org/train2017/000000431795.jpg,0,0
+2023,2023,FB,behind,in front of,True,False,The motorcycle is in front of the bird.,False,,,"The user wants me to determine the truth value of the statement ""The motorcycle is in front of the bird"" based on the image.
+
+1.  **Analyze the image content**:
+    *   **Foreground**: There is a large African Grey parrot perched on a stand, eating food from a bowl on",http://images.cocodataset.org/train2017/000000155777.jpg,1,3
+2169,2169,LR,right of,left of,False,True,The cat is left of the dining table.,True,False,False,False,http://images.cocodataset.org/train2017/000000320089.jpg,0,0
+2190,2190,FB,in front of,behind,True,False,The truck is behind the airplane.,False,False,True,False,http://images.cocodataset.org/train2017/000000135057.jpg,0,0
+2183,2183,FB,behind,in front of,True,False,The bed is in front of the bench.,False,False,True,False,http://images.cocodataset.org/train2017/000000017921.jpg,0,0
+2084,2084,FB,in front of,behind,False,True,The train is behind the car.,True,,,"The user wants me to determine the truth value of the statement ""The train is behind the car"" based on the provided image.
+
+1.  **Identify the objects:**
+    *   **""Train"":** The image shows a large tram (streetcar) on the left side. In common parlance,",http://images.cocodataset.org/train2017/000000324275.jpg,1,3
+2008,2008,FB,behind,in front of,True,False,The zebra is in front of the horse.,False,,,"The user wants me to determine the truth value of the statement ""The zebra is in front of the horse"" based on the provided image.
+
+1.  **Analyze the image content**:
+    *   There are two marionettes hanging from a light fixture.
+    *   On the left, there is",http://images.cocodataset.org/train2017/000000568005.jpg,1,3
+2122,2122,LR,at the right side of,at the left side of,True,False,The wine glass is at the left side of the right side of the sandwich.,False,,,"The statement claims that the wine glass is located at the ""left side of the right side of the sandwich."" This phrasing is ambiguous but can be interpreted in two main ways:
+
+1.  **Relative to the sandwich:** The wine glass is on the right side of the image (to the right of the sandwich).",http://images.cocodataset.org/train2017/000000268787.jpg,1,3
+2109,2109,FB,in front of,behind,False,True,The car is behind the bus.,True,False,False,"The user wants me to identify if the statement ""The car is behind the bus"" is true or false based on the image.
+
+1.  **Analyze the image content**:
+    *   **Foreground**: A large white bus with blue and yellow stripes and graphics is moving from left to right. It occupies the",http://images.cocodataset.org/train2017/000000557191.jpg,1,3

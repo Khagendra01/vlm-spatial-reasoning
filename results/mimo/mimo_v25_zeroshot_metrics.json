@@ -1,0 +1,13 @@
+{
+  "global": {
+    "accuracy": 0.7954441913439636,
+    "correct": 1746,
+    "total": 2195
+  },
+  "config": {
+    "model": "XiaomiMiMo/MiMo-V2.5",
+    "prompt": "frozen VSR prompt (App. A)",
+    "decoding": "temperature=0, top_p=1.0, max_tokens=16, thinking-disabled attempted; see usage_report.json and raw validation outputs",
+    "source": "OpenCode Go API"
+  }
+}

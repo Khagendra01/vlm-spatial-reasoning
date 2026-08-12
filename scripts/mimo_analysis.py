@@ -120,13 +120,14 @@ def analyze_consistency(orig_csv, flip_csv):
                 fp = fp == "True"
             else:
                 fp = None
+            orig_label = fl["orig_label"] == "True"
             flip_label = fl["ground_truth"] == "True"
             if o is None:
                 st["orig_na"] += 1
             if fp is None:
                 st["flip_na"] += 1
             if o is not None and fp is not None:
-                if o == (fl["ground_truth"] == "True"):
+                if o == orig_label:
                     st["orig_acc"] += 1
                 if fp == flip_label:
                     st["flip_acc"] += 1
@@ -134,9 +135,9 @@ def analyze_consistency(orig_csv, flip_csv):
                     st["consistent"] += 1
                 if fp == o:
                     st["contradiction"] += 1
-                if o == flip_label and fp == flip_label:
+                if o == orig_label and fp == flip_label:
                     st["both_correct"] += 1
-                if o != flip_label and fp != flip_label:
+                if o != orig_label and fp != flip_label:
                     st["both_wrong"] += 1
     return {k: dict(v) for k, v in fam_stats.items()}
 

@@ -1,0 +1,194 @@
+{
+  "model": "XiaomiMiMo/MiMo-V2.5 (zero-shot)",
+  "prompt": "frozen VSR prompt (supplementary App. A)",
+  "overall": {
+    "n": 2195,
+    "correct": 1746,
+    "accuracy": 0.7954,
+    "wilson95": [
+      0.7781,
+      0.8118
+    ]
+  },
+  "by_family": {
+    "horizontal": {
+      "n": 371,
+      "correct": 304,
+      "accuracy": 0.8194,
+      "wilson95": [
+        0.7771,
+        0.8552
+      ]
+    },
+    "vertical": {
+      "n": 426,
+      "correct": 352,
+      "accuracy": 0.8263,
+      "wilson95": [
+        0.7874,
+        0.8593
+      ]
+    },
+    "depth": {
+      "n": 322,
+      "correct": 241,
+      "accuracy": 0.7484,
+      "wilson95": [
+        0.6983,
+        0.7927
+      ]
+    },
+    "orientation": {
+      "n": 137,
+      "correct": 90,
+      "accuracy": 0.6569,
+      "wilson95": [
+        0.5741,
+        0.7312
+      ]
+    },
+    "containment": {
+      "n": 171,
+      "correct": 149,
+      "accuracy": 0.8713,
+      "wilson95": [
+        0.8129,
+        0.9135
+      ]
+    },
+    "proximity": {
+      "n": 153,
+      "correct": 110,
+      "accuracy": 0.719,
+      "wilson95": [
+        0.643,
+        0.7841
+      ]
+    },
+    "topology_contact": {
+      "n": 454,
+      "correct": 384,
+      "accuracy": 0.8458,
+      "wilson95": [
+        0.8097,
+        0.8761
+      ]
+    },
+    "compositional": {
+      "n": 65,
+      "correct": 48,
+      "accuracy": 0.7385,
+      "wilson95": [
+        0.6205,
+        0.8298
+      ]
+    }
+  },
+  "orientation_by_relation": {
+    "facing": {
+      "n": 64,
+      "correct": 48,
+      "accuracy": 0.75,
+      "wilson95": [
+        0.6318,
+        0.8399
+      ]
+    },
+    "facing away from": {
+      "n": 39,
+      "correct": 22,
+      "accuracy": 0.5641,
+      "wilson95": [
+        0.4098,
+        0.707
+      ]
+    },
+    "parallel to": {
+      "n": 22,
+      "correct": 14,
+      "accuracy": 0.6364,
+      "wilson95": [
+        0.4295,
+        0.8027
+      ]
+    },
+    "perpendicular to": {
+      "n": 12,
+      "correct": 6,
+      "accuracy": 0.5,
+      "wilson95": [
+        0.2538,
+        0.7462
+      ]
+    }
+  },
+  "clean_label_subsets": {
+    "full": {
+      "n": 137,
+      "accuracy": 0.6569,
+      "correct": 90
+    },
+    "minus_questionable": {
+      "n": 132,
+      "accuracy": 0.6742,
+      "correct": 89
+    },
+    "clear": {
+      "n": 124,
+      "accuracy": 0.6935,
+      "correct": 86
+    },
+    "strict": {
+      "n": 107,
+      "accuracy": 0.7103,
+      "correct": 76
+    }
+  },
+  "consistency": {
+    "FB": {
+      "n": 314,
+      "orig_acc": 230,
+      "flip_acc": 191,
+      "consistent": 176,
+      "contradiction": 117,
+      "both_correct": 152,
+      "both_wrong": 24,
+      "flip_na": 11,
+      "orig_na": 14
+    },
+    "PP": {
+      "n": 34,
+      "orig_acc": 20,
+      "flip_acc": 16,
+      "consistent": 8,
+      "contradiction": 26,
+      "both_correct": 5,
+      "both_wrong": 3,
+      "flip_na": 0,
+      "orig_na": 0
+    },
+    "FF": {
+      "n": 103,
+      "orig_acc": 68,
+      "flip_acc": 62,
+      "consistent": 44,
+      "contradiction": 56,
+      "both_correct": 37,
+      "both_wrong": 7,
+      "flip_na": 3,
+      "orig_na": 0
+    },
+    "LR": {
+      "n": 245,
+      "orig_acc": 186,
+      "flip_acc": 121,
+      "consistent": 127,
+      "contradiction": 85,
+      "both_correct": 111,
+      "both_wrong": 16,
+      "flip_na": 17,
+      "orig_na": 20
+    }
+  },
+  "note": "additive evidence; canonical tables untouched. Wilson 95% CIs; perpendicular (n=12) and other small subsets are descriptive."
+}
