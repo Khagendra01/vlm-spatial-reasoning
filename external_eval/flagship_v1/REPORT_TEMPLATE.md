@@ -12,24 +12,23 @@
 - total requests and retries:
 - total cost, if available:
 
-## 1. Binary audit (137 items)
+## 1. Clean/ambiguous audit (137 items)
 
 | quantity | value |
 |---|---:|
 | total items | 137 |
-| valid TRUE/FALSE | |
+| valid CLEAN/AMBIGUOUS | |
 | invalid | |
-| TRUE | |
-| FALSE | |
+| CLEAN | |
+| AMBIGUOUS | |
 | parser-valid rate | |
 
-Report the binary output distribution and invalid-output policy. Do not call
-this accuracy unless a separately documented ground-truth comparison is being
-made; this sheet is primarily a clean/ambiguous audit.
+Report the clean/ambiguous output distribution and invalid-output policy. This
+is an audit-label distribution, not statement accuracy.
 
-## 2. Binary results by relation
+## 2. Clean/ambiguous results by relation
 
-| relation | n | TRUE | FALSE | INVALID |
+| relation | n | CLEAN | AMBIGUOUS | INVALID |
 |---|---:|---:|---:|---:|
 | facing | | | | |
 | facing away from | | | | |

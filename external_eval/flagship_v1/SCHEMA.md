@@ -15,8 +15,8 @@ ground-truth answer or previous annotation.
 
 ## Result sheets
 
-`results_template.csv` stores one row per binary request. `parsed_binary` must
-be one of `TRUE`, `FALSE`, or `INVALID`.
+`results_template.csv` stores one row per clean/ambiguous request.
+`parsed_clean` must be one of `CLEAN`, `AMBIGUOUS`, or `INVALID`.
 
 `taxonomy_results_template.csv` stores one row per taxonomy request.
 `parsed_taxonomy` must be one of the eight identifiers in `prompts.md` or

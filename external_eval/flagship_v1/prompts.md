@@ -1,20 +1,24 @@
 # Frozen prompts
 
-## Binary orientation audit (`orientation_137.csv`)
+## Clean/ambiguous orientation audit (`orientation_137.csv`)
 
 Use the image and the supplied statement only.
 
 ```text
-Look at the image carefully. Decide whether the statement is true or false
-from the image alone. Answer with exactly one token: TRUE or FALSE.
-Do not explain your answer. Do not use outside knowledge.
+Look at the image and statement carefully. Decide whether a human can
+confidently judge the statement from the image alone, even if the statement is
+false. Answer with exactly one token: CLEAN or AMBIGUOUS.
+Use AMBIGUOUS when the viewpoint hides the relevant geometry, an object has no
+meaningful intrinsic orientation, an object is not clearly visible, or the
+annotation appears questionable. Do not use model predictions or outside
+knowledge. Do not explain your answer.
 Statement: {statement}
 ```
 
 The evaluator must preserve both the raw model response and a parser result:
-`TRUE`, `FALSE`, or `INVALID`. Any response that is not an unambiguous exact
-binary answer after the provider's documented whitespace/case normalization
-is `INVALID` and counts as wrong in aggregate reporting.
+`CLEAN`, `AMBIGUOUS`, or `INVALID`. Any response that is not an unambiguous
+exact label after the provider's documented whitespace/case normalization is
+`INVALID`.
 
 ## Failure taxonomy (`taxonomy_48.csv`)
 

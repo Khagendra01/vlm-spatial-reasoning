@@ -79,7 +79,7 @@ def main() -> None:
     manifest = {
         "package": "flagship-model-external-evaluation",
         "version": "flagship-v1",
-        "purpose": "Blind provider-neutral replay of the 137-item binary and 48-item taxonomy audit used for MiMo and independent human raters.",
+        "purpose": "Blind provider-neutral replay of the 137-item clean/ambiguous and 48-item taxonomy audit used for MiMo and independent human raters.",
         "source": {
             "binary_sheet": "results/iaa/blind_clean_label_sheet.csv",
             "taxonomy_sheet": "results/iaa/blind_failure_taxonomy_sheet.csv",

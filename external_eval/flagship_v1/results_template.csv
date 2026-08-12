@@ -1,1 +1,1 @@
-run_id,model_id,provider,eval_date_utc,item_id,relation,raw_response,parsed_binary,invalid_reason,latency_ms
+run_id,model_id,provider,eval_date_utc,item_id,relation,raw_response,parsed_clean,invalid_reason,latency_ms

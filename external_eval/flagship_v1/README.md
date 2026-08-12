@@ -7,7 +7,8 @@ the independent human raters in this repository.
 It contains:
 
 - `orientation_137.csv`: all 137 VSR orientation examples. The model should
-  answer the statement as a binary visual question.
+  judge whether the image/statement pair is `clean` or `ambiguous`, matching
+  the human and MiMo audit protocol.
 - `taxonomy_48.csv`: the 48 persistent-failure examples used for the
   eight-class failure taxonomy. The model should select one taxonomy class.
 - `images/`: local copies of the 137 referenced images. The taxonomy sheet
@@ -27,10 +28,11 @@ the image, relation, and statement. Run items one at a time and preserve the
 raw response before parsing it. Invalid, empty, or non-conforming responses
 must be recorded as invalid; never guess a label.
 
-The 137-item sheet is the primary binary audit. The 48-item sheet is a
+The 137-item sheet is the primary clean/ambiguous audit. The 48-item sheet is a
 separate taxonomy audit of persistent failures. A model's taxonomy output is
-not an answer-correctness judgment and must not be used to relabel the binary
-sheet.
+not an answer-correctness judgment and must not be used to relabel the
+clean/ambiguous sheet. A prior TRUE/FALSE run is a different exploratory task
+and is not comparable to the human/MiMo clean-label audit.
 
 ## Suggested model run
 

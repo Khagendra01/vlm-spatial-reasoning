@@ -1,7 +1,7 @@
 {
   "package": "flagship-model-external-evaluation",
   "version": "flagship-v1",
-  "purpose": "Blind provider-neutral replay of the 137-item binary and 48-item taxonomy audit used for MiMo and independent human raters.",
+  "purpose": "Blind provider-neutral replay of the 137-item clean/ambiguous and 48-item taxonomy audit used for MiMo and independent human raters.",
   "source": {
     "binary_sheet": "results/iaa/blind_clean_label_sheet.csv",
     "taxonomy_sheet": "results/iaa/blind_failure_taxonomy_sheet.csv",
@@ -563,29 +563,33 @@
       "bytes": 175595,
       "sha256": "59177935a3a54bc465eac3b622183452d5ebb0ced415a3224968e723880d07c5"
     },
+    "images.zip": {
+      "bytes": 19862579,
+      "sha256": "07e1935b154ae01d04bf539850aeaae73f646fb8a973857ada3fc2dca10e5a0f"
+    },
     "orientation_137.csv": {
       "bytes": 9776,
       "sha256": "b85b03d7fad0d9697722cb1843e822622b4433fc9a4858439bdae7efeced20b5"
     },
     "prompts.md": {
-      "bytes": 1885,
-      "sha256": "aaa0d80e75d90312c3d6931f8c0e8a115b3299a9450d36e80342975ddc407a9a"
+      "bytes": 2120,
+      "sha256": "9825006bcb3f8be081ed0f4ae08baaaeb6d11925d40c53ba16f3e559291f8c80"
     },
     "README.md": {
-      "bytes": 2231,
-      "sha256": "73c85fcce9d9b24504be4adc5b86c9a84e19393c568d49931b4b2c54a6aa8470"
+      "bytes": 2425,
+      "sha256": "b0cab5e4fa3cc37875374eae6a76f4c966ef002c8110801f35d6a8bd179738af"
     },
     "REPORT_TEMPLATE.md": {
-      "bytes": 1990,
-      "sha256": "a557ed25e56834b097f33442e20c3d32fd3e8a3485a43f9ffff32a7a88507dde"
+      "bytes": 1948,
+      "sha256": "d30506b49492ef9de05eac0a9379a0f80bf3c930ee6cfd469f0fce57c5d10c30"
     },
     "results_template.csv": {
-      "bytes": 109,
-      "sha256": "8fa607d0aad1f64aa36b54cd65cd0e5b8eeff739a89d3e7c1c6922c4222fec71"
+      "bytes": 108,
+      "sha256": "b1fc618d7e1bc6f40a25984b46f79f195a31dcc85bee47ad395da6d6d67b508e"
     },
     "SCHEMA.md": {
-      "bytes": 790,
-      "sha256": "3716a33cde2b22a68f48dc7545f4f0f21ca7ed5e1d69bef9e8fe3d0877f33548"
+      "bytes": 803,
+      "sha256": "c77aa6c2515fe4d271039b870b7aed934435093ea80f123806b6a9ac8f8f4264"
     },
     "taxonomy_48.csv": {
       "bytes": 3578,
