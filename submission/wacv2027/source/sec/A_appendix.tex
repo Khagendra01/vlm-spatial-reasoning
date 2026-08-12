@@ -262,6 +262,9 @@ ungrounded probe moved only
 $n=103/97/88$) and the generative T1 readouts 64.1/66.0/68.2 (zero-shot) and
 68.9/72.2/78.4 (General LoRA); committed in
 \texttt{results/probe/clear\_subset\_results.json}.
+The reliability of the single-annotator audit underlying this table is
+assessed with a second blind annotator in \S\ref{app:taxonomy}
+(inter-annotator agreement); the frozen table above is retained unchanged.
 
 % ============================================================
 % D. Statistical appendix
@@ -562,24 +565,49 @@ persistent failures.
 
 \textbf{Inter-annotator agreement (additive reliability evidence).} Because
 the clean-label audit (\S\ref{app:probes}) and the taxonomy above are
-single-annotator, the accompanying code package includes a blind
-second-annotation protocol: \texttt{scripts/export\_iaa\_sheets.py} exports
-two rating sheets over the same examples (the 137-example orientation test
-set for the binary clean/ambiguous flag, and the 48 persistent-failure cases
-for the eight-class taxonomy), containing only image, statement, and
-relation---ground truth, model predictions, and the first annotator's labels
-are withheld---and \texttt{scripts/iaa\_tool.py} provides a blind annotation
-interface. A second, independent human annotator rates the same examples
-under this protocol; agreement is then computed by
-\texttt{scripts/compute\_iaa.py} as Cohen's kappa for the binary flag and
-Krippendorff's alpha (nominal) for the taxonomy, both with bootstrap 95\%
-confidence intervals, and written to \texttt{results/iaa\_results.json} with
-a summary at \texttt{results/iaa\_summary.md}. If the second rater is not yet
-available, these statistics are simply absent: the audit remains
-single-annotator, and no reported accuracy number (Table~\ref{tab:cleanlabel})
-is altered by this protocol. An LLM-assisted relabeling, if ever used, would
-be reported separately as a weaker, non-human-IAA check and would not be
-substituted for the human second rater.
+single-annotator, a second, independent human annotator re-rated the same
+examples under a blind protocol: \texttt{scripts/export\_iaa\_sheets.py}
+exports two rating sheets (the 137-example orientation test set for the
+binary clean/ambiguous flag, and the 48 persistent-failure cases for the
+eight-class taxonomy) containing only image, statement, and relation---ground
+truth, model predictions, and the first annotator's labels are withheld---and
+\texttt{scripts/iaa\_tool.py} provides a blind annotation interface with
+auto-save. Agreement is computed by \texttt{scripts/compute\_iaa.py} (Cohen's
+kappa for the binary flag, Krippendorff's alpha, nominal, for the taxonomy,
+both with bootstrap 95\% confidence intervals; \texttt{results/iaa\_results.json}).
+
+\textbf{Results.} On the 48 cases rated by both annotators (the persistent-failure
+set; the remaining 89 orientation examples were never flagged by the first
+annotator and are excluded from the agreement statistics), the binary
+clean/ambiguous flag agrees on 32/48 cases (66.7\%; $\kappa{=}0.36$, bootstrap
+95\% CI $[0.13, 0.59]$). On the eight-class taxonomy the exact-class agreement
+is 15/48 (31.2\%; $\alpha{=}0.14$, CI $[-0.03, 0.28]$). The disagreement is
+systematic rather than random: the second annotator never used
+\emph{camera-viewpoint ambiguity} or \emph{subject/reference inversion},
+over-used \emph{annotation questionable} (11 vs.\ 5) and
+\emph{small/occluded object} (11 vs.\ 2), and flagged 62 of the 137
+orientation examples as ambiguous, versus 30 excluded by the first
+annotator's strict set. Part of the disagreement on \emph{annotation
+questionable} is attributable to the blind protocol itself: judging whether a
+ground-truth label is wrong requires the label, which was withheld.
+
+\textbf{Consequences.} The frozen first-annotator table
+(Table~\ref{tab:cleanlabel}) is retained unchanged; we do not redefine the
+exclusion sets to manufacture agreement. An annotator-dependence analysis
+(\texttt{results/iaa/consensus\_subsets.json},
+\texttt{scripts/iaa\_consensus\_subsets.py}) shows that the sensitivity
+conclusion is partially annotator-dependent: under the second annotator's own
+masks the clean-subset gains largely vanish (7B General LoRA 66.7\% and 7B
+zero-shot 54.7\% on $n{=}75$, both similar to or below their full-set values),
+while under the consensus union mask ($n{=}62$) the trained conditions again
+improve (7B General LoRA 77.4\%, 7B Hard-Neg 74.2\%, 2B zero-shot 72.6\%) but
+7B zero-shot does not (58.1\%). The statement that 2B structured prompting
+shows no clean-subset gain (53.3\% on both full and strict sets) is specific
+to the frozen first-annotator masks: under the consensus mask it reaches
+69.3\%. Overall the second annotator provides only partial corroboration, so
+the clean-label analysis should be read as annotator-specific exploratory
+evidence rather than a ruling on label noise. No reported accuracy number is
+altered by this protocol, and no LLM-assisted relabeling was used.
 
 % ============================================================
 % G. Reproducibility and artifact index
