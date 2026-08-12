@@ -50,6 +50,7 @@ CONDS = [
     ("7B Hard-Neg LoRA", "results/7B_hardneg_lora_predictions_20260809_164619.csv"),
     ("7B Projector LoRA", "results/qwen2vl_7b_projector_lora_predictions_20260809_221720.csv"),
     ("7B Vision+Projector LoRA", "results/qwen2vl_7b_vision_proj_lora_predictions_20260809_222845.csv"),
+    ("MiMo-V2.5 zero-shot", "results/mimo/mimo_v25_zeroshot_predictions.csv"),
 ]
 
 

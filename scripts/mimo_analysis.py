@@ -101,6 +101,9 @@ def pct(x, n):
 
 
 def analyze_consistency(orig_csv, flip_csv):
+    """Family stats + facing-pair (FF) verdict pattern, mirroring
+    scripts/consistency_verdict_table.py for direct comparison with the
+    canonical verdict table (App. D, tab:verdicts)."""
     orig = {}
     with open(orig_csv, newline="", encoding="utf-8") as f:
         for row in csv.DictReader(f):
@@ -110,6 +113,7 @@ def analyze_consistency(orig_csv, flip_csv):
                                      "consistent": 0, "contradiction": 0,
                                      "both_correct": 0, "both_wrong": 0,
                                      "flip_na": 0, "orig_na": 0})
+    ff_verdicts = []  # (orig verdict, flip verdict) for the FF family
     with open(flip_csv, newline="", encoding="utf-8") as f:
         for fl in csv.DictReader(f):
             st = fam_stats[fl["family"]]
@@ -139,7 +143,28 @@ def analyze_consistency(orig_csv, flip_csv):
                     st["both_correct"] += 1
                 if o != orig_label and fp != flip_label:
                     st["both_wrong"] += 1
-    return {k: dict(v) for k, v in fam_stats.items()}
+                if fl["family"] == "FF":
+                    ff_verdicts.append((o, fp))
+    # verdict pattern for the facing family (both-T / both-F / complementary,
+    # base rates, and expectations under verdict independence)
+    verdict_pattern = None
+    if ff_verdicts:
+        n = len(ff_verdicts)
+        both_t = sum(1 for o, fp in ff_verdicts if o and fp)
+        both_f = sum(1 for o, fp in ff_verdicts if not o and not fp)
+        comp = n - both_t - both_f
+        pt = sum(1 for o, _ in ff_verdicts if o) / n
+        qt = sum(1 for _, fp in ff_verdicts if fp) / n
+        exp_both_f = (1 - pt) * (1 - qt) * n
+        exp_comp = (pt * (1 - qt) + (1 - pt) * qt) * n
+        verdict_pattern = {
+            "n": n, "both_true": both_t, "both_false": both_f,
+            "complementary": comp, "orig_true_rate": round(pt, 4),
+            "flip_true_rate": round(qt, 4),
+            "exp_both_false": round(exp_both_f, 1),
+            "exp_complementary": round(exp_comp, 1),
+        }
+    return {k: dict(v) for k, v in fam_stats.items()}, verdict_pattern
 
 
 def main():
@@ -195,9 +220,10 @@ def main():
 
     # ---- 4. consistency ----
     cons = None
+    verdict = None
     flip_path = Path(args.consistency_flips)
     if flip_path.exists() and pred_path.exists():
-        cons = analyze_consistency(pred_path, flip_path)
+        cons, verdict = analyze_consistency(pred_path, flip_path)
 
     summary = {
         "model": "XiaomiMiMo/MiMo-V2.5 (zero-shot)",
@@ -207,6 +233,17 @@ def main():
         "orientation_by_relation": per_rel,
         "clean_label_subsets": clean,
         "consistency": cons,
+        "facing_verdict_pattern": verdict,
+        "protocol": {
+            "parse_rate": round(sum(1 for r in rows
+                                    if r["prediction"] in ("True", "False"))
+                                / len(rows), 4),
+            "thinking_flagged": sum(1 for r in rows
+                                    if r["thinking_likely"] == "1"),
+            "unparsed_counted_wrong": sum(1 for r in rows
+                                          if r["prediction"] not in
+                                          ("True", "False")),
+        },
         "note": "additive evidence; canonical tables untouched. Wilson 95% CIs; "
                 "perpendicular (n=12) and other small subsets are descriptive.",
     }

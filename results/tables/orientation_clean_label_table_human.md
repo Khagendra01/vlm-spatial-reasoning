@@ -16,3 +16,4 @@ table is unchanged: results/tables/orientation_clean_label_table.md.
 | 7B Hard-Neg LoRA | 0.664 (n=137) | 0.682 (n=126) | 0.682 (n=126) | 0.729 (n=107) | 0.653 (n=75) |
 | 7B Projector LoRA | 0.642 (n=137) | 0.651 (n=126) | 0.651 (n=126) | 0.710 (n=107) | 0.613 (n=75) |
 | 7B Vision+Projector LoRA | 0.642 (n=137) | 0.675 (n=126) | 0.675 (n=126) | 0.729 (n=107) | 0.640 (n=75) |
+| MiMo-V2.5 zero-shot | 0.657 (n=137) | 0.682 (n=126) | 0.682 (n=126) | 0.720 (n=107) | 0.587 (n=75) |

@@ -190,5 +190,20 @@
       "orig_na": 20
     }
   },
+  "facing_verdict_pattern": {
+    "n": 100,
+    "both_true": 0,
+    "both_false": 56,
+    "complementary": 44,
+    "orig_true_rate": 0.3,
+    "flip_true_rate": 0.14,
+    "exp_both_false": 60.2,
+    "exp_complementary": 35.6
+  },
+  "protocol": {
+    "parse_rate": 0.9686,
+    "thinking_flagged": 294,
+    "unparsed_counted_wrong": 69
+  },
   "note": "additive evidence; canonical tables untouched. Wilson 95% CIs; perpendicular (n=12) and other small subsets are descriptive."
 }

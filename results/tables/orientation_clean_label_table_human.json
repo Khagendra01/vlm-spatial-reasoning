@@ -345,6 +345,28 @@
         "n": 75,
         "accuracy": 0.64
       }
+    },
+    "MiMo-V2.5 zero-shot": {
+      "full": {
+        "n": 137,
+        "accuracy": 0.6569
+      },
+      "human_minus_q": {
+        "n": 126,
+        "accuracy": 0.6825
+      },
+      "human_clear": {
+        "n": 126,
+        "accuracy": 0.6825
+      },
+      "human_strict": {
+        "n": 107,
+        "accuracy": 0.7196
+      },
+      "human_binary": {
+        "n": 75,
+        "accuracy": 0.5867
+      }
     }
   }
 }

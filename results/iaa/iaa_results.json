@@ -1,9 +1,9 @@
 {
   "schema_version": "iaa-v1",
   "method": {
-    "rater1": "committed single-annotator audit (results/orientation_persistent_annotations.csv)",
-    "rater2": "independent blind human rater (results/iaa/rater2_clean_labels.csv, results/iaa/rater2_taxonomy.csv)",
-    "binary_flag": "clean vs ambiguous derived from rater1 taxonomy (only clear_image_model_reasoning_failure = clean)",
+    "rater1": "first label source: C:\\Users\\Khage\\Desktop\\VLM-Spatial-Reasoning\\results\\orientation_persistent_annotations.csv",
+    "rater2": "second label source: C:\\Users\\Khage\\Desktop\\VLM-Spatial-Reasoning\\results\\iaa\\rater2_clean_labels.csv, C:\\Users\\Khage\\Desktop\\VLM-Spatial-Reasoning\\results\\iaa\\rater2_taxonomy.csv",
+    "binary_flag": "clean vs ambiguous derived from the first source's taxonomy (only clear_image_model_reasoning_failure = clean)",
     "statistics": {
       "clean_flag": "Cohen's kappa, percent agreement",
       "taxonomy": "Krippendorff's alpha (nominal, two raters)",
@@ -122,8 +122,8 @@
     }
   },
   "caveats": [
-    "n is the intersection of units rated by both annotators (48 persistent-failure cases)",
+    "n is the intersection of units rated by both annotators",
     "kappa/alpha are undefined or unstable when one class dominates; CIs are bootstrap approximations at this sample size",
-    "these statistics are ADDITIVE evidence for the single-annotator audit; they do not replace or alter any reported clean-label accuracy in the paper (Table 2 main / Table 7 supplementary)"
+    "these statistics are ADDITIVE evidence; they do not replace or alter any reported accuracy number in the paper"
   ]
 }
