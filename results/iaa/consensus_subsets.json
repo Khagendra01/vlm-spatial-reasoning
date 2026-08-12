@@ -1,0 +1,191 @@
+{
+  "note": "Additive annotator-dependence analysis; the frozen first-annotator table (results/tables/orientation_clean_label_table.md) is NOT modified.",
+  "mask_sizes": {
+    "full": 137,
+    "r1_strict": 107,
+    "r2_ambiguous": 75,
+    "consensus": 62
+  },
+  "conditions": {
+    "2B zero-shot": {
+      "full": {
+        "n": 137,
+        "accuracy": 0.6277
+      },
+      "r1_strict": {
+        "n": 107,
+        "accuracy": 0.757
+      },
+      "r2_ambiguous": {
+        "n": 75,
+        "accuracy": 0.6533
+      },
+      "consensus": {
+        "n": 62,
+        "accuracy": 0.7258
+      }
+    },
+    "2B structured": {
+      "full": {
+        "n": 137,
+        "accuracy": 0.5328
+      },
+      "r1_strict": {
+        "n": 107,
+        "accuracy": 0.5327
+      },
+      "r2_ambiguous": {
+        "n": 75,
+        "accuracy": 0.6667
+      },
+      "consensus": {
+        "n": 62,
+        "accuracy": 0.6935
+      }
+    },
+    "2B General LoRA": {
+      "full": {
+        "n": 137,
+        "accuracy": 0.6204
+      },
+      "r1_strict": {
+        "n": 107,
+        "accuracy": 0.729
+      },
+      "r2_ambiguous": {
+        "n": 75,
+        "accuracy": 0.6667
+      },
+      "consensus": {
+        "n": 62,
+        "accuracy": 0.7097
+      }
+    },
+    "2B Targeted LoRA": {
+      "full": {
+        "n": 137,
+        "accuracy": 0.6423
+      },
+      "r1_strict": {
+        "n": 107,
+        "accuracy": 0.7664
+      },
+      "r2_ambiguous": {
+        "n": 75,
+        "accuracy": 0.6533
+      },
+      "consensus": {
+        "n": 62,
+        "accuracy": 0.7097
+      }
+    },
+    "7B zero-shot": {
+      "full": {
+        "n": 137,
+        "accuracy": 0.635
+      },
+      "r1_strict": {
+        "n": 107,
+        "accuracy": 0.7196
+      },
+      "r2_ambiguous": {
+        "n": 75,
+        "accuracy": 0.5467
+      },
+      "consensus": {
+        "n": 62,
+        "accuracy": 0.5806
+      }
+    },
+    "7B General LoRA": {
+      "full": {
+        "n": 137,
+        "accuracy": 0.6569
+      },
+      "r1_strict": {
+        "n": 107,
+        "accuracy": 0.785
+      },
+      "r2_ambiguous": {
+        "n": 75,
+        "accuracy": 0.6667
+      },
+      "consensus": {
+        "n": 62,
+        "accuracy": 0.7742
+      }
+    },
+    "7B Targeted LoRA": {
+      "full": {
+        "n": 137,
+        "accuracy": 0.6423
+      },
+      "r1_strict": {
+        "n": 107,
+        "accuracy": 0.7196
+      },
+      "r2_ambiguous": {
+        "n": 75,
+        "accuracy": 0.5733
+      },
+      "consensus": {
+        "n": 62,
+        "accuracy": 0.6452
+      }
+    },
+    "7B Hard-Neg LoRA": {
+      "full": {
+        "n": 137,
+        "accuracy": 0.6642
+      },
+      "r1_strict": {
+        "n": 107,
+        "accuracy": 0.7664
+      },
+      "r2_ambiguous": {
+        "n": 75,
+        "accuracy": 0.6533
+      },
+      "consensus": {
+        "n": 62,
+        "accuracy": 0.7419
+      }
+    },
+    "7B Projector LoRA": {
+      "full": {
+        "n": 137,
+        "accuracy": 0.6423
+      },
+      "r1_strict": {
+        "n": 107,
+        "accuracy": 0.7383
+      },
+      "r2_ambiguous": {
+        "n": 75,
+        "accuracy": 0.6133
+      },
+      "consensus": {
+        "n": 62,
+        "accuracy": 0.6774
+      }
+    },
+    "7B Vision+Projector LoRA": {
+      "full": {
+        "n": 137,
+        "accuracy": 0.6423
+      },
+      "r1_strict": {
+        "n": 107,
+        "accuracy": 0.7383
+      },
+      "r2_ambiguous": {
+        "n": 75,
+        "accuracy": 0.64
+      },
+      "consensus": {
+        "n": 62,
+        "accuracy": 0.6935
+      }
+    }
+  }
+}
