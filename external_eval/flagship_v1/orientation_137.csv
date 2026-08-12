@@ -1,0 +1,138 @@
+item_id,relation,statement,image_file
+3,facing,The laptop is facing the sandwich.,images/id3.jpg
+14,perpendicular to,The airplane is perpendicular to the truck.,images/id14.jpg
+19,parallel to,The truck is parallel to the motorcycle.,images/id19.jpg
+22,perpendicular to,The teddy bear is perpendicular to the cake.,images/id22.jpg
+33,facing away from,The cat is facing away from the sink.,images/id33.jpg
+34,facing away from,The cat is facing away from the toilet.,images/id34.jpg
+81,facing away from,The cat is facing away from the tv.,images/id81.jpg
+106,facing away from,The parking meter is facing away from the person.,images/id106.jpg
+114,facing,The person is facing the book.,images/id114.jpg
+156,facing away from,The person is facing away from the horse.,images/id156.jpg
+170,facing away from,The person is facing away from the cow.,images/id170.jpg
+171,facing,The teddy bear is facing the cow.,images/id171.jpg
+189,parallel to,The bus is parallel to the motorcycle.,images/id189.jpg
+211,facing away from,The bus is facing away from the cow.,images/id211.jpg
+213,facing,The laptop is facing the sandwich.,images/id213.jpg
+230,facing away from,The teddy bear is facing away from the book.,images/id230.jpg
+239,facing away from,The cat is facing away from the toilet.,images/id239.jpg
+250,facing,The laptop is facing the chair.,images/id250.jpg
+280,facing,The person is facing the teddy bear.,images/id280.jpg
+356,facing,The dog is facing the boat.,images/id356.jpg
+357,facing,The person is facing the bear.,images/id357.jpg
+359,facing,The zebra is facing the car.,images/id359.jpg
+362,facing,The cat is facing the keyboard.,images/id362.jpg
+364,facing,The cat is facing the tv.,images/id364.jpg
+375,facing,The zebra is facing the person.,images/id375.jpg
+382,facing away from,The elephant is facing away from the bus.,images/id382.jpg
+385,facing,The person is facing the teddy bear.,images/id385.jpg
+394,parallel to,The horse is parallel to the cow.,images/id394.jpg
+410,facing,The teddy bear is facing the person.,images/id410.jpg
+424,facing,The bed is facing the tv.,images/id424.jpg
+426,perpendicular to,The car is perpendicular to the motorcycle.,images/id426.jpg
+439,facing away from,The bench is facing away from the car.,images/id439.jpg
+508,parallel to,The suitcase is parallel to the couch.,images/id508.jpg
+513,facing,The cat is facing the laptop.,images/id513.jpg
+523,facing,The teddy bear is facing the book.,images/id523.jpg
+544,parallel to,The skateboard is parallel to the couch.,images/id544.jpg
+558,facing away from,The bird is facing away from the cat.,images/id558.jpg
+564,facing away from,The sheep is facing away from the person.,images/id564.jpg
+565,perpendicular to,The dog is perpendicular to the couch.,images/id565.jpg
+582,facing,The banana is facing the cat.,images/id582.jpg
+594,facing,The book is facing the cat.,images/id594.jpg
+617,parallel to,The bench is parallel to the person.,images/id617.jpg
+657,facing,The teddy bear is facing the cow.,images/id657.jpg
+676,parallel to,The boat is parallel to the truck.,images/id676.jpg
+728,perpendicular to,The bed is perpendicular to the person.,images/id728.jpg
+738,facing,The laptop is facing the cat.,images/id738.jpg
+739,facing,The cat is facing the refrigerator.,images/id739.jpg
+756,facing,The person is facing the car.,images/id756.jpg
+757,facing away from,The person is facing away from the laptop.,images/id757.jpg
+780,parallel to,The motorcycle is parallel to the bus.,images/id780.jpg
+805,facing,The person is facing the frisbee.,images/id805.jpg
+834,perpendicular to,The bus is perpendicular to the car.,images/id834.jpg
+858,facing away from,The cat is facing away from the toilet.,images/id858.jpg
+859,facing,The cat is facing the sink.,images/id859.jpg
+860,facing,The zebra is facing the person.,images/id860.jpg
+868,facing away from,The person is facing away from the bear.,images/id868.jpg
+911,facing away from,The cat is facing away from the cake.,images/id911.jpg
+934,parallel to,The motorcycle is parallel to the car.,images/id934.jpg
+937,perpendicular to,The zebra is perpendicular to the horse.,images/id937.jpg
+959,facing away from,The cat is facing away from the toilet.,images/id959.jpg
+984,parallel to,The motorcycle is parallel to the bus.,images/id984.jpg
+986,facing,The dog is facing the cake.,images/id986.jpg
+1018,facing away from,The car is facing away from the pizza.,images/id1018.jpg
+1019,facing,The person is facing the banana.,images/id1019.jpg
+1020,parallel to,The boat is parallel to the truck.,images/id1020.jpg
+1035,parallel to,The skateboard is parallel to the couch.,images/id1035.jpg
+1042,facing away from,The dog is facing away from the fire hydrant.,images/id1042.jpg
+1078,facing,The dog is facing the horse.,images/id1078.jpg
+1093,facing away from,The laptop is facing away from the chair.,images/id1093.jpg
+1132,facing,The person is facing the book.,images/id1132.jpg
+1158,facing,The refrigerator is facing the cat.,images/id1158.jpg
+1167,facing away from,The dog is facing away from the horse.,images/id1167.jpg
+1178,parallel to,The bench is parallel to the person.,images/id1178.jpg
+1202,facing,The bird is facing the elephant.,images/id1202.jpg
+1219,facing away from,The person is facing away from the keyboard.,images/id1219.jpg
+1234,facing,The person is facing the refrigerator.,images/id1234.jpg
+1243,facing,The cat is facing the teddy bear.,images/id1243.jpg
+1266,facing away from,The cat is facing away from the bed.,images/id1266.jpg
+1296,facing away from,The horse is facing away from the zebra.,images/id1296.jpg
+1308,facing,The tv is facing the toilet.,images/id1308.jpg
+1312,facing away from,The hair drier is facing away from the person.,images/id1312.jpg
+1329,facing,The oven is facing the tv.,images/id1329.jpg
+1338,facing,The cat is facing the keyboard.,images/id1338.jpg
+1342,facing,The cell phone is facing the person.,images/id1342.jpg
+1369,facing,The laptop is facing the cat.,images/id1369.jpg
+1375,facing away from,The cat is facing away from the refrigerator.,images/id1375.jpg
+1376,facing,The laptop is facing the cat.,images/id1376.jpg
+1380,parallel to,The train is parallel to the boat.,images/id1380.jpg
+1384,parallel to,The person is parallel to the snowboard.,images/id1384.jpg
+1400,facing away from,The cat is facing away from the suitcase.,images/id1400.jpg
+1405,facing,The teddy bear is facing the book.,images/id1405.jpg
+1450,facing,The person is facing the bear.,images/id1450.jpg
+1457,facing,The cow is facing the chair.,images/id1457.jpg
+1490,facing away from,The laptop is facing away from the person.,images/id1490.jpg
+1559,facing,The cat is facing the laptop.,images/id1559.jpg
+1592,facing away from,The dog is facing away from the person.,images/id1592.jpg
+1608,parallel to,The book is parallel to the bed.,images/id1608.jpg
+1611,facing,The cat is facing the backpack.,images/id1611.jpg
+1617,facing,The cow is facing the bench.,images/id1617.jpg
+1650,facing,The chair is facing the hot dog.,images/id1650.jpg
+1662,parallel to,The car is parallel to the motorcycle.,images/id1662.jpg
+1663,perpendicular to,The knife is perpendicular to the carrot.,images/id1663.jpg
+1682,perpendicular to,The cow is perpendicular to the motorcycle.,images/id1682.jpg
+1760,facing,The person is facing the bed.,images/id1760.jpg
+1773,facing away from,The cat is facing away from the bed.,images/id1773.jpg
+1775,perpendicular to,The book is perpendicular to the bed.,images/id1775.jpg
+1792,facing,The cat is facing the person.,images/id1792.jpg
+1810,facing,The bus is facing the dining table.,images/id1810.jpg
+1815,parallel to,The bicycle is parallel to the motorcycle.,images/id1815.jpg
+1816,facing,The book is facing the cat.,images/id1816.jpg
+1822,facing,The cat is facing the tv.,images/id1822.jpg
+1839,perpendicular to,The train is perpendicular to the bus.,images/id1839.jpg
+1877,facing,The laptop is facing the person.,images/id1877.jpg
+1893,facing,The teddy bear is facing the dog.,images/id1893.jpg
+1905,facing,The teddy bear is facing the person.,images/id1905.jpg
+1910,facing away from,The person is facing away from the toaster.,images/id1910.jpg
+1911,facing away from,The bench is facing away from the parking meter.,images/id1911.jpg
+1928,facing,The umbrella is facing the bed.,images/id1928.jpg
+1934,facing,The person is facing the laptop.,images/id1934.jpg
+1939,facing away from,The person is facing away from the refrigerator.,images/id1939.jpg
+1942,parallel to,The motorcycle is parallel to the bus.,images/id1942.jpg
+1949,facing,The cow is facing the dog.,images/id1949.jpg
+1953,facing away from,The cow is facing away from the person.,images/id1953.jpg
+1997,facing away from,The cat is facing away from the toilet.,images/id1997.jpg
+1999,facing,The refrigerator is facing the person.,images/id1999.jpg
+2000,facing away from,The cat is facing away from the tv.,images/id2000.jpg
+2009,parallel to,The dining table is parallel to the bench.,images/id2009.jpg
+2015,facing away from,The couch is facing away from the laptop.,images/id2015.jpg
+2034,facing away from,The bench is facing away from the parking meter.,images/id2034.jpg
+2059,perpendicular to,The car is perpendicular to the motorcycle.,images/id2059.jpg
+2100,facing,The bird is facing the book.,images/id2100.jpg
+2124,parallel to,The motorcycle is parallel to the car.,images/id2124.jpg
+2141,parallel to,The bed is parallel to the bicycle.,images/id2141.jpg
+2151,facing,The bear is facing the person.,images/id2151.jpg
+2160,facing,The person is facing the dining table.,images/id2160.jpg
+2165,facing,The cat is facing the laptop.,images/id2165.jpg
+2189,facing,The bear is facing the teddy bear.,images/id2189.jpg
