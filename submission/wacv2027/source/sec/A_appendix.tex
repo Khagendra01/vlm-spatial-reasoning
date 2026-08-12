@@ -560,6 +560,27 @@ right. Of the 48 annotated cases, hard-negative training fixes 5; 15 still
 fail under all three 7B conditions. Facing/facing-away account for 68.8\% of
 persistent failures.
 
+\textbf{Inter-annotator agreement (additive reliability evidence).} Because
+the clean-label audit (\S\ref{app:probes}) and the taxonomy above are
+single-annotator, the accompanying code package includes a blind
+second-annotation protocol: \texttt{scripts/export\_iaa\_sheets.py} exports
+two rating sheets over the same examples (the 137-example orientation test
+set for the binary clean/ambiguous flag, and the 48 persistent-failure cases
+for the eight-class taxonomy), containing only image, statement, and
+relation---ground truth, model predictions, and the first annotator's labels
+are withheld---and \texttt{scripts/iaa\_tool.py} provides a blind annotation
+interface. A second, independent human annotator rates the same examples
+under this protocol; agreement is then computed by
+\texttt{scripts/compute\_iaa.py} as Cohen's kappa for the binary flag and
+Krippendorff's alpha (nominal) for the taxonomy, both with bootstrap 95\%
+confidence intervals, and written to \texttt{results/iaa\_results.json} with
+a summary at \texttt{results/iaa\_summary.md}. If the second rater is not yet
+available, these statistics are simply absent: the audit remains
+single-annotator, and no reported accuracy number (Table~\ref{tab:cleanlabel})
+is altered by this protocol. An LLM-assisted relabeling, if ever used, would
+be reported separately as a weaker, non-human-IAA check and would not be
+substituted for the human second rater.
+
 % ============================================================
 % G. Reproducibility and artifact index
 % ============================================================
