@@ -1,0 +1,63 @@
+{
+  "resource": "VSR orientation multi-rater audit resource",
+  "version": "iaa-v2",
+  "created": "2026-08-12",
+  "schema": "https://github.com/Khagendra01/vlm-spatial-reasoning (paper-draft-v1)",
+  "layers": [
+    {
+      "id": "automated_llm_audit",
+      "description": "Original frozen audit labels, LLM-generated; image grounding unverified",
+      "files": [
+        "results/orientation_persistent_annotations.csv",
+        "results/failure_annotations.csv",
+        "results/orientation_persistent_failures_v2.json"
+      ],
+      "commit": "4b83729"
+    },
+    {
+      "id": "human_a",
+      "description": "Independent human re-audit A (blind, image-grounded; 137 binary + 48 taxonomy)",
+      "files": [
+        "results/iaa/rater2_clean_labels.csv",
+        "results/iaa/rater2_taxonomy.csv"
+      ]
+    },
+    {
+      "id": "human_b",
+      "description": "Independent human re-audit B (blind, image-grounded; 137 binary + 48 taxonomy)",
+      "files": [
+        "results/iaa/rater3_clean_labels.csv",
+        "results/iaa/rater3_taxonomy.csv"
+      ]
+    },
+    {
+      "id": "llm_mimo_audit",
+      "description": "Second-LLM audit-reliability check (MiMo-V2.5, image-grounded prompts); degenerate (option-1 collapse) — reported as a reliability finding",
+      "files": [
+        "results/mimo/audit_mimo_clean.csv",
+        "results/mimo/audit_mimo_taxo.csv"
+      ]
+    }
+  ],
+  "agreement_statistics": [
+    "results/iaa/iaa_results.json                  (human A vs automated audit)",
+    "results/iaa/llm_rater3_results.json           (automated audit vs human B)",
+    "results/iaa/rater2_rater3_results.json        (human A vs human B, n=48)",
+    "results/iaa/rater2_rater3_binary137.json      (human A vs human B, full 137)",
+    "results/iaa/human_mimo_results.json           (human A vs MiMo audit)",
+    "results/iaa/llm_mimo_results.json             (automated audit vs MiMo audit)",
+    "results/iaa/consensus_subsets.json            (annotator-dependence of clean-label table)"
+  ],
+  "protocol_tooling": [
+    "scripts/export_iaa_sheets.py",
+    "scripts/iaa_tool.py",
+    "scripts/compute_iaa.py",
+    "scripts/iaa_consensus_subsets.py"
+  ],
+  "derived_tables": [
+    "results/tables/orientation_clean_label_table.md",
+    "results/tables/orientation_clean_label_table_human.md"
+  ],
+  "usage_note": "All ratings are per VSR test-set example id. The automated audit's labels predate this resource and are retained as the frozen v1; human and MiMo layers are additive. Derived from VSR (cambridgeltl/vsr_random) statements and COCO images (images.cocodataset.org).",
+  "citation": "See the accompanying WACV 2027 E&D-track submission, supplementary App. F."
+}

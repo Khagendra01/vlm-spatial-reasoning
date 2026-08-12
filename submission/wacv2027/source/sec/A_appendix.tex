@@ -322,7 +322,7 @@ MiMo-V2.5 zero-shot & 65.7 & 68.2 & 68.2 & 72.0 & 58.7 \\
 \end{tabular}
 \end{table*}
 Under the human strict mask, orientation accuracy rises (best 77.6\%, 2B
-Targeted LoRA), error is not eliminated (human ceiling 76.6\% below the
+Targeted LoRA), error is not eliminated (human ceiling 77.6\% below the
 automated ceiling 78.5\% for the 2B/7B conditions), and 2B structured still
 shows no gain (51.4\%), so the paper's sensitivity conclusions are not an
 artifact of the automated audit. The human binary mask alone (75 clean
@@ -709,6 +709,13 @@ first-pass labels or the human re-audit ($\kappa{=}0.00$; $\alpha\approx-0.1$;
 that naive LLM audit prompting can degenerate to the first option, and we do
 not substitute it for the human re-audit.
 
+\textbf{Released resource.} The layered multi-rater data --- the automated
+audit, two independent human re-audits, and the second-LLM audit-reliability
+check, together with all per-item agreement statistics --- is versioned and
+released as a citable artifact under \texttt{results/iaa/}
+(\texttt{MANIFEST.json}, ratings CSVs, agreement JSONs, and the blind-rating
+tooling).
+
 % ============================================================
 % G. Reproducibility and artifact index
 % ============================================================
@@ -744,9 +751,11 @@ SITE numbers & \texttt{site/zeroshot\_7b\_predictions.csv} & --- \\
 MiMo-V2.5 VSR / consistency / audit (Table~1 row, verdict table,
 App.~\ref{app:probes}) & \texttt{mimo/*.csv}, \texttt{mimo/mimo\_vsr\_summary.json} & --- \\
 Human re-audit + inter-source agreement (App.~\ref{app:taxonomy}) &
-\texttt{iaa/rater2\_*.csv}, \texttt{iaa/iaa\_results.json},
+\texttt{iaa/rater2\_*.csv}, \texttt{iaa/rater3\_*.csv},
+\texttt{iaa/iaa\_results.json},
 \texttt{iaa/consensus\_subsets.json},
 \texttt{iaa/human\_mimo\_results.json},
+\texttt{iaa/MANIFEST.json} (released multi-rater resource),
 \texttt{tables/orientation\_clean\_label\_table\_human.md} & --- \\
 \bottomrule
 \end{tabular}
