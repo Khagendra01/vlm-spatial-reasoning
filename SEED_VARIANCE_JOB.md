@@ -29,6 +29,32 @@ Report, per condition, across the 3 seeds (42 + 101 + 202):
   original training machine (manifests: general_train.jsonl,
   hardneg_train.jsonl; image cache at data/image_cache/).
 
+## GPU choice
+
+The runner uses one CUDA device, bf16, eager attention, gradient
+checkpointing, and batch size 1; multiple GPUs will not speed one run unless
+the script is rewritten for distributed training. The canonical A6000 48 GB
+is therefore a valid baseline, not a requirement on the GPU model.
+
+Recommended choices:
+
+1. **L40S / RTX 6000 Ada 48 GB** — best cost/speed balance when available;
+   enough VRAM with newer tensor hardware than the A6000.
+2. **A100 80 GB** — conservative choice if priced near an L40S; high memory
+   bandwidth and ample headroom, though often less cost-efficient.
+3. **H100 80 GB** — fastest minimum-wall-clock choice; worthwhile when its
+   hourly price is no more than roughly 2--2.5 times an L40S/A6000.
+4. **A6000 48 GB** — cheapest safe fallback and closest to the canonical run.
+
+Avoid 24 GB cards (RTX 4090, L4, A10) and 32 GB cards for this unmodified
+recipe: the preflight intentionally rejects them. Avoid two small GPUs: this
+code is single-device and will not combine their VRAM. Before renting, run a
+100-step benchmark and record GPU name, peak VRAM, elapsed time, and cost;
+choose by **cost per completed seed**, not peak TFLOPS. To minimize wall time,
+run the four jobs in parallel on four GPUs with separate
+`CUDA_VISIBLE_DEVICES` values; to minimize cost, use one L40S/A6000
+sequentially.
+
 ## Exact commands (run from the repository root)
 
 ```bash
