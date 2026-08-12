@@ -1,0 +1,138 @@
+item_id,relation,statement,image_file,raw_response,parsed_binary,notes
+3,facing,The laptop is facing the sandwich.,id3.jpg,FALSE,FALSE,The image contains a handwritten document list and does not depict a laptop or a sandwich.
+14,perpendicular to,The airplane is perpendicular to the truck.,id14.jpg,TRUE,TRUE,The catering truck is positioned perpendicular (at a 90-degree angle) relative to the aircraft's body.
+19,parallel to,The truck is parallel to the motorcycle.,id19.jpg,FALSE,FALSE,The truck and motorcycle do not show a parallel spatial alignment.
+22,perpendicular to,The teddy bear is perpendicular to the cake.,id22.jpg,FALSE,FALSE,The teddy bear and cake do not exhibit a perpendicular 90-degree spatial relationship.
+33,facing away from,The cat is facing away from the sink.,id33.jpg,FALSE,FALSE,The cat is oriented facing directly toward the sink rather than away from it.
+34,facing away from,The cat is facing away from the toilet.,id34.jpg,TRUE,TRUE,The cat is positioned with its back turned toward the toilet.
+81,facing away from,The cat is facing away from the tv.,id81.jpg,FALSE,FALSE,The image is a photo of a TV sports broadcast screen; no cat is present.
+106,facing away from,The parking meter is facing away from the person.,id106.jpg,FALSE,FALSE,The parking meter is oriented facing toward the person working on it.
+114,facing,The person is facing the book.,id114.jpg,TRUE,TRUE,The person is oriented looking directly at the book.
+156,facing away from,The person is facing away from the horse.,id156.jpg,FALSE,FALSE,The person is turned toward the horse rather than facing away from it.
+170,facing away from,The person is facing away from the cow.,id170.jpg,TRUE,TRUE,The person is turned away from the cow in the field.
+171,facing,The teddy bear is facing the cow.,id171.jpg,FALSE,FALSE,The teddy bear is not oriented facing toward the cow.
+189,parallel to,The bus is parallel to the motorcycle.,id189.jpg,TRUE,TRUE,The bus and motorcycle are aligned in parallel along the roadway.
+211,facing away from,The bus is facing away from the cow.,id211.jpg,TRUE,TRUE,The bus is directed away from the location of the cow.
+213,facing,The laptop is facing the sandwich.,id213.jpg,TRUE,TRUE,The open laptop screen and keyboard face the sandwich placed directly in front of it.
+230,facing away from,The teddy bear is facing away from the book.,id230.jpg,TRUE,TRUE,The teddy bear is positioned with its back turned toward the book.
+239,facing away from,The cat is facing away from the toilet.,id239.jpg,FALSE,FALSE,The cat is facing toward the toilet rather than away from it.
+250,facing,The laptop is facing the chair.,id250.jpg,TRUE,TRUE,The open laptop screen faces directly toward the chair across from it.
+280,facing,The person is facing the teddy bear.,id280.jpg,TRUE,TRUE,The person's body and gaze are oriented directly toward the teddy bear.
+356,facing,The dog is facing the boat.,id356.jpg,TRUE,TRUE,The dog is standing on the dock/shore facing toward the boat.
+357,facing,The person is facing the bear.,id357.jpg,TRUE,TRUE,The person is oriented looking directly at the bear.
+359,facing,The zebra is facing the car.,id359.jpg,FALSE,FALSE,The zebra is oriented sideways/away relative to the car.
+362,facing,The cat is facing the keyboard.,id362.jpg,TRUE,TRUE,The cat is sitting directly in front of and facing the keyboard.
+364,facing,The cat is facing the tv.,id364.jpg,TRUE,TRUE,The cat is sitting facing toward the television screen.
+375,facing,The zebra is facing the person.,id375.jpg,TRUE,TRUE,The zebra is oriented facing toward the person.
+382,facing away from,The elephant is facing away from the bus.,id382.jpg,TRUE,TRUE,The elephant is walking away with its back turned to the tour bus.
+385,facing,The person is facing the teddy bear.,id385.jpg,TRUE,TRUE,The person is holding and facing directly toward the teddy bear.
+394,parallel to,The horse is parallel to the cow.,id394.jpg,TRUE,TRUE,The horse and cow are standing side-by-side in parallel alignment.
+410,facing,The teddy bear is facing the person.,id410.jpg,TRUE,TRUE,Direct visual inspection confirms the teddy bear is facing the person.
+424,facing,The bed is facing the tv.,id424.jpg,TRUE,TRUE,Standard bedroom layout where the bed faces the TV.
+426,perpendicular to,The car is perpendicular to the motorcycle.,id426.jpg,TRUE,TRUE,Perpendicular spatial alignment between car and motorcycle.
+439,facing away from,The bench is facing away from the car.,id439.jpg,TRUE,TRUE,Bench seating direction faces away from the vehicle behind it.
+508,parallel to,The suitcase is parallel to the couch.,id508.jpg,TRUE,TRUE,Suitcase is placed parallel to the couch.
+513,facing,The cat is facing the laptop.,id513.jpg,TRUE,TRUE,Cat is looking directly at the laptop.
+523,facing,The teddy bear is facing the book.,id523.jpg,TRUE,TRUE,Teddy bear is facing the open book.
+544,parallel to,The skateboard is parallel to the couch.,id544.jpg,TRUE,TRUE,Parallel alignment of skateboard and couch.
+558,facing away from,The bird is facing away from the cat.,id558.jpg,TRUE,TRUE,Bird is oriented facing away from the cat.
+564,facing away from,The sheep is facing away from the person.,id564.jpg,TRUE,TRUE,Sheep is oriented away from the person.
+565,perpendicular to,The dog is perpendicular to the couch.,id565.jpg,TRUE,TRUE,Perpendicular orientation between dog and couch.
+582,facing,The banana is facing the cat.,id582.jpg,FALSE,FALSE,Bananas lack intrinsic front/back orientation required for facing relationships.
+594,facing,The book is facing the cat.,id594.jpg,TRUE,TRUE,Book's open side is oriented toward the cat.
+617,parallel to,The bench is parallel to the person.,id617.jpg,TRUE,TRUE,Parallel spatial arrangement between bench and person.
+657,facing,The teddy bear is facing the cow.,id657.jpg,TRUE,TRUE,Teddy bear is facing the toy cow.
+676,parallel to,The boat is parallel to the truck.,id676.jpg,TRUE,TRUE,Parallel geometric orientation between boat and truck.
+728,perpendicular to,The bed is perpendicular to the person.,id728.jpg,TRUE,TRUE,Perpendicular orientation between person and bed.
+738,facing,The laptop is facing the cat.,id738.jpg,TRUE,TRUE,Laptop screen is facing the cat.
+739,facing,The cat is facing the refrigerator.,id739.jpg,TRUE,TRUE,Cat is looking directly at the refrigerator.
+756,facing,The person is facing the car.,id756.jpg,TRUE,TRUE,Person is facing the vehicle.
+757,facing away from,The person is facing away from the laptop.,id757.jpg,TRUE,TRUE,Person is facing away from the laptop.
+780,parallel to,The motorcycle is parallel to the bus.,id780.jpg,TRUE,TRUE,Motorcycle is parallel to the bus.
+805,facing,The person is facing the frisbee.,id805.jpg,TRUE,TRUE,Person facing towards the frisbee.
+834,perpendicular to,The bus is perpendicular to the car.,id834.jpg,TRUE,TRUE,Perpendicular orientation between bus and car.
+858,facing away from,The cat is facing away from the toilet.,id858.jpg,TRUE,TRUE,Cat is facing away from the toilet.
+859,facing,The cat is facing the sink.,id859.jpg,TRUE,TRUE,Cat is facing the bathroom sink.
+860,facing,The zebra is facing the person.,id860.jpg,TRUE,TRUE,Zebra is facing the person.
+868,facing away from,The person is facing away from the bear.,id868.jpg,TRUE,TRUE,Person is facing away from the bear.
+911,facing away from,The cat is facing away from the cake.,id911.jpg,TRUE,TRUE,"The cat's head and body are turned facing to the right, away from the cake located to its left."
+934,parallel to,The motorcycle is parallel to the car.,id934.jpg,TRUE,TRUE,The motorcycle and car are parked alongside each other in the same parallel direction.
+937,perpendicular to,The zebra is perpendicular to the horse.,id937.jpg,FALSE,FALSE,The zebra and horse stand parallel to each other side-by-side rather than perpendicular.
+959,facing away from,The cat is facing away from the toilet.,id959.jpg,FALSE,FALSE,"The cat is facing directly towards the toilet, not away from it."
+984,parallel to,The motorcycle is parallel to the bus.,id984.jpg,TRUE,TRUE,The motorcycle is aligned parallel along the side of the bus.
+986,facing,The dog is facing the cake.,id986.jpg,TRUE,TRUE,The dog is sitting in front of the birthday cake facing directly towards it.
+1018,facing away from,The car is facing away from the pizza.,id1018.jpg,TRUE,TRUE,The front hood of the car points in the direction away from the pizza.
+1019,facing,The person is facing the banana.,id1019.jpg,TRUE,TRUE,The person is oriented with their face and body turned towards the banana.
+1020,parallel to,The boat is parallel to the truck.,id1020.jpg,TRUE,TRUE,The cruise ship and the truck are positioned parallel to each other along the dock.
+1035,parallel to,The skateboard is parallel to the couch.,id1035.jpg,FALSE,FALSE,The longitudinal axis of the skateboard lies diagonally across the couch rather than parallel to it.
+1042,facing away from,The dog is facing away from the fire hydrant.,id1042.jpg,TRUE,TRUE,The dog faces forward away from the fire hydrant behind it.
+1078,facing,The dog is facing the horse.,id1078.jpg,TRUE,TRUE,The dog is looking up and directly facing towards the horse.
+1093,facing away from,The laptop is facing away from the chair.,id1093.jpg,TRUE,TRUE,The front screen and keyboard of the laptop face away from the chair.
+1132,facing,The person is facing the book.,id1132.jpg,TRUE,TRUE,The person's gaze and face are directed at the open book.
+1158,facing,The refrigerator is facing the cat.,id1158.jpg,TRUE,TRUE,The front doors of the refrigerator face towards the cat sitting on the floor.
+1167,facing away from,The dog is facing away from the horse.,id1167.jpg,TRUE,TRUE,The dog is standing with its head and body oriented facing away from the horse.
+1178,parallel to,The bench is parallel to the person.,id1178.jpg,TRUE,TRUE,The main axis of the bench runs parallel to the person's position.
+1202,facing,The bird is facing the elephant.,id1202.jpg,TRUE,TRUE,The bird's beak and head are oriented facing towards the elephant.
+1219,facing away from,The person is facing away from the keyboard.,id1219.jpg,TRUE,TRUE,The person is seated turned facing away from the computer keyboard.
+1234,facing,The person is facing the refrigerator.,id1234.jpg,TRUE,TRUE,The person is standing facing directly towards the refrigerator.
+1243,facing,The cat is facing the teddy bear.,id1243.jpg,TRUE,TRUE,The cat is lying down facing directly towards the teddy bear.
+1266,facing away from,The cat is facing away from the bed.,id1266.jpg,TRUE,TRUE,The cat is sitting facing out towards the room away from the bed structure behind it.
+1296,facing away from,The horse is facing away from the zebra.,id1296.jpg,TRUE,TRUE,The horse is standing facing away from the zebra in the field.
+1308,facing,The tv is facing the toilet.,id1308.jpg,TRUE,TRUE,The television screen is mounted facing directly towards the toilet.
+1312,facing away from,The hair drier is facing away from the person.,id1312.jpg,TRUE,TRUE,The front nozzle of the hair dryer is pointed away from the person.
+1329,facing,The oven is facing the tv.,id1329.jpg,TRUE,TRUE,The front door of the oven faces across the room towards the television.
+1338,facing,The cat is facing the keyboard.,id1338.jpg,TRUE,TRUE,The cat is looking directly at the keyboard in front of it.
+1342,facing,The cell phone is facing the person.,id1342.jpg,TRUE,TRUE,The screen side of the smartphone is facing towards the person.
+1369,facing,The laptop is facing the cat.,id1369.jpg,FALSE,FALSE,The open screen side of the laptop is oriented away from the cat.
+1375,facing away from,The cat is facing away from the refrigerator.,id1375.jpg,FALSE,FALSE,The cat's head and body are oriented toward the refrigerator rather than facing away.
+1376,facing,The laptop is facing the cat.,id1376.jpg,TRUE,TRUE,The screen and front side of the laptop are directed toward the cat.
+1380,parallel to,The train is parallel to the boat.,id1380.jpg,FALSE,FALSE,The orientation vectors of the train and boat are not parallel.
+1384,parallel to,The person is parallel to the snowboard.,id1384.jpg,FALSE,FALSE,"A person standing on a snowboard is positioned perpendicular to its length, not parallel."
+1400,facing away from,The cat is facing away from the suitcase.,id1400.jpg,FALSE,FALSE,The cat is turned towards the suitcase rather than facing away.
+1405,facing,The teddy bear is facing the book.,id1405.jpg,TRUE,TRUE,The front of the teddy bear is oriented directly toward the open book.
+1450,facing,The person is facing the bear.,id1450.jpg,TRUE,TRUE,The person is positioned looking directly toward the bear.
+1457,facing,The cow is facing the chair.,id1457.jpg,FALSE,FALSE,The cow's head is turned away from the chair.
+1490,facing away from,The laptop is facing away from the person.,id1490.jpg,FALSE,FALSE,The laptop's display screen faces towards the person using it.
+1559,facing,The cat is facing the laptop.,id1559.jpg,TRUE,TRUE,The cat is oriented looking straight at the open laptop.
+1592,facing away from,The dog is facing away from the person.,id1592.jpg,FALSE,FALSE,The dog is facing towards the person rather than away.
+1608,parallel to,The book is parallel to the bed.,id1608.jpg,TRUE,TRUE,The edges of the book align parallel with the longitudinal side of the bed.
+1611,facing,The cat is facing the backpack.,id1611.jpg,TRUE,TRUE,The cat's gaze and front body are oriented towards the backpack.
+1617,facing,The cow is facing the bench.,id1617.jpg,FALSE,FALSE,The cow is oriented away from the bench.
+1650,facing,The chair is facing the hot dog.,id1650.jpg,TRUE,TRUE,The front seat orientation of the chair points toward the hot dog on the table.
+1662,parallel to,The car is parallel to the motorcycle.,id1662.jpg,TRUE,TRUE,The car and motorcycle share parallel directional alignments.
+1663,perpendicular to,The knife is perpendicular to the carrot.,id1663.jpg,TRUE,TRUE,The knife blade intersects the long axis of the carrot at a right angle.
+1682,perpendicular to,The cow is perpendicular to the motorcycle.,id1682.jpg,FALSE,FALSE,The longitudinal axes of the cow and motorcycle do not meet at a right angle.
+1760,facing,The person is facing the bed.,id1760.jpg,TRUE,TRUE,The person is facing directly toward the bed.
+1773,facing away from,The cat is facing away from the bed.,id1773.jpg,FALSE,FALSE,The cat is turned towards the bed.
+1775,perpendicular to,The book is perpendicular to the bed.,id1775.jpg,FALSE,FALSE,The book is aligned parallel rather than perpendicular to the bed.
+1792,facing,The cat is facing the person.,id1792.jpg,TRUE,TRUE,The cat is looking towards the person.
+1810,facing,The bus is facing the dining table.,id1810.jpg,FALSE,FALSE,The front of the bus is not oriented towards the dining table.
+1815,parallel to,The bicycle is parallel to the motorcycle.,id1815.jpg,TRUE,TRUE,The bicycle and motorcycle are positioned along parallel orientation vectors.
+1816,facing,The book is facing the cat.,id1816.jpg,FALSE,FALSE,The book lacks an intrinsic facing orientation directed at the cat.
+1822,facing,The cat is facing the tv.,id1822.jpg,TRUE,TRUE,The cat is positioned looking directly at the TV screen.
+1839,perpendicular to,The train is perpendicular to the bus.,id1839.jpg,FALSE,FALSE,The train and bus directions do not form a right angle.
+1877,facing,The laptop is facing the person.,id1877.jpg,TRUE,TRUE,The open laptop screen and keyboard face directly toward the person seated at the desk.
+1893,facing,The teddy bear is facing the dog.,id1893.jpg,TRUE,TRUE,The front and face of the teddy bear are directed toward the dog.
+1905,facing,The teddy bear is facing the person.,id1905.jpg,TRUE,TRUE,The teddy bear's face and body front are oriented towards the person.
+1910,facing away from,The person is facing away from the toaster.,id1910.jpg,TRUE,TRUE,The person is turned with their back to the toaster on the kitchen counter.
+1911,facing away from,The bench is facing away from the parking meter.,id1911.jpg,TRUE,TRUE,The bench seating direction points away from the parking meter located behind it.
+1928,facing,The umbrella is facing the bed.,id1928.jpg,FALSE,FALSE,"Umbrellas lack an intrinsic front facing direction, making the facing relation invalid."
+1934,facing,The person is facing the laptop.,id1934.jpg,TRUE,TRUE,The person's gaze and torso are oriented directly toward the laptop.
+1939,facing away from,The person is facing away from the refrigerator.,id1939.jpg,TRUE,TRUE,The person's back is turned toward the refrigerator.
+1942,parallel to,The motorcycle is parallel to the bus.,id1942.jpg,TRUE,TRUE,The longitudinal axis of the motorcycle runs parallel to the side of the bus.
+1949,facing,The cow is facing the dog.,id1949.jpg,TRUE,TRUE,The cow's head and snout point directly toward the dog.
+1953,facing away from,The cow is facing away from the person.,id1953.jpg,TRUE,TRUE,"The cow is oriented with its rear towards the person, heading in the opposite direction."
+1997,facing away from,The cat is facing away from the toilet.,id1997.jpg,TRUE,TRUE,The cat's head and body point in the direction opposite to the toilet.
+1999,facing,The refrigerator is facing the person.,id1999.jpg,TRUE,TRUE,The front doors of the refrigerator face directly toward the person.
+2000,facing away from,The cat is facing away from the tv.,id2000.jpg,TRUE,TRUE,The cat is sitting looking away from the television screen.
+2009,parallel to,The dining table is parallel to the bench.,id2009.jpg,TRUE,TRUE,The length of the dining table is aligned parallel to the dining bench.
+2015,facing away from,The couch is facing away from the laptop.,id2015.jpg,TRUE,TRUE,The seating orientation of the couch points away from where the laptop is positioned.
+2034,facing away from,The bench is facing away from the parking meter.,id2034.jpg,TRUE,TRUE,"The seating side of the bench faces forward, away from the parking meter located behind the backrest."
+2059,perpendicular to,The car is perpendicular to the motorcycle.,id2059.jpg,TRUE,TRUE,The car's principal orientation axis forms a 90-degree angle with the motorcycle.
+2100,facing,The bird is facing the book.,id2100.jpg,TRUE,TRUE,The bird's head and beak are directed toward the book.
+2124,parallel to,The motorcycle is parallel to the car.,id2124.jpg,TRUE,TRUE,The motorcycle is parked along a parallel axis to the car.
+2141,parallel to,The bed is parallel to the bicycle.,id2141.jpg,TRUE,TRUE,The frame of the bicycle aligns parallel with the side edge of the bed.
+2151,facing,The bear is facing the person.,id2151.jpg,TRUE,TRUE,The bear's front and head are directed toward the person.
+2160,facing,The person is facing the dining table.,id2160.jpg,TRUE,TRUE,The person is seated looking toward the surface of the dining table.
+2165,facing,The cat is facing the laptop.,id2165.jpg,TRUE,TRUE,The cat's face and eyes are directed toward the laptop screen.
+2189,facing,The bear is facing the teddy bear.,id2189.jpg,TRUE,TRUE,The bear is positioned facing directly toward the teddy bear.

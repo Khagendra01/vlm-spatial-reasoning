@@ -1,0 +1,138 @@
+run_id,model_id,provider,eval_date_utc,item_id,relation,raw_response,parsed_clean,invalid_reason,latency_ms
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,3,facing,AMBIGUOUS,AMBIGUOUS,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,14,perpendicular to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,19,parallel to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,22,perpendicular to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,33,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,34,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,81,facing away from,AMBIGUOUS,AMBIGUOUS,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,106,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,114,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,156,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,170,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,171,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,189,parallel to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,211,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,213,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,230,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,239,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,250,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,280,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,356,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,357,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,359,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,362,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,364,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,375,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,382,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,385,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,394,parallel to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,410,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,424,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,426,perpendicular to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,439,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,508,parallel to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,513,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,523,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,544,parallel to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,558,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,564,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,565,perpendicular to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,582,facing,AMBIGUOUS,AMBIGUOUS,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,594,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,617,parallel to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,657,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,676,parallel to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,728,perpendicular to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,738,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,739,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,756,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,757,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,780,parallel to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,805,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,834,perpendicular to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,858,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,859,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,860,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,868,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,911,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,934,parallel to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,937,perpendicular to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,959,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,984,parallel to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,986,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1018,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1019,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1020,parallel to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1035,parallel to,AMBIGUOUS,AMBIGUOUS,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1042,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1078,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1093,facing away from,AMBIGUOUS,AMBIGUOUS,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1132,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1158,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1167,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1178,parallel to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1202,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1219,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1234,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1243,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1266,facing away from,AMBIGUOUS,AMBIGUOUS,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1296,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1308,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1312,facing away from,AMBIGUOUS,AMBIGUOUS,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1329,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1338,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1342,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1369,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1375,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1376,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1380,parallel to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1384,parallel to,AMBIGUOUS,AMBIGUOUS,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1400,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1405,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1450,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1457,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1490,facing away from,AMBIGUOUS,AMBIGUOUS,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1559,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1592,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1608,parallel to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1611,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1617,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1650,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1662,parallel to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1663,perpendicular to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1682,perpendicular to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1760,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1773,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1775,perpendicular to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1792,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1810,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1815,parallel to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1816,facing,AMBIGUOUS,AMBIGUOUS,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1822,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1839,perpendicular to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1877,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1893,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1905,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1910,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1911,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1928,facing,AMBIGUOUS,AMBIGUOUS,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1934,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1939,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1942,parallel to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1949,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1953,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1997,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,1999,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,2000,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,2009,parallel to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,2015,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,2034,facing away from,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,2059,perpendicular to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,2100,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,2124,parallel to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,2141,parallel to,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,2151,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,2160,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,2165,facing,CLEAN,CLEAN,,150
+run_gemini_spark_clean_137_001,gemini-spark,google,2026-08-12T19:44:00Z,2189,facing,CLEAN,CLEAN,,150

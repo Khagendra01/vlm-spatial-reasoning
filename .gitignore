@@ -30,3 +30,6 @@ results/iaa/images/
 
 submission/wacv2027/source/build/
 
+# Duplicate of committed external_eval/flagship_v1/images (download artifact)
+external_eval/flagship_v1/images.zip
+
