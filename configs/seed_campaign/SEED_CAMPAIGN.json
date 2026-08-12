@@ -3,6 +3,7 @@
   "created_by": "opencode (user-directed)",
   "created_at": "2026-08-11T00:00:00",
   "status": "FROZEN_BEFORE_TRAINING",
+  "_protocol_correction": "2026-08-11: the battery described below (with_sample/with_shuffle heavy battery, uniform-392 eval) was RETRACTED after code audit; see SPATIAL_REASONING_DECISION_LOG 'battery drift' entry. The corrected campaign battery is the frozen Paper-2 legacy Tier-A/B/C protocol (normal, shuffle, relcomp, facingcomp, hflip_flip, hflip_invariant) via scripts/grounding/run_seed_battery.py. This document is retained as audit history; training inputs/recipe/splits/seed semantics are unaffected.",
   "approval": "User approved all three campaign decisions on 2026-08-11: (1) implement + pre-register battery, (2) split frozen at 42 with train-time RNG varying per seed, (3) full 3x2 campaign in background runs.",
   "purpose": "Re-train the two general-VSR LoRA backbones (Qwen2-VL-7B-Instruct, SmolVLM2-2.2B-Instruct) under three fresh random seeds each, using training-run inputs identical to the seed-0 runs EXCEPT the seed, to study seed variance of the results and to produce seed-quality verdicts. Seed-0 artifacts live in checkpoints/qwen2vl_7b_general_lora/final and checkpoints/general_lora/final (master).",
 

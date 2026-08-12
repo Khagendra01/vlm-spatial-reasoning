@@ -1,0 +1,38 @@
+{
+  "analysis_files": {
+    "tier_a": "results/grounding/analysis/tier_a_metrics_regress_smolvlm2.json",
+    "tier_b_facingcomp": "results/grounding/analysis/tier_b_metrics_regress_smolvlm2_facing.json",
+    "tier_b_relcomp": "results/grounding/analysis/tier_b_metrics_regress_smolvlm2_tierb.json",
+    "tier_c": "results/grounding/analysis/tier_c_metrics_regress_smolvlm2_tierc.json"
+  },
+  "attn_implementation": "sdpa",
+  "batch_size": 8,
+  "checkpoints": [
+    "zero_shot",
+    "general_lora"
+  ],
+  "correction": "SPATIAL_REASONING_DECISION_LOG 2026-08-11 battery-drift entry",
+  "generated_at": "2026-08-11T23:33:18.752175+00:00",
+  "git_branch": "research/spatial-grounding-audit",
+  "git_commit": "88f5da2912fe21f79e6a7efbd9d686723f0b6925",
+  "model_family": "smolvlm2",
+  "predictions_dir": "results/grounding/predictions/regress_smolvlm2",
+  "protocol_hash": "018b5dd4ce4b4958b065ac41b8a59a9903083ab39801da80019fe62780e41824",
+  "resume": false,
+  "tier_a_conditions": [
+    "normal",
+    "shuffle",
+    "blank",
+    "text_only"
+  ],
+  "tier_b_facingcomp": [
+    "facingcomp"
+  ],
+  "tier_b_relcomp": [
+    "relcomp"
+  ],
+  "tier_c_transforms": [
+    "hflip_flip",
+    "hflip_invariant"
+  ]
+}

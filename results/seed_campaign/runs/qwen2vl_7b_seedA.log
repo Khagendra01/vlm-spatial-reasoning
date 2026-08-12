@@ -1,4 +1,24 @@
+The image processor of type `Qwen2VLImageProcessor` is now loaded as a fast processor by default, even if the model checkpoint was saved with a slow processor. This is a breaking change and may produce slightly different outputs. To continue using the slow processor, instantiate this class with `use_fast=False`. Note that this behavior will be extended to all models in a future release.
 Manifest: 2000 examples (campaign seed 101)
 Loading processor + model (bf16, eager)...
-Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Fetching 5 files: 100%|██████████| 5/5 [00:00<00:00, 778.40it/s]
-Loading weights:   0%|          | 0/730 [00:00<?, ?it/s]Loading weights:  62%|██████▏   | 450/730 [00:00<00:00, 4498.88it/s]Loading weights: 100%|██████████| 730/730 [00:00<00:00, 4493.79it/s]
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Fetching 5 files:  20%|██        | 1/5 [00:10<00:40, 10.07s/it]Fetching 5 files:  40%|████      | 2/5 [00:24<00:36, 12.08s/it]Fetching 5 files:  60%|██████    | 3/5 [00:27<00:18,  9.16s/it]Fetching 5 files:  80%|████████  | 4/5 [00:28<00:07,  7.13s/it]Fetching 5 files: 100%|██████████| 5/5 [00:28<00:00,  5.73s/it]Fetching 5 files: 100%|██████████| 5/5 [00:28<00:00,  5.73s/it]
+Loading checkpoint shards:   0%|          | 0/5 [00:00<?, ?it/s]Loading checkpoint shards:  20%|██        | 1/5 [00:00<00:00,  7.93it/s]Loading checkpoint shards: 100%|██████████| 5/5 [00:00<00:00, 24.76it/s]Loading checkpoint shards: 100%|██████████| 5/5 [00:00<00:00, 21.94it/s]
+Train: 1900, Eval: 100 (split frozen at seed=42)
+Traceback (most recent call last):
+  File "/home/ubuntu/vlm-spatial-reasoning/scripts/run_seed_campaign.py", line 333, in <module>
+    main()
+  File "/home/ubuntu/vlm-spatial-reasoning/scripts/run_seed_campaign.py", line 326, in main
+    train_7b(args.seed, args.output)
+  File "/home/ubuntu/vlm-spatial-reasoning/scripts/run_seed_campaign.py", line 221, in train_7b
+    for batch in loader:
+                 ^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/utils/data/dataloader.py", line 718, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/utils/data/dataloader.py", line 778, in _next_data
+    data = self._dataset_fetcher.fetch(index)  # may raise StopIteration
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/dist-packages/torch/utils/data/_utils/fetch.py", line 57, in fetch
+    return self.collate_fn(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: train_7b.<locals>.collate_batch() missing 1 required positional argument: 'batch_examples'

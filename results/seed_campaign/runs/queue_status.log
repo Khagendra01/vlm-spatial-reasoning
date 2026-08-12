@@ -1,1 +1,10 @@
 [06:55:55] START qwen2vl_7b seed=101 seedA
+[18:56:35] START qwen2vl_7b seed=101 seedA
+[18:58:22] DONE qwen2vl_7b seedA rc=1
+[18:58:22] START qwen2vl_7b seed=202 seedB
+[18:58:55] DONE qwen2vl_7b seedB rc=1
+[18:58:55] START qwen2vl_7b seed=303 seedC
+[18:59:29] DONE qwen2vl_7b seedC rc=1
+[18:59:29] START smolvlm2_2b seed=101 seedA
+[19:20:38] DONE smolvlm2_2b seedA rc=137
+[19:20:38] START smolvlm2_2b seed=202 seedB

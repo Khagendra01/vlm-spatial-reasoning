@@ -140,3 +140,44 @@ tier_*_metrics_*.json` regression targets, this entry + deprecation marks.
 - No fresh-seed battery evaluation has been run or inspected.
 
 At commit: ff51ab55 (research/spatial-grounding-audit).
+
+---
+
+## 2026-08-12 - Training incident: 2B seedB deadlock at first backward (root cause still open)
+
+**Symptom.** Every `run_seed_campaign.py` 2B invocation after seedA (seedB,
+3 attempts + 1 launcher-variant attempt, all with seed=202) freezes at the
+FIRST `loss.backward()`: all 54 threads futex-waiting, 0% GPU, zero IO,
+log frozen after the first autocast FutureWarning. seedA (same driver,
+same seeds contract, ran 18:59-21:04 UTC) completed normally.
+
+**Proven facts.**
+- SIGUSR1 faulthandler stack dump (env PYTHONPATH=/tmp/opencode registers
+  sitecustomize.py): main thread stuck in
+  `torch/autograd/graph.py:_engine_run_backward` while a second thread is
+  inside `torch/utils/checkpoint.py:backward` — circular wait between the
+  autograd engine and the gradient-checkpointing recompute worker.
+  Deadlock is at lora.py:189 `loss.backward()`, i.e. NOT collate/forward/
+  data/network (all 2000 cache images verified present, hub mirror flaky
+  period ruled out).
+- Negative results: wedge reproduces with GPU free, with GPU shared, with
+  `PYTHONPATH`/`PYTHONUNBUFFERED`/nohup/foreground, with a module-level-
+  import launcher variant (scripts/run_seed_campaign_launcher.py, kept as
+  diagnostic artifact: import order is NOT the cause).
+- 8/8 probe-shaped training runs passed (n16/n64/n256/n512/n1024/n2000 and
+  env/bg variants), including the FULL 2000-row manifest with the exact
+  seeds/recipe (epochs=1). 5/5 driver-shaped runs failed. The only untested
+  structural delta at the failing point was epochs=2 (+eval_every=100),
+  which cannot mechanistically affect a first backward; investigation
+  stopped here pending a box reboot + driver/stack re-check.
+
+**Status / next steps (not yet executed).** Reboot the box, re-test
+{epochs=2, n64}; if the trigger persists, test with gradient checkpointing
+disabled (mathematically identical outputs, but a recipe deviation that
+requires approval) and/or upgrade/downgrade torch. 7B legs never ran
+post-fix (queued seedA/B/C failed rc=1 with TypeError before ff51ab5).
+
+**Untouched by this incident:** battery correction + regression harness
+(frozen, commit 88f5da2), control/eligibility files, and all seed-0
+artifacts. No training inputs/recipe changed; no fresh-seed battery
+evaluation has been run.

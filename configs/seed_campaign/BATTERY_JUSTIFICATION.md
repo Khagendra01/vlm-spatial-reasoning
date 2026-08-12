@@ -1,5 +1,17 @@
 # Seed Campaign Battery — Justification (frozen before training, 2026-08-11)
 
+> **PROTOCOL CORRECTION (2026-08-11).** The battery specified below (heavy
+> with_sample/with_shuffle conditions, uniform-392px eval) was RETRACTED
+> after code audit found it drifts from the frozen Paper-2 protocol
+> (see SPATIAL_REASONING_DECISION_LOG, "battery drift" entry). The campaign
+> is evaluated with the corrected battery = the frozen legacy Tier-A/B/C
+> protocol (normal, shuffle, relcomp, facingcomp, hflip_flip,
+> hflip_invariant) via `scripts/grounding/run_seed_battery.py`, gated by the
+> regression harness `scripts/grounding/regress_seed_battery.py`. The text
+> below is retained verbatim as audit history; the seed-variance rationale
+> (detecting systematic condition-level drift) is unchanged and motivates
+> the corrected battery identically.
+
 ## Why a battery at all
 
 The seed-0 runs were each evaluated with a single VSR accuracy number plus,

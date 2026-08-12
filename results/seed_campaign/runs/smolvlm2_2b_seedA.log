@@ -12,10 +12,78 @@ LoRA TRAINING
   Effective BS: 16
   LoRA:     rank=8, alpha=16, dropout=0.05
   Max Length: 2048
-  Device:   NVIDIA GeForce RTX 3060 Ti
-  VRAM:     8.6 GB
+  Device:   NVIDIA RTX A6000
+  VRAM:     50.9 GB
 ============================================================
 
 Loaded 2000 training examples
 Loading processor...
 Loading model...
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.29s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.04s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.08s/it]
+Applying LoRA...
+trainable params: 4,638,720 || all params: 2,251,423,600 || trainable%: 0.2060
+Train: 1900, Eval: 100
+
+Starting training (237 steps, 23 warmup)...
+/home/ubuntu/vlm-spatial-reasoning/src/training/lora.py:179: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(dtype=torch.bfloat16):
+Thread 0x000076de1dfff640 (most recent call first):
+  <no Python frame>
+
+Thread 0x000076de537fe640 (most recent call first):
+  File "/usr/lib/python3.12/threading.py", line 359 in wait
+  File "/usr/lib/python3.12/threading.py", line 655 in wait
+  File "/home/ubuntu/.local/lib/python3.12/site-packages/tqdm/_monitor.py", line 69 in run
+  File "/usr/lib/python3.12/threading.py", line 1075 in _bootstrap_inner
+  File "/usr/lib/python3.12/threading.py", line 1032 in _bootstrap
+
+Current thread 0x000076df9a86b040 (most recent call first):
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/linear.py", line 134 in forward
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1789 in _call_impl
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1778 in _wrapped_call_impl
+  File "/home/ubuntu/.local/lib/python3.12/site-packages/transformers/models/smolvlm/modeling_smolvlm.py", line 247 in forward
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1789 in _call_impl
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1778 in _wrapped_call_impl
+  File "/home/ubuntu/.local/lib/python3.12/site-packages/transformers/models/smolvlm/modeling_smolvlm.py", line 295 in forward
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1789 in _call_impl
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1778 in _wrapped_call_impl
+  File "/usr/local/lib/python3.12/dist-packages/torch/utils/checkpoint.py", line 274 in forward
+  File "/usr/local/lib/python3.12/dist-packages/torch/autograd/function.py", line 596 in apply
+  File "/usr/local/lib/python3.12/dist-packages/torch/utils/checkpoint.py", line 511 in checkpoint
+  File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/eval_frame.py", line 1298 in _fn
+  File "/usr/local/lib/python3.12/dist-packages/torch/_compile.py", line 54 in inner
+  File "/home/ubuntu/.local/lib/python3.12/site-packages/transformers/modeling_layers.py", line 93 in __call__
+  File "/home/ubuntu/.local/lib/python3.12/site-packages/transformers/models/smolvlm/modeling_smolvlm.py", line 374 in forward
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1789 in _call_impl
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1778 in _wrapped_call_impl
+  File "/home/ubuntu/.local/lib/python3.12/site-packages/transformers/models/smolvlm/modeling_smolvlm.py", line 459 in forward
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1789 in _call_impl
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1778 in _wrapped_call_impl
+  File "/home/ubuntu/.local/lib/python3.12/site-packages/transformers/models/smolvlm/modeling_smolvlm.py", line 693 in get_image_features
+  File "/home/ubuntu/.local/lib/python3.12/site-packages/transformers/models/smolvlm/modeling_smolvlm.py", line 767 in forward
+  File "/home/ubuntu/.local/lib/python3.12/site-packages/transformers/utils/generic.py", line 940 in wrapper
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1789 in _call_impl
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1778 in _wrapped_call_impl
+  File "/home/ubuntu/.local/lib/python3.12/site-packages/transformers/models/smolvlm/modeling_smolvlm.py", line 955 in forward
+  File "/home/ubuntu/.local/lib/python3.12/site-packages/transformers/utils/generic.py", line 940 in wrapper
+  File "/home/ubuntu/.local/lib/python3.12/site-packages/peft/tuners/tuners_utils.py", line 222 in forward
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1789 in _call_impl
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1778 in _wrapped_call_impl
+  File "/home/ubuntu/.local/lib/python3.12/site-packages/peft/peft_model.py", line 1850 in forward
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1789 in _call_impl
+  File "/usr/local/lib/python3.12/dist-packages/torch/nn/modules/module.py", line 1778 in _wrapped_call_impl
+  File "/home/ubuntu/vlm-spatial-reasoning/src/training/lora.py", line 180 in train
+  File "/home/ubuntu/vlm-spatial-reasoning/scripts/run_seed_campaign.py", line 299 in train_2b
+  File "/home/ubuntu/vlm-spatial-reasoning/scripts/run_seed_campaign.py", line 331 in main
+  File "/home/ubuntu/vlm-spatial-reasoning/scripts/run_seed_campaign.py", line 336 in <module>
+  Step 100/237 | Loss: 0.5237 | LR: 6.40e-05 | Elapsed: 3151s
+
+Epoch 1/2 complete | Avg Loss: 0.5139
+  Step 200/237 | Loss: 0.4212 | LR: 1.73e-05 | Elapsed: 6321s
+
+Epoch 2/2 complete | Avg Loss: 0.4185
+
+Training complete in 7474.0s
+Final model saved to: checkpoints/seed_campaign/smolvlm2_2b_general_lora_seedA/final
+Training log: checkpoints/seed_campaign/smolvlm2_2b_general_lora_seedA/training_log.json
+DONE backbone=smolvlm2_2b seed=101 tag=A output=checkpoints/seed_campaign/smolvlm2_2b_general_lora_seedA
