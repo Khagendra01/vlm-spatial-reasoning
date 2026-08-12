@@ -13,9 +13,9 @@ ground truth and model outputs are withheld on purpose.
 For each example decide whether the image + statement is **unambiguous** for a
 human judge:
 
-- `clean`      — a human can confidently decide whether the statement is true
+- `clean`      ï¿½ a human can confidently decide whether the statement is true
                  or false from the image alone (even if the answer is hard).
-- `ambiguous`  — the statement cannot be confidently judged from the image:
+- `ambiguous`  ï¿½ the statement cannot be confidently judged from the image:
                  annotation seems wrong, camera viewpoint hides the relevant
                  geometry, the objects have no meaningful orientation, the
                  reference object is not clearly visible, etc.
@@ -51,3 +51,21 @@ For each example, choose exactly one class from the eight below (fill the
   `python scripts/compute_iaa.py`
   to obtain Cohen's kappa (clean/ambiguous) and Krippendorff's alpha
   (taxonomy) with bootstrap 95% CIs.
+
+## Recommended workflow: the auto-saving web server
+
+Instead of editing the CSVs by hand, use the annotation server â€” every
+rating click and note edit is saved instantly, and you can close the tab /
+reboot and resume where you left off:
+
+    python scripts/iaa_tool.py --port 5000
+    # open http://127.0.0.1:5000
+
+- Sheet 1 (`/sheet/clean`): 137 examples, binary clean/ambiguous flag.
+- Sheet 2 (`/sheet/taxonomy`): 48 examples, eight-class taxonomy.
+- Shortcuts: `1..N` select option, `n` next, `p` prev, `r` jump to next
+  unrated. Notes autosave ~0.8 s after you stop typing.
+- Outputs are written exactly where `scripts/compute_iaa.py` expects them
+  (`results/iaa/rater2_clean_labels.csv`,
+  `results/iaa/rater2_taxonomy.csv`), so when you are done simply run:
+  `python scripts/compute_iaa.py`
