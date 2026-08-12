@@ -1,4 +1,4 @@
-"""Ground subject/reference objects with frozen Qwen2-VL-7B (manual box tokens).
+﻿"""Ground subject/reference objects with frozen Qwen2-VL-7B (manual box tokens).
 
 Two batched passes (subject query for all images, then reference query),
 one box per query for reliability.
@@ -8,7 +8,7 @@ Coordinate convention: Qwen2-VL outputs boxes in per-axis [0,1000] space
 import os, sys, json, re, time, hashlib
 from pathlib import Path
 
-os.chdir("/home/ubuntu/vlm-spatial-reasoning")
+os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, ".")
 from scripts.parse_orientation import parse_orientation_statement
 

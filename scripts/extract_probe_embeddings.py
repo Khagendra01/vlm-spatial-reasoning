@@ -1,4 +1,4 @@
-"""
+﻿"""
 Extract frozen vision-encoder embeddings for all VSR orientation examples
 (train/validation/test) from the 7B base model (NO LoRA).
 
@@ -12,7 +12,7 @@ import os, sys, csv, time, hashlib
 from pathlib import Path
 from collections import Counter
 
-os.chdir("/home/ubuntu/vlm-spatial-reasoning")
+os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, ".")
 
 ORIENT = ["facing", "facing away from", "parallel to", "perpendicular to"]
@@ -34,7 +34,7 @@ def main():
 
     MODEL = "Qwen/Qwen2-VL-7B-Instruct"
 
-    # ── Collect examples ──
+    # â”€â”€ Collect examples â”€â”€
     examples = {}  # key: (split, idx)
     for split in ["train", "validation", "test"]:
         ds = load_dataset("cambridgeltl/vsr_random", split=split)
@@ -61,7 +61,7 @@ def main():
         except Exception as e:
             print(f"FAIL {k}: {e}")
 
-    # ── Load model ──
+    # â”€â”€ Load model â”€â”€
     processor = AutoProcessor.from_pretrained(MODEL)
     model = Qwen2VLForConditionalGeneration.from_pretrained(
         MODEL, dtype=torch.bfloat16, _attn_implementation="eager",
@@ -70,7 +70,7 @@ def main():
     visual = model.model.visual
     print(f"Model loaded: {torch.cuda.memory_allocated()/1e9:.1f}GB")
 
-    # ── Extract embeddings in batches ──
+    # â”€â”€ Extract embeddings in batches â”€â”€
     keys = list(examples.keys())
     all_vit, all_merger = [], []
     t0 = time.time()
@@ -108,7 +108,7 @@ def main():
             print(f"  [{start+len(batch_keys)}/{len(keys)}] {time.time()-t0:.0f}s")
     print(f"Extraction done: {time.time()-t0:.0f}s")
 
-    # ── Organize ──
+    # â”€â”€ Organize â”€â”€
     out_data = {
         "split": [], "idx": [], "relation": [], "statement": [],
         "label": [], "image": [],

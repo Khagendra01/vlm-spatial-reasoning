@@ -1,4 +1,4 @@
-"""
+﻿"""
 Download SITE media for the frozen preregistered subsets.
 
 The official release hosts media only inside 15 zips (~130GB total).
@@ -11,7 +11,7 @@ Media root: data/site_media/<relative path from 'visual' field>
 import os, sys, json, subprocess, time
 from pathlib import Path
 
-os.chdir("/home/ubuntu/vlm-spatial-reasoning")
+os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 NEEDED = Path("results/site/needed_media.txt")
 MEDIA_ROOT = Path("data/site_media")
@@ -27,7 +27,7 @@ def main():
         # remaining needed files not yet on disk
         missing = [p for p in needed if not (MEDIA_ROOT / p).exists()]
         if not missing:
-            print(f"All {len(needed)} needed files present — done.")
+            print(f"All {len(needed)} needed files present â€” done.")
             break
         print(f"Remaining missing: {len(missing)}")
 

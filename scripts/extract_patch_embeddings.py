@@ -1,9 +1,9 @@
-"""Extract per-image patch embeddings (ViT + merger) for the 647 orientation
+﻿"""Extract per-image patch embeddings (ViT + merger) for the 647 orientation
 examples, saving spatial grids so region pooling is possible."""
 import os, sys, time, hashlib, pickle
 from pathlib import Path
 
-os.chdir("/home/ubuntu/vlm-spatial-reasoning")
+os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, ".")
 
 import torch

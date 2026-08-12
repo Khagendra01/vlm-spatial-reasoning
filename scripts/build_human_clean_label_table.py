@@ -17,11 +17,15 @@ Masks:
                            subject_reference_inversion/parallel_perpendicular
   human-binary    137 minus the human's binary "ambiguous" flags
 
-Usage:  python scripts/build_human_clean_label_table.py
-Outputs:
+Usage:  python scripts/build_human_clean_label_table.py [--rater rater2|rater3]
+Outputs (rater2, default; file names preserved for backward compatibility):
   results/tables/orientation_clean_label_table_human.md
   results/tables/orientation_clean_label_table_human.json
+Outputs (rater3):
+  results/tables/orientation_clean_label_table_human2.md
+  results/tables/orientation_clean_label_table_human2.json
 """
+import argparse
 import csv
 import json
 from pathlib import Path
@@ -63,9 +67,17 @@ def load_csv_col(path, col):
 
 
 def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--rater", choices=["rater2", "rater3"], default="rater2",
+                    help="which blind human re-audit to use (default: rater2, "
+                         "the first human re-audit; outputs keep the original "
+                         "file names). rater3 writes *_human2.* files.")
+    args = ap.parse_args()
+    second = args.rater == "rater3"
+
     # human taxonomy pass (48) + human binary pass (137)
-    taxo = load_csv_col(RESULTS / "iaa" / "rater2_taxonomy.csv", "class")
-    binary = load_csv_col(RESULTS / "iaa" / "rater2_clean_labels.csv",
+    taxo = load_csv_col(RESULTS / "iaa" / (args.rater + "_taxonomy.csv"), "class")
+    binary = load_csv_col(RESULTS / "iaa" / (args.rater + "_clean_labels.csv"),
                           "rating_clean")
 
     excl = {
@@ -88,14 +100,17 @@ def main():
             cells[key] = {"n": n, "accuracy": round(c / n, 4)}
         table[name] = cells
 
+    suffix = "2" if second else ""
+    tag = "rater3 (second human re-audit)" if second else "rater2 (first human re-audit)"
+
     lines = [
-        "# Clean-Label Orientation Robustness — HUMAN audit (versioned, additive)",
+        f"# Clean-Label Orientation Robustness — HUMAN audit (versioned, additive; {tag})",
         "",
         "Exclusion masks derived from the HUMAN taxonomy pass (48 cases) and",
         "the HUMAN binary pass (137 cases). The frozen first-annotator (LLM)",
         "table is unchanged: results/tables/orientation_clean_label_table.md.",
         "",
-        "| Condition | full (137) | -q | clear | strict | human-binary (75) |",
+        "| Condition | full (137) | -q | clear | strict | human-binary |",
         "|---|---|---|---|---|---|",
     ]
     for name, cells in table.items():
@@ -106,10 +121,10 @@ def main():
             f"{cells['human_strict']['accuracy']:.3f} (n={cells['human_strict']['n']}) | "
             f"{cells['human_binary']['accuracy']:.3f} (n={cells['human_binary']['n']}) |")
 
-    out_md = RESULTS / "tables" / "orientation_clean_label_table_human.md"
-    out_json = RESULTS / "tables" / "orientation_clean_label_table_human.json"
+    out_md = RESULTS / "tables" / f"orientation_clean_label_table_human{suffix}.md"
+    out_json = RESULTS / "tables" / f"orientation_clean_label_table_human{suffix}.json"
     out_md.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    out_json.write_text(json.dumps({"note": "human-audit versioned table",
+    out_json.write_text(json.dumps({"note": "human-audit versioned table: " + tag,
                                     "exclusion_masks": {
                                         k: sorted(v) for k, v in excl.items()},
                                     "table": table}, indent=2), encoding="utf-8")

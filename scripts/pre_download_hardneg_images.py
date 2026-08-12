@@ -1,4 +1,4 @@
-"""Pre-download all images needed for hard-negative experiment."""
+﻿"""Pre-download all images needed for hard-negative experiment."""
 import os, json, hashlib, time
 import urllib.request
 from io import BytesIO
@@ -6,7 +6,7 @@ from PIL import Image
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-CACHE_DIR = Path("/home/ubuntu/vlm-spatial-reasoning/data/image_cache")
+CACHE_DIR = Path(__file__).resolve().parents[1] / "data/image_cache"
 CACHE_DIR.mkdir(parents=True, exist_ok=True)
 LOG = "/tmp/hn_download.log"
 

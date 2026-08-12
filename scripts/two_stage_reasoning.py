@@ -19,7 +19,7 @@ import os, sys, json, csv, pickle
 from pathlib import Path
 from collections import Counter
 
-os.chdir("/home/ubuntu/vlm-spatial-reasoning")
+os.chdir(Path(__file__).resolve().parent.parent)  # repository root (portable)
 sys.path.insert(0, ".")
 
 import numpy as np
@@ -87,13 +87,21 @@ def main():
             audit[r["id"]] = r["final_status"].strip()
 
     control = {}
+    gt_label = {}
     with open("results/7B_general_lora_predictions_20260809_094930.csv") as f:
         for r in csv.DictReader(f):
             if r["relation"] in ORIENT:
                 control[int(r["id"])] = r["correct"] == "True"
+                gt_label[int(r["id"])] = r["ground_truth"] == "True"
 
     d = np.load(OUT / "probe/embeddings_vit.npz", allow_pickle=True)
     rel_by_key = {(sp, int(ix)): rl for sp, ix, rl in zip(d["split"], d["idx"], d["relation"])}
+    test_rel_all = {int(ix): rl for sp, ix, rl in
+                    zip(d["split"], d["idx"], d["relation"]) if sp == "test"}
+    per_example_written = [False]
+    pred_csv = OUT / "two_stage_predictions.csv"
+    if pred_csv.exists():
+        pred_csv.unlink()
 
     def pool_region(es, box, gh, gw, W, H, psize=28):
         x1, y1, x2, y2 = box
@@ -188,6 +196,44 @@ def main():
                 if cm.sum():
                     per_rel[rl] = float(accuracy_score(label[cm], decision[cm]))
 
+            # NEW (additive): per-example ground-truth scoring of the pipeline.
+            gt = np.array([bool(gt_label.get(ix, False)) for ix in te_idx])
+            gt_acc = float(accuracy_score(gt, decision))
+            gt_per_rel = {}
+            for rl in ORIENT:
+                cm = np.array([r == rl for r in te_rel])
+                if cm.sum():
+                    gt_per_rel[rl] = float(accuracy_score(gt[cm], decision[cm]))
+            # full-137 GT scoring with no-box statements scored wrong
+            all_ids = sorted(control.keys())
+            te_pos = {ix: k for k, ix in enumerate(te_idx)}
+            decision137 = np.array([
+                bool(decision[te_pos[ix]]) if ix in te_pos else False
+                for ix in all_ids])
+            gt137 = np.array([bool(gt_label[ix]) for ix in all_ids])
+            gt_acc_137 = float(accuracy_score(gt137, decision137))
+            gt_per_rel_137 = {}
+            for rl in ORIENT:
+                cm = np.array([test_rel_all.get(ix) == rl for ix in all_ids])
+                if cm.sum():
+                    gt_per_rel_137[rl] = float(
+                        accuracy_score(gt137[cm], decision137[cm]))
+
+            # save per-example decisions (additive artifact)
+            with open(OUT / "two_stage_predictions.csv", "a", newline="") as f:
+                w = csv.writer(f)
+                if not per_example_written[0]:
+                    w.writerow(["id", "relation", "claimed_rel", "pred_rel",
+                                "decision", "control_correct", "gt_label",
+                                "version"])
+                    per_example_written[0] = True
+                rel_names = ORIENT
+                for k, ix in enumerate(te_idx):
+                    w.writerow([ix, te_rel[k], rel_names[int(claimed[k])],
+                                rel_names[int(yp_te[k])], bool(decision[k]),
+                                bool(label[k]), bool(gt[k]),
+                                f"{set_name}::{model_name}"])
+
             key = f"{set_name}::{model_name}"
             results[key] = {
                 "cv_rel_acc": float(np.mean(cv)), "cv_rel_std": float(np.std(cv)),
@@ -196,10 +242,15 @@ def main():
                 "val_4way_acc": float(accuracy_score(y_va, yp_va)),
                 "TF_overall": acc, "TF_per_relation": per_rel,
                 "n_test": int(len(X_te)),
+                # additive ground-truth scoring
+                "TF_gt_overall_127": gt_acc, "TF_gt_per_relation_127": gt_per_rel,
+                "TF_gt_overall_137_no_box_wrong": gt_acc_137,
+                "TF_gt_per_relation_137": gt_per_rel_137,
             }
             print(f"  {model_name}: 4way CV={np.mean(cv):.3f}±{np.std(cv):.3f} "
                   f"test={accuracy_score(y_te, yp_te):.3f} | TF overall={acc:.3f} "
-                  f"per-rel={ {k: round(v,3) for k,v in per_rel.items()} }")
+                  f"per-rel={ {k: round(v,3) for k,v in per_rel.items()} } | "
+                  f"TF-GT 127={gt_acc:.3f} / 137={gt_acc_137:.3f}")
 
             # McNemar vs control on all 137 (no-box decisions count as wrong)
             all_137 = sorted(control.keys())

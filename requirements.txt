@@ -1,47 +1,32 @@
-# VLM Spatial Reasoning - Requirements
-# Environment: conda p310 (Python 3.10.18, CUDA-enabled)
+# Top-level dependency manifest for the VLM-Spatial-Reasoning archive.
+# Canonical environment (headline VSR/SITE/probe runs):
+#   Ubuntu 24.04, Python 3.12.13, 1x RTX A6000 (48 GB)
+# Verified versions are pinned to the versions recorded in the paper's
+# reproducibility appendix; other versions may work but are not verified.
+# CPU-only analyses (audit, IAA, bootstrap, tables) need only numpy/scipy/
+# scikit-learn + the committed prediction CSVs.
 
-# PyTorch with CUDA (install via conda: conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia)
-# torch>=2.0.0
-# torchvision>=0.15.0
+# --- core numerics (CPU analyses) ---
+numpy==2.2.1
+scipy==1.14.1
+scikit-learn==1.6.0
 
-# Core dependencies
-num2words>=0.5.12
-transformers>=4.48.0
-datasets>=2.14.0
-accelerate>=0.21.0
+# --- deep learning (model evaluation / training; GPU) ---
+torch==2.12.1+cu130
+transformers==5.14.1
+datasets==5.0.1
+peft==0.20.0
+accelerate==1.6.0
 
-# Vision and image processing
-Pillow>=9.5.0
-opencv-python>=4.8.0
-timm>=0.9.0
+# --- vision / io ---
+pillow==11.1.0
+requests==2.32.3
 
-# Data processing and analysis
-numpy>=1.24.0
-pandas>=2.0.0
-scikit-learn>=1.3.0
+# --- tooling ---
+flask==3.1.0      # blind IAA rating server (scripts/iaa_tool.py)
+matplotlib==3.10.0
+huggingface_hub==0.29.2
 
-# Visualization
-matplotlib>=3.7.0
-seaborn>=0.12.0
-plotly>=5.15.0
-
-# Evaluation metrics
-rouge-score>=0.1.2
-# cider>=1.0.1  # Removed: macOS-only, not needed for VSR classification
-
-# Experiment tracking
-wandb>=0.15.0
-tensorboard>=2.14.0
-
-# Utilities
-tqdm>=4.65.0
-pyyaml>=6.0
-python-dotenv>=1.0.0
-jupyter>=1.0.0
-ipykernel>=6.25.0
-
-# Optional: for specific experiments
-# deepspeed>=0.10.0
-# peft>=0.4.0
-# bitsandbytes>=0.41.0
+# --- optional ---
+# av==14.1.0        # SITE video decoding (image-only eval used in the paper)
+# pypdf==5.1.0      # PDF text verification utilities

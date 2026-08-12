@@ -1,4 +1,4 @@
-"""
+﻿"""
 Audit orientation training examples before hard-negative construction.
 
 Two-stage flagging:
@@ -13,7 +13,7 @@ from pathlib import Path
 from collections import Counter
 from datetime import datetime
 
-os.chdir("/home/ubuntu/vlm-spatial-reasoning")
+os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, ".")
 
 ORIENT = ["facing", "facing away from", "parallel to", "perpendicular to"]

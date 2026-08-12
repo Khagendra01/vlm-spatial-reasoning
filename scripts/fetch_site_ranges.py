@@ -1,5 +1,5 @@
-"""
-Ultra-fast targeted SITE media fetch, v3 — multipart byteranges.
+﻿"""
+Ultra-fast targeted SITE media fetch, v3 â€” multipart byteranges.
 
 Phase A: parse central directories (tails + CD regions) -> locate needed
          entries, report total bytes.
@@ -12,7 +12,7 @@ Handles: ZIP64, HTTP 429 (retry with backoff), size validation.
 import os, sys, json, subprocess, time, struct, zlib, re
 from pathlib import Path
 
-os.chdir("/home/ubuntu/vlm-spatial-reasoning")
+os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 NEEDED = Path("results/site/needed_media.txt")
 MEDIA_ROOT = Path("data/site_media")
@@ -122,7 +122,7 @@ def main():
     WORK.mkdir(parents=True, exist_ok=True)
     print(f"Needed: {len(needed)}", flush=True)
 
-    # ── Phase A ──
+    # â”€â”€ Phase A â”€â”€
     t0 = time.time()
     loc = {}
     for i in range(1, 16):
@@ -149,7 +149,7 @@ def main():
     print(f"Located {len(loc)}/{len(needed)}; total compressed {total/1e9:.2f}GB; "
           f"phase A {time.time()-t0:.0f}s", flush=True)
 
-    # ── Phase B: single-range per file (overshoot covers local header) ──
+    # â”€â”€ Phase B: single-range per file (overshoot covers local header) â”€â”€
     by_zip = {}
     for (z, n), e in loc.items():
         by_zip.setdefault(z, []).append((n, e))

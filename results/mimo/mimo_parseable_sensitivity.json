@@ -1,0 +1,80 @@
+{
+  "note": "Canonical policy counts invalid outputs as wrong (never guessed); this file adds the parseable-only sensitivity.",
+  "n_total": 2195,
+  "n_unparsed": 69,
+  "unparsed_rate_pct": 3.14,
+  "overall": {
+    "full_counted_wrong": {
+      "correct": 1746,
+      "n": 2195,
+      "accuracy_pct": 79.54
+    },
+    "parseable_only": {
+      "correct": 1746,
+      "n": 2126,
+      "accuracy_pct": 82.13
+    }
+  },
+  "orientation": {
+    "full_counted_wrong": {
+      "correct": 90,
+      "n": 137,
+      "accuracy_pct": 65.69
+    },
+    "parseable_only": {
+      "correct": 90,
+      "n": 137,
+      "accuracy_pct": 65.69
+    }
+  },
+  "per_relation": {
+    "facing": {
+      "full": {
+        "correct": 48,
+        "n": 64,
+        "accuracy_pct": 75.0
+      },
+      "parseable": {
+        "correct": 48,
+        "n": 64,
+        "accuracy_pct": 75.0
+      }
+    },
+    "facing away from": {
+      "full": {
+        "correct": 22,
+        "n": 39,
+        "accuracy_pct": 56.41
+      },
+      "parseable": {
+        "correct": 22,
+        "n": 39,
+        "accuracy_pct": 56.41
+      }
+    },
+    "parallel to": {
+      "full": {
+        "correct": 14,
+        "n": 22,
+        "accuracy_pct": 63.64
+      },
+      "parseable": {
+        "correct": 14,
+        "n": 22,
+        "accuracy_pct": 63.64
+      }
+    },
+    "perpendicular to": {
+      "full": {
+        "correct": 6,
+        "n": 12,
+        "accuracy_pct": 50.0
+      },
+      "parseable": {
+        "correct": 6,
+        "n": 12,
+        "accuracy_pct": 50.0
+      }
+    }
+  }
+}

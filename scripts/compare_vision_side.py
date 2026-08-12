@@ -1,4 +1,4 @@
-"""
+﻿"""
 Paired comparison of vision-side LoRA conditions vs the LM-only General LoRA
 control. Per-condition metrics (overall / orientation / per-relation) and
 exact McNemar tests on paired test examples.
@@ -7,7 +7,7 @@ import os, sys, csv, json
 from pathlib import Path
 from collections import Counter
 
-os.chdir("/home/ubuntu/vlm-spatial-reasoning")
+os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from scipy.stats import binomtest
 

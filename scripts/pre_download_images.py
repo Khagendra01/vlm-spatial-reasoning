@@ -1,4 +1,4 @@
-"""Pre-download all VSR images to local cache for fast training."""
+﻿"""Pre-download all VSR images to local cache for fast training."""
 import os, json, hashlib, time
 import urllib.request
 from io import BytesIO
@@ -6,7 +6,7 @@ from PIL import Image
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-CACHE_DIR = Path("/home/ubuntu/vlm-spatial-reasoning/data/image_cache")
+CACHE_DIR = Path(__file__).resolve().parents[1] / "data/image_cache"
 CACHE_DIR.mkdir(parents=True, exist_ok=True)
 
 def get_cache_path(url: str) -> Path:
@@ -32,7 +32,7 @@ def download_one(url: str) -> tuple[str, bool, float]:
 def main():
     urls = set()
     for manifest in ["general_train.jsonl", "targeted_train.jsonl"]:
-        path = f"/home/ubuntu/vlm-spatial-reasoning/data/manifests/{manifest}"
+        path = f"{CACHE_DIR.parent}/manifests/{manifest}"
         if not os.path.exists(path):
             continue
         with open(path) as f:

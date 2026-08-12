@@ -1,4 +1,4 @@
-"""
+﻿"""
 Clean-label robustness: orientation accuracy (all VSR conditions) on the
 full test set vs clean subsets (annotation-questionable removed).
 
@@ -11,7 +11,7 @@ Exclusion sets (from the 48-annotation audit):
                  orientation test set; resulting strict subset n=107)
 """
 import os, sys, csv
-os.chdir("/home/ubuntu/vlm-spatial-reasoning")
+os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 MODES_Q = {"annotation_questionable"}
 MODES_CLEAR = MODES_Q | {"camera_viewpoint_ambiguity"}
@@ -51,7 +51,7 @@ print(f"{'condition':<26} {'full(137)':>10} {'-q(132)':>9} {'clear(124)':>11} {'
 lines = ["# Clean-Label Orientation Robustness (VSR test)", "",
          "Full test (137) vs subsets with annotation-questionable / ambiguous examples removed.",
          "Exclusion sets from the 48-example manual audit (results/orientation_persistent_annotations.csv).",
-         "", "| Condition | full (137) | −questionable (132) | clear (124) | strict (107) |", "|---|---|---|---|---|"]
+         "", "| Condition | full (137) | âˆ’questionable (132) | clear (124) | strict (107) |", "|---|---|---|---|---|"]
 for name, path in CONDS:
     rows = {}
     with open(path) as f:

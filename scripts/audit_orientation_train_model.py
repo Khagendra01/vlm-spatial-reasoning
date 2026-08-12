@@ -1,4 +1,4 @@
-"""
+﻿"""
 Model-consensus audit: run 7B General LoRA over all 451 orientation train
 examples and flag label disagreements for manual review.
 """
@@ -6,7 +6,7 @@ import os, sys, csv, time, hashlib
 from pathlib import Path
 from PIL import Image
 
-os.chdir("/home/ubuntu/vlm-spatial-reasoning")
+os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, ".")
 
 def parse_tf(text):

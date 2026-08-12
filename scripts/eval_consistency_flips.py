@@ -1,4 +1,4 @@
-"""
+﻿"""
 Logical-consistency analysis: evaluate models on FLIPPED complementary
 statements (same image, same objects, complementary relation).
 
@@ -14,7 +14,7 @@ flip accuracy, both-correct / both-wrong.
 import os, sys, re, time, hashlib, json, csv, argparse
 from pathlib import Path
 
-os.chdir("/home/ubuntu/vlm-spatial-reasoning")
+os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, ".")
 
 import torch
@@ -141,7 +141,7 @@ def evaluate(flips, model_name, base_model, lora_path, out_csv, orig_csv):
         w.writerows(results)
     print(f"Saved {len(results)} -> {out_csv}")
 
-    # ── Analysis ──
+    # â”€â”€ Analysis â”€â”€
     orig = load_original_verdicts(orig_csv)
     return analyze(results, orig, model_name)
 
@@ -179,7 +179,16 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--condition", required=True,
                     choices=["7B_zero_shot", "LM_only_LoRA", "hardneg_LoRA",
-                             "projector_LoRA", "vision_proj_LoRA"])
+                             "projector_LoRA", "vision_proj_LoRA",
+                             "seed_checkpoint"])
+    ap.add_argument("--lora-path", default=None,
+                    help="override adapter path (with --condition seed_checkpoint)")
+    ap.add_argument("--orig-csv", default=None,
+                    help="override original-verdict predictions CSV "
+                         "(with --condition seed_checkpoint)")
+    ap.add_argument("--out-csv", default=None,
+                    help="override flip-output CSV (with --condition "
+                         "seed_checkpoint)")
     args = ap.parse_args()
 
     CONDS = {
@@ -189,12 +198,22 @@ def main():
         "projector_LoRA": ("Qwen/Qwen2-VL-7B-Instruct", "checkpoints/qwen2vl_7b_projector_lora/final", "qwen2vl_7b_projector_lora_predictions_20260809_221720"),
         "vision_proj_LoRA": ("Qwen/Qwen2-VL-7B-Instruct", "checkpoints/qwen2vl_7b_vision_proj_lora/final", "qwen2vl_7b_vision_proj_lora_predictions_20260809_222845"),
     }
-    base, lora, orig_name = CONDS[args.condition]
+    if args.condition == "seed_checkpoint":
+        if not (args.lora_path and args.orig_csv and args.out_csv):
+            ap.error("--condition seed_checkpoint requires --lora-path, "
+                     "--orig-csv, --out-csv")
+        base = "Qwen/Qwen2-VL-7B-Instruct"
+        lora = args.lora_path
+        name = f"seed:{args.lora_path}"
+        out_csv, orig_csv = args.out_csv, args.orig_csv
+    else:
+        base, lora, orig_name = CONDS[args.condition]
+        name = args.condition
+        out_csv = f"results/consistency_flips_{args.condition}.csv"
+        orig_csv = f"results/{orig_name}.csv"
     flips = build_flips()
-    print(f"{args.condition}: {len(flips)} flip statements")
-    fam_stats = evaluate(flips, args.condition, base, lora,
-                         f"results/consistency_flips_{args.condition}.csv",
-                         f"results/{orig_name}.csv")
+    print(f"{name}: {len(flips)} flip statements")
+    fam_stats = evaluate(flips, name, base, lora, out_csv, orig_csv)
     for fam in ["LR", "FB", "FF", "PP"]:
         s = fam_stats[fam]
         n = s["n"]
@@ -203,8 +222,10 @@ def main():
         print(f"  {fam} n={n} | orig_acc={s['orig_acc']/n:.3f} flip_acc={s['flip_acc']/n:.3f} "
               f"consistent={s['consistent']/n:.3f} contradiction={s['contradiction']/n:.3f} "
               f"both_correct={s['both_correct']/n:.3f} both_wrong={s['both_wrong']/n:.3f}")
-    (Path("results") / f"consistency_stats_{args.condition}.json").write_text(
+    out_stats = f"results/consistency_stats_{name.replace(':', '_').replace('/', '_')}.json"
+    (Path("results") / out_stats).write_text(
         json.dumps({k: dict(v) for k, v in fam_stats.items()}, indent=1))
+    print(f"wrote {out_csv} and {out_stats}")
 
 if __name__ == "__main__":
     main()

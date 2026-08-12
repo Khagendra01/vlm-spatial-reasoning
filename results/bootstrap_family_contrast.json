@@ -1,0 +1,136 @@
+{
+  "2B zs -> 7B zs (scaling)": {
+    "n_examples": 2195,
+    "family_accuracy_pair": {
+      "orientation": [
+        62.77,
+        63.5
+      ],
+      "depth": [
+        68.94,
+        75.16
+      ],
+      "horizontal": [
+        70.18,
+        84.8
+      ],
+      "containment": [
+        83.43,
+        89.35
+      ],
+      "topology_contact": [
+        80.54,
+        80.32
+      ]
+    },
+    "contrasts": {
+      "depth": {
+        "point_pp": 5.465135557872784,
+        "ci95_pp": [
+          -5.670932130389448,
+          16.540497347780736
+        ],
+        "p_positive": 0.8337,
+        "delta_family_pp": 6.211180124223603,
+        "delta_orientation_pp": 0.7299270072992692
+      },
+      "horizontal": {
+        "point_pp": 13.889220770905364,
+        "ci95_pp": [
+          2.9388632774149355,
+          24.84312972211551
+        ],
+        "p_positive": 0.9932,
+        "delta_family_pp": 14.619883040935678,
+        "delta_orientation_pp": 0.7299270072992692
+      },
+      "containment": {
+        "point_pp": 5.149442404871939,
+        "ci95_pp": [
+          -5.90085518075412,
+          16.175009717963118
+        ],
+        "p_positive": 0.8199,
+        "delta_family_pp": 5.917159763313606,
+        "delta_orientation_pp": 0.7299270072992692
+      },
+      "topology_contact": {
+        "point_pp": -0.927663407867358,
+        "ci95_pp": [
+          -11.17568616441524,
+          9.416925388909059
+        ],
+        "p_positive": 0.4294,
+        "delta_family_pp": -0.2262443438914019,
+        "delta_orientation_pp": 0.7299270072992692
+      }
+    }
+  },
+  "7B zs -> 7B General LoRA (adaptation)": {
+    "n_examples": 2195,
+    "family_accuracy_pair": {
+      "orientation": [
+        63.5,
+        65.69
+      ],
+      "depth": [
+        75.16,
+        82.3
+      ],
+      "horizontal": [
+        84.8,
+        87.43
+      ],
+      "containment": [
+        89.35,
+        92.9
+      ],
+      "topology_contact": [
+        80.32,
+        84.39
+      ]
+    },
+    "contrasts": {
+      "depth": {
+        "point_pp": 5.01421634855148,
+        "ci95_pp": [
+          -6.50853470553567,
+          16.538967221290292
+        ],
+        "p_positive": 0.8019,
+        "delta_family_pp": 7.142857142857151,
+        "delta_orientation_pp": 2.1897810218978075
+      },
+      "horizontal": {
+        "point_pp": 0.5015595253340163,
+        "ci95_pp": [
+          -10.6543731591753,
+          11.537969010116534
+        ],
+        "p_positive": 0.5381,
+        "delta_family_pp": 2.631578947368418,
+        "delta_orientation_pp": 2.1897810218978075
+      },
+      "containment": {
+        "point_pp": 1.4541130738997108,
+        "ci95_pp": [
+          -10.080767071221864,
+          13.039346952878672
+        ],
+        "p_positive": 0.594,
+        "delta_family_pp": 3.5502958579881616,
+        "delta_orientation_pp": 2.1897810218978075
+      },
+      "topology_contact": {
+        "point_pp": 1.9721534498133901,
+        "ci95_pp": [
+          -9.591439046140637,
+          13.335204941044354
+        ],
+        "p_positive": 0.6345,
+        "delta_family_pp": 4.072398190045245,
+        "delta_orientation_pp": 2.1897810218978075
+      }
+    }
+  }
+}

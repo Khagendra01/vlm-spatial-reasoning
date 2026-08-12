@@ -1,4 +1,4 @@
-"""
+﻿"""
 Representation probe: how much orientation information is linearly (and
 nonlinearly) accessible in the frozen 7B vision representation?
 
@@ -17,7 +17,7 @@ No VSR test examples are used for training.
 import os, sys, json, csv
 from pathlib import Path
 
-os.chdir("/home/ubuntu/vlm-spatial-reasoning")
+os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, ".")
 
 import numpy as np
@@ -50,13 +50,13 @@ def load_level(name):
     return d["emb"], d["split"], d["idx"], d["relation"]
 
 def main():
-    # ── Audit status for train examples (from the hard-negative audit) ──
+    # â”€â”€ Audit status for train examples (from the hard-negative audit) â”€â”€
     audit = {}
     with open("results/orientation_train_audit.csv") as f:
         for r in csv.DictReader(f):
             audit[r["id"]] = r["final_status"].strip()
 
-    # ── Generative reference: 7B zero-shot predictions on test ──
+    # â”€â”€ Generative reference: 7B zero-shot predictions on test â”€â”€
     gen = {}
     with open("results/qwen2vl_7b_predictions_20260809_064919.csv") as f:
         for r in csv.DictReader(f):
@@ -153,7 +153,7 @@ def main():
                       f"val={val_acc:.3f} test={test_acc:.3f} (bal {test_bal:.3f}) "
                       f"majority={majority:.3f} per_class={ {k: round(v,3) for k,v in per_class.items()} }")
 
-            # ── Generative reference on the SAME test images ──
+            # â”€â”€ Generative reference on the SAME test images â”€â”€
             gen_acc, gen_acc_lora = {}, {}
             for c in class_names:
                 ids_c = ix_te[y_te == labels[c]]
@@ -167,7 +167,7 @@ def main():
             }
             print(f"  generative 7B zero-shot statement acc on same images: { {k: round(v,3) for k,v in gen_acc.items()} }")
 
-    # ── Write JSON + report ──
+    # â”€â”€ Write JSON + report â”€â”€
     with open(OUT / "probe_results.json", "w") as f:
         json.dump(results, f, indent=2)
 
@@ -184,7 +184,7 @@ def main():
         lines.append("|---|---|---|---|---|---|")
         for mn in ["linear", "mlp"]:
             m = t[mn]
-            lines.append(f"| {mn} | {m['cv_acc_mean']:.3f}±{m['cv_acc_std']:.3f} | {m['val_acc']:.3f} | "
+            lines.append(f"| {mn} | {m['cv_acc_mean']:.3f}Â±{m['cv_acc_std']:.3f} | {m['val_acc']:.3f} | "
                          f"{m['test_acc']:.3f} | {m['test_balanced']:.3f} | [{m['test_ci'][0]:.3f}, {m['test_ci'][1]:.3f}] |")
         lines.append("")
         lines.append("Per-class test accuracy:")

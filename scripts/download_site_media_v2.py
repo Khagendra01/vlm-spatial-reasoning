@@ -1,4 +1,4 @@
-"""
+﻿"""
 Download all 15 SITE media zips with hf_transfer (fast, auth'd), extract
 only the needed entries, delete zips to bound disk usage.
 
@@ -7,7 +7,7 @@ Needed entries come from results/site/needed_media.txt.
 import os, sys, subprocess, time
 from pathlib import Path
 
-os.chdir("/home/ubuntu/vlm-spatial-reasoning")
+os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 os.environ["HF_HUB_ENABLE_HF_TRANSFER"] = "1"
 
 NEEDED = Path("results/site/needed_media.txt")

@@ -1,4 +1,4 @@
-"""
+﻿"""
 Vision-side LoRA conditions for the orientation causal study.
 Conditions (--target):
   projector     : LoRA on the vision patch-merger (projector) only
@@ -12,7 +12,7 @@ LoRA r=8 alpha=16 dropout=0.05, gradient clipping 1.0.
 import os, sys, json, time, hashlib, argparse
 from pathlib import Path
 
-os.chdir("/home/ubuntu/vlm-spatial-reasoning")
+os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, ".")
 
 import torch

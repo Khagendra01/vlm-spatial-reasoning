@@ -1,4 +1,4 @@
-"""
+﻿"""
 Build the hard-negative orientation training manifest.
 
 Design (fair comparison vs 7B General LoRA = general_train.jsonl, 2000 rows):
@@ -17,7 +17,7 @@ Usage: python3 scripts/build_hardneg_manifest.py [--orient-block O]
 import os, sys, json, csv, argparse
 from collections import defaultdict, Counter
 
-os.chdir("/home/ubuntu/vlm-spatial-reasoning")
+os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, ".")
 
 RELATION_PAIRS = [
@@ -64,7 +64,7 @@ def main():
 
     audit_by_id = {r["id"]: r for r in audit_rows}
 
-    # ── Orientation block ──
+    # â”€â”€ Orientation block â”€â”€
     # Originals: prefer general manifest's orientation examples, then fill from
     # the audited pool (all 4 relations) to reach the target. Excluded examples
     # are never used; original_only examples are kept but not inverted.
@@ -126,7 +126,7 @@ def main():
     print("  block relations:", dict(Counter(e["relation"] for e in orient_block)))
     print("  block labels:", dict(Counter(e["label"] for e in orient_block)))
 
-    # ── Non-orientation: proportional trim of general manifest ──
+    # â”€â”€ Non-orientation: proportional trim of general manifest â”€â”€
     n_non = 2000 - len(orient_block)
     fam_counts = Counter(e["family"] for e in non_orient)
     non_by_fam = defaultdict(list)

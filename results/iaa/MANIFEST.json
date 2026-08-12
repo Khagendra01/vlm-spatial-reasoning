@@ -56,7 +56,12 @@
   ],
   "derived_tables": [
     "results/tables/orientation_clean_label_table.md",
-    "results/tables/orientation_clean_label_table_human.md"
+    "results/tables/orientation_clean_label_table_human.md   (human A, rater2)",
+    "results/tables/orientation_clean_label_table_human2.md  (human B, rater3)"
+  ],
+  "related_analyses": [
+    "results/bootstrap_family_contrast.json       (family-relative bootstrap contrasts, seed 20260812)",
+    "results/mimo/mimo_parseable_sensitivity.json (MiMo output-format sensitivity)"
   ],
   "usage_note": "All ratings are per VSR test-set example id. The automated audit's labels predate this resource and are retained as the frozen v1; human and MiMo layers are additive. Derived from VSR (cambridgeltl/vsr_random) statements and COCO images (images.cocodataset.org).",
   "citation": "See the accompanying WACV 2027 E&D-track submission, supplementary App. F."

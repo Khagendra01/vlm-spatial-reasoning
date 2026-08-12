@@ -1,4 +1,4 @@
-"""
+﻿"""
 SITE external-validation: 7B zero-shot evaluation on the frozen
 preregistered subsets (primary / secondary / exploratory).
 
@@ -15,7 +15,7 @@ import os, sys, json, csv, time, hashlib, argparse
 from pathlib import Path
 from collections import Counter, defaultdict
 
-os.chdir("/home/ubuntu/vlm-spatial-reasoning")
+os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, ".")
 
 import torch
@@ -139,7 +139,7 @@ def main():
     subset_of = {sid: [s for s, ids in frozen.items() if sid in ids] for sid in wanted}
     print(f"Examples to evaluate: {len(wanted)} (union of frozen subsets)")
 
-    # ── frozen run metadata + config hash (reproducibility) ──
+    # â”€â”€ frozen run metadata + config hash (reproducibility) â”€â”€
     import hashlib
     config = {
         "model": MODEL,
@@ -294,7 +294,7 @@ def main():
                 torch.cuda.empty_cache()
                 print(f"    OOM at scale {scale}, retrying smaller", flush=True)
         if out is None:
-            print("    OOM at all scales — skipping batch", flush=True)
+            print("    OOM at all scales â€” skipping batch", flush=True)
             return []
         in_len = inputs["input_ids"].shape[1]
         texts = processor.batch_decode(out[:, in_len:], skip_special_tokens=True)
@@ -370,7 +370,7 @@ def main():
         w.writerows(results)
     print(f"Saved {len(results)} predictions -> {pred_file}")
 
-    # ── Metrics per subset ──
+    # â”€â”€ Metrics per subset â”€â”€
     metrics = {}
     for sub_name in ["primary", "secondary", "exploratory"]:
         sub = [r for r in results if sub_name in r["subset"].split(",")]

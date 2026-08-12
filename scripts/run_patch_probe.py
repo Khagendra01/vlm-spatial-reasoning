@@ -1,4 +1,4 @@
-"""
+﻿"""
 Patch-level probe: does orientation info survive at the patch level (position-
 resolved), even if mean-pooling destroys it?
 
@@ -12,7 +12,7 @@ Levels: vit patches (1280d) and merger patches (3584d).
 import os, sys, json
 from pathlib import Path
 
-os.chdir("/home/ubuntu/vlm-spatial-reasoning")
+os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, ".")
 
 import numpy as np

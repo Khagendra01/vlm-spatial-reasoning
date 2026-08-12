@@ -1,10 +1,10 @@
-# Clean-Label Orientation Robustness — HUMAN audit (versioned, additive)
+# Clean-Label Orientation Robustness — HUMAN audit (versioned, additive; rater2 (first human re-audit))
 
 Exclusion masks derived from the HUMAN taxonomy pass (48 cases) and
 the HUMAN binary pass (137 cases). The frozen first-annotator (LLM)
 table is unchanged: results/tables/orientation_clean_label_table.md.
 
-| Condition | full (137) | -q | clear | strict | human-binary (75) |
+| Condition | full (137) | -q | clear | strict | human-binary |
 |---|---|---|---|---|---|
 | 2B zero-shot | 0.628 (n=137) | 0.675 (n=126) | 0.675 (n=126) | 0.766 (n=107) | 0.653 (n=75) |
 | 2B structured | 0.533 (n=137) | 0.532 (n=126) | 0.532 (n=126) | 0.514 (n=107) | 0.667 (n=75) |

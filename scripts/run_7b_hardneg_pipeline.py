@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 7B hard-negative orientation LoRA: train + evaluate + analyze + commit.
 
@@ -16,7 +16,7 @@ from collections import defaultdict
 from math import sqrt, erfc
 from PIL import Image
 
-os.chdir("/home/ubuntu/vlm-spatial-reasoning")
+os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, ".")
 
 LOG = "/tmp/hn7b_pipeline.log"
@@ -91,9 +91,9 @@ def load_cached_image(url):
     p = Path("data/image_cache") / f"{h}.jpg"
     return Image.open(p).convert("RGB") if p.exists() else None
 
-# ════════════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 # PHASE 1: Train hard-negative LoRA (same config as control)
-# ════════════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 def phase1_train():
     log("=" * 60)
     log("PHASE 1: Train 7B hard-negative LoRA")
@@ -287,9 +287,9 @@ def phase1_train():
     import gc; gc.collect()
     return final_dir
 
-# ════════════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 # PHASE 2: Evaluate hard-negative LoRA on full test set
-# ════════════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 def phase2_eval(lora_path):
     log("=" * 60)
     log("PHASE 2: Evaluate hard-negative LoRA")
@@ -414,9 +414,9 @@ def phase2_eval(lora_path):
     log(f"Saved: {preds_path}")
     return metrics_path, preds_path
 
-# ════════════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 # PHASE 3: Analysis + report + commit
-# ════════════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 def phase3_analysis(metrics_path, preds_path):
     log("=" * 60)
     log("PHASE 3: Analysis vs 7B General LoRA control")
@@ -515,7 +515,7 @@ def phase3_analysis(metrics_path, preds_path):
             regressions.append(fam)
         log(f"  {fam:20s} gen={a_gen:.4f} hn={a_hn:.4f} delta={delta:+.4f} {flag}")
 
-    # ── Write report ──
+    # â”€â”€ Write report â”€â”€
     with open(metrics_path) as f:
         hn_metrics = json.load(f)
     with open("results/7B_general_lora_metrics_20260809_094930.json") as f:
@@ -526,10 +526,10 @@ def phase3_analysis(metrics_path, preds_path):
     report = f"""# Hard-Negative Orientation LoRA: Results
 
 ## Experiment
-- **Control:** 7B General LoRA (general_train.jsonl, 2000 ex, r=8 α=16 lr=1e-4, 2 epochs)
+- **Control:** 7B General LoRA (general_train.jsonl, 2000 ex, r=8 Î±=16 lr=1e-4, 2 epochs)
 - **Treatment:** 7B Hard-Negative LoRA (hardneg_train.jsonl, 2000 ex, identical config)
 - **Only variable:** orientation block replaced by audited-clean originals + paired hard negatives
-  (facing ↔ facing away from, parallel ↔ perpendicular)
+  (facing â†” facing away from, parallel â†” perpendicular)
 
 ## Overall
 | Condition | Overall |
@@ -579,7 +579,7 @@ Orientation ceiling evidence: {sum(1 for rel in orient_rels if per_rel[rel]['7B_
         f.write(report)
     log(f"Saved report: {report_path}")
 
-    # ── Commit ──
+    # â”€â”€ Commit â”€â”€
     log("COMMITTING TO GITHUB")
     run(f"git add data/manifests/hardneg_train.jsonl results/{os.path.basename(metrics_path)} "
         f"results/{os.path.basename(preds_path)} results/hardneg_analysis_report.md "

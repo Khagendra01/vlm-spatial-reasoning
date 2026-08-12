@@ -1,4 +1,4 @@
-"""
+﻿"""
 Re-evaluate probes + generative models on the "human-clear" test subset.
 
 Motivation: a chunk of VSR orientation test labels are human-ambiguous
@@ -20,7 +20,7 @@ Methods re-evaluated (identical training as before, no test contamination):
 import os, sys, json, csv
 from pathlib import Path
 
-os.chdir("/home/ubuntu/vlm-spatial-reasoning")
+os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, ".")
 
 import numpy as np
@@ -42,7 +42,7 @@ TASKS = {
     "T3_4way": None,
 }
 
-# ── annotated test ids and modes ──
+# â”€â”€ annotated test ids and modes â”€â”€
 annotated = {}
 with open(ANNOT) as f:
     for r in csv.DictReader(f):
@@ -52,7 +52,7 @@ QUES = {"annotation_questionable", "camera_viewpoint_ambiguity"}
 STRICT_EXTRA = {"intrinsic_orientation_ambiguous", "front_back_object_ambiguous",
                 "small_occluded_object"}
 
-# ── generative predictions (test ids = index in test split) ──
+# â”€â”€ generative predictions (test ids = index in test split) â”€â”€
 def load_gen(path):
     d = {}
     with open(path) as f:
@@ -84,14 +84,14 @@ def eval_set(model, scaler, X, y, Xva, yva):
     return acc, bal, maj, [lo, hi]
 
 def main():
-    # ── ungrounded features ──
+    # â”€â”€ ungrounded features â”€â”€
     # per example: split, idx, relation, emb (mean-pooled)
     ungr = {}
     for level in ["vit", "merger"]:
         d = np.load(OUT / f"embeddings_{level}.npz", allow_pickle=True)
         ungr[level] = (d["emb"], d["split"], d["idx"], d["relation"])
 
-    # ── grounded features (region-pooled visual) ──
+    # â”€â”€ grounded features (region-pooled visual) â”€â”€
     import pickle
     from scripts.run_grounded_probe import pool_region
     patch_data = pickle.load(open(OUT / "patch_embeddings.pkl", "rb"))
@@ -146,7 +146,7 @@ def main():
                 excl = {i for i, m in annotated.items() if m in QUES | STRICT_EXTRA}
 
             res = {}
-            # ── ungrounded ──
+            # â”€â”€ ungrounded â”€â”€
             for level in ["vit", "merger"]:
                 emb, sp, ix, rel = ungr[level]
                 mask = np.ones(len(rel), dtype=bool)
@@ -173,7 +173,7 @@ def main():
                     acc, bal, maj, ci = eval_set(mf, sc, X_tr, y_tr, X_te, y_te)
                     res[f"ungrounded_{level}_{mn}"] = {"acc": acc, "bal": bal, "maj": maj, "ci": ci, "n": len(X_te)}
 
-            # ── grounded ──
+            # â”€â”€ grounded â”€â”€
             for level in ["vit", "merger"]:
                 rows = grounded_rows(level)
                 tr = [r for r in rows if r[0] == "train" and audit.get(str(r[1]), "clean") != "exclude"
@@ -193,7 +193,7 @@ def main():
                     acc, bal, maj, ci = eval_set(mf, sc, X_tr, y_tr, X_te, y_te)
                     res[f"grounded_{level}_{mn}"] = {"acc": acc, "bal": bal, "maj": maj, "ci": ci, "n": len(X_te)}
 
-            # ── generative ──
+            # â”€â”€ generative â”€â”€
             te_ids = [int(ix) for i, ix in enumerate(ix[te_mask])]
             if te_ids:
                 for gname, g in [("gen_zeroshot", gen_zs), ("gen_lora", gen_lora)]:

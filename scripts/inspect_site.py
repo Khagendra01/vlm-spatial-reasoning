@@ -1,4 +1,4 @@
-"""
+﻿"""
 Inspect the SITE (Spatial Intelligence Thorough Evaluation, ICCV 2025)
 benchmark: structure, SI-factor distribution, orientation subset, modality
 counts, and representative examples.
@@ -11,7 +11,7 @@ import os, sys, json
 from pathlib import Path
 from collections import Counter
 
-os.chdir("/home/ubuntu/vlm-spatial-reasoning")
+os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, ".")
 
 from src.datasets.site import (load_site, load_site_splits,
@@ -32,19 +32,19 @@ def main():
 
     print("=" * 72)
     print("SITE (Spatial Intelligence Thorough Evaluation, ICCV 2025)")
-    print("External-validation benchmark — inspection only (no model eval)")
+    print("External-validation benchmark â€” inspection only (no model eval)")
     print("=" * 72)
     print(f"Total examples: {total}")
     print(f"  image_test: {len(image)}  |  video_test: {len(video)}")
 
-    # ── SI factor counts ──
+    # â”€â”€ SI factor counts â”€â”€
     cat_counts = Counter(r["category"] for r in all_records)
     print("\n-- Counts by SI factor (official category) --")
     for factor in SI_FACTORS:
         n = cat_counts.get(factor, 0)
         print(f"  {factor:<42} {n:>5}  {fmt_pct(n, total)}")
 
-    # ── Orientation subset (heuristic) ──
+    # â”€â”€ Orientation subset (heuristic) â”€â”€
     orient = get_orientation_subset(all_records)
     print("\n-- Spatial orientation (HEURISTIC keyword subset, NOT official) --")
     print(f"  orientation-relevant examples: {len(orient)}  {fmt_pct(len(orient), total)}")
@@ -65,13 +65,13 @@ def main():
     for ds, n in Counter(r["source_dataset"] for r in orient).most_common(15):
         print(f"    {ds:<24} {n}")
 
-    # ── Intrinsic vs extrinsic ──
+    # â”€â”€ Intrinsic vs extrinsic â”€â”€
     print("\n-- Intrinsic vs extrinsic --")
     print("  NOT AVAILABLE: the official SITE-Bench release does not include")
     print("  intrinsic/extrinsic annotations. The paper's top-down taxonomy")
     print("  (intrinsic/extrinsic) is not exposed per example in the dataset.")
 
-    # ── Modality counts ──
+    # â”€â”€ Modality counts â”€â”€
     print("\n-- Modality counts (derived: config + visual structure) --")
     mod_counts = Counter(r["modality"] for r in all_records)
     for m in ["single-image", "multi-image", "video"]:
@@ -83,12 +83,12 @@ def main():
         parts = ", ".join(f"{f.split(' & ')[0]}:{row.get(f, 0)}" for f in SI_FACTORS if row.get(f, 0))
         print(f"    {m:<14} {parts}")
 
-    # ── Source datasets ──
+    # â”€â”€ Source datasets â”€â”€
     print("\n-- Source benchmarks (official 'dataset' field, top 20) --")
     for ds, n in Counter(r["source_dataset"] for r in all_records).most_common(20):
         print(f"  {ds:<28} {n:>5}")
 
-    # ── Options / answer stats ──
+    # â”€â”€ Options / answer stats â”€â”€
     print("\n-- Question structure --")
     opt_counts = Counter(len(r["options"]) for r in all_records)
     print("  options per question:", dict(sorted(opt_counts.items())))
@@ -97,7 +97,7 @@ def main():
     n_image_opts = sum(1 for r in all_records if any("<image>" in (o or "") for o in r["options"]))
     print(f"  examples with <image> placeholders in options: {n_image_opts}")
 
-    # ── 10 representative examples ──
+    # â”€â”€ 10 representative examples â”€â”€
     print("\n-- 10 representative examples --")
     shown = set()
     for r in all_records:
@@ -118,9 +118,9 @@ def main():
         if len(shown) >= 10:
             break
 
-    # ── Report ──
+    # â”€â”€ Report â”€â”€
     report_lines = [
-        "# SITE (Spatial Intelligence Thorough Evaluation, ICCV 2025) — Dataset Inspection",
+        "# SITE (Spatial Intelligence Thorough Evaluation, ICCV 2025) â€” Dataset Inspection",
         "",
         "## Source",
         "",

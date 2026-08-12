@@ -1,4 +1,4 @@
-"""
+﻿"""
 Object-grounded representation probe.
 
 For each orientation example, use grounded bounding boxes (subject + reference
@@ -16,7 +16,7 @@ T3 4-way. Same splits as the ungrounded probe: train = audited-clean, val, test.
 import os, sys, json, csv
 from pathlib import Path
 
-os.chdir("/home/ubuntu/vlm-spatial-reasoning")
+os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, ".")
 
 import numpy as np
@@ -87,18 +87,18 @@ def main():
     def cache_path(url):
         return CACHE / f"{hashlib.md5(url.encode()).hexdigest()}.jpg"
 
-    # ── Load groundings ──
+    # â”€â”€ Load groundings â”€â”€
     gd = json.loads((OUT / "grounded_boxes.json").read_text())
     boxes = gd["boxes"]
     examples = gd["examples"]
 
-    # ── Audit status ──
+    # â”€â”€ Audit status â”€â”€
     audit = {}
     with open("results/orientation_train_audit.csv") as f:
         for r in csv.DictReader(f):
             audit[r["id"]] = r["final_status"].strip()
 
-    # ── Load per-image patch data ──
+    # â”€â”€ Load per-image patch data â”€â”€
     import pickle
     with open(OUT / "patch_embeddings.pkl", "rb") as f:
         patch_data = pickle.load(f)

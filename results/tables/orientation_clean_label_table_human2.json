@@ -1,14 +1,12 @@
 {
-  "note": "human-audit versioned table: rater2 (first human re-audit)",
+  "note": "human-audit versioned table: rater3 (second human re-audit)",
   "exclusion_masks": {
     "full": [],
     "human_minus_q": [
       33,
       34,
       239,
-      356,
       439,
-      565,
       1266,
       1608,
       1611,
@@ -19,10 +17,11 @@
       33,
       34,
       239,
-      356,
       439,
+      558,
       565,
       1266,
+      1559,
       1608,
       1611,
       2059,
@@ -38,8 +37,10 @@
       239,
       250,
       356,
+      424,
       439,
       508,
+      558,
       564,
       565,
       582,
@@ -55,6 +56,7 @@
       1559,
       1608,
       1611,
+      1662,
       1905,
       2034,
       2059,
@@ -62,10 +64,14 @@
     ],
     "human_binary": [
       3,
-      19,
+      14,
       81,
+      106,
       170,
-      239,
+      171,
+      189,
+      211,
+      213,
       250,
       356,
       357,
@@ -75,14 +81,12 @@
       426,
       439,
       508,
-      544,
+      523,
       564,
       565,
       594,
-      617,
       657,
       676,
-      728,
       738,
       780,
       805,
@@ -91,37 +95,33 @@
       934,
       959,
       1018,
-      1020,
-      1078,
-      1093,
       1234,
-      1243,
       1266,
       1308,
       1342,
-      1380,
       1384,
+      1400,
       1405,
-      1450,
       1457,
       1592,
       1608,
-      1617,
       1650,
       1773,
       1775,
       1792,
       1810,
+      1822,
       1839,
       1905,
       1910,
       1911,
-      1928,
+      1934,
       1942,
       2015,
       2034,
       2059,
       2151,
+      2160,
       2189
     ]
   },
@@ -132,20 +132,20 @@
         "accuracy": 0.6277
       },
       "human_minus_q": {
-        "n": 126,
-        "accuracy": 0.6746
+        "n": 128,
+        "accuracy": 0.6641
       },
       "human_clear": {
-        "n": 126,
-        "accuracy": 0.6746
+        "n": 125,
+        "accuracy": 0.672
       },
       "human_strict": {
-        "n": 107,
-        "accuracy": 0.7664
+        "n": 104,
+        "accuracy": 0.7788
       },
       "human_binary": {
-        "n": 75,
-        "accuracy": 0.6533
+        "n": 77,
+        "accuracy": 0.6234
       }
     },
     "2B structured": {
@@ -154,20 +154,20 @@
         "accuracy": 0.5328
       },
       "human_minus_q": {
-        "n": 126,
-        "accuracy": 0.5317
+        "n": 128,
+        "accuracy": 0.5312
       },
       "human_clear": {
-        "n": 126,
-        "accuracy": 0.5317
+        "n": 125,
+        "accuracy": 0.528
       },
       "human_strict": {
-        "n": 107,
-        "accuracy": 0.514
+        "n": 104,
+        "accuracy": 0.5096
       },
       "human_binary": {
-        "n": 75,
-        "accuracy": 0.6667
+        "n": 77,
+        "accuracy": 0.5974
       }
     },
     "2B General LoRA": {
@@ -176,20 +176,20 @@
         "accuracy": 0.6204
       },
       "human_minus_q": {
-        "n": 126,
-        "accuracy": 0.6667
+        "n": 128,
+        "accuracy": 0.6562
       },
       "human_clear": {
-        "n": 126,
-        "accuracy": 0.6667
+        "n": 125,
+        "accuracy": 0.664
       },
       "human_strict": {
-        "n": 107,
-        "accuracy": 0.7477
+        "n": 104,
+        "accuracy": 0.75
       },
       "human_binary": {
-        "n": 75,
-        "accuracy": 0.6667
+        "n": 77,
+        "accuracy": 0.6364
       }
     },
     "2B Targeted LoRA": {
@@ -198,20 +198,20 @@
         "accuracy": 0.6423
       },
       "human_minus_q": {
-        "n": 126,
-        "accuracy": 0.6905
+        "n": 128,
+        "accuracy": 0.6875
       },
       "human_clear": {
-        "n": 126,
-        "accuracy": 0.6905
+        "n": 125,
+        "accuracy": 0.688
       },
       "human_strict": {
-        "n": 107,
-        "accuracy": 0.7757
+        "n": 104,
+        "accuracy": 0.7885
       },
       "human_binary": {
-        "n": 75,
-        "accuracy": 0.6533
+        "n": 77,
+        "accuracy": 0.6364
       }
     },
     "7B zero-shot": {
@@ -220,20 +220,20 @@
         "accuracy": 0.635
       },
       "human_minus_q": {
-        "n": 126,
-        "accuracy": 0.6587
+        "n": 128,
+        "accuracy": 0.6562
       },
       "human_clear": {
-        "n": 126,
-        "accuracy": 0.6587
+        "n": 125,
+        "accuracy": 0.664
       },
       "human_strict": {
-        "n": 107,
-        "accuracy": 0.7477
+        "n": 104,
+        "accuracy": 0.7596
       },
       "human_binary": {
-        "n": 75,
-        "accuracy": 0.5467
+        "n": 77,
+        "accuracy": 0.5844
       }
     },
     "7B General LoRA": {
@@ -242,20 +242,20 @@
         "accuracy": 0.6569
       },
       "human_minus_q": {
-        "n": 126,
-        "accuracy": 0.6825
+        "n": 128,
+        "accuracy": 0.6797
       },
       "human_clear": {
-        "n": 126,
-        "accuracy": 0.6825
+        "n": 125,
+        "accuracy": 0.688
       },
       "human_strict": {
-        "n": 107,
-        "accuracy": 0.729
+        "n": 104,
+        "accuracy": 0.7404
       },
       "human_binary": {
-        "n": 75,
-        "accuracy": 0.6667
+        "n": 77,
+        "accuracy": 0.6234
       }
     },
     "7B Targeted LoRA": {
@@ -264,20 +264,20 @@
         "accuracy": 0.6423
       },
       "human_minus_q": {
-        "n": 126,
-        "accuracy": 0.6508
+        "n": 128,
+        "accuracy": 0.6562
       },
       "human_clear": {
-        "n": 126,
-        "accuracy": 0.6508
+        "n": 125,
+        "accuracy": 0.664
       },
       "human_strict": {
-        "n": 107,
-        "accuracy": 0.6916
+        "n": 104,
+        "accuracy": 0.7115
       },
       "human_binary": {
-        "n": 75,
-        "accuracy": 0.5733
+        "n": 77,
+        "accuracy": 0.6104
       }
     },
     "7B Hard-Neg LoRA": {
@@ -286,20 +286,20 @@
         "accuracy": 0.6642
       },
       "human_minus_q": {
-        "n": 126,
-        "accuracy": 0.6825
+        "n": 128,
+        "accuracy": 0.6797
       },
       "human_clear": {
-        "n": 126,
-        "accuracy": 0.6825
+        "n": 125,
+        "accuracy": 0.696
       },
       "human_strict": {
-        "n": 107,
-        "accuracy": 0.729
+        "n": 104,
+        "accuracy": 0.7404
       },
       "human_binary": {
-        "n": 75,
-        "accuracy": 0.6533
+        "n": 77,
+        "accuracy": 0.6104
       }
     },
     "7B Projector LoRA": {
@@ -308,20 +308,20 @@
         "accuracy": 0.6423
       },
       "human_minus_q": {
-        "n": 126,
-        "accuracy": 0.6508
+        "n": 128,
+        "accuracy": 0.6562
       },
       "human_clear": {
-        "n": 126,
-        "accuracy": 0.6508
+        "n": 125,
+        "accuracy": 0.648
       },
       "human_strict": {
-        "n": 107,
-        "accuracy": 0.7103
+        "n": 104,
+        "accuracy": 0.7212
       },
       "human_binary": {
-        "n": 75,
-        "accuracy": 0.6133
+        "n": 77,
+        "accuracy": 0.6623
       }
     },
     "7B Vision+Projector LoRA": {
@@ -330,20 +330,20 @@
         "accuracy": 0.6423
       },
       "human_minus_q": {
-        "n": 126,
-        "accuracy": 0.6746
+        "n": 128,
+        "accuracy": 0.6719
       },
       "human_clear": {
-        "n": 126,
-        "accuracy": 0.6746
+        "n": 125,
+        "accuracy": 0.68
       },
       "human_strict": {
-        "n": 107,
-        "accuracy": 0.729
+        "n": 104,
+        "accuracy": 0.7404
       },
       "human_binary": {
-        "n": 75,
-        "accuracy": 0.64
+        "n": 77,
+        "accuracy": 0.6364
       }
     },
     "MiMo-V2.5 zero-shot": {
@@ -352,20 +352,20 @@
         "accuracy": 0.6569
       },
       "human_minus_q": {
-        "n": 126,
-        "accuracy": 0.6825
+        "n": 128,
+        "accuracy": 0.6797
       },
       "human_clear": {
-        "n": 126,
-        "accuracy": 0.6825
+        "n": 125,
+        "accuracy": 0.672
       },
       "human_strict": {
-        "n": 107,
-        "accuracy": 0.7196
+        "n": 104,
+        "accuracy": 0.7308
       },
       "human_binary": {
-        "n": 75,
-        "accuracy": 0.5867
+        "n": 77,
+        "accuracy": 0.6234
       }
     }
   }

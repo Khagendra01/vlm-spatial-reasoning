@@ -1,7 +1,7 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Master autonomous script: Full 7B VLM pipeline.
-Zero-shot → General LoRA → Targeted LoRA → Evaluate → Compare → Commit.
+Zero-shot â†’ General LoRA â†’ Targeted LoRA â†’ Evaluate â†’ Compare â†’ Commit.
 
 Runs in screen session 'vlm7b'. Check with: screen -r vlm7b
 Logs to: /tmp/vlm7b_pipeline.log
@@ -13,7 +13,7 @@ from datetime import datetime
 from collections import defaultdict
 from math import sqrt, erfc
 
-os.chdir("/home/ubuntu/vlm-spatial-reasoning")
+os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, ".")
 
 LOG = "/tmp/vlm7b_pipeline.log"
@@ -34,7 +34,7 @@ def run(cmd):
         log(f"  STDERR: {r.stderr[-500:]}")
     return r.stdout, r.returncode
 
-# ── McNemar test ──
+# â”€â”€ McNemar test â”€â”€
 def mcnemar(b, c):
     n = b + c
     if n == 0:
@@ -50,7 +50,7 @@ def CI(n_correct, n_total, z=1.96):
     se = sqrt(p * (1 - p) / n_total)
     return max(0, p - z * se), min(1, p + z * se)
 
-# ── Relation families ──
+# â”€â”€ Relation families â”€â”€
 RELATION_FAMILIES = {
     "horizontal": ["left of", "right of", "at the left side of", "at the right side of",
                     "at the side of", "beside", "next to", "alongside", "across from"],
@@ -71,7 +71,7 @@ def get_family(relation):
             return fam
     return "other"
 
-# ── Parse True/False ──
+# â”€â”€ Parse True/False â”€â”€
 def parse_tf(text):
     t = text.strip().lower()
     if "assistant:" in t:
@@ -82,9 +82,9 @@ def parse_tf(text):
         return False
     return None
 
-# ════════════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 # PHASE 1: Zero-shot evaluation on 7B model
-# ════════════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 def phase1_zeroshot():
     log("=" * 60)
     log("PHASE 1: Qwen2-VL-7B-Instruct ZERO-SHOT evaluation")
@@ -252,9 +252,9 @@ def phase1_zeroshot():
     return metrics_path, preds_path
 
 
-# ════════════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 # PHASE 2: LoRA training for 7B (general + targeted)
-# ════════════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 def phase2_lora_training():
     log("=" * 60)
     log("PHASE 2: Qwen2-VL-7B LoRA training (general + targeted)")
@@ -271,7 +271,7 @@ def phase2_lora_training():
 
     MODEL_NAME = "Qwen/Qwen2-VL-7B-Instruct"
 
-    # ── Load manifests ──
+    # â”€â”€ Load manifests â”€â”€
     with open("data/manifests/general_train.jsonl") as f:
         general_examples = [json.loads(l) for l in f]
     with open("data/manifests/targeted_train.jsonl") as f:
@@ -279,7 +279,7 @@ def phase2_lora_training():
     log(f"General manifest: {len(general_examples)} examples")
     log(f"Targeted manifest: {len(targeted_examples)} examples")
 
-    # ── Collator ──
+    # â”€â”€ Collator â”€â”€
     TRAIN_PROMPT = 'Look at the image carefully.\n\nStatement: "{statement}"\n\nIs this statement true or false?\n\nAnswer with exactly one word: True or False.'
 
     def load_cached_image(url):
@@ -500,9 +500,9 @@ def phase2_lora_training():
     return gen_dir, tgt_dir
 
 
-# ════════════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 # PHASE 3: Evaluate LoRA models
-# ════════════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 def phase3_evaluate_lora(lora_path, label):
     log("=" * 60)
     log(f"PHASE 3: Evaluate {label}")
@@ -637,9 +637,9 @@ def phase3_evaluate_lora(lora_path, label):
     return metrics_path, preds_path
 
 
-# ════════════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 # PHASE 4: Comparison table + McNemar + commit
-# ════════════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 def phase4_analysis(metrics_files, preds_files):
     log("=" * 60)
     log("PHASE 4: Analysis + Comparison + Commit")
@@ -728,9 +728,9 @@ def phase4_analysis(metrics_files, preds_files):
     log("DONE - all results committed and pushed")
 
 
-# ════════════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 # MAIN
-# ════════════════════════════════════════════════════════════════
+# â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 if __name__ == "__main__":
     try:
         log("STARTING FULL 7B PIPELINE")
