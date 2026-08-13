@@ -87,7 +87,11 @@ provision_repo() {
     checkpoints/qwen2vl_7b_hardneg_lora/final \
     checkpoints/general_lora/final \
     checkpoints/seed_campaign/qwen2vl_7b_general_lora_seedA/final \
-    checkpoints/seed_campaign/smolvlm2_2b_general_lora_seedA/final
+    checkpoints/seed_campaign/qwen2vl_7b_general_lora_seedB/final \
+    checkpoints/seed_campaign/qwen2vl_7b_general_lora_seedC/final \
+    checkpoints/seed_campaign/smolvlm2_2b_general_lora_seedA/final \
+    checkpoints/seed_campaign/smolvlm2_2b_general_lora_seedB/final \
+    checkpoints/seed_campaign/smolvlm2_2b_general_lora_seedC/final
   git config --global --add safe.directory "$REPO" >/dev/null 2>&1 || true
   git -C "$REPO" fetch --quiet origin "$BRANCH"
   git -C "$REPO" reset --quiet --hard "origin/$BRANCH"
