@@ -28,7 +28,7 @@
 \newcommand{\modelfrontier}{MiMo-V2.5}
 \newcommand{\pp}{\,pp}
 
-\title{Beyond Spatial Accuracy: Diagnosing Persistent Orientation Failures in Vision--Language Models}
+\title{Beyond Spatial Accuracy: A Capability Audit Ladder for Vision--Language Models}
 
 \author{Anonymous Authors\\
 Anonymous Institution}
@@ -46,7 +46,7 @@ This paper contributes an evaluation practice as much as a set of model results.
 
 Prior benchmarks establish that grounded spatial reasoning remains difficult, but they leave open how to diagnose a relation-specific failure. VSR introduced a controlled natural-image probe and reported particularly poor object-orientation performance~\cite{liu2023vsr}; What'sUp and GSR-Bench similarly expose failures on basic grounded relations~\cite{kamath2023whatsup,rajabi2024gsrbench}; and broader evaluations continue to identify orientation as a difficult factor~\cite{wang2025site}. We therefore ask three narrower questions: does the VSR orientation weakness persist in modern generative VLMs and at much larger scale; can prompting, adaptation, or visual readouts remove it; and do accuracy, logical coherence, and cross-dataset transfer tell the same story?
 
-The novelty is diagnostic rather than a claim that we discovered spatial difficulty. Our contribution is not any individual diagnostic, but a \emph{Capability Audit Ladder}: a falsification protocol that holds the relation family and examples fixed while testing whether an apparent capability failure survives scaling, adaptation, label re-audit, representation readout, logical reformulation, and cross-dataset transfer---each stage with a pre-specified decision outcome (scaling-responsive, adaptation-responsive, annotation-sensitive, representation-limited, coherence-limited, benchmark-specialized, persistent, or model-family-specific). Prior work generally reports benchmark accuracy, studies a single intervention, or proposes a consistency objective; one controlled audit of the same family distinguishes a persistent relation-specific bottleneck from aggregate underperformance, annotation artifacts, or benchmark-specific specialization.
+We introduce the Capability Audit Ladder: a stage-wise falsification methodology that keeps the target capability and examples fixed while systematically testing competing explanations for an apparent benchmark improvement---scaling, adaptation, annotation artifacts, representation accessibility, logical coherence, and cross-dataset transfer---producing interpretable diagnostic outcomes. Unlike prior work that reports benchmark accuracy, studies a single intervention, or proposes a consistency objective, the ladder's intellectual object is a controlled way to adjudicate competing explanations for an apparent capability result without changing the target being diagnosed: the evaluation procedure changes the scientific conclusion one would draw about model improvement.
 
 In our VSR experiments, the distinction between relation families is striking. Moving from \modelsmall{} to the larger \modellarge{} increases zero-shot overall accuracy from 74.0\% to 80.9\%; horizontal, depth, and containment rise by 6--15\,pp. Orientation, by contrast, moves only from 62.8\% to 63.5\%. A large 2026 sparse-MoE model (\modelfrontier{}, 310B total / 15B active parameters) reproduces the same relation-specific pattern: 79.5\% overall accuracy yet 65.7\% on orientation, again inside the 62--66\% band. Two further external zero-shot models bound this result: GPT-5.6 Sol does not reproduce the relative weakness---73.0\% orientation, above its own depth (67.1\%) and outside the band---while Gemini Spark's evaluation degenerates (51.5\% overall; 98.6\% TRUE answers in its first pass, a redo that reused the 137 orientation verdicts, App.~A). The bottleneck is therefore model-family-dependent rather than universal, and one function of the protocol is precisely to detect such differences instead of assuming a failure generalizes. We then evaluate prompting, language-side adaptation, targeted data construction, visual-side adaptation, representation probing, and object-centric decomposition: structured prompting significantly hurts; general and targeted LoRA improve aggregate accuracy but do not remove the persistent orientation weakness; hard negatives improve targeted relational coherence without a significant orientation-accuracy gain; and the tested visual-side LoRA configurations do not outperform the language-side control.
 
@@ -58,7 +58,7 @@ Finally, we test cross-dataset transfer. The 7B model is strong on SITE's offici
 
 Our contributions are four reusable components of the Capability Audit Ladder:
 \begin{itemize}[leftmargin=*]
-    \item \textbf{The ladder itself.} A seven-stage falsification protocol (detect, scale, adapt, audit labels, read out representations, test logical coherence, transfer) with pre-specified decision outcomes, applied to a fixed relation family and example set. Instantiating it on object-relative orientation---across ten VSR conditions, two differently sized models, and three external zero-shot models---shows several spatial families improve substantially while orientation remains unusually resistant in the controlled families; one newer flagship does not reproduce the same relative orientation-weakness pattern and one external model's evaluation degenerates under the protocol, bounding rather than weakening the claim. The ladder is defined operationally so it transfers to other benchmarks and relation families, and \S\ref{sec:discriminability} demonstrates it yields a different diagnosis on a scaling-responsive family.
+    \item \textbf{The ladder itself.} A seven-stage falsification protocol (detect, scale, adapt, audit labels, read out representations, test logical coherence, transfer) with explicit decision outcomes, applied to a fixed relation family and example set. Instantiating it on object-relative orientation---across ten VSR conditions, two differently sized models, and three external zero-shot models---shows several spatial families improve substantially while orientation remains unusually resistant in the controlled families; one newer flagship does not reproduce the same relative orientation-weakness pattern and one external model's evaluation degenerates under the protocol, bounding rather than weakening the claim. The ladder is defined operationally so it transfers to other benchmarks and relation families, and \S\ref{sec:discriminability} demonstrates it yields a different diagnosis on a scaling-responsive family.
     \item \textbf{A robustness and sensitivity audit.} A label-sensitivity analysis (automated labels with two independent human re-audits), frozen/object-grounded probes, visual-side adaptation, and object-centric decomposition constrain purely annotation-based or single-component explanations. The audit practice (flagged-example exclusion sets, decodability checks against majority baselines) applies to any benchmark whose labels or examples may be ambiguous.
     \item \textbf{An accuracy--coherence separation protocol.} Complementary-relation tests on VSR's strict relation pairs show that, for the tested conditions, relational consistency can change substantially while task accuracy remains fixed. The protocol measures consistency against verdict-pattern base rates, so it can be applied wherever complementary formulations of the same relation exist.
     \item \textbf{A cross-dataset transfer protocol.} SITE shows strong official spatial-relationship performance, while VSR-trained LoRA transfers poorly and significantly harms the official SITE category; the orientation-vocabulary slice is analyzed as exploratory evidence. The protocol (pre-specified subsets, chance-adjusted accuracy, paired transfer tests) is model- and benchmark-agnostic and is reported with negative as well as positive transfer.
@@ -68,7 +68,7 @@ The ladder is deliberately modular: each stage can be applied independently to o
 \begin{figure*}[t]
     \centering
     \includegraphics[width=0.98\textwidth]{fig/fig0_ladder.png}
-    \caption{The Capability Audit Ladder. The suspected capability failure is held fixed---same relation family, same examples---and tested at each stage, producing a pre-specified decision outcome. \S\ref{sec:discriminability} shows the same ladder labels a scaling-responsive family (horizontal) differently.}
+    \caption{The Capability Audit Ladder. The suspected capability failure is held fixed---same relation family, same examples---and tested at each stage, producing an explicit decision outcome. \S\ref{sec:discriminability} shows the same ladder labels a scaling-responsive family (horizontal) differently.}
     \label{fig:ladder}
 \end{figure*}
 
@@ -85,19 +85,17 @@ Taken together, prior work establishes the problem and offers several useful dia
 \begin{table}[t]
 \centering
 \footnotesize
-\caption{Capability of prior spatial-evaluation work versus the Capability Audit Ladder. $\checkmark$: component present in the work; $\times$: not addressed. The final column---a unified falsification protocol across all stages on a fixed relation family---is what distinguishes this paper.}
+\caption{Capability of prior spatial-evaluation work versus the Capability Audit Ladder. $\checkmark$: component present in the work; ---: not addressed. The final column---a controlled audit of a fixed target across multiple competing explanations---is the originality contribution of this paper.}
 \label{tab:related-matrix}
-\begin{tabular}{@{}lccccc@{}}
+\begin{tabular}{@{}lcccccc@{}}
 \toprule
-Work & Per-family accuracy & Scaling & Adaptation & Label audit & Representation / coherence \\
+Work & Family accuracy & Scaling & Adapt & Audit labels & Repr./Coh. & Transfer & Fixed-target audit \\
 \midrule
-VSR~\cite{liu2023vsr} & $\checkmark$ & $\times$ & $\times$ & $\times$ & $\times$ \\
-What'sUp~\cite{kamath2023whatsup} & $\checkmark$ & $\times$ & $\times$ & $\times$ & $\times$ \\
-SITE~\cite{wang2025site} & $\checkmark$ & $\times$ & $\times$ & $\times$ & $\times$ \\
-AdaptVis~\cite{chen2025adaptvis} & $\checkmark$ & $\times$ & $\times$ & $\times$ & $\checkmark$ \\
-SAGE~\cite{liu2026sage} & $\times$ & $\times$ & $\checkmark$ & $\times$ & $\checkmark$ \\
-Test-Time Consistency~\cite{testsime2026consistency} & $\times$ & $\times$ & $\times$ & $\times$ & $\checkmark$ \\
-\emph{Ours (Capability Audit Ladder)} & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
+VSR~\cite{liu2023vsr} & $\checkmark$ & --- & --- & --- & --- & --- & --- \\
+AdaptVis~\cite{chen2025adaptvis} & $\checkmark$ & --- & --- & --- & $\checkmark$ & --- & --- \\
+SAGE~\cite{liu2026sage} & --- & --- & $\checkmark$ & --- & $\checkmark$ & --- & --- \\
+Test-Time Consistency~\cite{testsime2026consistency} & --- & --- & --- & --- & $\checkmark$ & --- & --- \\
+\emph{Ours (Audit Ladder)} & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ & $\checkmark$ \\
 \bottomrule
 \end{tabular}
 \end{table}
