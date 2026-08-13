@@ -183,7 +183,7 @@ def parse_tf(text):
     return None
 
 
-def train(condition, seed, out_dir):
+def train(condition, seed, out_dir, max_steps=None):
     with open(MANIFESTS[condition]) as f:
         examples = [json.loads(l) for l in f]
     print(f"[seed {seed}] manifest {MANIFESTS[condition]}: {len(examples)} examples", flush=True)
@@ -218,6 +218,7 @@ def train(condition, seed, out_dir):
     print(f"[seed {seed}] total steps: {total_steps}", flush=True)
 
     t0 = time.time()
+    done = 0
     for epoch in range(2):
         for batch in loader:
             if batch is None:
@@ -238,6 +239,13 @@ def train(condition, seed, out_dir):
             optimizer.step()
             scheduler.step()
             optimizer.zero_grad()
+            done += 1
+            if max_steps is not None and done >= max_steps:
+                print(f"[seed {seed}] SMOKE TEST: stopped after {done} steps "
+                      f"(--max-steps {max_steps})", flush=True)
+                break
+        if max_steps is not None and done >= max_steps:
+            break
         print(f"[seed {seed}] epoch {epoch+1}/2 done | loss {out.loss.item():.4f} | {time.time()-t0:.0f}s",
               flush=True)
 
@@ -370,6 +378,12 @@ def main():
     ap.add_argument("--seed", type=int, required=True)
     ap.add_argument("--skip-preflight", action="store_true",
                     help="skip the VRAM/model preflight (use with care)")
+    ap.add_argument("--max-steps", type=int, default=None,
+                    help="stop training after N optimizer steps (smoke test "
+                         "only; canonical behavior is the full 2-epoch run). "
+                         "Note: the run still writes metrics.json and is then "
+                         "treated as complete, so use a scratch seed for smoke "
+                         "tests.")
     args = ap.parse_args()
 
     seed_everything(args.seed)
@@ -382,7 +396,12 @@ def main():
                  "exists with metrics.json; refusing to overwrite.")
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    ckpt = train(args.condition, args.seed, out_dir)
+    ckpt = train(args.condition, args.seed, out_dir, max_steps=args.max_steps)
+    if args.max_steps is not None:
+        print(f"SMOKE TEST complete: {args.max_steps} steps; skipping full "
+              "evaluation. Delete results/seed_variance/{args.condition}/"
+              f"{args.seed} before the real run.", flush=True)
+        return
     evaluate(args.condition, args.seed, ckpt, out_dir)
     print(f"DONE: results/seed_variance/{args.condition}/{args.seed}/", flush=True)
 
