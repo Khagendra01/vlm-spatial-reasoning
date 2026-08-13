@@ -13,6 +13,7 @@ scikit-learn==1.6.0
 
 # --- deep learning (model evaluation / training; GPU) ---
 torch==2.12.1+cu130
+torchvision==0.27.1+cu130   # required by Qwen2-VL processor (Qwen2VLVideoProcessor)
 transformers==5.14.1
 datasets==5.0.1
 peft==0.20.0

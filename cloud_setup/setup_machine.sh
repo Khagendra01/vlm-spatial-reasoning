@@ -51,8 +51,8 @@ provision_venv() {
     python3 -m venv "$VENV"
   fi
   "$VENV/bin/python" -m pip install --upgrade -q pip
-  log "provision_venv: installing torch (cu130 index)"
-  "$VENV/bin/pip" install -q "torch==2.12.1+cu130" \
+  log "provision_venv: installing torch + torchvision (cu130 index)"
+  "$VENV/bin/pip" install -q "torch==2.12.1+cu130" "torchvision==0.27.1+cu130" \
       --index-url https://download.pytorch.org/whl/cu130 \
     || die "torch install failed (check the cu130 wheel index)"
   log "provision_venv: installing requirements.txt"
