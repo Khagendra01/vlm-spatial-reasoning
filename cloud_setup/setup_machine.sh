@@ -60,13 +60,20 @@ provision_venv() {
 }
 
 # ------------------------------------------------------------------- repo
+# NOTE: sparse + partial clone (--filter=blob:none). The repo tree is ~1.2GB
+# because checkpoints/ contains hundreds of old LoRA adapters that the
+# seed-variance job does NOT need (it trains fresh LoRAs). Cloning everything
+# times out; the cone below keeps the clone to a few MB of blobs.
 provision_repo() {
-  log "provision_repo: $REPO (branch $BRANCH)"
+  log "provision_repo: $REPO (branch $BRANCH, sparse cone)"
   if [ ! -d "$REPO/.git" ]; then
-    git clone --quiet --branch "$BRANCH" "$REPO_URL" "$REPO"
+    git clone --quiet --depth 1 --filter=blob:none --sparse \
+      --branch "$BRANCH" "$REPO_URL" "$REPO"
   fi
+  git -C "$REPO" sparse-checkout set src scripts configs data cloud_setup \
+    docs requirements.txt .gitignore README.md SEED_VARIANCE_JOB.md
   git -C "$REPO" fetch --quiet origin "$BRANCH"
-  git -C "$REPO" reset --quiet --hard "origin/$BRANCH"
+  git -C "$REPO" checkout --quiet --force "origin/$BRANCH"
 }
 
 # --------------------------------------------- HF token / models / dataset
