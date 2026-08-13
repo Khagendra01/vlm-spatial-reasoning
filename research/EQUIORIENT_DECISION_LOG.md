@@ -111,6 +111,45 @@ Paper 3: introduce a structural solution
 
 ---
 
+## 2026-08-13 — Close Gate 0 with `MUTATE`
+
+**Results already seen?** No EquiOrient training results. Decision is literature- and design-driven.
+
+**Decision:** close `EQUIORIENT_NOVELTY_GATE.md` with verdict `MUTATE`.
+
+**Reason:** a deeper search found substantial overlap around the original broad formulation:
+
+- VLM latent spatial shaping and causal intervention already exist;
+- representation-level geometric supervision inside VLMs already exists;
+- continuous / object-centric spatial latent tokens already exist;
+- transformation/view-consistency spatial VLM training already exists;
+- latent equivariance, group actions, and homomorphism/composition objectives are established representation-learning ideas.
+
+No searched paper, however, was found to combine the full revised target: an answer-path object-pair state, predeclared heterogeneous geometry-derived actions that do not receive the true relation label, matched augmentation/output-consistency/invariance controls, a wrong-geometry control, and held-out transformation composition as the primary behavioral test.
+
+**Mutation:** replace the provisional `rho_r(T)` framing with a typed spatial state and geometry-derived `rho(T)` action. The answer label / ground-truth relation must not be an input to the transformation operator. Make unseen composition the primary pilot test.
+
+**Pilot redesign:**
+
+- first relation behaviors: left/right, above/below, controlled parallel/perpendicular invariance;
+- first transform generators: horizontal reflection `H`, vertical reflection `V`;
+- train on `H` and `V` individually;
+- hold out `V ∘ H` composition;
+- matched conditions: ordinary SFT/LoRA, augmentation-only, output-consistency, latent-invariance, EquiOrient, wrong-geometry control;
+- require answer-path participation of `z` and causal ablation/corruption evidence;
+- do not include facing/facing-away until the simpler algebra passes.
+
+**Affected frozen artifacts:**
+
+- `research/EQUIORIENT_NOVELTY_GATE.md` — updated and gate closed;
+- `research/EQUIORIENT_PROTOCOL_FREEZE.md` — **must be amended before GPU pilot**;
+- `configs/equiorient_protocol.yaml` — **must be amended before GPU pilot**;
+- `research/EQUIORIENT_STUDY.md` — may be synchronized after protocol authority is amended.
+
+**Confirmatory status:** no GPU training is confirmatory until the protocol/config amendments are committed and the CPU algebra, synthetic-data, and representation-feasibility gates pass.
+
+---
+
 ## Future decisions
 
 Append entries with:
