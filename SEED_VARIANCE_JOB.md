@@ -29,6 +29,42 @@ Report, per condition, across the 3 seeds (42 + 101 + 202):
   original training machine (manifests: general_train.jsonl,
   hardneg_train.jsonl; image cache at data/image_cache/).
 
+## Pre-stage model and data before renting four machines
+
+Use the first A6000 as a staging machine. Supply the Hugging Face token only
+through the provider's secret/environment-variable mechanism:
+
+```bash
+export HF_TOKEN='(set through the machine secret manager; never commit it)'
+huggingface-cli login --token "$HF_TOKEN" --add-to-git-credential false
+python - <<'PY'
+from huggingface_hub import snapshot_download
+import os
+snapshot_download("Qwen/Qwen2-VL-7B-Instruct", token=os.environ["HF_TOKEN"])
+PY
+python - <<'PY'
+from datasets import load_dataset
+load_dataset("cambridgeltl/vsr_random", split="test")
+PY
+```
+
+Then verify the repository manifests and image cache required by the runner:
+
+```bash
+test -f data/manifests/general_train.jsonl
+test -f data/manifests/hardneg_train.jsonl
+python -c "from pathlib import Path; print(len(list(Path('data/image_cache').glob('*'))))"
+```
+
+If the image cache is not already present, pre-download it using the
+repository's portable downloader before starting training. Do not rely on
+four machines downloading the same model and images simultaneously: that
+adds avoidable startup time and can trigger Hub/network rate limits. After
+the first machine is validated, repeat the setup on the other three machines
+or copy the provider's prepared disk/image if supported. Confirm on every
+machine that `HF_TOKEN` is available, the model loads, and the cache paths are
+local before launching a seed job.
+
 ## GPU choice
 
 The runner uses one CUDA device, bf16, eager attention, gradient
