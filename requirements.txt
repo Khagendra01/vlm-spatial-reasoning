@@ -22,6 +22,7 @@ accelerate==1.6.0
 # --- vision / io ---
 pillow==11.1.0
 requests==2.32.3
+num2words==0.5.14   # required by SmolVLM2 processor (transformers 5.14.1)
 
 # --- tooling ---
 flask==3.1.0      # blind IAA rating server (scripts/iaa_tool.py)
