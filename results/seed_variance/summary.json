@@ -1,0 +1,95 @@
+{
+  "note": "Additive seed-variance evidence. Does not alter the frozen canonical snapshot (results/* committed files). std is only reported with n_seeds >= 2.",
+  "per_condition": {
+    "general": {
+      "n_seeds": 3,
+      "seeds": [
+        "101",
+        "202",
+        "303"
+      ],
+      "overall": {
+        "values": [
+          84.56,
+          83.87,
+          84.01
+        ],
+        "mean": 84.15,
+        "std": 0.36
+      },
+      "orientation": {
+        "values": [
+          69.34,
+          64.23,
+          67.88
+        ],
+        "mean": 67.15,
+        "std": 2.63
+      }
+    },
+    "targeted": {
+      "n_seeds": 2,
+      "seeds": [
+        "101",
+        "202"
+      ],
+      "overall": {
+        "values": [
+          83.46,
+          83.33
+        ],
+        "mean": 83.39,
+        "std": 0.1
+      },
+      "orientation": {
+        "values": [
+          67.15,
+          62.77
+        ],
+        "mean": 64.96,
+        "std": 3.1
+      }
+    },
+    "hardneg": {
+      "n_seeds": 2,
+      "seeds": [
+        "101",
+        "202"
+      ],
+      "overall": {
+        "values": [
+          83.69,
+          84.01
+        ],
+        "mean": 83.85,
+        "std": 0.23
+      },
+      "orientation": {
+        "values": [
+          67.15,
+          67.88
+        ],
+        "mean": 67.52,
+        "std": 0.52
+      }
+    }
+  },
+  "orientation_delta_vs_seed_variance": {
+    "general_vs_hardneg": {
+      "canonical_delta_pp": -0.7,
+      "inside_seed_variance": true,
+      "pooled_seed_std_pp": 1.9
+    },
+    "general_vs_targeted": {
+      "canonical_delta_pp": 1.5,
+      "inside_seed_variance": true,
+      "pooled_seed_std_pp": 2.87
+    },
+    "targeted_vs_hardneg": {
+      "canonical_delta_pp": -2.2,
+      "inside_seed_variance": true,
+      "pooled_seed_std_pp": 2.22
+    }
+  },
+  "interpretation": "A canonical between-condition delta whose absolute value is smaller than the pooled seed-to-seed std is within observed training-run variance: 'X outperforms Y' language for that pair should be softened (e.g., 'nominally higher, within seed variance')."
+}

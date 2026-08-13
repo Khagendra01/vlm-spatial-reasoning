@@ -1,0 +1,26 @@
+{
+  "global": {
+    "accuracy": 0.8369020501138952,
+    "correct": 1837,
+    "total": 2195
+  },
+  "by_family": {
+    "orientation": {
+      "accuracy": 0.6715328467153284,
+      "correct": 92,
+      "total": 137
+    }
+  },
+  "config": {
+    "model": "Qwen/Qwen2-VL-7B-Instruct",
+    "condition": "hardneg",
+    "seed": 101,
+    "lora_r": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "lr": 0.0001,
+    "epochs": 2,
+    "manifest": "data/manifests/hardneg_train.jsonl",
+    "recipe": "canonical (run_7b_pipeline.py / train_vision_lora.py), seed-only change"
+  }
+}

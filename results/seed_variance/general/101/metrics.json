@@ -1,0 +1,26 @@
+{
+  "global": {
+    "accuracy": 0.8455580865603645,
+    "correct": 1856,
+    "total": 2195
+  },
+  "by_family": {
+    "orientation": {
+      "accuracy": 0.6934306569343066,
+      "correct": 95,
+      "total": 137
+    }
+  },
+  "config": {
+    "model": "Qwen/Qwen2-VL-7B-Instruct",
+    "condition": "general",
+    "seed": 101,
+    "lora_r": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "lr": 0.0001,
+    "epochs": 2,
+    "manifest": "data/manifests/general_train.jsonl",
+    "recipe": "canonical (run_7b_pipeline.py / train_vision_lora.py), seed-only change"
+  }
+}
