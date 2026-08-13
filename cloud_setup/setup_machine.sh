@@ -44,7 +44,7 @@ LOG="$HERE/setup.log"
 log() { echo "[$(date '+%F %T')] $*" | tee -a "$LOG"; }
 die() { log "FATAL: $*"; exit 1; }
 
-[ $# -ge 1 ] || die "usage: $0 --stage | --train <backbone> <seed> | --regress | --battery <family> <tag> [ckpts] | --collect"
+[ $# -ge 1 ] || die "usage: $0 --stage | --train <backbone> <seed> | --images | --regress | --battery <family> <tag> [ckpts] | --collect"
 MODE="$1"; SUB1="${2:-}"; SUB2="${3:-}"; SUB3="${4:-}"
 
 # ---------------------------------------------------------------- system deps
@@ -119,12 +119,50 @@ PY
 }
 
 # -------------------------------------------------------------- image cache
+# Two disjoint image sets are required on a training box:
+#   1. TEST payload (frozen IDs)  -> scripts/grounding/download_images.py
+#      (needed by the battery; strict: exit 1 if any frozen-available link
+#      fails to download)
+#   2. TRAINING manifest images (general_train.jsonl; COCO train2017/val2017,
+#      md5-hashed into the same cache). CRITICAL: run_seed_campaign.py
+#      train_7b has NO URL fallback -- load_cached_image() returns None and
+#      the loop silently skips the row. Without these, 7B seeds train on a
+#      silently truncated manifest (seed-0 trained on the full 1900 rows) and
+#      the seeds are incomparable. The 2B collator DOES have a live-URL
+#      fallback, but that is slow/network-bound (seedA: 7474s, ~31s/step) --
+#      pre-caching fixes both.
 provision_images() {
   log "provision_images: download_images.py (frozen IDs, strict)"
   ( cd "$REPO" && "$VENV/bin/python" scripts/grounding/download_images.py )
   local n
   n=$(find "$REPO/data/image_cache" -name '*.jpg' 2>/dev/null | wc -l)
-  log "provision_images: $n images cached"
+  log "provision_images: $n images cached (test payload)"
+
+  log "provision_images: training manifest images (general_train.jsonl, strict)"
+  ( cd "$REPO" && "$VENV/bin/python" - <<'PY'
+import json, sys
+from src.grounding.images import download_images
+
+urls = []
+with open("data/manifests/general_train.jsonl", encoding="utf-8") as f:
+    for line in f:
+        ex = json.loads(line)
+        if "image" in ex:
+            urls.append(ex["image"])
+urls = list(dict.fromkeys(urls))
+print(f"manifest unique images: {len(urls)}")
+res = download_images(urls)
+missing = [u for u, ok in res.items() if not ok]
+print(f"manifest images ok: {len(res) - len(missing)}/{len(res)}")
+if missing:
+    print("MISSING manifest images (7B training would silently skip these):")
+    for u in missing[:10]:
+        print(f"  {u}")
+    sys.exit(1)
+PY
+  )
+  n=$(find "$REPO/data/image_cache" -name '*.jpg' 2>/dev/null | wc -l)
+  log "provision_images: $n images cached TOTAL (test + training manifest)"
 }
 
 # ------------------------------------------------------------- smoke test
@@ -214,6 +252,12 @@ case "$MODE" in
     [ -n "$SUB1" ] && [ -n "$SUB2" ] || die "--battery needs <family> <tag>"
     provision_repo; provision_images
     battery_run "$SUB1" "$SUB2" "$SUB3"
+    ;;
+  --images)
+    # top-up image cache only (test payload + training manifest) on a box
+    # that was staged before the manifest-image fix
+    provision_repo; provision_images
+    log "IMAGES OK -- cache now holds test payload + training manifest"
     ;;
   --collect)
     log "collect: zip seed_campaign + battery artifacts"
