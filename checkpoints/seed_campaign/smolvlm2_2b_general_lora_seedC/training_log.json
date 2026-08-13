@@ -1,0 +1,25 @@
+{
+  "manifest": "data/manifests/general_train.jsonl",
+  "model": "HuggingFaceTB/SmolVLM2-2.2B-Instruct",
+  "epochs": 2,
+  "lr": 0.0001,
+  "effective_batch_size": 16,
+  "lora_rank": 8,
+  "lora_alpha": 16,
+  "lora_dropout": 0.05,
+  "total_steps": 237,
+  "epoch_losses": [
+    0.5096480778836964,
+    0.416427422855417
+  ],
+  "total_time_seconds": 6648.0480897426605,
+  "train_size": 1900,
+  "eval_size": 100,
+  "device": "NVIDIA RTX A6000",
+  "timestamp": "2026-08-13T06:50:23.335257",
+  "campaign_id": "seed_campaign_r1",
+  "spec_ref": "configs/seed_campaign/SEED_CAMPAIGN.json",
+  "seed": 303,
+  "split_seed": 42,
+  "backbone": "smolvlm2_2b"
+}
