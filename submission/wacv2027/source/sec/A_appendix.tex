@@ -102,6 +102,36 @@ non-conforming outputs fell in the orientation family. The orientation
 conclusions are therefore independent of the format-policy choice; the
 overall row depends on it by 2.6\,pp.
 
+\textbf{External-model protocol: GPT-5.6 Sol and Gemini Spark.}
+\label{app:external}
+Two further external zero-shot models were evaluated on the full 2{,}195-item
+VSR test set with the \textbf{identical frozen prompt}, one image per request,
+the same parser, and the same invalid-counted-wrong policy
+(\texttt{results/external\_models/external\_vsr\_scores.json}; raw outputs
+committed under \texttt{results/external\_models/raw/}).
+GPT-5.6 Sol (OpenAI; interactive session, 2026-08-12,
+\texttt{gpt56sol\_vsr\_2195.csv}) reached 75.4\% overall and 73.0\% on
+orientation (CI $[65.0, 79.7]$), with orientation above its own depth
+(67.1\%): the relative weakness is not reproduced, although the orientation
+CI still overlaps the controlled models' band. Gemini Spark (Google;
+run \texttt{run\_gemini\_spark\_vsr2195\_001}, 2026-08-12) produced a
+degenerate evaluation: its first pass answered TRUE on 98.6\% of items
+(2{,}165/2{,}195; overall 54.3\%), and its requested redo reused 1{,}315 of
+2{,}195 answers including all 137 orientation verdicts (id-level identity
+verified; orientation 57.7\% in both passes). Gemini's row in
+Table~\ref{tab:vsr-main} (main) therefore reports the v2 numbers as a
+degenerate-evaluation finding, not as a capability estimate. Complementary-
+consistency runs on the 696 strict/soft pairs are likewise committed
+(\texttt{gpt56sol\_consistency\_pairs.csv},
+\texttt{gemini\_consistency\_v2.csv}): GPT-5.6 Sol reaches 83.3\% / 91.1\% /
+87.2\% complementary on facing / front-behind / left-right ($n{=}102$ / 314 /
+242 parseable), while Gemini's facing rate is 60.2\% with a flip-True rate of
+exactly 0.0 (0/103) and a 100\% complementary front/behind rate---patterns
+consistent with its defaulting behavior, reported as degenerate. Both
+external evaluations were collected on 2026-08-12; neither provider's serving
+snapshot is guaranteed stable, and GPT's interactive run carries no
+deterministic-decoding guarantee.
+
 \textbf{Parsing.} VSR outputs are parsed with an anchored case-insensitive
 regex (\texttt{src/evaluation/parser.py}): strips prefixes
 (`the answer is', `answer:', `response:', `output:') and trailing
@@ -505,6 +535,8 @@ Condition (facing pairs, $n{=}103$) & both-T & both-F & comp.\ & orig-T & flip-T
 \midrule
 7B zero-shot & 0 & 65 (63.1\%) & 38 (36.9\%) & 0.20 & 0.17 & 66.5\% & 30.2\% \\
 MiMo-V2.5 zero-shot ($n{=}100$) & 0 & 56 (56.0\%) & 44 (44.0\%) & 0.30 & 0.14 & 60.2\% & 35.6\% \\
+GPT-5.6 Sol zero-shot ($n{=}102$) & 0 & 17 (16.7\%) & 85 (83.3\%) & 0.59 & 0.25 & 31.1\% & 54.5\% \\
+Gemini Spark zero-shot$^{\dagger}$ & 0 & 41 (39.8\%) & 62 (60.2\%) & 0.60 & 0.00 & 39.8\% & 60.2\% \\
 LM-only LoRA & 25 (24.3\%) & 10 (9.7\%) & 68 (66.0\%) & 0.62 & 0.52 & 18.0\% & 49.4\% \\
 HardNeg LoRA & 18 (17.5\%) & 5 (4.9\%) & 80 (77.7\%) & 0.60 & 0.52 & 19.0\% & 50.2\% \\
 Projector LoRA & 18 (17.5\%) & 15 (14.6\%) & 70 (68.0\%) & 0.53 & 0.50 & 23.5\% & 50.3\% \\
@@ -520,9 +552,18 @@ contradictions (0\% $\rightarrow$ 24.3\% LM-only / 17.5\% hard-neg), a
 disclosed specialization trade-off. The large sparse-MoE zero-shot model shows
 the same False-defaulting bias (0 both-True; 56.0\% both-False; observed
 complementary 44.0\% vs.\ 35.6\% expected under independence), so scale alone
-does not alter the coherence failure mode. Full table for left/right
-($n{=}245$), front/behind ($n{=}314$), and parallel/perp (soft, $n{=}34$)
-in the committed JSON.
+does not alter the coherence failure mode. GPT-5.6 Sol does: with a flip-True
+rate of 0.25 (vs.\ 0.00--0.17 for the other zero-shot models) it reaches
+83.3\% complementary facing verdicts, so its coherence does not reproduce the
+controlled models' failure mode either. $^{\dagger}$Gemini Spark's row is
+degenerate: its zero flip-True rate (0/103) reproduces the expected rate under
+independence exactly, and its front/behind pairs are 100\% complementary,
+consistent with the defaulting behavior documented in
+\S\ref{app:external}; its coherence numbers are reported as a
+degenerate-evaluation finding, not as capability estimates. Full table for
+left/right ($n{=}245$), front/behind ($n{=}314$), and parallel/perp (soft,
+$n{=}34$) in the committed JSON, with the external models' per-family
+complementary rates in \S\ref{app:external}.
 
 \textbf{Consistency definitions.} Strict complements (exactly one truth value):
 left$\leftrightarrow$right ($n{=}245$), in front of$\leftrightarrow$behind
@@ -885,6 +926,10 @@ SITE numbers & \texttt{site/zeroshot\_7b\_predictions.csv} & --- \\
  & \texttt{site/zeroshot\_image\_metrics.json} & \\
 MiMo-V2.5 VSR / consistency / audit (Table~1 row, verdict table,
 App.~\ref{app:probes}) & \texttt{mimo/*.csv}, \texttt{mimo/mimo\_vsr\_summary.json} & --- \\
+GPT-5.6 Sol / Gemini Spark VSR + consistency (Table~1 rows,
+App.~\ref{app:external}) &
+\texttt{external\_models/external\_vsr\_scores.json} + raw CSVs under
+\texttt{external\_models/raw/} & --- \\
 Human re-audits + inter-source agreement (App.~\ref{app:taxonomy}) &
 \texttt{iaa/rater2\_*.csv}, \texttt{iaa/rater3\_*.csv},
 \texttt{iaa/iaa\_results.json},
@@ -935,7 +980,9 @@ by \texttt{scripts/compare\_site\_zeroshot\_lora.py}; VSR/SITE headline
 recomputation by \texttt{scripts/make\_paper\_figures.py} (output archived at
 \texttt{paper/fig/audit\_output.txt}); MiMo-V2.5 evaluation and analysis by
 \texttt{scripts/eval\_mimo\_vsr.py} and \texttt{scripts/mimo\_analysis.py}
-(predictions and summaries under \texttt{results/mimo/}).
+(predictions and summaries under \texttt{results/mimo/}); external-model
+scoring by \texttt{scripts/score\_external\_vsr.py}
+(\texttt{results/external\_models/external\_vsr\_scores.json}).
 
 \textbf{Two-stage reproducibility caveat.} The two-stage pipeline requires
 per-patch embeddings (\texttt{results/probe/patch\_embeddings.pkl}, 8.2\,GB,
