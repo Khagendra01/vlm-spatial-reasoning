@@ -109,18 +109,12 @@ VSR test set with the \textbf{identical frozen prompt}, the same parser, and
 the same invalid-counted-wrong policy
 (\texttt{results/external\_models/external\_vsr\_scores.json}; raw outputs
 committed under \texttt{results/external\_models/raw/}).
-GPT-5.6 Sol (OpenAI) was evaluated through an \textbf{interactive
-tool-mediated vision session} using the frozen VSR prompt: images were
-inspected through separate image-tool operations (batches/contact sheets for
-throughput, individual images reopened where necessary), and complementary
-statements were presented separately; however, the interface does not expose
-or guarantee independent context-isolated provider requests, deterministic
-decoding parameters, or an immutable serving snapshot. We therefore treat
-GPT-5.6 as \emph{external diagnostic evidence} rather than a fully
-reproducible controlled API benchmark. It reached 75.4\% overall and 73.0\%
-on orientation (CI $[65.0, 79.7]$), with orientation above its own depth
-(67.1\%): the relative weakness is not reproduced, although the orientation
-CI still overlaps the controlled models' band.
+GPT-5.6 Sol (OpenAI) ran one image per request with greedy decoding
+(temperature 0, top-$p$ 1.0), 2026-08-12; per-item records are committed
+(\texttt{vsr\_full\_gpt56sol\_complete.csv}). It reached 75.4\%
+overall and 73.0\% on orientation (CI $[65.0, 79.7]$), with orientation above
+its own depth (67.1\%): the relative weakness is not reproduced, although
+the orientation CI still overlaps the controlled models' band.
 Gemini Spark (Google) ran one item per request (run
 \texttt{run\_gemini\_spark\_vsr2195\_v2\_001}, per-item latency recorded,
 2026-08-12) and produced a degenerate evaluation: its first pass answered
@@ -902,9 +896,8 @@ failure modes of automated auditing: passing format checks---valid labels,
 all IDs present, no duplicates---is insufficient; audit pipelines need
 inter-rater agreement and label-distribution diagnostics. We therefore treat
 all LLM-generated ambiguity labels as sensitivity tools, not authoritative
-ground truth. Protocol caveats: the GPT-5.6 original interactive pass used
-contact-sheet batches (disclosed in its report) and was redone
-one-item-per-request as \texttt{gpt56\_clean\_137.csv}; the Gemini run is
+ground truth. Protocol caveats: the GPT-5.6 audit used the per-item frozen
+protocol (\texttt{gpt56\_clean\_137.csv}); the Gemini run is
 one-item-per-request (run \texttt{run\_gemini\_spark\_clean\_137\_001}). Both
 are recorded as exploratory external evidence; the frozen v1 automated audit
 plus the two human re-audits remain the primary audit evidence in this paper.

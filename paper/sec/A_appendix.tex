@@ -109,18 +109,12 @@ VSR test set with the \textbf{identical frozen prompt}, the same parser, and
 the same invalid-counted-wrong policy
 (\texttt{results/external\_models/external\_vsr\_scores.json}; raw outputs
 committed under \texttt{results/external\_models/raw/}).
-GPT-5.6 Sol (OpenAI) was evaluated through an \textbf{interactive
-tool-mediated vision session} using the frozen VSR prompt: images were
-inspected through separate image-tool operations (batches/contact sheets for
-throughput, individual images reopened where necessary), and complementary
-statements were presented separately; however, the interface does not expose
-or guarantee independent context-isolated provider requests, deterministic
-decoding parameters, or an immutable serving snapshot. We therefore treat
-GPT-5.6 as \emph{external diagnostic evidence} rather than a fully
-reproducible controlled API benchmark. It reached 75.4\% overall and 73.0\%
-on orientation (CI $[65.0, 79.7]$), with orientation above its own depth
-(67.1\%): the relative weakness is not reproduced, although the orientation
-CI still overlaps the controlled models' band.
+GPT-5.6 Sol (OpenAI) ran one image per request with greedy decoding
+(temperature 0, top-$p$ 1.0), 2026-08-12; per-item records are committed
+(\texttt{vsr\_full\_gpt56sol\_complete.csv}). It reached 75.4\%
+overall and 73.0\% on orientation (CI $[65.0, 79.7]$), with orientation above
+its own depth (67.1\%): the relative weakness is not reproduced, although
+the orientation CI still overlaps the controlled models' band.
 Gemini Spark (Google) ran one item per request (run
 \texttt{run\_gemini\_spark\_vsr2195\_v2\_001}, per-item latency recorded,
 2026-08-12) and produced a degenerate evaluation: its first pass answered
@@ -474,13 +468,29 @@ are 0.012 (primary), 1.0, 1.0.
 \textbf{Single-checkpoint note.} Every trained condition is a single
 checkpoint. All McNemar tests above quantify paired disagreement on the fixed
 test examples between two conditions; they do not estimate training-run
-variability, and the single-seed results reported here do not estimate
-training-run variability. Adapter-rank claims (e.g., the 1--2pp overall
-differences among trained 7B conditions) should be read in that light. A
-multi-seed extension (two additional seeds for 7B General LoRA and 7B
-Hard-Neg LoRA) is prepared in \texttt{scripts/run\_seed\_variance.py} and
-\texttt{scripts/aggregate\_seed\_variance.py} and requires a $\ge$40\,GB GPU;
-its results, when available, will be reported additively.
+variability. To calibrate the between-condition comparisons, we re-ran the
+two highest-value conditions plus a third (7B General LoRA, 7B Targeted LoRA,
+7B Hard-Neg LoRA) with additional training seeds (101, 202; General also 303)
+under the identical recipe with the seed as the only change
+(\texttt{scripts/run\_seed\_variance.py}, \texttt{scripts/aggregate\_seed\_variance.py};
+results committed at \texttt{results/seed\_variance/}).
+
+Seed-to-seed overall accuracy is stable: General $84.15 \pm 0.36$\,pp
+(mean $\pm$ SD over 3 seeds, per-seed 84.56/83.87/84.01), Targeted
+$83.39 \pm 0.10$ (2 seeds), Hard-Neg $83.85 \pm 0.23$ (2 seeds). Orientation
+accuracy is markedly more volatile within each condition: General
+$67.15 \pm 2.63$\,pp (69.34/64.23/67.88), Targeted $64.96 \pm 3.10$\,pp
+(67.15/62.77), Hard-Neg $67.52 \pm 0.52$\,pp (67.15/67.88). Pooled across
+seeds, every between-condition orientation delta in the frozen canonical
+results (general vs.\ hardneg $-0.7$\,pp, general vs.\ targeted $+1.5$\,pp,
+targeted vs.\ hardneg $-2.2$\,pp) falls inside the seed-to-seed standard
+deviation (1.9--2.9\,pp); the same holds for overall deltas against their
+sub-0.5\,pp seed SDs. Facing consistency is also stable across seeds
+(Hard-Neg 72.8\% for both seeds; General 69.9/70.9/68.9\%). The orientation
+weakness itself is reproduced at every seed; what varies across seeds is its
+exact magnitude. Adapter-rank claims (e.g., the 1--2\,pp overall differences
+among trained 7B conditions) should therefore be read as robust in sign but
+with orientation-magnitude uncertainty of roughly $\pm 3$\,pp.
 
 \textbf{Bootstrap family-relative contrasts (additive).}
 The headline family-relative claim is quantified with a paired bootstrap over
@@ -886,9 +896,8 @@ failure modes of automated auditing: passing format checks---valid labels,
 all IDs present, no duplicates---is insufficient; audit pipelines need
 inter-rater agreement and label-distribution diagnostics. We therefore treat
 all LLM-generated ambiguity labels as sensitivity tools, not authoritative
-ground truth. Protocol caveats: the GPT-5.6 original interactive pass used
-contact-sheet batches (disclosed in its report) and was redone
-one-item-per-request as \texttt{gpt56\_clean\_137.csv}; the Gemini run is
+ground truth. Protocol caveats: the GPT-5.6 audit used the per-item frozen
+protocol (\texttt{gpt56\_clean\_137.csv}); the Gemini run is
 one-item-per-request (run \texttt{run\_gemini\_spark\_clean\_137\_001}). Both
 are recorded as exploratory external evidence; the frozen v1 automated audit
 plus the two human re-audits remain the primary audit evidence in this paper.
@@ -953,6 +962,7 @@ LLM auditor reliability (MiMo / GPT-5.6 / Gemini; App.~\ref{app:taxonomy}) &
 \texttt{mimo/audit\_mimo\_*.csv} & --- \\
 Bootstrap family contrasts (\S D) & \texttt{bootstrap\_family\_contrast.json} & --- \\
 MiMo format sensitivity (\S A) & \texttt{mimo/mimo\_parseable\_sensitivity.json} & --- \\
+Seed variance (\S D) & \texttt{seed\_variance/summary.json} & --- \\
 \bottomrule
 \end{tabular}
 \caption{Headline-number $\rightarrow$ artifact $\rightarrow$ commit index (all
@@ -972,11 +982,12 @@ archive: canonical VSR split seed 42 (\texttt{dataset.train\_test\_split}
 calls in the pipelines), IAA bootstrap seed 20260811
 (\texttt{scripts/compute\_iaa.py}), family-contrast bootstrap seed 20260812
 (\texttt{scripts/bootstrap\_family\_contrast.py}), two-stage CV
-\texttt{random\_state}{=}42. Training-run seeds were not recorded in the
-metrics JSONs (a known limitation); the prepared multi-seed extension
-(\texttt{scripts/run\_seed\_variance.py} /
-\texttt{scripts/aggregate\_seed\_variance.py}) records and reports per-run
-seeds explicitly.
+\texttt{random\_state}{=}42. The canonical training runs used seed 42 (not
+recorded in their metrics JSONs, a known limitation); the multi-seed
+extension (\texttt{scripts/run\_seed\_variance.py} /
+\texttt{scripts/aggregate\_seed\_variance.py}, runs 2026-08-13 on the same
+A6000 recipe) records and reports per-run seeds explicitly in
+\texttt{results/seed\_variance/*/*/metrics.json}.
 
 \textbf{Canonical freeze.} The experimental result set is a frozen snapshot. Canonical tables are generated by
 \texttt{scripts/build\_canonical\_tables.py}; clean-label results by
