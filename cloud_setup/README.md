@@ -1,4 +1,7 @@
-# Cloud seed-variance runbook (Thunder Compute, 4× A6000)
+﻿# Cloud seed-variance runbook (Thunder Compute, 4x A6000)
+
+> **STATUS: COMPLETED 2026-08-13.** All required runs finished (general 101/202/303, hardneg 101/202, targeted 101/202 bonus); results committed under ``results/seed_variance/``, paper updated, pushed at ``ce22ee9``. All instances deleted, billing stopped. This runbook documents the process for any future re-run (re-provisioning is ~10 min via ``setup_machine.sh --stage`` + ``job_supervisor.sh``).
+
 
 Everything is automated behind ONE command per machine. Your only manual
 steps: create the instance, `tnr connect`, paste one line, report back.

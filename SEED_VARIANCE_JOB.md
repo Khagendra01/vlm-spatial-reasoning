@@ -1,7 +1,34 @@
-# Multi-seed job spec — run LAST, on the GPU machine (not on this box)
+# Multi-seed job spec — ~~run LAST, on the GPU machine~~ **COMPLETED 2026-08-13**
+
+> **Status: DONE.** All required runs finished, results committed
+> (`results/seed_variance/`, summary at `results/seed_variance/summary.json`),
+> paper updated (App. D single-checkpoint note + Limitations + Environments),
+> pushed at commit `ce22ee9`. GPUs torn down; no further compute needed.
+> If re-run is ever wanted, `cloud_setup/setup_machine.sh` (sparse clone +
+> staged venv/models/images) + `cloud_setup/job_supervisor.sh` (queue,
+> heartbeat, auto consistency+zip) provision and run a fresh machine in
+> ~10 min staging + ~1.5 h per seed on an A6000.
 
 Reviewer Priority-3 experiment. Everything else in the revision is already
-done and committed; this is the only remaining new-compute item.
+done and committed; this was the only remaining new-compute item.
+
+## Results (as run 2026-08-13, A6000, identical canonical recipe, seed-only change)
+
+| condition | seeds run | overall (mean ± SD) | orientation (mean ± SD) |
+|---|---|---|---|
+| 7B General LoRA | 101, 202, **303** | 84.15 ± 0.36% | 67.15 ± 2.63% |
+| 7B Hard-Neg LoRA | 101, 202 | 83.85 ± 0.23% | 67.52 ± 0.52% |
+| 7B Targeted LoRA (bonus) | 101, 202 | 83.39 ± 0.10% | 64.96 ± 3.10% |
+
+- Per-seed values, family breakdowns, FF consistency: see
+  `results/seed_variance/*/*/metrics.json`, `predictions.csv`,
+  `consistency_flips.csv` (all committed).
+- Every between-condition orientation delta in the frozen canonical results
+  (general vs hardneg −0.7 pp, general vs targeted +1.5 pp, targeted vs
+  hardneg −2.2 pp) falls **inside** the pooled seed-to-seed SD (1.9–2.9 pp).
+  Facing consistency stable across seeds (hardneg 72.8% both seeds).
+- `targeted/303` and `hardneg/303` were interrupted at teardown (partial
+  checkpoints only; not used in the summary).
 
 ## Task
 
