@@ -69,14 +69,20 @@ provision_repo() {
   git -C "$REPO" reset --quiet --hard "origin/$BRANCH"
 }
 
-# --------------------------------------------- HF token / model / dataset
+# --------------------------------------------- HF token / models / dataset
 provision_hf() {
   [ -n "${HF_TOKEN:-}" ] || die "HF_TOKEN is not set; export it first"
-  log "provision_hf: downloading Qwen/Qwen2-VL-7B-Instruct (once per machine)"
+  log "provision_hf: downloading 7B model Qwen/Qwen2-VL-7B-Instruct"
   HF_HUB_ENABLE_HF_TRANSFER=0 "$VENV/bin/python" - "$HF_TOKEN" <<'PY'
 import os, sys
 from huggingface_hub import snapshot_download
 snapshot_download("Qwen/Qwen2-VL-7B-Instruct", token=sys.argv[1])
+PY
+  log "provision_hf: downloading 2B model HuggingFaceTB/SmolVLM2-2.2B-Instruct"
+  "$VENV/bin/python" - "$HF_TOKEN" <<'PY'
+import os, sys
+from huggingface_hub import snapshot_download
+snapshot_download("HuggingFaceTB/SmolVLM2-2.2B-Instruct", token=sys.argv[1])
 PY
   log "provision_hf: preloading cambridgeltl/vsr_random test split"
   "$VENV/bin/python" - "$HF_TOKEN" <<'PY'
@@ -102,7 +108,15 @@ smoke_test() {
       | tee -a "$LOG" )
   log "smoke_test: cleaning scratch outputs"
   rm -rf "$REPO/results/seed_variance/general/$scratch_seed"
-  log "smoke_test: OK — provision complete"
+  log "smoke_test: 2B model load check (SmolVLM2 wrapper on this venv)"
+  ( cd "$REPO" && "$VENV/bin/python" - <<'PY'
+from src.models.smolvlm import SmolVLMClassifier
+m = SmolVLMClassifier()
+print(f"2B loaded OK: {type(m.model).__name__}", flush=True)
+del m
+PY
+  )
+  log "smoke_test: OK — provision complete (7B smoke + 2B load verified)"
 }
 
 # ------------------------------------------------------------- full run

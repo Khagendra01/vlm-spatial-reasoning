@@ -95,6 +95,56 @@ tnr scp 3:$HOME/seed_variance_hardneg_202.zip .
 (one per machine, or use `--collect` on each machine first to build a single
 `seed_variance_all.zip`).
 
+## Ready for 2B AND 7B
+
+The provisioner downloads **both** base models, so the same machines can run
+any canonical workload:
+
+| Workload | Model | Command (in `$REPO`, using the venv) |
+|---|---|---|
+| Seed variance (reviewer P3) | 7B | `python scripts/run_seed_variance.py --condition general --seed 101` |
+| 2B zero-shot baseline | 2B | `python scripts/run_baseline.py` (SmolVLM2 wrapper) |
+| 2B structured prompt | 2B | `python scripts/run_structured_prompt.py` |
+| 2B/7B LoRA eval | both | `python scripts/eval_lora.py --base-model ...` |
+
+Both wrappers use the same modern API (`AutoProcessor` /
+`AutoModelForImageTextToText`, bf16, eager attention), so ONE venv serves
+both. The `--stage` smoke test now also loads the 2B model to prove the venv
+works for both before you launch anything. (Historical note: the canonical 2B
+runs happened on an old python3.10/conda environment; we deliberately run
+both on the current pinned stack here. If SmolVLM2 ever fails to load on
+transformers 5.14.1, the fallback is a second venv pinned to transformers
+4.5x — staging will catch it before any real run.)
+
+SITE evaluation is intentionally NOT part of this setup: it needs the ~130 GB
+`data/site_media/` bundle and stays on the original GPU box.
+
+## Gotchas learned the hard way (read before touching anything)
+
+These are the problems we hit in earlier sessions; the provisioner and
+recipes already encode the fixes, but knowing them saves debugging time:
+
+1. **Never install flash-attn on these machines.** It fails to build on
+   CUDA 13. Every recipe in this repo uses `_attn_implementation="eager"`
+   by design — that is not an oversight.
+2. **transformers 5.14.1 ignores `max_pixels`.** Verified empirically: a
+   2000×1335 image yields a 96×142 patch grid (13,632 vision tokens). The
+   SITE evaluator pre-resizes to ≤392 px long side as a constant protocol
+   parameter. VSR COCO images are small, so VSR runs are unaffected — do not
+   "fix" the resizing if you run SITE later.
+3. **datasets v5 renamed the split:** it is `"validation"`, not `"dev"`.
+   The seed runner only uses `split="test"`, so nothing to do — just don't
+   copy old `dev`-based snippets.
+4. **Qwen2-VL grounding boxes are per-axis [0, 1000], not pixels** (only
+   relevant to the two-stage/probe scripts, not the seed runner).
+5. **The runner silently skips images missing from `data/image_cache`**
+   (train batches and eval statements both). That is why provisioning runs
+   `pre_download_all.py` and checks counts BEFORE launching — never skip
+   that step.
+6. **HF token hygiene:** the token is in this chat's history, so treat it as
+   exposed — rotate it on Hugging Face after these runs. On the machines it
+   lives only in the session env var; nothing writes it to disk.
+
 ## Token safety
 
 - `HF_TOKEN` lives only in the session environment; the provisioner reads it
