@@ -1,0 +1,2196 @@
+item_id,relation,raw_response
+0,inside,False
+1,consists of,False
+2,above,False
+3,facing,False
+4,inside,False
+5,at the edge of,True
+6,touching,False
+7,in front of,True
+8,beside,True
+9,behind,True
+10,in front of,True
+11,at the left side of,True
+12,behind,True
+13,inside,False
+14,perpendicular to,False
+15,contains,False
+16,at the edge of,True
+17,touching,True
+18,contains,False
+19,parallel to,False
+20,away from,True
+21,in,False
+22,perpendicular to,False
+23,on top of,True
+24,beside,True
+25,at the left side of,False
+26,attached to,False
+27,above,True
+28,below,True
+29,in front of,True
+30,touching,False
+31,at the edge of,True
+32,at the side of,False
+33,facing away from,False
+34,facing away from,False
+35,on top of,False
+36,under,True
+37,at the right side of,True
+38,contains,True
+39,in front of,False
+40,in,False
+41,beneath,True
+42,part of,True
+43,below,True
+44,touching,True
+45,alongside,True
+46,near,False
+47,has as a part,True
+48,on,False
+49,behind,True
+50,contains,True
+51,beneath,True
+52,in,False
+53,at the back of,True
+54,beside,True
+55,far away from,True
+56,at the left side of,True
+57,contains,False
+58,at the back of,True
+59,at the left side of,True
+60,far from,False
+61,in front of,True
+62,in,True
+63,touching,False
+64,at the left side of,True
+65,contains,False
+66,touching,False
+67,below,True
+68,beneath,True
+69,behind,False
+70,touching,True
+71,beside,False
+72,touching,True
+73,on top of,False
+74,attached to,False
+75,at the left side of,True
+76,under,False
+77,beside,True
+78,far from,True
+79,in,False
+80,in front of,True
+81,facing away from,False
+82,beneath,True
+83,inside,True
+84,at the left side of,False
+85,at the left side of,True
+86,above,False
+87,far away from,False
+88,inside,True
+89,at the edge of,False
+90,touching,False
+91,below,True
+92,in,True
+93,under,True
+94,above,False
+95,at the right side of,False
+96,away from,False
+97,on,True
+98,at the edge of,False
+99,beside,True
+100,beside,True
+101,in,False
+102,contains,False
+103,near,True
+104,below,True
+105,above,True
+106,facing away from,False
+107,at the right side of,True
+108,ahead of,True
+109,in front of,True
+110,at the right side of,True
+111,surrounding,False
+112,in the middle of,True
+113,touching,True
+114,facing,False
+115,on,False
+116,touching,True
+117,beneath,False
+118,at the right side of,False
+119,on,True
+120,alongside,True
+121,touching,True
+122,across from,False
+123,inside,True
+124,in front of,False
+125,right of,False
+126,in front of,False
+127,close to,False
+128,off,True
+129,beneath,False
+130,in,True
+131,on top of,True
+132,against,True
+133,touching,False
+134,under,False
+135,on top of,True
+136,far away from,False
+137,touching,False
+138,on,False
+139,behind,False
+140,on,False
+141,into,True
+142,behind,False
+143,below,True
+144,below,True
+145,over,False
+146,under,False
+147,touching,False
+148,under,False
+149,touching,True
+150,under,True
+151,off,False
+152,on,False
+153,in front of,True
+154,behind,True
+155,on,True
+156,facing away from,True
+157,left of,True
+158,far away from,True
+159,next to,False
+160,behind,False
+161,at the edge of,True
+162,at the edge of,True
+163,far away from,False
+164,under,False
+165,in front of,True
+166,beside,True
+167,touching,False
+168,connected to,False
+169,at the side of,True
+170,facing away from,False
+171,facing,True
+172,away from,True
+173,touching,False
+174,on top of,False
+175,away from,False
+176,touching,True
+177,in front of,True
+178,in front of,True
+179,touching,True
+180,beneath,True
+181,at the right side of,True
+182,within,False
+183,at,True
+184,in,True
+185,beneath,True
+186,on top of,True
+187,in front of,True
+188,touching,True
+189,parallel to,True
+190,at the left side of,True
+191,inside,True
+192,adjacent to,False
+193,next to,True
+194,at the right side of,True
+195,left of,True
+196,over,False
+197,touching,False
+198,at the right side of,True
+199,below,True
+200,above,True
+201,above,False
+202,touching,False
+203,through,False
+204,on top of,False
+205,on top of,True
+206,in front of,True
+207,at the right side of,True
+208,touching,False
+209,far away from,True
+210,right of,True
+211,facing away from,True
+212,below,True
+213,facing,True
+214,in,True
+215,at the right side of,False
+216,on top of,True
+217,inside,False
+218,far from,True
+219,on top of,False
+220,alongside,True
+221,on top of,True
+222,above,True
+223,on,True
+224,touching,True
+225,away from,False
+226,with,True
+227,in,False
+228,touching,True
+229,under,True
+230,facing away from,False
+231,above,True
+232,behind,True
+233,on,False
+234,on top of,False
+235,on top of,True
+236,under,True
+237,in,False
+238,in the middle of,False
+239,facing away from,False
+240,beneath,False
+241,beside,True
+242,away from,False
+243,touching,False
+244,at the right side of,True
+245,next to,True
+246,touching,True
+247,at the left side of,False
+248,in front of,False
+249,against,True
+250,facing,True
+251,right of,False
+252,on,True
+253,at the edge of,True
+254,on top of,True
+255,surrounding,True
+256,in front of,True
+257,on top of,False
+258,touching,True
+259,at the left side of,True
+260,in front of,True
+261,under,True
+262,beneath,False
+263,below,True
+264,in front of,True
+265,off,True
+266,close to,True
+267,in front of,True
+268,on top of,False
+269,into,True
+270,enclosed by,True
+271,behind,False
+272,contains,True
+273,at the right side of,False
+274,under,False
+275,under,True
+276,has as a part,False
+277,touching,True
+278,behind,True
+279,in front of,False
+280,facing,True
+281,enclosed by,False
+282,behind,True
+283,far away from,True
+284,at the right side of,False
+285,touching,True
+286,touching,True
+287,touching,True
+288,right of,True
+289,on top of,False
+290,close to,True
+291,behind,False
+292,on,False
+293,contains,False
+294,next to,True
+295,over,False
+296,inside,False
+297,behind,True
+298,behind,False
+299,under,True
+300,contains,True
+301,in front of,False
+302,at the right side of,False
+303,down from,False
+304,surrounding,False
+305,on,False
+306,next to,False
+307,on,True
+308,above,False
+309,behind,True
+310,under,True
+311,touching,False
+312,behind,True
+313,in the middle of,False
+314,opposite to,True
+315,behind,True
+316,detached from,True
+317,under,True
+318,on top of,False
+319,with,True
+320,over,False
+321,on top of,True
+322,off,True
+323,in front of,True
+324,near,False
+325,touching,False
+326,at the edge of,True
+327,ahead of,True
+328,touching,True
+329,under,True
+330,under,False
+331,across from,True
+332,away from,False
+333,behind,False
+334,touching,True
+335,above,True
+336,near,False
+337,away from,True
+338,contains,True
+339,in front of,False
+340,at the edge of,False
+341,under,False
+342,at the right side of,False
+343,beside,True
+344,next to,True
+345,under,True
+346,touching,True
+347,touching,True
+348,behind,True
+349,on,True
+350,behind,False
+351,far away from,False
+352,ahead of,True
+353,next to,True
+354,touching,True
+355,below,True
+356,facing,False
+357,facing,True
+358,far away from,False
+359,facing,True
+360,over,True
+361,behind,True
+362,facing,False
+363,at the right side of,False
+364,facing,False
+365,touching,True
+366,away from,True
+367,under,True
+368,across from,False
+369,at the left side of,True
+370,on,False
+371,opposite to,False
+372,by,True
+373,far away from,False
+374,over,True
+375,facing,True
+376,at the edge of,False
+377,surrounding,True
+378,beside,False
+379,touching,True
+380,at the left side of,True
+381,behind,False
+382,facing away from,True
+383,touching,False
+384,touching,False
+385,facing,False
+386,on,True
+387,on top of,True
+388,far from,False
+389,left of,True
+390,at the right side of,False
+391,under,True
+392,away from,False
+393,above,True
+394,parallel to,False
+395,under,False
+396,under,True
+397,in front of,True
+398,in the middle of,True
+399,in front of,False
+400,above,True
+401,behind,True
+402,on,False
+403,in front of,True
+404,at the right side of,False
+405,part of,False
+406,at the back of,False
+407,part of,False
+408,in front of,True
+409,touching,True
+410,facing,False
+411,touching,True
+412,above,False
+413,under,True
+414,in,True
+415,beside,False
+416,touching,True
+417,on top of,True
+418,over,True
+419,over,False
+420,in front of,False
+421,in front of,True
+422,touching,True
+423,near,False
+424,facing,True
+425,alongside,True
+426,perpendicular to,False
+427,in,True
+428,far away from,True
+429,opposite to,False
+430,touching,True
+431,beneath,True
+432,touching,False
+433,touching,False
+434,behind,True
+435,touching,False
+436,beneath,True
+437,inside,True
+438,opposite to,True
+439,facing away from,False
+440,above,False
+441,attached to,True
+442,on top of,True
+443,on,False
+444,on,True
+445,contains,True
+446,behind,True
+447,under,False
+448,touching,True
+449,on top of,False
+450,alongside,False
+451,touching,False
+452,on top of,True
+453,touching,True
+454,far away from,True
+455,touching,False
+456,opposite to,False
+457,under,False
+458,touching,True
+459,on,False
+460,next to,False
+461,touching,True
+462,touching,False
+463,on top of,True
+464,behind,True
+465,touching,False
+466,beneath,False
+467,behind,True
+468,in front of,True
+469,in front of,False
+470,at the right side of,False
+471,in front of,True
+472,in front of,True
+473,next to,True
+474,at the left side of,False
+475,touching,True
+476,in front of,True
+477,touching,True
+478,touching,False
+479,touching,True
+480,at the back of,False
+481,on top of,True
+482,behind,True
+483,right of,False
+484,toward,False
+485,at the right side of,True
+486,on,True
+487,behind,True
+488,touching,False
+489,near,True
+490,consists of,False
+491,at the left side of,True
+492,beneath,True
+493,on top of,True
+494,at the left side of,True
+495,in front of,True
+496,touching,True
+497,touching,True
+498,in,True
+499,beneath,False
+500,consists of,False
+501,down from,True
+502,on top of,True
+503,in the middle of,True
+504,behind,True
+505,close to,False
+506,touching,False
+507,on top of,True
+508,parallel to,False
+509,touching,True
+510,in front of,False
+511,on,False
+512,in,False
+513,facing,True
+514,contains,False
+515,touching,True
+516,above,False
+517,contains,False
+518,in front of,True
+519,on top of,True
+520,at the right side of,False
+521,beneath,False
+522,under,False
+523,facing,False
+524,in front of,False
+525,over,False
+526,on top of,True
+527,in,True
+528,touching,True
+529,outside,True
+530,behind,True
+531,on top of,False
+532,touching,False
+533,touching,True
+534,on,True
+535,touching,False
+536,part of,True
+537,touching,True
+538,left of,True
+539,adjacent to,True
+540,in the middle of,False
+541,on top of,False
+542,inside,False
+543,along,True
+544,parallel to,False
+545,right of,True
+546,inside,False
+547,inside,False
+548,left of,True
+549,far away from,False
+550,next to,False
+551,touching,True
+552,behind,True
+553,right of,True
+554,at the back of,True
+555,over,True
+556,at the back of,True
+557,behind,True
+558,facing away from,True
+559,under,True
+560,far away from,False
+561,surrounding,False
+562,on top of,True
+563,beneath,False
+564,facing away from,True
+565,perpendicular to,False
+566,far away from,True
+567,adjacent to,True
+568,touching,True
+569,on,False
+570,at the right side of,False
+571,toward,False
+572,touching,False
+573,outside,False
+574,at the left side of,True
+575,beneath,False
+576,below,True
+577,at the side of,True
+578,touching,True
+579,on,True
+580,far away from,False
+581,under,True
+582,facing,False
+583,in front of,True
+584,contains,False
+585,left of,False
+586,detached from,False
+587,contains,True
+588,touching,True
+589,across from,True
+590,near,True
+591,touching,False
+592,touching,True
+593,under,True
+594,facing,False
+595,in front of,True
+596,under,False
+597,contains,False
+598,next to,False
+599,beneath,True
+600,in front of,True
+601,on,False
+602,below,True
+603,touching,True
+604,by,True
+605,by,True
+606,above,True
+607,attached to,True
+608,behind,True
+609,alongside,True
+610,touching,True
+611,touching,False
+612,left of,False
+613,above,True
+614,opposite to,False
+615,on,False
+616,at the left side of,False
+617,parallel to,False
+618,at the left side of,True
+619,inside,True
+620,away from,False
+621,at the left side of,False
+622,touching,True
+623,into,True
+624,under,True
+625,touching,True
+626,touching,False
+627,next to,True
+628,beneath,False
+629,under,False
+630,at the left side of,False
+631,across from,False
+632,above,True
+633,adjacent to,True
+634,into,True
+635,beyond,True
+636,far from,True
+637,on,True
+638,behind,False
+639,over,True
+640,outside,True
+641,touching,True
+642,left of,False
+643,has as a part,False
+644,on,False
+645,at the right side of,True
+646,near,True
+647,by,True
+648,beneath,True
+649,on,True
+650,in the middle of,False
+651,behind,False
+652,part of,False
+653,in front of,True
+654,touching,False
+655,at the edge of,True
+656,behind,True
+657,facing,True
+658,on top of,True
+659,in front of,True
+660,on top of,False
+661,contains,False
+662,touching,True
+663,next to,True
+664,touching,True
+665,on,False
+666,in front of,False
+667,touching,False
+668,close to,True
+669,contains,True
+670,far away from,False
+671,behind,True
+672,at the left side of,True
+673,next to,True
+674,under,True
+675,on,True
+676,parallel to,True
+677,touching,True
+678,in front of,True
+679,at the right side of,False
+680,touching,True
+681,behind,True
+682,at the left side of,False
+683,beside,True
+684,next to,True
+685,far away from,True
+686,on top of,True
+687,in,False
+688,far away from,False
+689,at the right side of,False
+690,in front of,False
+691,away from,True
+692,in,True
+693,above,True
+694,touching,True
+695,at the back of,True
+696,close to,True
+697,left of,True
+698,at the left side of,True
+699,under,False
+700,behind,True
+701,above,False
+702,in front of,True
+703,on,False
+704,at the left side of,False
+705,at the left side of,True
+706,contains,False
+707,next to,True
+708,touching,True
+709,connected to,True
+710,touching,True
+711,at the left side of,True
+712,at the left side of,True
+713,beneath,False
+714,right of,False
+715,touching,False
+716,on,True
+717,left of,False
+718,on,True
+719,far from,True
+720,in front of,True
+721,at the left side of,False
+722,contains,False
+723,behind,True
+724,on,True
+725,toward,True
+726,right of,False
+727,under,False
+728,perpendicular to,False
+729,surrounding,True
+730,next to,False
+731,toward,False
+732,right of,True
+733,behind,True
+734,inside,True
+735,in front of,False
+736,away from,False
+737,left of,False
+738,facing,True
+739,facing,True
+740,contains,True
+741,at the left side of,False
+742,across,False
+743,part of,False
+744,touching,False
+745,touching,True
+746,below,False
+747,on top of,True
+748,next to,True
+749,below,True
+750,on top of,False
+751,in front of,True
+752,under,False
+753,in,False
+754,in front of,True
+755,on,True
+756,facing,True
+757,facing away from,False
+758,near,True
+759,behind,True
+760,touching,True
+761,under,False
+762,at the right side of,True
+763,at the edge of,True
+764,touching,True
+765,next to,False
+766,far away from,False
+767,contains,True
+768,touching,False
+769,on top of,False
+770,beneath,False
+771,beside,True
+772,in front of,True
+773,down from,True
+774,surrounding,True
+775,against,True
+776,in,False
+777,part of,False
+778,touching,True
+779,has as a part,False
+780,parallel to,True
+781,beside,False
+782,into,True
+783,touching,False
+784,under,False
+785,touching,False
+786,next to,True
+787,on top of,True
+788,into,False
+789,on,False
+790,far away from,True
+791,inside,False
+792,inside,False
+793,in,True
+794,adjacent to,False
+795,below,True
+796,in front of,True
+797,below,True
+798,at the left side of,False
+799,by,True
+800,touching,False
+801,has as a part,False
+802,at the left side of,False
+803,above,False
+804,in front of,True
+805,facing,False
+806,inside,True
+807,touching,False
+808,touching,True
+809,next to,False
+810,surrounding,True
+811,consists of,False
+812,touching,True
+813,below,False
+814,left of,False
+815,at the back of,False
+816,left of,False
+817,behind,False
+818,at the back of,False
+819,left of,True
+820,off,True
+821,left of,True
+822,far away from,False
+823,on,False
+824,next to,False
+825,in,False
+826,on top of,False
+827,far from,False
+828,on,False
+829,in,False
+830,contains,False
+831,above,False
+832,in front of,False
+833,at the left side of,True
+834,perpendicular to,False
+835,at the edge of,True
+836,at the right side of,False
+837,under,True
+838,touching,False
+839,above,False
+840,under,False
+841,on,False
+842,behind,False
+843,in front of,False
+844,in front of,True
+845,part of,False
+846,behind,True
+847,close to,True
+848,adjacent to,True
+849,near,True
+850,on,False
+851,away from,False
+852,touching,True
+853,behind,True
+854,close to,False
+855,in front of,False
+856,next to,True
+857,behind,True
+858,facing away from,False
+859,facing,False
+860,facing,False
+861,behind,True
+862,far away from,False
+863,behind,False
+864,touching,False
+865,at the left side of,False
+866,left of,False
+867,below,False
+868,facing away from,True
+869,on top of,True
+870,beside,True
+871,next to,True
+872,at the left side of,True
+873,under,True
+874,in,True
+875,at the left side of,False
+876,on top of,False
+877,surrounding,True
+878,at the right side of,False
+879,touching,False
+880,on top of,False
+881,touching,True
+882,contains,False
+883,far away from,False
+884,on,False
+885,on top of,True
+886,in front of,True
+887,on top of,True
+888,left of,False
+889,along,True
+890,away from,False
+891,close to,True
+892,above,False
+893,on,False
+894,behind,True
+895,behind,True
+896,touching,False
+897,in front of,False
+898,at the left side of,False
+899,part of,True
+900,at the right side of,True
+901,in front of,True
+902,under,True
+903,contains,True
+904,beyond,True
+905,on,False
+906,in,False
+907,inside,True
+908,surrounding,False
+909,in front of,True
+910,at the right side of,False
+911,facing away from,False
+912,right of,True
+913,outside,False
+914,touching,True
+915,beneath,True
+916,behind,True
+917,at the left side of,True
+918,on top of,True
+919,behind,True
+920,left of,False
+921,above,False
+922,on,False
+923,on top of,True
+924,at the left side of,True
+925,below,False
+926,near,True
+927,touching,True
+928,next to,False
+929,inside,True
+930,near,True
+931,off,True
+932,above,True
+933,in front of,True
+934,parallel to,False
+935,over,False
+936,in,False
+937,perpendicular to,True
+938,behind,True
+939,beside,False
+940,touching,False
+941,surrounding,True
+942,touching,True
+943,at the right side of,True
+944,far from,False
+945,below,True
+946,over,True
+947,at the left side of,False
+948,on top of,True
+949,behind,True
+950,close to,True
+951,behind,True
+952,above,True
+953,on top of,False
+954,at the right side of,False
+955,above,False
+956,left of,True
+957,next to,False
+958,at the right side of,False
+959,facing away from,False
+960,at the back of,False
+961,in the middle of,True
+962,at the left side of,False
+963,below,True
+964,beside,False
+965,at the right side of,True
+966,at the left side of,True
+967,in front of,True
+968,contains,True
+969,beneath,True
+970,left of,False
+971,attached to,False
+972,on top of,True
+973,contains,True
+974,below,False
+975,inside,True
+976,touching,True
+977,behind,True
+978,far away from,True
+979,behind,False
+980,under,True
+981,under,True
+982,at the edge of,True
+983,in,True
+984,parallel to,True
+985,over,False
+986,facing,True
+987,in front of,True
+988,contains,True
+989,at the left side of,False
+990,on top of,False
+991,within,True
+992,next to,True
+993,in front of,False
+994,on,False
+995,under,True
+996,behind,True
+997,touching,True
+998,next to,True
+999,in front of,True
+1000,at the edge of,True
+1001,behind,True
+1002,in front of,False
+1003,on,True
+1004,beside,True
+1005,in the middle of,True
+1006,above,True
+1007,next to,True
+1008,on top of,False
+1009,adjacent to,True
+1010,under,False
+1011,above,True
+1012,beneath,False
+1013,at the edge of,False
+1014,at the right side of,False
+1015,above,True
+1016,beside,False
+1017,under,True
+1018,facing away from,False
+1019,facing,True
+1020,parallel to,True
+1021,surrounding,True
+1022,adjacent to,True
+1023,far from,False
+1024,at the left side of,False
+1025,at the left side of,True
+1026,at the right side of,False
+1027,inside,False
+1028,touching,True
+1029,on top of,True
+1030,ahead of,True
+1031,on,True
+1032,on,False
+1033,touching,True
+1034,next to,True
+1035,parallel to,False
+1036,behind,False
+1037,behind,True
+1038,in front of,False
+1039,at the left side of,True
+1040,touching,True
+1041,in front of,False
+1042,facing away from,True
+1043,below,False
+1044,in front of,True
+1045,behind,True
+1046,at the right side of,True
+1047,by,True
+1048,touching,True
+1049,in front of,False
+1050,touching,True
+1051,in front of,True
+1052,at the left side of,False
+1053,touching,True
+1054,in front of,True
+1055,touching,True
+1056,touching,True
+1057,at the right side of,True
+1058,inside,False
+1059,above,True
+1060,in front of,True
+1061,on,False
+1062,next to,True
+1063,under,True
+1064,under,True
+1065,by,True
+1066,touching,False
+1067,at the right side of,True
+1068,behind,True
+1069,far from,False
+1070,under,True
+1071,touching,True
+1072,far from,False
+1073,contains,True
+1074,touching,False
+1075,beside,False
+1076,under,True
+1077,behind,True
+1078,facing,False
+1079,near,True
+1080,below,True
+1081,at the right side of,False
+1082,touching,True
+1083,on,False
+1084,on,False
+1085,behind,True
+1086,beside,True
+1087,touching,False
+1088,under,True
+1089,inside,True
+1090,at the right side of,False
+1091,touching,True
+1092,on,True
+1093,facing away from,True
+1094,right of,True
+1095,away from,True
+1096,attached to,False
+1097,touching,True
+1098,above,True
+1099,under,False
+1100,at the right side of,True
+1101,touching,True
+1102,touching,True
+1103,at the left side of,True
+1104,left of,True
+1105,in,True
+1106,touching,False
+1107,in front of,True
+1108,next to,True
+1109,under,True
+1110,on,False
+1111,behind,False
+1112,touching,True
+1113,on top of,True
+1114,at the right side of,True
+1115,away from,False
+1116,below,False
+1117,under,False
+1118,far from,False
+1119,behind,True
+1120,away from,False
+1121,at the left side of,True
+1122,beside,False
+1123,under,False
+1124,below,True
+1125,alongside,True
+1126,touching,True
+1127,behind,True
+1128,next to,False
+1129,far away from,False
+1130,touching,True
+1131,detached from,True
+1132,facing,True
+1133,behind,True
+1134,close to,True
+1135,behind,False
+1136,below,True
+1137,under,True
+1138,in the middle of,True
+1139,above,True
+1140,on,True
+1141,touching,False
+1142,at the edge of,False
+1143,under,True
+1144,far away from,False
+1145,touching,False
+1146,beyond,True
+1147,under,True
+1148,touching,True
+1149,below,True
+1150,away from,False
+1151,at the left side of,True
+1152,above,True
+1153,touching,True
+1154,beneath,True
+1155,at the right side of,True
+1156,in front of,True
+1157,at the right side of,False
+1158,facing,True
+1159,inside,True
+1160,under,True
+1161,in the middle of,False
+1162,on top of,True
+1163,touching,True
+1164,in front of,True
+1165,in front of,True
+1166,across,False
+1167,facing away from,True
+1168,at the right side of,True
+1169,on top of,False
+1170,in front of,True
+1171,at the edge of,True
+1172,under,True
+1173,in front of,True
+1174,near,True
+1175,touching,True
+1176,in front of,False
+1177,on top of,True
+1178,parallel to,True
+1179,at the right side of,True
+1180,at the left side of,False
+1181,on,False
+1182,below,False
+1183,left of,True
+1184,touching,False
+1185,touching,False
+1186,under,False
+1187,off,False
+1188,touching,True
+1189,in,True
+1190,touching,True
+1191,over,True
+1192,above,False
+1193,far from,False
+1194,in front of,True
+1195,left of,False
+1196,behind,False
+1197,under,True
+1198,at the back of,True
+1199,touching,True
+1200,on top of,False
+1201,on,True
+1202,facing,True
+1203,behind,True
+1204,at the left side of,False
+1205,next to,True
+1206,on,False
+1207,beneath,True
+1208,touching,False
+1209,touching,False
+1210,at the left side of,False
+1211,behind,True
+1212,around,True
+1213,far away from,False
+1214,has as a part,True
+1215,on top of,True
+1216,next to,True
+1217,on top of,True
+1218,under,False
+1219,facing away from,True
+1220,far away from,False
+1221,touching,True
+1222,right of,True
+1223,on,True
+1224,touching,True
+1225,under,True
+1226,at the right side of,True
+1227,below,False
+1228,far away from,False
+1229,above,False
+1230,at the right side of,True
+1231,at the left side of,True
+1232,next to,True
+1233,left of,True
+1234,facing,False
+1235,at the back of,True
+1236,on top of,True
+1237,beyond,False
+1238,at the edge of,True
+1239,below,True
+1240,beneath,False
+1241,under,True
+1242,beside,True
+1243,facing,False
+1244,behind,True
+1245,behind,True
+1246,at the left side of,False
+1247,on top of,False
+1248,next to,True
+1249,has as a part,True
+1250,down from,False
+1251,behind,True
+1252,beside,False
+1253,behind,False
+1254,in front of,True
+1255,touching,True
+1256,at the right side of,True
+1257,on,False
+1258,at the edge of,True
+1259,far away from,True
+1260,at the right side of,False
+1261,below,True
+1262,next to,False
+1263,at the back of,True
+1264,at the left side of,False
+1265,by,True
+1266,facing away from,True
+1267,inside,False
+1268,across from,False
+1269,across from,False
+1270,surrounding,True
+1271,above,True
+1272,at the left side of,False
+1273,behind,False
+1274,at the left side of,False
+1275,next to,True
+1276,next to,True
+1277,touching,True
+1278,on,True
+1279,behind,True
+1280,beneath,True
+1281,at the left side of,True
+1282,at the edge of,True
+1283,near,True
+1284,next to,True
+1285,at the left side of,True
+1286,under,True
+1287,on top of,True
+1288,far away from,False
+1289,contains,False
+1290,in front of,True
+1291,in,True
+1292,adjacent to,True
+1293,inside,False
+1294,beside,True
+1295,at the left side of,True
+1296,facing away from,True
+1297,beneath,True
+1298,behind,True
+1299,left of,True
+1300,touching,True
+1301,near,True
+1302,below,False
+1303,at the edge of,True
+1304,in front of,True
+1305,at the left side of,True
+1306,in front of,True
+1307,left of,True
+1308,facing,False
+1309,on,True
+1310,touching,False
+1311,part of,False
+1312,facing away from,True
+1313,on,True
+1314,on top of,True
+1315,touching,True
+1316,touching,False
+1317,at the left side of,False
+1318,on top of,False
+1319,off,False
+1320,above,True
+1321,above,False
+1322,at the left side of,False
+1323,above,True
+1324,contains,False
+1325,below,True
+1326,in front of,False
+1327,under,True
+1328,at the left side of,False
+1329,facing,False
+1330,in,False
+1331,far away from,False
+1332,beneath,True
+1333,behind,True
+1334,at the right side of,False
+1335,under,False
+1336,adjacent to,False
+1337,beside,False
+1338,facing,False
+1339,on top of,False
+1340,near,False
+1341,near,False
+1342,facing,True
+1343,part of,True
+1344,behind,False
+1345,at the left side of,False
+1346,touching,False
+1347,on top of,True
+1348,under,True
+1349,beneath,False
+1350,left of,False
+1351,above,True
+1352,below,True
+1353,at the left side of,False
+1354,on,True
+1355,away from,False
+1356,at the left side of,True
+1357,in front of,False
+1358,at the left side of,False
+1359,touching,False
+1360,in,False
+1361,next to,False
+1362,behind,False
+1363,beyond,False
+1364,left of,True
+1365,in front of,False
+1366,away from,True
+1367,at the right side of,False
+1368,above,False
+1369,facing,False
+1370,right of,False
+1371,adjacent to,False
+1372,in,True
+1373,touching,False
+1374,touching,False
+1375,facing away from,True
+1376,facing,True
+1377,touching,True
+1378,ahead of,True
+1379,beneath,True
+1380,parallel to,False
+1381,beneath,False
+1382,attached to,True
+1383,left of,True
+1384,parallel to,False
+1385,touching,True
+1386,at the left side of,True
+1387,above,True
+1388,under,True
+1389,below,False
+1390,in front of,True
+1391,at the left side of,True
+1392,left of,True
+1393,beside,True
+1394,below,True
+1395,in front of,False
+1396,under,True
+1397,beside,True
+1398,touching,True
+1399,at the edge of,False
+1400,facing away from,False
+1401,outside,False
+1402,touching,True
+1403,on,True
+1404,on top of,False
+1405,facing,False
+1406,opposite to,True
+1407,touching,False
+1408,at the back of,False
+1409,below,True
+1410,against,True
+1411,in front of,True
+1412,far from,True
+1413,on top of,False
+1414,at the left side of,False
+1415,below,True
+1416,by,True
+1417,on top of,True
+1418,contains,True
+1419,in the middle of,True
+1420,behind,True
+1421,off,False
+1422,next to,False
+1423,over,True
+1424,behind,True
+1425,beneath,False
+1426,behind,True
+1427,above,False
+1428,in front of,True
+1429,behind,False
+1430,in front of,True
+1431,above,True
+1432,away from,False
+1433,under,True
+1434,behind,False
+1435,on,False
+1436,connected to,True
+1437,at the left side of,True
+1438,on,False
+1439,under,True
+1440,right of,False
+1441,behind,False
+1442,touching,True
+1443,on top of,False
+1444,below,False
+1445,behind,False
+1446,contains,True
+1447,behind,True
+1448,in front of,False
+1449,touching,False
+1450,facing,True
+1451,at the edge of,False
+1452,in front of,True
+1453,under,False
+1454,at the left side of,False
+1455,touching,False
+1456,below,True
+1457,facing,True
+1458,in front of,False
+1459,above,False
+1460,next to,True
+1461,contains,False
+1462,under,True
+1463,touching,False
+1464,above,False
+1465,outside,False
+1466,detached from,False
+1467,behind,True
+1468,on,True
+1469,behind,False
+1470,behind,True
+1471,on,True
+1472,far away from,False
+1473,touching,False
+1474,touching,True
+1475,touching,False
+1476,contains,True
+1477,contains,False
+1478,on top of,True
+1479,behind,True
+1480,next to,False
+1481,above,False
+1482,next to,True
+1483,in,False
+1484,over,False
+1485,under,False
+1486,at the left side of,True
+1487,on,True
+1488,on top of,True
+1489,on,False
+1490,facing away from,True
+1491,touching,True
+1492,touching,True
+1493,at the back of,True
+1494,at the right side of,True
+1495,next to,False
+1496,behind,False
+1497,contains,True
+1498,below,False
+1499,at the left side of,True
+1500,in front of,True
+1501,at the right side of,True
+1502,behind,False
+1503,contains,True
+1504,contains,True
+1505,close to,False
+1506,right of,True
+1507,at the right side of,False
+1508,touching,False
+1509,far from,True
+1510,at the left side of,True
+1511,right of,True
+1512,at the right side of,False
+1513,on top of,False
+1514,connected to,False
+1515,on top of,True
+1516,in,False
+1517,under,False
+1518,by,True
+1519,touching,True
+1520,on,True
+1521,far away from,True
+1522,far away from,False
+1523,on,False
+1524,touching,True
+1525,over,True
+1526,contains,False
+1527,on,True
+1528,at the right side of,True
+1529,behind,True
+1530,on top of,False
+1531,touching,True
+1532,on,False
+1533,contains,True
+1534,in the middle of,True
+1535,inside,False
+1536,touching,False
+1537,by,False
+1538,touching,True
+1539,touching,True
+1540,below,False
+1541,contains,True
+1542,in front of,True
+1543,behind,False
+1544,on,True
+1545,left of,False
+1546,touching,True
+1547,behind,False
+1548,surrounding,True
+1549,close to,False
+1550,at the edge of,True
+1551,across from,False
+1552,over,True
+1553,under,True
+1554,below,False
+1555,at the back of,True
+1556,in,False
+1557,at the left side of,False
+1558,opposite to,False
+1559,facing,True
+1560,next to,True
+1561,far away from,False
+1562,on,True
+1563,behind,True
+1564,below,False
+1565,at the right side of,True
+1566,in,False
+1567,on top of,False
+1568,below,False
+1569,contains,True
+1570,in,True
+1571,in,False
+1572,behind,False
+1573,far away from,False
+1574,beneath,True
+1575,in front of,True
+1576,below,False
+1577,touching,True
+1578,at the right side of,True
+1579,beneath,True
+1580,far away from,False
+1581,touching,True
+1582,ahead of,True
+1583,contains,False
+1584,touching,True
+1585,above,False
+1586,under,False
+1587,on top of,True
+1588,touching,False
+1589,in,True
+1590,at the back of,True
+1591,behind,False
+1592,facing away from,False
+1593,at the back of,True
+1594,in the middle of,False
+1595,on top of,False
+1596,inside,False
+1597,on,False
+1598,beneath,True
+1599,in front of,True
+1600,in,True
+1601,inside,False
+1602,in,True
+1603,away from,False
+1604,in front of,True
+1605,touching,False
+1606,touching,True
+1607,beside,True
+1608,parallel to,True
+1609,touching,False
+1610,with,True
+1611,facing,True
+1612,behind,True
+1613,next to,False
+1614,under,False
+1615,in,True
+1616,behind,False
+1617,facing,True
+1618,in front of,True
+1619,far away from,False
+1620,beneath,True
+1621,on,False
+1622,touching,False
+1623,in front of,True
+1624,at the edge of,True
+1625,at the right side of,True
+1626,far from,True
+1627,under,True
+1628,behind,True
+1629,on top of,False
+1630,behind,False
+1631,contains,True
+1632,behind,True
+1633,right of,True
+1634,behind,True
+1635,adjacent to,True
+1636,touching,True
+1637,by,True
+1638,at the left side of,False
+1639,behind,True
+1640,in,True
+1641,beneath,True
+1642,under,True
+1643,in front of,True
+1644,at the left side of,False
+1645,at the side of,True
+1646,at the right side of,True
+1647,contains,False
+1648,inside,True
+1649,surrounding,False
+1650,facing,False
+1651,behind,False
+1652,below,False
+1653,touching,True
+1654,behind,False
+1655,right of,False
+1656,touching,True
+1657,on,False
+1658,next to,False
+1659,under,True
+1660,in the middle of,False
+1661,across from,True
+1662,parallel to,True
+1663,perpendicular to,True
+1664,in front of,False
+1665,in front of,False
+1666,at the left side of,True
+1667,behind,False
+1668,on top of,False
+1669,away from,True
+1670,next to,False
+1671,above,False
+1672,behind,True
+1673,left of,False
+1674,on,True
+1675,behind,True
+1676,below,True
+1677,inside,True
+1678,at the back of,True
+1679,touching,False
+1680,on,True
+1681,touching,True
+1682,perpendicular to,False
+1683,behind,False
+1684,touching,False
+1685,under,True
+1686,under,True
+1687,behind,True
+1688,on top of,True
+1689,far away from,False
+1690,near,False
+1691,away from,False
+1692,in front of,True
+1693,at the right side of,False
+1694,contains,True
+1695,behind,True
+1696,on top of,False
+1697,under,True
+1698,at the right side of,False
+1699,touching,True
+1700,off,False
+1701,behind,False
+1702,off,True
+1703,at the left side of,False
+1704,right of,False
+1705,away from,False
+1706,above,False
+1707,below,False
+1708,under,False
+1709,within,False
+1710,under,True
+1711,in front of,True
+1712,left of,True
+1713,beneath,True
+1714,touching,True
+1715,away from,False
+1716,off,False
+1717,at the side of,False
+1718,by,True
+1719,over,False
+1720,under,False
+1721,on,False
+1722,on,True
+1723,next to,True
+1724,touching,False
+1725,touching,True
+1726,touching,False
+1727,near,True
+1728,touching,False
+1729,in front of,True
+1730,above,True
+1731,away from,False
+1732,touching,False
+1733,on,True
+1734,into,True
+1735,far from,False
+1736,toward,False
+1737,touching,True
+1738,far from,False
+1739,touching,True
+1740,over,True
+1741,at the left side of,False
+1742,in front of,True
+1743,on,True
+1744,contains,False
+1745,touching,True
+1746,surrounding,False
+1747,at the left side of,True
+1748,in front of,False
+1749,beneath,True
+1750,close to,True
+1751,over,True
+1752,surrounding,True
+1753,in front of,False
+1754,near,False
+1755,touching,True
+1756,surrounding,True
+1757,on,False
+1758,beneath,True
+1759,under,True
+1760,facing,False
+1761,next to,True
+1762,behind,False
+1763,behind,False
+1764,in front of,True
+1765,beneath,True
+1766,in,False
+1767,left of,True
+1768,close to,False
+1769,touching,True
+1770,at the edge of,False
+1771,within,False
+1772,in front of,True
+1773,facing away from,False
+1774,in,False
+1775,perpendicular to,False
+1776,under,True
+1777,under,False
+1778,above,False
+1779,under,False
+1780,contains,True
+1781,in the middle of,False
+1782,contains,True
+1783,on,False
+1784,at the edge of,True
+1785,touching,False
+1786,behind,True
+1787,on top of,False
+1788,across from,True
+1789,touching,False
+1790,inside,False
+1791,at the left side of,False
+1792,facing,True
+1793,next to,True
+1794,above,True
+1795,at the left side of,False
+1796,in front of,True
+1797,under,False
+1798,connected to,True
+1799,above,True
+1800,beneath,True
+1801,under,False
+1802,on top of,False
+1803,in front of,True
+1804,against,True
+1805,contains,True
+1806,under,False
+1807,across from,True
+1808,inside,False
+1809,touching,True
+1810,facing,False
+1811,behind,False
+1812,behind,False
+1813,in front of,False
+1814,touching,True
+1815,parallel to,True
+1816,facing,False
+1817,on,False
+1818,at the left side of,True
+1819,touching,True
+1820,under,False
+1821,in the middle of,True
+1822,facing,False
+1823,on,True
+1824,in,True
+1825,above,False
+1826,at the left side of,True
+1827,on,True
+1828,next to,True
+1829,at the right side of,True
+1830,touching,False
+1831,touching,True
+1832,in,False
+1833,at the right side of,True
+1834,in front of,False
+1835,in front of,False
+1836,contains,True
+1837,far from,False
+1838,outside,False
+1839,perpendicular to,False
+1840,contains,True
+1841,touching,False
+1842,on,False
+1843,in,False
+1844,under,False
+1845,below,True
+1846,at the edge of,True
+1847,far away from,False
+1848,below,True
+1849,beside,False
+1850,far away from,False
+1851,on top of,False
+1852,touching,True
+1853,under,False
+1854,touching,True
+1855,in front of,True
+1856,behind,True
+1857,far from,False
+1858,at the side of,False
+1859,beside,True
+1860,at the left side of,True
+1861,in front of,False
+1862,away from,False
+1863,below,True
+1864,in,True
+1865,at the right side of,True
+1866,behind,True
+1867,touching,False
+1868,off,False
+1869,in front of,True
+1870,above,False
+1871,away from,False
+1872,into,False
+1873,under,True
+1874,contains,False
+1875,on top of,False
+1876,right of,True
+1877,facing,True
+1878,in,True
+1879,touching,False
+1880,touching,True
+1881,in front of,True
+1882,beneath,True
+1883,under,False
+1884,part of,False
+1885,contains,False
+1886,on,True
+1887,touching,True
+1888,over,False
+1889,below,False
+1890,behind,False
+1891,touching,True
+1892,inside,False
+1893,facing,False
+1894,contains,False
+1895,touching,True
+1896,under,False
+1897,at the right side of,True
+1898,across from,False
+1899,in the middle of,True
+1900,behind,True
+1901,touching,False
+1902,has as a part,True
+1903,over,True
+1904,close to,False
+1905,facing,False
+1906,contains,False
+1907,off,False
+1908,surrounding,False
+1909,in front of,False
+1910,facing away from,False
+1911,facing away from,True
+1912,touching,False
+1913,touching,True
+1914,touching,True
+1915,behind,True
+1916,on,True
+1917,attached to,True
+1918,touching,True
+1919,attached to,True
+1920,behind,True
+1921,touching,True
+1922,beside,False
+1923,under,True
+1924,touching,True
+1925,at the edge of,False
+1926,behind,False
+1927,on,False
+1928,facing,False
+1929,on,True
+1930,far from,True
+1931,under,True
+1932,on,False
+1933,above,True
+1934,facing,True
+1935,behind,True
+1936,part of,True
+1937,at the right side of,True
+1938,touching,True
+1939,facing away from,True
+1940,under,True
+1941,next to,True
+1942,parallel to,True
+1943,with,False
+1944,opposite to,True
+1945,in,True
+1946,in,True
+1947,touching,True
+1948,far away from,True
+1949,facing,True
+1950,contains,True
+1951,at the left side of,True
+1952,next to,True
+1953,facing away from,False
+1954,at the left side of,True
+1955,on,True
+1956,at the right side of,True
+1957,at the right side of,True
+1958,in front of,False
+1959,at the back of,True
+1960,beneath,True
+1961,above,True
+1962,right of,False
+1963,left of,True
+1964,on,False
+1965,in front of,False
+1966,down from,True
+1967,ahead of,True
+1968,below,False
+1969,close to,False
+1970,inside,True
+1971,at the right side of,True
+1972,under,True
+1973,outside,False
+1974,toward,True
+1975,beside,True
+1976,beneath,True
+1977,on,True
+1978,at the left side of,True
+1979,on,True
+1980,on,False
+1981,in,True
+1982,on top of,True
+1983,on top of,True
+1984,at the back of,True
+1985,below,False
+1986,behind,True
+1987,close to,False
+1988,far from,False
+1989,on,True
+1990,behind,False
+1991,out of,False
+1992,across,False
+1993,in front of,False
+1994,close to,True
+1995,under,True
+1996,in,True
+1997,facing away from,True
+1998,away from,False
+1999,facing,True
+2000,facing away from,False
+2001,below,False
+2002,on top of,True
+2003,ahead of,True
+2004,touching,True
+2005,beneath,True
+2006,left of,True
+2007,below,True
+2008,behind,False
+2009,parallel to,True
+2010,in,False
+2011,alongside,False
+2012,at the left side of,False
+2013,next to,False
+2014,on,True
+2015,facing away from,False
+2016,on,True
+2017,on top of,True
+2018,in the middle of,True
+2019,on,False
+2020,touching,True
+2021,on top of,False
+2022,on,False
+2023,behind,True
+2024,at the left side of,False
+2025,at the edge of,True
+2026,contains,False
+2027,left of,True
+2028,behind,False
+2029,contains,False
+2030,under,False
+2031,above,True
+2032,touching,False
+2033,touching,True
+2034,facing away from,False
+2035,part of,True
+2036,at the right side of,True
+2037,below,True
+2038,on,False
+2039,on,True
+2040,at the right side of,False
+2041,below,True
+2042,on top of,True
+2043,touching,True
+2044,touching,False
+2045,touching,False
+2046,touching,False
+2047,touching,True
+2048,right of,True
+2049,on top of,True
+2050,touching,True
+2051,below,False
+2052,on top of,True
+2053,right of,False
+2054,alongside,False
+2055,over,True
+2056,behind,True
+2057,on,False
+2058,away from,False
+2059,perpendicular to,False
+2060,away from,False
+2061,in front of,True
+2062,below,True
+2063,beside,True
+2064,inside,True
+2065,against,True
+2066,at the side of,False
+2067,in front of,True
+2068,left of,True
+2069,touching,False
+2070,beside,True
+2071,outside,False
+2072,in front of,True
+2073,attached to,False
+2074,beneath,True
+2075,on,True
+2076,touching,False
+2077,away from,True
+2078,far away from,False
+2079,behind,False
+2080,under,True
+2081,surrounding,True
+2082,far away from,True
+2083,at the edge of,True
+2084,in front of,False
+2085,at the left side of,True
+2086,touching,False
+2087,near,True
+2088,at the back of,False
+2089,in,True
+2090,far away from,False
+2091,contains,True
+2092,at the right side of,False
+2093,at the edge of,True
+2094,right of,False
+2095,far away from,False
+2096,behind,False
+2097,touching,True
+2098,touching,True
+2099,at the right side of,True
+2100,facing,False
+2101,touching,False
+2102,on top of,True
+2103,behind,True
+2104,touching,True
+2105,under,True
+2106,contains,False
+2107,beside,True
+2108,by,True
+2109,in front of,False
+2110,touching,False
+2111,in front of,False
+2112,attached to,True
+2113,on top of,True
+2114,behind,True
+2115,at the edge of,True
+2116,in front of,True
+2117,right of,True
+2118,on top of,True
+2119,far from,False
+2120,in front of,True
+2121,touching,True
+2122,at the right side of,True
+2123,away from,False
+2124,parallel to,True
+2125,contains,False
+2126,inside,True
+2127,under,True
+2128,at the right side of,False
+2129,beneath,False
+2130,on,False
+2131,near,True
+2132,on top of,False
+2133,in front of,True
+2134,above,True
+2135,behind,True
+2136,touching,False
+2137,into,True
+2138,touching,False
+2139,below,True
+2140,at the right side of,True
+2141,parallel to,False
+2142,touching,True
+2143,on,False
+2144,touching,True
+2145,at the edge of,True
+2146,left of,False
+2147,behind,True
+2148,on top of,True
+2149,right of,True
+2150,far from,False
+2151,facing,False
+2152,touching,False
+2153,in front of,True
+2154,far away from,True
+2155,touching,True
+2156,touching,True
+2157,in,True
+2158,inside,False
+2159,on top of,True
+2160,facing,True
+2161,next to,False
+2162,at the left side of,False
+2163,left of,True
+2164,on top of,False
+2165,facing,True
+2166,touching,False
+2167,right of,False
+2168,touching,False
+2169,right of,False
+2170,at the side of,False
+2171,at the right side of,True
+2172,touching,False
+2173,on,True
+2174,beneath,False
+2175,contains,True
+2176,behind,True
+2177,next to,True
+2178,contains,True
+2179,in,False
+2180,behind,True
+2181,far from,False
+2182,touching,True
+2183,behind,True
+2184,on,False
+2185,touching,False
+2186,at the edge of,False
+2187,in front of,False
+2188,above,True
+2189,facing,False
+2190,in front of,True
+2191,above,False
+2192,by,True
+2193,far away from,False
+2194,close to,True
