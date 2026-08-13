@@ -118,12 +118,13 @@ def train_general_lora(output_dir: str):
                 "labels": labels,
                 "pixel_values": pin.get("pixel_values", None),
                 "image_grid_thw": pin.get("image_grid_thw", None),
+                "mm_token_type_ids": pin.get("mm_token_type_ids", None),
             })
         if not processed:
             return None
         max_len = max(p["input_ids"].shape[0] for p in processed)
         out = {"input_ids": [], "labels": [], "pixel_values": [],
-               "image_grid_thw": []}
+               "image_grid_thw": [], "mm_token_type_ids": []}
         for p in processed:
             ids = p["input_ids"][:max_len]
             labels = p["labels"][:max_len]
@@ -139,6 +140,12 @@ def train_general_lora(output_dir: str):
                 out["pixel_values"].append(pv)
             if p["image_grid_thw"] is not None:
                 out["image_grid_thw"].append(p["image_grid_thw"].squeeze(0))
+            if p["mm_token_type_ids"] is not None:
+                mm = p["mm_token_type_ids"]
+                mm = mm.squeeze(0) if mm.dim() > 1 else mm
+                if mm.shape[0] < max_len:
+                    mm = torch.cat([mm, torch.zeros(max_len - mm.shape[0], dtype=mm.dtype)])
+                out["mm_token_type_ids"].append(mm[:max_len])
         batch = {}
         for k, v in out.items():
             if v:
