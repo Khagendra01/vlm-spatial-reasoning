@@ -1,0 +1,33 @@
+{
+  "hardneg/202": {
+    "overall": 0.8400911161731207,
+    "orientation": 0.6788321167883211,
+    "status": "done",
+    "families": {
+      "containment": 0.8638,
+      "other": 0.8474,
+      "vertical": 0.8521,
+      "orientation": 0.6788,
+      "depth": 0.8261,
+      "horizontal": 0.8705
+    },
+    "ff_consistency": 0.7282
+  },
+  "hardneg/303": {
+    "status": "INCOMPLETE"
+  },
+  "targeted/202": {
+    "overall": 0.833257403189066,
+    "orientation": 0.6277372262773723,
+    "status": "done",
+    "families": {
+      "containment": 0.8638,
+      "other": 0.8488,
+      "vertical": 0.8451,
+      "orientation": 0.6277,
+      "depth": 0.8199,
+      "horizontal": 0.8595
+    },
+    "ff_consistency": 0.6699
+  }
+}

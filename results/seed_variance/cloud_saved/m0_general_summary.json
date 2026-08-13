@@ -1,0 +1,44 @@
+{
+  "general/101": {
+    "overall": 0.8455580865603645,
+    "orientation": 0.6934306569343066,
+    "status": "done",
+    "families": {
+      "containment": 0.892,
+      "other": 0.846,
+      "vertical": 0.8732,
+      "orientation": 0.6934,
+      "depth": 0.8106,
+      "horizontal": 0.8733
+    },
+    "ff_consistency": 0.699
+  },
+  "general/202": {
+    "overall": 0.8387243735763098,
+    "orientation": 0.6423357664233577,
+    "status": "done",
+    "families": {
+      "containment": 0.8732,
+      "other": 0.8474,
+      "vertical": 0.8638,
+      "orientation": 0.6423,
+      "depth": 0.8168,
+      "horizontal": 0.865
+    },
+    "ff_consistency": 0.7087
+  },
+  "general/303": {
+    "overall": 0.8400911161731207,
+    "orientation": 0.6788321167883211,
+    "status": "done",
+    "families": {
+      "containment": 0.8826,
+      "other": 0.8583,
+      "vertical": 0.8474,
+      "orientation": 0.6788,
+      "depth": 0.8075,
+      "horizontal": 0.8595
+    },
+    "ff_consistency": 0.6893
+  }
+}
