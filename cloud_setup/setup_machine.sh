@@ -82,7 +82,7 @@ provision_repo() {
   fi
   git -C "$REPO" sparse-checkout set src scripts configs data \
     results/grounding/protocol results/grounding/analysis results/seed_campaign/battery \
-    cloud_setup requirements.txt .gitignore README.md SPATIAL_REASONING_DECISION_LOG.md \
+    research cloud_setup requirements.txt .gitignore README.md SPATIAL_REASONING_DECISION_LOG.md \
     checkpoints/qwen2vl_7b_general_lora/final \
     checkpoints/qwen2vl_7b_hardneg_lora/final \
     checkpoints/general_lora/final \
