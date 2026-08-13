@@ -105,32 +105,40 @@ overall row depends on it by 2.6\,pp.
 \textbf{External-model protocol: GPT-5.6 Sol and Gemini Spark.}
 \label{app:external}
 Two further external zero-shot models were evaluated on the full 2{,}195-item
-VSR test set with the \textbf{identical frozen prompt}, one image per request,
-the same parser, and the same invalid-counted-wrong policy
+VSR test set with the \textbf{identical frozen prompt}, the same parser, and
+the same invalid-counted-wrong policy
 (\texttt{results/external\_models/external\_vsr\_scores.json}; raw outputs
 committed under \texttt{results/external\_models/raw/}).
-GPT-5.6 Sol (OpenAI; interactive session, 2026-08-12,
-\texttt{gpt56sol\_vsr\_2195.csv}) reached 75.4\% overall and 73.0\% on
-orientation (CI $[65.0, 79.7]$), with orientation above its own depth
+GPT-5.6 Sol (OpenAI) was evaluated through an \textbf{interactive
+tool-mediated vision session} using the frozen VSR prompt: images were
+inspected through separate image-tool operations (batches/contact sheets for
+throughput, individual images reopened where necessary), and complementary
+statements were presented separately; however, the interface does not expose
+or guarantee independent context-isolated provider requests, deterministic
+decoding parameters, or an immutable serving snapshot. We therefore treat
+GPT-5.6 as \emph{external diagnostic evidence} rather than a fully
+reproducible controlled API benchmark. It reached 75.4\% overall and 73.0\%
+on orientation (CI $[65.0, 79.7]$), with orientation above its own depth
 (67.1\%): the relative weakness is not reproduced, although the orientation
-CI still overlaps the controlled models' band. Gemini Spark (Google;
-run \texttt{run\_gemini\_spark\_vsr2195\_001}, 2026-08-12) produced a
-degenerate evaluation: its first pass answered TRUE on 98.6\% of items
-(2{,}165/2{,}195; overall 54.3\%), and its requested redo reused 1{,}315 of
-2{,}195 answers including all 137 orientation verdicts (id-level identity
-verified; orientation 57.7\% in both passes). Gemini's row in
-Table~\ref{tab:vsr-main} (main) therefore reports the v2 numbers as a
+CI still overlaps the controlled models' band.
+Gemini Spark (Google) ran one item per request (run
+\texttt{run\_gemini\_spark\_vsr2195\_v2\_001}, per-item latency recorded,
+2026-08-12) and produced a degenerate evaluation: its first pass answered
+TRUE on 98.6\% of items (2{,}165/2{,}195; overall 54.3\%), and its requested
+redo reused 1{,}315 of 2{,}195 answers including all 137 orientation verdicts
+(id-level identity verified; orientation 57.7\% in both passes). Gemini's row
+in Table~\ref{tab:vsr-main} (main) therefore reports the v2 numbers as a
 degenerate-evaluation finding, not as a capability estimate. Complementary-
 consistency runs on the 696 strict/soft pairs are likewise committed
 (\texttt{gpt56sol\_consistency\_pairs.csv},
-\texttt{gemini\_consistency\_v2.csv}): GPT-5.6 Sol reaches 83.3\% / 91.1\% /
-87.2\% complementary on facing / front-behind / left-right ($n{=}102$ / 314 /
-242 parseable), while Gemini's facing rate is 60.2\% with a flip-True rate of
-exactly 0.0 (0/103) and a 100\% complementary front/behind rate---patterns
-consistent with its defaulting behavior, reported as degenerate. Both
-external evaluations were collected on 2026-08-12; neither provider's serving
-snapshot is guaranteed stable, and GPT's interactive run carries no
-deterministic-decoding guarantee.
+\texttt{gemini\_consistency\_v2.csv}): GPT-5.6 Sol's two statements per pair
+were evaluated in separate passes within the same session, reaching 83.3\% /
+91.1\% / 87.2\% complementary on facing / front-behind / left-right
+($n{=}102$ / 314 / 242 parseable), while Gemini's facing rate is 60.2\% with
+a flip-True rate of exactly 0.0 (0/103) and a 100\% complementary
+front/behind rate---patterns consistent with its defaulting behavior,
+reported as degenerate. Both external evaluations were collected on
+2026-08-12; neither provider's serving snapshot is guaranteed stable.
 
 \textbf{Parsing.} VSR outputs are parsed with an anchored case-insensitive
 regex (\texttt{src/evaluation/parser.py}): strips prefixes
