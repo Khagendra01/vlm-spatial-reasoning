@@ -186,6 +186,13 @@ def parse_tf(text):
 def train(condition, seed, out_dir, max_steps=None):
     with open(MANIFESTS[condition]) as f:
         examples = [json.loads(l) for l in f]
+    # Normalize ids to str: hardneg_train.jsonl mixes int ids (430) with
+    # string ids ("171_hn"), and Dataset.from_list infers a single schema
+    # from the first rows -> ArrowInvalid on the later strings. Ids are only
+    # used for bookkeeping, never in training, so str() is lossless.
+    for ex in examples:
+        if "id" in ex:
+            ex["id"] = str(ex["id"])
     print(f"[seed {seed}] manifest {MANIFESTS[condition]}: {len(examples)} examples", flush=True)
 
     processor = AutoProcessor.from_pretrained(MODEL_NAME)
