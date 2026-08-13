@@ -1,0 +1,69 @@
+example_idx,vsr_id,relation,statement,your_answer,ground_truth,correct
+1,14,perpendicular to,The airplane is perpendicular to the truck.,False,True,False
+3,22,perpendicular to,The teddy bear is perpendicular to the cake.,False,True,False
+5,34,facing away from,The cat is facing away from the toilet.,False,True,False
+7,106,facing away from,The parking meter is facing away from the person.,False,False,True
+9,156,facing away from,The person is facing away from the horse.,False,True,False
+11,171,facing,The teddy bear is facing the cow.,False,True,False
+13,211,facing away from,The bus is facing away from the cow.,True,True,True
+15,230,facing away from,The teddy bear is facing away from the book.,True,False,False
+17,250,facing,The laptop is facing the chair.,False,True,False
+19,356,facing,The dog is facing the boat.,True,True,True
+21,359,facing,The zebra is facing the car.,False,False,True
+23,364,facing,The cat is facing the tv.,False,False,True
+25,382,facing away from,The elephant is facing away from the bus.,True,True,True
+27,394,parallel to,The horse is parallel to the cow.,False,False,True
+29,424,facing,The bed is facing the tv.,False,False,True
+31,439,facing away from,The bench is facing away from the car.,False,False,True
+33,513,facing,The cat is facing the laptop.,False,True,False
+35,544,parallel to,The skateboard is parallel to the couch.,False,True,False
+37,564,facing away from,The sheep is facing away from the person.,True,False,False
+39,582,facing,The banana is facing the cat.,False,False,True
+41,617,parallel to,The bench is parallel to the person.,True,False,False
+43,676,parallel to,The boat is parallel to the truck.,False,True,False
+45,738,facing,The laptop is facing the cat.,False,False,True
+47,756,facing,The person is facing the car.,True,True,True
+49,780,parallel to,The motorcycle is parallel to the bus.,False,False,True
+51,834,perpendicular to,The bus is perpendicular to the car.,False,True,False
+53,859,facing,The cat is facing the sink.,False,False,True
+55,868,facing away from,The person is facing away from the bear.,False,True,False
+57,934,parallel to,The motorcycle is parallel to the car.,True,False,False
+59,959,facing away from,The cat is facing away from the toilet.,False,False,True
+61,986,facing,The dog is facing the cake.,True,True,True
+63,1019,facing,The person is facing the banana.,False,True,False
+65,1035,parallel to,The skateboard is parallel to the couch.,False,False,True
+67,1078,facing,The dog is facing the horse.,True,True,True
+69,1132,facing,The person is facing the book.,True,True,True
+71,1167,facing away from,The dog is facing away from the horse.,True,True,True
+73,1202,facing,The bird is facing the elephant.,False,True,False
+75,1234,facing,The person is facing the refrigerator.,True,False,False
+77,1266,facing away from,The cat is facing away from the bed.,False,True,False
+79,1308,facing,The tv is facing the toilet.,True,False,False
+81,1329,facing,The oven is facing the tv.,True,False,False
+83,1342,facing,The cell phone is facing the person.,False,True,False
+85,1375,facing away from,The cat is facing away from the refrigerator.,True,True,True
+87,1380,parallel to,The train is parallel to the boat.,False,False,True
+89,1400,facing away from,The cat is facing away from the suitcase.,False,True,False
+91,1450,facing,The person is facing the bear.,False,False,True
+93,1490,facing away from,The laptop is facing away from the person.,False,True,False
+95,1592,facing away from,The dog is facing away from the person.,True,False,False
+97,1611,facing,The cat is facing the backpack.,False,True,False
+99,1650,facing,The chair is facing the hot dog.,False,False,True
+101,1663,perpendicular to,The knife is perpendicular to the carrot.,False,False,True
+103,1760,facing,The person is facing the bed.,False,True,False
+105,1775,perpendicular to,The book is perpendicular to the bed.,False,False,True
+107,1810,facing,The bus is facing the dining table.,False,False,True
+109,1816,facing,The book is facing the cat.,True,False,False
+111,1839,perpendicular to,The train is perpendicular to the bus.,True,False,False
+113,1893,facing,The teddy bear is facing the dog.,True,False,False
+115,1910,facing away from,The person is facing away from the toaster.,False,False,True
+117,1928,facing,The umbrella is facing the bed.,False,False,True
+119,1939,facing away from,The person is facing away from the refrigerator.,True,True,True
+121,1949,facing,The cow is facing the dog.,False,True,False
+123,1997,facing away from,The cat is facing away from the toilet.,True,False,False
+125,2000,facing away from,The cat is facing away from the tv.,True,False,False
+127,2015,facing away from,The couch is facing away from the laptop.,True,False,False
+129,2059,perpendicular to,The car is perpendicular to the motorcycle.,False,True,False
+131,2124,parallel to,The motorcycle is parallel to the car.,True,True,True
+133,2151,facing,The bear is facing the person.,True,False,False
+135,2165,facing,The cat is facing the laptop.,False,True,False
