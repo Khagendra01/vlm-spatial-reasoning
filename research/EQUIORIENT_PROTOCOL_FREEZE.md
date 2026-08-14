@@ -278,12 +278,14 @@ and latent group-action learning all exist).
 
 ## B1. Phase-1 scope declaration (explicit, must appear in paper)
 
-> "Phase-1 is a one-seed falsification pilot. The 14-train / 3-held-out-scene
-> design is not final-paper evidence. Success only authorizes a larger
-> multi-seed, larger-independent-scene confirmatory experiment."
+> "Phase-1 is a one-seed falsification pilot. The 10-train / 4-validation /
+> 3-held-out-scene design is not final-paper evidence. Success only
+> authorizes a larger multi-seed, larger-independent-scene confirmatory
+> experiment."
 
-(Note: the corrected freeze uses 10 train / 4 validation / 3 holdout scenes;
-the scope declaration above retains the published protocol wording.)
+(Consistency correction 2026-08-14: wording updated from "14-train /
+3-held-out" to the frozen scene split 10 train / 4 validation / 3 holdout.
+No scientific decision changed.)
 
 ## B2. All six arms share the IDENTICAL answer-path architecture
 
@@ -309,7 +311,8 @@ transformed H/V examples.
 
 output_consistency, latent_invariance, equiorient, wrong_geometry all use
 the SAME predeclared weight grid {0.1, 1.0, 10.0}, the SAME fixed validation
-slice (scene_0010..0013), and the SAME selection rule. NEVER select using
+slice (scene_0010, scene_0011, scene_0012, scene_0013), and the SAME
+selection rule. NEVER select using
 held-out V o H. Wrong-geometry uses the same selected weight as EquiOrient
 (not tuned independently to make it worse).
 

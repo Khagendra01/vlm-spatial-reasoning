@@ -13,9 +13,10 @@ pilot:
   purpose: "falsification and implementation validation, not paper-number optimization"
 
   scope_declaration: >-
-    Phase-1 is a one-seed falsification pilot. The 14-train / 3-held-out-scene
-    design is NOT final-paper evidence. Success only authorizes a larger
-    multi-seed, larger-independent-scene confirmatory experiment.
+    Phase-1 is a one-seed falsification pilot. The 10-train / 4-validation /
+    3-held-out-scene design is NOT final-paper evidence. Success only
+    authorizes a larger multi-seed, larger-independent-scene confirmatory
+    experiment.
 
   # ------------------------------------------------------------------ #
   # BACKBONE (frozen)
@@ -110,9 +111,9 @@ pilot:
     selection_rule: >-
       SAME predeclared grid {0.1, 1.0, 10.0} for output_consistency,
       latent_invariance, equiorient, AND wrong_geometry; selected on the
-      SAME fixed validation slice (scene_0013, see data); NEVER selected
-      using held-out V o H. Wrong-geometry uses the SAME selected weight as
-      EquiOrient (not tuned independently).
+      SAME fixed validation slice (scene_0010, scene_0011, scene_0012,
+      scene_0013); NEVER selected using held-out V o H. Wrong-geometry uses
+      the SAME selected weight as EquiOrient (not tuned independently).
 
   # ------------------------------------------------------------------ #
   # DATA (frozen; from Gate 2 generator)

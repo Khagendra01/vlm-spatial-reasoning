@@ -407,3 +407,25 @@ affected frozen artifacts: equiorient_pilot_freeze.yaml (final), protocol
 Amendment B, qwen3_smoke_test.py (R2).
 
 confirmatory or exploratory: pre-result freeze; no model training.
+
+---
+## 2026-08-14 (cont.) — Pre-GPU documentation/config consistency correction (zero compute)
+
+results already seen? NO (no EquiOrient GPU results exist)
+
+decision: single zero-compute freeze-correction commit per orchestrator:
+- Phase-1 scope wording updated from "14-train / 3-held-out" to
+  "10-train / 4-validation / 3-held-out" in configs/equiorient_pilot_freeze.yaml
+  (scope_declaration) and research/EQUIORIENT_PROTOCOL_FREEZE.md (Amendment
+  B1 quote).
+- Structural-loss validation slice made unambiguous as scene_0010, scene_0011,
+  scene_0012, scene_0013 in the YAML selection_rule and Protocol Amendment B3.
+- NO changes to: model, architecture, losses, scene IDs, metrics, seeds,
+  hyperparameters, stop conditions, or any scientific decision.
+- Schema/config sanity checks only (YAML parse + scene-split consistency).
+- This is a documentation consistency correction, logged pre-GPU.
+
+confirmed frozen data split (unchanged): 10 train (scene_0000-0009),
+4 validation (scene_0010-0013), 3 holdout (scene_0014-0016).
+
+confirmatory or exploratory: documentation only; no training.
