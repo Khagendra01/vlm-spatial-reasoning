@@ -249,3 +249,28 @@ test_equiorient_synthetic.py, FEASIBILITY.md, human_inspection pack.
 
 confirmatory or exploratory: CPU infrastructure + design analysis; no model
 training.
+
+---
+## 2026-08-14 (cont.) — Gate 2 human spot check: PASS (all clear)
+
+results already seen? no (no model outputs; only synthetic renderings)
+
+decision: human spot check of the 51 synthetic pairs completed by the
+orchestrator with verbal sign-off "all clear" — 0 flags.
+
+- Recorded as results/equiorient/human_inspection/spotcheck_verdict.json.
+- Combined with machine verification (4,896 manifest rows all law_ok;
+  hostile renderer-bug test detected 192 violations when corrupted) the
+  synthetic-data layer is accepted.
+- Gate 2 CLOSED. Next: pilot-freeze config (backbone choice, budgets,
+  lambda_eq rule, arms) then GPU pilot under explicit unlock.
+
+alternatives considered: none (spot check is protocol-mandated; no flag
+required re-check).
+
+reason: execution guide Gate 1 -> human spot check >= 50 pairs stratified
+by relation x transform; Amendment A6.
+
+affected frozen artifacts: none frozen changed; adds spotcheck_verdict.json.
+
+confirmatory or exploratory: CPU verification; no model training.

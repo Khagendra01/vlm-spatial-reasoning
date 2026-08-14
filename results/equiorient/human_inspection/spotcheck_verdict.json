@@ -1,0 +1,15 @@
+{
+  "gate": "Gate 2 - human spot check",
+  "status": "PASS - all clear",
+  "date": "2026-08-14",
+  "human": "orchestrator (user) - verbal sign-off 'all clear'",
+  "method": "self-contained HTML gallery (51 side-by-side original|transformed pairs) at results/equiorient/human_inspection/gallery.html",
+  "num_pairs": 51,
+  "num_flagged": 0,
+  "machine_law_checks": {
+    "rows_in_manifest": 4896,
+    "all_law_ok": true,
+    "hostile_renderer_bug_test": "192 violations detected with injected bug; gate confirmed sensitive"
+  },
+  "note": "Human inspected the gallery visually and confirmed all pairs render as genuine flips with relations matching the algebra expectations; no flags."
+}
