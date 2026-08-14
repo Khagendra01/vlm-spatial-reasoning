@@ -25,8 +25,10 @@ master  ← TRUNK: single source of truth for ALL shared research code,
    shared code), not from an older paper branch.
 4. Pull master into a paper branch when shared code updates are needed
    (rare mid-paper; the frozen submission layer never syncs mid-deadline).
-5. `research/equiorient` is a separate research thread; merge its shared
-   code to master when it produces stable infrastructure.
+5. `research/equiorient` = Paper-3 research line (EquiOrient): pulls shared
+   code from master (merged 2026-08-14, `d76c1e6`), pushes stable infra back
+   to master, and carries NO paper-specific artifacts (Paper-1-era leftovers
+   removed `6124eab`; canonical copies on paper1/wacv2027).
 
 ## Branch contents
 
@@ -35,7 +37,7 @@ master  ← TRUNK: single source of truth for ALL shared research code,
 | `master` | Trunk. Default branch on GitHub. Shared code + protocol + tests + shared docs. | both |
 | `paper1/wacv2027` | **Paper 1**: "Beyond Spatial Accuracy..." (WACV 2027 Datasets Track). Manuscript at `submission/wacv2027/source/`, external flagship eval CSVs, Paper-1 submission kit `FINAL_WACV2027_SUBMISSION/`. | `Desktop\VLM-Spatial-Reasoning` |
 | `paper2/wacv2027` | **Paper 2**: "What Spatial Fine-Tuning Actually Changes" (WACV 2027 Datasets Track). Seed campaign outputs, audit artifacts, Paper-2 submission kit `FINAL_WACV2027_SUBMISSION_PAPER2/`. | `Documents\vlm-spatial-reasoning` |
-| `research/equiorient` | EquiOrient study line (protocol freeze, MUTATE novelty gate, decision log under `research/`). | — |
+| `research/equiorient` | **Paper 3** (EquiOrient): method paper on transformation-equivariant spatial representation learning. Status: novelty gate CLOSED (MUTATE verdict); protocol/config amendment + transformation algebra pending before GPU. Own docs under `research/EQUIORIENT_*` + `configs/equiorient_protocol.yaml` + shared layer from master. | — |
 
 ## Kit ownership
 
