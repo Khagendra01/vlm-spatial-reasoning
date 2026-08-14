@@ -1,0 +1,101 @@
+# EquiOrient — PILOT FREEZE CONFIG (pre-GPU)
+#
+# Frozen 2026-08-14 AFTER Gate 1 (algebra), Gate 2 (synthetic scenes,
+# human-verified), Gate 3 (representation feasibility). Per Amendment A6,
+# this config is the predeclared pilot contract: anything here is fixed
+# BEFORE any GPU run, and changes require a decision-log entry.
+
+pilot:
+  name: "EquiOrient Phase-1 pilot (one seed, falsification-first)"
+  seeds: 1
+  target_duration_hours: 48
+  purpose: "falsification and implementation validation, not paper-number optimization"
+
+  # --- backbone: TWO candidates allowed; CHOOSE ONE at freeze time.
+  #     (protocol: max 1 backbone in pilot)
+  backbone_candidates:
+    - name: "SmolVLM2-2B"
+      revision: "HuggingFaceTB/SmolVLM2-2B-Instruct"
+      reason: "open weights; Paper-2 2B family already characterized on VSR; fits A6000 with LoRA"
+    - name: "Qwen2-VL-7B"
+      revision: "Qwen/Qwen2-VL-7B-Instruct"
+      reason: "Paper-1/2 7B family; stronger zero-shot; heavier (A6000 OK, slower)"
+  # FROZEN CHOICE (fill at freeze):
+  backbone: "TBD"
+
+  # --- data (from Gate 2 generator; frozen)
+  data:
+    generator: "src/equiorient/datasets.py"
+    num_scenes_train: 14     # scene_0000..scene_0013
+    num_scenes_holdout: 3    # scene_0014..scene_0016 (held-out V o H eval)
+    seed: 20260814
+    canvas: [320, 320]
+    relations_phase1:
+      - left_of
+      - right_of
+      - above
+      - below
+      - parallel        # invariance-controlled only
+      - perpendicular   # invariance-controlled only
+      # NO facing/facing-away (Amendment A3)
+    transforms_seen:
+      - identity
+      - hflip
+      - vflip
+    transform_held_out:
+      - v_after_h       # NEVER in training; primary test at eval
+
+  # --- arms (all 6, matched: same scenes, transforms, steps, budget)
+  arms:
+    - ordinary_sft_lora          # baseline 1
+    - augmentation_only          # baseline 2 (data aug, no structural loss)
+    - output_consistency         # baseline 3 (answer-level consistency)
+    - latent_invariance          # baseline 4 (equivariance with rho = I)
+    - equiorient                 # the method (correct rho)
+    - wrong_geometry_equiorient  # control (incorrect rho; mandatory)
+
+  # --- architecture (Gate-3 feasibility doc; frozen)
+  architecture:
+    z_placement: "PairEncoder over pooled vision features of KNOWN object boxes (synthetic scenes = exact grounding)"
+    z_typed_blocks: ["z_h", "z_v", "z_d", "z_orient"]
+    answer_head: "W_rel * z + b_rel; relation token FORCED from rel_logits (no LM bypass)"
+    rho_source: "src/equiorient/transforms.py RHO_ACTION (geometry-derived, predeclared)"
+    rho_relation_label_conditioned: false   # NEVER receives true relation
+    causal_ablation_mandatory: true         # corrupt z -> accuracy must drop
+
+  # --- loss
+  losses:
+    answer: "cross-entropy on relation head (rel_logits)"
+    equivariance: "|| rho(T) z(x,a,b) - z(T(x),a',b') ||^2  (block-diagonal rho)"
+    lambda_eq_selection:
+      rule: "predeclared grid {0.1, 1.0, 10.0} on FIXED validation slice, chosen BEFORE comparing methods"
+      grid: [0.1, 1.0, 10.0]
+
+  # --- optimization (matched across arms)
+  optimization:
+    optimizer: "AdamW"
+    lr: 1e-4
+    epochs: 2
+    batch_size: 8
+    precision: "bf16"
+    gradient_checkpointing: true
+    max_paired_examples_per_epoch: 2048
+
+  # --- metrics (primary)
+  primary_metrics:
+    - "held_out_VoH_accuracy"          # primary test
+    - "latent_equivariance_error_VoH"  # |rho(VH) z - z(VH(x))| on holdout
+    - "paired_both_correct_VoH"
+    - "correct_rho_vs_wrong_rho_contrast"
+  secondary_metrics:
+    - "seen_transform_accuracy"        # H and V individually
+    - "relation_family_accuracy"
+    - "visual_dependence_normal_vs_shuffle"
+    - "general_capability_preservation"
+
+  # --- stop conditions (protocol section 12 + Amendment A5)
+  stop_conditions:
+    - "EquiOrient does NOT beat augmentation_only AND output_consistency on held-out V o H (same data/budget)"
+    - "latent equivariance error does NOT drop on held-out V o H"
+    - "causal ablation shows answer accuracy flat under z corruption"
+    - "correct_rho == wrong_rho on held-out V o H (geometry irrelevant)"

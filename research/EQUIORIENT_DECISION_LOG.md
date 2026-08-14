@@ -274,3 +274,27 @@ by relation x transform; Amendment A6.
 affected frozen artifacts: none frozen changed; adds spotcheck_verdict.json.
 
 confirmatory or exploratory: CPU verification; no model training.
+
+---
+## 2026-08-14 (cont.) — Pilot freeze config drafted (pre-GPU)
+
+results already seen? no
+
+decision: draft configs/equiorient_pilot_freeze.yaml encoding the full
+predeclared pilot contract per Amendment A6: 6 matched arms, H/V seen with
+V o H held out, 14 train / 3 holdout scenes from Gate-2 generator (seed
+20260814), lambda_eq grid {0.1,1.0,10.0} chosen on fixed validation slice
+before method comparison, forced-relation decoding, mandatory causal
+ablation, stop conditions from protocol s12 + A5.
+
+OPEN DECISION (not frozen yet): backbone — SmolVLM2-2B vs Qwen2-VL-7B
+(max 1 per protocol). Both candidates listed with reasons; must be fixed
+in the YAML before GPU.
+
+GPU REMAINS OFF until: (a) backbone frozen in pilot YAML, (b) explicit
+compute unlock from orchestrator.
+
+affected frozen artifacts: none (draft only; freeze happens on next commit
+after backbone decision).
+
+confirmatory or exploratory: planning only; no model training.
