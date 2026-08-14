@@ -163,3 +163,47 @@ reason
 affected frozen artifacts
 whether change is confirmatory or exploratory
 ```
+
+---
+## 2026-08-14 — Gate 1 executed: transformation algebra + protocol amendment (CPU work, no GPU)
+
+results already seen? no (no model outputs exist yet)
+
+decision: execute Amendment A (MUTATE target) in protocol authority + YAML,
+and build the transformation algebra as executable, unit-tested data.
+
+- research/EQUIORIENT_PROTOCOL_FREEZE.md: appended Amendment A (mutated
+  target: answer-path z; rho never receives true relation; H/V seen, V o H
+  held out; facing excluded from Phase 1; wrong-geometry control mandatory;
+  composition = primary test; gate order A6).
+- configs/equiorient_protocol.yaml: status -> mutated_target_amended_gate1_in_progress;
+  added wrong_geometry_control_required, composition_is_primary_test,
+  holdout_transform=V_composition_H, rho_relation_label_conditioned=false,
+  z_on_answer_path_required, facing_excluded_phase1; pilot relations ->
+  horizontal_left_right, vertical_above_below, parallel_perpendicular.
+- src/equiorient/transforms.py: typed state (z_h/z_v/z_d/z_pose/z_orient),
+  predeclared geometry-derived rho(T) for I/H/V/VoH/HoH, expected_after()
+  relation algebra (component-driven: a transform flips a relation iff it
+  flips the relation's typed component).
+- tests/test_equiorient_transforms.py: 21 tests covering identity, inverse,
+  composition rho(VoH)=rho(V)rho(H) (state + relations), geometry-derived
+  actions (H flips only z_h etc.), depth/orientation invariance, no
+  contradictions, determinism, wrong-geometry-control reachability. ALL PASS.
+- Full shared suite: 142 passed (incl. merged protocol manifests from
+  master 8be6b05).
+- Also fixed a shared-layer gap: results/grounding/protocol/ backfilled to
+  master (was only on paper2; tests depend on it).
+
+alternatives considered: parameterized rho_r(T) keyed on true relation
+(rejected: violates A2.2 — leaks the answer into the action); invariance-only
+constraint (rejected: anti-drift forbids replacing equivariance).
+
+reason: novelty gate closed MUTATE on 2026-08-13; Gate 1 is the mandatory
+first step before any GPU per the execution guide and Amendment A6.
+
+affected frozen artifacts: PROTOCOL_FREEZE.md (amended, not rewritten),
+equiorient_protocol.yaml (amended), NOVELTY_GATE.md (unchanged — still
+authoritative for the mutated target).
+
+confirmatory or exploratory: protocol/governance + CPU infrastructure; no
+model training performed.

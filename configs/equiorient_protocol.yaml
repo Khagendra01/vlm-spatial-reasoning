@@ -1,7 +1,7 @@
-project:
+﻿project:
   name: EquiOrient
   branch: research/equiorient
-  status: planned_not_executed
+  status: mutated_target_amended_gate1_in_progress
   paper_role: method_solution
   authority:
     - research/EQUIORIENT_PROTOCOL_FREEZE.md
@@ -44,6 +44,12 @@ transforms:
     - object_local_state_change
     - viewpoint_frame_change
     - unsafe
+  wrong_geometry_control_required: true
+  composition_is_primary_test: true
+  holdout_transform: V_composition_H
+  rho_relation_label_conditioned: false
+  z_on_answer_path_required: true
+  facing_excluded_phase1: true
   pilot_candidates:
     - horizontal_reflection
     - vertical_reflection
@@ -63,7 +69,7 @@ pilot:
   target_duration_hours: 48
   candidate_relation_families:
     - horizontal_left_right
-    - intrinsic_facing_facing_away
+    - vertical_above_below
     - parallel_perpendicular
   stop_after_report: true
 

@@ -189,3 +189,86 @@ Stop and report before continuing if:
 - prior work is discovered that threatens the novelty target;
 - EquiOrient gains are fully explained by augmentation-only baseline;
 - implementation requires changing a frozen confirmatory definition.
+
+---
+
+# AMENDMENT A — MUTATED TARGET (2026-08-14, authority: EQUIORIENT_NOVELTY_GATE.md MUTATE verdict)
+
+The novelty gate closed with **MUTATE**. The pre-amendment sections above remain
+the general governance frame; this amendment narrows the confirmatory target.
+Where this amendment conflicts with sections 1-12, THIS amendment wins until a
+new decision-log entry supersedes it.
+
+## A1. Mutated research question (replaces section 1)
+
+> Can an **answer-path object-pair spatial state** be trained to obey a
+> **predeclared, heterogeneous, geometry-derived transformation algebra**, such
+> that the learned structure **generalizes compositionally to held-out
+> transformations** beyond matched augmentation, output-consistency, invariance,
+> and wrong-geometry controls?
+
+Abandoned: "pair-conditioned latent with a relation-dependent equivariance
+loss under transformed views" — not sufficiently distinctive (latent spatial
+shaping, representation-level geometric supervision, view-consistency training,
+and latent group-action learning all exist).
+
+## A2. Hard design constraints (non-negotiable)
+
+1. **z is on the answer path.** The structural objective acts on the same
+   learned spatial state that the answer head consumes. Architecture:
+   ision features -> object-pair spatial state z(a,b) -> answer pathway ->
+   relation prediction / language answer, with the equivariance loss acting on
+   that same z. An auxiliary probe that the model can ignore is NOT EquiOrient.
+2. **rho(T) never receives the true relation label.** rho is predeclared and
+   derived from the geometry/coordinate semantics of T, with typed block actions:
+   z = [z_h, z_v, z_d, z_pose, ...]; horizontal reflection acts on z_h,
+   vertical reflection on z_v, provably-orthogonal components stay invariant.
+   No form of ho(T, true_relation) is permitted.
+3. **Composition is the primary test.** Train on H and V individually; hold out
+   V o H; the decisive test is ho(V o H) ~= rho(V) rho(H) behaviorally AND
+   in latent equivariance error, on the unseen composition.
+
+## A3. Amended pilot design (replaces pilot relation/transform lists)
+
+- Relations: **left/right** (horizontal), **above/below** (vertical),
+  **parallel/perpendicular** (controlled invariance only).
+- Transforms: **H (horizontal reflection)**, **V (vertical reflection)**.
+- **Hold out: V o H composition** (never seen in training data).
+- **facing/facing-away are EXCLUDED from Phase 1** (intrinsic pose, camera
+  viewpoint, grounding ambiguity — Paper-1 mess). Only after the clean algebra
+  passes may facing enter as a scientifically meaningful extension.
+- Matched controls (same scenes, transforms, steps, model, parameter budget):
+  1. ordinary spatial SFT/LoRA;
+  2. transformation augmentation only;
+  3. output-consistency training;
+  4. latent invariance baseline;
+  5. relation-aware latent equivariance (EquiOrient);
+  6. **wrong-geometry EquiOrient (mandatory)** — same loss machinery with an
+     incorrect rho (e.g., rho_H acting on z_v). If correct rho > wrong rho on
+     the held-out composition, the geometry matters; otherwise the claim dies.
+
+## A4. Amended primary evidence (adds to section 4)
+
+1. held-out V o H task accuracy (primary);
+2. latent equivariance error on held-out V o H;
+3. paired both-correct on held-out composition;
+4. correct-rho vs wrong-rho contrast on held-out composition;
+5. multi-seed method-vs-baseline comparison.
+
+## A5. Amended stop condition (adds to section 12)
+
+- **If EquiOrient does not beat augmentation-only AND output-consistency on the
+  held-out V o H composition (same data/budget), STOP.** The protocol already
+  names gains-explained-by-augmentation as a kill condition; the mutation makes
+  held-out composition the decisive axis.
+
+## A6. Gate order (mandatory before any GPU)
+
+1. Gate 1: executable transformation algebra (this file's section 6 checks,
+   implemented as unit tests on a machine-readable table).
+2. Synthetic paired scenes CPU-side; 50 human-inspected pairs stratified by
+   relation x transform.
+3. Representation-feasibility gate: where z lives, how the answer head consumes
+   it, gradient reachability from answer objective AND equivariance objective,
+   no bypass path.
+4. GPU pilot (one seed, falsification-first, 48h target).
