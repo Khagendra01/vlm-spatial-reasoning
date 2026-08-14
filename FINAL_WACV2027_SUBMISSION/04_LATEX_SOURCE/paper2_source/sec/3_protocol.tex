@@ -1,0 +1,54 @@
+% Section 3: Protocol
+\paragraph{Task and data.}
+We use Visual Spatial Reasoning (VSR)~\cite{liu2023vsr}, test split
+($n=2195$ rows). Statements are true/false sentences about object-relative
+relations; labels are frozen. The frozen prompt template, generation
+settings (greedy, $\max\_new\_tokens=5$), image preprocessing (uniform
+392\,px long-side cap), and cache keys (md5 of the image URL) are identical
+to the underlying committed protocol (documented in the repository decision
+log and protocol freeze documents).
+
+\paragraph{Evaluation battery (corrected, frozen).}
+Following the battery-drift correction in the decision log, the seed
+campaign is evaluated with the already-committed legacy grounding drivers,
+not the drifted heavy battery. The corrected battery has six conditions
+with canonical frozen subset sizes:
+\begin{center}
+\begin{tabular}{ll}
+\textbf{condition} & \textbf{$n$} \\
+normal / shuffle / blank / text\_only & 2195 \\
+relcomp (strict complements) & 666 \\
+facingcomp (facing-antonym) & 103 \\
+hflip\_flip (global reflection, flip-expected) & 245 \\
+hflip\_invariant (global reflection, expected-invariant) & 421 \\
+\end{tabular}
+\end{center}
+The shuffle condition uses the frozen cycle-derangement mapping
+(seed 20260810); identity and eligibility come from frozen
+\emph{eligible-ids} manifests. Attention is eager for \qwen{} and sdpa for
+\smol{}, matching every committed legacy run.
+
+\paragraph{Training recipe (verbatim seed-0 recipe).}
+Each fresh seed is a General-LoRA run on the general training manifest
+(2000 rows; 95/5 split frozen at seed 42) with the seed-0 recipe:
+epochs 2, lr $10^{-4}$, LoRA $r{=}8$, $\alpha{=}16$, dropout 0.05, bf16,
+gradient checkpointing. The only intentional difference from seed-0 is the
+explicit per-run seed ($101/202/303$) applied to torch/cuda/numpy at
+driver start. Three seeds per backbone were trained on A6000 GPUs.
+
+\paragraph{Fresh-seed analysis.}
+Seeds are independent training draws, not ordered stages; we report per-seed
+values, means, and standard deviations, and never ``monotonic across
+seeds.'' All comparisons are within-backbone; preprocessing is identical
+within a backbone.
+
+\paragraph{Independent numerical audit.}
+Every headline quantity in this paper was recomputed by a standalone script
+(\texttt{scripts/audit\_paper2\_numbers\_independent.py}) that imports no
+analyzer module and reads only raw prediction CSVs/JSONL, frozen protocol
+manifests, and committed analysis JSONs as comparison targets. The audit
+hard-fails on any deterministic-proportion discrepancy above $10^{-6}$, any
+row-count/ID mismatch, and any terminology mismatch. It passed with zero
+issues, and the committed seed-0 tier-a values were reproduced
+byte-identically (7B normal 0.82414579; 2B normal 0.76492027; absolute
+difference 0.0).

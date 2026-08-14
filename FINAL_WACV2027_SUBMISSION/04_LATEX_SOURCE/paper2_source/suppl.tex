@@ -1,0 +1,73 @@
+% WACV 2027 supplementary - Paper 2 (seed campaign details).
+% Compile: tectonic suppl.tex
+\documentclass[10pt,twocolumn,letterpaper]{article}
+\usepackage[review,datasets]{wacv}
+\input{preamble}
+\definecolor{wacvblue}{rgb}{0.21,0.49,0.74}
+\usepackage[pagebackref,breaklinks,colorlinks,allcolors=wacvblue]{hyperref}
+\usepackage[capitalize,noabbrev]{cleveref}
+
+\def\wacvPaperID{*****}
+\def\confName{WACV}
+\def\confYear{2027}
+
+\title{Supplementary Material: What Spatial Fine-Tuning Actually Changes}
+
+\author{Anonymous Authors\\
+Anonymous Institution}
+
+\begin{document}
+\maketitle
+
+\section{Protocol Freeze and Governance}
+The seed campaign was governed by a frozen specification
+(\texttt{configs/seed\_campaign/SEED\_CAMPAIGN.json}) and a decision log
+(\texttt{SPATIAL\_REASONING\_DECISION\_LOG.md}). Key entries: the battery
+drift correction (2026-08-11) reinstate the committed legacy Tier-A/B/C
+drivers; the training deadlock incident (2026-08-12) and its non-recurrence
+on fresh boxes; the campaign completion entry (2026-08-14) with framing
+decisions; and the numerical-audit/claim-hierarchy/literature-audit
+entries (2026-08-14).
+
+\section{Frozen Metric Definitions}
+From the committed analyzer (\texttt{analyze\_tier\_c.py}), read as the
+authoritative definitions:
+\begin{itemize}[leftmargin=*]
+  \item $A_{\text{transform}}(m) = P(\text{transformed prediction} =
+        \text{expected transformed label})$: transformed-answer accuracy.
+  \item $C_{\text{pair}}(m) = P(\text{pair consistency})$: the model's two
+        answers on the same example obey the linked-answer law.
+        hflip\_flip: $P(\text{mirrored} \neq \text{normal})$ (answer-update
+        rate); hflip\_invariant: $P(\text{mirrored} = \text{normal})$
+        (response-stability rate); relcomp/facingcomp: flip-law
+        compliance. Invalid outputs count as non-consistent.
+  \item $\text{both\_correct}(m) = P(\text{normal-correct} \wedge
+        \text{transformed obeys the law})$: joint correctness.
+  \item $G = A_{\text{normal}} - A_{\text{shuffle}}$ (correct-image
+        dependence); $\dG = G_{\text{tuned}} - G_{\text{zero-shot}}$.
+\end{itemize}
+
+\section{Independent Numerical Audit (verbatim summary)}
+\texttt{scripts/audit\_paper2\_numbers\_independent.py} recomputes every
+headline quantity from raw prediction CSVs/JSONL and frozen manifests
+without importing any analyzer module. Hard-fail rules: deterministic
+proportion discrepancy $> 10^{-6}$; row-count mismatch; ID mismatch;
+terminology mismatch. Verdict: PASS (0 issues, 0 failed claims).
+Committed seed-0 reproduction: 7B normal 0.82414579 (diff 0.0);
+2B normal 0.76492027 (diff 0.0). Claim-level audits: \dA{} positive all
+fresh seeds both backbones; \dG{} positive all fresh seeds both backbones;
+fresh-seed $C_{\text{pair}}$ within 0.05 of legacy General; all fresh 2B
+hflip $C_{\text{pair}}$ $>$ 2B zero-shot; \qwennew{} scoped. Hostile tests
+(single-prediction flips) produced FAIL as expected and PASS after restore.
+
+\section{Canonical Subset Sizes}
+normal/shuffle/blank/text\_only $n{=}2195$; relcomp $n{=}666$;
+facingcomp $n{=}103$; hflip\_flip $n{=}245$; hflip\_invariant $n{=}421$.
+All verified against frozen eligible-IDs manifests.
+
+\section{Archived Artifacts}
+All raw predictions, analysis JSONs, checkpoints, training logs, figures,
+and audit outputs are archived under \texttt{results/seed\_campaign/} in
+the repository (commit \texttt{0db0fff}).
+
+\end{document}

@@ -308,3 +308,21 @@ scripts/make_pub_figures.py, all values from numerical_audit.json):
   both_correct) per checkpoint per family.
 - PUBLICATION_TABLES.md - Tables 1-5 (headline quantities, Tier-C trio,
   fresh-seed stats, Qwen3-VL extension, canonical subset sizes).
+
+### 2026-08-14 (cont.) - Steps 5-7: paper written, hostile reviews PASS, SUBMISSION FREEZE
+
+- Step 5: full WACV-2027 LaTeX paper + supplement written under
+  FINAL_WACV2027_SUBMISSION/04_LATEX_SOURCE/paper2_source/ (main.tex, 6
+  sections, references.bib, suppl.tex; all numbers audit-sourced; novelty
+  sentence per Step-3 audit; terminology per frozen contract).
+- Step 6: hostile reviews completed (results/seed_campaign/HOSTILE_REVIEW.md):
+  novelty (accept), statistics (accept; per-seed means/SDs, no pooled n),
+  causal-language (accept; "correct-image dependence" not "causal
+  grounding"; Qwen3-VL scoped), numerical auditor (script
+  scripts/hostile_numerical_review.py; hostile-tested: planted +0.0501 ->
+  FAIL, restored -> PASS; scanner bugs in sec/ glob and range '--' signs
+  found and fixed by the hostile test itself).
+- Step 7: SUBMISSION FREEZE (results/seed_campaign/SUBMISSION_FREEZE.md).
+  Claims C1-C5 frozen + audited. GPU stays OFF. Remaining: LaTeX compile
+  (tectonic absent locally; compile on Paper-1 toolchain/CI), OpenReview
+  enrollment Aug 21, main.pdf Aug 28, suppl+code Aug 30.
