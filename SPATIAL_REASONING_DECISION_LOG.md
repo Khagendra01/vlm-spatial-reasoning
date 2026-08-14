@@ -261,3 +261,20 @@ ANALYSIS.md from raw artifacts):
   transformed-accuracy gain.
 Story unchanged: dA and dG remain the seed-robust headline; Tier C reports
 three separate transformation-behavior quantities.
+
+### 2026-08-14 (cont.) - Step 2: scientific claim hierarchy FROZEN
+
+results/seed_campaign/CLAIM_HIERARCHY.md committed. Every number is
+generated from numerical_audit.json (independent audit, PASS) by
+scripts/freeze_claim_hierarchy.py -- no hand-typed values.
+
+Structure:
+- Tier-0 terminology contract (A_transform / C_pair / both_correct / G / dG;
+  seeds = independent draws; Qwen3-VL scoped).
+- Tier-1 primary confirmatory (7B + HardNeg + 2B): C1 dA, C2 G/dG, C3 dC
+  (relcomp), C4 Tier-C transformation behavior (3 separate quantities).
+- Tier-2 post-confirmatory: Qwen3-VL dA/dG/A_transform only.
+- Tier-3 explicitly NOT claimed: no VRS novelty, no VisualFLIP reproduction,
+  no accuracy=grounding, no Qwen3-VL C_pair.
+
+Pipeline moves to Step 3 (literature/novelty audit) when directed.
