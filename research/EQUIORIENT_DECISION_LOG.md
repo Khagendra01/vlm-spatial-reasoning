@@ -367,3 +367,43 @@ EQUIORIENT_QWEN3_FEASIBILITY.md, EQUIORIENT_ARCHITECTURE_CRITIQUE.md,
 qwen3_smoke_test.py; local pip env upgraded transformers 4.57.6.
 
 confirmatory or exploratory: engineering/CPU only; NO GPU, NO scientific run.
+
+---
+## 2026-08-14 (cont.) — FINAL PILOT FREEZE (Amendment B + corrected six-arm design)
+
+results already seen? NO (no EquiOrient GPU results; smoke tests are
+random-weight engineering checks only)
+
+decision: final pre-result control correction per orchestrator:
+1. ALL six arms use the identical Qwen3 answer-path architecture
+   (deepstack -> pooling -> PairEncoder -> typed z -> forced relation head);
+   PairEncoder + relation head trainable in EVERY arm.
+2. Loss functions are pure functions (zero trainable params) — verified.
+3. Init-equivalence test: one common state cloned into six arms,
+   numerically identical pre-training; differences only in data/loss —
+   PASS (smoke R2 12/12).
+4. LoRA cleanup: Qwen3 fused vision qkv/proj/c_fc/c_proj (rank 16 alpha 32
+   dropout 0.05); text backbone FROZEN; lm_head FROZEN (relation answer
+   forced from z, so text LoRA not on primary answer path; identical in all
+   arms).
+5. Structural-loss fairness: same grid {0.1,1.0,10.0}, same validation
+   slice (scene_0010-0013), same selection rule; wrong-geometry uses the
+   same selected weight as EquiOrient; never select on held-out VoH.
+6. Phase-1 scope declaration added to protocol (Amendment B1): one-seed
+   falsification pilot, 10 train / 4 val / 3 holdout, NOT final-paper
+   evidence; success authorizes multi-seed confirmatory.
+7. Frozen PairEncoder spec (B6): input 8192, hidden 512, depth 2 GELU,
+   z_total 512 (128x4), head Linear(256,4), default init.
+8. Backbone pinned: Qwen/Qwen3-VL-8B-Instruct @ 0c351dd..., transformers
+   ==4.57.6.
+
+Trainable params per arm (smoke R2): 4,458,500 identical across all six
+(common PairEncoder + head; vision LoRA; text/lm_head frozen).
+
+FINAL FREEZE COMMIT: see commit message. GPU REMAINS OFF. No training
+launched. Awaiting explicit orchestrator GPU unlock.
+
+affected frozen artifacts: equiorient_pilot_freeze.yaml (final), protocol
+Amendment B, qwen3_smoke_test.py (R2).
+
+confirmatory or exploratory: pre-result freeze; no model training.

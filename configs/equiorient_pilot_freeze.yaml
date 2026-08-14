@@ -1,74 +1,140 @@
-# EquiOrient — PILOT FREEZE CONFIG (pre-GPU)
+# EquiOrient — PILOT FREEZE CONFIG (FINAL, pre-GPU)
 #
-# Frozen 2026-08-14 AFTER Gate 1 (algebra), Gate 2 (synthetic scenes,
-# human-verified), Gate 3 (representation feasibility). Per Amendment A6,
-# this config is the predeclared pilot contract: anything here is fixed
-# BEFORE any GPU run, and changes require a decision-log entry.
+# Frozen 2026-08-14 (commit: see report) AFTER Gate 1 (algebra), Gate 2
+# (synthetic scenes, human-verified), Gate 3 (feasibility), Gate 3b
+# (Qwen3 feasibility, 76d66a0) and the final six-arm control correction.
+# Anything here is fixed BEFORE any GPU run; changes require a decision-log
+# entry stating whether results had been seen.
 
 pilot:
-  name: "EquiOrient Phase-1 pilot (one seed, falsification-first)"
+  name: "EquiOrient Phase-1 falsification pilot (one seed)"
   seeds: 1
   target_duration_hours: 48
   purpose: "falsification and implementation validation, not paper-number optimization"
 
-  # --- backbone: SINGLE primary = Qwen3-VL-8B (orchestrator decision,
-  #     2026-08-14, prospective/pre-result). Status pending Gate 3b.
-  #     Qwen2-VL-7B: optional LATER replication backbone only.
-  #     SmolVLM2-2B: engineering smoke tests ONLY, never the scientific pilot.
-  backbone_primary: "Qwen/Qwen3-VL-8B-Instruct"
-  backbone_status: "pending_qwen3_gate3b"
-  backbone_replication_later: "Qwen/Qwen2-VL-7B-Instruct (optional, post-primary)"
-  backbone_smoke_only: "SmolVLM2-2B (engineering smoke tests only)"
+  scope_declaration: >-
+    Phase-1 is a one-seed falsification pilot. The 14-train / 3-held-out-scene
+    design is NOT final-paper evidence. Success only authorizes a larger
+    multi-seed, larger-independent-scene confirmatory experiment.
 
-  # --- data (from Gate 2 generator; frozen)
+  # ------------------------------------------------------------------ #
+  # BACKBONE (frozen)
+  # ------------------------------------------------------------------ #
+  backbone:
+    name: "Qwen/Qwen3-VL-8B-Instruct"
+    revision: "0c351dd01ed87e9c1b53cbc748cba10e6187ff3b"
+    transformers: "==4.57.6"
+    torch: "2.x (bf16)"
+    flash_attn: "not required (sdpa fallback)"
+    processor: "Qwen3VLProcessor (preprocessor_config.json from repo)"
+    image_processing: "smart-resize within min/max pixels; image_grid_thw contract"
+    # Qwen3-SPECIFIC (Gate 3b, source-verified): vision attention uses a
+    # FUSED self.qkv = nn.Linear(dim, dim*3) — LoRA targets qkv, NOT
+    # Qwen2-style separate q_proj/k_proj/v_proj.
+    lora:
+      vision_targets: ["qkv", "proj"]           # Qwen3VLVisionAttention fused qkv + output proj
+      vision_mlp_targets: ["c_fc", "c_proj"]    # Qwen3VLVisionMLP
+      vision_rank: 16
+      vision_alpha: 32
+      vision_dropout: 0.05
+      text_lora: "NONE — text backbone FROZEN"
+      lm_head: "FROZEN"
+      rationale: >-
+        The scored relation answer is forced from z (relation head), so
+        text-side LoRA does not participate in the primary answer path.
+        Text backbone frozen in ALL arms identically.
+
+  # ------------------------------------------------------------------ #
+  # COMMON ANSWER-PATH ARCHITECTURE (identical in ALL SIX arms)
+  # ------------------------------------------------------------------ #
+  architecture:
+    common_path: >-
+      Qwen3 deepstack features -> object-region pooling -> PairEncoder ->
+      typed z(a,b) -> forced relation head. PairEncoder + relation head
+      exist and are trainable in EVERY arm (incl. baselines).
+    feature_source: "Qwen3 deepstack features (deepstack_visual_indexes, spatial layout intact)"
+    pooling: "mean-pool of deepstack feature cells intersecting each known object box (synthetic ground truth; box->grid via image_grid_thw + patch 28 + merge 2)"
+    pair_encoder:
+      input_dim: 8192              # concat [V_a(4096) ; V_b(4096)]
+      hidden_dim: 512
+      depth: 2                     # Linear -> GELU -> Linear
+      activation: "GELU"
+      z_total_dim: 512
+      z_blocks: [128, 128, 128, 128]     # z_h, z_v, z_d, z_orient
+      init: "default nn.Linear init (kaiming-uniform); frozen, do not change"
+    relation_head:
+      shape: "Linear(256, 4)"      # [z_h ; z_v] -> left/right/above/below
+      decoding: "FORCED from rel_logits (relation slot masked; LM cannot emit it)"
+    frozen_layers: ["patch_embed", "pos_embed", "text_backbone", "lm_head"]
+    trainable_layers: ["vision LoRA (qkv/proj/c_fc/c_proj)", "pair_encoder", "relation_head"]
+
+  # ------------------------------------------------------------------ #
+  # SIX ARMS (corrected: common architecture everywhere; only data/loss differ)
+  # ------------------------------------------------------------------ #
+  arms:
+    - name: "ordinary_sft_lora"
+      data: "ORIGINAL scenes only (no transforms)"
+      loss: "answer loss only"
+      note: "original-only by design (otherwise collapses into augmentation); optimization/update budget matched; data difference explicitly labeled"
+    - name: "augmentation_only"
+      data: "H/V paired scenes (same transformed examples as all arms below)"
+      loss: "answer loss only"
+    - name: "output_consistency"
+      data: "H/V paired scenes"
+      loss: "answer loss + output-law consistency (expected_after law)"
+    - name: "latent_invariance"
+      data: "H/V paired scenes"
+      loss: "answer loss + latent rho=I loss"
+    - name: "equiorient"
+      data: "H/V paired scenes"
+      loss: "answer loss + correct geometry-derived rho(T)"
+    - name: "wrong_geometry_equiorient"
+      data: "H/V paired scenes"
+      loss: "answer loss + WRONG predeclared rho (e.g., rho_H acting on z_v)"
+      note: "bit-for-bit same model structure as equiorient; differs ONLY in the wrong rho matrix"
+
+  # CRITICAL causal comparison (must share EXACTLY the same H/V examples):
+  causal_comparison: ["augmentation_only", "output_consistency",
+                      "latent_invariance", "equiorient", "wrong_geometry_equiorient"]
+  data_difference_labeled: true   # ordinary_sft uses original-only data, labeled
+
+  # ------------------------------------------------------------------ #
+  # LOSSES (zero trainable parameters)
+  # ------------------------------------------------------------------ #
+  losses:
+    answer: "cross-entropy on forced relation head"
+    output_consistency: "answer-law consistency (expected_after) — pure function"
+    latent_invariance: "|| z(x) - z(Tx) ||^2 with rho = I — pure function"
+    equivariance: "|| rho(T) z(x,a,b) - z(T(x),a',b') ||^2 — pure function"
+    structural_loss_weight_grid: [0.1, 1.0, 10.0]
+    selection_rule: >-
+      SAME predeclared grid {0.1, 1.0, 10.0} for output_consistency,
+      latent_invariance, equiorient, AND wrong_geometry; selected on the
+      SAME fixed validation slice (scene_0013, see data); NEVER selected
+      using held-out V o H. Wrong-geometry uses the SAME selected weight as
+      EquiOrient (not tuned independently).
+
+  # ------------------------------------------------------------------ #
+  # DATA (frozen; from Gate 2 generator)
+  # ------------------------------------------------------------------ #
   data:
     generator: "src/equiorient/datasets.py"
-    num_scenes_train: 14     # scene_0000..scene_0013
-    num_scenes_holdout: 3    # scene_0014..scene_0016 (held-out V o H eval)
     seed: 20260814
     canvas: [320, 320]
-    relations_phase1:
-      - left_of
-      - right_of
-      - above
-      - below
-      - parallel        # invariance-controlled only
-      - perpendicular   # invariance-controlled only
-      # NO facing/facing-away (Amendment A3)
-    transforms_seen:
-      - identity
-      - hflip
-      - vflip
-    transform_held_out:
-      - v_after_h       # NEVER in training; primary test at eval
+    scenes_train: ["scene_0000", "scene_0001", "scene_0002", "scene_0003",
+                   "scene_0004", "scene_0005", "scene_0006", "scene_0007",
+                   "scene_0008", "scene_0009"]
+    scenes_validation: ["scene_0010", "scene_0011", "scene_0012", "scene_0013"]
+    scenes_holdout: ["scene_0014", "scene_0015", "scene_0016"]
+    relations_phase1: ["left_of", "right_of", "above", "below",
+                       "parallel", "perpendicular"]    # facing EXCLUDED
+    transforms_seen: ["identity", "hflip", "vflip"]
+    transform_held_out: ["v_after_h"]                  # NEVER in training
+    paired_examples_per_epoch: 2048
 
-  # --- arms (all 6, matched: same scenes, transforms, steps, budget)
-  arms:
-    - ordinary_sft_lora          # baseline 1
-    - augmentation_only          # baseline 2 (data aug, no structural loss)
-    - output_consistency         # baseline 3 (answer-level consistency)
-    - latent_invariance          # baseline 4 (equivariance with rho = I)
-    - equiorient                 # the method (correct rho)
-    - wrong_geometry_equiorient  # control (incorrect rho; mandatory)
-
-  # --- architecture (Gate-3 feasibility doc; frozen)
-  architecture:
-    z_placement: "PairEncoder over pooled vision features of KNOWN object boxes (synthetic scenes = exact grounding)"
-    z_typed_blocks: ["z_h", "z_v", "z_d", "z_orient"]
-    answer_head: "W_rel * z + b_rel; relation token FORCED from rel_logits (no LM bypass)"
-    rho_source: "src/equiorient/transforms.py RHO_ACTION (geometry-derived, predeclared)"
-    rho_relation_label_conditioned: false   # NEVER receives true relation
-    causal_ablation_mandatory: true         # corrupt z -> accuracy must drop
-
-  # --- loss
-  losses:
-    answer: "cross-entropy on relation head (rel_logits)"
-    equivariance: "|| rho(T) z(x,a,b) - z(T(x),a',b') ||^2  (block-diagonal rho)"
-    lambda_eq_selection:
-      rule: "predeclared grid {0.1, 1.0, 10.0} on FIXED validation slice, chosen BEFORE comparing methods"
-      grid: [0.1, 1.0, 10.0]
-
-  # --- optimization (matched across arms)
+  # ------------------------------------------------------------------ #
+  # OPTIMIZATION (matched across arms)
+  # ------------------------------------------------------------------ #
   optimization:
     optimizer: "AdamW"
     lr: 1e-4
@@ -76,21 +142,37 @@ pilot:
     batch_size: 8
     precision: "bf16"
     gradient_checkpointing: true
-    max_paired_examples_per_epoch: 2048
+    update_budget: "identical number of optimizer steps across all six arms"
 
-  # --- metrics (primary)
+  # ------------------------------------------------------------------ #
+  # INITIALIZATION EQUIVALENCE (mandatory pre-training check)
+  # ------------------------------------------------------------------ #
+  init_equivalence:
+    procedure: >-
+      initialize ONE common Qwen3 + PairEncoder + head state; clone into all
+      six arms; BEFORE training verify common parameters are numerically
+      identical across arms; verify arm differences exist only in data
+      treatment / loss computation. (Executable test:
+      scripts/equiorient/qwen3_smoke_test.py check 3.)
+    result_at_freeze: "PASS (12/12 smoke checks)"
+
+  # ------------------------------------------------------------------ #
+  # METRICS
+  # ------------------------------------------------------------------ #
   primary_metrics:
-    - "held_out_VoH_accuracy"          # primary test
-    - "latent_equivariance_error_VoH"  # |rho(VH) z - z(VH(x))| on holdout
+    - "held_out_VoH_accuracy"
+    - "latent_equivariance_error_VoH"
     - "paired_both_correct_VoH"
     - "correct_rho_vs_wrong_rho_contrast"
   secondary_metrics:
-    - "seen_transform_accuracy"        # H and V individually
+    - "seen_transform_accuracy"
     - "relation_family_accuracy"
     - "visual_dependence_normal_vs_shuffle"
     - "general_capability_preservation"
 
-  # --- stop conditions (protocol section 12 + Amendment A5)
+  # ------------------------------------------------------------------ #
+  # STOP CONDITIONS (protocol s12 + Amendment A5)
+  # ------------------------------------------------------------------ #
   stop_conditions:
     - "EquiOrient does NOT beat augmentation_only AND output_consistency on held-out V o H (same data/budget)"
     - "latent equivariance error does NOT drop on held-out V o H"

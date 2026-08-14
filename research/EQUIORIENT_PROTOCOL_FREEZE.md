@@ -272,3 +272,71 @@ and latent group-action learning all exist).
    it, gradient reachability from answer objective AND equivariance objective,
    no bypass path.
 4. GPU pilot (one seed, falsification-first, 48h target).
+
+# AMENDMENT B — Phase-1 falsification scope + final arm/architecture freeze
+# (2026-08-14, authority: orchestrator pre-freeze control correction)
+
+## B1. Phase-1 scope declaration (explicit, must appear in paper)
+
+> "Phase-1 is a one-seed falsification pilot. The 14-train / 3-held-out-scene
+> design is not final-paper evidence. Success only authorizes a larger
+> multi-seed, larger-independent-scene confirmatory experiment."
+
+(Note: the corrected freeze uses 10 train / 4 validation / 3 holdout scenes;
+the scope declaration above retains the published protocol wording.)
+
+## B2. All six arms share the IDENTICAL answer-path architecture
+
+Qwen3 deepstack features -> object-region pooling -> PairEncoder -> typed
+z(a,b) -> forced relation head. PairEncoder and relation head exist and are
+trainable in EVERY arm (baselines included). Arm differences exist ONLY in
+data treatment / loss computation.
+
+- ordinary_sft_lora: original-only data, answer loss only (data difference
+  explicitly labeled; optimization budget matched).
+- augmentation_only: H/V paired data, answer loss only.
+- output_consistency: H/V data + output-law consistency loss.
+- latent_invariance: H/V data + latent rho=I loss.
+- equiorient: H/V data + correct geometry-derived rho(T).
+- wrong_geometry_equiorient: bit-for-bit same structure as EquiOrient,
+  differing ONLY in the predeclared wrong rho.
+
+The critical causal comparison (augmentation <-> output-consistency <->
+latent-invariance <-> EquiOrient <-> wrong-geometry) uses EXACTLY the same
+transformed H/V examples.
+
+## B3. Structural-loss hyperparameter fairness
+
+output_consistency, latent_invariance, equiorient, wrong_geometry all use
+the SAME predeclared weight grid {0.1, 1.0, 10.0}, the SAME fixed validation
+slice (scene_0010..0013), and the SAME selection rule. NEVER select using
+held-out V o H. Wrong-geometry uses the same selected weight as EquiOrient
+(not tuned independently to make it worse).
+
+## B4. Loss functions introduce ZERO trainable parameters
+
+All structural losses are pure functions of (logits, z, rho); verified by
+smoke test (check 2).
+
+## B5. Initialization equivalence (mandatory pre-training check)
+
+One common Qwen3 + PairEncoder + head state is cloned into all six arms;
+before training, common parameters must be numerically identical; arm
+differences exist only in data/loss. Executable: scripts/equiorient/
+qwen3_smoke_test.py check 3. Status at freeze: PASS.
+
+## B6. Frozen PairEncoder spec (do not change after pilot results)
+
+- input: concat [V_a(4096) ; V_b(4096)] = 8192 (Qwen3 deepstack features)
+- hidden: 512, depth 2 (Linear -> GELU -> Linear), activation GELU
+- z_total: 512, blocks z_h=z_v=z_d=z_orient=128
+- init: default nn.Linear init
+- relation head: Linear(256, 4) over [z_h ; z_v]; FORCED decoding
+
+## B7. Backbone freeze (Qwen3)
+
+Qwen/Qwen3-VL-8B-Instruct @ 0c351dd01ed87e9c1b53cbc748cba10e6187ff3b,
+transformers==4.57.6. LoRA: vision qkv/proj/c_fc/c_proj (fused qkv — Qwen3
+naming), rank 16 alpha 32 dropout 0.05. Text backbone FROZEN; lm_head
+FROZEN (relation answer is forced from z, text LoRA does not participate in
+the primary answer path). All arms identical.
