@@ -364,3 +364,20 @@ scripts/make_pub_figures.py, all values from numerical_audit.json):
      SUBMISSION_FREEZE + figures + tables), frozen protocol manifests.
    GPU stays OFF. Remaining calendar actions are human steps at the
    deadlines above (enrollment requires OpenReview credentials/authors).
+
+### 2026-08-14 (cont.) - Branch reorganization (repository hygiene)
+
+Renamed branches to a canonical scheme (BRANCH_MAP.md committed on master, cd365f6):
+- paper-draft-v1            -> paper1/wacv2027        (Paper 1)
+- research/spatial-grounding-audit -> paper2/wacv2027 (Paper 2)
+- external-eval/flagship-v1 -> paper1/external-eval  -> DELETED
+  (fully merged into paper1/wacv2027, 0 unique commits; raw provenance CSVs
+  on that branch, canonical copies under results/iaa/; archive tag preserved)
+- research/equiorient kept unchanged.
+Safety tags pushed to origin: archive/paper-draft-v1, archive/research-
+spatial-grounding-audit, archive/external-eval-flagship-v1,
+archive/research-equiorient (old tips recoverable).
+Open DRAFT PR #1 (head paper-draft-v1) auto-closed by branch deletion;
+content fully contained in paper1/wacv2027.
+Note: this repo (Documents clone) is the Paper-2 workspace; Desktop clone is
+the Paper-1 workspace. Both track the same origin.
