@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>EquiOrient — Gate 2 human spot check (51 pairs)</title>
+<style>
+  body { font-family: 'Segoe UI', Arial, sans-serif; margin: 24px; background: #f4f4f6; }
+  h1 { font-size: 20px; } p { max-width: 900px; color: #444; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(460px, 1fr)); gap: 14px; }
+  .card { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 10px; }
+  .head { display: flex; justify-content: space-between; margin-bottom: 6px; }
+  .scene { font-weight: 700; } .tr { color: #1f6feb; font-family: Consolas, monospace; }
+  img { width: 100%; border: 1px solid #ccc; border-radius: 4px; }
+  .expect { font-size: 12px; color: #666; margin: 6px 0; }
+  .buttons { display: flex; gap: 8px; align-items: center; }
+  button { padding: 4px 12px; border-radius: 4px; border: 1px solid #999; cursor: pointer; }
+  .ok { background: #e6f4ea; } .ok.done { background: #34a853; color: #fff; }
+  .flag { background: #fdecea; } .flag.done { background: #ea4335; color: #fff; }
+  .state { font-size: 12px; margin-left: 6px; }
+  .toolbar { margin: 14px 0; }
+  .progress { font-weight: 600; }
+</style>
+</head>
+<body>
+<h1>EquiOrient — Gate 2 human spot check</h1>
+<p>Look at each pair: LEFT = original scene, RIGHT = transformed scene
+(object ids labeled). Verify the transform did what the algebra claims
+(see the &quot;Expect&quot; line under each image) and that nothing looks
+broken (collisions, wrong flips, artifacts). Click a verdict per image.
+Then press <b>Download verdicts</b> and send me the JSON.</p>
+<div class="toolbar">
+  <button onclick="download()">&#8681; Download verdicts (JSON)</button>
+  <span class="progress" id="prog">0/51 checked</span>
+</div>
+<div class="grid">
+
+    <div class="card" id="card-scene_0000-hflip">
+      <div class="head">
+        <span class="scene">scene_0000</span>
+        <span class="tr">hflip</span>
+      </div>
+      <img src="scene_0000__hflip.png" alt="scene_0000__hflip.png" loading="lazy"/>
+      <div class="expect">Expect: horizontal reflection: left<->right flip; above/below, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0000|hflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0000|hflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0000|hflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0000-v_after_h">
+      <div class="head">
+        <span class="scene">scene_0000</span>
+        <span class="tr">v_after_h</span>
+      </div>
+      <img src="scene_0000__v_after_h.png" alt="scene_0000__v_after_h.png" loading="lazy"/>
+      <div class="expect">Expect: V after H (composition): left<->right AND above<->below flip; depth + orientation unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0000|v_after_h', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0000|v_after_h', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0000|v_after_h"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0000-vflip">
+      <div class="head">
+        <span class="scene">scene_0000</span>
+        <span class="tr">vflip</span>
+      </div>
+      <img src="scene_0000__vflip.png" alt="scene_0000__vflip.png" loading="lazy"/>
+      <div class="expect">Expect: vertical reflection: above<->below flip; left/right, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0000|vflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0000|vflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0000|vflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0001-hflip">
+      <div class="head">
+        <span class="scene">scene_0001</span>
+        <span class="tr">hflip</span>
+      </div>
+      <img src="scene_0001__hflip.png" alt="scene_0001__hflip.png" loading="lazy"/>
+      <div class="expect">Expect: horizontal reflection: left<->right flip; above/below, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0001|hflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0001|hflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0001|hflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0001-v_after_h">
+      <div class="head">
+        <span class="scene">scene_0001</span>
+        <span class="tr">v_after_h</span>
+      </div>
+      <img src="scene_0001__v_after_h.png" alt="scene_0001__v_after_h.png" loading="lazy"/>
+      <div class="expect">Expect: V after H (composition): left<->right AND above<->below flip; depth + orientation unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0001|v_after_h', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0001|v_after_h', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0001|v_after_h"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0001-vflip">
+      <div class="head">
+        <span class="scene">scene_0001</span>
+        <span class="tr">vflip</span>
+      </div>
+      <img src="scene_0001__vflip.png" alt="scene_0001__vflip.png" loading="lazy"/>
+      <div class="expect">Expect: vertical reflection: above<->below flip; left/right, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0001|vflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0001|vflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0001|vflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0002-hflip">
+      <div class="head">
+        <span class="scene">scene_0002</span>
+        <span class="tr">hflip</span>
+      </div>
+      <img src="scene_0002__hflip.png" alt="scene_0002__hflip.png" loading="lazy"/>
+      <div class="expect">Expect: horizontal reflection: left<->right flip; above/below, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0002|hflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0002|hflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0002|hflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0002-v_after_h">
+      <div class="head">
+        <span class="scene">scene_0002</span>
+        <span class="tr">v_after_h</span>
+      </div>
+      <img src="scene_0002__v_after_h.png" alt="scene_0002__v_after_h.png" loading="lazy"/>
+      <div class="expect">Expect: V after H (composition): left<->right AND above<->below flip; depth + orientation unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0002|v_after_h', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0002|v_after_h', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0002|v_after_h"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0002-vflip">
+      <div class="head">
+        <span class="scene">scene_0002</span>
+        <span class="tr">vflip</span>
+      </div>
+      <img src="scene_0002__vflip.png" alt="scene_0002__vflip.png" loading="lazy"/>
+      <div class="expect">Expect: vertical reflection: above<->below flip; left/right, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0002|vflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0002|vflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0002|vflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0003-hflip">
+      <div class="head">
+        <span class="scene">scene_0003</span>
+        <span class="tr">hflip</span>
+      </div>
+      <img src="scene_0003__hflip.png" alt="scene_0003__hflip.png" loading="lazy"/>
+      <div class="expect">Expect: horizontal reflection: left<->right flip; above/below, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0003|hflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0003|hflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0003|hflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0003-v_after_h">
+      <div class="head">
+        <span class="scene">scene_0003</span>
+        <span class="tr">v_after_h</span>
+      </div>
+      <img src="scene_0003__v_after_h.png" alt="scene_0003__v_after_h.png" loading="lazy"/>
+      <div class="expect">Expect: V after H (composition): left<->right AND above<->below flip; depth + orientation unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0003|v_after_h', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0003|v_after_h', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0003|v_after_h"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0003-vflip">
+      <div class="head">
+        <span class="scene">scene_0003</span>
+        <span class="tr">vflip</span>
+      </div>
+      <img src="scene_0003__vflip.png" alt="scene_0003__vflip.png" loading="lazy"/>
+      <div class="expect">Expect: vertical reflection: above<->below flip; left/right, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0003|vflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0003|vflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0003|vflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0004-hflip">
+      <div class="head">
+        <span class="scene">scene_0004</span>
+        <span class="tr">hflip</span>
+      </div>
+      <img src="scene_0004__hflip.png" alt="scene_0004__hflip.png" loading="lazy"/>
+      <div class="expect">Expect: horizontal reflection: left<->right flip; above/below, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0004|hflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0004|hflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0004|hflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0004-v_after_h">
+      <div class="head">
+        <span class="scene">scene_0004</span>
+        <span class="tr">v_after_h</span>
+      </div>
+      <img src="scene_0004__v_after_h.png" alt="scene_0004__v_after_h.png" loading="lazy"/>
+      <div class="expect">Expect: V after H (composition): left<->right AND above<->below flip; depth + orientation unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0004|v_after_h', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0004|v_after_h', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0004|v_after_h"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0004-vflip">
+      <div class="head">
+        <span class="scene">scene_0004</span>
+        <span class="tr">vflip</span>
+      </div>
+      <img src="scene_0004__vflip.png" alt="scene_0004__vflip.png" loading="lazy"/>
+      <div class="expect">Expect: vertical reflection: above<->below flip; left/right, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0004|vflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0004|vflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0004|vflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0005-hflip">
+      <div class="head">
+        <span class="scene">scene_0005</span>
+        <span class="tr">hflip</span>
+      </div>
+      <img src="scene_0005__hflip.png" alt="scene_0005__hflip.png" loading="lazy"/>
+      <div class="expect">Expect: horizontal reflection: left<->right flip; above/below, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0005|hflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0005|hflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0005|hflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0005-v_after_h">
+      <div class="head">
+        <span class="scene">scene_0005</span>
+        <span class="tr">v_after_h</span>
+      </div>
+      <img src="scene_0005__v_after_h.png" alt="scene_0005__v_after_h.png" loading="lazy"/>
+      <div class="expect">Expect: V after H (composition): left<->right AND above<->below flip; depth + orientation unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0005|v_after_h', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0005|v_after_h', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0005|v_after_h"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0005-vflip">
+      <div class="head">
+        <span class="scene">scene_0005</span>
+        <span class="tr">vflip</span>
+      </div>
+      <img src="scene_0005__vflip.png" alt="scene_0005__vflip.png" loading="lazy"/>
+      <div class="expect">Expect: vertical reflection: above<->below flip; left/right, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0005|vflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0005|vflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0005|vflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0006-hflip">
+      <div class="head">
+        <span class="scene">scene_0006</span>
+        <span class="tr">hflip</span>
+      </div>
+      <img src="scene_0006__hflip.png" alt="scene_0006__hflip.png" loading="lazy"/>
+      <div class="expect">Expect: horizontal reflection: left<->right flip; above/below, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0006|hflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0006|hflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0006|hflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0006-v_after_h">
+      <div class="head">
+        <span class="scene">scene_0006</span>
+        <span class="tr">v_after_h</span>
+      </div>
+      <img src="scene_0006__v_after_h.png" alt="scene_0006__v_after_h.png" loading="lazy"/>
+      <div class="expect">Expect: V after H (composition): left<->right AND above<->below flip; depth + orientation unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0006|v_after_h', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0006|v_after_h', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0006|v_after_h"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0006-vflip">
+      <div class="head">
+        <span class="scene">scene_0006</span>
+        <span class="tr">vflip</span>
+      </div>
+      <img src="scene_0006__vflip.png" alt="scene_0006__vflip.png" loading="lazy"/>
+      <div class="expect">Expect: vertical reflection: above<->below flip; left/right, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0006|vflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0006|vflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0006|vflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0007-hflip">
+      <div class="head">
+        <span class="scene">scene_0007</span>
+        <span class="tr">hflip</span>
+      </div>
+      <img src="scene_0007__hflip.png" alt="scene_0007__hflip.png" loading="lazy"/>
+      <div class="expect">Expect: horizontal reflection: left<->right flip; above/below, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0007|hflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0007|hflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0007|hflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0007-v_after_h">
+      <div class="head">
+        <span class="scene">scene_0007</span>
+        <span class="tr">v_after_h</span>
+      </div>
+      <img src="scene_0007__v_after_h.png" alt="scene_0007__v_after_h.png" loading="lazy"/>
+      <div class="expect">Expect: V after H (composition): left<->right AND above<->below flip; depth + orientation unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0007|v_after_h', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0007|v_after_h', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0007|v_after_h"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0007-vflip">
+      <div class="head">
+        <span class="scene">scene_0007</span>
+        <span class="tr">vflip</span>
+      </div>
+      <img src="scene_0007__vflip.png" alt="scene_0007__vflip.png" loading="lazy"/>
+      <div class="expect">Expect: vertical reflection: above<->below flip; left/right, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0007|vflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0007|vflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0007|vflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0008-hflip">
+      <div class="head">
+        <span class="scene">scene_0008</span>
+        <span class="tr">hflip</span>
+      </div>
+      <img src="scene_0008__hflip.png" alt="scene_0008__hflip.png" loading="lazy"/>
+      <div class="expect">Expect: horizontal reflection: left<->right flip; above/below, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0008|hflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0008|hflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0008|hflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0008-v_after_h">
+      <div class="head">
+        <span class="scene">scene_0008</span>
+        <span class="tr">v_after_h</span>
+      </div>
+      <img src="scene_0008__v_after_h.png" alt="scene_0008__v_after_h.png" loading="lazy"/>
+      <div class="expect">Expect: V after H (composition): left<->right AND above<->below flip; depth + orientation unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0008|v_after_h', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0008|v_after_h', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0008|v_after_h"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0008-vflip">
+      <div class="head">
+        <span class="scene">scene_0008</span>
+        <span class="tr">vflip</span>
+      </div>
+      <img src="scene_0008__vflip.png" alt="scene_0008__vflip.png" loading="lazy"/>
+      <div class="expect">Expect: vertical reflection: above<->below flip; left/right, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0008|vflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0008|vflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0008|vflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0009-hflip">
+      <div class="head">
+        <span class="scene">scene_0009</span>
+        <span class="tr">hflip</span>
+      </div>
+      <img src="scene_0009__hflip.png" alt="scene_0009__hflip.png" loading="lazy"/>
+      <div class="expect">Expect: horizontal reflection: left<->right flip; above/below, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0009|hflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0009|hflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0009|hflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0009-v_after_h">
+      <div class="head">
+        <span class="scene">scene_0009</span>
+        <span class="tr">v_after_h</span>
+      </div>
+      <img src="scene_0009__v_after_h.png" alt="scene_0009__v_after_h.png" loading="lazy"/>
+      <div class="expect">Expect: V after H (composition): left<->right AND above<->below flip; depth + orientation unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0009|v_after_h', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0009|v_after_h', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0009|v_after_h"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0009-vflip">
+      <div class="head">
+        <span class="scene">scene_0009</span>
+        <span class="tr">vflip</span>
+      </div>
+      <img src="scene_0009__vflip.png" alt="scene_0009__vflip.png" loading="lazy"/>
+      <div class="expect">Expect: vertical reflection: above<->below flip; left/right, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0009|vflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0009|vflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0009|vflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0010-hflip">
+      <div class="head">
+        <span class="scene">scene_0010</span>
+        <span class="tr">hflip</span>
+      </div>
+      <img src="scene_0010__hflip.png" alt="scene_0010__hflip.png" loading="lazy"/>
+      <div class="expect">Expect: horizontal reflection: left<->right flip; above/below, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0010|hflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0010|hflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0010|hflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0010-v_after_h">
+      <div class="head">
+        <span class="scene">scene_0010</span>
+        <span class="tr">v_after_h</span>
+      </div>
+      <img src="scene_0010__v_after_h.png" alt="scene_0010__v_after_h.png" loading="lazy"/>
+      <div class="expect">Expect: V after H (composition): left<->right AND above<->below flip; depth + orientation unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0010|v_after_h', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0010|v_after_h', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0010|v_after_h"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0010-vflip">
+      <div class="head">
+        <span class="scene">scene_0010</span>
+        <span class="tr">vflip</span>
+      </div>
+      <img src="scene_0010__vflip.png" alt="scene_0010__vflip.png" loading="lazy"/>
+      <div class="expect">Expect: vertical reflection: above<->below flip; left/right, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0010|vflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0010|vflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0010|vflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0011-hflip">
+      <div class="head">
+        <span class="scene">scene_0011</span>
+        <span class="tr">hflip</span>
+      </div>
+      <img src="scene_0011__hflip.png" alt="scene_0011__hflip.png" loading="lazy"/>
+      <div class="expect">Expect: horizontal reflection: left<->right flip; above/below, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0011|hflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0011|hflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0011|hflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0011-v_after_h">
+      <div class="head">
+        <span class="scene">scene_0011</span>
+        <span class="tr">v_after_h</span>
+      </div>
+      <img src="scene_0011__v_after_h.png" alt="scene_0011__v_after_h.png" loading="lazy"/>
+      <div class="expect">Expect: V after H (composition): left<->right AND above<->below flip; depth + orientation unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0011|v_after_h', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0011|v_after_h', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0011|v_after_h"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0011-vflip">
+      <div class="head">
+        <span class="scene">scene_0011</span>
+        <span class="tr">vflip</span>
+      </div>
+      <img src="scene_0011__vflip.png" alt="scene_0011__vflip.png" loading="lazy"/>
+      <div class="expect">Expect: vertical reflection: above<->below flip; left/right, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0011|vflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0011|vflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0011|vflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0012-hflip">
+      <div class="head">
+        <span class="scene">scene_0012</span>
+        <span class="tr">hflip</span>
+      </div>
+      <img src="scene_0012__hflip.png" alt="scene_0012__hflip.png" loading="lazy"/>
+      <div class="expect">Expect: horizontal reflection: left<->right flip; above/below, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0012|hflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0012|hflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0012|hflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0012-v_after_h">
+      <div class="head">
+        <span class="scene">scene_0012</span>
+        <span class="tr">v_after_h</span>
+      </div>
+      <img src="scene_0012__v_after_h.png" alt="scene_0012__v_after_h.png" loading="lazy"/>
+      <div class="expect">Expect: V after H (composition): left<->right AND above<->below flip; depth + orientation unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0012|v_after_h', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0012|v_after_h', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0012|v_after_h"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0012-vflip">
+      <div class="head">
+        <span class="scene">scene_0012</span>
+        <span class="tr">vflip</span>
+      </div>
+      <img src="scene_0012__vflip.png" alt="scene_0012__vflip.png" loading="lazy"/>
+      <div class="expect">Expect: vertical reflection: above<->below flip; left/right, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0012|vflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0012|vflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0012|vflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0013-hflip">
+      <div class="head">
+        <span class="scene">scene_0013</span>
+        <span class="tr">hflip</span>
+      </div>
+      <img src="scene_0013__hflip.png" alt="scene_0013__hflip.png" loading="lazy"/>
+      <div class="expect">Expect: horizontal reflection: left<->right flip; above/below, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0013|hflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0013|hflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0013|hflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0013-v_after_h">
+      <div class="head">
+        <span class="scene">scene_0013</span>
+        <span class="tr">v_after_h</span>
+      </div>
+      <img src="scene_0013__v_after_h.png" alt="scene_0013__v_after_h.png" loading="lazy"/>
+      <div class="expect">Expect: V after H (composition): left<->right AND above<->below flip; depth + orientation unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0013|v_after_h', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0013|v_after_h', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0013|v_after_h"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0013-vflip">
+      <div class="head">
+        <span class="scene">scene_0013</span>
+        <span class="tr">vflip</span>
+      </div>
+      <img src="scene_0013__vflip.png" alt="scene_0013__vflip.png" loading="lazy"/>
+      <div class="expect">Expect: vertical reflection: above<->below flip; left/right, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0013|vflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0013|vflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0013|vflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0014-hflip">
+      <div class="head">
+        <span class="scene">scene_0014</span>
+        <span class="tr">hflip</span>
+      </div>
+      <img src="scene_0014__hflip.png" alt="scene_0014__hflip.png" loading="lazy"/>
+      <div class="expect">Expect: horizontal reflection: left<->right flip; above/below, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0014|hflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0014|hflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0014|hflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0014-v_after_h">
+      <div class="head">
+        <span class="scene">scene_0014</span>
+        <span class="tr">v_after_h</span>
+      </div>
+      <img src="scene_0014__v_after_h.png" alt="scene_0014__v_after_h.png" loading="lazy"/>
+      <div class="expect">Expect: V after H (composition): left<->right AND above<->below flip; depth + orientation unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0014|v_after_h', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0014|v_after_h', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0014|v_after_h"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0014-vflip">
+      <div class="head">
+        <span class="scene">scene_0014</span>
+        <span class="tr">vflip</span>
+      </div>
+      <img src="scene_0014__vflip.png" alt="scene_0014__vflip.png" loading="lazy"/>
+      <div class="expect">Expect: vertical reflection: above<->below flip; left/right, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0014|vflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0014|vflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0014|vflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0015-hflip">
+      <div class="head">
+        <span class="scene">scene_0015</span>
+        <span class="tr">hflip</span>
+      </div>
+      <img src="scene_0015__hflip.png" alt="scene_0015__hflip.png" loading="lazy"/>
+      <div class="expect">Expect: horizontal reflection: left<->right flip; above/below, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0015|hflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0015|hflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0015|hflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0015-v_after_h">
+      <div class="head">
+        <span class="scene">scene_0015</span>
+        <span class="tr">v_after_h</span>
+      </div>
+      <img src="scene_0015__v_after_h.png" alt="scene_0015__v_after_h.png" loading="lazy"/>
+      <div class="expect">Expect: V after H (composition): left<->right AND above<->below flip; depth + orientation unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0015|v_after_h', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0015|v_after_h', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0015|v_after_h"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0015-vflip">
+      <div class="head">
+        <span class="scene">scene_0015</span>
+        <span class="tr">vflip</span>
+      </div>
+      <img src="scene_0015__vflip.png" alt="scene_0015__vflip.png" loading="lazy"/>
+      <div class="expect">Expect: vertical reflection: above<->below flip; left/right, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0015|vflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0015|vflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0015|vflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0016-hflip">
+      <div class="head">
+        <span class="scene">scene_0016</span>
+        <span class="tr">hflip</span>
+      </div>
+      <img src="scene_0016__hflip.png" alt="scene_0016__hflip.png" loading="lazy"/>
+      <div class="expect">Expect: horizontal reflection: left<->right flip; above/below, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0016|hflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0016|hflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0016|hflip"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0016-v_after_h">
+      <div class="head">
+        <span class="scene">scene_0016</span>
+        <span class="tr">v_after_h</span>
+      </div>
+      <img src="scene_0016__v_after_h.png" alt="scene_0016__v_after_h.png" loading="lazy"/>
+      <div class="expect">Expect: V after H (composition): left<->right AND above<->below flip; depth + orientation unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0016|v_after_h', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0016|v_after_h', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0016|v_after_h"></span>
+      </div>
+    </div>
+    <div class="card" id="card-scene_0016-vflip">
+      <div class="head">
+        <span class="scene">scene_0016</span>
+        <span class="tr">vflip</span>
+      </div>
+      <img src="scene_0016__vflip.png" alt="scene_0016__vflip.png" loading="lazy"/>
+      <div class="expect">Expect: vertical reflection: above<->below flip; left/right, in_front_of/behind, parallel/perpendicular unchanged</div>
+      <div class="buttons">
+        <button class="ok" onclick="mark('scene_0016|vflip', true)">&#10003; looks right</button>
+        <button class="flag" onclick="mark('scene_0016|vflip', false)">&#9888; flag</button>
+        <span class="state" id="st-scene_0016|vflip"></span>
+      </div>
+    </div>
+</div>
+<script>
+const verdicts = {};
+const TOTAL = 51;
+function mark(key, ok) {
+  verdicts[key] = ok;
+  const [scene, tr] = key.split('|');
+  const okBtn = document.querySelector(`#card-${scene}-${tr} .ok`);
+  const flBtn = document.querySelector(`#card-${scene}-${tr} .flag`);
+  const st = document.getElementById('st-' + key);
+  okBtn.classList.toggle('done', ok);
+  flBtn.classList.toggle('done', !ok);
+  st.textContent = ok ? 'verified' : 'FLAGGED';
+  document.getElementById('prog').textContent =
+    Object.keys(verdicts).length + '/' + TOTAL + ' checked';
+}
+function download() {
+  const blob = new Blob([JSON.stringify(verdicts, null, 2)], {type: 'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'equiorient_spotcheck_verdicts.json';
+  a.click();
+}
+</script>
+</body>
+</html>
