@@ -1,0 +1,4686 @@
+{
+  "authority": "research/GROUNDING_PROTOCOL_FREEZE.md",
+  "freeze_note": "visual transform validity table and eligible IDs are committed before any full Tier-C result is inspected",
+  "protocol_version": "v0.1",
+  "transform_version": "tier_c_v0.1",
+  "transforms": {
+    "hflip_flip": {
+      "entries": {
+        "vsr_test:0011": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0025": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0037": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0056": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0059": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0064": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0075": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0084": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0085": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0095": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0107": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0110": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0118": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0125": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "right of"
+        },
+        "vsr_test:0157": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "left of"
+        },
+        "vsr_test:0181": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0190": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0194": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0195": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "left of"
+        },
+        "vsr_test:0198": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0207": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0210": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "right of"
+        },
+        "vsr_test:0215": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0244": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0247": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0251": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "right of"
+        },
+        "vsr_test:0259": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0273": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0284": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0288": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "right of"
+        },
+        "vsr_test:0302": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0342": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0363": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0369": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0380": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0389": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "left of"
+        },
+        "vsr_test:0390": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0404": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0470": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0474": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0483": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "right of"
+        },
+        "vsr_test:0485": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0491": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0494": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0520": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0538": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "left of"
+        },
+        "vsr_test:0545": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "right of"
+        },
+        "vsr_test:0548": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "left of"
+        },
+        "vsr_test:0553": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "right of"
+        },
+        "vsr_test:0570": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0574": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0585": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "left of"
+        },
+        "vsr_test:0612": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "left of"
+        },
+        "vsr_test:0616": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0618": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0621": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0630": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0642": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "left of"
+        },
+        "vsr_test:0645": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0672": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0679": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0682": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0689": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0697": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "left of"
+        },
+        "vsr_test:0698": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0704": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0705": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0711": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0712": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0714": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "right of"
+        },
+        "vsr_test:0717": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "left of"
+        },
+        "vsr_test:0721": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0726": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "right of"
+        },
+        "vsr_test:0732": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "right of"
+        },
+        "vsr_test:0737": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "left of"
+        },
+        "vsr_test:0741": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0762": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0798": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0802": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0814": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "left of"
+        },
+        "vsr_test:0816": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "left of"
+        },
+        "vsr_test:0819": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "left of"
+        },
+        "vsr_test:0821": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "left of"
+        },
+        "vsr_test:0833": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0836": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0865": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0866": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "left of"
+        },
+        "vsr_test:0872": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0875": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0878": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0888": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "left of"
+        },
+        "vsr_test:0898": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0900": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0910": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0912": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "right of"
+        },
+        "vsr_test:0917": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0920": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "left of"
+        },
+        "vsr_test:0924": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0943": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0947": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0954": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0956": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "left of"
+        },
+        "vsr_test:0958": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0962": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0965": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:0966": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:0970": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "left of"
+        },
+        "vsr_test:0989": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1014": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1024": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1025": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1026": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1039": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1046": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1052": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1057": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1067": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1081": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1090": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1094": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "right of"
+        },
+        "vsr_test:1100": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1103": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1104": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "left of"
+        },
+        "vsr_test:1114": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1121": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1151": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1155": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1157": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1168": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1179": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1180": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1183": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "left of"
+        },
+        "vsr_test:1195": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "left of"
+        },
+        "vsr_test:1204": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1210": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1222": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "right of"
+        },
+        "vsr_test:1226": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1230": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1231": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1233": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "left of"
+        },
+        "vsr_test:1246": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1256": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1260": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1264": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1272": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1274": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1281": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1285": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1295": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1299": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "left of"
+        },
+        "vsr_test:1305": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1307": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "left of"
+        },
+        "vsr_test:1317": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1322": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1328": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1334": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1345": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1350": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "left of"
+        },
+        "vsr_test:1353": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1356": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1358": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1364": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "left of"
+        },
+        "vsr_test:1367": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1370": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "right of"
+        },
+        "vsr_test:1383": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "left of"
+        },
+        "vsr_test:1386": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1391": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1392": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "left of"
+        },
+        "vsr_test:1414": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1437": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1440": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "right of"
+        },
+        "vsr_test:1454": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1486": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1494": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1499": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1501": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1506": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "right of"
+        },
+        "vsr_test:1507": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1510": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1511": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "right of"
+        },
+        "vsr_test:1512": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1528": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1545": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "left of"
+        },
+        "vsr_test:1557": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1565": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1578": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1625": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1633": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "right of"
+        },
+        "vsr_test:1638": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1644": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1646": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1655": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "right of"
+        },
+        "vsr_test:1666": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1673": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "left of"
+        },
+        "vsr_test:1693": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1698": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1703": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1704": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "right of"
+        },
+        "vsr_test:1712": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "left of"
+        },
+        "vsr_test:1741": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1747": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1767": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "left of"
+        },
+        "vsr_test:1791": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1795": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1818": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1826": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1829": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1833": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1860": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1865": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1876": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "right of"
+        },
+        "vsr_test:1897": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1937": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1951": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1954": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:1956": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1957": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1962": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "right of"
+        },
+        "vsr_test:1963": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "left of"
+        },
+        "vsr_test:1971": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:1978": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the left side of"
+        },
+        "vsr_test:2006": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "left of"
+        },
+        "vsr_test:2012": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:2024": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:2027": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "left of"
+        },
+        "vsr_test:2036": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:2040": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:2048": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "right of"
+        },
+        "vsr_test:2053": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "right of"
+        },
+        "vsr_test:2068": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "left of"
+        },
+        "vsr_test:2085": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:2092": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:2094": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "right of"
+        },
+        "vsr_test:2099": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:2117": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "right of"
+        },
+        "vsr_test:2122": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:2128": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the right side of"
+        },
+        "vsr_test:2140": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        },
+        "vsr_test:2146": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "left of"
+        },
+        "vsr_test:2149": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "right of"
+        },
+        "vsr_test:2162": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "at the left side of"
+        },
+        "vsr_test:2163": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "left of"
+        },
+        "vsr_test:2167": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "right of"
+        },
+        "vsr_test:2169": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": true,
+          "family": "horizontal",
+          "original_label": false,
+          "relation": "right of"
+        },
+        "vsr_test:2171": {
+          "expected_prediction_behavior": "flip_expected",
+          "expected_transformed_label": false,
+          "family": "horizontal",
+          "original_label": true,
+          "relation": "at the right side of"
+        }
+      },
+      "image_transform": "PIL FLIP_LEFT_RIGHT post-preprocess",
+      "law": "flip_expected",
+      "n_eligible": 245,
+      "statements_fixed": true
+    },
+    "hflip_invariant": {
+      "entries": {
+        "vsr_test:0002": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "above"
+        },
+        "vsr_test:0007": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0009": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:0010": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:0012": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0027": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "above"
+        },
+        "vsr_test:0028": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:0029": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0039": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0043": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:0049": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0061": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:0067": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:0069": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:0080": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0086": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "above"
+        },
+        "vsr_test:0091": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:0094": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "above"
+        },
+        "vsr_test:0104": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:0105": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:0109": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0124": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:0126": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0139": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:0142": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0143": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:0144": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:0153": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0154": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0160": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:0165": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:0177": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0178": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0187": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0199": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:0200": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:0201": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "above"
+        },
+        "vsr_test:0206": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:0212": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:0222": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:0231": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:0232": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0248": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0256": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0260": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0263": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:0264": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0267": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0271": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:0278": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:0279": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:0282": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0291": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:0297": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0298": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0301": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:0308": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "above"
+        },
+        "vsr_test:0309": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0312": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0315": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0323": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0333": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:0335": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "above"
+        },
+        "vsr_test:0339": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:0348": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0350": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:0355": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:0361": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0381": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:0393": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:0397": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0399": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:0400": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:0401": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0403": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:0408": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0412": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:0420": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0421": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0434": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0440": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "above"
+        },
+        "vsr_test:0446": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0464": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:0467": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:0468": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0469": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:0471": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0472": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0476": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0482": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0487": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0495": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0504": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:0510": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:0516": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "above"
+        },
+        "vsr_test:0518": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:0524": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:0530": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0552": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:0557": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0576": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:0583": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:0595": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0600": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0602": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:0606": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "above"
+        },
+        "vsr_test:0608": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0613": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:0632": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "above"
+        },
+        "vsr_test:0638": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:0651": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0653": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0656": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0659": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0666": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:0671": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0678": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0681": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:0690": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:0693": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:0700": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:0701": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:0702": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:0720": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0723": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0733": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0735": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:0746": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:0749": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:0751": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0754": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:0759": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:0772": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0795": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:0796": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:0797": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:0803": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:0804": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0813": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:0817": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:0831": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:0832": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0839": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "above"
+        },
+        "vsr_test:0842": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:0843": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:0844": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0846": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0853": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:0855": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:0857": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:0861": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:0863": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:0867": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:0886": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0892": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:0894": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0895": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0897": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:0901": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0909": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0916": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0919": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:0921": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "above"
+        },
+        "vsr_test:0925": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:0932": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:0933": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0938": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:0945": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:0949": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0951": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0952": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:0955": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "above"
+        },
+        "vsr_test:0963": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:0967": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:0974": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:0977": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:0979": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:0987": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:0993": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:0996": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:0999": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1001": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1002": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:1006": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:1011": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:1015": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:1036": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1037": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1038": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:1041": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1043": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:1044": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1045": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1049": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:1051": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:1054": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:1059": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:1060": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:1068": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1077": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1080": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:1085": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1098": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:1107": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1111": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1116": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:1119": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1124": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:1127": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1133": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1135": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1136": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:1139": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:1149": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:1152": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:1156": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1164": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1165": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:1170": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1173": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1176": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:1182": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:1192": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "above"
+        },
+        "vsr_test:1194": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:1196": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1203": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1211": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1227": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:1229": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "above"
+        },
+        "vsr_test:1239": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:1244": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1245": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1251": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1253": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1254": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1261": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:1271": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:1273": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1279": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1290": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1298": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1302": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:1304": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:1306": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1320": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:1321": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:1323": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:1325": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:1326": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:1333": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1344": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1351": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:1352": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:1357": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1362": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1365": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:1368": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "above"
+        },
+        "vsr_test:1387": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:1389": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:1390": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1394": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:1395": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1409": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:1411": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1415": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:1420": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1424": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1426": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1427": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:1428": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:1429": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1430": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1431": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:1434": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1441": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1444": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:1445": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1447": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1448": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:1452": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:1456": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:1458": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1459": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "above"
+        },
+        "vsr_test:1464": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "above"
+        },
+        "vsr_test:1467": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1469": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1470": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1479": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1481": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "above"
+        },
+        "vsr_test:1496": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1498": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:1500": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:1502": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1529": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1540": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:1542": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1543": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1547": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1554": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:1563": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1564": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:1568": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:1572": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1575": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1576": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:1585": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "above"
+        },
+        "vsr_test:1591": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1599": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:1604": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1612": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1616": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1618": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1623": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1628": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1630": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1632": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1634": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1639": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1643": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1651": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1652": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:1654": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1664": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:1665": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1667": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1671": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "above"
+        },
+        "vsr_test:1672": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1675": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1676": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:1683": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1687": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1692": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1695": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1701": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1706": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:1707": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:1711": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1729": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1730": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:1742": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1748": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:1753": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1762": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1763": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1764": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1772": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1778": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "above"
+        },
+        "vsr_test:1786": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1794": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:1796": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1799": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:1803": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1811": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1812": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1813": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:1825": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "above"
+        },
+        "vsr_test:1834": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:1835": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:1845": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:1848": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:1855": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:1856": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1861": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:1863": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:1866": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1869": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:1870": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "above"
+        },
+        "vsr_test:1881": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1889": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:1890": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1900": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1909": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1915": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1920": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1926": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1933": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:1935": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1958": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:1961": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:1965": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:1968": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:1985": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:1986": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:1990": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:1993": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:2001": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:2007": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:2008": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:2023": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:2028": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:2031": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "above"
+        },
+        "vsr_test:2037": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:2041": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "below"
+        },
+        "vsr_test:2051": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:2056": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:2061": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:2062": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:2067": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:2072": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:2079": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:2084": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:2096": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "behind"
+        },
+        "vsr_test:2103": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:2109": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:2111": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:2114": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:2116": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:2120": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:2133": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:2134": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:2135": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:2139": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "below"
+        },
+        "vsr_test:2147": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:2153": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:2176": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:2180": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:2183": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "behind"
+        },
+        "vsr_test:2187": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "depth",
+          "original_label": false,
+          "relation": "in front of"
+        },
+        "vsr_test:2188": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "vertical",
+          "original_label": true,
+          "relation": "above"
+        },
+        "vsr_test:2190": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": true,
+          "family": "depth",
+          "original_label": true,
+          "relation": "in front of"
+        },
+        "vsr_test:2191": {
+          "expected_prediction_behavior": "expected_invariant",
+          "expected_transformed_label": false,
+          "family": "vertical",
+          "original_label": false,
+          "relation": "above"
+        }
+      },
+      "image_transform": "PIL FLIP_LEFT_RIGHT post-preprocess",
+      "law": "expected_invariant",
+      "n_eligible": 421,
+      "statements_fixed": true
+    }
+  }
+}
