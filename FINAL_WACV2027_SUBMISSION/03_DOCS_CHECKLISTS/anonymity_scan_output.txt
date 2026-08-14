@@ -1,18 +1,0 @@
-Anonymity scan - upload artifacts only (PDFs, code ZIP, LaTeX sources).
-Scope note: internal checklists (not uploaded) are excluded; they legitimately
-name the scanned tokens as documentation.
-
-HITS (7):
-[git SHAs (hex with a-f)] zip:results/site/orientation_confound_analysis.json: ...95,    0.3781313969665601   ],   "orient_p": 2.364418324317009e-28  },  "within_category": [   {    "category...
-[git SHAs (hex with a-f)] zip:results/site/vsr_lora_predictions.csv: ... [-0.0018727616018998638, 0.007005445282938005, 8.97167203275373e-05]}""]",D,B,0, B image_test-00241,secondary,3d ...
-[git SHAs (hex with a-f)] zip:results/site/vsr_lora_predictions.csv: ...[-0.0004548504518708807, 0.001951786856664972, -7.749986575322776e-05]}"", ""{'rotation matrix': [[0.728234, -0.0221...
-[git SHAs (hex with a-f)] zip:results/site/zeroshot_7b_predictions.csv: ... [-0.0018727616018998638, 0.007005445282938005, 8.97167203275373e-05]}""]",D,B,0,B image_test-00241,secondary,3d i...
-[git SHAs (hex with a-f)] zip:results/site/zeroshot_7b_predictions.csv: ...[-0.0004548504518708807, 0.001951786856664972, -7.749986575322776e-05]}"", ""{'rotation matrix': [[0.728234, -0.0221...
-[git SHAs (hex with a-f)] zip:results/two_stage_results.json: ...6     },     "A_geometry::mlp": {       "p": 2.7191876822818543e-05,       "ctrl_loss": 47,       "ctrl_gain": 1...
-[git SHAs (hex with a-f)] zip:results/vision_side_comparison.json: ...195)": {       "7B_zero-shot": {         "p": 2.3234781216063164e-06,         "discordant_ctrl": 194,         "di...
-
-Benign excluded items:
-  - SITE protocol config hashes 28f4cc09887477af / 4d371713c96ee0d9 (preregistration artifacts)
-  - numeric float runs in JSON/CSV that match the hex pattern (false positives)
-  - github.com/cvpr-org/author-kit comment inside the official wacv.sty
-  - github.com/wenqi-wang20/SITE-Bench (SITE benchmark provenance)
