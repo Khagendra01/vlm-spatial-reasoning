@@ -90,19 +90,25 @@ def main():
       f'fresh-seed ΔG: mean {mean_sd([(s - ss) - (zs_n - zs_s) for s, ss in zip(seeds_n, seeds_s)])}.\n')
 
     # ---------------- QWEN2VL tier-c ----------------
-    w('### 1c. Tier-C: visual response under global reflection (hflip)\n')
-    w('hflip_flip (n=245, flip-expected). A_transform = transformed-image '
-      'accuracy (= flip rate); C_pair = paired both-images correctness '
-      '(answer-updating); both_correct = both images answered correctly '
-      'with the label law obeyed:\n')
-    w('| checkpoint | A_transform (flip rate) | C_pair | both_correct |')
+    w('### 1c. Tier-C: transformation behavior under global reflection (hflip)\n')
+    w('Frozen definitions (analyze_tier_c.py):\n')
+    w('- `A_transform` = P(transformed prediction == expected transformed '
+      'label) — transformed-answer accuracy;\n')
+    w('- `C_pair` = P(pair consistency) — the model\'s two answers on the same '
+      'example obey the linked-answer law: hflip_flip = P(mirrored != normal) '
+      '(response flip / answer-update rate), hflip_invariant = P(mirrored == '
+      'normal) (response-stability rate);\n')
+    w('- `both_correct` = P(normal-correct AND transformed answer obeys the '
+      'law).\n')
+    w('hflip_flip (n=245, flip-expected):\n')
+    w('| checkpoint | A_transform (transformed accuracy) | C_pair (answer-update) | both_correct |')
     w('|---|---|---|---|')
     for ck in order:
         v = tier_c_ck('qwen2vl', 'hflip_flip', ck)
         w(f'| {ck} | {v["A_transform"]:.4f} | {v["C_pair"]:.4f} | {v["both_correct"]:.4f} |')
     w('')
-    w('hflip_invariant (n=421, stability):\n')
-    w('| checkpoint | A_transform | C_pair | both_correct |')
+    w('hflip_invariant (n=421, response stability):\n')
+    w('| checkpoint | A_transform | C_pair (stability) | both_correct |')
     w('|---|---|---|---|')
     for ck in order:
         v = tier_c_ck('qwen2vl', 'hflip_invariant', ck)
@@ -137,10 +143,10 @@ def main():
         w(f'| seed{i} | {s - zs_n2:+.4f} | {ss:.4f} | {s - ss:.4f} | {(s - ss) - (zs_n2 - zs_s2):+.4f} |')
     w('')
     w('### 2c. Tier-C hflip_flip (n=245)\n')
-    w('A_transform = flip rate (transformed-image accuracy); C_pair = paired '
-      'both-images correctness (answer-updating); both_correct = paired '
-      'both-correct with the label law obeyed:\n')
-    w('| checkpoint | A_transform (flip rate) | C_pair | both_correct |')
+    w('A_transform = transformed-answer accuracy; C_pair = pair consistency '
+      '(answer-update rate, P(mirrored != normal)); both_correct = '
+      'P(normal-correct AND transformed obeys the flip law):\n')
+    w('| checkpoint | A_transform (transformed accuracy) | C_pair (answer-update) | both_correct |')
     w('|---|---|---|---|')
     for ck in order2:
         v = tier_c_ck('smolvlm2', 'hflip_flip', ck)
@@ -165,8 +171,11 @@ def main():
     w(f'| normal accuracy | {zs3["normal"]["accuracy"]:.4f} | {gl3["normal"]["accuracy"]:.4f} | {q3["deltas"]["dA_normal"]:+.4f} |')
     w(f'| shuffle accuracy | {zs3["shuffle"]["accuracy"]:.4f} | {gl3["shuffle"]["accuracy"]:.4f} | {gl3["shuffle"]["accuracy"]-zs3["shuffle"]["accuracy"]:+.4f} |')
     w(f'| shuffle gap (G) | {zs3["normal"]["accuracy"]-zs3["shuffle"]["accuracy"]:.4f} | {gl3["normal"]["accuracy"]-gl3["shuffle"]["accuracy"]:.4f} | {q3["deltas"]["dG_shuffle_gap"]:+.4f} |')
-    w(f'| hflip_flip flip rate | {zs3["hflip_flip"]["both_correct_rate"]:.4f} | {gl3["hflip_flip"]["both_correct_rate"]:.4f} | {q3["deltas"]["dhflip_flip_both_correct"]:+.4f} |')
+    w(f'| hflip_flip transformed accuracy (A_transform) | {zs3["hflip_flip"]["both_correct_rate"]:.4f} | {gl3["hflip_flip"]["both_correct_rate"]:.4f} | {q3["deltas"]["dhflip_flip_both_correct"]:+.4f} |')
     w('')
+    w('Note: the Qwen3-VL extension computed transformed-answer accuracy only; '
+      'C_pair (pair consistency / answer-update rate) was NOT computed for this '
+      'extension, so no response-law-compliance claim is made for Qwen3-VL.\n')
     w('Note: labeled exploratory architecture extension (not preregistered); the frozen '
       'confirmatory comparisons remain Qwen2-VL-7B / HardNeg / SmolVLM2.\n')
 
@@ -184,12 +193,21 @@ def main():
       '(= G_tuned - G_zero_shot), is +0.0456 (7B seed-0), +0.0378..+0.0478 (7B fresh '
       'seeds), +0.0305 (2B seed-0), +0.0287..+0.0337 (2B fresh seeds), +0.0356 '
       '(Qwen3-VL).')
-    w('3. **Visual response under global reflection (hflip_flip)**: 2B A_transform '
-      '(flip rate) rises 0.4980 (zero-shot) -> 0.5224 (seed-0 General) -> 0.5469 for '
-      'each fresh seed, while paired both-correct rises monotonically 0.2531 -> '
-      '0.2980 -> 0.3061/0.3143/0.3224; 7B A_transform replicates tightly '
-      '(0.6571 seed-0 vs 0.6490/0.6571/0.6449 seeds); Qwen3-VL A_transform +0.0449 '
-      '(0.6571 -> 0.7020).')
+    w('3. **Transformation behavior under global reflection (hflip_flip, Tier C)**: '
+      'three separate quantities, never collapsed:\n'
+      '   - *transformed accuracy* `A_transform`: 2B 0.4980 (zero-shot) -> 0.5224 '
+      '(seed-0 General) -> 0.5469 for each fresh seed; 7B 0.6367 -> 0.6571 (seed-0) '
+      'vs 0.6490/0.6571/0.6449 (fresh seeds); Qwen3-VL 0.6571 -> 0.7020 (+0.0449, '
+      'transformed-accuracy gain only — C_pair not computed for the extension);\n'
+      '   - *response-law compliance / answer-update rate* `C_pair` '
+      '(P(mirrored != normal)): 2B 0.3184 (zero-shot) -> 0.3469 (seed-0) with all '
+      'three fresh seeds higher than zero-shot (0.3429/0.3633/0.3714); 7B 0.6163 '
+      '(zero-shot) -> 0.6857 (seed-0) with fresh seeds 0.6490/0.6898/0.6653 — '
+      'broadly higher after General adaptation, varying across seeds;\n'
+      '   - *joint correctness* `both_correct`: 2B 0.2531 -> 0.2980 (seed-0) -> '
+      '0.3061/0.3143/0.3224 (fresh seeds).\n'
+      '   Seeds are independent training draws, not ordered stages; fresh-seed '
+      'statements report ranges, never "monotonic across seeds".')
     w('4. **Semantic consistency (ΔC, relcomp)**: seeds cluster tightly around seed-0 in '
       'both families (7B C_pair: seed-0 0.677, seeds 0.655-0.665; 2B C_pair: seed-0 0.502, '
       'seeds 0.498-0.511) — no axis-specific divergence.')
@@ -198,8 +216,8 @@ def main():
       '(within seed-0 +/- tolerance); no REVIEW/FAIL cases recorded.')
     w('')
     w('**Caveats (recorded, not hidden):** hflip is a global horizontal reflection, not '
-      'VisualFLIP-style minimal local edits; pair metrics are reported as collapse-style '
-      'paired answer-update metrics following VisualFLIP with the intervention difference '
+      'VisualFLIP-style minimal local edits; C_pair is reported as a collapse-style '
+      'paired answer-update metric following VisualFLIP with the intervention difference '
       'stated explicitly. facingcomp is a semantic (language-change) condition and '
       'contributes to ΔC, not ΔG.')
 

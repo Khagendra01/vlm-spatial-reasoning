@@ -241,3 +241,23 @@ metric); synthesis distinguishes A_transform (flip rate) from both_correct,
 and G (normal-minus-shuffle gap) from dG (= G_tuned - G_zero_shot)
 throughout. All numbers re-derived from raw prediction artifacts by
 scripts/grounding/analyze_seed_campaign.py.
+
+### 2026-08-14 (cont.) - Terminology correction (zero-GPU bookkeeping)
+
+Orchestrator audit: the reporting layer still inverted the frozen metric
+semantics in prose. Corrected (analyze_seed_campaign.py regenerates
+ANALYSIS.md from raw artifacts):
+- A_transform = P(transformed prediction == expected transformed label):
+  TRANSFORMED-ANSWER ACCURACY (never "flip rate").
+- C_pair = P(pair consistency): linked-answer law compliance; hflip_flip =
+  P(mirrored != normal) (response flip / answer-update rate); hflip_invariant
+  = P(mirrored == normal) (response-stability rate). (frozen definitions in
+  analyze_tier_c.py docstring.)
+- both_correct = P(normal-correct AND transformed obeys the law).
+- Removed "monotonic across seeds" (seeds are independent draws, not ordered
+  stages); fresh-seed statements now report ranges.
+- Qwen3-VL extension scoped to A_transform only (C_pair NOT computed for the
+  extension; no response-law-compliance claim made). The +0.0449 is a
+  transformed-accuracy gain.
+Story unchanged: dA and dG remain the seed-robust headline; Tier C reports
+three separate transformation-behavior quantities.

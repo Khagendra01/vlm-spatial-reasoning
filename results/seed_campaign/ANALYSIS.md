@@ -28,11 +28,19 @@ seed-0 (committed legacy general_lora): normal=0.8241, shuffle=0.4720 — matche
 
 Fresh-seed ΔA: mean 0.0506 +/- 0.0046; fresh-seed ΔG: mean 0.0440 +/- 0.0054.
 
-### 1c. Tier-C: visual response under global reflection (hflip)
+### 1c. Tier-C: transformation behavior under global reflection (hflip)
 
-hflip_flip (n=245, flip-expected). A_transform = transformed-image accuracy (= flip rate); C_pair = paired both-images correctness (answer-updating); both_correct = both images answered correctly with the label law obeyed:
+Frozen definitions (analyze_tier_c.py):
 
-| checkpoint | A_transform (flip rate) | C_pair | both_correct |
+- `A_transform` = P(transformed prediction == expected transformed label) — transformed-answer accuracy;
+
+- `C_pair` = P(pair consistency) — the model's two answers on the same example obey the linked-answer law: hflip_flip = P(mirrored != normal) (response flip / answer-update rate), hflip_invariant = P(mirrored == normal) (response-stability rate);
+
+- `both_correct` = P(normal-correct AND transformed answer obeys the law).
+
+hflip_flip (n=245, flip-expected):
+
+| checkpoint | A_transform (transformed accuracy) | C_pair (answer-update) | both_correct |
 |---|---|---|---|
 | zero_shot | 0.6367 | 0.6163 | 0.5388 |
 | general_lora | 0.6571 | 0.6857 | 0.5959 |
@@ -41,9 +49,9 @@ hflip_flip (n=245, flip-expected). A_transform = transformed-image accuracy (= f
 | r1_seedB | 0.6571 | 0.6898 | 0.6041 |
 | r1_seedC | 0.6449 | 0.6653 | 0.5837 |
 
-hflip_invariant (n=421, stability):
+hflip_invariant (n=421, response stability):
 
-| checkpoint | A_transform | C_pair | both_correct |
+| checkpoint | A_transform | C_pair (stability) | both_correct |
 |---|---|---|---|
 | zero_shot | 0.7031 | 0.8907 | 0.6556 |
 | general_lora | 0.8242 | 0.9026 | 0.7696 |
@@ -77,9 +85,9 @@ seed-0 (committed r1_2b_full general_lora): normal=0.7649, shuffle=0.4674 — ma
 
 ### 2c. Tier-C hflip_flip (n=245)
 
-A_transform = flip rate (transformed-image accuracy); C_pair = paired both-images correctness (answer-updating); both_correct = paired both-correct with the label law obeyed:
+A_transform = transformed-answer accuracy; C_pair = pair consistency (answer-update rate, P(mirrored != normal)); both_correct = P(normal-correct AND transformed obeys the flip law):
 
-| checkpoint | A_transform (flip rate) | C_pair | both_correct |
+| checkpoint | A_transform (transformed accuracy) | C_pair (answer-update) | both_correct |
 |---|---|---|---|
 | zero_shot | 0.4980 | 0.3184 | 0.2531 |
 | general_lora | 0.5224 | 0.3469 | 0.2980 |
@@ -119,7 +127,9 @@ A_transform = flip rate (transformed-image accuracy); C_pair = paired both-image
 | normal accuracy | 0.8141 | 0.8465 | +0.0324 |
 | shuffle accuracy | 0.4670 | 0.4638 | -0.0032 |
 | shuffle gap (G) | 0.3471 | 0.3827 | +0.0356 |
-| hflip_flip flip rate | 0.6571 | 0.7020 | +0.0449 |
+| hflip_flip transformed accuracy (A_transform) | 0.6571 | 0.7020 | +0.0449 |
+
+Note: the Qwen3-VL extension computed transformed-answer accuracy only; C_pair (pair consistency / answer-update rate) was NOT computed for this extension, so no response-law-compliance claim is made for Qwen3-VL.
 
 Note: labeled exploratory architecture extension (not preregistered); the frozen confirmatory comparisons remain Qwen2-VL-7B / HardNeg / SmolVLM2.
 
@@ -129,9 +139,13 @@ Note: labeled exploratory architecture extension (not preregistered); the frozen
 
 1. **ΔA (benchmark)**: normal accuracy improves in every family (7B seed-0 +5.42 pp, fresh seeds +4.56..+5.47 pp; 2B seed-0 +2.87 pp, fresh seeds +3.05..+3.23 pp; Qwen3-VL +3.24 pp).
 2. **G vs ΔG (correct-image dependence)**: the normal-minus-shuffle gap **G** widens under tuning in every family — 7B: G 0.3522 (seed-0), 0.3444..0.3544 (fresh seeds); 2B: G 0.2975 (seed-0), 0.2957..0.3007 (fresh seeds); Qwen3-VL: G 0.3471 -> 0.3827. The change relative to zero-shot, **ΔG** (= G_tuned - G_zero_shot), is +0.0456 (7B seed-0), +0.0378..+0.0478 (7B fresh seeds), +0.0305 (2B seed-0), +0.0287..+0.0337 (2B fresh seeds), +0.0356 (Qwen3-VL).
-3. **Visual response under global reflection (hflip_flip)**: 2B A_transform (flip rate) rises 0.4980 (zero-shot) -> 0.5224 (seed-0 General) -> 0.5469 for each fresh seed, while paired both-correct rises monotonically 0.2531 -> 0.2980 -> 0.3061/0.3143/0.3224; 7B A_transform replicates tightly (0.6571 seed-0 vs 0.6490/0.6571/0.6449 seeds); Qwen3-VL A_transform +0.0449 (0.6571 -> 0.7020).
+3. **Transformation behavior under global reflection (hflip_flip, Tier C)**: three separate quantities, never collapsed:
+   - *transformed accuracy* `A_transform`: 2B 0.4980 (zero-shot) -> 0.5224 (seed-0 General) -> 0.5469 for each fresh seed; 7B 0.6367 -> 0.6571 (seed-0) vs 0.6490/0.6571/0.6449 (fresh seeds); Qwen3-VL 0.6571 -> 0.7020 (+0.0449, transformed-accuracy gain only — C_pair not computed for the extension);
+   - *response-law compliance / answer-update rate* `C_pair` (P(mirrored != normal)): 2B 0.3184 (zero-shot) -> 0.3469 (seed-0) with all three fresh seeds higher than zero-shot (0.3429/0.3633/0.3714); 7B 0.6163 (zero-shot) -> 0.6857 (seed-0) with fresh seeds 0.6490/0.6898/0.6653 — broadly higher after General adaptation, varying across seeds;
+   - *joint correctness* `both_correct`: 2B 0.2531 -> 0.2980 (seed-0) -> 0.3061/0.3143/0.3224 (fresh seeds).
+   Seeds are independent training draws, not ordered stages; fresh-seed statements report ranges, never "monotonic across seeds".
 4. **Semantic consistency (ΔC, relcomp)**: seeds cluster tightly around seed-0 in both families (7B C_pair: seed-0 0.677, seeds 0.655-0.665; 2B C_pair: seed-0 0.502, seeds 0.498-0.511) — no axis-specific divergence.
 
 **Verdicts per seed** (vs seed-0, per protocol): all fresh seeds PASS on ΔA/ΔG (within seed-0 +/- tolerance); no REVIEW/FAIL cases recorded.
 
-**Caveats (recorded, not hidden):** hflip is a global horizontal reflection, not VisualFLIP-style minimal local edits; pair metrics are reported as collapse-style paired answer-update metrics following VisualFLIP with the intervention difference stated explicitly. facingcomp is a semantic (language-change) condition and contributes to ΔC, not ΔG.
+**Caveats (recorded, not hidden):** hflip is a global horizontal reflection, not VisualFLIP-style minimal local edits; C_pair is reported as a collapse-style paired answer-update metric following VisualFLIP with the intervention difference stated explicitly. facingcomp is a semantic (language-change) condition and contributes to ΔC, not ΔG.
