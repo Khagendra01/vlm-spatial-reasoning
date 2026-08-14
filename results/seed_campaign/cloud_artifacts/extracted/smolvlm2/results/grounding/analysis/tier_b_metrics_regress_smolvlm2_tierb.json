@@ -1,0 +1,214 @@
+{
+  "generated_at": "2026-08-13T17:55:56+00:00",
+  "git_branch": "HEAD",
+  "git_commit": "9b994a2a052f86be9f9d15743c202c4e0c8e0c22",
+  "normal_tag": "regress_smolvlm2",
+  "status": "confirmatory",
+  "tag": "regress_smolvlm2_tierb",
+  "transforms": {
+    "relcomp": {
+      "family_breakdown": {
+        "general_lora": {
+          "depth": {
+            "C": 0.650685,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 292,
+            "obey": 190
+          },
+          "horizontal": {
+            "C": 0.538776,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 245,
+            "obey": 132
+          },
+          "vertical": {
+            "C": 0.457364,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 129,
+            "obey": 59
+          }
+        },
+        "zero_shot": {
+          "depth": {
+            "C": 0.609589,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 292,
+            "obey": 178
+          },
+          "horizontal": {
+            "C": 0.481633,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 245,
+            "obey": 118
+          },
+          "vertical": {
+            "C": 0.387597,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 129,
+            "obey": 50
+          }
+        }
+      },
+      "law": "flip_law",
+      "n_eligible": 666,
+      "relation_breakdown": {
+        "general_lora": {
+          "above": {
+            "C": 0.461538,
+            "n": 65
+          },
+          "at the left side of": {
+            "C": 0.510417,
+            "n": 96
+          },
+          "at the right side of": {
+            "C": 0.475,
+            "n": 80
+          },
+          "behind": {
+            "C": 0.613333,
+            "n": 150
+          },
+          "below": {
+            "C": 0.453125,
+            "n": 64
+          },
+          "in front of": {
+            "C": 0.690141,
+            "n": 142
+          },
+          "left of": {
+            "C": 0.65,
+            "n": 40
+          },
+          "right of": {
+            "C": 0.655172,
+            "n": 29
+          }
+        },
+        "zero_shot": {
+          "above": {
+            "C": 0.384615,
+            "n": 65
+          },
+          "at the left side of": {
+            "C": 0.46875,
+            "n": 96
+          },
+          "at the right side of": {
+            "C": 0.3625,
+            "n": 80
+          },
+          "behind": {
+            "C": 0.533333,
+            "n": 150
+          },
+          "below": {
+            "C": 0.390625,
+            "n": 64
+          },
+          "in front of": {
+            "C": 0.690141,
+            "n": 142
+          },
+          "left of": {
+            "C": 0.6,
+            "n": 40
+          },
+          "right of": {
+            "C": 0.689655,
+            "n": 29
+          }
+        }
+      },
+      "summary_by_checkpoint": {
+        "general_lora": {
+          "A_transform": 0.572072,
+          "C": 0.572072,
+          "C_pair": 0.501502,
+          "C_valid": 0.572072,
+          "both_correct": 0.403904,
+          "invalid": 0,
+          "invalid_rate": 0.0,
+          "n": 666,
+          "obey": 381
+        },
+        "zero_shot": {
+          "A_transform": 0.51952,
+          "C": 0.51952,
+          "C_pair": 0.468468,
+          "C_valid": 0.51952,
+          "both_correct": 0.345345,
+          "invalid": 0,
+          "invalid_rate": 0.0,
+          "n": 666,
+          "obey": 346
+        }
+      },
+      "transitions": {
+        "P1": {
+          "C_u": 0.468468,
+          "C_v": 0.501502,
+          "delta_C": 0.033033,
+          "delta_c_ci": {
+            "ci_lower": 0.001502,
+            "ci_upper": 0.064565,
+            "mean": 0.033033,
+            "n": 666,
+            "n_iter": 10000,
+            "seed": 20260810
+          },
+          "from": "zero_shot",
+          "mcnemar": {
+            "b": 68,
+            "c": 46,
+            "discordant_n": 114,
+            "exact_p": 0.048725,
+            "mcnemar_odds_ratio": 1.4782608695652173
+          },
+          "n": 666,
+          "to": "general_lora"
+        },
+        "checkpoints": [
+          "zero_shot",
+          "general_lora"
+        ]
+      },
+      "transitions_transformed_accuracy": {
+        "P1": {
+          "C_u": 0.51952,
+          "C_v": 0.572072,
+          "delta_C": 0.052553,
+          "delta_c_ci": {
+            "ci_lower": 0.03003,
+            "ci_upper": 0.076577,
+            "mean": 0.052553,
+            "n": 666,
+            "n_iter": 10000,
+            "seed": 20260810
+          },
+          "from": "zero_shot",
+          "mcnemar": {
+            "b": 50,
+            "c": 15,
+            "discordant_n": 65,
+            "exact_p": 1.6e-05,
+            "mcnemar_odds_ratio": 3.3333333333333335
+          },
+          "n": 666,
+          "to": "general_lora"
+        },
+        "checkpoints": [
+          "zero_shot",
+          "general_lora"
+        ]
+      }
+    }
+  }
+}

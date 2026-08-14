@@ -181,3 +181,51 @@ post-fix (queued seedA/B/C failed rc=1 with TypeError before ff51ab5).
 (frozen, commit 88f5da2), control/eligibility files, and all seed-0
 artifacts. No training inputs/recipe changed; no fresh-seed battery
 evaluation has been run.
+
+---
+
+## 2026-08-14 - R1 seed campaign COMPLETE: all 5 training runs + both gates + both batteries + Qwen3-VL extension
+
+**Compute executed (3x A6000, Thunder Compute; instances since deleted):**
+- Training: 7B seedA/B/C (101/202/303) + 2B seedB/seedC — all 5 completed.
+  2B seedB deadlock (2026-08-12 entry) did NOT recur on the fresh box:
+  full 3800-step 2B runs completed with the identical driver.
+- Regression gate: PASSED for both families (0 mismatches vs committed
+  legacy outputs; qwen2vl + smolvlm2) — corrected battery verified.
+- Fresh-seed batteries: qwen2vl (6 ckpts x 6 conds) + smolvlm2 (5 ckpts x 6
+  conds) completed; all analysis artifacts committed under
+  results/grounding/analysis (r1_campaign tags).
+- Post-confirmatory extension: Qwen3-VL-8B-Instruct general LoRA trained
+  (3800 steps, r=8/a=16, split seed=42) + evaluated on normal/shuffle/
+  hflip_flip/hflip_invariant/relcomp. Labeled exploratory architecture
+  extension, NOT preregistered (orchestrator guidance 2026-08-13).
+
+**Key results (full tables in results/seed_campaign/ANALYSIS.md):**
+- dA: +5.4 pts (7B seed-0), +4.6..5.5 (7B seeds), +2.9..3.2 (2B), +3.2
+  (Qwen3-VL) — benchmark gain replicates across every seed/backbone.
+- dG (correct-image dependence, normal-shuffle gap): widens under tuning in
+  all families (7B 0.352 seed-0 / 0.344-0.354 seeds; 2B 0.298 / 0.296-0.301;
+  Qwen3-VL +0.036).
+- Visual response (hflip_flip flip-rate): monotonic improvement across fresh
+  2B seeds (0.298 -> 0.306/0.314/0.322), tight replication in 7B (0.657
+  seed-0 vs 0.649/0.657/0.645), +0.045 in Qwen3-VL.
+- dC (relcomp C_pair): seeds cluster tightly around seed-0 in both families
+  (7B 0.655-0.665 vs 0.677; 2B 0.498-0.511 vs 0.502).
+- All checkpoints + training logs pushed to origin/research/
+  spatial-grounding-audit (commit 2ef4f3c); raw battery artifacts archived
+  locally in results/seed_campaign/cloud_artifacts/.
+
+**Framing decisions (per orchestrator literature review 2026-08-13):**
+- Novelty claim = three-way training-effect decomposition (dA/dG/dC under
+  ordinary spatial fine-tuning, multi-seed, cross-backbone) — NOT the
+  normal-vs-shuffle gap itself (Beyond Accuracy 2026 defines VRS
+  identically).
+- hflip metrics reported as collapse-style paired answer-update metrics
+  following VisualFLIP (Zhu et al. 2026); explicitly NOT the VisualFLIP
+  protocol (global reflection vs minimal local edit). VisualFLIP official
+  dataset gated; re-check before deadline.
+- facingcomp contributes to dC (semantic), never sold as visual
+  counterfactual.
+- Qwen3-VL-8B labeled post-confirmatory external validation, motivated by
+  reviewer/relevance concerns (VisualFLIP Table 1 provides the published
+  zero-shot reference row).

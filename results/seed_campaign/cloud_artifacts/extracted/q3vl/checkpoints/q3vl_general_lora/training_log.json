@@ -1,0 +1,11 @@
+{
+  "model": "Qwen/Qwen3-VL-8B-Instruct",
+  "epochs": 2,
+  "lr": 0.0001,
+  "lora_rank": 8,
+  "lora_alpha": 16,
+  "total_steps": 3800,
+  "split_seed": 42,
+  "device": "NVIDIA RTX A6000",
+  "status": "post-confirmatory exploratory extension"
+}

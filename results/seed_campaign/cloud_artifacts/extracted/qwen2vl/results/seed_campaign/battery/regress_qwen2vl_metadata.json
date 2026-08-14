@@ -1,0 +1,39 @@
+{
+  "analysis_files": {
+    "tier_a": "results/grounding/analysis/tier_a_metrics_regress_qwen2vl.json",
+    "tier_b_facingcomp": "results/grounding/analysis/tier_b_metrics_regress_qwen2vl_facing.json",
+    "tier_b_relcomp": "results/grounding/analysis/tier_b_metrics_regress_qwen2vl_tierb.json",
+    "tier_c": "results/grounding/analysis/tier_c_metrics_regress_qwen2vl_tierc.json"
+  },
+  "attn_implementation": "eager",
+  "batch_size": 8,
+  "checkpoints": [
+    "zero_shot",
+    "general_lora",
+    "hardneg_lora"
+  ],
+  "correction": "SPATIAL_REASONING_DECISION_LOG 2026-08-11 battery-drift entry",
+  "generated_at": "2026-08-13T16:03:58.564570+00:00",
+  "git_branch": "HEAD",
+  "git_commit": "9b994a2a052f86be9f9d15743c202c4e0c8e0c22",
+  "model_family": "qwen2vl",
+  "predictions_dir": "results/grounding/predictions/regress_qwen2vl",
+  "protocol_hash": "018b5dd4ce4b4958b065ac41b8a59a9903083ab39801da80019fe62780e41824",
+  "resume": false,
+  "tier_a_conditions": [
+    "normal",
+    "shuffle",
+    "blank",
+    "text_only"
+  ],
+  "tier_b_facingcomp": [
+    "facingcomp"
+  ],
+  "tier_b_relcomp": [
+    "relcomp"
+  ],
+  "tier_c_transforms": [
+    "hflip_flip",
+    "hflip_invariant"
+  ]
+}

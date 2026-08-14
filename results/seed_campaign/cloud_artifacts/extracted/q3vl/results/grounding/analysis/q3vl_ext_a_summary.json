@@ -1,0 +1,61 @@
+{
+  "conditions": {
+    "general_lora": {
+      "hflip_flip": {
+        "accuracy": 0.702,
+        "both_correct_rate": 0.702,
+        "n": 245
+      },
+      "hflip_invariant": {
+        "accuracy": 0.8124,
+        "both_correct_rate": 0.8124,
+        "n": 421
+      },
+      "n_rows": 5722,
+      "normal": {
+        "accuracy": 0.8465,
+        "n": 2195
+      },
+      "relcomp": {
+        "accuracy": 0.6682,
+        "n": 666
+      },
+      "shuffle": {
+        "accuracy": 0.4638,
+        "n": 2195
+      }
+    },
+    "zero_shot": {
+      "hflip_flip": {
+        "accuracy": 0.6571,
+        "both_correct_rate": 0.6571,
+        "n": 245
+      },
+      "hflip_invariant": {
+        "accuracy": 0.7838,
+        "both_correct_rate": 0.7838,
+        "n": 421
+      },
+      "n_rows": 5722,
+      "normal": {
+        "accuracy": 0.8141,
+        "n": 2195
+      },
+      "relcomp": {
+        "accuracy": 0.6577,
+        "n": 666
+      },
+      "shuffle": {
+        "accuracy": 0.467,
+        "n": 2195
+      }
+    }
+  },
+  "deltas": {
+    "dA_normal": 0.0324,
+    "dG_shuffle_gap": 0.0356,
+    "dhflip_flip_both_correct": 0.0449
+  },
+  "model": "Qwen/Qwen3-VL-8B-Instruct",
+  "tag": "ext_a"
+}

@@ -1,0 +1,62 @@
+{
+  "attn": "eager",
+  "batch_size": 8,
+  "checkpoints": "zero_shot,general_lora,hardneg_lora,r1_seedA,r1_seedB,r1_seedC",
+  "conditions": "normal,shuffle,blank,text_only",
+  "env": {
+    "argv": [
+      "/home/ubuntu/vlm-spatial-reasoning/scripts/grounding/run_tier_a.py",
+      "--tag",
+      "r1_campaign",
+      "--conditions",
+      "normal,shuffle,blank,text_only",
+      "--model-family",
+      "qwen2vl",
+      "--checkpoints",
+      "zero_shot,general_lora,hardneg_lora,r1_seedA,r1_seedB,r1_seedC",
+      "--attn",
+      "eager",
+      "--batch-size",
+      "8"
+    ],
+    "cwd": "/home/ubuntu/vlm-spatial-reasoning",
+    "datasets": "5.0.1",
+    "device": "cuda",
+    "peft": "0.20.0",
+    "platform": "Linux-6.17.0-35-generic-x86_64-with-glibc2.35",
+    "python": "3.12.13",
+    "torch": "2.12.1+cu130",
+    "torch_cuda": "13.0",
+    "transformers": "5.14.1"
+  },
+  "generation": {
+    "do_sample": false,
+    "max_new_tokens": 5
+  },
+  "git_branch": "HEAD",
+  "git_commit": "9b994a2a052f86be9f9d15743c202c4e0c8e0c22",
+  "ids_file": "results/grounding/protocol/vsr_test_ids.json",
+  "ids_file_sha256": "dfbbc956915c17fd853d23855ea1e307bc12c78ab88ce971ccaa83079c6039dc",
+  "limit": null,
+  "model_family": "qwen2vl",
+  "model_ids": {
+    "general_lora": "Qwen/Qwen2-VL-7B-Instruct",
+    "hardneg_lora": "Qwen/Qwen2-VL-7B-Instruct",
+    "r1_seedA": "Qwen/Qwen2-VL-7B-Instruct",
+    "r1_seedB": "Qwen/Qwen2-VL-7B-Instruct",
+    "r1_seedC": "Qwen/Qwen2-VL-7B-Instruct",
+    "zero_shot": "Qwen/Qwen2-VL-7B-Instruct"
+  },
+  "parser_hash": "eb4075c77285da02c52794154760fa969fb21ab3dcceb0820cb7d2ba27d27471",
+  "preprocessing": {
+    "cap_long_side_px": 392,
+    "note": "uniform across conditions (TECHNIQUES.md §4)"
+  },
+  "prompt_hash": "7f29cebb9d06eca06ad0d6c690e4d5a083b71a9c42008f88e92474e3ff0eb98a",
+  "protocol_hash": "018b5dd4ce4b4958b065ac41b8a59a9903083ab39801da80019fe62780e41824",
+  "quantize": "none",
+  "run_id": "tier_a_r1_campaign",
+  "shuffle_mapping_sha256": "d0ca3efb893c3338c12823430a9c1007d019eb79f432c51851ff7c318e1eb171",
+  "started_at": "2026-08-13T19:31:16+00:00",
+  "tag": "r1_campaign"
+}

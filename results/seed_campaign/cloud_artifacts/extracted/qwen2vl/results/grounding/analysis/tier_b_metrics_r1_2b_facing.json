@@ -1,0 +1,138 @@
+{
+  "generated_at": "2026-08-11T05:33:12+00:00",
+  "git_branch": "research/spatial-grounding-audit",
+  "git_commit": "b2c4bcf56962788e103845b20c72a3d6dc80ec5f",
+  "normal_tag": "r1_2b_full",
+  "status": "confirmatory",
+  "tag": "r1_2b_full",
+  "transforms": {
+    "facingcomp": {
+      "family_breakdown": {
+        "general_lora": {
+          "orientation": {
+            "C": 0.504854,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 103,
+            "obey": 52
+          }
+        },
+        "zero_shot": {
+          "orientation": {
+            "C": 0.533981,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 103,
+            "obey": 55
+          }
+        }
+      },
+      "law": "flip_law",
+      "n_eligible": 103,
+      "relation_breakdown": {
+        "general_lora": {
+          "facing": {
+            "C": 0.46875,
+            "n": 64
+          },
+          "facing away from": {
+            "C": 0.564103,
+            "n": 39
+          }
+        },
+        "zero_shot": {
+          "facing": {
+            "C": 0.53125,
+            "n": 64
+          },
+          "facing away from": {
+            "C": 0.538462,
+            "n": 39
+          }
+        }
+      },
+      "summary_by_checkpoint": {
+        "general_lora": {
+          "A_transform": 0.504854,
+          "C": 0.504854,
+          "C_pair": 0.553398,
+          "C_valid": 0.504854,
+          "both_correct": 0.339806,
+          "invalid": 0,
+          "invalid_rate": 0.0,
+          "n": 103,
+          "obey": 52
+        },
+        "zero_shot": {
+          "A_transform": 0.533981,
+          "C": 0.533981,
+          "C_pair": 0.621359,
+          "C_valid": 0.533981,
+          "both_correct": 0.398058,
+          "invalid": 0,
+          "invalid_rate": 0.0,
+          "n": 103,
+          "obey": 55
+        }
+      },
+      "transitions": {
+        "P1": {
+          "C_u": 0.621359,
+          "C_v": 0.553398,
+          "delta_C": -0.067961,
+          "delta_c_ci": {
+            "ci_lower": -0.15534,
+            "ci_upper": 0.009709,
+            "mean": -0.067961,
+            "n": 103,
+            "n_iter": 10000,
+            "seed": 20260810
+          },
+          "from": "zero_shot",
+          "mcnemar": {
+            "b": 6,
+            "c": 13,
+            "discordant_n": 19,
+            "exact_p": 0.167068,
+            "mcnemar_odds_ratio": 0.46153846153846156
+          },
+          "n": 103,
+          "to": "general_lora"
+        },
+        "checkpoints": [
+          "zero_shot",
+          "general_lora"
+        ]
+      },
+      "transitions_transformed_accuracy": {
+        "P1": {
+          "C_u": 0.533981,
+          "C_v": 0.504854,
+          "delta_C": -0.029126,
+          "delta_c_ci": {
+            "ci_lower": -0.097087,
+            "ci_upper": 0.029126,
+            "mean": -0.029126,
+            "n": 103,
+            "n_iter": 10000,
+            "seed": 20260810
+          },
+          "from": "zero_shot",
+          "mcnemar": {
+            "b": 4,
+            "c": 7,
+            "discordant_n": 11,
+            "exact_p": 0.548828,
+            "mcnemar_odds_ratio": 0.5714285714285714
+          },
+          "n": 103,
+          "to": "general_lora"
+        },
+        "checkpoints": [
+          "zero_shot",
+          "general_lora"
+        ]
+      }
+    }
+  }
+}

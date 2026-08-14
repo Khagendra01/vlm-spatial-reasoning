@@ -1,0 +1,1112 @@
+{
+  "analysis": {
+    "accuracy_by_checkpoint_condition": {
+      "blank": {
+        "general_lora": 0.45,
+        "hardneg_lora": 0.44,
+        "zero_shot": 0.435
+      },
+      "normal": {
+        "general_lora": 0.83,
+        "hardneg_lora": 0.825,
+        "zero_shot": 0.735
+      },
+      "shuffle": {
+        "general_lora": 0.45,
+        "hardneg_lora": 0.44,
+        "zero_shot": 0.44
+      },
+      "text_only": {
+        "general_lora": 0.425,
+        "hardneg_lora": 0.44,
+        "zero_shot": 0.435
+      }
+    },
+    "checkpoints": [
+      "zero_shot",
+      "general_lora",
+      "hardneg_lora"
+    ],
+    "conditions": [
+      "normal",
+      "shuffle",
+      "blank",
+      "text_only"
+    ],
+    "family_breakdown": {
+      "blank": {
+        "general_lora": {
+          "compositional": {
+            "accuracy": 0.2,
+            "accuracy_valid": 0.2,
+            "correct": 1,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 5
+          },
+          "containment": {
+            "accuracy": 0.4166666666666667,
+            "accuracy_valid": 0.4166666666666667,
+            "correct": 10,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 24
+          },
+          "depth": {
+            "accuracy": 0.32,
+            "accuracy_valid": 0.32,
+            "correct": 8,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 25
+          },
+          "horizontal": {
+            "accuracy": 0.34285714285714286,
+            "accuracy_valid": 0.34285714285714286,
+            "correct": 12,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 35
+          },
+          "orientation": {
+            "accuracy": 0.46153846153846156,
+            "accuracy_valid": 0.46153846153846156,
+            "correct": 6,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 13
+          },
+          "other": {
+            "accuracy": 0.5,
+            "accuracy_valid": 0.5,
+            "correct": 2,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 4
+          },
+          "proximity": {
+            "accuracy": 0.7142857142857143,
+            "accuracy_valid": 0.7142857142857143,
+            "correct": 10,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 14
+          },
+          "topology_contact": {
+            "accuracy": 0.47619047619047616,
+            "accuracy_valid": 0.47619047619047616,
+            "correct": 20,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 42
+          },
+          "vertical": {
+            "accuracy": 0.5526315789473685,
+            "accuracy_valid": 0.5526315789473685,
+            "correct": 21,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 38
+          }
+        },
+        "hardneg_lora": {
+          "compositional": {
+            "accuracy": 0.2,
+            "accuracy_valid": 0.2,
+            "correct": 1,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 5
+          },
+          "containment": {
+            "accuracy": 0.4166666666666667,
+            "accuracy_valid": 0.4166666666666667,
+            "correct": 10,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 24
+          },
+          "depth": {
+            "accuracy": 0.28,
+            "accuracy_valid": 0.28,
+            "correct": 7,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 25
+          },
+          "horizontal": {
+            "accuracy": 0.34285714285714286,
+            "accuracy_valid": 0.34285714285714286,
+            "correct": 12,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 35
+          },
+          "orientation": {
+            "accuracy": 0.38461538461538464,
+            "accuracy_valid": 0.38461538461538464,
+            "correct": 5,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 13
+          },
+          "other": {
+            "accuracy": 0.25,
+            "accuracy_valid": 0.25,
+            "correct": 1,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 4
+          },
+          "proximity": {
+            "accuracy": 0.7857142857142857,
+            "accuracy_valid": 0.7857142857142857,
+            "correct": 11,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 14
+          },
+          "topology_contact": {
+            "accuracy": 0.5,
+            "accuracy_valid": 0.5,
+            "correct": 21,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 42
+          },
+          "vertical": {
+            "accuracy": 0.5263157894736842,
+            "accuracy_valid": 0.5263157894736842,
+            "correct": 20,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 38
+          }
+        },
+        "zero_shot": {
+          "compositional": {
+            "accuracy": 0.2,
+            "accuracy_valid": 0.2,
+            "correct": 1,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 5
+          },
+          "containment": {
+            "accuracy": 0.4166666666666667,
+            "accuracy_valid": 0.4166666666666667,
+            "correct": 10,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 24
+          },
+          "depth": {
+            "accuracy": 0.32,
+            "accuracy_valid": 0.32,
+            "correct": 8,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 25
+          },
+          "horizontal": {
+            "accuracy": 0.34285714285714286,
+            "accuracy_valid": 0.34285714285714286,
+            "correct": 12,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 35
+          },
+          "orientation": {
+            "accuracy": 0.46153846153846156,
+            "accuracy_valid": 0.46153846153846156,
+            "correct": 6,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 13
+          },
+          "other": {
+            "accuracy": 0.75,
+            "accuracy_valid": 0.75,
+            "correct": 3,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 4
+          },
+          "proximity": {
+            "accuracy": 0.5,
+            "accuracy_valid": 0.5,
+            "correct": 7,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 14
+          },
+          "topology_contact": {
+            "accuracy": 0.5,
+            "accuracy_valid": 0.5,
+            "correct": 21,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 42
+          },
+          "vertical": {
+            "accuracy": 0.5,
+            "accuracy_valid": 0.5,
+            "correct": 19,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 38
+          }
+        }
+      },
+      "normal": {
+        "general_lora": {
+          "compositional": {
+            "accuracy": 0.6,
+            "accuracy_valid": 0.6,
+            "correct": 3,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 5
+          },
+          "containment": {
+            "accuracy": 0.875,
+            "accuracy_valid": 0.875,
+            "correct": 21,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 24
+          },
+          "depth": {
+            "accuracy": 0.8,
+            "accuracy_valid": 0.8,
+            "correct": 20,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 25
+          },
+          "horizontal": {
+            "accuracy": 0.8857142857142857,
+            "accuracy_valid": 0.8857142857142857,
+            "correct": 31,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 35
+          },
+          "orientation": {
+            "accuracy": 0.7692307692307693,
+            "accuracy_valid": 0.7692307692307693,
+            "correct": 10,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 13
+          },
+          "other": {
+            "accuracy": 0.75,
+            "accuracy_valid": 0.75,
+            "correct": 3,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 4
+          },
+          "proximity": {
+            "accuracy": 0.9285714285714286,
+            "accuracy_valid": 0.9285714285714286,
+            "correct": 13,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 14
+          },
+          "topology_contact": {
+            "accuracy": 0.7619047619047619,
+            "accuracy_valid": 0.7619047619047619,
+            "correct": 32,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 42
+          },
+          "vertical": {
+            "accuracy": 0.868421052631579,
+            "accuracy_valid": 0.868421052631579,
+            "correct": 33,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 38
+          }
+        },
+        "hardneg_lora": {
+          "compositional": {
+            "accuracy": 0.6,
+            "accuracy_valid": 0.6,
+            "correct": 3,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 5
+          },
+          "containment": {
+            "accuracy": 0.875,
+            "accuracy_valid": 0.875,
+            "correct": 21,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 24
+          },
+          "depth": {
+            "accuracy": 0.88,
+            "accuracy_valid": 0.88,
+            "correct": 22,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 25
+          },
+          "horizontal": {
+            "accuracy": 0.8857142857142857,
+            "accuracy_valid": 0.8857142857142857,
+            "correct": 31,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 35
+          },
+          "orientation": {
+            "accuracy": 0.7692307692307693,
+            "accuracy_valid": 0.7692307692307693,
+            "correct": 10,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 13
+          },
+          "other": {
+            "accuracy": 0.5,
+            "accuracy_valid": 0.5,
+            "correct": 2,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 4
+          },
+          "proximity": {
+            "accuracy": 0.9285714285714286,
+            "accuracy_valid": 0.9285714285714286,
+            "correct": 13,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 14
+          },
+          "topology_contact": {
+            "accuracy": 0.7380952380952381,
+            "accuracy_valid": 0.7380952380952381,
+            "correct": 31,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 42
+          },
+          "vertical": {
+            "accuracy": 0.8421052631578947,
+            "accuracy_valid": 0.8421052631578947,
+            "correct": 32,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 38
+          }
+        },
+        "zero_shot": {
+          "compositional": {
+            "accuracy": 0.6,
+            "accuracy_valid": 0.6,
+            "correct": 3,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 5
+          },
+          "containment": {
+            "accuracy": 0.8333333333333334,
+            "accuracy_valid": 0.8333333333333334,
+            "correct": 20,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 24
+          },
+          "depth": {
+            "accuracy": 0.72,
+            "accuracy_valid": 0.72,
+            "correct": 18,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 25
+          },
+          "horizontal": {
+            "accuracy": 0.7714285714285715,
+            "accuracy_valid": 0.7714285714285715,
+            "correct": 27,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 35
+          },
+          "orientation": {
+            "accuracy": 0.5384615384615384,
+            "accuracy_valid": 0.5384615384615384,
+            "correct": 7,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 13
+          },
+          "other": {
+            "accuracy": 1.0,
+            "accuracy_valid": 1.0,
+            "correct": 4,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 4
+          },
+          "proximity": {
+            "accuracy": 0.7142857142857143,
+            "accuracy_valid": 0.7142857142857143,
+            "correct": 10,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 14
+          },
+          "topology_contact": {
+            "accuracy": 0.6904761904761905,
+            "accuracy_valid": 0.6904761904761905,
+            "correct": 29,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 42
+          },
+          "vertical": {
+            "accuracy": 0.7631578947368421,
+            "accuracy_valid": 0.7631578947368421,
+            "correct": 29,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 38
+          }
+        }
+      },
+      "shuffle": {
+        "general_lora": {
+          "compositional": {
+            "accuracy": 0.4,
+            "accuracy_valid": 0.4,
+            "correct": 2,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 5
+          },
+          "containment": {
+            "accuracy": 0.4166666666666667,
+            "accuracy_valid": 0.4166666666666667,
+            "correct": 10,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 24
+          },
+          "depth": {
+            "accuracy": 0.36,
+            "accuracy_valid": 0.36,
+            "correct": 9,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 25
+          },
+          "horizontal": {
+            "accuracy": 0.3142857142857143,
+            "accuracy_valid": 0.3142857142857143,
+            "correct": 11,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 35
+          },
+          "orientation": {
+            "accuracy": 0.5384615384615384,
+            "accuracy_valid": 0.5384615384615384,
+            "correct": 7,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 13
+          },
+          "other": {
+            "accuracy": 0.75,
+            "accuracy_valid": 0.75,
+            "correct": 3,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 4
+          },
+          "proximity": {
+            "accuracy": 0.5714285714285714,
+            "accuracy_valid": 0.5714285714285714,
+            "correct": 8,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 14
+          },
+          "topology_contact": {
+            "accuracy": 0.5,
+            "accuracy_valid": 0.5,
+            "correct": 21,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 42
+          },
+          "vertical": {
+            "accuracy": 0.5,
+            "accuracy_valid": 0.5,
+            "correct": 19,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 38
+          }
+        },
+        "hardneg_lora": {
+          "compositional": {
+            "accuracy": 0.4,
+            "accuracy_valid": 0.4,
+            "correct": 2,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 5
+          },
+          "containment": {
+            "accuracy": 0.4166666666666667,
+            "accuracy_valid": 0.4166666666666667,
+            "correct": 10,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 24
+          },
+          "depth": {
+            "accuracy": 0.36,
+            "accuracy_valid": 0.36,
+            "correct": 9,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 25
+          },
+          "horizontal": {
+            "accuracy": 0.34285714285714286,
+            "accuracy_valid": 0.34285714285714286,
+            "correct": 12,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 35
+          },
+          "orientation": {
+            "accuracy": 0.46153846153846156,
+            "accuracy_valid": 0.46153846153846156,
+            "correct": 6,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 13
+          },
+          "other": {
+            "accuracy": 0.5,
+            "accuracy_valid": 0.5,
+            "correct": 2,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 4
+          },
+          "proximity": {
+            "accuracy": 0.5,
+            "accuracy_valid": 0.5,
+            "correct": 7,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 14
+          },
+          "topology_contact": {
+            "accuracy": 0.5,
+            "accuracy_valid": 0.5,
+            "correct": 21,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 42
+          },
+          "vertical": {
+            "accuracy": 0.5,
+            "accuracy_valid": 0.5,
+            "correct": 19,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 38
+          }
+        },
+        "zero_shot": {
+          "compositional": {
+            "accuracy": 0.2,
+            "accuracy_valid": 0.2,
+            "correct": 1,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 5
+          },
+          "containment": {
+            "accuracy": 0.4166666666666667,
+            "accuracy_valid": 0.4166666666666667,
+            "correct": 10,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 24
+          },
+          "depth": {
+            "accuracy": 0.36,
+            "accuracy_valid": 0.36,
+            "correct": 9,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 25
+          },
+          "horizontal": {
+            "accuracy": 0.34285714285714286,
+            "accuracy_valid": 0.34285714285714286,
+            "correct": 12,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 35
+          },
+          "orientation": {
+            "accuracy": 0.46153846153846156,
+            "accuracy_valid": 0.46153846153846156,
+            "correct": 6,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 13
+          },
+          "other": {
+            "accuracy": 0.75,
+            "accuracy_valid": 0.75,
+            "correct": 3,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 4
+          },
+          "proximity": {
+            "accuracy": 0.5,
+            "accuracy_valid": 0.5,
+            "correct": 7,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 14
+          },
+          "topology_contact": {
+            "accuracy": 0.5,
+            "accuracy_valid": 0.5,
+            "correct": 21,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 42
+          },
+          "vertical": {
+            "accuracy": 0.5,
+            "accuracy_valid": 0.5,
+            "correct": 19,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 38
+          }
+        }
+      },
+      "text_only": {
+        "general_lora": {
+          "compositional": {
+            "accuracy": 0.2,
+            "accuracy_valid": 0.2,
+            "correct": 1,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 5
+          },
+          "containment": {
+            "accuracy": 0.375,
+            "accuracy_valid": 0.375,
+            "correct": 9,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 24
+          },
+          "depth": {
+            "accuracy": 0.24,
+            "accuracy_valid": 0.24,
+            "correct": 6,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 25
+          },
+          "horizontal": {
+            "accuracy": 0.5428571428571428,
+            "accuracy_valid": 0.5428571428571428,
+            "correct": 19,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 35
+          },
+          "orientation": {
+            "accuracy": 0.3076923076923077,
+            "accuracy_valid": 0.3076923076923077,
+            "correct": 4,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 13
+          },
+          "other": {
+            "accuracy": 0.0,
+            "accuracy_valid": 0.0,
+            "correct": 0,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 4
+          },
+          "proximity": {
+            "accuracy": 0.5714285714285714,
+            "accuracy_valid": 0.5714285714285714,
+            "correct": 8,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 14
+          },
+          "topology_contact": {
+            "accuracy": 0.4523809523809524,
+            "accuracy_valid": 0.4523809523809524,
+            "correct": 19,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 42
+          },
+          "vertical": {
+            "accuracy": 0.5,
+            "accuracy_valid": 0.5,
+            "correct": 19,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 38
+          }
+        },
+        "hardneg_lora": {
+          "compositional": {
+            "accuracy": 0.2,
+            "accuracy_valid": 0.2,
+            "correct": 1,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 5
+          },
+          "containment": {
+            "accuracy": 0.25,
+            "accuracy_valid": 0.25,
+            "correct": 6,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 24
+          },
+          "depth": {
+            "accuracy": 0.32,
+            "accuracy_valid": 0.32,
+            "correct": 8,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 25
+          },
+          "horizontal": {
+            "accuracy": 0.5142857142857142,
+            "accuracy_valid": 0.5142857142857142,
+            "correct": 18,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 35
+          },
+          "orientation": {
+            "accuracy": 0.38461538461538464,
+            "accuracy_valid": 0.38461538461538464,
+            "correct": 5,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 13
+          },
+          "other": {
+            "accuracy": 0.25,
+            "accuracy_valid": 0.25,
+            "correct": 1,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 4
+          },
+          "proximity": {
+            "accuracy": 0.6428571428571429,
+            "accuracy_valid": 0.6428571428571429,
+            "correct": 9,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 14
+          },
+          "topology_contact": {
+            "accuracy": 0.42857142857142855,
+            "accuracy_valid": 0.42857142857142855,
+            "correct": 18,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 42
+          },
+          "vertical": {
+            "accuracy": 0.5789473684210527,
+            "accuracy_valid": 0.5789473684210527,
+            "correct": 22,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 38
+          }
+        },
+        "zero_shot": {
+          "compositional": {
+            "accuracy": 0.2,
+            "accuracy_valid": 0.2,
+            "correct": 1,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 5
+          },
+          "containment": {
+            "accuracy": 0.4166666666666667,
+            "accuracy_valid": 0.4166666666666667,
+            "correct": 10,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 24
+          },
+          "depth": {
+            "accuracy": 0.32,
+            "accuracy_valid": 0.32,
+            "correct": 8,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 25
+          },
+          "horizontal": {
+            "accuracy": 0.34285714285714286,
+            "accuracy_valid": 0.34285714285714286,
+            "correct": 12,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 35
+          },
+          "orientation": {
+            "accuracy": 0.46153846153846156,
+            "accuracy_valid": 0.46153846153846156,
+            "correct": 6,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 13
+          },
+          "other": {
+            "accuracy": 0.75,
+            "accuracy_valid": 0.75,
+            "correct": 3,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 4
+          },
+          "proximity": {
+            "accuracy": 0.5,
+            "accuracy_valid": 0.5,
+            "correct": 7,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 14
+          },
+          "topology_contact": {
+            "accuracy": 0.5,
+            "accuracy_valid": 0.5,
+            "correct": 21,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 42
+          },
+          "vertical": {
+            "accuracy": 0.5,
+            "accuracy_valid": 0.5,
+            "correct": 19,
+            "invalid": 0,
+            "invalid_rate": 0.0,
+            "n": 38
+          }
+        }
+      }
+    },
+    "gaps": {
+      "general_lora": {
+        "G_blank": 0.37999999999999995,
+        "G_shuffle": 0.37999999999999995,
+        "G_text": 0.40499999999999997
+      },
+      "hardneg_lora": {
+        "G_blank": 0.38499999999999995,
+        "G_shuffle": 0.38499999999999995,
+        "G_text": 0.38499999999999995
+      },
+      "zero_shot": {
+        "G_blank": 0.3,
+        "G_shuffle": 0.295,
+        "G_text": 0.3
+      }
+    },
+    "invalid_rate_by_checkpoint_condition": {
+      "blank": {
+        "general_lora": 0.0,
+        "hardneg_lora": 0.0,
+        "zero_shot": 0.0
+      },
+      "normal": {
+        "general_lora": 0.0,
+        "hardneg_lora": 0.0,
+        "zero_shot": 0.0
+      },
+      "shuffle": {
+        "general_lora": 0.0,
+        "hardneg_lora": 0.0,
+        "zero_shot": 0.0
+      },
+      "text_only": {
+        "general_lora": 0.0,
+        "hardneg_lora": 0.0,
+        "zero_shot": 0.0
+      }
+    },
+    "paired_stats": {
+      "D1": {
+        "delta_a_ci": {
+          "ci_lower": -0.03,
+          "ci_upper": 0.02,
+          "mean": -0.005,
+          "n": 200,
+          "n_iter": 10000,
+          "seed": 20260810
+        },
+        "did_ci": {
+          "ci_lower": -0.03,
+          "ci_upper": 0.035,
+          "mean": 0.005,
+          "n": 200,
+          "n_iter": 10000,
+          "seed": 20260810
+        },
+        "effect_sizes": {
+          "cohens_h_deltaA": -0.0132
+        },
+        "from": "general_lora",
+        "g_shuffle_general_lora_ci": {
+          "ci_lower": 0.295,
+          "ci_upper": 0.465,
+          "mean": 0.38,
+          "n": 200,
+          "n_iter": 10000,
+          "seed": 20260810
+        },
+        "g_shuffle_hardneg_lora_ci": {
+          "ci_lower": 0.295,
+          "ci_upper": 0.475,
+          "mean": 0.385,
+          "n": 200,
+          "n_iter": 10000,
+          "seed": 20260810
+        },
+        "mcnemar": {
+          "b": 3,
+          "c": 4,
+          "continuity_chi2": 0.0,
+          "discordant_n": 7,
+          "exact_p": 1.0,
+          "mcnemar_odds_ratio": 0.75
+        },
+        "status": "key_diagnostic",
+        "to": "hardneg_lora"
+      },
+      "P1": {
+        "delta_a_ci": {
+          "ci_lower": 0.035,
+          "ci_upper": 0.155,
+          "mean": 0.095,
+          "n": 200,
+          "n_iter": 10000,
+          "seed": 20260810
+        },
+        "did_ci": {
+          "ci_lower": 0.025,
+          "ci_upper": 0.145,
+          "mean": 0.085,
+          "n": 200,
+          "n_iter": 10000,
+          "seed": 20260810
+        },
+        "effect_sizes": {
+          "cohens_h_deltaA": 0.2315
+        },
+        "from": "zero_shot",
+        "g_shuffle_general_lora_ci": {
+          "ci_lower": 0.295,
+          "ci_upper": 0.465,
+          "mean": 0.38,
+          "n": 200,
+          "n_iter": 10000,
+          "seed": 20260810
+        },
+        "g_shuffle_zero_shot_ci": {
+          "ci_lower": 0.22,
+          "ci_upper": 0.375,
+          "mean": 0.295,
+          "n": 200,
+          "n_iter": 10000,
+          "seed": 20260810
+        },
+        "mcnemar": {
+          "b": 28,
+          "c": 9,
+          "continuity_chi2": 8.7568,
+          "discordant_n": 37,
+          "exact_p": 0.002563,
+          "mcnemar_odds_ratio": 3.111111111111111
+        },
+        "status": "confirmatory_primary",
+        "to": "general_lora"
+      }
+    },
+    "transitions": {
+      "D1": {
+        "delta_A": -0.0050000000000000044,
+        "delta_G_blank": 0.0050000000000000044,
+        "delta_G_shuffle": 0.0050000000000000044,
+        "delta_G_text": -0.020000000000000018,
+        "from": "general_lora",
+        "to": "hardneg_lora"
+      },
+      "P1": {
+        "delta_A": 0.09499999999999997,
+        "delta_G_blank": 0.07999999999999996,
+        "delta_G_shuffle": 0.08499999999999996,
+        "delta_G_text": 0.10499999999999998,
+        "from": "zero_shot",
+        "to": "general_lora"
+      }
+    }
+  },
+  "metadata": {
+    "git_branch": "research/spatial-grounding-audit",
+    "git_commit": "2f047945e4a22ea8774c8172826991930be36ad0",
+    "prediction_dir": "results/grounding/predictions/pilot200",
+    "protocol_hash": "018b5dd4ce4b4958b065ac41b8a59a9903083ab39801da80019fe62780e41824",
+    "status_label": "engineering",
+    "tag": "pilot200"
+  },
+  "predictions": [
+    "results/grounding/predictions/pilot200/general_lora_blank.csv",
+    "results/grounding/predictions/pilot200/general_lora_normal.csv",
+    "results/grounding/predictions/pilot200/general_lora_shuffle.csv",
+    "results/grounding/predictions/pilot200/general_lora_text_only.csv",
+    "results/grounding/predictions/pilot200/hardneg_lora_blank.csv",
+    "results/grounding/predictions/pilot200/hardneg_lora_normal.csv",
+    "results/grounding/predictions/pilot200/hardneg_lora_shuffle.csv",
+    "results/grounding/predictions/pilot200/hardneg_lora_text_only.csv",
+    "results/grounding/predictions/pilot200/zero_shot_blank.csv",
+    "results/grounding/predictions/pilot200/zero_shot_normal.csv",
+    "results/grounding/predictions/pilot200/zero_shot_shuffle.csv",
+    "results/grounding/predictions/pilot200/zero_shot_text_only.csv"
+  ]
+}
