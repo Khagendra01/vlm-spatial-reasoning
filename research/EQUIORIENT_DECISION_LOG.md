@@ -298,3 +298,72 @@ affected frozen artifacts: none (draft only; freeze happens on next commit
 after backbone decision).
 
 confirmatory or exploratory: planning only; no model training.
+
+---
+## 2026-08-14 (cont.) — BACKBONE DECISION: Qwen3-VL-8B primary (prospective, pre-result)
+
+results already seen? NO EquiOrient GPU/model results exist.
+
+decision: Paper-3 primary pilot backbone = Qwen/Qwen3-VL-8B-Instruct.
+- Qwen2-VL-7B: optional LATER replication backbone only.
+- SmolVLM2-2B: engineering smoke tests only; never the scientific pilot.
+- Selected PROSPECTIVELY (before any EquiOrient result) because Paper 3
+  should use the newer backbone.
+- Prior Gate-3 feasibility design was backbone-generic in concept but its
+  concrete implementation assumptions referenced SmolVLM2/Qwen2 module
+  names and visual-token layouts; Qwen3 requires a compatibility check
+  (Gate 3b) BEFORE freeze.
+- This is a pre-result protocol amendment, NOT result-driven model switching.
+
+FROZEN AND UNCHANGED (do not reopen): Gate 1 algebra, Gate 2 synthetic
+generator + 4896 machine law checks + 51-pair human audit, H/V seen with
+V o H held out, six-arm matched comparison, wrong-geometry control,
+primary stop conditions.
+
+status: pilot YAML amended -> backbone_primary Qwen/Qwen3-VL-8B-Instruct,
+backbone_status pending_qwen3_gate3b. Next: Gate 3b (Qwen3-specific
+representation feasibility) then freeze + explicit GPU unlock.
+
+confirmatory or exploratory: protocol amendment (pre-result); no training.
+
+---
+## 2026-08-14 (cont.) — Gate 3b executed: Qwen3-VL-8B feasibility (CPU only)
+
+results already seen? no (no EquiOrient GPU results; smoke tests are
+random-weight engineering checks, no scientific outputs produced/inspected)
+
+decision: run Qwen3-specific feasibility per orchestrator Steps 2-4.
+
+FINDINGS (source-verified from transformers 4.57.6 modeling_qwen3_vl.py):
+1. transformers >= 4.57.0 required (local upgraded 4.56.2 -> 4.57.6).
+2. Qwen3-VL vision stack emits DEEPSTACK features (deepstack_visual_indexes
+   + deepstack mergers) in addition to merged image_embeds — richer
+   mid-stream source for z(a,b) pooling; spatial layout intact.
+3. Qwen3 vision attention uses FUSED self.qkv (nn.Linear(dim, dim*3)) —
+   differs from Qwen2-VL separate q/k/v; LoRA target must be 'qkv'.
+4. Box->grid mapping deterministic via image_grid_thw + patch(28)/merge(2);
+   no detector needed (synthetic ground truth).
+5. typed z = [z_h|z_v|z_d|z_orient] construction unchanged; forced relation
+   decoding unchanged; causal ablation mandatory.
+6. VRAM estimate 24-27 GB (bf16, LoRA, batch 8, grad checkpointing) ->
+   fits A6000 48GB.
+
+ARCHITECTURE CRITIQUE (Step 4): frozen-backbone + head-only WOULD invite
+"classifier on pretrained encoder" criticism -> MUTATE_ARCHITECTURE (minor):
+pool z from Qwen3 deepstack features + LoRA-train vision tower (fused qkv)
+so gradients from BOTH objectives reach the backbone representation; forced
+relation decoding + causal ablation unchanged. Pre-result amendment.
+
+SMOKE TESTS (scripts/equiorient/qwen3_smoke_test.py, CPU, tiny random
+Qwen3-VL): 13/13 PASS — preprocessing/tensor shapes, box->cell mapping,
+pooled V_a/V_b shapes, typed z blocks, relation logits depend on z,
+z-corruption changes logits, L_answer grad to PairEncoder, L_eq grad to
+same PairEncoder, rho keyed on (T, component) only, six-arm matched
+trainable counts (base arms share head-only budget; EquiOrient delta =
+20,608 PairEncoder params reported explicitly).
+
+affected frozen artifacts: none reopened (Gates 1-2 intact); adds
+EQUIORIENT_QWEN3_FEASIBILITY.md, EQUIORIENT_ARCHITECTURE_CRITIQUE.md,
+qwen3_smoke_test.py; local pip env upgraded transformers 4.57.6.
+
+confirmatory or exploratory: engineering/CPU only; NO GPU, NO scientific run.

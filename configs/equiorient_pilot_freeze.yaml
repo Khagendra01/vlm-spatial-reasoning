@@ -11,17 +11,14 @@ pilot:
   target_duration_hours: 48
   purpose: "falsification and implementation validation, not paper-number optimization"
 
-  # --- backbone: TWO candidates allowed; CHOOSE ONE at freeze time.
-  #     (protocol: max 1 backbone in pilot)
-  backbone_candidates:
-    - name: "SmolVLM2-2B"
-      revision: "HuggingFaceTB/SmolVLM2-2B-Instruct"
-      reason: "open weights; Paper-2 2B family already characterized on VSR; fits A6000 with LoRA"
-    - name: "Qwen2-VL-7B"
-      revision: "Qwen/Qwen2-VL-7B-Instruct"
-      reason: "Paper-1/2 7B family; stronger zero-shot; heavier (A6000 OK, slower)"
-  # FROZEN CHOICE (fill at freeze):
-  backbone: "TBD"
+  # --- backbone: SINGLE primary = Qwen3-VL-8B (orchestrator decision,
+  #     2026-08-14, prospective/pre-result). Status pending Gate 3b.
+  #     Qwen2-VL-7B: optional LATER replication backbone only.
+  #     SmolVLM2-2B: engineering smoke tests ONLY, never the scientific pilot.
+  backbone_primary: "Qwen/Qwen3-VL-8B-Instruct"
+  backbone_status: "pending_qwen3_gate3b"
+  backbone_replication_later: "Qwen/Qwen2-VL-7B-Instruct (optional, post-primary)"
+  backbone_smoke_only: "SmolVLM2-2B (engineering smoke tests only)"
 
   # --- data (from Gate 2 generator; frozen)
   data:
