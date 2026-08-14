@@ -1,0 +1,1049 @@
+{
+  "authority": "research/GROUNDING_PROTOCOL_FREEZE.md",
+  "freeze_note": "dedicated facing/facing-away D1 diagnostic; frozen before any facingcomp prediction is inspected (decision log 2026-08-11); Tier-B artifacts unchanged",
+  "parser_audit": {
+    "parse_failed": 0,
+    "parsed": 2195,
+    "reconstruct_failed": 0,
+    "total": 2195
+  },
+  "protocol_version": "v0.1",
+  "transforms": {
+    "facingcomp": {
+      "entries": {
+        "vsr_test:0003": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "sandwich",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "laptop",
+          "transformed_statement": "The laptop is facing away from the sandwich"
+        },
+        "vsr_test:0033": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "sink",
+          "original_label": true,
+          "relation": "facing away from",
+          "subject": "cat",
+          "transformed_statement": "The cat is facing the sink"
+        },
+        "vsr_test:0034": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "toilet",
+          "original_label": true,
+          "relation": "facing away from",
+          "subject": "cat",
+          "transformed_statement": "The cat is facing the toilet"
+        },
+        "vsr_test:0081": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "tv",
+          "original_label": false,
+          "relation": "facing away from",
+          "subject": "cat",
+          "transformed_statement": "The cat is facing the tv"
+        },
+        "vsr_test:0106": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "person",
+          "original_label": false,
+          "relation": "facing away from",
+          "subject": "parking meter",
+          "transformed_statement": "The parking meter is facing the person"
+        },
+        "vsr_test:0114": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "book",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "person",
+          "transformed_statement": "The person is facing away from the book"
+        },
+        "vsr_test:0156": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "horse",
+          "original_label": true,
+          "relation": "facing away from",
+          "subject": "person",
+          "transformed_statement": "The person is facing the horse"
+        },
+        "vsr_test:0170": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "cow",
+          "original_label": false,
+          "relation": "facing away from",
+          "subject": "person",
+          "transformed_statement": "The person is facing the cow"
+        },
+        "vsr_test:0171": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "cow",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "teddy bear",
+          "transformed_statement": "The teddy bear is facing away from the cow"
+        },
+        "vsr_test:0211": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "cow",
+          "original_label": true,
+          "relation": "facing away from",
+          "subject": "bus",
+          "transformed_statement": "The bus is facing the cow"
+        },
+        "vsr_test:0213": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "sandwich",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "laptop",
+          "transformed_statement": "The laptop is facing away from the sandwich"
+        },
+        "vsr_test:0230": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "book",
+          "original_label": false,
+          "relation": "facing away from",
+          "subject": "teddy bear",
+          "transformed_statement": "The teddy bear is facing the book"
+        },
+        "vsr_test:0239": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "toilet",
+          "original_label": true,
+          "relation": "facing away from",
+          "subject": "cat",
+          "transformed_statement": "The cat is facing the toilet"
+        },
+        "vsr_test:0250": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "chair",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "laptop",
+          "transformed_statement": "The laptop is facing away from the chair"
+        },
+        "vsr_test:0280": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "teddy bear",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "person",
+          "transformed_statement": "The person is facing away from the teddy bear"
+        },
+        "vsr_test:0356": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "boat",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "dog",
+          "transformed_statement": "The dog is facing away from the boat"
+        },
+        "vsr_test:0357": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "bear",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "person",
+          "transformed_statement": "The person is facing away from the bear"
+        },
+        "vsr_test:0359": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "car",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "zebra",
+          "transformed_statement": "The zebra is facing away from the car"
+        },
+        "vsr_test:0362": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "keyboard",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "cat",
+          "transformed_statement": "The cat is facing away from the keyboard"
+        },
+        "vsr_test:0364": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "tv",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "cat",
+          "transformed_statement": "The cat is facing away from the tv"
+        },
+        "vsr_test:0375": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "person",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "zebra",
+          "transformed_statement": "The zebra is facing away from the person"
+        },
+        "vsr_test:0382": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "bus",
+          "original_label": true,
+          "relation": "facing away from",
+          "subject": "elephant",
+          "transformed_statement": "The elephant is facing the bus"
+        },
+        "vsr_test:0385": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "teddy bear",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "person",
+          "transformed_statement": "The person is facing away from the teddy bear"
+        },
+        "vsr_test:0410": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "person",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "teddy bear",
+          "transformed_statement": "The teddy bear is facing away from the person"
+        },
+        "vsr_test:0424": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "tv",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "bed",
+          "transformed_statement": "The bed is facing away from the tv"
+        },
+        "vsr_test:0439": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "car",
+          "original_label": false,
+          "relation": "facing away from",
+          "subject": "bench",
+          "transformed_statement": "The bench is facing the car"
+        },
+        "vsr_test:0513": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "laptop",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "cat",
+          "transformed_statement": "The cat is facing away from the laptop"
+        },
+        "vsr_test:0523": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "book",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "teddy bear",
+          "transformed_statement": "The teddy bear is facing away from the book"
+        },
+        "vsr_test:0558": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "cat",
+          "original_label": true,
+          "relation": "facing away from",
+          "subject": "bird",
+          "transformed_statement": "The bird is facing the cat"
+        },
+        "vsr_test:0564": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "person",
+          "original_label": false,
+          "relation": "facing away from",
+          "subject": "sheep",
+          "transformed_statement": "The sheep is facing the person"
+        },
+        "vsr_test:0582": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "cat",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "banana",
+          "transformed_statement": "The banana is facing away from the cat"
+        },
+        "vsr_test:0594": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "cat",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "book",
+          "transformed_statement": "The book is facing away from the cat"
+        },
+        "vsr_test:0657": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "cow",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "teddy bear",
+          "transformed_statement": "The teddy bear is facing away from the cow"
+        },
+        "vsr_test:0738": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "cat",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "laptop",
+          "transformed_statement": "The laptop is facing away from the cat"
+        },
+        "vsr_test:0739": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "refrigerator",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "cat",
+          "transformed_statement": "The cat is facing away from the refrigerator"
+        },
+        "vsr_test:0756": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "car",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "person",
+          "transformed_statement": "The person is facing away from the car"
+        },
+        "vsr_test:0757": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "laptop",
+          "original_label": false,
+          "relation": "facing away from",
+          "subject": "person",
+          "transformed_statement": "The person is facing the laptop"
+        },
+        "vsr_test:0805": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "frisbee",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "person",
+          "transformed_statement": "The person is facing away from the frisbee"
+        },
+        "vsr_test:0858": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "toilet",
+          "original_label": false,
+          "relation": "facing away from",
+          "subject": "cat",
+          "transformed_statement": "The cat is facing the toilet"
+        },
+        "vsr_test:0859": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "sink",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "cat",
+          "transformed_statement": "The cat is facing away from the sink"
+        },
+        "vsr_test:0860": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "person",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "zebra",
+          "transformed_statement": "The zebra is facing away from the person"
+        },
+        "vsr_test:0868": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "bear",
+          "original_label": true,
+          "relation": "facing away from",
+          "subject": "person",
+          "transformed_statement": "The person is facing the bear"
+        },
+        "vsr_test:0911": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "cake",
+          "original_label": false,
+          "relation": "facing away from",
+          "subject": "cat",
+          "transformed_statement": "The cat is facing the cake"
+        },
+        "vsr_test:0959": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "toilet",
+          "original_label": false,
+          "relation": "facing away from",
+          "subject": "cat",
+          "transformed_statement": "The cat is facing the toilet"
+        },
+        "vsr_test:0986": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "cake",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "dog",
+          "transformed_statement": "The dog is facing away from the cake"
+        },
+        "vsr_test:1018": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "pizza",
+          "original_label": false,
+          "relation": "facing away from",
+          "subject": "car",
+          "transformed_statement": "The car is facing the pizza"
+        },
+        "vsr_test:1019": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "banana",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "person",
+          "transformed_statement": "The person is facing away from the banana"
+        },
+        "vsr_test:1042": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "fire hydrant",
+          "original_label": false,
+          "relation": "facing away from",
+          "subject": "dog",
+          "transformed_statement": "The dog is facing the fire hydrant"
+        },
+        "vsr_test:1078": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "horse",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "dog",
+          "transformed_statement": "The dog is facing away from the horse"
+        },
+        "vsr_test:1093": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "chair",
+          "original_label": true,
+          "relation": "facing away from",
+          "subject": "laptop",
+          "transformed_statement": "The laptop is facing the chair"
+        },
+        "vsr_test:1132": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "book",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "person",
+          "transformed_statement": "The person is facing away from the book"
+        },
+        "vsr_test:1158": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "cat",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "refrigerator",
+          "transformed_statement": "The refrigerator is facing away from the cat"
+        },
+        "vsr_test:1167": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "horse",
+          "original_label": true,
+          "relation": "facing away from",
+          "subject": "dog",
+          "transformed_statement": "The dog is facing the horse"
+        },
+        "vsr_test:1202": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "elephant",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "bird",
+          "transformed_statement": "The bird is facing away from the elephant"
+        },
+        "vsr_test:1219": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "keyboard",
+          "original_label": true,
+          "relation": "facing away from",
+          "subject": "person",
+          "transformed_statement": "The person is facing the keyboard"
+        },
+        "vsr_test:1234": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "refrigerator",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "person",
+          "transformed_statement": "The person is facing away from the refrigerator"
+        },
+        "vsr_test:1243": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "teddy bear",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "cat",
+          "transformed_statement": "The cat is facing away from the teddy bear"
+        },
+        "vsr_test:1266": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "bed",
+          "original_label": true,
+          "relation": "facing away from",
+          "subject": "cat",
+          "transformed_statement": "The cat is facing the bed"
+        },
+        "vsr_test:1296": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "zebra",
+          "original_label": true,
+          "relation": "facing away from",
+          "subject": "horse",
+          "transformed_statement": "The horse is facing the zebra"
+        },
+        "vsr_test:1308": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "toilet",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "tv",
+          "transformed_statement": "The tv is facing away from the toilet"
+        },
+        "vsr_test:1312": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "person",
+          "original_label": true,
+          "relation": "facing away from",
+          "subject": "hair drier",
+          "transformed_statement": "The hair drier is facing the person"
+        },
+        "vsr_test:1329": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "tv",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "oven",
+          "transformed_statement": "The oven is facing away from the tv"
+        },
+        "vsr_test:1338": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "keyboard",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "cat",
+          "transformed_statement": "The cat is facing away from the keyboard"
+        },
+        "vsr_test:1342": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "person",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "cell phone",
+          "transformed_statement": "The cell phone is facing away from the person"
+        },
+        "vsr_test:1369": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "cat",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "laptop",
+          "transformed_statement": "The laptop is facing away from the cat"
+        },
+        "vsr_test:1375": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "refrigerator",
+          "original_label": true,
+          "relation": "facing away from",
+          "subject": "cat",
+          "transformed_statement": "The cat is facing the refrigerator"
+        },
+        "vsr_test:1376": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "cat",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "laptop",
+          "transformed_statement": "The laptop is facing away from the cat"
+        },
+        "vsr_test:1400": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "suitcase",
+          "original_label": true,
+          "relation": "facing away from",
+          "subject": "cat",
+          "transformed_statement": "The cat is facing the suitcase"
+        },
+        "vsr_test:1405": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "book",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "teddy bear",
+          "transformed_statement": "The teddy bear is facing away from the book"
+        },
+        "vsr_test:1450": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "bear",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "person",
+          "transformed_statement": "The person is facing away from the bear"
+        },
+        "vsr_test:1457": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "chair",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "cow",
+          "transformed_statement": "The cow is facing away from the chair"
+        },
+        "vsr_test:1490": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "person",
+          "original_label": true,
+          "relation": "facing away from",
+          "subject": "laptop",
+          "transformed_statement": "The laptop is facing the person"
+        },
+        "vsr_test:1559": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "laptop",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "cat",
+          "transformed_statement": "The cat is facing away from the laptop"
+        },
+        "vsr_test:1592": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "person",
+          "original_label": false,
+          "relation": "facing away from",
+          "subject": "dog",
+          "transformed_statement": "The dog is facing the person"
+        },
+        "vsr_test:1611": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "backpack",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "cat",
+          "transformed_statement": "The cat is facing away from the backpack"
+        },
+        "vsr_test:1617": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "bench",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "cow",
+          "transformed_statement": "The cow is facing away from the bench"
+        },
+        "vsr_test:1650": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "hot dog",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "chair",
+          "transformed_statement": "The chair is facing away from the hot dog"
+        },
+        "vsr_test:1760": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "bed",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "person",
+          "transformed_statement": "The person is facing away from the bed"
+        },
+        "vsr_test:1773": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "bed",
+          "original_label": false,
+          "relation": "facing away from",
+          "subject": "cat",
+          "transformed_statement": "The cat is facing the bed"
+        },
+        "vsr_test:1792": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "person",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "cat",
+          "transformed_statement": "The cat is facing away from the person"
+        },
+        "vsr_test:1810": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "dining table",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "bus",
+          "transformed_statement": "The bus is facing away from the dining table"
+        },
+        "vsr_test:1816": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "cat",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "book",
+          "transformed_statement": "The book is facing away from the cat"
+        },
+        "vsr_test:1822": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "tv",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "cat",
+          "transformed_statement": "The cat is facing away from the tv"
+        },
+        "vsr_test:1877": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "person",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "laptop",
+          "transformed_statement": "The laptop is facing away from the person"
+        },
+        "vsr_test:1893": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "dog",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "teddy bear",
+          "transformed_statement": "The teddy bear is facing away from the dog"
+        },
+        "vsr_test:1905": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "person",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "teddy bear",
+          "transformed_statement": "The teddy bear is facing away from the person"
+        },
+        "vsr_test:1910": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "toaster",
+          "original_label": false,
+          "relation": "facing away from",
+          "subject": "person",
+          "transformed_statement": "The person is facing the toaster"
+        },
+        "vsr_test:1911": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "parking meter",
+          "original_label": true,
+          "relation": "facing away from",
+          "subject": "bench",
+          "transformed_statement": "The bench is facing the parking meter"
+        },
+        "vsr_test:1928": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "bed",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "umbrella",
+          "transformed_statement": "The umbrella is facing away from the bed"
+        },
+        "vsr_test:1934": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "laptop",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "person",
+          "transformed_statement": "The person is facing away from the laptop"
+        },
+        "vsr_test:1939": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "refrigerator",
+          "original_label": true,
+          "relation": "facing away from",
+          "subject": "person",
+          "transformed_statement": "The person is facing the refrigerator"
+        },
+        "vsr_test:1949": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "dog",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "cow",
+          "transformed_statement": "The cow is facing away from the dog"
+        },
+        "vsr_test:1953": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "person",
+          "original_label": true,
+          "relation": "facing away from",
+          "subject": "cow",
+          "transformed_statement": "The cow is facing the person"
+        },
+        "vsr_test:1997": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "toilet",
+          "original_label": false,
+          "relation": "facing away from",
+          "subject": "cat",
+          "transformed_statement": "The cat is facing the toilet"
+        },
+        "vsr_test:1999": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "person",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "refrigerator",
+          "transformed_statement": "The refrigerator is facing away from the person"
+        },
+        "vsr_test:2000": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "tv",
+          "original_label": false,
+          "relation": "facing away from",
+          "subject": "cat",
+          "transformed_statement": "The cat is facing the tv"
+        },
+        "vsr_test:2015": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "laptop",
+          "original_label": false,
+          "relation": "facing away from",
+          "subject": "couch",
+          "transformed_statement": "The couch is facing the laptop"
+        },
+        "vsr_test:2034": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "parking meter",
+          "original_label": false,
+          "relation": "facing away from",
+          "subject": "bench",
+          "transformed_statement": "The bench is facing the parking meter"
+        },
+        "vsr_test:2100": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "book",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "bird",
+          "transformed_statement": "The bird is facing away from the book"
+        },
+        "vsr_test:2151": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "person",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "bear",
+          "transformed_statement": "The bear is facing away from the person"
+        },
+        "vsr_test:2160": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "dining table",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "person",
+          "transformed_statement": "The person is facing away from the dining table"
+        },
+        "vsr_test:2165": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": false,
+          "family": "orientation",
+          "object": "laptop",
+          "original_label": true,
+          "relation": "facing",
+          "subject": "cat",
+          "transformed_statement": "The cat is facing away from the laptop"
+        },
+        "vsr_test:2189": {
+          "expected_prediction_behavior": "flip_law",
+          "expected_transformed_label": true,
+          "family": "orientation",
+          "object": "teddy bear",
+          "original_label": false,
+          "relation": "facing",
+          "subject": "bear",
+          "transformed_statement": "The bear is facing away from the teddy bear"
+        }
+      },
+      "law": "flip_law",
+      "n_eligible": 103
+    }
+  }
+}

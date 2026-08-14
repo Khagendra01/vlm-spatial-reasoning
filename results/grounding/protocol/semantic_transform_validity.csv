@@ -1,0 +1,184 @@
+transform,relation,status,expected_truth_behavior,reason,eligible_n,excluded_n
+relcomp,above,strict_included,flip_law,,65,0
+relcomp,across,unsafe_excluded,flip_law,path semantics; not a static spatial axis pair,0,3
+relcomp,across from,not_in_scope,flip_law,no strict complement partner for this relation in the VSR relation set (not mutually exclusive + exhaustive on one axis),0,12
+relcomp,adjacent to,not_in_scope,flip_law,no strict complement partner for this relation in the VSR relation set (not mutually exclusive + exhaustive on one axis),0,12
+relcomp,against,not_in_scope,flip_law,no strict complement partner for this relation in the VSR relation set (not mutually exclusive + exhaustive on one axis),0,6
+relcomp,ahead of,soft_excluded,flip_law,intrinsic-orientation reading of 'at the back of' is not equivalent to 'behind',0,8
+relcomp,along,unsafe_excluded,flip_law,directional/path semantics; reversal not symmetric,0,2
+relcomp,alongside,not_in_scope,flip_law,no strict complement partner for this relation in the VSR relation set (not mutually exclusive + exhaustive on one axis),0,9
+relcomp,around,unsafe_excluded,flip_law,enclosing-path semantics; not a strict complement,0,1
+relcomp,at,soft_excluded,flip_law,'at' is region-ambiguous (at the edge of vs. in the middle of); no strict complement partner,0,1
+relcomp,at the back of,not_in_scope,flip_law,no strict complement partner for this relation in the VSR relation set (not mutually exclusive + exhaustive on one axis),0,22
+relcomp,at the edge of,soft_excluded,flip_law,region relations; not mutually exclusive with other regions,0,37
+relcomp,at the left side of,strict_included,flip_law,,96,0
+relcomp,at the right side of,strict_included,flip_law,,80,0
+relcomp,at the side of,not_in_scope,flip_law,no strict complement partner for this relation in the VSR relation set (not mutually exclusive + exhaustive on one axis),0,8
+relcomp,attached to,not_in_scope,flip_law,no strict complement partner for this relation in the VSR relation set (not mutually exclusive + exhaustive on one axis),0,11
+relcomp,away from,not_in_scope,flip_law,no strict complement partner for this relation in the VSR relation set (not mutually exclusive + exhaustive on one axis),0,35
+relcomp,behind,strict_included,flip_law,,150,0
+relcomp,below,strict_included,flip_law,,64,0
+relcomp,beneath,not_in_scope,flip_law,no strict complement partner for this relation in the VSR relation set (not mutually exclusive + exhaustive on one axis),0,53
+relcomp,beside,not_in_scope,flip_law,no strict complement partner for this relation in the VSR relation set (not mutually exclusive + exhaustive on one axis),0,37
+relcomp,beyond,soft_excluded,flip_law,directional distance reading; 'beyond' is ambiguous (through vs. behind),0,5
+relcomp,by,soft_excluded,flip_law,'by' is ambiguous (proximity vs. authorship) and is not a verified symmetric relation,0,15
+relcomp,close to,not_in_scope,flip_law,no strict complement partner for this relation in the VSR relation set (not mutually exclusive + exhaustive on one axis),0,20
+relcomp,connected to,not_in_scope,flip_law,no strict complement partner for this relation in the VSR relation set (not mutually exclusive + exhaustive on one axis),0,5
+relcomp,consists of,unsafe_excluded,flip_law,mereology; inverse requires re-parsing of plural/collective subjects; excluded,0,4
+relcomp,contains,not_in_scope,flip_law,no strict complement partner for this relation in the VSR relation set (not mutually exclusive + exhaustive on one axis),0,66
+relcomp,detached from,not_in_scope,flip_law,no strict complement partner for this relation in the VSR relation set (not mutually exclusive + exhaustive on one axis),0,4
+relcomp,down from,soft_excluded,flip_law,directional; 'down from' is not a strict exhaustive complement of a single relation,0,5
+relcomp,enclosed by,unsafe_excluded,flip_law,passive containment; inverse wording not in the relation set,0,2
+relcomp,facing,soft_excluded,flip_law,not complementary (two objects can face each other neither toward nor away; oblique orientations),0,64
+relcomp,facing away from,not_in_scope,flip_law,no strict complement partner for this relation in the VSR relation set (not mutually exclusive + exhaustive on one axis),0,39
+relcomp,far away from,not_in_scope,flip_law,no strict complement partner for this relation in the VSR relation set (not mutually exclusive + exhaustive on one axis),0,50
+relcomp,far from,not_in_scope,flip_law,no strict complement partner for this relation in the VSR relation set (not mutually exclusive + exhaustive on one axis),0,25
+relcomp,has as a part,not_in_scope,flip_law,no strict complement partner for this relation in the VSR relation set (not mutually exclusive + exhaustive on one axis),0,8
+relcomp,in,not_in_scope,flip_law,no strict complement partner for this relation in the VSR relation set (not mutually exclusive + exhaustive on one axis),0,60
+relcomp,in front of,strict_included,flip_law,,142,0
+relcomp,in the middle of,unsafe_excluded,flip_law,geometric region; two objects can be neither (offset within the region),0,19
+relcomp,inside,not_in_scope,flip_law,no strict complement partner for this relation in the VSR relation set (not mutually exclusive + exhaustive on one axis),0,39
+relcomp,into,unsafe_excluded,flip_law,directional (entry); not a static complement,0,9
+relcomp,left of,strict_included,flip_law,,40,0
+relcomp,near,not_in_scope,flip_law,no strict complement partner for this relation in the VSR relation set (not mutually exclusive + exhaustive on one axis),0,23
+relcomp,next to,not_in_scope,flip_law,no strict complement partner for this relation in the VSR relation set (not mutually exclusive + exhaustive on one axis),0,60
+relcomp,off,not_in_scope,flip_law,no strict complement partner for this relation in the VSR relation set (not mutually exclusive + exhaustive on one axis),0,14
+relcomp,on,soft_excluded,flip_law,contact-relation pair; not exhaustive (an object near but not contacting is neither) and 'off' has directional uses,0,117
+relcomp,on top of,soft_excluded,flip_law,contact condition makes the pair non-exclusive (an object above without contact is neither),0,105
+relcomp,opposite to,not_in_scope,flip_law,no strict complement partner for this relation in the VSR relation set (not mutually exclusive + exhaustive on one axis),0,9
+relcomp,out of,soft_excluded,flip_law,directional (entering/leaving); not a static complement,0,1
+relcomp,outside,soft_excluded,flip_law,containment boundary relations; 'outside' does not imply non-containment for open containers,0,9
+relcomp,over,soft_excluded,flip_law,contact semantics of 'over' make exclusivity with 'on top of' ambiguous,0,25
+relcomp,parallel to,unsafe_excluded,flip_law,not a universal strict complement; oblique configurations make both false,0,22
+relcomp,part of,unsafe_excluded,flip_law,mereology verbs; argument structure is not reversible by the VSR template and the inverse wording is not in the relation set,0,14
+relcomp,perpendicular to,not_in_scope,flip_law,no strict complement partner for this relation in the VSR relation set (not mutually exclusive + exhaustive on one axis),0,12
+relcomp,right of,strict_included,flip_law,,29,0
+relcomp,surrounding,unsafe_excluded,flip_law,collective subject semantics ('surrounding' requires a plural surrounding object); excluded,0,20
+relcomp,through,unsafe_excluded,flip_law,path semantics (passing through); not a static containment complement,0,1
+relcomp,touching,not_in_scope,flip_law,no strict complement partner for this relation in the VSR relation set (not mutually exclusive + exhaustive on one axis),0,273
+relcomp,toward,unsafe_excluded,flip_law,directional; not invertible by reversal,0,6
+relcomp,under,not_in_scope,flip_law,no strict complement partner for this relation in the VSR relation set (not mutually exclusive + exhaustive on one axis),0,114
+relcomp,with,not_in_scope,flip_law,no strict complement partner for this relation in the VSR relation set (not mutually exclusive + exhaustive on one axis),0,4
+relcomp,within,not_in_scope,flip_law,no strict complement partner for this relation in the VSR relation set (not mutually exclusive + exhaustive on one axis),0,4
+sorev,above,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,65
+sorev,across,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,3
+sorev,across from,strict_included,stability_law,,12,0
+sorev,adjacent to,strict_included,stability_law,,12,0
+sorev,against,strict_included,stability_law,,6,0
+sorev,ahead of,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,8
+sorev,along,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,2
+sorev,alongside,strict_included,stability_law,,9,0
+sorev,around,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,1
+sorev,at,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,1
+sorev,at the back of,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,22
+sorev,at the edge of,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,37
+sorev,at the left side of,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,96
+sorev,at the right side of,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,80
+sorev,at the side of,strict_included,stability_law,,8,0
+sorev,attached to,strict_included,stability_law,,11,0
+sorev,away from,strict_included,stability_law,,35,0
+sorev,behind,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,150
+sorev,below,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,64
+sorev,beneath,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,53
+sorev,beside,strict_included,stability_law,,37,0
+sorev,beyond,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,5
+sorev,by,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,15
+sorev,close to,strict_included,stability_law,,20,0
+sorev,connected to,strict_included,stability_law,,5,0
+sorev,consists of,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,4
+sorev,contains,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,66
+sorev,detached from,strict_included,stability_law,,4,0
+sorev,down from,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,5
+sorev,enclosed by,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,2
+sorev,facing,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,64
+sorev,facing away from,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,39
+sorev,far away from,strict_included,stability_law,,50,0
+sorev,far from,strict_included,stability_law,,25,0
+sorev,has as a part,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,8
+sorev,in,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,60
+sorev,in front of,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,142
+sorev,in the middle of,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,19
+sorev,inside,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,39
+sorev,into,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,9
+sorev,left of,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,40
+sorev,near,strict_included,stability_law,,23,0
+sorev,next to,strict_included,stability_law,,60,0
+sorev,off,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,14
+sorev,on,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,117
+sorev,on top of,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,105
+sorev,opposite to,strict_included,stability_law,,9,0
+sorev,out of,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,1
+sorev,outside,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,9
+sorev,over,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,25
+sorev,parallel to,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,22
+sorev,part of,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,14
+sorev,perpendicular to,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,12
+sorev,right of,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,29
+sorev,surrounding,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,20
+sorev,through,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,1
+sorev,touching,strict_included,stability_law,,273,0
+sorev,toward,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,6
+sorev,under,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,114
+sorev,with,strict_included,stability_law,,4,0
+sorev,within,not_in_scope,stability_law,relation not verified symmetric for this statement template,0,4
+continv,above,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,65
+continv,across,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,3
+continv,across from,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,12
+continv,adjacent to,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,12
+continv,against,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,6
+continv,ahead of,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,8
+continv,along,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,2
+continv,alongside,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,9
+continv,around,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,1
+continv,at,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,1
+continv,at the back of,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,22
+continv,at the edge of,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,37
+continv,at the left side of,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,96
+continv,at the right side of,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,80
+continv,at the side of,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,8
+continv,attached to,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,11
+continv,away from,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,35
+continv,behind,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,150
+continv,below,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,64
+continv,beneath,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,53
+continv,beside,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,37
+continv,beyond,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,5
+continv,by,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,15
+continv,close to,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,20
+continv,connected to,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,5
+continv,consists of,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,4
+continv,contains,strict_included,paraphrase_law,,66,0
+continv,detached from,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,4
+continv,down from,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,5
+continv,enclosed by,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,2
+continv,facing,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,64
+continv,facing away from,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,39
+continv,far away from,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,50
+continv,far from,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,25
+continv,has as a part,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,8
+continv,in,strict_included,paraphrase_law,,60,0
+continv,in front of,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,142
+continv,in the middle of,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,19
+continv,inside,strict_included,paraphrase_law,,39,0
+continv,into,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,9
+continv,left of,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,40
+continv,near,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,23
+continv,next to,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,60
+continv,off,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,14
+continv,on,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,117
+continv,on top of,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,105
+continv,opposite to,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,9
+continv,out of,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,1
+continv,outside,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,9
+continv,over,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,25
+continv,parallel to,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,22
+continv,part of,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,14
+continv,perpendicular to,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,12
+continv,right of,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,29
+continv,surrounding,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,20
+continv,through,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,1
+continv,touching,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,273
+continv,toward,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,6
+continv,under,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,114
+continv,with,not_in_scope,paraphrase_law,relation is not a containment inverse pair (in/inside/within/contains),0,4
+continv,within,strict_included,paraphrase_law,,4,0

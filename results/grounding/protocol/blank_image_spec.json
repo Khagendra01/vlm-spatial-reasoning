@@ -1,0 +1,20 @@
+{
+  "construction": {
+    "color_rgb": [
+      128,
+      128,
+      128
+    ],
+    "mode": "RGB",
+    "size_px": 448
+  },
+  "file": "results\\grounding\\protocol\\blank_image.png",
+  "name": "blank_image",
+  "preprocessing": {
+    "cap_long_side_px": 392,
+    "note": "blank goes through the identical preprocessing path as normal/shuffle images"
+  },
+  "protocol_version": "v0.1",
+  "sha256": "530f34374ddf21b3bda244f37e8d3f0ed8a6b37226805a2d770f118ed587f1c2",
+  "version": "tier_a_v0.1"
+}
