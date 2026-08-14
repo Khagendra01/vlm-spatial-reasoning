@@ -278,3 +278,19 @@ Structure:
   no accuracy=grounding, no Qwen3-VL C_pair.
 
 Pipeline moves to Step 3 (literature/novelty audit) when directed.
+
+### 2026-08-14 (cont.) - Step 3: literature/novelty audit complete
+
+results/seed_campaign/LITERATURE_NOVELTY_AUDIT.md committed. Re-verified all
+named neighbors (Beyond Accuracy/VRS, Seeing without Looking, Consistent Yet
+Wrong/ViewDiag v2, VisualFLIP, CORAL, Med-OPD) plus fresh arXiv searches
+(visual reliance / evidence dependence + cs.CV; visual grounding +
+fine-tuning + cs.CV, submission-sorted). Nothing found does the exact
+experiment: ordinary spatial LoRA fine-tuning as the controlled
+intervention with jointly measured dA/dG/dC and Tier-C transformation
+behavior, multi-seed, cross-backbone.
+
+Exact novelty sentence frozen (Section 3 of the audit). VisualFLIP dataset
+still gated (401, re-checked 2026-08-14); weekly re-check scheduled;
+optional 1-GPU-hr external validation requires explicit compute unlock
+(GPU stays OFF otherwise).
