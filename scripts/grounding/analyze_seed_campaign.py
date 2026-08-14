@@ -16,7 +16,9 @@ def tier_a(fam, tag):
 
 def tier_c_ck(fam, trans, ck, tag='r1_campaign'):
     d = load(f'{BASE}/{fam}/results/grounding/analysis/tier_c_metrics_{tag}_tierc.json')
-    return d['transforms'][trans]['direction_by_checkpoint'][ck]
+    # NOTE: direction_by_checkpoint["C"] == A_transform (transformed accuracy);
+    # the true paired metric is summary_by_checkpoint["C_pair"].
+    return d['transforms'][trans]['summary_by_checkpoint'][ck]
 
 
 def tier_b_ck(fam, transform, ck, tag='r1_campaign'):
@@ -89,19 +91,22 @@ def main():
 
     # ---------------- QWEN2VL tier-c ----------------
     w('### 1c. Tier-C: visual response under global reflection (hflip)\n')
-    w('hflip_flip (n=245, flip-expected):\n')
-    w('| checkpoint | A_transform (flip rate) | C_pair | both_correct | change_rate |')
-    w('|---|---|---|---|---|')
+    w('hflip_flip (n=245, flip-expected). A_transform = transformed-image '
+      'accuracy (= flip rate); C_pair = paired both-images correctness '
+      '(answer-updating); both_correct = both images answered correctly '
+      'with the label law obeyed:\n')
+    w('| checkpoint | A_transform (flip rate) | C_pair | both_correct |')
+    w('|---|---|---|---|')
     for ck in order:
         v = tier_c_ck('qwen2vl', 'hflip_flip', ck)
-        w(f'| {ck} | {v["A_transform"]:.4f} | {v["C"]:.4f} | {v["both_correct"]:.4f} | {v["change_rate"]:.4f} |')
+        w(f'| {ck} | {v["A_transform"]:.4f} | {v["C_pair"]:.4f} | {v["both_correct"]:.4f} |')
     w('')
     w('hflip_invariant (n=421, stability):\n')
     w('| checkpoint | A_transform | C_pair | both_correct |')
     w('|---|---|---|---|')
     for ck in order:
         v = tier_c_ck('qwen2vl', 'hflip_invariant', ck)
-        w(f'| {ck} | {v["A_transform"]:.4f} | {v["C"]:.4f} | {v["both_correct"]:.4f} |')
+        w(f'| {ck} | {v["A_transform"]:.4f} | {v["C_pair"]:.4f} | {v["both_correct"]:.4f} |')
     w('')
 
     # ---------------- SMOLVLM2 ----------------
@@ -132,11 +137,14 @@ def main():
         w(f'| seed{i} | {s - zs_n2:+.4f} | {ss:.4f} | {s - ss:.4f} | {(s - ss) - (zs_n2 - zs_s2):+.4f} |')
     w('')
     w('### 2c. Tier-C hflip_flip (n=245)\n')
-    w('| checkpoint | A_transform | C_pair | both_correct |')
+    w('A_transform = flip rate (transformed-image accuracy); C_pair = paired '
+      'both-images correctness (answer-updating); both_correct = paired '
+      'both-correct with the label law obeyed:\n')
+    w('| checkpoint | A_transform (flip rate) | C_pair | both_correct |')
     w('|---|---|---|---|')
     for ck in order2:
         v = tier_c_ck('smolvlm2', 'hflip_flip', ck)
-        w(f'| {ck} | {v["A_transform"]:.4f} | {v["C"]:.4f} | {v["both_correct"]:.4f} |')
+        w(f'| {ck} | {v["A_transform"]:.4f} | {v["C_pair"]:.4f} | {v["both_correct"]:.4f} |')
     w('')
 
     # ---------------- Tier-B (ΔC semantic) ----------------
@@ -166,14 +174,22 @@ def main():
     w('## 4. Synthesis\n')
     w('**Does the adaptation decompose into dissociable axes?** Yes, consistently across '
       'families:\n')
-    w('1. **ΔA**: benchmark accuracy improves in every family (7B +5.4 seed-0 / +4.5..5.7 seeds; '
-      '2B +2.9 / +3.0..3.2; Qwen3-VL +3.2).')
-    w('2. **ΔG (correct-image dependence)**: the normal-minus-shuffle gap widens under tuning '
-      '(7B: 0.352 seed-0, 0.348..0.354 seeds; 2B: 0.298 seed-0, 0.295..0.300 seeds; '
-      'Qwen3-VL +0.036).')
-    w('3. **Visual response (hflip)**: flip-rate improves monotonically across fresh seeds '
-      'in 2B (0.298 -> 0.306/0.314/0.322), replicates tightly in 7B (0.657 seed-0 vs '
-      '0.649/0.657/0.645), and improves +0.045 in Qwen3-VL.')
+    w('1. **ΔA (benchmark)**: normal accuracy improves in every family '
+      '(7B seed-0 +5.42 pp, fresh seeds +4.56..+5.47 pp; 2B seed-0 +2.87 pp, fresh seeds '
+      '+3.05..+3.23 pp; Qwen3-VL +3.24 pp).')
+    w('2. **G vs ΔG (correct-image dependence)**: the normal-minus-shuffle gap **G** '
+      'widens under tuning in every family — 7B: G 0.3522 (seed-0), 0.3444..0.3544 '
+      '(fresh seeds); 2B: G 0.2975 (seed-0), 0.2957..0.3007 (fresh seeds); '
+      'Qwen3-VL: G 0.3471 -> 0.3827. The change relative to zero-shot, **ΔG** '
+      '(= G_tuned - G_zero_shot), is +0.0456 (7B seed-0), +0.0378..+0.0478 (7B fresh '
+      'seeds), +0.0305 (2B seed-0), +0.0287..+0.0337 (2B fresh seeds), +0.0356 '
+      '(Qwen3-VL).')
+    w('3. **Visual response under global reflection (hflip_flip)**: 2B A_transform '
+      '(flip rate) rises 0.4980 (zero-shot) -> 0.5224 (seed-0 General) -> 0.5469 for '
+      'each fresh seed, while paired both-correct rises monotonically 0.2531 -> '
+      '0.2980 -> 0.3061/0.3143/0.3224; 7B A_transform replicates tightly '
+      '(0.6571 seed-0 vs 0.6490/0.6571/0.6449 seeds); Qwen3-VL A_transform +0.0449 '
+      '(0.6571 -> 0.7020).')
     w('4. **Semantic consistency (ΔC, relcomp)**: seeds cluster tightly around seed-0 in '
       'both families (7B C_pair: seed-0 0.677, seeds 0.655-0.665; 2B C_pair: seed-0 0.502, '
       'seeds 0.498-0.511) — no axis-specific divergence.')

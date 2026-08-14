@@ -229,3 +229,15 @@ evaluation has been run.
 - Qwen3-VL-8B labeled post-confirmatory external validation, motivated by
   reviewer/relevance concerns (VisualFLIP Table 1 provides the published
   zero-shot reference row).
+
+### 2026-08-14 (cont.) - Reporting correction (no compute, no reruns)
+
+Orchestrator audit caught a numerical/labeling inconsistency in the initial
+ANALYSIS.md: the 2B synthesis quoted both_correct values (0.298->0.306/
+0.314/0.322) while calling them flip-rates, and the tier-c tables labeled
+direction_by_checkpoint["C"] (== A_transform) as C_pair. Corrected in
+commit: tier-c tables now read summary_by_checkpoint["C_pair"] (true paired
+metric); synthesis distinguishes A_transform (flip rate) from both_correct,
+and G (normal-minus-shuffle gap) from dG (= G_tuned - G_zero_shot)
+throughout. All numbers re-derived from raw prediction artifacts by
+scripts/grounding/analyze_seed_campaign.py.

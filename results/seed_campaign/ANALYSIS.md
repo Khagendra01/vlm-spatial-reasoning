@@ -30,27 +30,27 @@ Fresh-seed ΔA: mean 0.0506 +/- 0.0046; fresh-seed ΔG: mean 0.0440 +/- 0.0054.
 
 ### 1c. Tier-C: visual response under global reflection (hflip)
 
-hflip_flip (n=245, flip-expected):
+hflip_flip (n=245, flip-expected). A_transform = transformed-image accuracy (= flip rate); C_pair = paired both-images correctness (answer-updating); both_correct = both images answered correctly with the label law obeyed:
 
-| checkpoint | A_transform (flip rate) | C_pair | both_correct | change_rate |
-|---|---|---|---|---|
-| zero_shot | 0.6367 | 0.6367 | 0.5388 | 0.6367 |
-| general_lora | 0.6571 | 0.6571 | 0.5959 | 0.6571 |
-| hardneg_lora | 0.6653 | 0.6653 | 0.6204 | 0.6653 |
-| r1_seedA | 0.6490 | 0.6490 | 0.5796 | 0.6490 |
-| r1_seedB | 0.6571 | 0.6571 | 0.6041 | 0.6571 |
-| r1_seedC | 0.6449 | 0.6449 | 0.5837 | 0.6449 |
+| checkpoint | A_transform (flip rate) | C_pair | both_correct |
+|---|---|---|---|
+| zero_shot | 0.6367 | 0.6163 | 0.5388 |
+| general_lora | 0.6571 | 0.6857 | 0.5959 |
+| hardneg_lora | 0.6653 | 0.6980 | 0.6204 |
+| r1_seedA | 0.6490 | 0.6490 | 0.5796 |
+| r1_seedB | 0.6571 | 0.6898 | 0.6041 |
+| r1_seedC | 0.6449 | 0.6653 | 0.5837 |
 
 hflip_invariant (n=421, stability):
 
 | checkpoint | A_transform | C_pair | both_correct |
 |---|---|---|---|
-| zero_shot | 0.7031 | 0.7031 | 0.6556 |
-| general_lora | 0.8242 | 0.8242 | 0.7696 |
-| hardneg_lora | 0.8147 | 0.8147 | 0.7720 |
-| r1_seedA | 0.8242 | 0.8242 | 0.7577 |
-| r1_seedB | 0.8005 | 0.8005 | 0.7411 |
-| r1_seedC | 0.8028 | 0.8028 | 0.7506 |
+| zero_shot | 0.7031 | 0.8907 | 0.6556 |
+| general_lora | 0.8242 | 0.9026 | 0.7696 |
+| hardneg_lora | 0.8147 | 0.9002 | 0.7720 |
+| r1_seedA | 0.8242 | 0.8931 | 0.7577 |
+| r1_seedB | 0.8005 | 0.8931 | 0.7411 |
+| r1_seedC | 0.8028 | 0.9002 | 0.7506 |
 
 ## 2. SmolVLM2-2B (confirmatory family)
 
@@ -77,13 +77,15 @@ seed-0 (committed r1_2b_full general_lora): normal=0.7649, shuffle=0.4674 — ma
 
 ### 2c. Tier-C hflip_flip (n=245)
 
-| checkpoint | A_transform | C_pair | both_correct |
+A_transform = flip rate (transformed-image accuracy); C_pair = paired both-images correctness (answer-updating); both_correct = paired both-correct with the label law obeyed:
+
+| checkpoint | A_transform (flip rate) | C_pair | both_correct |
 |---|---|---|---|
-| zero_shot | 0.4980 | 0.4980 | 0.2531 |
-| general_lora | 0.5224 | 0.5224 | 0.2980 |
-| r1_seedA | 0.5469 | 0.5469 | 0.3061 |
-| r1_seedB | 0.5469 | 0.5469 | 0.3143 |
-| r1_seedC | 0.5469 | 0.5469 | 0.3224 |
+| zero_shot | 0.4980 | 0.3184 | 0.2531 |
+| general_lora | 0.5224 | 0.3469 | 0.2980 |
+| r1_seedA | 0.5469 | 0.3429 | 0.3061 |
+| r1_seedB | 0.5469 | 0.3633 | 0.3143 |
+| r1_seedC | 0.5469 | 0.3714 | 0.3224 |
 
 ## 2d. Tier-B semantic consistency (relcomp, ΔC axis)
 
@@ -125,9 +127,9 @@ Note: labeled exploratory architecture extension (not preregistered); the frozen
 
 **Does the adaptation decompose into dissociable axes?** Yes, consistently across families:
 
-1. **ΔA**: benchmark accuracy improves in every family (7B +5.4 seed-0 / +4.5..5.7 seeds; 2B +2.9 / +3.0..3.2; Qwen3-VL +3.2).
-2. **ΔG (correct-image dependence)**: the normal-minus-shuffle gap widens under tuning (7B: 0.352 seed-0, 0.348..0.354 seeds; 2B: 0.298 seed-0, 0.295..0.300 seeds; Qwen3-VL +0.036).
-3. **Visual response (hflip)**: flip-rate improves monotonically across fresh seeds in 2B (0.298 -> 0.306/0.314/0.322), replicates tightly in 7B (0.657 seed-0 vs 0.649/0.657/0.645), and improves +0.045 in Qwen3-VL.
+1. **ΔA (benchmark)**: normal accuracy improves in every family (7B seed-0 +5.42 pp, fresh seeds +4.56..+5.47 pp; 2B seed-0 +2.87 pp, fresh seeds +3.05..+3.23 pp; Qwen3-VL +3.24 pp).
+2. **G vs ΔG (correct-image dependence)**: the normal-minus-shuffle gap **G** widens under tuning in every family — 7B: G 0.3522 (seed-0), 0.3444..0.3544 (fresh seeds); 2B: G 0.2975 (seed-0), 0.2957..0.3007 (fresh seeds); Qwen3-VL: G 0.3471 -> 0.3827. The change relative to zero-shot, **ΔG** (= G_tuned - G_zero_shot), is +0.0456 (7B seed-0), +0.0378..+0.0478 (7B fresh seeds), +0.0305 (2B seed-0), +0.0287..+0.0337 (2B fresh seeds), +0.0356 (Qwen3-VL).
+3. **Visual response under global reflection (hflip_flip)**: 2B A_transform (flip rate) rises 0.4980 (zero-shot) -> 0.5224 (seed-0 General) -> 0.5469 for each fresh seed, while paired both-correct rises monotonically 0.2531 -> 0.2980 -> 0.3061/0.3143/0.3224; 7B A_transform replicates tightly (0.6571 seed-0 vs 0.6490/0.6571/0.6449 seeds); Qwen3-VL A_transform +0.0449 (0.6571 -> 0.7020).
 4. **Semantic consistency (ΔC, relcomp)**: seeds cluster tightly around seed-0 in both families (7B C_pair: seed-0 0.677, seeds 0.655-0.665; 2B C_pair: seed-0 0.502, seeds 0.498-0.511) — no axis-specific divergence.
 
 **Verdicts per seed** (vs seed-0, per protocol): all fresh seeds PASS on ΔA/ΔG (within seed-0 +/- tolerance); no REVIEW/FAIL cases recorded.
