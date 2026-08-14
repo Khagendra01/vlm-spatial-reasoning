@@ -7,9 +7,15 @@ Last updated: 2026-08-14 (branch reorganization)
 | Branch | What it is | Workspace clone |
 |---|---|---|
 | `master` | Trunk. Default branch on GitHub. Shared code, docs, scripts, results. | both |
-| `paper1/wacv2027` | **Paper 1**: "Beyond Spatial Accuracy: Diagnosing Persistent Orientation Failures in Vision-Language Models" (WACV 2027 Datasets Track). Contains the Capability Audit Ladder manuscript, external flagship eval CSVs, `FINAL_WACV2027_SUBMISSION/` (Paper-1 submission kit). | `Desktop\VLM-Spatial-Reasoning` |
-| `paper2/wacv2027` | **Paper 2**: "What Spatial Fine-Tuning Actually Changes" (WACV 2027 Datasets Track). Seed campaign (ΔA/ΔG/ΔC, multi-seed, Qwen2-VL-7B / SmolVLM2-2B / Qwen3-VL-8B), independent numerical audit, claim hierarchy, figures/tables, `FINAL_WACV2027_SUBMISSION_PAPER2/` (Paper-2 submission kit). | `Documents\vlm-spatial-reasoning` |
+| `paper1/wacv2027` | **Paper 1**: "Beyond Spatial Accuracy: Diagnosing Persistent Orientation Failures in Vision-Language Models" (WACV 2027 Datasets Track). Manuscript at `submission/wacv2027/source/`, external flagship eval CSVs, and the full Paper-1 submission kit `FINAL_WACV2027_SUBMISSION/` (upload PDFs + code zip + enrollment docs + checklists). | `Desktop\VLM-Spatial-Reasoning` |
+| `paper2/wacv2027` | **Paper 2**: "What Spatial Fine-Tuning Actually Changes" (WACV 2027 Datasets Track). Seed campaign (ΔA/ΔG/ΔC, multi-seed, Qwen2-VL-7B / SmolVLM2-2B / Qwen3-VL-8B), independent numerical audit, claim hierarchy, figures/tables, and the full Paper-2 submission kit `FINAL_WACV2027_SUBMISSION_PAPER2/`. | `Documents\vlm-spatial-reasoning` |
 | `research/equiorient` | EquiOrient study line (separate research thread: protocol freeze, MUTATE novelty gate, decision log under `research/`). | — |
+
+## Kit ownership (corrected 2026-08-14)
+
+- Paper-1 kit `FINAL_WACV2027_SUBMISSION/` lives on **`paper1/wacv2027`** (moved verbatim from the Paper-2 line where it had been parked; commit `00d85b8` on paper1, removal `44df918` on paper2).
+- Paper-2 kit `FINAL_WACV2027_SUBMISSION_PAPER2/` lives on **`paper2/wacv2027`**.
+- The old `FINAL_WACV2027_SUBMISSION/04_LATEX_SOURCE/paper2_source/` copy was a byte-identical duplicate (hash-verified) of the Paper-2 kit's source; deleted, zero loss.
 
 ## Archive tags (old branch names, preserved forever)
 
