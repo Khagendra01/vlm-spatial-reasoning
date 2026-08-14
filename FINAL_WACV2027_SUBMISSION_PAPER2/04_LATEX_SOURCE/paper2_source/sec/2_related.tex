@@ -1,0 +1,52 @@
+% Section 2: Related Work
+\paragraph{Accuracy versus visual grounding.}
+A central and rapidly growing observation is that benchmark accuracy can
+overstate genuine visual dependence. \emph{Beyond Accuracy}
+(Zafar et al., 2026)~\cite{zafar2026beyond} evaluates medical VLMs with
+real, blank, and shuffled images and defines the Visual Reliance Score
+(VRS) as $A(\text{real}) - A(\text{shuffle})$; they find that RLVR can
+improve accuracy while degrading visual grounding. Our \emph{correct-image
+dependence} (the normal-minus-shuffle gap, $G$) is the same construction;
+we do not claim it as novel, and we report the zero-shot-relative change
+\dG{} as the adaptation quantity. \emph{Seeing without Looking}
+(Lan et al., 2026)~\cite{lan2026seeing} applies global and localized
+visual interventions to show that predictions can remain robust after
+evidence removal; it audits pretrained models rather than a fine-tuning
+transition. \emph{VisualFLIP} (Zhu et al., 2026)~\cite{zhu2026visualflip}
+introduces a paired benchmark where the question stays fixed and a minimal
+task-critical edit deterministically flips the gold answer, with pair
+accuracy and Collapse Rate as metrics; its dataset and harness are not yet
+publicly released, and we do not claim to reproduce its protocol. Our
+Tier-C horizontal reflection is a global image intervention, not a minimal
+local edit; we report our pair metrics as \emph{collapse-style paired
+answer-update metrics following VisualFLIP}, with the intervention
+difference stated explicitly.
+
+\paragraph{Consistency versus grounding.}
+\emph{Consistent Yet Wrong} (Bhat and Yamasaki, 2026)~\cite{bhat2026consistent}
+introduces ViewDiag and shows that multi-view consistency can coexist with
+substantial error, indicating prior-driven collapse rather than
+evidence-sensitive reasoning. Their dissociation between consistency and
+grounding is the static analogue of our \dC{}-versus-\dG{} decomposition,
+but they do not study a fine-tuning transition. \emph{VisualFLIP}'s
+collapse rate is a similar paired-consistency notion for minimal-edit
+pairs.
+
+\paragraph{Grounding-aware training objectives.}
+\emph{CORAL} (Zafar et al., 2026)~\cite{zafar2026coral} fine-tunes
+Qwen2.5-VL-7B with a Contrastive Grounding Objective that penalizes answer
+invariance under hard-negative image swaps, improving accuracy and
+reducing visual hallucination in medical VQA. \emph{Med-OPD}
+(Qian et al., 2026)~\cite{qian2026medopd} adds evidence-aware on-policy
+distillation for medical VLMs. These works \emph{design} grounding-aware
+objectives; we study what \emph{ordinary} fine-tuning already changes,
+without modifying the objective.
+
+\paragraph{Positioning.}
+No prior work, to our knowledge, treats ordinary spatial task fine-tuning
+as a controlled intervention and measures \dA{}, \dG{}, and \dC{} (plus
+Tier-C transformation behavior) jointly, per training seed, across two
+backbone families, with a contemporary-backbone extension. Our novelty
+claim is precisely this joint, seed-robust decomposition---not the
+normal-minus-shuffle gap, not ``accuracy differs from grounding,'' and not
+a new training objective.

@@ -1,0 +1,78 @@
+% Section 1: Introduction
+Spatial reasoning is central to multimodal systems that operate in physical
+environments: a useful VLM must determine whether one object is to the left
+of another, above it, in front of it, or facing it, and it must do so using
+the image---not a language prior. A growing line of work shows that
+benchmark accuracy can diverge from genuine visual grounding: models can
+answer correctly while depending weakly on the image~\cite{lan2026seeing,
+zafar2026beyond,zhu2026visualflip}, and consistency across conditions can
+coexist with error~\cite{bhat2026consistent}. Prior work has also
+introduced grounding-aware training objectives that explicitly reward
+visual dependence~\cite{zafar2026coral}.
+
+What has not been examined is whether \emph{ordinary} spatial task
+fine-tuning---the standard LoRA recipe with no grounding-aware
+objective---moves benchmark accuracy, correct-image dependence, and
+semantic pair consistency as a jointly measured vector of capability
+changes, and whether those changes replicate across training seeds and
+backbone families. This is the gap we address.
+
+We use Visual Spatial Reasoning (VSR)~\cite{liu2023vsr} as the task.
+VSR contains natural-image statements about object-relative relations
+(left/right, above/below, facing, containment, and others) paired with
+true/false labels. Following the frozen protocol of the underlying study
+(documented in the repository decision log), we evaluate every checkpoint
+under a corrected battery of six conditions: \emph{normal} (the frozen
+prompt and image), \emph{shuffle} (frozen derangement of the image),
+\emph{relcomp} (strict complement pairs: language changes, expected label
+flips), \emph{facingcomp} (facing-antonym flip-law diagnostic), and the
+Tier-C pair \emph{hflip\_flip} / \emph{hflip\_invariant} (global
+horizontal reflection; language fixed; left/right truth must flip,
+vertical/depth truth must stay).
+
+We train three fresh General-LoRA seeds per backbone (7B \qwen{} and 2B
+\smol{}) using the identical recipe as the committed seed-0 run, then
+measure, per seed:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{\dA{} (benchmark gain):} normal accuracy after tuning minus
+        zero-shot normal accuracy;
+  \item \textbf{\dG{} (correct-image dependence):} the change in the
+        normal-minus-shuffle accuracy gap relative to zero-shot;
+  \item \textbf{\dC{} (semantic pair consistency):} relcomp/facingcomp
+        flip-law compliance and its seed stability;
+  \item \textbf{Tier-C transformation behavior:} three separate quantities
+        under global reflection---transformed accuracy
+        ($A_{\text{transform}}$), pair consistency ($C_{\text{pair}}$), and
+        joint correctness (both\_correct)---following the frozen metric
+        definitions of the underlying study.
+\end{itemize}
+
+Every headline number in this paper was recomputed independently from raw
+prediction artifacts by a standalone audit script
+(\texttt{scripts/audit\_paper2\_numbers\_independent.py}) that imports no
+analyzer module; the audit passed with zero discrepancies and zero
+failed claims. We report means and standard deviations across the three
+fresh seeds; seeds are independent training draws, not ordered stages.
+
+Our primary finding is that the adaptation decomposes cleanly and
+reproducibly. \dA{} is positive for all six fresh seeds across both
+families; \dG{} is positive for all six; semantic pair consistency stays
+within 0.05 of the legacy General checkpoint for every fresh seed; and all
+fresh 2B Tier-C answer-update rates exceed the 2B zero-shot rate. A
+post-confirmatory extension on the contemporary \qwennew{} backbone
+reproduces the primary \dA{}/\dG{} pattern and the transformed-accuracy
+gain, and is explicitly labeled exploratory rather than preregistered.
+
+We make three contributions:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{A controlled multi-seed, cross-backbone decomposition of
+        ordinary spatial fine-tuning} into benchmark gain, correct-image
+        dependence, and semantic pair consistency, with all quantities
+        recomputed independently and frozen before manuscript mode.
+  \item \textbf{A seed-robust result set:} every component of the vector
+        replicates across three fresh training seeds on two backbone
+        families, closing the single-checkpoint-anecdote criticism.
+  \item \textbf{A scoped contemporary-backbone extension} (\qwennew{})
+        that reproduces the primary adaptation pattern, honestly labeled as
+        post-confirmatory external validation.
+\end{itemize}

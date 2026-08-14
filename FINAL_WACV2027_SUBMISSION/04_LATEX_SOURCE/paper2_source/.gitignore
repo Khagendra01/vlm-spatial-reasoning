@@ -1,0 +1,8 @@
+# LaTeX build artifacts (compiled PDFs ARE committed; intermediates are not)
+*.aux
+*.bbl
+*.blg
+*.brf
+*.log
+*.out
+build/

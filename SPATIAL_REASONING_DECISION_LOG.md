@@ -326,3 +326,41 @@ scripts/make_pub_figures.py, all values from numerical_audit.json):
   Claims C1-C5 frozen + audited. GPU stays OFF. Remaining: LaTeX compile
   (tectonic absent locally; compile on Paper-1 toolchain/CI), OpenReview
   enrollment Aug 21, main.pdf Aug 28, suppl+code Aug 30.
+
+### 2026-08-14 (cont.) - Remaining tasks executed: LaTeX compiled, Paper-2 submission kit built
+
+1. COMPILE (no compute, no numbers): MiKTeX 26.5 toolchain found at
+   C:\Users\Khage\AppData\Local\Programs\MiKTeX (pdflatex 4.27). Compiled
+   FINAL_WACV2027_SUBMISSION/04_LATEX_SOURCE/paper2_source:
+   - main.pdf: 5 pages (abstract..conclusion + references), 0 undefined
+     citations, 0 overfull boxes (fixed 2 table overfulls via tabcolsep=4pt
+     in sec/4_results.tex).
+   - suppl.pdf: 1 page (fixed missing \dA/\dG/\qwennew macro definitions and
+     a nested-math \dG bug in suppl.tex; fixed 32pt overfull via \allowbreak;
+     fixed stale commit hash 0db0fff -> 95b66bc in Archived Artifacts).
+   - Verified via pymupdf text extraction: title/abstract/numbers/figures
+     (3 embedded PNGs)/references all present. Hostile numerical review
+     re-run against compiled source: PASS.
+
+2. OPENREVIEW ENROLLMENT KIT (Aug 21): FINAL_WACV2027_SUBMISSION_PAPER2/
+   created mirroring the Paper-1 convention:
+   - 02_OPENREVIEW_ENROLLMENT/: OPENREVIEW_SUBMISSION.md + title.txt +
+     abstract_paste.txt (paste-ready; ASCII-safe Delta A/G/C).
+   - 01_UPLOAD_THIS/FINALIZE_BEFORE_UPLOAD.txt + set_paper_id.py
+     (adapted to MiKTeX; tested end-to-end with fake ID 1234 -> headers
+     rebuilt "Submission #1234" -> reverted to anonymous *****; fixed two
+     script bugs found by the test: Python 3.12 re.sub \d escape (lambda
+     replacement) and suppl.pdf -> supplementary.pdf build-name mapping).
+   - 03_DOCS_CHECKLISTS/: WACV2027_SUBMISSION_CHECKLIST.md (SHA-256s),
+     ANONYMITY_CHECKLIST.md, SUBMISSION_REPRODUCIBILITY.md.
+   - README_FIRST.md with the deadline card (enroll Aug 21, main.pdf
+     Aug 28, suppl+code Aug 30; decisions Oct 9).
+
+3. UPLOAD ARTIFACTS READY (frozen, anonymous):
+   - main.pdf 5pp (SHA-256 D6AF008E...), supplementary.pdf 1p (A4A55543...),
+     wacv2027_code.zip 39 entries / 0.45 MB (9ABAE8E3...): seed-campaign
+     scripts (audit/analyze/freeze/figures/hostile), seed_campaign results
+     (ANALYSIS/NUMERICAL_AUDIT/CLAIM_HIERARCHY/LITERATURE/HOSTILE_REVIEW/
+     SUBMISSION_FREEZE + figures + tables), frozen protocol manifests.
+   GPU stays OFF. Remaining calendar actions are human steps at the
+   deadlines above (enrollment requires OpenReview credentials/authors).

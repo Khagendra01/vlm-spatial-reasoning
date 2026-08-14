@@ -1,0 +1,16 @@
+% Section 6: Conclusion
+Ordinary spatial LoRA fine-tuning on VSR produces a reproducible vector of
+capability changes, not a single benchmark gain. Across three fresh
+training seeds and two backbone families, \dA{} (benchmark accuracy) and
+\dG{} (correct-image dependence) are positive for every seed, semantic
+pair consistency \dC{} stays within 0.05 of the legacy General checkpoint,
+and Tier-C transformation behavior improves answer-update rates while
+remaining a set of three separately reported quantities. A contemporary
+\qwennew{} extension reproduces the primary \dA{}/\dG{} pattern and the
+transformed-accuracy gain. Every number was independently recomputed from
+raw artifacts and the frozen protocol; the full claim hierarchy,
+numerical audit, literature audit, figures, and tables are archived in the
+repository. We recommend that spatial fine-tuning be evaluated and
+reported as this joint vector---accuracy, correct-image dependence,
+semantic consistency, and transformation behavior---rather than collapsed
+into a single accuracy number.

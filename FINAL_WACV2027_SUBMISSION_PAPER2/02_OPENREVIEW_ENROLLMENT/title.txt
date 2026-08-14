@@ -1,0 +1,1 @@
+What Spatial Fine-Tuning Actually Changes: A Multi-Seed Decomposition of Accuracy, Evidence Dependence, and Semantic Consistency in Vision-Language Models

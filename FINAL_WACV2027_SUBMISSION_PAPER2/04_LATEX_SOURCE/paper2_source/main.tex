@@ -1,0 +1,57 @@
+% WACV 2027 paper - Evaluations & Dataset track.
+% Paper 2: What Spatial Fine-Tuning Changes (R1 seed campaign).
+% Review version, anonymous. Compile: tectonic main.tex
+% All numbers from results/seed_campaign/numerical_audit.json (Step-1
+% independent audit, PASS) and CLAIM_HIERARCHY.md (frozen claim set).
+
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage[review,datasets]{wacv}
+% \usepackage[pagenumbers]{wacv} % arXiv version
+
+\input{preamble}
+
+\definecolor{wacvblue}{rgb}{0.21,0.49,0.74}
+\usepackage[pagebackref,breaklinks,colorlinks,allcolors=wacvblue]{hyperref}
+\usepackage[capitalize,noabbrev]{cleveref}
+
+\def\wacvPaperID{*****}
+\def\confName{WACV}
+\def\confYear{2027}
+
+\newcommand{\qwen}{Qwen2-VL-7B}
+\newcommand{\smol}{SmolVLM2-2B}
+\newcommand{\qwennew}{Qwen3-VL-8B}
+\newcommand{\dA}{$\Delta A$}
+\newcommand{\dG}{$\Delta G$}
+\newcommand{\dC}{$\Delta C$}
+
+\title{What Spatial Fine-Tuning Actually Changes: A Multi-Seed Decomposition of Accuracy, Evidence Dependence, and Semantic Consistency in Vision--Language Models}
+
+\author{Anonymous Authors\\
+Anonymous Institution}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Fine-tuning a vision--language model (VLM) on a spatial reasoning task usually improves benchmark accuracy. But ``better accuracy'' is not a single capability: the same adaptation may change how much the model depends on the correct image, how coherently it applies relational semantics, and how it responds to a causal image transformation, in different directions and at different rates. We treat ordinary LoRA fine-tuning on the Visual Spatial Reasoning (VSR) task as a controlled intervention and measure, per training seed and across two backbone families, a vector of capability changes: benchmark gain \dA{}, correct-image dependence \dG{} (the normal-minus-shuffle accuracy gap, relative to zero-shot), and semantic pair consistency \dC{} (relcomp/facing-antonym flip-law compliance), together with Tier-C transformation behavior under global horizontal reflection (transformed accuracy, pair consistency, joint correctness). Across 3 fresh training seeds per family (plus the committed seed-0), \dA{} is positive for every seed on both backbones (7B: $+0.0506\pm0.0046$; 2B: $+0.0316\pm0.0009$) and \dG{} is positive for every seed (7B: $+0.0440\pm0.0054$; 2B: $+0.0316\pm0.0026$). Fresh-seed semantic pair consistency stays within 0.05 of the legacy General checkpoint in both families, and all fresh 2B answer-update rates exceed the 2B zero-shot rate. A post-confirmatory extension on the contemporary \qwennew{} backbone reproduces the primary \dA{}/\dG{} pattern ($+0.032$/$+0.036$) and the transformed-accuracy gain ($+0.045$). We conclude that ordinary spatial fine-tuning is not a scalar capability update: benchmark accuracy, correct-image dependence, and semantic consistency can be described---and must be reported---as a jointly measured vector whose components replicate across seeds and families.
+\end{abstract}
+
+\section{Introduction}
+\input{sec/1_intro.tex}
+\section{Related Work}
+\input{sec/2_related.tex}
+\section{Protocol}
+\input{sec/3_protocol.tex}
+\section{Results}
+\input{sec/4_results.tex}
+\section{Discussion and Limitations}
+\input{sec/5_discussion.tex}
+\section{Conclusion}
+\input{sec/6_conclusion.tex}
+
+\bibliographystyle{ieeenat_fullname}
+\bibliography{references}
+
+\end{document}
