@@ -207,3 +207,45 @@ authoritative for the mutated target).
 
 confirmatory or exploratory: protocol/governance + CPU infrastructure; no
 model training performed.
+
+---
+## 2026-08-14 (cont.) — Gates 2-3 executed (CPU work; still no GPU)
+
+results already seen? no
+
+Gate 2 (synthetic paired scenes):
+- src/equiorient/datasets.py: plan-view synthetic generator (rects/circles/
+  line segments with depth + direction), geometry-level transforms
+  (H/V/VoH), margin-guaranteed strict relations, PIL rendering.
+- tests/test_equiorient_synthetic.py: 8 tests PASS — algebra law holds for
+  every pair x relation x transform; VH composition == sequential; no ties
+  post-transform; pixel-level inverse/composition/determinism.
+- Hostile-verified: injected renderer bug (V flips x instead of y) produced
+  192 law violations -> gate is sensitive, not vacuous.
+- Human-inspection pack committed: 51 side-by-side PNG pairs + manifest
+  (4896 rows, all law_ok, stratified relation x transform) at
+  results/equiorient/human_inspection/. HUMAN SPOT-CHECK STILL REQUIRED
+  (50+ pairs) before pilot — see manifest.csv.
+
+Gate 3 (representation feasibility): research/EQUIORIENT_REPRESENTATION_
+FEASIBILITY.md — proposal: PairEncoder over pooled vision features of known
+object boxes (synthetic scenes = exact grounding), typed z = [z_h|z_v|z_d|
+z_orient]; relation head W_rel·z with FORCED relation decoding (no LM-side
+bypass); answer gradient reaches z via W_rel^T; equivariance loss reaches
+same z via shared PairEncoder weights on z(x) and z(Tx); bypass table with
+mitigations (forced decoding, causal ablation mandatory, equivariance loss
+as structural backstop). Open items frozen at pilot time (backbone, head
+dims, lambda_eq selection rule predeclared). Verdict: FEASIBLE.
+
+alternatives considered: auxiliary-branch z (rejected: model can ignore it —
+gate requires answer-path); conditioning rho on relation label (rejected:
+A2.2 leaks answer).
+
+reason: execution-guide gate order (Gate 1 -> synthetic scenes -> feasibility
+-> pilot); protocol Amendment A6.
+
+affected frozen artifacts: none frozen changed; adds datasets.py,
+test_equiorient_synthetic.py, FEASIBILITY.md, human_inspection pack.
+
+confirmatory or exploratory: CPU infrastructure + design analysis; no model
+training.
