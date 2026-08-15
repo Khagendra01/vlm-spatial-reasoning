@@ -557,3 +557,35 @@ confirmatory or exploratory: implementation correction; the re-run is the
 first valid pilot execution.
 
 ---
+## 2026-08-15 — Pilot run #2 (valid) COMPLETE: verdict MUTATE (ceiling), stop conditions 1+4 triggered
+
+results already seen? YES (run #2 results seen; run #1 void)
+
+run #2 (65 min, A6000, Qwen3-VL-8B @ 0c351dd0, freeze 91185d7, harness
+cdc80b7): all six arms 0.9861 val; held-out V o H = 1.0000 for ALL five
+causal arms incl. wrong_geometry; z-corrupted = 0.5 everywhere (causal
+path PASS); lambda selection -> 0.1 for all three structural arms.
+
+stop conditions: 1 TRIGGERED (equiorient does not beat augmentation/
+output-consistency behaviorally); 2 NOT MEASURABLE (latent equivariance
+error missing from harness — frozen metric gap); 3 PASS (ablation
+1.0->0.5); 4 TRIGGERED (correct rho == wrong rho behaviorally).
+
+verdict: MUTATE the held-out test — V o H composition is at ceiling for
+every arm (closed answer-level algebra; augmentation alone composes it),
+so the pilot has no discriminative power. This is a falsification of the
+TEST DESIGN, not of EquiOrient. Candidate mutations (order recommended):
+B first — implement frozen latent metrics (latent_equivariance_error_VoH,
+paired_both_correct_VoH) and re-run same design (~1h GPU, zero protocol
+change); then A — held-out depth relation family (head to 6 classes,
+Amendment C) if B does not discriminate; C (unseen transform class)
+reopens Gate-1 algebra — heaviest, last.
+
+affected frozen artifacts: none changed; adds PILOT_REPORT.md + pilot_run
+artifacts. Harness metric gap documented; harness to be completed before
+any further GPU run.
+
+confirmatory or exploratory: one-seed falsification pilot (Phase-1 scope
+per Amendment B1); result is NOT final-paper evidence.
+
+---
