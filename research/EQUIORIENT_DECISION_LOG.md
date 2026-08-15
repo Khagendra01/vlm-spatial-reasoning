@@ -520,3 +520,40 @@ training step) established:
 Frozen contract unchanged; discovery documented for the pilot report.
 
 ---
+## 2026-08-15 — PILOT RUN #1 INVALID: five implementation deviations found in result audit (run void)
+
+results already seen? The first GPU run COMPLETED (62 min, all 12 runs) but
+the result audit found the matrix scientifically VOID — the numbers are
+correct as computed, the sentences they would support are not:
+
+1. HELD-OUT LEAK (fatal): load_pilot_data did not filter v_after_h; the
+   manifest contains V o H rows for all 17 scenes and they entered the
+   training data of every arm except ordinary_sft (and validation). The
+   frozen protocol requires transform_held_out v_after_h NEVER in training.
+   This is why every arm hit ~1.0 — the held-out transform was seen.
+2. equiorient arm ran with NO equivariance loss: run() passed
+   structural='equiorient' but the loss branch keys on 'equivariance' —
+   the primary method arm silently collapsed to augmentation_only.
+3. wrong_geometry arm was NOT wrong: it ran latent_invariance (rho=I)
+   instead of the frozen WRONG predeclared rho (e.g., rho_H acting on z_v).
+4. Vision LoRA state carried over between arms (only enc/head were
+   re-initialized) — arms did not start from the common init (Amendment B3).
+5. Hold-out evaluation ran ONCE on the last arm only (wrong_geometry), not
+   per causal-comparison arm at its selected lambda — the frozen primary
+   metric (per-arm held_out_VoH_accuracy contrast) was never computed.
+
+decision: fix all five in pilot_harness.py (filter V o H from train/val;
+STRUCTURAL_OF map with fail-loud assert; WRONG_RHO_VEC with the frozen
+example semantics — H acts on z_v, V acts on z_h, V o H misread as
+identity; common-init LoRA snapshot restored at every train_run; selected-
+lambda re-run of all five causal arms with a SINGLE hold-out V o H
+evaluation each, after selection, never used for selection) and RE-RUN the
+pilot. Run #1 numbers are void and must not be reported.
+
+affected frozen artifacts: pilot_harness.py only (engineering); no change
+to backbone/revision/losses/data/seeds/metrics/stop conditions.
+
+confirmatory or exploratory: implementation correction; the re-run is the
+first valid pilot execution.
+
+---

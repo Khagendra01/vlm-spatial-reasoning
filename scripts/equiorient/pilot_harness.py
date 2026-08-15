@@ -58,6 +58,14 @@ RHO_VEC = {"hflip": [RHO_ACTION[Transform.H][c] for c in COMP_MAP.values()],
            "vflip": [RHO_ACTION[Transform.V][c] for c in COMP_MAP.values()],
            "v_after_h": [RHO_ACTION[Transform.VH][c] for c in COMP_MAP.values()],
            "identity": [1, 1, 1, 1]}
+# WRONG predeclared rho (frozen YAML: "WRONG predeclared rho (e.g., rho_H
+# acting on z_v)"): the geometry-derived action applied to the WRONG typed
+# component — H acts on z_v, V acts on z_h, and the held-out composition is
+# misread as identity (a natural "wrong geometry" misunderstanding).
+WRONG_RHO_VEC = {"hflip": [+1, -1, +1, +1],   # H acting on z_v
+                 "vflip": [-1, +1, +1, +1],   # V acting on z_h
+                 "v_after_h": [1, 1, 1, 1],   # V o H misread as identity
+                 "identity": [1, 1, 1, 1]}
 
 
 class PairEncoder(nn.Module):
@@ -120,6 +128,12 @@ def load_pilot_data(manifest_path: Path) -> PilotData:
              "holdout": set(m["scene_split"]["holdout"])}
     pd_ = PilotData()
     for ex in m["examples"]:
+        # Held-out transform discipline: V o H must NEVER appear in train or
+        # validation (frozen YAML: transform_held_out [v_after_h], "NEVER in
+        # training"). The committed manifest contains v_after_h rows for all
+        # 17 scenes; they belong ONLY to the single held-out evaluation.
+        if ex["transform"] == "v_after_h":
+            continue
         rec = (ex["scene_id"], ex["transform"], ex["png"],
                ex["boxes"], ex["pair_relations"])
         if ex["scene_id"] in split["train"]:
@@ -218,6 +232,13 @@ class PilotRunner:
         n = sum(p.numel() for p in self.model.parameters() if p.requires_grad)
         self.log(f"vision LoRA attached (qkv/proj/c_fc/c_proj r=16); "
                  f"trainable: {n:,}")
+        # Common-init snapshot: every arm must start from the SAME LoRA
+        # state (Amendment B3 init-equivalence). train_run() restores this
+        # before training so arms differ ONLY in data/loss, never in
+        # starting point.
+        self.lora_init = {
+            n: p.detach().clone()
+            for n, p in self.model.named_parameters() if p.requires_grad}
         return n
 
     # ---------------- features (cached per image) ----------------
@@ -277,7 +298,21 @@ class PilotRunner:
         return self.head(z), z
 
     # ---------------- training ----------------
+    # structural values: "none" | "equivariance" | "latent_invariance" |
+    #                    "output_consistency" | "wrong_geometry"
+    KNOWN_STRUCTURAL = ("none", "equivariance", "latent_invariance",
+                        "output_consistency", "wrong_geometry")
+
     def train_run(self, name, examples, lam, structural, run_dir, seed):
+        assert structural in self.KNOWN_STRUCTURAL, \
+            f"UNKNOWN STRUCTURAL {structural!r} — harness bug, not protocol"
+        # Restore the common-init LoRA state (Amendment B3): every arm
+        # starts from the same vision-LoRA weights; only enc/head (re-init
+        # below) and the data/loss treatment differ between arms.
+        with torch.no_grad():
+            for n, p in self.model.named_parameters():
+                if p.requires_grad:
+                    p.copy_(self.lora_init[n])
         torch.manual_seed(seed)
         self.enc = PairEncoder().to(self.device)
         self.head = RelationHead().to(self.device)
@@ -316,6 +351,12 @@ class PilotRunner:
                     if structural == "equivariance" and lam is not None:
                         ztx = [s * zk for s, zk in zip(rho_vec, z)]
                         tot = tot + lam * loss_equivariance(z, ztx, rho_vec)
+                    elif structural == "wrong_geometry" and lam is not None:
+                        # WRONG predeclared rho applied to the SAME z(x) and
+                        # z(Tx) — same loss form as equiorient, wrong action.
+                        wrho = WRONG_RHO_VEC[tr]
+                        ztx = [s * zk for s, zk in zip(wrho, z)]
+                        tot = tot + lam * loss_equivariance(z, ztx, wrho)
                     elif structural == "latent_invariance" and lam:
                         ztx = [zk for zk in z]
                         tot = tot + lam * loss_latent_invariance(z, ztx)
@@ -386,41 +427,62 @@ class PilotRunner:
             results[arm] = {"val_acc": acc, "lambda": None}
         # ---- structural arms: lambda grid ----
         grid = freeze["losses"]["structural_loss_weight_grid"]
+        # arm name -> structural loss key ("equiorient" is the equivariance
+        # arm; a plain-name pass-through silently dropped the loss before
+        # 2026-08-15 — see decision log "pilot run #1 invalid").
+        STRUCTURAL_OF = {"output_consistency": "output_consistency",
+                         "latent_invariance": "latent_invariance",
+                         "equiorient": "equivariance"}
         lam_scores = {}
         for arm in ["output_consistency", "latent_invariance", "equiorient"]:
             lam_scores[arm] = {}
             for lam in grid:
                 rd = self.out / f"{arm}__lam{lam}"
                 rd.mkdir(parents=True, exist_ok=True)
-                acc = self.train_run(arm, data.train, lam, arm, rd,
-                                     seed=20260814)
+                acc = self.train_run(arm, data.train, lam,
+                                     STRUCTURAL_OF[arm], rd, seed=20260814)
                 lam_scores[arm][lam] = acc
                 results[f"{arm}__lam{lam}"] = {"val_acc": acc, "lambda": lam}
         selected = {a: min(grid, key=lambda g: (-lam_scores[a][g], g))
                     for a in lam_scores}
         for a, s in selected.items():
             self.log(f"LAMBDA SELECT {a}: {lam_scores[a]} -> {s}")
-        # ---- wrong_geometry at equiorient's selected lambda ----
-        lam_eq = selected["equiorient"]
-        rd = self.out / f"wrong_geometry__lam{lam_eq}"
-        rd.mkdir(parents=True, exist_ok=True)
-        acc = self.train_run("wrong_geometry_equiorient", data.train,
-                             lam_eq, "latent_invariance", rd, seed=20260814)
-        results["wrong_geometry_equiorient"] = {"val_acc": acc,
-                                                "lambda": lam_eq}
-        # ---- single holdout eval (V o H) + causal ablation ----
-        self.log("HOLDOUT EVAL: scene_0014-0016, V o H — ONCE")
-        ho = self.eval_scenes(freeze["data"]["scenes_holdout"], voh_only=True)
-        ho_corrupt = self.eval_scenes(freeze["data"]["scenes_holdout"],
-                                      voh_only=True, corrupted=True)
+        # ---- selected-λ final runs + SINGLE per-arm holdout eval ----
+        # Each causal-comparison arm is re-trained ONCE at its selected λ
+        # (fresh common-init via train_run's LoRA restore) and evaluated on
+        # the held-out V o H exactly once — never used for selection.
+        causal_arms = [
+            ("augmentation_only", None, "none"),
+            ("output_consistency", selected["output_consistency"],
+             "output_consistency"),
+            ("latent_invariance", selected["latent_invariance"],
+             "latent_invariance"),
+            ("equiorient", selected["equiorient"], "equivariance"),
+            ("wrong_geometry_equiorient", selected["equiorient"],
+             "wrong_geometry"),
+        ]
+        self.log("HOLDOUT EVAL: selected-lambda arms, scene_0014-0016 V o H -- "
+                 "exactly once per arm, after selection")
+        for arm, lam, structural in causal_arms:
+            rd = self.out / f"{arm}__selected"
+            rd.mkdir(parents=True, exist_ok=True)
+            acc = self.train_run(arm, data.train, lam, structural, rd,
+                                 seed=20260814)
+            ho = self.eval_scenes(freeze["data"]["scenes_holdout"],
+                                  voh_only=True)
+            ho_c = self.eval_scenes(freeze["data"]["scenes_holdout"],
+                                    voh_only=True, corrupted=True)
+            self.log(f"[{arm}] selected-lambda val {acc:.4f} | holdout V o H "
+                     f"{ho:.4f} | z-corrupted {ho_c:.4f}")
+            results[arm] = {"val_acc": acc, "lambda": lam,
+                            "holdout_VoH_accuracy": ho,
+                            "holdout_VoH_accuracy_z_corrupted": ho_c,
+                            "causal_ablation_delta": ho - ho_c}
         matrix = {
             "freeze_commit": "91185d7",
             "backbone": freeze["backbone"]["name"],
             "lambda_selected": selected,
             "per_arm_val": results,
-            "holdout_VoH_accuracy": ho,
-            "holdout_VoH_accuracy_z_corrupted": ho_corrupt,
-            "causal_ablation_delta": ho - ho_corrupt,
             "elapsed_seconds": time.time() - t0,
         }
         (self.out / "result_matrix.json").write_text(
