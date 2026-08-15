@@ -66,15 +66,21 @@ def _clone_repo() -> None:
     import subprocess
 
     dst = "/root/equiorient"
-    subprocess.run(
-        ["git", "clone", "--quiet", "--depth", "1", "--filter=blob:none",
-         "--sparse", "--branch", BRANCH, REPO_URL, dst], check=True)
-    subprocess.run(["git", "-C", dst, "sparse-checkout", "set",
-                    *SPARSE_CONE], check=True)
-    subprocess.run(["git", "-C", dst, "fetch", "--quiet", "--depth", "1",
-                    "origin", PINNED_COMMIT], check=True)
-    subprocess.run(["git", "-C", dst, "checkout", "--quiet", "--force",
-                    PINNED_COMMIT], check=True)
+
+    def run(cmd):
+        p = subprocess.run(cmd, capture_output=True, text=True)
+        if p.returncode != 0:
+            raise RuntimeError(f"CMD FAILED {cmd[0]} rc={p.returncode}\n"
+                               f"stdout: {p.stdout[-2000:]}\n"
+                               f"stderr: {p.stderr[-2000:]}")
+        return p
+
+    run(["git", "clone", "--quiet", "--depth", "1", "--filter=blob:none",
+         "--sparse", "--branch", BRANCH, REPO_URL, dst])
+    run(["git", "-C", dst, "sparse-checkout", "set", *SPARSE_CONE])
+    run(["git", "-C", dst, "fetch", "--quiet", "--depth", "1",
+         "origin", PINNED_COMMIT])
+    run(["git", "-C", dst, "checkout", "--quiet", "--force", PINNED_COMMIT])
 
 
 def _run_harness(mode: str, variant: str) -> dict:
