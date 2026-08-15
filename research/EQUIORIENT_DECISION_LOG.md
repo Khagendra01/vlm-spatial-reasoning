@@ -650,3 +650,29 @@ the on-box pre-flight must verify the VENV imports (python = /bin/
 python), not system python.
 
 ---
+## 2026-08-15 — FINAL: run #5 complete, Phase-1 pilot verdict = KILL as designed; compute CLOSED
+
+results already seen? YES (run #5 = final complete matrix; runs #1-#4
+void/aborted as logged)
+
+run #5 (69 min; oc/lat λ=1.0, eq λ=10.0): all arms 0.9722 val; held-out
+V o H 1.0000; z-corr 0.5 (causal path PASS); both_correct 0.9444-0.9722;
+latent_eq_err_VoH equiorient 10.309 vs controls 10.370/10.384/10.392
+(no meaningful drop -> stop 2 TRIGGERED); depth_probe_holdout 0.6111 for
+ALL arms incl. wrong_geometry (stop 4 TRIGGERED, Amendment C probe does
+NOT discriminate; the common 0.6111 = generic depth signal from answer-
+path training, zero EquiOrient contribution).
+
+verdict: KILL Phase-1 design as tested — no support on any frozen
+criterion (stops 1, 2, 4 triggered; 3 is sanity-only). NO Gate-6
+multi-seed, NO external validation on this design. Compute budget for
+this account EXHAUSTED; instance deleted 06:10 UTC (billing stopped);
+snapshot equiorient-pilot-provisioned-run5 retained. GPU stays OFF until
+explicit orchestrator unlock + fresh budget.
+
+open (zero-compute, for a future budget, NOT promised): a harder regime
+(richer scenes / longer training / non-closed held-out structure) could
+re-test EquiOrient; candidate paper stories per guide s12 are the
+negative-result framings. No action taken.
+
+---
