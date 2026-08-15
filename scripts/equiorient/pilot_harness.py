@@ -240,8 +240,11 @@ class PilotRunner:
         inp = self.processor(images=img, text="", return_tensors="pt")
         pix = inp["pixel_values"].to(self.device, dtype=torch.bfloat16)
         grid = inp["image_grid_thw"].to(self.device)
-        with torch.no_grad():
-            _, deep = self.model.visual(pix, grid_thw=grid)
+        # NO no_grad here (real path): the frozen design (Amendment B4/
+        # ARCHITECTURE_CRITIQUE) requires vision-LoRA gradients to reach the
+        # backbone from BOTH objectives. no_grad silently froze the LoRA
+        # (grads never flowed); evals disable autograd at the call site.
+        _, deep = self.model.visual(pix, grid_thw=grid)
         return deep[0], grid
 
     def pooled(self, feat, grid, boxes, obj_id):
@@ -252,6 +255,10 @@ class PilotRunner:
         as image_embeds. n_merged = (H_feat/2) x (W_feat/2) where
         H_feat/W_feat are the pre-merge grid dims from image_grid_thw and
         merge size = 2. Box center -> merged cell via canvas scale.
+
+        .float(): deepstack features arrive bf16 (model bf16); the frozen
+        PairEncoder spec is default fp32 init — cast here so the encoder
+        sees fp32 (dtype-mismatch fix, 2026-08-15, verified on GPU box).
         """
         h_feat, w_feat = grid[0, 1].item(), grid[0, 2].item()
         mh, mw = h_feat // 2, w_feat // 2   # merged grid (merge size 2)
@@ -260,7 +267,7 @@ class PilotRunner:
         c = (min(int(cx / canvas[0] * mw), mw - 1),
              min(int(cy / canvas[1] * mh), mh - 1))
         idx = c[1] * mw + c[0]
-        return feat[idx].unsqueeze(0)
+        return feat[idx].unsqueeze(0).float()
 
     def pair_logits_z(self, image_path, boxes, a, b):
         feat, grid = self.image_features(image_path)
@@ -341,11 +348,15 @@ class PilotRunner:
                     y = rel_label(ex["pair_relations"], a, b)
                     if y is None:
                         continue
-                    logits, z = self.pair_logits_z(ex["png"], ex["boxes"],
-                                                   a, b)
-                    if corrupted:
-                        z = [zk * 0.0 for zk in z]
-                        logits = self.head(z)
+                    # no_grad: evaluation never builds autograd graphs
+                    # (feature extraction is now grad-enabled in the
+                    # training path, so evals must opt out explicitly).
+                    with torch.no_grad():
+                        logits, z = self.pair_logits_z(ex["png"],
+                                                        ex["boxes"], a, b)
+                        if corrupted:
+                            z = [zk * 0.0 for zk in z]
+                            logits = self.head(z)
                     correct += int(logits.argmax(-1).item() == y)
                     total += 1
         return correct / max(total, 1)

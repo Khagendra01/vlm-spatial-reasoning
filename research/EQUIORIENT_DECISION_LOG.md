@@ -476,3 +476,29 @@ on the box (Qwen3-VL-8B @ 0c351dd0, bf16/sdpa, deepstack features
 returned) before the pilot relaunch. Still zero scientific changes.
 
 ---
+### 2026-08-15 (cont.) — Fix 2: bf16/float32 mismatch + Fix 3: vision-LoRA gradient flow
+
+Real-model verification on the box surfaced two more implementation
+deviations (tiny smoke cannot catch either):
+
+Fix 2 (dtype): pre-flight crashed with
+  RuntimeError: mat1 and mat2 must have the same dtype, but got BFloat16 and Float
+  Root cause: deepstack features arrive bf16 (model bf16) but the frozen
+  PairEncoder spec is default fp32 init. Fix: pooled() casts the pooled
+  feature to float() (encoder/head remain frozen-spec fp32; no scientific
+  parameter changed).
+
+Fix 3 (gradient flow, deeper): image_features() computed vision features
+under torch.no_grad(), so the vision LoRA (3,028,992 trainable params)
+NEVER received gradients — violating the frozen Amendment B4 /
+ARCHITECTURE_CRITIQUE requirement that gradients from BOTH objectives
+reach the backbone representation. Fix: the real path now forwards
+WITHOUT no_grad; eval_scenes explicitly wraps its loop in torch.no_grad()
+so evaluation never builds autograd graphs.
+
+Both fixes verified locally (py_compile + --tiny PASS) and must pass a
+REAL-model training-step gradient check on the A6000 box before relaunch.
+No changes to: backbone, revision, architecture spec, losses, data, seeds,
+metrics, hyperparameters, stop conditions.
+
+---
