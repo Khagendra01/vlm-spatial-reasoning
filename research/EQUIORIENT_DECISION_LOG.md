@@ -730,3 +730,42 @@ confirmatory or exploratory: pre-result amendment; still Phase-1
 one-seed falsification scope.
 
 ---
+## 2026-08-15 — Amendment D pilot (Modal L40S, v2 harder regime) COMPLETE: verdict KILL (definitive)
+
+results already seen? YES (Amendment D run = second valid regime, first
+Modal run)
+
+run (536 s on Modal L40S — ~20x faster than the A6000 runs thanks to the
+harness optimizations; repo commit 6e1c91b): five objects/scene, 600
+pairs/arm, epochs 2, all six arms + grid + selection + evals + depth
+probe executed. Model = Qwen3-VL-8B @ 0c351dd0, verified in run.log.
+
+results (selected-lambda):
+- val: augmentation 0.9833, all others 0.9875; ordinary_sft 0.8917
+- held-out V o H: 1.0000 for ALL five causal arms (ceiling persists)
+- z-corrupted: 0.5000 everywhere (causal path PASS)
+- both_correct_VoH: 1.0000 everywhere
+- latent_eq_err_VoH: 20.05/20.17/20.27/20.17/19.96 (equiorient mid-pack;
+  no meaningful drop -> stop 2 TRIGGERED)
+- depth_probe_holdout: 0.5667/0.5833/0.6000/0.5833/0.5833 (all within
+  binomial noise of chance; no arm exceeds controls by >= 0.15; stop 4
+  TRIGGERED; equiorient 0.5833 == wrong_geometry 0.5833)
+
+verdict per the predeclared Amendment D rules: KILL. The harder visual
+regime did NOT break the behavioral ceiling and did NOT create any
+discrimination: EquiOrient == controls on every metric in a SECOND
+regime (v1 algebra-closed + v2 harder scenes + Amendment C depth probe).
+Phase-1 falsification is now definitive across regimes.
+
+consequences: NO Gate-6 multi-seed, NO external validation. GPU work for
+EquiOrient is CLOSED. Modal billing ended with the sandbox (pay-per-
+second); total compute spend this Amendment D run < .50, well within
+the  credit. Volumes retained (model cache ~free); nothing running.
+
+affected frozen artifacts: none changed by the result; artifacts added
+(pilot_run_v2_modal/). Harness, v2 freeze, scaffold unchanged.
+
+confirmatory or exploratory: Phase-1 one-seed falsification (Amendment
+B1 scope); definitive negative for the tested design.
+
+---
