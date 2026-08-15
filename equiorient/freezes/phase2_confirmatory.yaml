@@ -1,0 +1,55 @@
+# EquiOrient Phase-2 confirmatory freeze ledger (draft — fill at freeze)
+#
+# Per orchestrator directive (2026-08-15): Phase 2 = D4 noncommutative
+# compositional benchmark. COMMIT THIS LEDGER BEFORE inspecting any
+# confirmatory test result; then do not change it.
+#
+# Gates passed before this draft (2026-08-15, all CPU):
+#   - PHASE2_GATE_PASS: 45/45 (D4 laws, labels, renderer, dataset,
+#     manipulation/gradient checks)
+#   - identifiability audit PASS: unseen set {R2,R3,RH,R2H,R3H} fully
+#     distinguishes correct from wrong rho (Phase-1 collision eliminated)
+#   - full dataset built + validated (20,480 examples, 0 problems)
+#
+# PENDING (fill before the 5-seed run): dataset generator commit,
+# manifest sha256s, model revision pin, lambda values, seed list.
+
+phase2_freeze:
+  dataset_generator_commit: PENDING        # git sha of generator at freeze
+  train_scene_manifest_sha256: 53cc0ae9323a1cec5ebfa95cc4ff2f584ed465ad79e739dfa8af730bc4a94514
+  val_scene_manifest_sha256: PENDING       # per-split manifests at freeze
+  test_scene_manifest_sha256: PENDING
+  model_revision: "Qwen/Qwen3-VL-8B-Instruct @ 0c351dd01ed87e9c1b53cbc748cba10e6187ff3b"
+  transformers: "==4.57.6"
+  train_sizes: [128, 512, 2048]
+  primary_train_size: 512
+  primary_comparator: augmentation
+  secondary_comparator: output_consistency
+  training_generators: [H, R90]
+  unseen_group_elements: [R2, R3, RH, R2H, R3H]
+  label_set: [right, upper_right, above, upper_left, left, lower_left, below, lower_right]
+  seeds: PENDING          # five fixed training seeds
+  primary_metric: unseen_group_accuracy
+  minimum_effect: 0.03
+  structural_metric: normalized_equivariance_error
+  lambda_values: PENDING  # e.g. [0.1, 1.0, 10.0]
+  git_sha: PENDING
+  split_sizes:
+    dev: 512     # never used in training; development gates only
+    train_pool: 2048
+    val: 512
+    test: 1024
+  sparse_exposure: "identity + exactly one generator (H or R), 50/50"
+  wrong_representation:
+    R: "R180 = -I"
+    H: "same as correct"
+  gate_requirements:
+    non_ceiling: "augmentation unseen accuracy < 0.95 at N=512 (dev)"
+    above_chance: "augmentation > 0.125 meaningfully"
+    structural_effect: "equiorient latent error drastically below augmentation"
+    specificity: "equiorient prefers correct law; wrong arm prefers wrong law"
+    answer_causality: "zeroing z destroys performance"
+    no_collapse: "latent variance/effective rank above predeclared floor"
+    manipulation: "structural loss nonzero; grads reach both image branches"
+    algebra: "all D4/label unit tests pass"
+    no_leakage: "scene ids disjoint across train/val/test"
