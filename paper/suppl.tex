@@ -1,0 +1,217 @@
+% EquiOrient — Supplementary Material (WACV 2027 E&D Track, Round 2).
+% Compile: tectonic suppl.tex
+% Everything below is generated from committed artifacts; every number
+% resolves through paper/extract_numbers.py -> numbers.tex.
+
+\documentclass[10pt,letterpaper]{article}
+\usepackage[datasets]{wacv}
+\input{preamble}
+\input{numbers}
+
+\definecolor{wacvblue}{rgb}{0.21,0.49,0.74}
+\usepackage[pagebackref,breaklinks,colorlinks,allcolors=wacvblue]{hyperref}
+\usepackage[capitalize,noabbrev]{cleveref}
+
+\def\wacvPaperID{*****}
+\def\confName{WACV}
+\def\confYear{2027}
+
+\newcommand{\rhoop}{\rho}
+\newcommand{\zblk}{\mathbf{z}}
+
+\title{EquiOrient: Supplementary Material}
+
+\author{Anonymous Authors\\
+Anonymous Institution}
+
+\begin{document}
+\maketitle
+
+\section{Full result matrices (Regime B, v2 corrected)}
+
+Validation accuracy at the selected lambda; held-out V o H behavioral
+accuracy; accuracy with z zeroed (bias decode); paired both-correct;
+latent equivariance error on the held-out composition; depth probes
+(full-z and z\_d-only); per-epoch answer/structural loss curves.
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{lccccccc}
+\hline
+arm & val & holdout & z-corr & both & latent & probe & probe-zd\\
+\hline
+ordinary\_sft & \eqnVTwoCOrdinarySftLoraVal & --- & --- & --- & --- & --- & ---\\
+augmentation & \eqnVTwoCAugmentationOnlyVal & \eqnVTwoCAugmentationOnlyHoldout &
+\eqnVTwoCAugmentationOnlyZcorr & \eqnVTwoCAugmentationOnlyBoth &
+\eqnVTwoCAugmentationOnlyLatent & \eqnVTwoCAugmentationOnlyProbe &
+\eqnVTwoCAugmentationOnlyProbeZd\\
+output-consistency & \eqnVTwoCOutputConsistencyVal & \eqnVTwoCOutputConsistencyHoldout &
+\eqnVTwoCOutputConsistencyZcorr & \eqnVTwoCOutputConsistencyBoth &
+\eqnVTwoCOutputConsistencyLatent & \eqnVTwoCOutputConsistencyProbe &
+\eqnVTwoCOutputConsistencyProbeZd\\
+latent-invariance & \eqnVTwoCLatentInvarianceVal & \eqnVTwoCLatentInvarianceHoldout &
+\eqnVTwoCLatentInvarianceZcorr & \eqnVTwoCLatentInvarianceBoth &
+\eqnVTwoCLatentInvarianceLatent & \eqnVTwoCLatentInvarianceProbe &
+\eqnVTwoCLatentInvarianceProbeZd\\
+EquiOrient & \eqnVTwoCEquiorientVal & \eqnVTwoCEquiorientHoldout &
+\eqnVTwoCEquiorientZcorr & \eqnVTwoCEquiorientBoth &
+\eqnVTwoCEquiorientLatent & \eqnVTwoCEquiorientProbe &
+\eqnVTwoCEquiorientProbeZd\\
+wrong-geometry & \eqnVTwoCWrongGeometryEquiorientVal &
+\eqnVTwoCWrongGeometryEquiorientHoldout &
+\eqnVTwoCWrongGeometryEquiorientZcorr &
+\eqnVTwoCWrongGeometryEquiorientBoth &
+\eqnVTwoCWrongGeometryEquiorientLatent &
+\eqnVTwoCWrongGeometryEquiorientProbe &
+\eqnVTwoCWrongGeometryEquiorientProbeZd\\
+\hline
+\end{tabular}
+\caption{Regime B (5-object scenes; Modal L40S, \eqnRunVTwoElapsedS\ s;
+repo commit \eqnRunVTwoRepoCommit). Source:
+results/equiorient/pilot\_run\_v2\_final\_matrix.json.}
+\end{table}
+
+\section{Full result matrices (Regime A, v1 corrected)}
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{lccc}
+\hline
+arm & latent (V o H) & probe & probe-zd\\
+\hline
+augmentation & \eqnVOneCAugmentationOnlyLatent &
+\eqnVOneCAugmentationOnlyProbe & ---\\
+EquiOrient & \eqnVOneCEquiorientLatent &
+\eqnVOneCEquiorientProbe & ---\\
+wrong-geometry & \eqnVOneCWrongGeometryEquiorientLatent &
+\eqnVOneCWrongGeometryEquiorientProbe & ---\\
+\hline
+\end{tabular}
+\caption{Regime A (4-object scenes). Source:
+results/equiorient/pilot\_run\_v1\_corrected\_matrix.json.}
+\end{table}
+
+\section{Per-transform latent equivariance errors (correct vs.\ wrong rho)}
+
+Regime B, held-out scenes, mean $\lVert\rhoop(T)\zblk(x)-\zblk(Tx)\rVert^2$:
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{lcccccc}
+\hline
+arm & $\rhoop_H$ & $\rhoop_V$ & $\rhoop_{V\circ H}$ & wrong-H & wrong-V & wrong-V$\circ$H\\
+\hline
+augmentation & \eqnVTwoCAugmentationOnlyRhoH & \eqnVTwoCAugmentationOnlyRhoV &
+\eqnVTwoCAugmentationOnlyRhoVH & \eqnVTwoCAugmentationOnlyWH &
+\eqnVTwoCAugmentationOnlyWV & \eqnVTwoCAugmentationOnlyWVH\\
+output-consistency & \eqnVTwoCOutputConsistencyRhoH & \eqnVTwoCOutputConsistencyRhoV &
+\eqnVTwoCOutputConsistencyRhoVH & \eqnVTwoCOutputConsistencyWH &
+\eqnVTwoCOutputConsistencyWV & \eqnVTwoCOutputConsistencyWVH\\
+latent-invariance & \eqnVTwoCLatentInvarianceRhoH & \eqnVTwoCLatentInvarianceRhoV &
+\eqnVTwoCLatentInvarianceRhoVH & \eqnVTwoCLatentInvarianceWH &
+\eqnVTwoCLatentInvarianceWV & \eqnVTwoCLatentInvarianceWVH\\
+EquiOrient & \eqnVTwoCEquiorientRhoH & \eqnVTwoCEquiorientRhoV &
+\eqnVTwoCEquiorientRhoVH & \eqnVTwoCEquiorientWH &
+\eqnVTwoCEquiorientWV & \eqnVTwoCEquiorientWVH\\
+wrong-geometry & \eqnVTwoCWrongGeometryEquiorientRhoH &
+\eqnVTwoCWrongGeometryEquiorientRhoV &
+\eqnVTwoCWrongGeometryEquiorientRhoVH &
+\eqnVTwoCWrongGeometryEquiorientWH &
+\eqnVTwoCWrongGeometryEquiorientWV &
+\eqnVTwoCWrongGeometryEquiorientWVH\\
+\hline
+\end{tabular}
+\caption{The composition metric cannot separate correct from wrong rho
+(the axis-swapped wrong laws compose to the correct action on
+$V\circ H$); per-transform errors can and do.}
+\end{table}
+
+\section{Training loss curves (per epoch, Regime B)}
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{lccccc}
+\hline
+arm & ans e1 & ans e2 & struct e1 & struct e2\\
+\hline
+augmentation & \eqnVTwoCAugmentationOnlyAnsEpochOne &
+\eqnVTwoCAugmentationOnlyAnsEpochTwo & --- & ---\\
+output-consistency & \eqnVTwoCOutputConsistencyAnsEpochOne &
+\eqnVTwoCOutputConsistencyAnsEpochTwo &
+\eqnVTwoCOutputConsistencyStructEpochOne &
+\eqnVTwoCOutputConsistencyStructEpochTwo\\
+latent-invariance & \eqnVTwoCLatentInvarianceAnsEpochOne &
+\eqnVTwoCLatentInvarianceAnsEpochTwo &
+\eqnVTwoCLatentInvarianceStructEpochOne &
+\eqnVTwoCLatentInvarianceStructEpochTwo\\
+EquiOrient & \eqnVTwoCEquiorientAnsEpochOne &
+\eqnVTwoCEquiorientAnsEpochTwo &
+\eqnVTwoCEquiorientStructEpochOne &
+\eqnVTwoCEquiorientStructEpochTwo\\
+wrong-geometry & \eqnVTwoCWrongGeometryEquiorientAnsEpochOne &
+\eqnVTwoCWrongGeometryEquiorientAnsEpochTwo &
+\eqnVTwoCWrongGeometryEquiorientStructEpochOne &
+\eqnVTwoCWrongGeometryEquiorientStructEpochTwo\\
+\hline
+\end{tabular}
+\caption{The manipulation check: every structural arm has nonzero
+structural loss; EquiOrient and output-consistency decrease it, and the
+answer loss converges in all arms.}
+\end{table}
+
+\section{Depth probe: n, intervals, and the z\_d block}
+
+Regime B: probe fit on validation-scene depth pairs (identity images),
+scored on hold-out-scene depth pairs, $n{=}60$ (3 scenes $\times$ 20
+pairs); Wilson 95\% CI for 0.5333 (32/60) is [0.41, 0.65]; chance 0.5.
+All arms are inside the interval. The $\zblk_d$-block-only probe
+(0.52--0.55) is likewise flat, so the invariance-shaped depth component
+did not acquire decodable depth structure.
+
+Regime A: $n{=}36$; EquiOrient 0.5000, augmentation 0.6111 (22/36,
+Wilson CI [0.45, 0.75]) -- within noise of each other and of chance.
+
+\section{Algebra and data verification}
+
+- 21 unit tests on the transformation algebra (identity, inverse,
+  composition, no-contradiction, determinism, wrong-geometry reachability).
+- 10{,}880 law checks on the v2 scene pack (17 scenes $\times$ 4 transforms
+  $\times$ 20 ordered pairs $\times$ 8 relations), 0 violations; v1 pack:
+  4{,}896 rows, 0 violations; hostile renderer-bug test detects injected
+  violations.
+- Human spot check of 51 synthetic pairs: 0 flags (recorded verdict).
+
+\section{Compute ledger and provenance}
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{llll}
+\hline
+run & platform & outcome & GPU time\\
+\hline
+v1 pilot (4 runs) & A6000 (Thunder) & voided: implementation deviations
+(logged) & 2.7 h\\
+Amendment-D pilot & L40S (Modal) & voided: identically-zero structural
+losses (manipulation-check failure, decision log) & 9 min\\
+corrected v2 & L40S (Modal) & VALID & \eqnRunVTwoElapsedS\ s\\
+corrected v1 & L40S (Modal) & VALID & \eqnVOneCElapsedS\ s\\
+\hline
+\end{tabular}
+\caption{Voided runs are excluded from all scientific tables; the failure
+class (zero structural loss) is asserted against in the released harness.}
+\end{table}
+
+\section{Reproducibility}
+
+- Harness: scripts/equiorient/pilot\_harness.py (single file, no
+  analyzer imports; CPU tiny gate runs the full pipeline end-to-end
+  including the manipulation check before any GPU spend).
+- Generators: src/equiorient/datasets.py (v1/v2 recipes), scripts/
+  equiorient/build\_pilot\_data.py (deterministic seeds 20260814/20260815).
+- Frozen protocol: configs/equiorient\_pilot\_freeze.yaml and
+  \_v2.yaml; decision log: research/EQUIORIENT\_DECISION\_LOG.md.
+- Execution pipeline: modal/equiorient\_modal.py (serverless, pinned
+  stack torch 2.8.0+cu128 / transformers==4.57.6 / Qwen3-VL-8B @
+  0c351dd0); full pilot $<$25 min GPU.
+
+\end{document}
