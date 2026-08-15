@@ -589,3 +589,21 @@ confirmatory or exploratory: one-seed falsification pilot (Phase-1 scope
 per Amendment B1); result is NOT final-paper evidence.
 
 ---
+### 2026-08-15 (cont.) — Harness metric gap closed (Option B, zero protocol change)
+
+The two missing frozen primary metrics are now implemented and verified
+(local --tiny PASS): eval_voh_deep() computes, per causal arm, exactly
+once after selection on the held-out V o H:
+- paired_both_correct_VoH = P(normal-correct AND transformed obeys the
+  law), joined per pair on the same object ids across identity and
+  v_after_h images of the same holdout scene;
+- latent_equivariance_error_VoH = mean || rho(V o H) z(x) - z(Tx) ||^2
+  with the CORRECT predeclared rho (0 iff z obeys the algebra on the
+  unseen composition).
+
+Re-running the same pilot design (run #3) to obtain the complete frozen
+metric matrix. Behavioral ceiling expected to persist; discrimination,
+if any, must come from the latent/both-correct columns. No change to any
+frozen scientific parameter.
+
+---

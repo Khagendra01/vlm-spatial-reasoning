@@ -402,6 +402,56 @@ class PilotRunner:
                     total += 1
         return correct / max(total, 1)
 
+    def eval_voh_deep(self, scene_ids):
+        """Frozen primary metrics on the held-out V o H (one call per arm,
+        post-selection): returns (both_correct, latent_equivariance_error).
+
+        - paired_both_correct_VoH = P(normal-correct AND transformed obeys
+          the law), joined per pair on the SAME object ids across the
+          identity and v_after_h images of the same scene.
+        - latent_equivariance_error_VoH = mean || rho(V o H) z(x) - z(Tx) ||^2
+          with the CORRECT predeclared rho; 0 iff z obeys the algebra on the
+          unseen composition. (Missing from run #2 — harness gap closed.)
+        """
+        m = json.load(open(self.data_dir / "manifest.json", encoding="utf-8"))
+        by_scene = {}
+        for ex in m["examples"]:
+            by_scene.setdefault(ex["scene_id"], {}).setdefault(
+                ex["transform"], ex)
+        both_c = tot_b = 0
+        err_sum = err_n = 0
+        rho_vh = torch.tensor(RHO_VEC["v_after_h"], device=self.device)
+        for ex in m["examples"]:
+            if ex["scene_id"] not in scene_ids or ex["transform"] != "v_after_h":
+                continue
+            id_ex = by_scene.get(ex["scene_id"], {}).get("identity")
+            if id_ex is None:
+                continue
+            for a in ex["boxes"]:
+                for b in ex["boxes"]:
+                    if a == b:
+                        continue
+                    y_t = rel_label(ex["pair_relations"], a, b)
+                    y_n = rel_label(id_ex["pair_relations"], a, b)
+                    if y_t is None or y_n is None:
+                        continue
+                    with torch.no_grad():
+                        lt, zt = self.pair_logits_z(ex["png"], ex["boxes"],
+                                                    a, b)
+                        ln, zn = self.pair_logits_z(id_ex["png"],
+                                                    id_ex["boxes"], a, b)
+                    corr_t = int(lt.argmax(-1).item() == y_t)
+                    corr_n = int(ln.argmax(-1).item() == y_n)
+                    both_c += int(corr_t and corr_n)
+                    tot_b += 1
+                    err = sum(((s * zk - ztk) ** 2).mean().item()
+                              for s, zk, ztk in zip(rho_vh, zn, zt))
+                    err_sum += err
+                    err_n += 1
+        both = both_c / max(tot_b, 1)
+        err = err_sum / max(err_n, 1)
+        return both, err
+
     # ---------------- main ----------------
     def run(self):
         t0 = time.time()
@@ -472,12 +522,18 @@ class PilotRunner:
                                   voh_only=True)
             ho_c = self.eval_scenes(freeze["data"]["scenes_holdout"],
                                     voh_only=True, corrupted=True)
+            both_c, lat_err = self.eval_voh_deep(
+                freeze["data"]["scenes_holdout"])
             self.log(f"[{arm}] selected-lambda val {acc:.4f} | holdout V o H "
-                     f"{ho:.4f} | z-corrupted {ho_c:.4f}")
+                     f"{ho:.4f} | z-corrupted {ho_c:.4f} | "
+                     f"both_correct_VoH {both_c:.4f} | "
+                     f"latent_eq_err_VoH {lat_err:.6f}")
             results[arm] = {"val_acc": acc, "lambda": lam,
                             "holdout_VoH_accuracy": ho,
                             "holdout_VoH_accuracy_z_corrupted": ho_c,
-                            "causal_ablation_delta": ho - ho_c}
+                            "causal_ablation_delta": ho - ho_c,
+                            "paired_both_correct_VoH": both_c,
+                            "latent_equivariance_error_VoH": lat_err}
         matrix = {
             "freeze_commit": "91185d7",
             "backbone": freeze["backbone"]["name"],
