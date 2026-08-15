@@ -64,7 +64,8 @@ provision_venv() {
     || die "torch install failed (check the cu128 wheel index)"
   log "provision_venv: installing frozen EquiOrient stack"
   "$VENV/bin/pip" install -q \
-      "transformers==4.57.6" peft pillow pyyaml accelerate datasets huggingface_hub \
+      "transformers==4.57.6" peft pillow pyyaml accelerate datasets \
+      huggingface_hub scikit-learn \
     || die "pip install of the EquiOrient stack failed"
 }
 

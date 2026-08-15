@@ -31,6 +31,7 @@ import time
 from dataclasses import dataclass, field
 from pathlib import Path
 
+import numpy as np
 import torch
 import yaml
 from torch import nn
@@ -452,6 +453,62 @@ class PilotRunner:
         err = err_sum / max(err_n, 1)
         return both, err
 
+    def eval_depth_probe(self, val_scene_ids, holdout_scene_ids):
+        """Amendment C (2026-08-15, orchestrator-approved): held-out
+        relation-family transfer via linear probe on z.
+
+        Fit LogisticRegression on z (concat of the four typed blocks) from
+        VALIDATION-scene depth pairs (identity images); evaluate on
+        HOLD-OUT-scene depth pairs (in_front_of/behind). Depth labels never
+        appear in training supervision. Prediction: EquiOrient's rho keeps
+        z_d invariant under H/V, so its equivariance loss forces z_d to
+        carry depth geometry -> probe transfers; controls with no rho
+        shaping stay near chance. Returns holdout probe accuracy (NaN if
+        too few val depth pairs).
+        """
+        from sklearn.linear_model import LogisticRegression
+        m = json.load(open(self.data_dir / "manifest.json", encoding="utf-8"))
+        by_scene = {}
+        for ex in m["examples"]:
+            by_scene.setdefault(ex["scene_id"], {}).setdefault(
+                ex["transform"], ex)
+
+        def z_of(sid):
+            ex = by_scene.get(sid, {}).get("identity")
+            if ex is None:
+                return []
+            out = []
+            for a in ex["boxes"]:
+                for b in ex["boxes"]:
+                    if a == b:
+                        continue
+                    pr = ex["pair_relations"].get(f"{a}>{b}")
+                    if pr is None:
+                        continue
+                    if pr.get("in_front_of"):
+                        yd = 0
+                    elif pr.get("behind"):
+                        yd = 1
+                    else:
+                        continue
+                    with torch.no_grad():
+                        _, z = self.pair_logits_z(ex["png"], ex["boxes"],
+                                                  a, b)
+                    out.append((torch.cat(z, dim=-1).squeeze(0).cpu().numpy(),
+                                yd))
+            return out
+
+        tr = [r for sid in val_scene_ids for r in z_of(sid)]
+        if len(tr) < 10:
+            return float("nan")
+        clf = LogisticRegression(max_iter=1000)
+        clf.fit(np.array([r[0] for r in tr]), np.array([r[1] for r in tr]))
+        te = [r for sid in holdout_scene_ids for r in z_of(sid)]
+        if not te:
+            return float("nan")
+        return float(clf.score(np.array([r[0] for r in te]),
+                               np.array([r[1] for r in te])))
+
     # ---------------- main ----------------
     def run(self):
         t0 = time.time()
@@ -524,16 +581,21 @@ class PilotRunner:
                                     voh_only=True, corrupted=True)
             both_c, lat_err = self.eval_voh_deep(
                 freeze["data"]["scenes_holdout"])
+            depth_acc = self.eval_depth_probe(
+                freeze["data"]["scenes_validation"],
+                freeze["data"]["scenes_holdout"])
             self.log(f"[{arm}] selected-lambda val {acc:.4f} | holdout V o H "
                      f"{ho:.4f} | z-corrupted {ho_c:.4f} | "
                      f"both_correct_VoH {both_c:.4f} | "
-                     f"latent_eq_err_VoH {lat_err:.6f}")
+                     f"latent_eq_err_VoH {lat_err:.6f} | "
+                     f"depth_probe_holdout {depth_acc:.4f}")
             results[arm] = {"val_acc": acc, "lambda": lam,
                             "holdout_VoH_accuracy": ho,
                             "holdout_VoH_accuracy_z_corrupted": ho_c,
                             "causal_ablation_delta": ho - ho_c,
                             "paired_both_correct_VoH": both_c,
-                            "latent_equivariance_error_VoH": lat_err}
+                            "latent_equivariance_error_VoH": lat_err,
+                            "depth_probe_holdout_acc": depth_acc}
         matrix = {
             "freeze_commit": "91185d7",
             "backbone": freeze["backbone"]["name"],

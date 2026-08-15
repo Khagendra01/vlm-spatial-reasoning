@@ -607,3 +607,32 @@ if any, must come from the latent/both-correct columns. No change to any
 frozen scientific parameter.
 
 ---
+## 2026-08-15 — Amendment C APPROVED (orchestrator): held-out relation-family test via depth probe
+
+results already seen? run #2 results seen (ceiling verdict); run #3 (metric
+completion) ABORTED mid-flight and superseded by run #4 — no partial
+scientific output existed (matrix written only at completion).
+
+amendment (pre-result, logged): the frozen behavioral primary test (held-
+out V o H composition) is at ceiling and has no discriminative power; per
+the Gate-4 MUTATE verdict and orchestrator approval, the held-out test is
+EXTENDED (not replaced) by a representation-transfer test:
+- depth probe: after each causal arm's selected-lambda training, fit a
+  logistic-regression probe on z (concat of the four typed blocks) from
+  VALIDATION-scene depth pairs (identity images; labels in_front_of/
+  behind, 816 pairs available in the manifest); evaluate on HOLD-OUT-scene
+  depth pairs. Depth labels never appear in training supervision.
+- prediction: EquiOrient's rho keeps z_d invariant under H/V, so L_eq
+  forces z_d to carry depth geometry -> probe transfers; controls without
+  rho shaping stay near chance.
+- NO change to: backbone, revision, PairEncoder/z spec, head, losses,
+  training data, seeds, lambda rule, stop conditions. Purely additive
+  evaluation (harness-only + scikit-learn added to provisioner).
+
+affected frozen artifacts: none reopened; harness + provisioner gain the
+probe; run #4 = same design as run #2 + latent metrics + depth probe.
+
+confirmatory or exploratory: pre-result amendment to the pilot test
+protocol; still Phase-1 one-seed falsification scope.
+
+---
