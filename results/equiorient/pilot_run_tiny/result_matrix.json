@@ -1,0 +1,63 @@
+{
+ "freeze_commit": "91185d7",
+ "backbone": "Qwen/Qwen3-VL-8B-Instruct",
+ "lambda_selected": {
+  "output_consistency": 0.1,
+  "latent_invariance": 0.1,
+  "equiorient": 0.1
+ },
+ "per_arm_val": {
+  "ordinary_sft_lora": {
+   "val_acc": 0.4930555555555556,
+   "lambda": null
+  },
+  "augmentation_only": {
+   "val_acc": 0.5069444444444444,
+   "lambda": null
+  },
+  "output_consistency__lam0.1": {
+   "val_acc": 0.5069444444444444,
+   "lambda": 0.1
+  },
+  "output_consistency__lam1.0": {
+   "val_acc": 0.5069444444444444,
+   "lambda": 1.0
+  },
+  "output_consistency__lam10.0": {
+   "val_acc": 0.5069444444444444,
+   "lambda": 10.0
+  },
+  "latent_invariance__lam0.1": {
+   "val_acc": 0.5069444444444444,
+   "lambda": 0.1
+  },
+  "latent_invariance__lam1.0": {
+   "val_acc": 0.5069444444444444,
+   "lambda": 1.0
+  },
+  "latent_invariance__lam10.0": {
+   "val_acc": 0.5069444444444444,
+   "lambda": 10.0
+  },
+  "equiorient__lam0.1": {
+   "val_acc": 0.5069444444444444,
+   "lambda": 0.1
+  },
+  "equiorient__lam1.0": {
+   "val_acc": 0.5069444444444444,
+   "lambda": 1.0
+  },
+  "equiorient__lam10.0": {
+   "val_acc": 0.5069444444444444,
+   "lambda": 10.0
+  },
+  "wrong_geometry_equiorient": {
+   "val_acc": 0.5069444444444444,
+   "lambda": 0.1
+  }
+ },
+ "holdout_VoH_accuracy": 0.3611111111111111,
+ "holdout_VoH_accuracy_z_corrupted": 0.5,
+ "causal_ablation_delta": -0.1388888888888889,
+ "elapsed_seconds": 191.25057101249695
+}
