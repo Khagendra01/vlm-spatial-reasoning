@@ -54,7 +54,7 @@ BRANCH = "research/equiorient"
 PINNED_COMMIT = "7389e3d"  # Amendment D release (2026-08-15)
 SPARSE_CONE = ["src", "scripts", "configs", "cloud_setup", "modal",
                "research", "results/equiorient/pilot_data",
-               "results/equiorient/pilot_data_v2", "requirements.txt"]
+               "results/equiorient/pilot_data_v2"]
 
 
 def _env(hf_token: str):
