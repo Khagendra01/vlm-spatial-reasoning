@@ -636,3 +636,17 @@ confirmatory or exploratory: pre-result amendment to the pilot test
 protocol; still Phase-1 one-seed falsification scope.
 
 ---
+### 2026-08-15 (cont.) — Run #4 ABORTED (operational): stale provisioner on the box
+
+run #4 (metric-complete + probe) aborted at the first depth-probe call:
+ModuleNotFoundError: sklearn in the venv. Root cause: the box executed the
+stale ~/setup_equiorient.sh (curl'd at staging, before scikit-learn was
+added to the provisioner); my earlier box-side import check used the
+system python, not the venv, and gave a false green. No matrix was
+written -> no scientific output lost; partial logs archived as
+pilot_run_run4_ABORTED. Fixed by re-curl'ing the provisioner (venv pip now
+installs scikit-learn 1.9.0) and relaunching as run #5. Lesson encoded:
+the on-box pre-flight must verify the VENV imports (python = /bin/
+python), not system python.
+
+---
