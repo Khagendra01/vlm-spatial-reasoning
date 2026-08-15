@@ -81,3 +81,28 @@ held-out structure) was NOT tested and remains open.
 
 Box `65c57arp` deleted 06:10 UTC; snapshot `xv1GpVkwBL7ZTMZ9Ne72`
 (equiorient-pilot-provisioned-run5) retained.
+
+---
+
+# ADDENDUM (2026-08-15) — Amendment D re-test: KILL (definitive, second regime)
+
+Ran on **Modal L40S** (serverless, pay-per-second) — 536 s total (~20x
+faster than A6000 runs thanks to the input-cache/grouping optimizations).
+Harder regime: 5 objects/scene (v1 = 4), 600 pairs/arm, epochs 2,
+everything else frozen. Real Qwen3-VL-8B @ 0c351dd0 verified.
+
+| arm | val | holdout V∘H | z-corr | latent err | depth probe |
+|---|---|---|---|---|---|
+| ordinary_sft_lora | 0.8917 | — | — | — | — |
+| augmentation_only | 0.9833 | 1.0000 | 0.5000 | 20.05 | 0.5667 |
+| output_consistency | 0.9875 | 1.0000 | 0.5000 | 20.17 | 0.5833 |
+| latent_invariance | 0.9875 | 1.0000 | 0.5000 | 20.27 | 0.6000 |
+| **equiorient** | 0.9875 | 1.0000 | 0.5000 | 20.17 | 0.5833 |
+| wrong_geometry | 0.9875 | 1.0000 | 0.5000 | 19.96 | 0.5833 |
+
+Per the predeclared rules: **KILL** — behavioral ceiling persists, latent
+error flat, depth probe flat (all arms within binomial noise of chance;
+equiorient == wrong_geometry). EquiOrient shows zero measurable advantage
+in either regime. Phase-1 falsification is definitive across regimes; no
+Gate 6, no external validation. GPU work closed; spend < .50 of the
+/mo Modal credit (run log + matrix: results/equiorient/pilot_run_v2_modal/).
