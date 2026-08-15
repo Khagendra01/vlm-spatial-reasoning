@@ -629,6 +629,60 @@ class PilotRunner:
             Xtr[:, -Z_BLOCKS[-1]:], ytr).score(Xte[:, -Z_BLOCKS[-1]:], yte))
         return {"full": full, "z_d": zd}
 
+    def eval_rho_per_transform(self, scene_ids):
+        """Latent equivariance error per transform under the CORRECT and
+        the WRONG rho (mean || rho(tr) z(x) - z(Tx) ||^2), on the given
+        scenes, joined by object id across identity/transform images.
+
+        The composition metric cannot separate correct from wrong rho: the
+        axis-swapped wrong laws COMPOSE to the correct action on V o H.
+        Per-transform errors do separate them (correct rho minimizes its
+        own law on H and V; the wrong law contradicts it per-transform).
+        """
+        m = json.load(open(self.data_dir / "manifest.json", encoding="utf-8"))
+        by_scene = {}
+        for ex in m["examples"]:
+            by_scene.setdefault(ex["scene_id"], {}).setdefault(
+                ex["transform"], ex)
+        out = {"correct": {k: [] for k in RHO_VEC},
+               "wrong": {k: [] for k in RHO_VEC}}
+        for ex in m["examples"]:
+            if ex["scene_id"] not in scene_ids:
+                continue
+            if ex["transform"] == "identity":
+                continue
+            tr = ex["transform"]
+            if tr not in RHO_VEC:
+                continue
+            id_ex = by_scene.get(ex["scene_id"], {}).get("identity")
+            if id_ex is None:
+                continue
+            rv = torch.tensor(RHO_VEC[tr], device=self.device)
+            wv = torch.tensor(WRONG_RHO_VEC[tr], device=self.device)
+            with torch.no_grad():
+                ft, gt = self.vision_features(ex["png"],
+                                              requires_grad=False)
+                fx, gx = self.vision_features(id_ex["png"],
+                                              requires_grad=False)
+                for a in ex["boxes"]:
+                    for b in ex["boxes"]:
+                        if a == b:
+                            continue
+                        zt = self.enc(
+                            self.pooled(ft, gt, ex["boxes"], a),
+                            self.pooled(ft, gt, ex["boxes"], b))
+                        zx = self.enc(
+                            self.pooled(fx, gx, id_ex["boxes"], a),
+                            self.pooled(fx, gx, id_ex["boxes"], b))
+                        ce = sum(((s * xk - tk) ** 2).mean().item()
+                                 for s, xk, tk in zip(rv, zx, zt))
+                        we = sum(((s * xk - tk) ** 2).mean().item()
+                                 for s, xk, tk in zip(wv, zx, zt))
+                        out["correct"][tr].append(ce)
+                        out["wrong"][tr].append(we)
+        return {k1: {k2: (sum(v) / len(v) if v else float("nan"))
+                     for k2, v in d.items()} for k1, d in out.items()}
+
     # ---------------- main ----------------
     def run(self):
         t0 = time.time()
@@ -704,12 +758,18 @@ class PilotRunner:
             depth_acc = self.eval_depth_probe(
                 freeze["data"]["scenes_validation"],
                 freeze["data"]["scenes_holdout"])
+            rho_pt = self.eval_rho_per_transform(
+                freeze["data"]["scenes_holdout"])
             self.log(f"[{arm}] selected-lambda val {acc:.4f} | holdout V o H "
                      f"{ho:.4f} | z-corrupted {ho_c:.4f} | "
                      f"both_correct_VoH {both_c:.4f} | "
                      f"latent_eq_err_VoH {lat_err:.6f} | "
                      f"depth_probe_holdout {depth_acc['full']:.4f} "
-                     f"(z_d {depth_acc['z_d']:.4f})")
+                     f"(z_d {depth_acc['z_d']:.4f}) | "
+                     f"rho_H {rho_pt['correct']['hflip']:.4f} "
+                     f"rho_V {rho_pt['correct']['vflip']:.4f} "
+                     f"rho_VH {rho_pt['correct']['v_after_h']:.4f} "
+                     f"wrong_H {rho_pt['wrong']['hflip']:.4f}")
             results[arm] = {"val_acc": acc, "lambda": lam,
                             "holdout_VoH_accuracy": ho,
                             "holdout_VoH_accuracy_z_corrupted": ho_c,
@@ -718,6 +778,7 @@ class PilotRunner:
                             "latent_equivariance_error_VoH": lat_err,
                             "depth_probe_holdout_acc": depth_acc["full"],
                             "depth_probe_z_d_holdout_acc": depth_acc["z_d"],
+                            "rho_per_transform": rho_pt,
                             "train_loss": self._last_loss_hist}
         matrix = {
             "freeze_commit": "91185d7",
