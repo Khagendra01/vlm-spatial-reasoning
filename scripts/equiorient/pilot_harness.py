@@ -176,6 +176,12 @@ class PilotRunner:
         self.processor = None
         self.enc = None
         self.head = None
+        # OPTIMIZATION (2026-08-15, Modal migration): processed pixel inputs
+        # are LoRA-independent -> cached for the whole run (kills ~12k
+        # duplicate PIL/processor calls). Deepstack features depend on the
+        # LoRA state -> per-arm cache, reset at every train_run start.
+        self._pix_cache: dict = {}
+        self._feat_cache: dict = {}
         self.log_f = open(self.out / "run.log", "w", encoding="utf-8")
 
     def log(self, msg):
@@ -242,32 +248,48 @@ class PilotRunner:
             for n, p in self.model.named_parameters() if p.requires_grad}
         return n
 
-    # ---------------- features (cached per image) ----------------
-    def image_features(self, image_path):
-        """Qwen3 deepstack features for one image -> (feat, grid)."""
-        if self.tiny:
-            from PIL import Image as PILImage
-            img = PILImage.open(self.data_dir / image_path).convert("RGB")
-            # tiny: fake 5D pixel tensor matching the tiny vision contract
-            pix = torch.randn(1, 3, 2, 2 * 28, 2 * 28, device=self.device)
-            grid = torch.tensor([[1, 2, 2]], device=self.device)
-            with torch.no_grad():
-                _, deep = self.model.visual(pix, grid_thw=grid)
-            return deep[0], grid
-        from PIL import Image as PILImage
-        img = PILImage.open(self.data_dir / image_path).convert("RGB")
-        # text="" (not None): Qwen3VLProcessor.__call__ wraps text in a list
-        # and iterates self.image_token over each item — None would crash
-        # (verified 2026-08-15 on the GPU box with the frozen revision).
-        inp = self.processor(images=img, text="", return_tensors="pt")
-        pix = inp["pixel_values"].to(self.device, dtype=torch.bfloat16)
-        grid = inp["image_grid_thw"].to(self.device)
-        # NO no_grad here (real path): the frozen design (Amendment B4/
-        # ARCHITECTURE_CRITIQUE) requires vision-LoRA gradients to reach the
-        # backbone from BOTH objectives. no_grad silently froze the LoRA
-        # (grads never flowed); evals disable autograd at the call site.
-        _, deep = self.model.visual(pix, grid_thw=grid)
-        return deep[0], grid
+    # ---------------- features (cached) ----------------
+    def image_input(self, image_path):
+        """Processed pixel input for one image -> (pix, grid).
+
+        LoRA-independent, so cached for the whole run (optimization
+        2026-08-15). text="" (not None): Qwen3VLProcessor.__call__ wraps
+        text in a list and iterates self.image_token over each item — None
+        would crash (verified on the GPU box with the frozen revision).
+        """
+        if image_path not in self._pix_cache:
+            if self.tiny:
+                # tiny: fake 5D pixel tensor matching the tiny vision contract
+                pix = torch.randn(1, 3, 2, 2 * 28, 2 * 28, device=self.device)
+                grid = torch.tensor([[1, 2, 2]], device=self.device)
+            else:
+                from PIL import Image as PILImage
+                img = PILImage.open(self.data_dir / image_path).convert("RGB")
+                inp = self.processor(images=img, text="", return_tensors="pt")
+                pix = inp["pixel_values"].to(self.device,
+                                             dtype=torch.bfloat16)
+                grid = inp["image_grid_thw"].to(self.device)
+            self._pix_cache[image_path] = (pix, grid)
+        return self._pix_cache[image_path]
+
+    def vision_features(self, image_path, requires_grad):
+        """Qwen3 deepstack features for one image -> (feat, grid).
+
+        requires_grad=True in training: the frozen design (Amendment B4 /
+        ARCHITECTURE_CRITIQUE) requires vision-LoRA gradients to reach the
+        backbone from BOTH objectives. Evals (requires_grad=False) reuse a
+        per-arm feature cache under no_grad (features depend on the LoRA
+        state, so the cache resets at every train_run start).
+        """
+        if not requires_grad and image_path in self._feat_cache:
+            return self._feat_cache[image_path]
+        pix, grid = self.image_input(image_path)
+        with torch.no_grad() if not requires_grad else torch.enable_grad():
+            _, deep = self.model.visual(pix, grid_thw=grid)
+        feat = deep[0]
+        if not requires_grad:
+            self._feat_cache[image_path] = (feat, grid)
+        return feat, grid
 
     def pooled(self, feat, grid, boxes, obj_id):
         """mean-pool over the object box's merged-grid cell.
@@ -292,7 +314,7 @@ class PilotRunner:
         return feat[idx].unsqueeze(0).float()
 
     def pair_logits_z(self, image_path, boxes, a, b):
-        feat, grid = self.image_features(image_path)
+        feat, grid = self.vision_features(image_path, requires_grad=False)
         va = self.pooled(feat, grid, boxes, a)
         vb = self.pooled(feat, grid, boxes, b)
         z = self.enc(va, vb)
@@ -314,6 +336,9 @@ class PilotRunner:
             for n, p in self.model.named_parameters():
                 if p.requires_grad:
                     p.copy_(self.lora_init[n])
+        # per-arm caches reset: pixel inputs are LoRA-independent (kept),
+        # deepstack features are LoRA-dependent (fresh per arm).
+        self._feat_cache = {}
         torch.manual_seed(seed)
         self.enc = PairEncoder().to(self.device)
         self.head = RelationHead().to(self.device)
@@ -343,28 +368,43 @@ class PilotRunner:
                 opt.zero_grad()
                 tot = torch.tensor(0.0, device=self.device)
                 n = 0
+                # OPTIMIZATION (2026-08-15, Modal migration): group pairs
+                # by image so each image runs ONE vision forward per step
+                # (shared autograd graph keeps vision-LoRA gradients
+                # flowing, Amendment B4). ~20% wall-time cut.
+                groups = {}
                 for i in sel:
                     png, boxes, a, b, y, tr = pairs[i.item()]
-                    logits, z = self.pair_logits_z(png, boxes, a, b)
-                    tot = tot + loss_answer(
-                        logits, torch.tensor([y], device=self.device))
-                    rho_vec = RHO_VEC[tr]
-                    if structural == "equivariance" and lam is not None:
-                        ztx = [s * zk for s, zk in zip(rho_vec, z)]
-                        tot = tot + lam * loss_equivariance(z, ztx, rho_vec)
-                    elif structural == "wrong_geometry" and lam is not None:
-                        # WRONG predeclared rho applied to the SAME z(x) and
-                        # z(Tx) — same loss form as equiorient, wrong action.
-                        wrho = WRONG_RHO_VEC[tr]
-                        ztx = [s * zk for s, zk in zip(wrho, z)]
-                        tot = tot + lam * loss_equivariance(z, ztx, wrho)
-                    elif structural == "latent_invariance" and lam:
-                        ztx = [zk for zk in z]
-                        tot = tot + lam * loss_latent_invariance(z, ztx)
-                    elif structural == "output_consistency" and lam:
-                        tot = tot + lam * loss_output_consistency(
-                            logits, logits.detach())
-                    n += 1
+                    groups.setdefault(png, []).append((boxes, a, b, y, tr))
+                for png, g in groups.items():
+                    feat, grid = self.vision_features(png,
+                                                      requires_grad=True)
+                    for boxes, a, b, y, tr in g:
+                        va = self.pooled(feat, grid, boxes, a)
+                        vb = self.pooled(feat, grid, boxes, b)
+                        z = self.enc(va, vb)
+                        logits = self.head(z)
+                        tot = tot + loss_answer(
+                            logits, torch.tensor([y], device=self.device))
+                        rho_vec = RHO_VEC[tr]
+                        if structural == "equivariance" and lam is not None:
+                            ztx = [s * zk for s, zk in zip(rho_vec, z)]
+                            tot = tot + lam * loss_equivariance(
+                                z, ztx, rho_vec)
+                        elif structural == "wrong_geometry" and lam is not None:
+                            # WRONG predeclared rho applied to the SAME z(x)
+                            # and z(Tx) — same loss form as equiorient,
+                            # wrong action.
+                            wrho = WRONG_RHO_VEC[tr]
+                            ztx = [s * zk for s, zk in zip(wrho, z)]
+                            tot = tot + lam * loss_equivariance(z, ztx, wrho)
+                        elif structural == "latent_invariance" and lam:
+                            ztx = [zk for zk in z]
+                            tot = tot + lam * loss_latent_invariance(z, ztx)
+                        elif structural == "output_consistency" and lam:
+                            tot = tot + lam * loss_output_consistency(
+                                logits, logits.detach())
+                        n += 1
                 (tot / max(n, 1)).backward()
                 opt.step()
             self.log(f"[{name}] epoch {ep + 1}/{epochs} done")

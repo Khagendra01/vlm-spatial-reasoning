@@ -676,3 +676,23 @@ re-test EquiOrient; candidate paper stories per guide s12 are the
 negative-result framings. No action taken.
 
 ---
+### 2026-08-15 (cont.) — Harness compute optimizations (Modal migration, zero protocol change)
+
+Per orchestrator directive (don't waste pay-per-second compute on idle or
+under-utilization), profiling run #5 (4146s) showed the hot spots:
+~43% = per-pair vision forwards (each image forwarded ~12x, once per pair),
+~9% = duplicate PIL/processor calls per pair, evals re-extracting
+features per call. Three protocol-neutral fixes:
+1. image_input(): processed pixel tensors are LoRA-independent -> cached
+   for the whole run (kills ~12k duplicate processor calls).
+2. train_run steps group pairs by image: ONE vision forward per unique
+   image per step, shared autograd graph (vision-LoRA gradients still
+   flow, Amendment B4 preserved); ~20% wall-time cut.
+3. vision_features(requires_grad=False) + per-arm feature cache (reset at
+   each train_run) -> all evals (val, holdout, corrupted, voh_deep, depth
+   probe) reuse features: evals become near-free.
+Expected: run time ~69 min -> ~45-50 min. Verified: py_compile + --tiny
+PASS (tiny now exercises the gradient path on CPU, more faithful gate).
+No change to any frozen scientific parameter, loss, data, or seed.
+
+---
