@@ -67,6 +67,13 @@ WRONG_RHO_VEC = {"hflip": [+1, -1, +1, +1],   # H acting on z_v
                  "vflip": [-1, +1, +1, +1],   # V acting on z_h
                  "v_after_h": [1, 1, 1, 1],   # V o H misread as identity
                  "identity": [1, 1, 1, 1]}
+# Answer-law permutation per transform on the head classes
+# [left, right, above, below] (expected_after on the head's class names):
+# H swaps left<->right; V swaps above<->below; V o H composes both.
+LAW_PERM = {"identity": [0, 1, 2, 3],
+            "hflip": [1, 0, 2, 3],
+            "vflip": [0, 1, 3, 2],
+            "v_after_h": [1, 0, 3, 2]}
 
 
 class PairEncoder(nn.Module):
@@ -182,7 +189,19 @@ class PilotRunner:
         # LoRA state -> per-arm cache, reset at every train_run start.
         self._pix_cache: dict = {}
         self._feat_cache: dict = {}
+        self._id_cache: dict = {}
+        self._last_loss_hist: dict = {}
         self.log_f = open(self.out / "run.log", "w", encoding="utf-8")
+
+    def _identity_map(self) -> dict:
+        """scene_id -> identity example (static manifest data)."""
+        if not self._id_cache:
+            m = json.load(open(self.data_dir / "manifest.json",
+                               encoding="utf-8"))
+            for ex in m["examples"]:
+                if ex["transform"] == "identity":
+                    self._id_cache[ex["scene_id"]] = ex
+        return self._id_cache
 
     def log(self, msg):
         line = f"[{time.strftime('%H:%M:%S')}] {msg}"
@@ -359,23 +378,42 @@ class PilotRunner:
                  f"structural={structural}")
         epochs = self.freeze["optimization"]["epochs"]
         batch = self.freeze["optimization"]["batch_size"]
+        need_structural = structural != "none"
+        id_map = self._identity_map()
+        loss_hist = {"answer": [], "structural": []}
         for ep in range(epochs):
             torch.manual_seed(seed + ep)
             idx = torch.randperm(len(pairs))
             n_steps = len(idx) // batch
+            ans_sum = 0.0
+            struct_sum = 0.0
+            struct_n = 0
             for st in range(n_steps):
                 sel = idx[st * batch:(st + 1) * batch]
                 opt.zero_grad()
                 tot = torch.tensor(0.0, device=self.device)
                 n = 0
-                # OPTIMIZATION (2026-08-15, Modal migration): group pairs
-                # by image so each image runs ONE vision forward per step
-                # (shared autograd graph keeps vision-LoRA gradients
-                # flowing, Amendment B4). ~20% wall-time cut.
+                # OPTIMIZATION: group pairs by image so each image runs ONE
+                # vision forward per step (shared autograd graph keeps
+                # vision-LoRA gradients flowing, Amendment B4).
                 groups = {}
                 for i in sel:
                     png, boxes, a, b, y, tr = pairs[i.item()]
                     groups.setdefault(png, []).append((boxes, a, b, y, tr))
+                # CORRECTED STRUCTURAL LOSSES (2026-08-15, decision log):
+                # the laws require the pair state on BOTH images — z(x) from
+                # the scene's IDENTITY image and z(Tx) from the transform
+                # image. Identity features are computed once per scene per
+                # step (they do not depend on the transform). The previous
+                # implementation fabricated rho o z from a single image and
+                # was identically zero (manipulation check added below).
+                id_feat = {}
+                if need_structural:
+                    for png in groups:
+                        sid = png.split("__")[0]
+                        if sid not in id_feat and sid in id_map:
+                            id_feat[sid] = self.vision_features(
+                                id_map[sid]["png"], requires_grad=True)
                 for png, g in groups.items():
                     feat, grid = self.vision_features(png,
                                                       requires_grad=True)
@@ -384,32 +422,65 @@ class PilotRunner:
                         vb = self.pooled(feat, grid, boxes, b)
                         z = self.enc(va, vb)
                         logits = self.head(z)
-                        tot = tot + loss_answer(
+                        la = loss_answer(
                             logits, torch.tensor([y], device=self.device))
-                        rho_vec = RHO_VEC[tr]
-                        if structural == "equivariance" and lam is not None:
-                            ztx = [s * zk for s, zk in zip(rho_vec, z)]
-                            tot = tot + lam * loss_equivariance(
-                                z, ztx, rho_vec)
-                        elif structural == "wrong_geometry" and lam is not None:
-                            # WRONG predeclared rho applied to the SAME z(x)
-                            # and z(Tx) — same loss form as equiorient,
-                            # wrong action.
-                            wrho = WRONG_RHO_VEC[tr]
-                            ztx = [s * zk for s, zk in zip(wrho, z)]
-                            tot = tot + lam * loss_equivariance(z, ztx, wrho)
-                        elif structural == "latent_invariance" and lam:
-                            ztx = [zk for zk in z]
-                            tot = tot + lam * loss_latent_invariance(z, ztx)
-                        elif structural == "output_consistency" and lam:
-                            tot = tot + lam * loss_output_consistency(
-                                logits, logits.detach())
+                        tot = tot + la
+                        ans_sum += float(la.detach())
+                        if need_structural and lam is not None:
+                            sid = png.split("__")[0]
+                            if sid not in id_feat:
+                                raise RuntimeError(
+                                    f"no identity example for train scene "
+                                    f"{sid} — structural loss needs z(x)")
+                            ifeat, igrid = id_feat[sid]
+                            iboxes = id_map[sid]["boxes"]
+                            vax = self.pooled(ifeat, igrid, iboxes, a)
+                            vbx = self.pooled(ifeat, igrid, iboxes, b)
+                            zx = self.enc(vax, vbx)
+                            if structural == "equivariance":
+                                sl = loss_equivariance(
+                                    zx, z, RHO_VEC[tr])
+                            elif structural == "wrong_geometry":
+                                # WRONG predeclared rho on the SAME pair:
+                                # || wrho(tr) z(x) - z(Tx) ||^2
+                                sl = loss_equivariance(
+                                    zx, z, WRONG_RHO_VEC[tr])
+                            elif structural == "latent_invariance":
+                                sl = loss_latent_invariance(zx, z)
+                            elif structural == "output_consistency":
+                                # answer-law consistency: the answer on Tx
+                                # should equal the law-mapped answer on x
+                                # (soft targets from logits_x, detached).
+                                lx = self.head(zx).detach()
+                                sl = loss_output_consistency(
+                                    logits, lx[:, LAW_PERM[tr]])
+                            else:
+                                raise RuntimeError(
+                                    f"unknown structural {structural!r}")
+                            tot = tot + lam * sl
+                            struct_sum += float(sl.detach())
+                            struct_n += 1
                         n += 1
                 (tot / max(n, 1)).backward()
                 opt.step()
-            self.log(f"[{name}] epoch {ep + 1}/{epochs} done")
+            mean_struct = struct_sum / max(struct_n, 1)
+            # MANIPULATION CHECK: a nonzero structural loss must have been
+            # applied (this is the failure class that voided every prior
+            # GPU run — a zero structural loss must abort, never silently
+            # pass). log before asserting so the value is on record.
+            self.log(f"[{name}] epoch {ep + 1}/{epochs} done "
+                     f"(ans {ans_sum / max(n_steps, 1):.4f}, "
+                     f"struct {mean_struct:.6f})")
+            if need_structural and lam is not None and struct_n:
+                if mean_struct < 1e-6:
+                    raise RuntimeError(
+                        f"MANIPULATION CHECK FAILED: structural loss "
+                        f"mean {mean_struct:.3e} for {name} — aborting")
+            loss_hist["answer"].append(round(ans_sum / max(n_steps, 1), 6))
+            loss_hist["structural"].append(round(mean_struct, 8))
         val_acc = self.eval_scenes(self.freeze["data"]["scenes_validation"])
         self.log(f"[{name}] VAL accuracy (scene_0010-0013): {val_acc:.4f}")
+        self._last_loss_hist = loss_hist
         return val_acc
 
     def eval_scenes(self, scene_ids, voh_only=False, corrupted=False):
@@ -540,14 +611,23 @@ class PilotRunner:
 
         tr = [r for sid in val_scene_ids for r in z_of(sid)]
         if len(tr) < 10:
-            return float("nan")
+            return {"full": float("nan"), "z_d": float("nan")}
+        Xtr = np.array([r[0] for r in tr])
+        ytr = np.array([r[1] for r in tr])
         clf = LogisticRegression(max_iter=1000)
-        clf.fit(np.array([r[0] for r in tr]), np.array([r[1] for r in tr]))
+        clf.fit(Xtr, ytr)
         te = [r for sid in holdout_scene_ids for r in z_of(sid)]
         if not te:
-            return float("nan")
-        return float(clf.score(np.array([r[0] for r in te]),
-                               np.array([r[1] for r in te])))
+            return {"full": float("nan"), "z_d": float("nan")}
+        Xte = np.array([r[0] for r in te])
+        yte = np.array([r[1] for r in te])
+        # full-z probe (concat of the four typed blocks)
+        full = float(clf.score(Xte, yte))
+        # z_d-block-only probe (the component rho leaves invariant; the
+        # depth-transfer claim must isolate this block)
+        zd = float(LogisticRegression(max_iter=1000).fit(
+            Xtr[:, -Z_BLOCKS[-1]:], ytr).score(Xte[:, -Z_BLOCKS[-1]:], yte))
+        return {"full": full, "z_d": zd}
 
     # ---------------- main ----------------
     def run(self):
@@ -628,14 +708,17 @@ class PilotRunner:
                      f"{ho:.4f} | z-corrupted {ho_c:.4f} | "
                      f"both_correct_VoH {both_c:.4f} | "
                      f"latent_eq_err_VoH {lat_err:.6f} | "
-                     f"depth_probe_holdout {depth_acc:.4f}")
+                     f"depth_probe_holdout {depth_acc['full']:.4f} "
+                     f"(z_d {depth_acc['z_d']:.4f})")
             results[arm] = {"val_acc": acc, "lambda": lam,
                             "holdout_VoH_accuracy": ho,
                             "holdout_VoH_accuracy_z_corrupted": ho_c,
                             "causal_ablation_delta": ho - ho_c,
                             "paired_both_correct_VoH": both_c,
                             "latent_equivariance_error_VoH": lat_err,
-                            "depth_probe_holdout_acc": depth_acc}
+                            "depth_probe_holdout_acc": depth_acc["full"],
+                            "depth_probe_z_d_holdout_acc": depth_acc["z_d"],
+                            "train_loss": self._last_loss_hist}
         matrix = {
             "freeze_commit": "91185d7",
             "backbone": freeze["backbone"]["name"],

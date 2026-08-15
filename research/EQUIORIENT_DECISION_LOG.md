@@ -769,3 +769,65 @@ confirmatory or exploratory: Phase-1 one-seed falsification (Amendment
 B1 scope); definitive negative for the tested design.
 
 ---
+## 2026-08-15 — CRITICAL: manipulation-check failure — ALL structural losses were identically zero; prior pilots VOID as tests of the equivariance hypothesis
+
+results already seen? YES (all prior runs; discovered during the Gate-8
+hostile review, statistics/leakage reviewer)
+
+finding (verified against pilot_harness.py at both cdc80b7 and the
+Amendment D tip): train_run computed ztx = rho o z from the SAME z
+(no transformed-image features ever forwarded), so:
+- equivariance: sum((rho_i z_i - rho_i z_i)^2) = 0 identically
+- wrong_geometry: same construction = 0
+- latent_invariance: ztx = z -> (z - z)^2 = 0
+- output_consistency: mse(logits, logits.detach()) = 0 (same values)
+The intended laws require the pair state on the TRANSFORMED image
+z(Tx); the harness never computed it. All four structural arms trained
+as clones of augmentation-only (modulo fp noise). The lambda grid, the
+flat latent errors, and the flat depth probes are all consistent with
+five identical runs, not five manipulated conditions.
+
+also confirmed: rel_label assigns left/right before above/below and every
+ordered pair carries an x-relation -> the 4-class head is effectively
+binary (0 above/below labels in either manifest); the held-out V o H
+composition is answer-identical to the seen H transform for left/right
+labels, so the behavioral composition test is degenerate by construction;
+and the causal ablation's 0.5000 is the head's bias-only decode on
+balanced binary labels (NOT chance for a 4-class head).
+
+decision:
+1. All GPU runs to date are VOID as tests of the equivariance hypothesis
+   (runs #2, #5, Amendment D). They remain valid only as (a) evidence
+   that augmentation-only saturates the binary task, and (b) causal-path
+   plumbing evidence. No scientific claim about EquiOrient may be made
+   from them. The earlier 'KILL' verdicts are withdrawn and replaced by
+   'treatment never administered'.
+2. Harness corrected (2026-08-15, same commit stream): structural losses
+   now use the paired formulation — z(x) from the scene's IDENTITY image
+   and z(Tx) from the transform image (identity features grouped per
+   scene per step, gradients preserved, Amendment B4):
+   - equivariance: ||rho(tr) z(x) - z(Tx)||^2
+   - wrong_geometry: ||wrho(tr) z(x) - z(Tx)||^2
+   - latent_invariance: ||z(x) - z(Tx)||^2
+   - output_consistency: mse(logits_Tx, law_perm(logits_x).detach()),
+     law_perm from expected_after on the head classes
+3. MANIPULATION CHECK added (the failure class that escaped every prior
+   gate): per-epoch mean structural loss is logged and ASSERTED > 1e-6
+   whenever lam > 0 (tiny gate now catches zero-loss implementations).
+   Per-epoch answer/structural loss curves recorded in the matrix.
+4. Depth probe extended: full-z AND z_d-block-only probes (the
+   invariance structure claim needs the z_d component specifically).
+5. Re-run required: corrected pilot (Modal L40S, ~10-12 min, <).
+6. Paper: rewritten AFTER the corrected run; binary-task disclosure,
+   honest ablation language (bias decode), step-budget disclosure,
+   n + binomial CIs, per-lambda table, loss curves, corrected
+   bibliography (unverifiable entries dropped, HAE/SAGE added).
+
+affected frozen artifacts: none frozen changed by the finding; harness +
+paper to be corrected; v1/v2 freeze YAMLs remain the protocol contract
+(the losses are now IMPLEMENTED as the contract specifies).
+
+confirmatory or exploratory: implementation-correction; the corrected run
+is the first VALID test of the equivariance hypothesis.
+
+---
