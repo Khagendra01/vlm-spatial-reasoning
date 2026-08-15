@@ -502,3 +502,21 @@ No changes to: backbone, revision, architecture spec, losses, data, seeds,
 metrics, hyperparameters, stop conditions.
 
 ---
+### 2026-08-15 (cont.) — Deepstack discovery + REAL-model grad-flow verification PASS
+
+Verification on the box (Qwen3-VL-8B @ 0c351dd0, bf16/sdpa, one real
+training step) established:
+- Deepstack executes vision blocks 0-8 ONLY (the deep stack reuses them);
+  LoRA adapters attached to blocks 9-26 are inert (never in the forward
+  graph) — same in ALL six arms, so the matched comparison is unaffected;
+  frozen target-module set (qkv/proj/c_fc/c_proj) kept EXACTLY as frozen,
+  so the recorded init-equivalence numbers (4,458,500 per arm) remain the
+  frozen contract.
+- Gradient-flow check: all 36 executed-tower LoRA params receive
+  gradients from L_answer, as do PairEncoder and relation head
+  (TRAIN_STEP_GRAD_FLOW_OK). Fix 2 (dtype cast) and Fix 3 (no_grad
+  removal) validated in a real training step, not just a forward.
+
+Frozen contract unchanged; discovery documented for the pilot report.
+
+---
