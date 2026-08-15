@@ -26,22 +26,23 @@ the IDENTICAL six-arm comparison.
 
 ## 2. Design (all changes pre-result, logged)
 
-### D1 — Richer scenes (visual difficulty up)
-- Objects per scene: 4 → **6** (4 rectangles + 2 orientation lines),
-  sizes/colors varied, margins tightened (still no ties post-transform —
-  same algebra guarantees, re-verified by the hostile law tests).
+### D1 — Richer scenes (visual difficulty up) — IN SCOPE
+- Objects per scene: 4 → **5** (3 rectangles + 2 orientation lines),
+  sizes/colors varied, margins unchanged (no ties post-transform — same
+  algebra guarantees, re-verified: 10,880 law checks, 0 violations).
 - Same canvas 320×320, same relation-labeling rule, same transform set
   (I/H/V seen, V∘H held out), same 17 scenes / 10-4-3 scene split.
-- New data seed `20260815` (reproducible; new committed artifact
-  `results/equiorient/pilot_data_v2`).
-- Expected effect: more objects → more pairs per image (~30 vs 12), harder
-  pooling disambiguation → augmentation_only should drop below ceiling.
+- New data seed `20260815`; new committed artifact
+  `results/equiorient/pilot_data_v2` (20 ordered pairs/image vs 12 in v1).
+- Expected effect: harder pooling disambiguation -> augmentation_only
+  should drop below ceiling.
 
-### D2 — Longer training budget (method gets its best shot)
-- epochs 2 → **6** (frozen YAML `optimization.epochs`).
-- Everything else unchanged: AdamW lr 1e-4, batch 8, bf16, grad
-  checkpointing, λ grid {0.1, 1.0, 10.0} on scene_0010–13, stop
-  conditions, seeds (20260814 arm seed kept).
+### D2 — Longer training budget (epochs 2 → 6) — **DEFERRED**
+Budget-constrained (per orchestrator, 2026-08-15): 6 objects × 6 epochs ≈
+5× v1 compute ≈ $12 pilot / $27 Gate 6 — exceeds the $30 Modal credit and
+violates the continuous-run principle. D1 alone isolates the difficulty
+variable, which is the cleaner experiment anyway. Revisit only with a
+larger budget.
 
 ### D3 — Unchanged (frozen, not reopened)
 - Backbone/revision, PairEncoder/z/head specs, losses (pure functions),
@@ -73,8 +74,9 @@ the IDENTICAL six-arm comparison.
    volume mount — the modal app gains a `data_v2` arg).
 7. Collect → commit → verdict per §3.
 
-## 5. Cost & compute budget
+## 5. Cost & compute budget (rescaled, D1-only)
 
-- Pilot: ~50 min L40S ≈ **$1.60** (optimized harness).
-- Gate 6 (if PROCEED): 3 seeds × ~50 min in parallel ≈ **$4.90**.
-- Total this amendment ≈ **$6.50** — well inside the $30 monthly credit.
+- Pilot v2: ~1.6 h L40S ≈ **$3.2** (optimized harness; ~600 pairs/arm).
+- Gate 6 (if PROCEED): 3 seeds × ~1.6 h in parallel ≈ **$9.5**.
+- External validation (if Gate 6 passes): ≈ **$4**.
+- Total ≈ **$16.5** — fits the $30/mo Modal credit with margin.

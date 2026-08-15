@@ -696,3 +696,37 @@ PASS (tiny now exercises the gradient path on CPU, more faithful gate).
 No change to any frozen scientific parameter, loss, data, or seed.
 
 ---
+## 2026-08-15 — Amendment D APPROVED + IMPLEMENTED (harder regime, D1 only)
+
+results already seen? YES (run #5 = definitive ceiling/pilot evidence that
+motivates D)
+
+decision (orchestrator-approved, 2026-08-15): harder-regime re-test.
+- D1 (IN SCOPE): scene recipe v2 — 5 objects (3 rects + 2 lines, size
+  variance), seed 20260815, artifact results/equiorient/pilot_data_v2,
+  20 ordered pairs/image vs 12; algebra law re-verified (10,880 checks,
+  0 violations); scene split ids unchanged (10/4/3).
+- D2 (DEFERRED): epochs 6 dropped — budget math (6 objects x 6 epochs ~
+  5x v1 compute ~  pilot /  Gate 6) exceeds the /mo Modal
+  credit and the continuous-run principle; D1 isolates the difficulty
+  variable.
+- Freeze artifact: configs/equiorient_pilot_freeze_v2.yaml (v1 contract
+  byte-identical except data recipe/seed + decision-rule block).
+- Harness: unchanged; local gates PASS (py_compile, law check, --tiny on
+  v2 data, freeze v2 YAML parse).
+- Compute platform: Modal (serverless, /mo credit) — scaffold
+  modal/equiorient_modal.py clones the repo from origin at a PINNED
+  commit inside the sandbox (no local mounts), L40S with A100-40GB
+  fallback, HF cache + results Volumes, hf-token secret updated to the
+  ROTATED HF token.
+- Decision rules predeclared in the v2 YAML: PROCEED (EquiOrient beats
+  controls on held-out V o H and/or depth probe >= +0.15) / KILL (flat).
+
+affected frozen artifacts: adds datasets.make_scene_v2/generate_pack_v2,
+build_pilot_data.py --v2, freeze v2 YAML, pilot_data_v2, modal scaffold;
+v1 frozen artifacts untouched.
+
+confirmatory or exploratory: pre-result amendment; still Phase-1
+one-seed falsification scope.
+
+---

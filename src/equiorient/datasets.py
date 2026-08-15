@@ -253,3 +253,83 @@ def make_scene(scene_id: str, rng: random.Random, width: int = 320,
 def generate_pack(num_scenes: int, seed: int = 20260814) -> List[Scene]:
     rng = random.Random(seed)
     return [make_scene(f"scene_{i:04d}", rng) for i in range(num_scenes)]
+
+
+# --------------------------------------------------------------------- #
+# Amendment D (2026-08-15): harder visual regime — scene recipe v2
+# --------------------------------------------------------------------- #
+
+def make_scene_v2(scene_id: str, rng: random.Random, width: int = 320,
+                  height: int = 320) -> Scene:
+    """Amendment D recipe: 5 objects (3 rectangles + 2 orientation lines)
+    with size variance.
+
+    Same guarantees as v1: distinct x/y/depth for all objects (margins
+    respected after any Phase-1 transform), every pair carries at least one
+    axis relation, depths strictly distinct (depth probe signal). Harder
+    pooling disambiguation than v1's 4 objects: 20 ordered pairs/image vs
+    12. D2 (longer training) deliberately deferred — budget-constrained,
+    and D1 isolates the difficulty variable.
+    """
+    m = _X_MARGIN * width
+    my = _Y_MARGIN * height
+    objs: List[ObjectSpec] = []
+    used_x: List[float] = []
+    used_y: List[float] = []
+    used_z: List[float] = []
+
+    def free_x() -> float:
+        for _ in range(400):
+            v = rng.uniform(40, width - 40)
+            if all(abs(v - u) >= m for u in used_x):
+                return v
+        raise RuntimeError("could not place object (x)")
+
+    def free_y() -> float:
+        for _ in range(400):
+            v = rng.uniform(40, height - 40)
+            if all(abs(v - u) >= my for u in used_y):
+                return v
+        raise RuntimeError("could not place object (y)")
+
+    # 3 rectangles: axis carriers, varied sizes/colors
+    for i in range(3):
+        cx, cy = free_x(), free_y()
+        used_x.append(cx)
+        used_y.append(cy)
+        objs.append(ObjectSpec(f"o{i}", cx, cy, depth=0.0, shape="rect",
+                               size=rng.uniform(16, 30),
+                               color=(60 + (i % 3) * 70, 90 + (i % 2) * 90,
+                                      200 - i * 40)))
+
+    # 2 lines: orientation carriers (parallel/perpendicular pair)
+    ang = rng.uniform(0, math.pi)
+    cx, cy = free_x(), free_y()
+    used_x.append(cx)
+    used_y.append(cy)
+    objs.append(ObjectSpec("o3", cx, cy, depth=0.0, shape="line",
+                           size=rng.uniform(16, 28), color=(60, 180, 90),
+                           direction=(math.cos(ang), math.sin(ang))))
+    cx, cy = free_x(), free_y()
+    used_x.append(cx)
+    used_y.append(cy)
+    kind = rng.choice(["parallel", "perpendicular"])
+    (dx2, dy2) = objs[3].direction or (1.0, 0.0)
+    d4 = (dx2, dy2) if kind == "parallel" else (-dy2, dx2)
+    objs.append(ObjectSpec("o4", cx, cy, depth=0.0, shape="line",
+                           size=rng.uniform(16, 28), color=(200, 120, 60),
+                           direction=d4))
+
+    # distinct depths 0..4 (shuffled)
+    depths = list(range(5))
+    rng.shuffle(depths)
+    for o, z in zip(objs, depths):
+        o.depth = float(z)
+    return Scene(width, height, objs, scene_id)
+
+
+def generate_pack_v2(num_scenes: int, seed: int = 20260815) -> List[Scene]:
+    """Amendment D pack: 17 scenes (10 train / 4 val / 3 holdout ids
+    unchanged), harder recipe, new deterministic seed."""
+    rng = random.Random(seed)
+    return [make_scene_v2(f"scene_{i:04d}", rng) for i in range(num_scenes)]

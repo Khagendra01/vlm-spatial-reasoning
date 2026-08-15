@@ -1,37 +1,33 @@
 """EquiOrient Phase-1 pilot on Modal (serverless GPU, $30/mo starter credit).
 
-Replaces the Thunder Compute runbook flow (create instance -> stage ->
-run -> collect -> teardown) with Modal Sandboxes: pay-per-second, no idle
-billing, model cached in a Volume across runs, multi-seed trivially
-parallel (10 GPU concurrency on Starter).
+The cloud box CLONES the repo from GitHub (pinned commit) at function
+start — no local mounts, fully reproducible from any machine. Pay-per-
+second, no idle billing, model cached in a Volume across runs, multi-seed
+trivially parallel (10 GPU concurrency on Starter).
 
 Setup (one time, interactive):
     pip install modal
-    python -m modal setup            # opens a browser tab for auth
+    python -m modal setup                # browser auth (done 2026-08-15)
+    python -m modal secret create hf-token HF_TOKEN=hf_...   # gated model
 
 Usage:
-    python modal/equiorient_modal.py tiny          # CPU gate (free-ish)
-    python modal/equiorient_modal.py pilot         # full pilot (L40S)
-    python modal/equiorient_modal.py pilot --seed 3   # 3-way parallel
+    python modal/equiorient_modal.py tiny            # CPU gate (~free)
+    python modal/equiorient_modal.py pilot           # full pilot (L40S)
+    python modal/equiorient_modal.py pilot --variant v2   # Amendment D
 
-Frozen contract (configs/equiorient_pilot_freeze.yaml, commit 91185d7):
-    Qwen/Qwen3-VL-8B-Instruct @ 0c351dd0, transformers==4.57.6,
-    torch cu128, sdpa, vision LoRA qkv/proj/c_fc/c_proj r16 a32, frozen
-    text/lm_head, six arms, lambda grid {0.1,1.0,10.0} on scene_0010-13,
-    V o H held out, causal ablation, depth probe (Amendment C).
+Frozen contract: configs/equiorient_pilot_freeze_v2.yaml (Amendment D:
+harder regime, 5 objects/scene, seed 20260815, epochs 2) — v1 freeze
+(yaml v1) supported via --variant v1.
 """
 
 from __future__ import annotations
 
 import sys
-from pathlib import Path
 
 import modal
 
-REPO = Path(__file__).resolve().parent.parent
-
 # ---------------------------------------------------------------------------
-# Image: the frozen stack (mirrors cloud_setup/setup_equiorient.sh)
+# Image: frozen stack (mirrors cloud_setup/setup_equiorient.sh)
 # ---------------------------------------------------------------------------
 image = (
     modal.Image.debian_slim(python_version="3.12")
@@ -52,36 +48,52 @@ app = modal.App("equiorient-pilot", image=image)
 HF_CACHE = modal.Volume.from_name("equiorient-hf-cache", create_if_missing=True)
 RESULTS = modal.Volume.from_name("equiorient-results", create_if_missing=True)
 
-
-def _mounts():
-    return [
-        modal.Mount.from_local_dir(REPO / "src",
-                                   remote_path="/root/equiorient/src"),
-        modal.Mount.from_local_dir(REPO / "scripts" / "equiorient",
-                                   remote_path="/root/equiorient/scripts"),
-        modal.Mount.from_local_dir(REPO / "configs",
-                                   remote_path="/root/equiorient/configs"),
-        modal.Mount.from_local_dir(
-            REPO / "results" / "equiorient" / "pilot_data",
-            remote_path="/root/equiorient/pilot_data"),
-    ]
+# Pinned repo commit: update after each push (freeze traceability).
+REPO_URL = ("https://github.com/Khagendra01/vlm-spatial-reasoning.git")
+BRANCH = "research/equiorient"
+PINNED_COMMIT = "8e31c98"  # FIXME: bump to the Amendment D push hash
+SPARSE_CONE = ["src", "scripts", "configs", "cloud_setup", "modal",
+               "research", "results/equiorient/pilot_data",
+               "results/equiorient/pilot_data_v2", "requirements.txt"]
 
 
 def _env(hf_token: str):
     return {"HF_TOKEN": hf_token, "HF_HOME": "/root/hf-cache"}
 
 
-def _run_harness(mode: str) -> dict:
+def _clone_repo() -> None:
+    """Clone (sparse, partial) + checkout the pinned commit."""
+    import subprocess
+
+    dst = "/root/equiorient"
+    subprocess.run(
+        ["git", "clone", "--quiet", "--depth", "1", "--filter=blob:none",
+         "--sparse", "--branch", BRANCH, REPO_URL, dst], check=True)
+    subprocess.run(["git", "-C", dst, "sparse-checkout", "set",
+                    *SPARSE_CONE], check=True)
+    subprocess.run(["git", "-C", dst, "fetch", "--quiet", "--depth", "1",
+                    "origin", PINNED_COMMIT], check=True)
+    subprocess.run(["git", "-C", dst, "checkout", "--quiet", "--force",
+                    PINNED_COMMIT], check=True)
+
+
+def _run_harness(mode: str, variant: str) -> dict:
     """Runs pilot_harness.py inside the sandbox and returns the matrix."""
     import json
     import subprocess
 
+    _clone_repo()
     tiny = ["--tiny"] if mode == "tiny" else []
-    out_dir = f"/root/equiorient/results/pilot_run_{mode}"
+    freeze = ("configs/equiorient_pilot_freeze_v2.yaml" if variant == "v2"
+              else "configs/equiorient_pilot_freeze.yaml")
+    data = ("results/equiorient/pilot_data_v2" if variant == "v2"
+            else "results/equiorient/pilot_data")
+    out_dir = f"/root/equiorient/results/pilot_run_{variant}_{mode}"
     cmd = [
-        "python", "/root/equiorient/scripts/pilot_harness.py", *tiny,
-        "--freeze", "/root/equiorient/configs/equiorient_pilot_freeze.yaml",
-        "--data", "/root/equiorient/pilot_data",
+        "python", "/root/equiorient/scripts/equiorient/pilot_harness.py",
+        *tiny,
+        "--freeze", f"/root/equiorient/{freeze}",
+        "--data", f"/root/equiorient/{data}",
         "--out", out_dir,
     ]
     proc = subprocess.run(cmd, capture_output=True, text=True)
@@ -89,45 +101,43 @@ def _run_harness(mode: str) -> dict:
     if proc.returncode != 0:
         print(proc.stderr[-4000:])
         raise RuntimeError(f"harness failed ({proc.returncode})")
-    matrix_path = Path(out_dir) / "result_matrix.json"
-    if not matrix_path.exists():
+    matrix_path = f"{out_dir}/result_matrix.json"
+    if not __import__("os").path.exists(matrix_path):
         raise RuntimeError("no result_matrix.json produced")
-    return json.loads(matrix_path.read_text())
+    return json.loads(open(matrix_path, encoding="utf-8").read())
 
 
 @app.function(volumes={"/root/hf-cache": HF_CACHE,
                        "/root/equiorient/results": RESULTS},
-              mounts=_mounts(), secrets=[modal.Secret.from_name("hf-token")],
+              secrets=[modal.Secret.from_name("hf-token")],
               timeout=60 * 60,  # 1 h for the tiny gate
               )
-def run_tiny() -> dict:
+def run_tiny(variant: str = "v1") -> dict:
     import os
     os.environ.update(_env(os.environ["HF_TOKEN"]))
-    return _run_harness("tiny")
+    return _run_harness("tiny", variant)
 
 
-@app.function(gpu="L40S",
+@app.function(gpu=["L40S", "A100-40GB"],
               volumes={"/root/hf-cache": HF_CACHE,
                        "/root/equiorient/results": RESULTS},
-              mounts=_mounts(), secrets=[modal.Secret.from_name("hf-token")],
+              secrets=[modal.Secret.from_name("hf-token")],
               timeout=3 * 60 * 60,  # 3 h headroom for a full pilot
               )
-def run_pilot() -> dict:
+def run_pilot(variant: str = "v1") -> dict:
     import os
     os.environ.update(_env(os.environ["HF_TOKEN"]))
-    return _run_harness("pilot")
+    return _run_harness("pilot", variant)
 
 
 @app.local_entrypoint()
-def main(mode: str = "pilot"):
-    # NOTE: multi-seed (Gate 6) will call run_pilot.remote() once per seed
-    # in a map() — Starter allows 10 GPU concurrency. The Phase-1 freeze is
-    # single-seed; the harness seed parameterization lands with the
-    # confirmatory amendment.
+def main(mode: str = "pilot", variant: str = "v2"):
+    # NOTE: multi-seed (Gate 6) will map() run_pilot per seed — Starter
+    # allows 10 GPU concurrency. Phase-1 freeze is single-seed.
     if mode == "tiny":
-        m = run_tiny.remote()
+        m = run_tiny.remote(variant=variant)
     else:
-        m = run_pilot.remote()
+        m = run_pilot.remote(variant=variant)
     print("RESULT_MATRIX:", m)
 
 
