@@ -200,7 +200,8 @@ class PilotRunner:
                 torch_dtype=torch.bfloat16, attn_implementation="sdpa",
                 device_map="cuda")
             self.processor = AutoProcessor.from_pretrained(
-                bb["name"], revision=bb["revision"])
+                bb["name"], revision=bb["revision"],
+                image_token="<|image_pad|>", video_token="<|video_pad|>")
         for p in self.model.parameters():
             p.requires_grad_(False)
         self.log("model loaded; params frozen pending vision LoRA")

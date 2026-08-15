@@ -429,3 +429,37 @@ confirmed frozen data split (unchanged): 10 train (scene_0000-0009),
 4 validation (scene_0010-0013), 3 holdout (scene_0014-0016).
 
 confirmatory or exploratory: documentation only; no training.
+
+---
+## 2026-08-15 — Engineering fix: Qwen3VLProcessor image_token=None (zero-compute, pre-training)
+
+results already seen? NO (no EquiOrient scientific outputs; the pilot
+crashed in PRE-FLIGHT on the box before any training step)
+
+decision: fix a transformers-4.57.6 processor construction bug that the
+CPU --tiny smoke could NOT catch (the tiny path bypasses the processor;
+the real path crashed at the first AutoProcessor call):
+
+- On the A6000 box, the full pilot crashed at:
+  processing_qwen3_vl.py __call__ line 190: while self.image_token in
+  text[i] -> TypeError: 'NoneType' is not iterable.
+- Root cause: the frozen revision 0c351dd0's snapshot has an EMPTY
+  processor_config.json, and its tokenizer sets the image_token attribute
+  to None; Qwen3VLProcessor falls back to tokenizer.image_token only when
+  the image_token kwarg is absent -> self.image_token = None.
+- Fix (engineering only, no scientific parameter touched): construct the
+  processor with explicit image_token/video_token kwargs:
+    AutoProcessor.from_pretrained(bb["name"], revision=bb["revision"],
+        image_token="<|image_pad|>", video_token="<|video_pad|>")
+  token strings verified against the snapshot's added_tokens_decoder
+  (ids 151655/151656).
+- No changes to: backbone, revision, architecture, losses, data, seeds,
+  metrics, hyperparameters, stop conditions, or any frozen protocol
+  parameter.
+
+affected frozen artifacts: scripts/equiorient/pilot_harness.py (bug fix
+only; re-verified with a REAL-model processor forward before relaunch)
+
+confirmatory or exploratory: engineering fix; no training, no results.
+
+---
