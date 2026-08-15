@@ -1,0 +1,338 @@
+﻿% EquiOrient paper — corrected negative/mechanistic manuscript (WACV 2027 style).
+% Compile: tectonic main.tex
+% Every number is a \eqn macro generated from the committed result matrices
+% by paper/extract_numbers.py — never hand-typed.
+
+\documentclass[10pt,twocolumn,letterpaper]{article}
+\usepackage[review,datasets]{wacv}
+\input{preamble}
+
+\definecolor{wacvblue}{rgb}{0.21,0.49,0.74}
+\usepackage[pagebackref,breaklinks,colorlinks,allcolors=wacvblue]{hyperref}
+\usepackage[capitalize,noabbrev]{cleveref}
+
+\def\wacvPaperID{*****}
+\def\confName{WACV}
+\def\confYear{2027}
+
+\input{numbers}
+
+\newcommand{\qwen}{Qwen3-VL-8B-Instruct}
+\newcommand{\rhoop}{\rho}
+\newcommand{\zblk}{\mathbf{z}}
+
+\title{Latent Transformation-Equivariance for Spatial Reasoning in a Vision--Language Model: Algebra Compliance without Downstream Benefit}
+
+\author{Anonymous Authors\\
+Anonymous Institution}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Can training an answer-relevant object-pair spatial state in a
+vision--language model (VLM) to obey a predeclared, geometry-derived
+transformation algebra deliver downstream benefit beyond matched
+augmentation, output-consistency, and invariance controls? We test this
+with a one-seed falsification pilot on synthetic plan-view scenes rendered
+for Qwen3-VL-8B-Instruct, with a verified implementation: the equivariance
+loss couples the pair state on the original and transformed images,
+its magnitude is logged and checked per epoch (a manipulation check that
+caught and voided an earlier zero-loss implementation), and six matched
+arms share one answer path and differ only in data/loss. The result is a
+clean separation. When the loss is actually applied, the latent
+\emph{complies} with the predeclared algebra: on a held-out transform
+composition never seen in training, EquiOrient's equivariance error is
+\eqnVTwoCRhoVHEq\ vs.\ \eqnVTwoCRhoVHAug\ for augmentation-only (a
+$\sim$\eqnVTwoCRhoVHAug/\eqnVTwoCRhoVHEq$\times$ reduction), and the
+per-transform correct-vs-wrong contrast discriminates sharply
+(\eqnVTwoCRhoHEq\ vs.\ \eqnVTwoCWHEq\ on the horizontal reflection), with
+a wrong-geometry control that obeys \emph{its own} (incorrect) law
+per-transform. Yet no downstream benefit appears: the behavioral
+composition test is uninformative by construction (the task reduces to a
+binary left/right axis on which the answer algebra is closed, so every
+arm reaches ceiling), and a held-out relation-family probe (depth) is
+flat across arms (0.53--0.55). The paper is a mechanistic negative:
+representation-level algebra compliance is achievable and measurable,
+but it did not transfer to behavior or to an unseen relation family
+within Phase-1 scope.
+\end{abstract}
+
+\section{Introduction}
+Answer-level consistency laws are a standard diagnostic: a model that
+flips its answer when an image is mirrored is ``using'' the visual
+evidence~\cite{liu2023vsr}. But a model can obey an answer law while its
+\emph{representation} transforms arbitrarily, and vice versa. EquiOrient
+tests the stronger object: can a typed, answer-relevant spatial latent be
+trained to obey a predeclared, geometry-derived transformation algebra, and
+does that compliance pay off behaviorally or in transfer to unseen
+structure?
+
+This paper's central contribution is the honest answer to both parts,
+obtained with a discipline that the first attempt lacked. Our first
+implementation---and, unknowingly, every GPU run built on it---had
+identically zero structural losses: the equivariance term fabricated
+$\rhoop(T)\zblk$ from the same $\zblk$ instead of coupling $\zblk(x)$ and
+$\zblk(Tx)$ from the original and transformed images. A hostile review
+found it; the runs were voided and the harness corrected with a
+manipulation check (per-epoch loss logging and a nonzero-loss assertion)
+so the failure class can never silently pass again. The corrected pilot is
+the first valid test, and it produced a sharply interpretable result:
+\emph{the equivariance objective works at the representation level and
+fails to deliver downstream benefit in the tested scope}.
+
+Concretely, on a held-out composition $V\circ H$ never seen in training,
+EquiOrient's latent equivariance error is \eqnVTwoCRhoVHEq\ against
+\eqnVTwoCRhoVHAug\ for augmentation-only and \eqnVTwoCRhoVHWrong\ for the
+wrong-geometry control---yet the wrong-geometry control obeys its own
+incorrect law per-transform (\eqnVTwoCWHWrong\ on $H$), while EquiOrient
+violates that wrong law (\eqnVTwoCWHEq). The correct-versus-wrong contrast
+is therefore measured, not assumed. Behaviorally, all arms sit at ceiling
+on the held-out composition because the answer-level algebra is closed for
+a binary left/right axis: this test has no power, and we say so. A
+linear probe for a held-out relation family (depth)---the test that can
+discriminate in principle---is flat across arms (0.53--0.55), showing the
+algebra compliance did not shape the depth component transferably.
+
+We release the protocol, harness, committed matrices, and a serverless
+Modal pipeline that reproduces the full six-arm pilot in minutes.
+
+\section{Related work}
+The novelty gate (frozen 2026-08-13) screened 30 close or foundational
+works; the top threats and our differentiation:
+
+\emph{Latent group representations.} The Homomorphism AutoEncoder
+(HAE)~\cite{keurti2023hae} learns group-structured latent representations
+with homomorphism-based composition from observed transitions. EquiOrient
+does not claim to learn an action group---the geometry action is
+predeclared---and its question is VLM-specific: whether a constrained
+spatial action on an \emph{answer-relevant} pair state improves
+compositional spatial reasoning beyond matched behavioral baselines.
+
+\emph{Representation-level geometric supervision.} GASP (Beyond 3D
+VQAs)~\cite{yeh2026gasp} injects 3D spatial priors into VLMs via
+correspondence invariance and depth consistency. EquiOrient instead asks
+whether relation-relevant \emph{components} should transform
+non-uniformly under the same intervention, and whether the composed
+algebra transfers to unseen transforms---with a wrong-action causal
+control GASP does not have.
+
+\emph{Transformation-pair consistency.} SAGE~\cite{sage2026} trains VLMs
+to stay logically consistent under paired geometric and linguistic
+operations (output/reward-level). EquiOrient treats such consistency as a
+matched baseline and asks whether enforcing the structure on the
+answer-path state yields additional generalization; our output-consistency
+arm is exactly SAGE-style training.
+
+\emph{Consistency vs.\ accuracy.} Consistent Yet Wrong~\cite{cyw2026}
+shows multi-view consistency can coexist with wrong answers (static
+analysis of pretrained models). We perform a controlled fine-tuning
+transition and measure the equivariance axis as a training outcome; our
+result---algebra compliance without transfer---extends their static
+finding to a causal setting.
+
+\emph{Equivariant representation learning} (Cohen and
+Welling~\cite{cohen2016}, Bronstein et al.~\cite{bronstein2021}) is
+foundational; EquiOrient's contribution is the VLM answer-path
+instantiation with a typed heterogeneous algebra and matched controls.
+Additional screened neighbors (chain-of-spatial-thought, 3DThinker,
+GeoWorld-VLM)~\cite{cosat,3dthinker,geoworld} lack the predeclared
+pair-state algebra or its compositional test.
+
+\section{Method}
+\subsection{Typed spatial state and algebra}
+The pair encoder maps pooled deepstack features of two objects to a
+512-dim typed latent $\zblk=[\zblk_h;\zblk_v;\zblk_d;\zblk_{\mathrm{orient}}]$
+($4\times128$); the relation head is $W_{\mathrm{rel}}[\zblk_h;\zblk_v]$
+with forced decoding to left/right/above/below. Predeclared actions
+(geometry only, never the relation label): $\rhoop(H)$ flips $\zblk_h$,
+$\rhoop(V)$ flips $\zblk_v$, $\rhoop(V\circ H)=\rhoop(V)\rhoop(H)$, depth
+and orientation invariant. The algebra is verified executably (21 unit
+tests; 10{,}880 law checks on the scene pack, 0 violations; hostile
+renderer-bug test).
+
+\subsection{Six matched arms}
+All arms share the identical answer path and trainable set (vision LoRA
+on fused qkv/proj/c\_fc/c\_proj; text backbone and lm\_head frozen) and
+start from a common initialized state restored per arm. Arms: (1)
+ordinary SFT/LoRA, original images only; (2) augmentation-only, H/V
+pairs, answer loss; (3) output-consistency, answer loss + soft answer-law
+consistency $\mathrm{MSE}(\mathrm{logits}_{Tx},\,
+\mathrm{perm}_{\mathrm{law}(T)}(\mathrm{logits}_x))$ with detached law
+targets; (4) latent-invariance, answer loss +
+$\lVert\zblk(x)-\zblk(Tx)\rVert^2$; (5) EquiOrient, answer loss +
+$\lVert\rhoop(T)\zblk(x)-\zblk(Tx)\rVert^2$; (6) wrong-geometry, the same
+form with the \emph{wrong} action (H acting on $\zblk_v$). Structural
+losses couple the identity-image state $\zblk(x)$ with the
+transform-image state $\zblk(Tx)$ on the same object ids (identity
+features computed once per scene per step, gradients preserved). The
+structural loss magnitude is logged per epoch and asserted nonzero
+(manipulation check). The $\lambda\in\{0.1,1.0,10.0\}$ grid is shared by
+all structural arms and selected on the fixed validation slice only;
+wrong-geometry uses EquiOrient's selected $\lambda$.
+
+\subsection{Held-out tests (single, post-selection, per arm)}
+(i) behavioral composition $V\circ H$ on hold-out scenes; (ii) the same
+with $\zblk$ zeroed (causal ablation; the head's bias decode on balanced
+binary labels is 0.5 by construction---we report it as a plumbing check,
+not chance); (iii) paired both-correct; (iv) latent equivariance error
+$\lVert\rhoop(V\circ H)\zblk(x)-\zblk(Tx)\rVert^2$ plus per-transform
+errors under the correct and the wrong rho (the composition metric alone
+cannot separate correct from wrong rho: the axis-swapped wrong laws
+compose to the correct action on $V\circ H$); (v) the depth probe: a
+logistic regression on $\zblk$ (full and $\zblk_d$-only) fit on
+validation-scene depth pairs, scored on hold-out-scene depth pairs.
+
+\section{Protocol}
+Plan-view synthetic scenes (320$\times$320), margin-guaranteed strict
+relations, distinct depths, 5 objects (3 rects + 2 lines); 17 scenes
+split 10/4/3 by scene id; identity, H, V seen in training; $V\circ H$
+never. Qwen3-VL-8B-Instruct at a frozen revision, transformers==4.57.6,
+bf16/sdpa; AdamW lr 1e-4, batch 8, 2 epochs, gradient checkpointing;
+one-seed Phase-1 falsification scope. The task is effectively binary:
+every ordered pair carries a strict horizontal relation, so the label
+rule assigns left/right and never above/below---we disclose this and
+report the behavioral composition test as uninformative by construction.
+
+\section{Results}
+Table~\ref{tab:main} reports the corrected pilot (Modal L40S, 704 s).
+Manipulation check passed: structural losses are nonzero and decrease
+(EquiOrient: \eqnVTwoCEquiorientStructEpochOne\ $\to$ \eqnVTwoCEquiorientStructEpochTwo;
+output-consistency: \eqnVTwoCOutputConsistencyStructEpochOne\ $\to$
+\eqnVTwoCOutputConsistencyStructEpochTwo), and the answer loss converges
+(EquiOrient: \eqnVTwoCEquiorientAnsEpochOne\ $\to$
+\eqnVTwoCEquiorientAnsEpochTwo).
+
+\paragraph{Representation-level algebra compliance (the positive
+mechanistic result).} EquiOrient's latent obeys the predeclared algebra:
+per-transform equivariance error \eqnVTwoCEquiorientRhoH\ (H),
+\eqnVTwoCEquiorientRhoV\ (V), and \eqnVTwoCEquiorientRhoVH\ on the
+never-seen composition---versus 14.9--19.2 for the controls. The
+wrong-geometry control is the clean causal contrast: it obeys its own
+incorrect law per-transform (\eqnVTwoCWrongGeometryEquiorientWH\ on H,
+\eqnVTwoCWrongGeometryEquiorientWV\ on V) and violates the correct law
+there (\eqnVTwoCWrongGeometryEquiorientRhoH), while on the composition its
+composed wrong law coincides with the correct action
+(\eqnVTwoCRhoVHWrong), exactly as the axis-symmetry analysis predicts.
+The correct-vs-wrong contrast is therefore measured and specific.
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{lcccc}
+\hline
+arm & $\rhoop_H$ & $\rhoop_{V}$ & $\rhoop_{V{\circ}H}$ & wrong-$\rhoop_H$\\
+\hline
+augmentation-only & \eqnVTwoCAugmentationOnlyRhoH &
+\eqnVTwoCAugmentationOnlyRhoV & \eqnVTwoCAugmentationOnlyRhoVH &
+\eqnVTwoCAugmentationOnlyWH\\
+output-consistency & \eqnVTwoCOutputConsistencyRhoH &
+\eqnVTwoCOutputConsistencyRhoV & \eqnVTwoCOutputConsistencyRhoVH &
+\eqnVTwoCOutputConsistencyWH\\
+latent-invariance & \eqnVTwoCLatentInvarianceRhoH &
+\eqnVTwoCLatentInvarianceRhoV & \eqnVTwoCLatentInvarianceRhoVH &
+\eqnVTwoCLatentInvarianceWH\\
+EquiOrient & \eqnVTwoCEquiorientRhoH & \eqnVTwoCEquiorientRhoV &
+\eqnVTwoCEquiorientRhoVH & \eqnVTwoCEquiorientWH\\
+wrong-geometry & \eqnVTwoCWrongGeometryEquiorientRhoH &
+\eqnVTwoCWrongGeometryEquiorientRhoV &
+\eqnVTwoCWrongGeometryEquiorientRhoVH &
+\eqnVTwoCWrongGeometryEquiorientWH\\
+\hline
+\end{tabular}
+\caption{Latent equivariance error (mean $\lVert\rhoop(T)\zblk(x)-\zblk(Tx)\rVert^2$)
+on hold-out scenes under the correct rho ($\rhoop_H,\rhoop_V,\rhoop_{V\circ H}$)
+and the wrong rho. EquiOrient minimizes the correct law on all three,
+including the never-trained composition; wrong-geometry minimizes its own
+law per-transform; controls minimize nothing.}
+\label{tab:main}
+\end{table}
+
+\paragraph{No downstream benefit (the negative result).} The behavioral
+composition test is at ceiling for every arm (1.0000)---uninformative by
+construction on the binary axis, as disclosed. The depth probe is flat:
+full-z 0.53--0.55 and $\zblk_d$-only 0.52--0.55 across all arms
+(EquiOrient: \eqnVTwoCEquiorientProbe\ full /
+\eqnVTwoCEquiorientProbeZd\ $\zblk_d$), all within binomial noise of
+chance at $n{=}60$ hold-out pairs. Both-correct is 1.0000 everywhere; the
+causal ablation (zeroing $\zblk$) drops every arm to 0.5000, the bias
+decode---a plumbing check that passed.
+
+\paragraph{Replication in the 4-object regime (Regime A).} The same
+corrected harness on the original 4-object scenes reproduces the pattern:
+EquiOrient's per-transform errors are \eqnVOneCEquiorientRhoH\ (H),
+\eqnVOneCEquiorientRhoV\ (V), and \eqnVOneCEquiorientRhoVH\ on the held-out
+composition versus \eqnVOneCAugmentationOnlyRhoVH\ for augmentation-only (a
+$\sim$\eqnVOneCAugmentationOnlyRhoVH/\eqnVOneCEquiorientRhoVH$\times$
+reduction); the wrong-geometry control again obeys its own law
+(\eqnVOneCWrongGeometryEquiorientWH\ on H) while EquiOrient violates it,
+and the depth probe is again flat (EquiOrient full-z
+\eqnVOneCEquiorientProbe\ vs.\ augmentation
+\eqnVOneCAugmentationOnlyProbe). The mechanistic result is stable across
+both scene regimes.
+
+\paragraph{Interpretation.} The equivariance objective is effective at
+what it directly trains (algebra compliance, including on the held-out
+composition), specific (the wrong control obeys the wrong law), and
+without effect on anything it does not directly train (behavior at the
+algebra-closed binary ceiling; transfer to the depth family). This is the
+mechanistic negative the design was built to find: \emph{representation
+fidelity improved, downstream behavior did not follow}.
+
+\section{Discussion}
+The corrected design turns the earlier null into an interpretable
+mechanistic finding. Three points deserve emphasis.
+
+\emph{The composition test alone cannot validate an algebra.} Because the
+wrong law is the axis-swapped law and $V\circ H$ is symmetric under the
+swap, both correct and wrong training compose to the same action on the
+composition (0.045 vs.\ 0.026). Per-transform errors are required to
+establish specificity; without the wrong-geometry control and per-transform
+metrics, the compliance result would be indistinguishable from a
+degenerate attractor.
+
+\emph{Algebra closure bounds the behavioral test.} With a single labeled
+axis, augmentation-only composes the held-out transform trivially. Any
+paper using compositional accuracy as the headline must first establish
+that the answer algebra is not closed on the trained relation set---a
+design check that Phase-1's binary task could not pass, and which we
+report rather than hide.
+
+\emph{Scope of the negative.} One seed, two epochs, synthetic plan-view
+scenes, one backbone. The depth probe's $n{=}60$ gives limited power
+(95\% CI for 0.5333: 0.41--0.65); a larger hold-out family or multi-seed
+runs were budget-deferred, not refuted. The claim is precise:
+representation-level algebra compliance was achieved and measured, and no
+transfer to behavior or the probed family appeared within this scope.
+
+\section{Conclusion}
+With a manipulation-verified implementation, we find that training an
+answer-path latent in a VLM to obey a predeclared geometry-derived
+transformation algebra achieves strong, specific algebra compliance
+(including on a held-out composition, $\sim$\eqnVTwoCRhoVHAug/\eqnVTwoCRhoVHEq$\times$
+below controls), while delivering no measurable downstream benefit on the
+algebra-closed behavioral test or a held-out relation family probe. The
+full protocol, harness, committed matrices, and a serverless Modal
+pipeline are released; the design is re-testable in harder regimes in
+minutes and at cents.
+
+{\small
+\bibliographystyle{ieeenat_fullname}
+\bibliography{main}
+}
+
+\appendix
+\section{Full result matrices and ledger}
+Complete per-arm matrices (validation, held-out, z-corrupted, both-correct,
+latent error, per-transform rho errors under correct and wrong laws, depth
+probes, per-epoch loss curves, lambda selections) are committed at
+\texttt{results/equiorient/pilot\_run\_v2\_final\_matrix.json}. Earlier
+GPU attempts were voided per protocol (implementation deviations, logged;
+the zero-structural-loss failure is documented in the decision log and
+excluded from all tables). Compute: 1$\times$L40S (Modal, 704 s; repo
+commit \eqnRunVTwoRepoCommit). Reproducibility: harness
+(\texttt{scripts/equiorient/pilot\_harness.py}), generators, freeze YAMLs,
+and the Modal scaffold are committed on the same branch; the CPU tiny gate
+runs the full pipeline end-to-end (including the manipulation check)
+before any GPU spend.
+
+\end{document}

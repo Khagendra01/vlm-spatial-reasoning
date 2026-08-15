@@ -831,3 +831,44 @@ confirmatory or exploratory: implementation-correction; the corrected run
 is the first VALID test of the equivariance hypothesis.
 
 ---
+## 2026-08-15 — Corrected write-up COMPLETE: paper (v2) + Regime A replication + hostile-review resolution
+
+results already seen? YES (corrected runs)
+
+corrected pilots (Modal L40S, harness with paired x/Tx structural losses +
+manipulation check):
+- v2 regime (5-object scenes, 704 s): manipulation PASS (equiorient struct
+  loss 0.0156 -> 0.0132; answer loss 7.46 -> 1.24). Latent algebra
+  compliance: rho_H 0.033 / rho_V 0.006 / held-out rho_VH 0.045 vs
+  augmentation 14.9/12.0/14.7 (325x); correct-vs-wrong contrast sharp
+  (equiorient wrong-H 4.89 vs wrong_geometry wrong-H 0.020); wrong_geometry
+  obeys ITS law per-transform; composed wrong law == correct on V o H
+  (0.026) as predicted by axis-symmetry. No downstream: depth probes flat
+  (0.53-0.55 full, 0.52-0.55 z_d), behavioral ceiling (binary task).
+- v1 regime (4-object scenes): replication — equiorient rho_H 0.120 /
+  rho_V 0.105 / rho_VH 0.172 vs augmentation 10.36 (60x); wrong_geometry
+  own-law 0.112; probes flat (0.50-0.61).
+
+hostile review (Gate 8, three independent reviewers) resolved: numbers
+machine-verified; the zero-structural-loss class voided prior runs (logged
+above); bibliography corrected per the gate records (HAE keurti2023hae,
+GASP yeh2026gasp per gate, SAGE 2605.18162, Consistent Yet Wrong
+2606.02742; unverifiable entries dropped); binary-task disclosure added;
+causal ablation reframed as bias-decode plumbing check; per-lambda and
+step-budget caveats disclosed; n + binomial CIs stated; per-transform and
+per-block(z_d) metrics added.
+
+paper: paper/main.tex -> main.pdf (tectonic, WACV style, anonymous);
+all numbers machine-generated from committed matrices
+(paper/extract_numbers.py -> numbers.tex; 178 macros).
+
+scientific position (final): representation-level algebra compliance is
+achievable, specific (correct-vs-wrong), and replicable across two scene
+regimes, but it did not transfer to behavior (algebra-closed binary task
+ceiling) or to a held-out relation family (depth probe flat). Mechanistic
+negative per the execution guide's allowed story.
+
+compute ledger (Modal): 3 GPU runs (corrected v2, corrected v1, plus the
+voided zero-loss runs earlier) ~35 min L40S total, <  of the  credit.
+
+---
