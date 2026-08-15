@@ -1,0 +1,72 @@
+\begin{thebibliography}{10}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Bhat and Yamasaki(2026)]{cyw2026}
+S~Divakar Bhat and Toshihiko Yamasaki.
+\newblock Consistent yet wrong: Evidence insensitivity in spatial
+  vision-language models.
+\newblock \emph{arXiv preprint arXiv:2606.02742}, 2026.
+
+\bibitem[Bronstein et~al.(2021)Bronstein, Bruna, Cohen, and
+  Veli{\v{c}}kovi{\'c}]{bronstein2021}
+Michael Bronstein, Joan Bruna, Taco Cohen, and Petar Veli{\v{c}}kovi{\'c}.
+\newblock Geometric deep learning: Grids, groups, graphs, geodesics, and
+  gauges.
+\newblock \emph{arXiv preprint arXiv:2104.13478}, 2021.
+
+\bibitem[Cohen and Welling(2016)]{cohen2016}
+Taco Cohen and Max Welling.
+\newblock Group equivariant convolutional networks.
+\newblock In \emph{International Conference on Machine Learning (ICML)}, 2016.
+
+\bibitem[et~al.(2026{\natexlab{a}})]{3dthinker}
+Chen et al.
+\newblock Think with 3d: Geometric imagination for grounded spatial reasoning.
+\newblock In \emph{IEEE/CVF Conference on Computer Vision and Pattern
+  Recognition (CVPR)}, 2026{\natexlab{a}}.
+
+\bibitem[et~al.(2026{\natexlab{b}})]{yeh2026gasp}
+Yeh et al.
+\newblock Gasp: Beyond 3d vqas -- injecting 3d spatial priors into vlms.
+\newblock In \emph{IEEE/CVF Conference on Computer Vision and Pattern
+  Recognition (CVPR)}, 2026{\natexlab{b}}.
+
+\bibitem[Gu et~al.(2026)Gu, Zhou, Luo, and Wang]{geoworld}
+Renjie Gu, Kaichen Zhou, Yan Luo, and Mengyu Wang.
+\newblock Geoworld-vlm: Geometry from world models for vision-language models.
+\newblock \emph{arXiv preprint arXiv:2605.16713}, 2026.
+
+\bibitem[Keurti et~al.(2023)Keurti, Pan, Besserve, Grewe, and
+  Sch{\"o}lkopf]{keurti2023hae}
+Hamza Keurti, Hsiao-Ru Pan, Michel Besserve, Benjamin~F. Grewe, and Bernhard
+  Sch{\"o}lkopf.
+\newblock Homomorphism autoencoder: Learning group structured representations
+  from observed transitions.
+\newblock In \emph{International Conference on Machine Learning (ICML)}, 2023.
+
+\bibitem[Liu et~al.(2023)Liu, Emerson, and Collier]{liu2023vsr}
+Fangyu Liu, Guy Emerson, and Nigel Collier.
+\newblock Visual spatial reasoning.
+\newblock \emph{Transactions of the Association for Computational Linguistics},
+  2023.
+
+\bibitem[Liu et~al.(2026)Liu, Li, Sun, Wang, Koniusz, Chen, and Wang]{sage2026}
+Junming Liu, Yuqi Li, Yifei Sun, Maonan Wang, Piotr Koniusz, Yirong Chen, and
+  Ding Wang.
+\newblock Self-evolving spatial reasoning in vision language models via
+  geometric logic consistency.
+\newblock \emph{arXiv preprint arXiv:2605.18162}, 2026.
+
+\bibitem[Schofield et~al.(2026)Schofield, Elmahgiubi, Mahdavian, Shi, Shan,
+  Rasouli, and Bai]{cosat}
+Hunter Schofield, Mohammed Elmahgiubi, Mohammad Mahdavian, Richard Shi, Jinjun
+  Shan, Amir Rasouli, and Dongfeng Bai.
+\newblock Chain of spatial thoughts: Modality-agnostic spatial grounding for
+  vision language models.
+\newblock \emph{arXiv preprint arXiv:2608.10278}, 2026.
+
+\end{thebibliography}

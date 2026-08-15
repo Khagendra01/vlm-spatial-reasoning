@@ -17,7 +17,7 @@
 
 \input{numbers}
 
-\newcommand{\qwen}{Qwen3-VL-8B-Instruct}
+
 \newcommand{\rhoop}{\rho}
 \newcommand{\zblk}{\mathbf{z}}
 
@@ -44,7 +44,7 @@ clean separation. When the loss is actually applied, the latent
 \emph{complies} with the predeclared algebra: on a held-out transform
 composition never seen in training, EquiOrient's equivariance error is
 \eqnVTwoCRhoVHEq\ vs.\ \eqnVTwoCRhoVHAug\ for augmentation-only (a
-$\sim$\eqnVTwoCRhoVHAug/\eqnVTwoCRhoVHEq$\times$ reduction), and the
+a $\approx$\eqnVTwoCRatio$\times$ reduction), and the
 per-transform correct-vs-wrong contrast discriminates sharply
 (\eqnVTwoCRhoHEq\ vs.\ \eqnVTwoCWHEq\ on the horizontal reflection), with
 a wrong-geometry control that obeys \emph{its own} (incorrect) law
@@ -96,6 +96,20 @@ algebra compliance did not shape the depth component transferably.
 
 We release the protocol, harness, committed matrices, and a serverless
 Modal pipeline that reproduces the full six-arm pilot in minutes.
+
+Our contributions are:
+\begin{itemize}[leftmargin=*]
+\item a \emph{manipulation-verified} six-arm falsification harness for
+transformation-equivariance training, including the per-epoch structural-
+loss check that caught and voided an identically-zero implementation;
+\item the first valid measurement of the question: EquiOrient achieves
+strong, specific, two-regime latent algebra compliance (including on a
+held-out composition) without any downstream benefit in scope;
+\item per-transform and wrong-law causal metrics that separate correct
+from wrong actions where composition metrics cannot;
+\item released artifacts: protocol, harness, matrices, and a pay-per-
+second Modal pipeline (full pilot $\approx$20 min, $<$2).
+\end{itemize}
 
 \section{Related work}
 The novelty gate (frozen 2026-08-13) screened 30 close or foundational
@@ -195,8 +209,20 @@ rule assigns left/right and never above/below---we disclose this and
 report the behavioral composition test as uninformative by construction.
 
 \section{Results}
-Table~\ref{tab:main} reports the corrected pilot (Modal L40S, 704 s).
-Manipulation check passed: structural losses are nonzero and decrease
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig1_rho.png}
+\caption{Latent equivariance error under the correct rho, per transform
+(log scale). EquiOrient complies on the seen reflections and on the
+never-seen composition; the wrong-geometry control's small composition
+bar reflects its wrong law composing to the correct action on
+$V{\circ}H$ (Fig.~\ref{fig:contrast}); the remaining controls minimize
+nothing.}
+\label{fig:rho}
+\end{figure}
+
+Table~\ref{tab:main} reports the corrected pilot (Modal L40S, \eqnRunVTwoElapsedS\ s).
+Manipulation check passed: structural losses are nonzero in every structural arm (the manipulation check); they decrease for EquiOrient and output-consistency, and rise for latent-invariance, whose invariance objective competes with the answer loss
 (EquiOrient: \eqnVTwoCEquiorientStructEpochOne\ $\to$ \eqnVTwoCEquiorientStructEpochTwo;
 output-consistency: \eqnVTwoCOutputConsistencyStructEpochOne\ $\to$
 \eqnVTwoCOutputConsistencyStructEpochTwo), and the answer loss converges
@@ -207,16 +233,17 @@ output-consistency: \eqnVTwoCOutputConsistencyStructEpochOne\ $\to$
 mechanistic result).} EquiOrient's latent obeys the predeclared algebra:
 per-transform equivariance error \eqnVTwoCEquiorientRhoH\ (H),
 \eqnVTwoCEquiorientRhoV\ (V), and \eqnVTwoCEquiorientRhoVH\ on the
-never-seen composition---versus 14.9--19.2 for the controls. The
+never-seen composition---versus 14.9--19.2 for augmentation-only and output-consistency (latent-invariance: 3.1--5.6, still $\sim$70--450$\times$ above EquiOrient). The
 wrong-geometry control is the clean causal contrast: it obeys its own
 incorrect law per-transform (\eqnVTwoCWrongGeometryEquiorientWH\ on H,
 \eqnVTwoCWrongGeometryEquiorientWV\ on V) and violates the correct law
 there (\eqnVTwoCWrongGeometryEquiorientRhoH), while on the composition its
 composed wrong law coincides with the correct action
-(\eqnVTwoCRhoVHWrong), exactly as the axis-symmetry analysis predicts.
-The correct-vs-wrong contrast is therefore measured and specific.
+(\eqnVTwoCRhoVHWrong), exactly as the axis-symmetry analysis predicts
+(Fig.~\ref{fig:contrast}). The correct-vs-wrong contrast is therefore
+measured and specific.
 
-\begin{table}[t]
+\begin{table*}[t]
 \centering\small
 \begin{tabular}{lcccc}
 \hline
@@ -245,27 +272,79 @@ and the wrong rho. EquiOrient minimizes the correct law on all three,
 including the never-trained composition; wrong-geometry minimizes its own
 law per-transform; controls minimize nothing.}
 \label{tab:main}
-\end{table}
+\end{table*}
 
 \paragraph{No downstream benefit (the negative result).} The behavioral
 composition test is at ceiling for every arm (1.0000)---uninformative by
-construction on the binary axis, as disclosed. The depth probe is flat:
-full-z 0.53--0.55 and $\zblk_d$-only 0.52--0.55 across all arms
-(EquiOrient: \eqnVTwoCEquiorientProbe\ full /
-\eqnVTwoCEquiorientProbeZd\ $\zblk_d$), all within binomial noise of
-chance at $n{=}60$ hold-out pairs. Both-correct is 1.0000 everywhere; the
-causal ablation (zeroing $\zblk$) drops every arm to 0.5000, the bias
+construction on the binary axis, as disclosed. Validation accuracy at the
+selected $\lambda$ (Table~\ref{tab:beh}) is 0.98--0.99 for every causal
+arm in both regimes, with grid accuracy nearly flat across $\lambda$
+(EquiOrient: 0.9792/0.9833/0.9958 at 0.1/1.0/10.0), so $\lambda$
+selection on the 4-scene validation slice is noisy; we report it and never
+tune on the holdout. The depth probe is flat: full-z 0.53--0.55 and
+$\zblk_d$-only 0.52--0.55 across all arms (EquiOrient:
+\eqnVTwoCEquiorientProbe\ full / \eqnVTwoCEquiorientProbeZd\ $\zblk_d$),
+all within binomial noise of chance at $n{=}60$ hold-out pairs
+(Fig.~\ref{fig:probe}). Both-correct is 1.0000 everywhere; the causal
+ablation (zeroing $\zblk$) drops every arm to 0.5000, the bias
 decode---a plumbing check that passed.
+
+\begin{table*}[t]
+\centering\small
+\begin{tabular}{lccccc}
+\hline
+arm & val & hold-out $V{\circ}H$ & z-corr & both & probe\\
+\hline
+augmentation-only & \eqnVTwoCAugmentationOnlyVal & \eqnVTwoCAugmentationOnlyHoldout &
+\eqnVTwoCAugmentationOnlyZcorr & \eqnVTwoCAugmentationOnlyBoth &
+\eqnVTwoCAugmentationOnlyProbe\\
+output-consistency & \eqnVTwoCOutputConsistencyVal & \eqnVTwoCOutputConsistencyHoldout &
+\eqnVTwoCOutputConsistencyZcorr & \eqnVTwoCOutputConsistencyBoth &
+\eqnVTwoCOutputConsistencyProbe\\
+latent-invariance & \eqnVTwoCLatentInvarianceVal & \eqnVTwoCLatentInvarianceHoldout &
+\eqnVTwoCLatentInvarianceZcorr & \eqnVTwoCLatentInvarianceBoth &
+\eqnVTwoCLatentInvarianceProbe\\
+EquiOrient & \eqnVTwoCEquiorientVal & \eqnVTwoCEquiorientHoldout &
+\eqnVTwoCEquiorientZcorr & \eqnVTwoCEquiorientBoth &
+\eqnVTwoCEquiorientProbe\\
+wrong-geometry & \eqnVTwoCWrongGeometryEquiorientVal &
+\eqnVTwoCWrongGeometryEquiorientHoldout & \eqnVTwoCWrongGeometryEquiorientZcorr &
+\eqnVTwoCWrongGeometryEquiorientBoth & \eqnVTwoCWrongGeometryEquiorientProbe\\
+\hline
+\end{tabular}
+\caption{Behavioral metrics at the selected $\lambda$ (Regime B).
+z-corr $=$ accuracy with $\zblk$ zeroed (bias decode, not chance).
+The behavioral columns are uninformative by construction on the binary
+task; the probe column is flat.}
+\label{tab:beh}
+\end{table*}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig2_contrast.png}
+\caption{Specificity: errors under the correct vs.\ wrong rho on the
+horizontal reflection. EquiOrient minimizes the correct law and violates
+the wrong one; the wrong-geometry control is the mirror image.}
+\label{fig:contrast}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/fig3_probe.png}
+\caption{Held-out depth-family probe: flat across all arms, full-z and
+$\zblk_d$-only. Dashed line: chance (0.5).}
+\label{fig:probe}
+\end{figure}
 
 \paragraph{Replication in the 4-object regime (Regime A).} The same
 corrected harness on the original 4-object scenes reproduces the pattern:
 EquiOrient's per-transform errors are \eqnVOneCEquiorientRhoH\ (H),
 \eqnVOneCEquiorientRhoV\ (V), and \eqnVOneCEquiorientRhoVH\ on the held-out
 composition versus \eqnVOneCAugmentationOnlyRhoVH\ for augmentation-only (a
-$\sim$\eqnVOneCAugmentationOnlyRhoVH/\eqnVOneCEquiorientRhoVH$\times$
+$\approx$\eqnVOneCRatio$\times$
 reduction); the wrong-geometry control again obeys its own law
 (\eqnVOneCWrongGeometryEquiorientWH\ on H) while EquiOrient violates it,
-and the depth probe is again flat (EquiOrient full-z
+and the depth probe is again within binomial noise ($n{=}36$; EquiOrient full-z
 \eqnVOneCEquiorientProbe\ vs.\ augmentation
 \eqnVOneCAugmentationOnlyProbe). The mechanistic result is stable across
 both scene regimes.
@@ -308,8 +387,8 @@ transfer to behavior or the probed family appeared within this scope.
 With a manipulation-verified implementation, we find that training an
 answer-path latent in a VLM to obey a predeclared geometry-derived
 transformation algebra achieves strong, specific algebra compliance
-(including on a held-out composition, $\sim$\eqnVTwoCRhoVHAug/\eqnVTwoCRhoVHEq$\times$
-below controls), while delivering no measurable downstream benefit on the
+(including on a held-out composition, $\approx$\eqnVTwoCRatio$\times$
+below the augmentation-only and output-consistency controls), while delivering no measurable downstream benefit on the
 algebra-closed behavioral test or a held-out relation family probe. The
 full protocol, harness, committed matrices, and a serverless Modal
 pipeline are released; the design is re-testable in harder regimes in
@@ -325,10 +404,10 @@ minutes and at cents.
 Complete per-arm matrices (validation, held-out, z-corrupted, both-correct,
 latent error, per-transform rho errors under correct and wrong laws, depth
 probes, per-epoch loss curves, lambda selections) are committed at
-\texttt{results/equiorient/pilot\_run\_v2\_final\_matrix.json}. Earlier
+\texttt{results/equiorient/\ldots\_final\_matrix.json}. Earlier
 GPU attempts were voided per protocol (implementation deviations, logged;
 the zero-structural-loss failure is documented in the decision log and
-excluded from all tables). Compute: 1$\times$L40S (Modal, 704 s; repo
+excluded from all tables). Compute: 1$\times$L40S (Modal, \eqnRunVTwoElapsedS\ s; repo
 commit \eqnRunVTwoRepoCommit). Reproducibility: harness
 (\texttt{scripts/equiorient/pilot\_harness.py}), generators, freeze YAMLs,
 and the Modal scaffold are committed on the same branch; the CPU tiny gate

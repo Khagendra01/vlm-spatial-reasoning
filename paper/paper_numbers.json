@@ -327,12 +327,13 @@
     }
    }
   },
-  "elapsed_seconds": 1357.537112236023
+  "elapsed_seconds": 1357.537112236023,
+  "repo_commit": "65c6c1c97272c41e71d18bc0f0fadbb285edf74a"
  },
  "macros": {
   "run_v1_elapsed_s": 4145,
   "run_v2_elapsed_s": 1357,
-  "run_v2_repo_commit": "?",
+  "run_v2_repo_commit": "65c6c1c9",
   "V1_lam_oc": "1",
   "V1_lam_li": "1",
   "V1_lam_eq": "10",
@@ -505,6 +506,8 @@
   "V2C_rhoH_aug": "14.8577",
   "V2C_rhoVH_eq": "0.0452",
   "V2C_rhoVH_aug": "14.6516",
+  "V2C_ratio": "324",
+  "V1C_ratio": "60",
   "V2C_rhoVH_wrong": "0.0261",
   "V2C_wH_eq": "4.8945",
   "V2C_wH_wrong": "0.0198",

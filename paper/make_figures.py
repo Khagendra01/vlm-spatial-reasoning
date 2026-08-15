@@ -86,7 +86,7 @@ ax.set_xticklabels(SHORT, rotation=18, fontsize=7.5)
 ax.set_ylabel("hold-out depth accuracy", fontsize=8)
 ax.legend(fontsize=7)
 ax.set_title("Depth-family transfer probe â€” flat across all arms "
-             "(n=60, binomial 95% CI shown by dashed chance line)",
+             "(n=60; dashed line = chance 0.5)",
              fontsize=9)
 fig.tight_layout()
 fig.savefig(FIG / "fig3_probe.png", bbox_inches="tight")

@@ -113,6 +113,14 @@ for tag, M in (("V2C", V2),):
         f"{V2['per_arm_val']['equiorient']['rho_per_transform']['correct']['v_after_h']:.4f}")
     macros["V2C_rhoVH_aug"] = (
         f"{V2['per_arm_val']['augmentation_only']['rho_per_transform']['correct']['v_after_h']:.4f}")
+    # headline ratio macros (computed, not hand-typed)
+    r2 = V2['per_arm_val']['augmentation_only']['rho_per_transform']['correct']['v_after_h'] / \
+         V2['per_arm_val']['equiorient']['rho_per_transform']['correct']['v_after_h']
+    macros["V2C_ratio"] = f"{r2:.0f}"
+    if V1C is not None:
+        r1 = V1C['per_arm_val']['augmentation_only']['rho_per_transform']['correct']['v_after_h'] / \
+             V1C['per_arm_val']['equiorient']['rho_per_transform']['correct']['v_after_h']
+        macros["V1C_ratio"] = f"{r1:.0f}"
     macros["V2C_rhoVH_wrong"] = (
         f"{V2['per_arm_val']['wrong_geometry_equiorient']['rho_per_transform']['correct']['v_after_h']:.4f}")
     macros["V2C_wH_eq"] = (
