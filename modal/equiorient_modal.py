@@ -51,7 +51,7 @@ RESULTS = modal.Volume.from_name("equiorient-results", create_if_missing=True)
 # Pinned repo commit: update after each push (freeze traceability).
 REPO_URL = ("https://github.com/Khagendra01/vlm-spatial-reasoning.git")
 BRANCH = "research/equiorient"
-PINNED_COMMIT = "7389e3d"  # Amendment D release (2026-08-15)
+PINNED_COMMIT = "969f367"  # Amendment D release + cloud fixes (2026-08-15)
 SPARSE_CONE = ["src", "scripts", "configs", "cloud_setup", "modal",
                "research", "results/equiorient/pilot_data",
                "results/equiorient/pilot_data_v2"]
