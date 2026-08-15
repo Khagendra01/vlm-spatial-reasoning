@@ -463,3 +463,16 @@ only; re-verified with a REAL-model processor forward before relaunch)
 confirmatory or exploratory: engineering fix; no training, no results.
 
 ---
+### 2026-08-15 (cont.) — Second root cause of the same crash: text=None -> [None]
+
+On re-verification with the fix above, the same line still crashed: the
+None was NOT self.image_token (now set) but text[i]: Qwen3VLProcessor
+__call__ wraps missing text as [None] (text = [text] when not a list),
+then iterates 'while self.image_token in text[i]' -> None is not
+iterable. Engineering fix: harness now calls the processor with
+text="" (the harness consumes only pixel_values + image_grid_thw; the
+empty text is never used). Both fixes verified with a REAL-model forward
+on the box (Qwen3-VL-8B @ 0c351dd0, bf16/sdpa, deepstack features
+returned) before the pilot relaunch. Still zero scientific changes.
+
+---

@@ -234,7 +234,10 @@ class PilotRunner:
             return deep[0], grid
         from PIL import Image as PILImage
         img = PILImage.open(self.data_dir / image_path).convert("RGB")
-        inp = self.processor(images=img, return_tensors="pt")
+        # text="" (not None): Qwen3VLProcessor.__call__ wraps text in a list
+        # and iterates self.image_token over each item — None would crash
+        # (verified 2026-08-15 on the GPU box with the frozen revision).
+        inp = self.processor(images=img, text="", return_tensors="pt")
         pix = inp["pixel_values"].to(self.device, dtype=torch.bfloat16)
         grid = inp["image_grid_thw"].to(self.device)
         with torch.no_grad():
