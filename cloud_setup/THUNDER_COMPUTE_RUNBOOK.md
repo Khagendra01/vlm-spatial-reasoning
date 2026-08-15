@@ -194,8 +194,13 @@ single `seed_variance_all.zip`.) Unzip locally, then aggregate/commit.
 
 ## 8. Gotchas (all encoded in the scripts — read before touching anything)
 
+> **NOTE:** Gotchas 1–6 describe the Paper-1/2 (Qwen2-VL/SmolVLM2,
+> transformers 5.14.1) stack. The EquiOrient stack (section 9) is DIFFERENT:
+> transformers **4.57.6**, Qwen3-VL-8B, sdpa attention, cu128 wheels. Do not
+> apply the old pins to it.
+
 1. **Never install flash-attn.** Fails on CUDA 13; every recipe uses
-   `_attn_implementation="eager"` by design.
+   `_attn_implementation="eager"` by design (EquiOrient: `"sdpa"`).
 2. **transformers 5.14.1 ignores `max_pixels`.** SITE evaluator pre-resizes to
    ≤392 px long side as a constant protocol parameter; do not "fix" it.
 3. **datasets v5 split is `"validation"`, not `"dev"`.** Seed runner only uses
@@ -209,3 +214,47 @@ single `seed_variance_all.zip`.) Unzip locally, then aggregate/commit.
    rather than reboot attempts.
 7. **Hardware metrics vary by GPU config** — compare workloads with
    application-level metrics (iterations/sec), not temperature/wattage.
+
+---
+
+## 9. EquiOrient Phase-1 pilot (branch `research/equiorient`)
+
+Prepared 2026-08-14, all pre-GPU gates PASS (Gates 1–3b, pilot freeze, tiny
+harness logic test). Only remaining gate: **explicit orchestrator GPU unlock**.
+
+One-paste provisioning on an A6000 (`cloud_setup/setup_equiorient.sh`):
+
+```bash
+export HF_TOKEN=hf_YOUR_TOKEN_HERE        # never commit this; Qwen3-VL-8B is gated
+curl -fsSL https://raw.githubusercontent.com/Khagendra01/vlm-spatial-reasoning/research/equiorient/cloud_setup/setup_equiorient.sh -o setup_equiorient.sh
+bash setup_equiorient.sh --stage          # apt + venv (cu128) + sparse clone
+                                          #   + Qwen3-VL-8B @ 0c351dd0 + CPU --tiny smoke (~3 min)
+```
+
+Wait for `STAGE COMPLETE` (the tiny harness smoke runs the full
+pre-flight → 12-run → λ-select → holdout + ablation path on CPU), then:
+
+```bash
+bash setup_equiorient.sh --run            # full pilot, nohup, ~24–48 h, one seed
+```
+
+Monitor: `tail -f ~/pilot_run.log` and
+`tail -f ~/vlm-spatial-reasoning/results/equiorient/pilot_run/run.log`
+(milestones: pre-flight → per-arm training → `LAMBDA SELECT` → holdout V∘H →
+causal ablation → `result_matrix.json`). Refuses to rerun if
+`result_matrix.json` exists — safe resume (rerun `--run` if absent).
+
+Collect: `bash setup_equiorient.sh --collect` → `~/equiorient_pilot_run.zip`,
+then `tnr scp <machine>:$HOME/equiorient_pilot_run.zip .`
+
+Teardown: snapshot the box BEFORE deleting (snapshot takes the **UUID**,
+not the integer id) — a provisioned snapshot saves ~25 min on any rerun.
+
+EquiOrient-specific notes:
+- Qwen3-VL-8B needs **transformers >= 4.57** (frozen ==4.57.6) and the frozen
+  revision `0c351dd01ed87e9c1b53cbc748cba10e6187ff3b` — never use `main`.
+- Vision LoRA targets are Qwen3's FUSED `qkv` (+ `proj`, MLP `c_fc`/`c_proj`);
+  text backbone and lm_head stay FROZEN (answer forced from z).
+- VRAM estimate 24–27 GB (bf16, batch 8, grad checkpointing) → fits A6000 48 GB.
+- Pilot data is committed (`results/equiorient/pilot_data`, seed 20260814) and
+  cloned by the cone — the box runs the EXACT committed manifest.
