@@ -78,9 +78,13 @@ def _clone_repo() -> None:
     run(["git", "clone", "--quiet", "--depth", "1", "--filter=blob:none",
          "--sparse", "--branch", BRANCH, REPO_URL, dst])
     run(["git", "-C", dst, "sparse-checkout", "set", *SPARSE_CONE])
-    run(["git", "-C", dst, "fetch", "--quiet", "--depth", "1",
-         "origin", PINNED_COMMIT])
-    run(["git", "-C", dst, "checkout", "--quiet", "--force", PINNED_COMMIT])
+    # Freeze pin: shallow clones cannot fetch arbitrary SHAs from GitHub;
+    # clone the branch tip and ASSERT it equals the pinned release commit
+    # (the pin protects the frozen protocol; mismatch = abort, never run).
+    head = run(["git", "-C", dst, "rev-parse", "HEAD"]).stdout.strip()
+    if head != PINNED_COMMIT:
+        raise RuntimeError(f"PIN MISMATCH: origin/{BRANCH} head {head[:8]} "
+                           f"!= pinned {PINNED_COMMIT} — re-pin the scaffold")
 
 
 def _run_harness(mode: str, variant: str) -> dict:
