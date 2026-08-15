@@ -65,7 +65,7 @@ def _clone_repo() -> None:
     """Clone (sparse, partial) + checkout the pinned commit."""
     import subprocess
 
-    dst = "/root/equiorient"
+    dst = "/root/repo"
 
     def run(cmd):
         p = subprocess.run(cmd, capture_output=True, text=True)
@@ -94,12 +94,12 @@ def _run_harness(mode: str, variant: str) -> dict:
               else "configs/equiorient_pilot_freeze.yaml")
     data = ("results/equiorient/pilot_data_v2" if variant == "v2"
             else "results/equiorient/pilot_data")
-    out_dir = f"/root/equiorient/results/pilot_run_{variant}_{mode}"
+    out_dir = f"/root/results/pilot_run_{variant}_{mode}"
     cmd = [
-        "python", "/root/equiorient/scripts/equiorient/pilot_harness.py",
+        "python", "/root/repo/scripts/equiorient/pilot_harness.py",
         *tiny,
-        "--freeze", f"/root/equiorient/{freeze}",
-        "--data", f"/root/equiorient/{data}",
+        "--freeze", f"/root/repo/{freeze}",
+        "--data", f"/root/repo/{data}",
         "--out", out_dir,
     ]
     proc = subprocess.run(cmd, capture_output=True, text=True)
@@ -114,7 +114,7 @@ def _run_harness(mode: str, variant: str) -> dict:
 
 
 @app.function(volumes={"/root/hf-cache": HF_CACHE,
-                       "/root/equiorient/results": RESULTS},
+                       "/root/results": RESULTS},
               secrets=[modal.Secret.from_name("hf-token")],
               timeout=60 * 60,  # 1 h for the tiny gate
               )
@@ -126,7 +126,7 @@ def run_tiny(variant: str = "v1") -> dict:
 
 @app.function(gpu=["L40S", "A100-40GB"],
               volumes={"/root/hf-cache": HF_CACHE,
-                       "/root/equiorient/results": RESULTS},
+                       "/root/results": RESULTS},
               secrets=[modal.Secret.from_name("hf-token")],
               timeout=3 * 60 * 60,  # 3 h headroom for a full pilot
               )
