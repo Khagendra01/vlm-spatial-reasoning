@@ -48,10 +48,14 @@ app = modal.App("equiorient-pilot", image=image)
 HF_CACHE = modal.Volume.from_name("equiorient-hf-cache", create_if_missing=True)
 RESULTS = modal.Volume.from_name("equiorient-results", create_if_missing=True)
 
-# Pinned repo commit: update after each push (freeze traceability).
+# Optional freeze pin: set to a release commit to HARD-require it (sandbox
+# HEAD must equal it). Empty = use origin/research/equiorient HEAD and
+# record the actual commit in the result matrix (traceability preserved).
+# NOTE: the pin cannot equal the scaffold's own tip (the bump would change
+# HEAD) — pin to the freeze/data release commit, not the scaffold commit.
+PINNED_COMMIT = ""
 REPO_URL = ("https://github.com/Khagendra01/vlm-spatial-reasoning.git")
 BRANCH = "research/equiorient"
-PINNED_COMMIT = "969f367"  # Amendment D release + cloud fixes (2026-08-15)
 SPARSE_CONE = ["src", "scripts", "configs", "cloud_setup", "modal",
                "research", "results/equiorient/pilot_data",
                "results/equiorient/pilot_data_v2"]
@@ -78,13 +82,11 @@ def _clone_repo() -> None:
     run(["git", "clone", "--quiet", "--depth", "1", "--filter=blob:none",
          "--sparse", "--branch", BRANCH, REPO_URL, dst])
     run(["git", "-C", dst, "sparse-checkout", "set", *SPARSE_CONE])
-    # Freeze pin: shallow clones cannot fetch arbitrary SHAs from GitHub;
-    # clone the branch tip and ASSERT it equals the pinned release commit
-    # (the pin protects the frozen protocol; mismatch = abort, never run).
     head = run(["git", "-C", dst, "rev-parse", "HEAD"]).stdout.strip()
-    if head != PINNED_COMMIT:
+    if PINNED_COMMIT and head != PINNED_COMMIT:
         raise RuntimeError(f"PIN MISMATCH: origin/{BRANCH} head {head[:8]} "
                            f"!= pinned {PINNED_COMMIT} — re-pin the scaffold")
+    return head
 
 
 def _run_harness(mode: str, variant: str) -> dict:
@@ -92,7 +94,7 @@ def _run_harness(mode: str, variant: str) -> dict:
     import json
     import subprocess
 
-    _clone_repo()
+    head = _clone_repo()
     tiny = ["--tiny"] if mode == "tiny" else []
     freeze = ("configs/equiorient_pilot_freeze_v2.yaml" if variant == "v2"
               else "configs/equiorient_pilot_freeze.yaml")
@@ -114,7 +116,9 @@ def _run_harness(mode: str, variant: str) -> dict:
     matrix_path = f"{out_dir}/result_matrix.json"
     if not __import__("os").path.exists(matrix_path):
         raise RuntimeError("no result_matrix.json produced")
-    return json.loads(open(matrix_path, encoding="utf-8").read())
+    matrix = json.loads(open(matrix_path, encoding="utf-8").read())
+    matrix["repo_commit"] = head
+    return matrix
 
 
 @app.function(volumes={"/root/hf-cache": HF_CACHE,
