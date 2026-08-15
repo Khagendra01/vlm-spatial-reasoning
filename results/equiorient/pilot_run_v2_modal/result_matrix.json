@@ -98,5 +98,6 @@
    "depth_probe_holdout_acc": 0.5833333333333334
   }
  },
- "elapsed_seconds": 536.4286768436432
+ "elapsed_seconds": 536.4286768436432,
+ "repo_commit": "6e1c91b31e9008e9eb19f2e1379884c100fc7f1d"
 }
