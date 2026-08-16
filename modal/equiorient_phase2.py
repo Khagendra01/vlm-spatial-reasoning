@@ -64,7 +64,8 @@ def _prepare() -> str:
     return head
 
 
-@app.function(volumes={"/root/hf-cache": HF_CACHE,
+@app.function(gpu=["L40S", "A100-40GB"],
+              volumes={"/root/hf-cache": HF_CACHE,
                        "/root/results": RESULTS,
                        "/root/phase2_data": DATA},
               secrets=[modal.Secret.from_name("hf-token")],
