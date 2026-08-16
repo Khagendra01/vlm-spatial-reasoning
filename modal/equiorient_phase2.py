@@ -1,4 +1,4 @@
-"""EquiOrient Phase-2 dev/confirmatory runner on Modal (serverless L40S).
+﻿"""EquiOrient Phase-2 dev/confirmatory runner on Modal (serverless L40S).
 
 Usage:
     python modal/equiorient_phase2.py --arm augmentation --seed 101
@@ -30,6 +30,7 @@ app = modal.App("equiorient-phase2", image=image)
 
 HF_CACHE = modal.Volume.from_name("equiorient-hf-cache", create_if_missing=True)
 RESULTS = modal.Volume.from_name("equiorient-results", create_if_missing=True)
+DATA = modal.Volume.from_name("equiorient-phase2-data", create_if_missing=True)
 
 REPO_URL = "https://github.com/Khagendra01/vlm-spatial-reasoning.git"
 BRANCH = "research/equiorient-phase2"
@@ -65,7 +66,7 @@ def _prepare() -> str:
 
 @app.function(volumes={"/root/hf-cache": HF_CACHE,
                        "/root/results": RESULTS,
-                       "/root/phase2_data": HF_CACHE},  # data volume
+                       "/root/phase2_data": DATA}
               secrets=[modal.Secret.from_name("hf-token")],
               timeout=6 * 60 * 60)
 def run_arm(arm: str, seed: int, n_train: int = 512, lam: float = 1.0,
@@ -96,7 +97,7 @@ def run_arm(arm: str, seed: int, n_train: int = 512, lam: float = 1.0,
     return res
 
 
-@app.function(volumes={"/root/phase2_data": HF_CACHE},
+@app.function(volumes={"/root/phase2_data": DATA},
               timeout=60 * 60)
 def run_gate() -> dict:
     head = _prepare()
