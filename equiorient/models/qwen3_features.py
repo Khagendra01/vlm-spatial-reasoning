@@ -41,11 +41,20 @@ def vision_features(self, image_path, requires_grad):
 
 
 def pooled(self, feat, grid, boxes, obj_id):
+    """Mean-pool the merged-grid cell at an object's PIXEL position.
+
+    Phase-2 boxes are MATH coords (x right, y up, centered at 96): the
+    pixel position is px = cx + 96, py = 96 - cy. Mapping math coords
+    directly to grid cells picked the WRONG cell (dev-gate catch,
+    2026-08-15) — the fix is the explicit pixel conversion.
+    """
     h_feat, w_feat = grid[0, 1].item(), grid[0, 2].item()
     mh, mw = h_feat // 2, w_feat // 2
     cx, cy, _ = boxes[obj_id]
-    canvas = [192, 192]
-    c = (min(int(cx / canvas[0] * mw), mw - 1),
-         min(int(cy / canvas[1] * mh), mh - 1))
+    canvas = 192.0
+    px = cx + canvas / 2
+    py = canvas / 2 - cy
+    c = (min(int(px / canvas * mw), mw - 1),
+         min(int(py / canvas * mh), mh - 1))
     idx = c[1] * mw + c[0]
     return feat[idx].unsqueeze(0).float()
