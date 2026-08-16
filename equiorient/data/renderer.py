@@ -39,6 +39,17 @@ def render(scene, half: float = HALF) -> Image.Image:
     return img
 
 
+def add_noise(img: Image.Image, seed: int, amp: int = 6) -> Image.Image:
+    """Weak per-pixel background jitter (visual difficulty; deterministic
+    per seed)."""
+    import numpy as np
+    rng = np.random.default_rng(seed)
+    arr = np.asarray(img).astype(np.int16)
+    noise = rng.integers(-amp, amp + 1, size=arr.shape[:2])[..., None]
+    arr = np.clip(arr + noise, 0, 255).astype(np.uint8)
+    return Image.fromarray(arr)
+
+
 def pixel_transform(g_name: str, img: Image.Image) -> Image.Image:
     """Apply the group element as a pure pixel operation (no resampling)."""
     if g_name == "I":

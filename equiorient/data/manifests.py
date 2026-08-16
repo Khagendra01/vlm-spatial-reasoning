@@ -14,7 +14,7 @@ import json
 from pathlib import Path
 
 from equiorient.algebra.d4 import ELEMENTS, GENERATORS
-from equiorient.data.renderer import render
+from equiorient.data.renderer import add_noise, render
 from equiorient.data.scene_generator_v2 import generate_pack
 
 
@@ -66,6 +66,8 @@ def build(out_dir: Path, seed: int = 20260815,
             for g in gs:
                 ts = _transform_scene(g, s)
                 img = render(ts)
+                # deterministic per-image noise (seeded from scene+view)
+                img = add_noise(img, abs(hash((s.scene_id, g))) & 0xFFFFFFFF)
                 fname = f"{s.scene_id}__{g}.png"
                 img.save(out_dir / fname)
                 manifest["examples"].append({

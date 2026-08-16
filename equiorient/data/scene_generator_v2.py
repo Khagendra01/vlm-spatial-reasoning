@@ -61,7 +61,7 @@ def _gen_appearance(rng: random.Random, used: set) -> tuple:
     for _ in range(200):
         shape = rng.choice(SHAPES)
         color = rng.choice(_COLORS)
-        size = round(rng.uniform(8.0, 13.0), 1)
+        size = round(rng.uniform(6.0, 9.0), 1)   # harder: smaller targets
         key = (shape, color, size)
         if key not in used:
             used.add(key)
@@ -86,7 +86,7 @@ def make_scene(scene_id: str, rng: random.Random, label: str) -> Scene2:
     bx, by = cx - dx / 2, cy - dy / 2
     ax, ay = cx + dx / 2, cy + dy / 2
     # enforce margins from the canvas edge
-    edge = HALF - 16.0
+    edge = HALF - 14.0
     bx = min(max(bx, -edge), edge); by = min(max(by, -edge), edge)
     ax = min(max(ax, -edge), edge); ay = min(max(ay, -edge), edge)
     # recompute delta AFTER clamping (may shrink slightly; direction kept)
@@ -99,13 +99,16 @@ def make_scene(scene_id: str, rng: random.Random, label: str) -> Scene2:
     a = Object2("a", ax, ay, shape_a, size_a, color_a)
     b = Object2("b", bx, by, shape_b, size_b, color_b)
     objs = [a, b]
-    # distractors: 4-8, unique appearances, min distance from everything
-    n_d = rng.randint(4, 8)
+    # distractors: 6-10 (harder: denser clutter), mild overlap allowed
+    n_d = rng.randint(6, 10)
     for i in range(n_d):
         for _try in range(300):
             x = rng.uniform(-edge, edge)
             y = rng.uniform(-edge, edge)
-            if all(math.hypot(x - o.x, y - o.y) >= MIN_DIST for o in objs):
+            # nearest-distractor separation relaxed to allow mild overlap;
+            # keep >= 0.5 * MIN_DIST from the TARGET pair centers
+            if all(math.hypot(x - o.x, y - o.y) >= MIN_DIST * 0.5
+                   for o in objs[:2]):
                 sh, co, si = _gen_appearance(rng, used)
                 d = Object2(f"d{i}", x, y, sh, si, co)
                 objs.append(d)
