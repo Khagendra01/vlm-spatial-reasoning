@@ -87,7 +87,7 @@ def run_arm(arm: str, seed: int, n_train: int = 512, lam: float = 1.0,
            "--data", "/root/phase2_data",
            "--out", str(out_dir)]
     import subprocess
-    p = subprocess.run(cmd, capture_output=True, text=True)
+    p = subprocess.run(cmd, capture_output=True, text=True, cwd="/root/repo")
     print(p.stdout[-4000:])
     if p.returncode != 0:
         print(p.stderr[-4000:])
