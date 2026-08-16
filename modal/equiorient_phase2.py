@@ -56,11 +56,14 @@ def _prepare() -> str:
     if PINNED_COMMIT and head != PINNED_COMMIT:
         raise RuntimeError(f"PIN MISMATCH {head[:8]} != {PINNED_COMMIT}")
     sys.path.insert(0, dst)
+    import shutil
     import equiorient.data.manifests as mf
     from pathlib import Path
     out = Path("/root/phase2_data")
-    if not (out / "manifest.json").exists():
-        mf.build(out, n_dev=512, n_train=2048, n_val=512, n_test=1024)
+    # ALWAYS rebuild: the data volume persists across runs and must never
+    # serve a stale dataset (dev-gate catch 2026-08-15: stale labels).
+    shutil.rmtree(out, ignore_errors=True)
+    mf.build(out, n_dev=512, n_train=2048, n_val=512, n_test=1024)
     return head
 
 
