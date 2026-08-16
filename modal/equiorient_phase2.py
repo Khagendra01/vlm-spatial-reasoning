@@ -66,7 +66,7 @@ def _prepare() -> str:
 
 @app.function(volumes={"/root/hf-cache": HF_CACHE,
                        "/root/results": RESULTS,
-                       "/root/phase2_data": DATA}
+                       "/root/phase2_data": DATA},
               secrets=[modal.Secret.from_name("hf-token")],
               timeout=6 * 60 * 60)
 def run_arm(arm: str, seed: int, n_train: int = 512, lam: float = 1.0,
