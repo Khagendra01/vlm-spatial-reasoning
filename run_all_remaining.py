@@ -4,7 +4,7 @@ Batch 4 at a time to avoid Modal rate limits.
 import subprocess, sys, time, json, ast, os
 from pathlib import Path
 
-BATCH_SIZE = 4
+BATCH_SIZE = 6  # Modal task limit is 10; leave headroom
 BATCH_DELAY = 15
 results_dir = Path("results")
 

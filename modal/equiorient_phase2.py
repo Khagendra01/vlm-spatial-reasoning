@@ -69,7 +69,7 @@ def _prepare() -> str:
     return head
 
 
-@app.function(gpu=["L40S", "A100-40GB"],
+@app.function(gpu="L40S",
               volumes={"/root/hf-cache": HF_CACHE,
                        "/root/results": RESULTS,
                        "/root/phase2_data": DATA},
