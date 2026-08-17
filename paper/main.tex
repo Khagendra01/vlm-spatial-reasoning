@@ -283,29 +283,75 @@ construction.
 
 \section{Discussion}
 
-\paragraph{What the structural objective achieves.}
+\paragraph{The structural objective works; the task does not.}
 EquiOrient successfully trains the latent to obey the correct algebra:
-the structural loss is nonzero and convergent, and the wrong-geometry
-arm independently learns its own incorrect law. The mechanism works.
-It just does not help behaviorally, because behavior is already solved.
+the structural loss is nonzero and convergent ($0.318 \to 0.108$), and
+the wrong-geometry arm independently learns its own incorrect law
+($0.351 \to 0.174$). The mechanism works. However, behavioral accuracy
+is at ceiling for all arms, because the bounding-box pooling provides
+ground-truth object positions to the model, eliminating the perceptual
+challenge that spatial compositionality requires.
+
+\paragraph{Why visual difficulty does not help.}
+We systematically escalated difficulty across four versions (v1--v4):
+reducing target size (6--9px $\to$ 2--4px), increasing distractor
+count (6--10 $\to$ 12--20), reducing color diversity (12 $\to$ 3
+near-identical hues), and increasing per-pixel noise (amplitude 6
+$\to$ 12). All four versions produced behavioral ceiling. The cause
+is architectural: the model pools features from grid cells specified
+by bounding boxes, so it never needs to locate objects or reason about
+their visual properties. The backbone's region-pooled spatial features
+encode relative positions in a way that is inherently robust to global
+$D_4$ transforms.
 
 \paragraph{Implications for compositionality benchmarks.}
-Our result suggests that benchmarks relying on synthetic scenes with
-known object positions may systematically overestimate the difficulty of
-spatial compositionality for modern VLMs. The backbone's visual features
-already encode the needed geometric information. Future benchmarks
-should consider: (1)~natural images without known bounding boxes,
-(2)~relations requiring multi-step reasoning beyond single-pair
-displacement, or (3) adversarial construction targeting known VLM
-failure modes.
+Our result reveals a design pitfall: benchmarks that provide bounding
+boxes as input may systematically overestimate spatial compositionality
+difficulty for modern VLMs. The backbone's visual features already
+encode the needed geometric information. Future benchmarks should
+consider: (1)~natural images without bounding boxes, where object
+localization is part of the challenge; (2)~relations requiring
+multi-step reasoning beyond single-pair displacement; (3)~adversarial
+construction targeting known VLM failure modes; and (4)~tasks where
+the answer cannot be inferred from a single pair's pixel coordinates.
 
-\paragraph{The mechanistic negative is the result.}
-This paper's contribution is not ``EquiOrient fails.'' It is:
-\emph{explicit geometric structural objectives achieve
-representation-level algebra compliance with strong specificity, but the
-VLM backbone's intrinsic geometric robustness makes this compliance
-behaviorally irrelevant in the tested regime}. This is a clear,
-publishable, and useful negative result.
+\paragraph{What this paper contributes.}
+The contribution is a precise negative result with architectural
+explanation: \emph{explicit geometric structural objectives achieve
+representation-level algebra compliance with strong specificity, but
+bounding-box-pooled VLM features are already $D_4$-robust, making
+the structural compliance behaviorally irrelevant}. The finding is
+negative but actionable: it tells the field that providing bounding
+boxes as input shortcuts the spatial reasoning challenge, and that
+future work on geometric structure in VLMs must evaluate without
+such shortcuts.
+
+\section{Limitations}
+
+This study has several limitations that should guide future work:
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{Bounding-box shortcut.} The model receives ground-truth
+object positions, eliminating the perceptual challenge. The finding
+that behavioral accuracy is at ceiling is an artifact of this design
+choice, not a general statement about VLM spatial reasoning.
+\item \textbf{Frozen backbone.} The VLM text backbone is frozen; only
+the vision LoRA and downstream heads are trained. The structural
+objective cannot modify the backbone's spatial representations.
+Future work should test with an unfrozen backbone.
+\item \textbf{Synthetic data.} All scenes are synthetic plan-view
+renderings. The finding that VLM features are $D_4$-robust may not
+transfer to natural images where rotations introduce semantic
+artifacts.
+\item \textbf{Two epochs of training.} Each arm trains for only 2
+epochs ($\sim$128 steps). Longer training could reveal behavioral
+differences between arms, though the ceiling suggests otherwise.
+\item \textbf{Single group.} Only $D_4$ (8 elements) is tested. Larger
+groups (SO(2), SE(3)) may produce harder tasks where structural
+objectives provide benefit.
+\item \textbf{No comparison to prior methods.} SAGE~\cite{sage2026}
+and GASP~\cite{yeh2026gasp} are cited but not compared head-to-head.
+\end{itemize}
 
 \section{Conclusion}
 
@@ -313,11 +359,15 @@ We present EquiOrient Phase~2, a rigorous evaluation of latent
 transformation equivariance on the noncommutative dihedral group $D_4$,
 with 8-way labels, 30 confirmatory runs, and a 45-test verification
 suite. EquiOrient achieves strong, specific latent algebra compliance
-($E_{\text{struct}} = 0.112$, wrong-geometry $= 0.176$) but no
-behavioral improvement ($\Delta A = 0.0000$, 95\% CI $[0.0, 0.0]$),
-because the VLM backbone's region-pooled features are already
-$D_4$-robust. We release the full protocol, harness, and frozen
-ledgers for reproducibility.
+(structural loss $0.112$, wrong-geometry $0.176$) but no behavioral
+improvement ($\Delta A = 0.0000$, 95\% CI $[0.0, 0.0]$), because
+bounding-box-pooled VLM features are already $D_4$-robust. The result
+is a precise negative with an architectural explanation: when the model
+is told where objects are, spatial compositionality becomes trivial for
+modern VLMs, and geometric structural objectives cannot improve upon
+an already-solved task. Future work must evaluate without bounding-box
+shortcuts to meaningfully test whether geometric structure helps VLM
+spatial reasoning.
 
 {\small
 \bibliographystyle{ieeenat_fullname}
