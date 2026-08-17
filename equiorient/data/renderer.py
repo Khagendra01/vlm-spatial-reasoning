@@ -3,6 +3,9 @@
 Shapes are rotation-safe primitives (circle, square, regular octagon)
 so H/R introduce no semantic artifacts. Renders 192x192 RGB.
 Pixel ops for H/R/R2/R3 are provided for the renderer tests.
+
+ESCALATION v3: heavier per-pixel noise (amp=10), low-contrast background
+to make target detection harder against the muted palette.
 """
 
 from __future__ import annotations
@@ -15,7 +18,8 @@ from equiorient.data.transforms import to_pixel
 
 HALF = 96.0
 SIZE = int(2 * HALF)
-BG = (248, 248, 248)
+# Darker background (was 248,248,248 = near-white; now low-contrast gray)
+BG = (180, 180, 180)
 
 
 def render(scene, half: float = HALF) -> Image.Image:
@@ -39,9 +43,9 @@ def render(scene, half: float = HALF) -> Image.Image:
     return img
 
 
-def add_noise(img: Image.Image, seed: int, amp: int = 6) -> Image.Image:
-    """Weak per-pixel background jitter (visual difficulty; deterministic
-    per seed)."""
+def add_noise(img: Image.Image, seed: int, amp: int = 10) -> Image.Image:
+    """Per-pixel background jitter (deterministic per seed).
+    v3: heavier noise (amp=10) to degrade feature quality."""
     import numpy as np
     rng = np.random.default_rng(seed)
     arr = np.asarray(img).astype(np.int16)

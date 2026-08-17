@@ -3,14 +3,20 @@
 Each scene (independent by construction):
   - exactly ONE target pair (a, b) with displacement Delta = (xa-xb, ya-yb)
     sampled away from axis/diagonal boundaries (no label-flip risk);
-  - 4-8 distractor objects with unique appearance combinations;
-  - symmetric, rotation-safe shapes (circle, square, regular octagon);
+  - 8-16 distractor objects with similar visual properties to targets;
+  - shapes (circle, square, regular octagon);
   - no text rendered in the image;
   - balanced 8-direction labels across the pack;
   - explicit scene_id; split by scene_id BEFORE any transform.
 
 Coordinates are MATH coords: x rightward, y upward, centered at (0,0)
 with half-extent C. Pixel mapping (see renderer): px = x + C, py = C - y.
+
+ESCALATION v3 (2026-08-16): targets are tiny (3-5), all objects share a
+muted color palette so targets blend into clutter, distractors outnumber
+targets 8-16:1, heavy per-pixel noise, overlap allowed. The VLM must
+actually *find* the target pair among dense homogeneous clutter — simple
+position-based readout from pooled grid cells is no longer reliable.
 """
 
 from __future__ import annotations
@@ -23,10 +29,25 @@ from typing import Optional
 from equiorient.algebra.label_action import direction_of
 
 HALF = 96.0  # canvas half-extent (math units); render 192x192 px
-MIN_DIST = 14.0  # min center distance between objects
-TARGET_RANGE = (55.0, 85.0)  # target |Delta| range (px in math units)
+MIN_DIST = 10.0  # min center distance between any two objects
+TARGET_RANGE = (50.0, 80.0)  # target |Delta| range (px in math units)
 
 SHAPES = ("circle", "square", "octagon")
+
+# Muted palette: all objects share similar tones so targets don't stand out.
+# Grouped into families; each family has 3-4 near-identical shades.
+_MUTED_PALETTE = [
+    # warm grays / browns
+    (160, 150, 140), (155, 145, 135), (165, 155, 145), (150, 140, 130),
+    # cool grays / blues
+    (130, 140, 155), (125, 135, 150), (135, 145, 160), (120, 130, 145),
+    # olive / dark green
+    (140, 150, 120), (135, 145, 115), (145, 155, 125), (130, 140, 110),
+    # muted purple / slate
+    (145, 135, 155), (140, 130, 150), (150, 140, 160), (135, 125, 145),
+    # dark earth tones
+    (120, 110, 100), (125, 115, 105), (115, 105, 95), (130, 120, 110),
+]
 
 
 @dataclass
@@ -52,21 +73,22 @@ class Scene2:
         return [self.target_a, self.target_b] + list(self.distractors)
 
 
-_COLORS = [(200, 60, 60), (60, 160, 220), (220, 180, 60), (90, 190, 120),
-           (170, 90, 200), (240, 130, 60), (80, 130, 220), (180, 200, 70),
-           (220, 100, 160), (110, 200, 190), (140, 90, 70), (90, 90, 200)]
-
-
-def _gen_appearance(rng: random.Random, used: set) -> tuple:
-    for _ in range(200):
+def _gen_appearance(rng: random.Random, used: set,
+                    size_lo: float = 3.0, size_hi: float = 5.0) -> tuple:
+    """Generate a muted appearance (shape + color + small size)."""
+    for _ in range(300):
         shape = rng.choice(SHAPES)
-        color = rng.choice(_COLORS)
-        size = round(rng.uniform(6.0, 9.0), 1)   # harder: smaller targets
+        color = rng.choice(_MUTED_PALETTE)
+        size = round(rng.uniform(size_lo, size_hi), 1)
         key = (shape, color, size)
         if key not in used:
             used.add(key)
             return key
-    raise RuntimeError("appearance space exhausted")
+    # Fallback: relax uniqueness (dense clutter, reuse is OK)
+    shape = rng.choice(SHAPES)
+    color = rng.choice(_MUTED_PALETTE)
+    size = round(rng.uniform(size_lo, size_hi), 1)
+    return (shape, color, size)
 
 
 def make_scene(scene_id: str, rng: random.Random, label: str) -> Scene2:
@@ -79,14 +101,14 @@ def make_scene(scene_id: str, rng: random.Random, label: str) -> Scene2:
     ux, uy = DIRECTIONS[di]
     mag = rng.uniform(*TARGET_RANGE)
     # center the pair: place b such that both a and b stay within [-HALF, HALF]
-    cx = rng.uniform(-20.0, 20.0)
-    cy = rng.uniform(-20.0, 20.0)
+    cx = rng.uniform(-25.0, 25.0)
+    cy = rng.uniform(-25.0, 25.0)
     # solve: b = c - Delta/2, a = c + Delta/2 with Delta = (ux, uy)*mag
     dx, dy = ux * mag, uy * mag
     bx, by = cx - dx / 2, cy - dy / 2
     ax, ay = cx + dx / 2, cy + dy / 2
     # enforce margins from the canvas edge
-    edge = HALF - 14.0
+    edge = HALF - 10.0
     bx = min(max(bx, -edge), edge); by = min(max(by, -edge), edge)
     ax = min(max(ax, -edge), edge); ay = min(max(ay, -edge), edge)
     # recompute delta AFTER clamping (may shrink slightly; direction kept)
@@ -94,27 +116,27 @@ def make_scene(scene_id: str, rng: random.Random, label: str) -> Scene2:
     lab = direction_of(dx, dy)
     if lab is None:  # clamp pushed onto a boundary: resample once
         return make_scene(scene_id, rng, label)
-    shape_a, color_a, size_a = _gen_appearance(rng, used)
-    shape_b, color_b, size_b = _gen_appearance(rng, used)
+    # targets: tiny (3-5), muted colors — they blend into clutter
+    shape_a, color_a, size_a = _gen_appearance(rng, used, 3.0, 5.0)
+    shape_b, color_b, size_b = _gen_appearance(rng, used, 3.0, 5.0)
     a = Object2("a", ax, ay, shape_a, size_a, color_a)
     b = Object2("b", bx, by, shape_b, size_b, color_b)
     objs = [a, b]
-    # distractors: 6-10 (harder: denser clutter), mild overlap allowed
-    n_d = rng.randint(6, 10)
+    # distractors: 8-16 (dense homogeneous clutter), same size range as targets
+    n_d = rng.randint(8, 16)
+    placed = 0
     for i in range(n_d):
-        for _try in range(300):
+        for _try in range(500):
             x = rng.uniform(-edge, edge)
             y = rng.uniform(-edge, edge)
-            # nearest-distractor separation relaxed to allow mild overlap;
-            # keep >= 0.5 * MIN_DIST from the TARGET pair centers
-            if all(math.hypot(x - o.x, y - o.y) >= MIN_DIST * 0.5
-                   for o in objs[:2]):
-                sh, co, si = _gen_appearance(rng, used)
+            # minimum separation from ALL existing objects (tight packing)
+            if all(math.hypot(x - o.x, y - o.y) >= MIN_DIST * 0.4
+                   for o in objs):
+                sh, co, si = _gen_appearance(rng, used, 3.0, 6.0)
                 d = Object2(f"d{i}", x, y, sh, si, co)
                 objs.append(d)
+                placed += 1
                 break
-        else:
-            raise RuntimeError("could not place distractor")
     return Scene2(scene_id, a, b, objs[2:], lab, (round(dx, 3), round(dy, 3)))
 
 

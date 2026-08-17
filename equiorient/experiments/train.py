@@ -354,7 +354,7 @@ def make_examples(manifest: dict, scene_ids: set) -> list:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--mode", default="dev", choices=["tiny", "dev"])
+    ap.add_argument("--mode", default="dev", choices=["tiny", "dev", "confirmatory"])
     ap.add_argument("--arm", default="augmentation",
                     choices=list(ARMS))
     ap.add_argument("--seed", type=int, default=101)
@@ -364,6 +364,8 @@ def main():
     ap.add_argument("--batch", type=int, default=8)
     ap.add_argument("--data", default="results/phase2_data")
     ap.add_argument("--out", default="results/phase2_dev")
+    ap.add_argument("--eval_split", default="dev",
+                    help="Split to evaluate on (dev for dev mode, test for confirmatory)")
     a = ap.parse_args()
 
     data_dir = Path(a.data)
@@ -388,9 +390,14 @@ def main():
         runner.log(f"DEV unseen_accuracy {ev['unseen_accuracy']:.4f} "
                    f"worst {ev['worst_unseen_accuracy']:.4f}")
 
+    eval_split = "test" if a.mode == "confirmatory" else a.eval_split
+    ev = runner.evaluate(manifest, eval_split)
+    runner.log(f"{eval_split.upper()} unseen_accuracy {ev['unseen_accuracy']:.4f} "
+               f"worst {ev['worst_unseen_accuracy']:.4f}")
+
     result = {"mode": a.mode, "arm": a.arm, "seed": a.seed,
               "n_train": a.n_train, "lambda": a.lam,
-              "train_loss": hist, "dev_eval": ev}
+              "train_loss": hist, f"{eval_split}_eval": ev}
     (runner.out / f"result_{a.arm}_s{a.seed}.json").write_text(
         json.dumps(result, indent=1), encoding="utf-8")
     print(json.dumps(result, indent=1))
