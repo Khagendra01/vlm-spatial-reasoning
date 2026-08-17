@@ -1,0 +1,42 @@
+{
+ "mode": "confirmatory",
+ "arm": "augmentation",
+ "seed": 404,
+ "n_train": 512,
+ "lambda": 1.0,
+ "train_loss": {
+  "answer": [
+   3.338311,
+   0.011551
+  ],
+  "structural": [
+   0.0,
+   0.0
+  ]
+ },
+ "test_eval": {
+  "per_transform": {
+   "I": 1.0,
+   "R": 1.0,
+   "R2": 1.0,
+   "R3": 1.0,
+   "H": 1.0,
+   "RH": 1.0,
+   "R2H": 1.0,
+   "R3H": 1.0
+  },
+  "unseen_accuracy": 1.0,
+  "worst_unseen_accuracy": 1.0,
+  "n_per_transform": {
+   "I": 1024,
+   "R": 1024,
+   "R2": 1024,
+   "R3": 1024,
+   "H": 1024,
+   "RH": 1024,
+   "R2H": 1024,
+   "R3H": 1024
+  }
+ },
+ "repo_commit": "07af7da6e0c7c27444c91e0126590dfe9cf3d544"
+}
