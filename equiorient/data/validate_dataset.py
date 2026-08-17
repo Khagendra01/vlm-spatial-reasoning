@@ -53,11 +53,11 @@ def validate(manifest_path) -> list:
                     m["unseen"] + ["I", "H", "R"]):
                 problems.append(f"{split} scene {sid} missing transforms")
 
-    # 6. distractor count 8..16 per scene (v3: dense clutter)
+    # 6. distractor count 12..20 per scene (v4: extreme dense clutter)
     for sid, rows in by_scene.items():
         r = rows[0]
         n_dist = sum(1 for k in r["boxes"] if k.startswith("d"))
-        if not (8 <= n_dist <= 16):
+        if not (12 <= n_dist <= 20):
             problems.append(f"scene {sid} distractor count {n_dist}")
 
     # 7. unique png names

@@ -1,11 +1,6 @@
 """Phase-2 renderer: math coords -> PIL image, no text.
 
-Shapes are rotation-safe primitives (circle, square, regular octagon)
-so H/R introduce no semantic artifacts. Renders 192x192 RGB.
-Pixel ops for H/R/R2/R3 are provided for the renderer tests.
-
-ESCALATION v3: heavier per-pixel noise (amp=10), low-contrast background
-to make target detection harder against the muted palette.
+v4: very low contrast background, heavy noise (amp=12).
 """
 
 from __future__ import annotations
@@ -18,8 +13,8 @@ from equiorient.data.transforms import to_pixel
 
 HALF = 96.0
 SIZE = int(2 * HALF)
-# Darker background (was 248,248,248 = near-white; now low-contrast gray)
-BG = (180, 180, 180)
+# v4: even lower contrast — background nearly matches object colors
+BG = (155, 152, 148)
 
 
 def render(scene, half: float = HALF) -> Image.Image:
@@ -43,9 +38,8 @@ def render(scene, half: float = HALF) -> Image.Image:
     return img
 
 
-def add_noise(img: Image.Image, seed: int, amp: int = 10) -> Image.Image:
-    """Per-pixel background jitter (deterministic per seed).
-    v3: heavier noise (amp=10) to degrade feature quality."""
+def add_noise(img: Image.Image, seed: int, amp: int = 12) -> Image.Image:
+    """v4: heavier noise to degrade feature extraction."""
     import numpy as np
     rng = np.random.default_rng(seed)
     arr = np.asarray(img).astype(np.int16)
@@ -61,9 +55,9 @@ def pixel_transform(g_name: str, img: Image.Image) -> Image.Image:
     if g_name == "H":
         return img.transpose(Image.FLIP_LEFT_RIGHT)
     if g_name == "R":
-        return img.transpose(Image.ROTATE_90)  # CW 90 in pixel coords
+        return img.transpose(Image.ROTATE_90)
     if g_name == "R2":
         return img.transpose(Image.ROTATE_180)
     if g_name == "R3":
-        return img.transpose(Image.ROTATE_270)  # CCW 90 in pixel coords
+        return img.transpose(Image.ROTATE_270)
     raise ValueError(f"no pixel op for {g_name}")

@@ -4,6 +4,8 @@ Usage:
     python modal/equiorient_phase2.py --arm augmentation --seed 101
     python modal/equiorient_phase2.py --arm equiorient   --seed 101
     python modal/equiorient_phase2.py --gate              # brutal suite (CPU)
+    python modal/equiorient_phase2.py --arm augmentation --seed 101 --mode confirmatory
+    python modal/equiorient_phase2.py --launch_all       # launch all 30 jobs
 
 The sandbox clones research/equiorient-phase2 (pinned via HEAD assert),
 regenerates the deterministic dataset (seeds) into the data volume, and
@@ -74,17 +76,17 @@ def _prepare() -> str:
               secrets=[modal.Secret.from_name("hf-token")],
               timeout=6 * 60 * 60)
 def run_arm(arm: str, seed: int, n_train: int = 512, lam: float = 1.0,
-            epochs: int = 2, batch: int = 8, tiny: bool = False) -> dict:
+            epochs: int = 2, batch: int = 8, tiny: bool = False,
+            mode: str = "dev") -> dict:
     import os
     os.environ["HF_TOKEN"] = os.environ["HF_TOKEN"]
     os.environ["HF_HOME"] = "/root/hf-cache"
     head = _prepare()
-    from equiorient.experiments.train import main as _unused  # noqa
     import json
     from pathlib import Path
-    out_dir = Path("/root/results") / f"phase2_{'tiny' if tiny else 'dev'}"
+    out_dir = Path("/root/results") / f"phase2_{mode}"
     cmd = ["python", "-m", "equiorient.experiments.train",
-           "--mode", "tiny" if tiny else "dev",
+           "--mode", mode,
            "--arm", arm, "--seed", str(seed),
            "--n_train", str(n_train), "--lambda", str(lam),
            "--epochs", str(epochs), "--batch", str(batch),
@@ -117,11 +119,21 @@ def run_gate() -> dict:
 
 @app.local_entrypoint()
 def main(arm: str = "augmentation", seed: int = 101, tiny: bool = False,
-         gate: bool = False):
+         gate: bool = False, mode: str = "dev", launch_all: bool = False):
     if gate:
         print("GATE:", run_gate.remote())
         return
-    m = run_arm.remote(arm=arm, seed=seed, tiny=tiny)
+    if launch_all:
+        SEEDS = [101, 202, 303, 404, 505]
+        ARMS = ["original_sft", "augmentation", "output_consistency",
+                "latent_invariance", "equiorient", "wrong_geometry"]
+        for s in SEEDS:
+            for a in ARMS:
+                print(f"Launching {a} seed={s} mode={mode}")
+                run_arm.spawn(arm=a, seed=s, mode=mode)
+        print(f"Launched {len(SEEDS) * len(ARMS)} jobs")
+        return
+    m = run_arm.remote(arm=arm, seed=seed, tiny=tiny, mode=mode)
     print("RESULT:", m)
 
 
