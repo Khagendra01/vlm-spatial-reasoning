@@ -72,12 +72,14 @@ def subset_scenes(manifest: dict, split: str, n: int | None):
 
 
 class Phase2Runner:
-    def __init__(self, data_dir: Path, out: Path, tiny: bool = False):
+    def __init__(self, data_dir: Path, out: Path, tiny: bool = False,
+                 backbone: str = "qwen3"):
         self.data_dir = data_dir
         self.out = out
         self.out.mkdir(parents=True, exist_ok=True)
         self.device = "cpu" if tiny else "cuda"
         self.tiny = tiny
+        self.backbone = backbone
         self.model = None
         self.processor = None
         self.enc = None
@@ -110,6 +112,16 @@ class Phase2Runner:
                                               "mrope_section": [16, 12, 12]}},
                 hidden_size=128)
             self.model = Qwen3VLForConditionalGeneration(cfg).to(self.device)
+            self.feat_dim = 4096
+        elif self.backbone == "qwen2vl":
+            from transformers import (Qwen2VLForConditionalGeneration,
+                                      AutoProcessor)
+            bb = "Qwen/Qwen2-VL-7B-Instruct"
+            self.model = Qwen2VLForConditionalGeneration.from_pretrained(
+                bb, torch_dtype=torch.bfloat16,
+                attn_implementation="sdpa", device_map="cuda")
+            self.processor = AutoProcessor.from_pretrained(bb)
+            self.feat_dim = 3584
         else:
             from transformers import (Qwen3VLForConditionalGeneration,
                                       AutoProcessor)
@@ -119,8 +131,9 @@ class Phase2Runner:
                 bb, revision=rev, torch_dtype=torch.bfloat16,
                 attn_implementation="sdpa", device_map="cuda")
             self.processor = AutoProcessor.from_pretrained(
-                bb, revision=rev, image_token="<|image_pad|>",
-                video_token="<|video_pad|>")
+                bb, revision=rev, image_token="โฆ",
+                video_token="圐")
+            self.feat_dim = 4096
         for p in self.model.parameters():
             p.requires_grad_(False)
 
@@ -159,8 +172,14 @@ class Phase2Runner:
             return self._feat_cache[path]
         pix, grid = self.image_input(path)
         with torch.no_grad() if not requires_grad else torch.enable_grad():
-            _, deep = self.model.visual(pix, grid_thw=grid)
-        feat = deep[0]
+            out = self.model.visual(pix, grid_thw=grid)
+            if self.backbone == "qwen2vl":
+                # Qwen2-VL returns (features,) tuple
+                feat = out[0] if isinstance(out, tuple) else out
+            else:
+                # Qwen3-VL returns (last_hidden, deepstack_features)
+                _, deep = out
+                feat = deep[0]
         if not requires_grad:
             self._feat_cache[path] = (feat, grid)
         return feat, grid
@@ -196,7 +215,7 @@ class Phase2Runner:
                 if p.requires_grad:
                     p.copy_(self.lora_init[n])
         self._feat_cache = {}
-        self.enc = PairEncoderV2().to(self.device)
+        self.enc = PairEncoderV2(feat_dim=self.feat_dim).to(self.device)
         self.head = RelationHead8().to(self.device)
         structural = STRUCTURAL_OF.get(arm, "none")
         assert structural in KNOWN, f"arm {arm} -> {structural}"
@@ -366,11 +385,15 @@ def main():
     ap.add_argument("--out", default="results/phase2_dev")
     ap.add_argument("--eval_split", default="dev",
                     help="Split to evaluate on (dev for dev mode, test for confirmatory)")
+    ap.add_argument("--backbone", default="qwen3",
+                    choices=["qwen3", "qwen2vl"],
+                    help="VLM backbone: qwen3 (Qwen3-VL-8B) or qwen2vl (Qwen2-VL-7B)")
     a = ap.parse_args()
 
     data_dir = Path(a.data)
     manifest = load_manifest(data_dir)
-    runner = Phase2Runner(data_dir, Path(a.out), tiny=(a.mode == "tiny"))
+    runner = Phase2Runner(data_dir, Path(a.out), tiny=(a.mode == "tiny"),
+                          backbone=a.backbone)
     runner.load_model()
     runner.attach_lora()
 

@@ -77,7 +77,7 @@ def _prepare() -> str:
               timeout=6 * 60 * 60)
 def run_arm(arm: str, seed: int, n_train: int = 512, lam: float = 1.0,
             epochs: int = 2, batch: int = 8, tiny: bool = False,
-            mode: str = "dev") -> dict:
+            mode: str = "dev", backbone: str = "qwen3") -> dict:
     import os
     os.environ["HF_TOKEN"] = os.environ["HF_TOKEN"]
     os.environ["HF_HOME"] = "/root/hf-cache"
@@ -91,7 +91,8 @@ def run_arm(arm: str, seed: int, n_train: int = 512, lam: float = 1.0,
            "--n_train", str(n_train), "--lambda", str(lam),
            "--epochs", str(epochs), "--batch", str(batch),
            "--data", "/root/phase2_data",
-           "--out", str(out_dir)]
+           "--out", str(out_dir),
+           "--backbone", backbone]
     import subprocess
     p = subprocess.run(cmd, capture_output=True, text=True, cwd="/root/repo")
     print(p.stdout[-4000:])
@@ -119,7 +120,8 @@ def run_gate() -> dict:
 
 @app.local_entrypoint()
 def main(arm: str = "augmentation", seed: int = 101, tiny: bool = False,
-         gate: bool = False, mode: str = "dev", launch_all: bool = False):
+         gate: bool = False, mode: str = "dev", launch_all: bool = False,
+         n_train: int = 512, backbone: str = "qwen3"):
     if gate:
         print("GATE:", run_gate.remote())
         return
@@ -133,7 +135,8 @@ def main(arm: str = "augmentation", seed: int = 101, tiny: bool = False,
                 run_arm.spawn(arm=a, seed=s, mode=mode)
         print(f"Launched {len(SEEDS) * len(ARMS)} jobs")
         return
-    m = run_arm.remote(arm=arm, seed=seed, tiny=tiny, mode=mode)
+    m = run_arm.remote(arm=arm, seed=seed, tiny=tiny, mode=mode,
+                       n_train=n_train, backbone=backbone)
     print("RESULT:", m)
 
 
