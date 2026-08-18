@@ -35,7 +35,7 @@ RESULTS = modal.Volume.from_name("equiorient-results", create_if_missing=True)
 DATA = modal.Volume.from_name("equiorient-phase2-data", create_if_missing=True)
 
 REPO_URL = "https://github.com/Khagendra01/vlm-spatial-reasoning.git"
-BRANCH = "clean-confirmatory"
+BRANCH = "research/equiorient-phase2"
 PINNED_COMMIT = ""  # optional hard pin; empty = HEAD + recorded in results
 SPARSE_CONE = ["equiorient", "modal", "configs", "cloud_setup"]
 
