@@ -41,16 +41,18 @@ SHA-256-seeded data noise, provenance-annotated results). EquiOrient
 achieves strong, specific latent algebra compliance: the structural
 loss is nonzero and convergent, and the wrong-geometry arm learns its
 own incorrect law. Behaviorally, at the scarce-data regime ($N{=}128$,
-ten matched seeds) the correct law is significantly distinguishable
-from the wrong law ($+0.76$pp, 95\% CI $[+0.5, +1.0]$pp, $p<0.001$,
-$10/10$ seeds) but not from plain augmentation ($-1.4$pp, CI
-$[-3.0, +0.4]$pp, n.s.). At $N \geq 512$ every arm reaches ceiling
-($\geq 0.999$) because the VLM backbone's region-pooled features are
-already robust to $D_4$ transforms. The result is a precisely
-quantified mixed outcome: correct geometric structure provides a
-small, reliable low-data advantage over incorrect structure, but no
-measurable advantage over unconstrained augmentation, and no
-behavioral differentiation once the backbone saturates the task.
+fifteen matched seeds) behavior is \emph{sensitive to the correctness
+of the imposed law}: the correct law is significantly distinguishable
+from the wrong law ($+0.68$pp, 95\% CI $[+0.5, +0.9]$pp, $p<0.0001$,
+$15/15$ seeds), yet correct structural supervision does not outperform
+plain augmentation ($-0.9$pp, CI $[-2.3, +0.5]$pp, n.s.). At
+$N \geq 512$ every arm reaches ceiling ($\geq 0.999$) because the VLM
+backbone's region-pooled features are already robust to $D_4$
+transforms. The result is a precisely quantified mixed outcome:
+at low data, behavior is sensitive to whether the imposed geometric
+law is correct, but correct structural supervision does not outperform
+unconstrained augmentation, and no behavioral differentiation survives
+once the backbone saturates the task.
 \end{abstract}
 
 \section{Introduction}
@@ -87,12 +89,19 @@ held-out group elements distinguish correct from wrong representations.
 error, effective rank, cosine agreement, and z-ablation tests.
 \end{itemize}
 
-Our central finding is a mechanistic negative: EquiOrient's structural
-objective works at the representation level, but behavioral accuracy
-is at ceiling for all arms because the VLM backbone's region-pooled
-features are already $D_4$-robust. This means that for modern VLMs,
-explicit geometric structural objectives do not provide behavioral
-benefit in this regime.
+Our central finding is a precisely quantified mixed outcome.
+EquiOrient's structural objective works at the representation level:
+the latent obeys the correct algebra and is behaviorally
+distinguishable from an arm trained with an incorrect law even in the
+scarce-data regime ($N{=}128$, $+0.68$pp across fifteen matched seeds,
+$p<0.0001$). However, correct structural supervision does not
+outperform plain augmentation at low data ($-0.9$pp, n.s.), and at
+$N \geq 512$ all arms reach ceiling because the VLM backbone's
+region-pooled features are already $D_4$-robust. For modern VLMs on
+this synthetic plan-view task, behavior is sensitive to whether the
+imposed geometric law is correct, but explicit geometric structure
+provides no measurable benefit over unconstrained training once the
+backbone saturates the task.
 
 \section{Related Work}
 \label{sec:related}
@@ -292,7 +301,7 @@ construction.
 To test whether the structural objective provides benefit when data is
 scarce, we trained four key arms (augmentation, output consistency,
 EquiOrient, wrong geometry) at $N=128$ training scenes with
-\textbf{ten matched seeds} under a fully deterministic protocol (all
+\textbf{fifteen matched seeds} under a fully deterministic protocol (all
 random seeds fixed before model initialization; dataset noise seeded
 via SHA-256 of scene ID and transform, identical across processes).
 We additionally report $N=512$ (30 runs) and $N=2048$ (20 runs).
@@ -303,32 +312,33 @@ We additionally report $N=512$ (30 runs) and $N=2048$ (20 runs).
 \toprule
 $N$ & Aug. & Eq. & Wrong & Eq$-$Aug (CI) \\
 \midrule
-128 & $0.955 \pm 0.023$ & $0.941 \pm 0.017$ & $0.934 \pm 0.017$ & $-1.4$pp $[-3.0, +0.4]$ \\
+128 & $0.955 \pm 0.021$ & $0.945 \pm 0.016$ & $0.939 \pm 0.017$ & $-0.9$pp $[-2.3, +0.5]$ \\
 512 & $1.000 \pm 0.000$ & $1.000 \pm 0.000$ & $1.000 \pm 0.000$ & $0.0$pp \\
 2048 & $1.000 \pm 0.000$ & $1.000 \pm 0.000$ & $1.000 \pm 0.000$ & $0.0$pp \\
 \bottomrule
 \end{tabular}
-\caption{Unseen-group accuracy (mean $\pm$ std). N=128: 10 matched
+\caption{Unseen-group accuracy (mean $\pm$ std). N=128: 15 matched
 deterministic seeds. N=512: 30 runs. N=2048: 20 runs.}
 \label{tab:scaling}
 \end{table}
 
 At $N{=}128$, no arm reaches ceiling. EquiOrient's paired contrast
-against augmentation is $-1.4$pp with 95\% CI $[-3.0, +0.4]$pp
-(paired $t$-test $p=0.16$, wins $3/10$ seeds): there is
+against augmentation is $-0.9$pp with 95\% CI $[-2.3, +0.5]$pp
+(paired $t$-test $p=0.22$, wins $5/15$ seeds): there is
 \textbf{no evidence} that the correct geometric structure improves
 behavior beyond plain augmentation. However, the predeclared contrast
-against the wrong-geometry control is $+0.76$pp with 95\% CI
-$[+0.5, +1.0]$pp ($p=0.0003$, wins $10/10$ seeds): the correct law
+against the wrong-geometry control is $+0.68$pp with 95\% CI
+$[+0.5, +0.9]$pp ($p<0.0001$, wins $15/15$ seeds): the correct law
 is behaviorally distinguishable from the incorrect one even at
 $N{=}128$. At $N \geq 512$, all arms reach ceiling and every contrast
 is identically zero.
 
-The picture is therefore mixed and precisely quantified: the correct
-structural law confers a small but reliable low-data advantage over
-the wrong law, but no advantage over an unconstrained augmentation
-baseline, and any differences vanish once the backbone saturates the
-task.
+The picture is therefore mixed and precisely quantified: at low data,
+behavior is \emph{sensitive to whether the imposed geometric law is
+correct} (the correct law reliably outscores the wrong law), but
+correct structural supervision does not outperform an unconstrained
+augmentation baseline, and all behavioral differences vanish once the
+backbone saturates the task.
 
 \section{Discussion}
 
