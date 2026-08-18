@@ -38,7 +38,7 @@ compass-direction labels on synthetic scenes with dense homogeneous
 clutter. We compare six matched arms differing only in structural
 objective, under a fully deterministic protocol (seeded initialization,
 SHA-256-seeded data noise, provenance-annotated results). EquiOrient
-achieves strong, specific latent algebra compliance: the structural
+achieves clear law-consistent latent algebra compliance: the structural
 loss is nonzero and convergent, and the wrong-geometry arm learns its
 own incorrect law. Behaviorally, at the scarce-data regime ($N{=}128$,
 fifteen matched seeds) behavior is \emph{sensitive to the correctness
@@ -376,12 +376,14 @@ the answer cannot be inferred from a single pair's pixel coordinates.
 
 \paragraph{What this paper contributes.}
 The contribution is a precisely quantified mixed result with an
-architectural explanation. At scarce data ($N{=}128$, ten matched
-deterministic seeds), the correct geometric law is behaviorally
-distinguishable from the incorrect one ($+0.76$pp, $p<0.001$, all ten
-seeds) but not from plain augmentation ($-1.4$pp, n.s.): structural
-constraints encode \emph{which} law the latent obeys, yet provide no
-measurable advantage over an unconstrained baseline. At $N \geq 512$,
+architectural explanation. At scarce data ($N{=}128$, fifteen matched
+deterministic seeds), behavior is sensitive to the correctness of the
+imposed geometric law: the correct law is distinguishable from the
+incorrect one ($+0.68$pp, $p<0.0001$, all fifteen seeds) but correct
+structural supervision does not outperform plain augmentation
+($-0.9$pp, n.s.): structural constraints encode \emph{which} law the
+latent obeys, yet provide no measurable advantage over an
+unconstrained baseline. At $N \geq 512$,
 bounding-box-pooled VLM features are already $D_4$-robust, so every
 arm reaches ceiling and all contrasts vanish. The finding is
 actionable: it tells the field that providing bounding boxes as input
@@ -420,14 +422,15 @@ and GASP~\cite{yeh2026gasp} are cited but not compared head-to-head.
 
 We present EquiOrient Phase~2, a rigorous evaluation of latent
 transformation equivariance on the noncommutative dihedral group $D_4$,
-with 8-way labels, 30 confirmatory runs at $N{=}512$, ten matched
+with 8-way labels, 30 confirmatory runs at $N{=}512$, fifteen matched
 deterministic seeds at $N{=}128$, and a 45-test verification suite.
-EquiOrient achieves strong, specific latent algebra compliance
+EquiOrient achieves clear law-consistent latent algebra compliance
 (structural loss $0.112$, wrong-geometry $0.176$). Behaviorally, the
 correct law is significantly distinguishable from the wrong law at
-$N{=}128$ ($+0.76$pp, $p<0.001$) but not from plain augmentation
-($-1.4$pp, n.s.), and at $N \geq 512$ all arms reach ceiling because
-bounding-box-pooled VLM features are already $D_4$-robust. The result
+$N{=}128$ ($+0.68$pp, $p<0.0001$, $15/15$ seeds) but not from plain
+augmentation ($-0.9$pp, n.s.), and at $N \geq 512$ all arms reach
+ceiling because bounding-box-pooled VLM features are already
+$D_4$-robust. The result
 is a precisely quantified mixed outcome with an architectural
 explanation: geometric structure encodes \emph{which} law the latent
 obeys, but provides no measurable advantage once the backbone
