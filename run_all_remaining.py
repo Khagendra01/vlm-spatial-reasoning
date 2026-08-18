@@ -4,7 +4,7 @@ Batch 4 at a time to avoid Modal rate limits.
 import subprocess, sys, time, json, ast, os
 from pathlib import Path
 
-BATCH_SIZE = 6  # Modal task limit is 10; leave headroom
+BATCH_SIZE = 10
 BATCH_DELAY = 15
 results_dir = Path("results")
 
@@ -30,17 +30,6 @@ for n in [128, 2048]:
                 print(f"  SKIP scale-{n} {arm} s{seed}", flush=True)
                 continue
             jobs.append(("scale", n, arm, seed, "qwen3"))
-
-# Backbone jobs
-bb_dir = results_dir / "phase2_backbone_qwen2vl"
-bb_dir.mkdir(exist_ok=True)
-for seed in BB_SEEDS:
-    for arm in SCALE_ARMS:
-        rf = bb_dir / f"result_{arm}_s{seed}.json"
-        if rf.exists():
-            print(f"  SKIP backbone {arm} s{seed}", flush=True)
-            continue
-        jobs.append(("backbone", 512, arm, seed, "qwen2vl"))
 
 print(f"\nTotal jobs: {len(jobs)}", flush=True)
 print(f"  N=128: {sum(1 for j in jobs if j[0]=='scale' and j[1]==128)}", flush=True)
