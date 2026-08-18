@@ -66,8 +66,14 @@ def build(out_dir: Path, seed: int = 20260815,
             for g in gs:
                 ts = _transform_scene(g, s)
                 img = render(ts)
-                # deterministic per-image noise (seeded from scene+view)
-                img = add_noise(img, abs(hash((s.scene_id, g))) & 0xFFFFFFFF)
+                # Deterministic per-image noise via SHA-256 of scene+view.
+                # CRITICAL FIX: Python's built-in hash() is process-randomized
+                # (PYTHONHASHSEED), so abs(hash(...)) gave different noise
+                # across runs/containers. SHA-256 is stable across processes.
+                digest = hashlib.sha256(
+                    f"{s.scene_id}|{g}".encode("utf-8")).hexdigest()
+                noise_seed = int(digest[:8], 16)
+                img = add_noise(img, noise_seed)
                 fname = f"{s.scene_id}__{g}.png"
                 img.save(out_dir / fname)
                 manifest["examples"].append({

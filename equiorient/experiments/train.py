@@ -390,6 +390,18 @@ def main():
                     help="VLM backbone: qwen3 (Qwen3-VL-8B) or qwen2vl (Qwen2-VL-7B)")
     a = ap.parse_args()
 
+    # CRITICAL: Set ALL seeds BEFORE any stochastic initialization
+    # (model, LoRA, PairEncoder, optimizer). Same seed must produce the
+    # same starting parameters for every arm.
+    import random, numpy as np
+    random.seed(a.seed)
+    np.random.seed(a.seed)
+    torch.manual_seed(a.seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(a.seed)
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.benchmark = False
+
     data_dir = Path(a.data)
     manifest = load_manifest(data_dir)
     runner = Phase2Runner(data_dir, Path(a.out), tiny=(a.mode == "tiny"),
@@ -418,9 +430,31 @@ def main():
     runner.log(f"{eval_split.upper()} unseen_accuracy {ev['unseen_accuracy']:.4f} "
                f"worst {ev['worst_unseen_accuracy']:.4f}")
 
+    # ---- Provenance metadata embedded in every result JSON ----
+    import subprocess, hashlib
+    # git commit (if available)
+    try:
+        git_commit = subprocess.run(
+            ["git", "rev-parse", "HEAD"], capture_output=True, text=True,
+            cwd=str(REPO), timeout=10).stdout.strip()
+    except Exception:
+        git_commit = "unknown"
+    # dataset manifest sha
+    try:
+        manifest_json = (data_dir / "manifest.json").read_bytes()
+        dataset_sha = hashlib.sha256(manifest_json).hexdigest()
+    except Exception:
+        dataset_sha = "unknown"
+
     result = {"mode": a.mode, "arm": a.arm, "seed": a.seed,
               "n_train": a.n_train, "lambda": a.lam,
-              "train_loss": hist, f"{eval_split}_eval": ev}
+              "train_loss": hist, f"{eval_split}_eval": ev,
+              "provenance": {
+                  "git_commit": git_commit,
+                  "dataset_manifest_sha256": dataset_sha,
+                  "backbone": runner.backbone,
+                  "torch": torch.__version__,
+              }}
     (runner.out / f"result_{a.arm}_s{a.seed}.json").write_text(
         json.dumps(result, indent=1), encoding="utf-8")
     print(json.dumps(result, indent=1))
