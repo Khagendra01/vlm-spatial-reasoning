@@ -281,6 +281,38 @@ because the model never needs to find the objects. The backbone's
 region-pooled spatial features are already $D_4$-equivariant by
 construction.
 
+\subsection{Sample efficiency (data-scale experiments)}
+
+To test whether the structural objective provides benefit when data is
+scarce, we trained four key arms (augmentation, output consistency,
+EquiOrient, wrong geometry) at $N \in \{128, 512, 2048\}$ training
+scenes with five seeds each.
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{lccc}
+\toprule
+$N$ & Aug. & Eq. & $\Delta$ \\
+\midrule
+128 & $0.936 \pm 0.043$ & $0.956 \pm 0.005$ & $+0.021$ \\
+512 & $1.000 \pm 0.000$ & $1.000 \pm 0.000$ & $0.000$ \\
+2048 & $1.000 \pm 0.000$ & $1.000 \pm 0.000$ & $0.000$ \\
+\bottomrule
+\end{tabular}
+\caption{Unseen-group accuracy at different training set sizes.
+At $N{=}128$, EquiOrient shows a $+2.1$pp advantage over augmentation.
+At $N \geq 512$, all arms reach ceiling.}
+\label{tab:scaling}
+\end{table}
+
+At $N{=}128$, augmentation drops to $0.936 \pm 0.043$ while EquiOrient
+holds at $0.956 \pm 0.005$ ($\Delta{=}{+}2.1$pp), suggesting the
+structural objective provides sample-efficiency benefits when
+training data is limited. However, this advantage disappears at
+$N \geq 512$ where all arms reach ceiling. The wrong-geometry arm
+achieves $0.952$ at $N{=}128$---comparable to EquiOrient---because
+even the wrong structural law provides some inductive bias.
+
 \section{Discussion}
 
 \paragraph{The structural objective works; the task does not.}
