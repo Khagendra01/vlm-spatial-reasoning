@@ -36,15 +36,21 @@ reflection $H$ and 90$^\circ$ rotation $R$, with five held-out
 compositions including noncommutative pairs like $RH$), using 8-way
 compass-direction labels on synthetic scenes with dense homogeneous
 clutter. We compare six matched arms differing only in structural
-objective across five seeds. EquiOrient achieves strong, specific
-latent algebra compliance: the correct-vs-wrong specificity score is
-consistently positive, and the wrong-geometry arm learns its own
-incorrect law. However, behavioral accuracy on all held-out compositions
-is at ceiling for every arm ($\geq 0.999$), because the VLM backbone's
-region-pooled features are already robust to $D_4$ transforms. This is
-a clear mechanistic negative: representation-level geometric fidelity is
-achievable and measurable, but does not translate into behavioral
-improvement when the backbone already solves the task.
+objective, under a fully deterministic protocol (seeded initialization,
+SHA-256-seeded data noise, provenance-annotated results). EquiOrient
+achieves strong, specific latent algebra compliance: the structural
+loss is nonzero and convergent, and the wrong-geometry arm learns its
+own incorrect law. Behaviorally, at the scarce-data regime ($N{=}128$,
+ten matched seeds) the correct law is significantly distinguishable
+from the wrong law ($+0.76$pp, 95\% CI $[+0.5, +1.0]$pp, $p<0.001$,
+$10/10$ seeds) but not from plain augmentation ($-1.4$pp, CI
+$[-3.0, +0.4]$pp, n.s.). At $N \geq 512$ every arm reaches ceiling
+($\geq 0.999$) because the VLM backbone's region-pooled features are
+already robust to $D_4$ transforms. The result is a precisely
+quantified mixed outcome: correct geometric structure provides a
+small, reliable low-data advantage over incorrect structure, but no
+measurable advantage over unconstrained augmentation, and no
+behavioral differentiation once the backbone saturates the task.
 \end{abstract}
 
 \section{Introduction}
@@ -285,33 +291,44 @@ construction.
 
 To test whether the structural objective provides benefit when data is
 scarce, we trained four key arms (augmentation, output consistency,
-EquiOrient, wrong geometry) at $N \in \{128, 512, 2048\}$ training
-scenes with five seeds each.
+EquiOrient, wrong geometry) at $N=128$ training scenes with
+\textbf{ten matched seeds} under a fully deterministic protocol (all
+random seeds fixed before model initialization; dataset noise seeded
+via SHA-256 of scene ID and transform, identical across processes).
+We additionally report $N=512$ (30 runs) and $N=2048$ (20 runs).
 
 \begin{table}[t]
 \centering\small
-\begin{tabular}{lccc}
+\begin{tabular}{lcccc}
 \toprule
-$N$ & Aug. & Eq. & $\Delta$ \\
+$N$ & Aug. & Eq. & Wrong & Eq$-$Aug (CI) \\
 \midrule
-128 & $0.936 \pm 0.043$ & $0.956 \pm 0.005$ & $+0.021$ \\
-512 & $1.000 \pm 0.000$ & $1.000 \pm 0.000$ & $0.000$ \\
-2048 & $1.000 \pm 0.000$ & $1.000 \pm 0.000$ & $0.000$ \\
+128 & $0.955 \pm 0.023$ & $0.941 \pm 0.017$ & $0.934 \pm 0.017$ & $-1.4$pp $[-3.0, +0.4]$ \\
+512 & $1.000 \pm 0.000$ & $1.000 \pm 0.000$ & $1.000 \pm 0.000$ & $0.0$pp \\
+2048 & $1.000 \pm 0.000$ & $1.000 \pm 0.000$ & $1.000 \pm 0.000$ & $0.0$pp \\
 \bottomrule
 \end{tabular}
-\caption{Unseen-group accuracy at different training set sizes.
-At $N{=}128$, EquiOrient shows a $+2.1$pp advantage over augmentation.
-At $N \geq 512$, all arms reach ceiling.}
+\caption{Unseen-group accuracy (mean $\pm$ std). N=128: 10 matched
+deterministic seeds. N=512: 30 runs. N=2048: 20 runs.}
 \label{tab:scaling}
 \end{table}
 
-At $N{=}128$, augmentation drops to $0.936 \pm 0.043$ while EquiOrient
-holds at $0.956 \pm 0.005$ ($\Delta{=}{+}2.1$pp), suggesting the
-structural objective provides sample-efficiency benefits when
-training data is limited. However, this advantage disappears at
-$N \geq 512$ where all arms reach ceiling. The wrong-geometry arm
-achieves $0.952$ at $N{=}128$---comparable to EquiOrient---because
-even the wrong structural law provides some inductive bias.
+At $N{=}128$, no arm reaches ceiling. EquiOrient's paired contrast
+against augmentation is $-1.4$pp with 95\% CI $[-3.0, +0.4]$pp
+(paired $t$-test $p=0.16$, wins $3/10$ seeds): there is
+\textbf{no evidence} that the correct geometric structure improves
+behavior beyond plain augmentation. However, the predeclared contrast
+against the wrong-geometry control is $+0.76$pp with 95\% CI
+$[+0.5, +1.0]$pp ($p=0.0003$, wins $10/10$ seeds): the correct law
+is behaviorally distinguishable from the incorrect one even at
+$N{=}128$. At $N \geq 512$, all arms reach ceiling and every contrast
+is identically zero.
+
+The picture is therefore mixed and precisely quantified: the correct
+structural law confers a small but reliable low-data advantage over
+the wrong law, but no advantage over an unconstrained augmentation
+baseline, and any differences vanish once the backbone saturates the
+task.
 
 \section{Discussion}
 
@@ -348,15 +365,19 @@ construction targeting known VLM failure modes; and (4)~tasks where
 the answer cannot be inferred from a single pair's pixel coordinates.
 
 \paragraph{What this paper contributes.}
-The contribution is a precise negative result with architectural
-explanation: \emph{explicit geometric structural objectives achieve
-representation-level algebra compliance with strong specificity, but
-bounding-box-pooled VLM features are already $D_4$-robust, making
-the structural compliance behaviorally irrelevant}. The finding is
-negative but actionable: it tells the field that providing bounding
-boxes as input shortcuts the spatial reasoning challenge, and that
-future work on geometric structure in VLMs must evaluate without
-such shortcuts.
+The contribution is a precisely quantified mixed result with an
+architectural explanation. At scarce data ($N{=}128$, ten matched
+deterministic seeds), the correct geometric law is behaviorally
+distinguishable from the incorrect one ($+0.76$pp, $p<0.001$, all ten
+seeds) but not from plain augmentation ($-1.4$pp, n.s.): structural
+constraints encode \emph{which} law the latent obeys, yet provide no
+measurable advantage over an unconstrained baseline. At $N \geq 512$,
+bounding-box-pooled VLM features are already $D_4$-robust, so every
+arm reaches ceiling and all contrasts vanish. The finding is
+actionable: it tells the field that providing bounding boxes as input
+shortcuts the spatial reasoning challenge, and that future work on
+geometric structure in VLMs must evaluate without such shortcuts to
+test whether the correct law confers a genuine behavioral advantage.
 
 \section{Limitations}
 
@@ -389,17 +410,20 @@ and GASP~\cite{yeh2026gasp} are cited but not compared head-to-head.
 
 We present EquiOrient Phase~2, a rigorous evaluation of latent
 transformation equivariance on the noncommutative dihedral group $D_4$,
-with 8-way labels, 30 confirmatory runs, and a 45-test verification
-suite. EquiOrient achieves strong, specific latent algebra compliance
-(structural loss $0.112$, wrong-geometry $0.176$) but no behavioral
-improvement ($\Delta A = 0.0000$, 95\% CI $[0.0, 0.0]$), because
+with 8-way labels, 30 confirmatory runs at $N{=}512$, ten matched
+deterministic seeds at $N{=}128$, and a 45-test verification suite.
+EquiOrient achieves strong, specific latent algebra compliance
+(structural loss $0.112$, wrong-geometry $0.176$). Behaviorally, the
+correct law is significantly distinguishable from the wrong law at
+$N{=}128$ ($+0.76$pp, $p<0.001$) but not from plain augmentation
+($-1.4$pp, n.s.), and at $N \geq 512$ all arms reach ceiling because
 bounding-box-pooled VLM features are already $D_4$-robust. The result
-is a precise negative with an architectural explanation: when the model
-is told where objects are, spatial compositionality becomes trivial for
-modern VLMs, and geometric structural objectives cannot improve upon
-an already-solved task. Future work must evaluate without bounding-box
-shortcuts to meaningfully test whether geometric structure helps VLM
-spatial reasoning.
+is a precisely quantified mixed outcome with an architectural
+explanation: geometric structure encodes \emph{which} law the latent
+obeys, but provides no measurable advantage once the backbone
+saturates the task. Future work must evaluate without bounding-box
+shortcuts to meaningfully test whether correct geometric structure
+confers a genuine behavioral advantage.
 
 {\small
 \bibliographystyle{ieeenat_fullname}
