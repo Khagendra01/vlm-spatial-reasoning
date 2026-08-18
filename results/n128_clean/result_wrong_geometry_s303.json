@@ -1,0 +1,48 @@
+{
+ "mode": "confirmatory",
+ "arm": "wrong_geometry",
+ "seed": 303,
+ "n_train": 128,
+ "lambda": 1.0,
+ "train_loss": {
+  "answer": [
+   10.736494,
+   3.531449
+  ],
+  "structural": [
+   0.26226858,
+   0.46561407
+  ]
+ },
+ "test_eval": {
+  "per_transform": {
+   "I": 0.9443,
+   "R": 0.9551,
+   "R2": 0.9365,
+   "R3": 0.9531,
+   "H": 0.9326,
+   "RH": 0.9395,
+   "R2H": 0.9395,
+   "R3H": 0.9463
+  },
+  "unseen_accuracy": 0.943,
+  "worst_unseen_accuracy": 0.9365,
+  "n_per_transform": {
+   "I": 1024,
+   "R": 1024,
+   "R2": 1024,
+   "R3": 1024,
+   "H": 1024,
+   "RH": 1024,
+   "R2H": 1024,
+   "R3H": 1024
+  }
+ },
+ "provenance": {
+  "git_commit": "8138313d52f66389b3eda14bd2b7a8353f268642",
+  "dataset_manifest_sha256": "0b12e0f38eb93a74c9cf106fe09dc8a12ff8bd3fae5d9fe420d3a404f7ffd24f",
+  "backbone": "qwen3",
+  "torch": "2.8.0+cu128"
+ },
+ "repo_commit": "8138313d52f66389b3eda14bd2b7a8353f268642"
+}
