@@ -1,5 +1,5 @@
 ✓ Initialized. View run at 
-https://modal.com/apps/kgengamer/main/ap-0jmpMCr6iIRjjLB7Qjz7Td
+https://modal.com/apps/kgengamer/main/ap-iJrI1ezRqf6O6qNlP8x6nv
 ✓ Created objects.
 ├── 🔨 Created mount 
 │   C:\Users\Khage\Desktop\VLM-Spatial-Reasoning-NoBox\modal\equiorient_nobox.p
@@ -7,42 +7,3 @@ https://modal.com/apps/kgengamer/main/ap-0jmpMCr6iIRjjLB7Qjz7Td
 ├── 🔨 Created function run_arm.
 ├── 🔨 Created function run_gate.
 └── 🔨 Created function probe_features.
-`torch_dtype` is deprecated! Use `dtype` instead!
-
-[1ALoading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]
-[1ALoading checkpoint shards:  25%|██▌       | 1/4 [00:02<00:06,  2.23s/it]
-[1ALoading checkpoint shards:  50%|█████     | 2/4 [00:04<00:04,  2.11s/it]
-[1ALoading checkpoint shards:  75%|███████▌  | 3/4 [00:06<00:02,  2.11s/it]
-[1ALoading checkpoint shards: 100%|██████████| 4/4 [00:07<00:00,  1.76s/it]
-[1ALoading checkpoint shards: 100%|██████████| 4/4 [00:07<00:00,  1.90s/it]
-Traceback (most recent call last):
-Stopping app - uncaught exception raised locally: ValueError('Expected 2D array, got 1D array instead:\narray=[ 0.72265625  0.3828125  -0.17089844 ...  0.75        0.765625\n  0.8125    ].\nReshape your data either using array.reshape(-1, 1) if your data has a single feature or array.reshape(1, -1) if it contains a single sample.').
-  File "/pkg/modal/_runtime/container_io_manager.py", line 977, in handle_input_exception
-    yield
-  File "/pkg/modal/_container_entrypoint.py", line 187, in run_input_sync
-    values = io_context.call_function_sync()
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/pkg/modal/_runtime/container_io_manager.py", line 265, in call_function_sync
-    expected_value_or_values = self.finalized_function.callable(*args, **kwargs)
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/root/equiorient_nobox.py", line 202, in probe_features
-    sc = StandardScaler().fit(Xtr)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/sklearn/preprocessing/_data.py", line 928, in fit
-    return self.partial_fit(X, y, sample_weight)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/sklearn/base.py", line 1403, in wrapper
-    return fit_method(estimator, *args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/sklearn/preprocessing/_data.py", line 965, in partial_fit
-    X = validate_data(
-        ^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/sklearn/utils/validation.py", line 3038, in validate_data
-    out = check_array(X, input_name="X", **check_params)
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/site-packages/sklearn/utils/validation.py", line 1073, in check_array
-    raise ValueError(msg)
-ValueError: Expected 2D array, got 1D array instead:
-array=[ 0.72265625  0.3828125  -0.17089844 ...  0.75        0.765625
-  0.8125    ].
-Reshape your data either using array.reshape(-1, 1) if your data has a single feature or array.reshape(1, -1) if it contains a single sample.
