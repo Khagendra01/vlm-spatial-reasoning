@@ -1,0 +1,32 @@
+✓ Initialized. View run at 
+https://modal.com/apps/kgengamer/main/ap-nFiuSBreNVDfp7mjyElAfP
+✓ Created objects.
+├── 🔨 Created mount 
+│   C:\Users\Khage\Desktop\VLM-Spatial-Reasoning-NoBox\modal\equiorient_nobox.p
+│   y
+├── 🔨 Created function run_gate.
+├── 🔨 Created function run_arm.
+└── 🔨 Created function probe_features.
+Traceback (most recent call last):
+  File "/pkg/modal/_runtime/container_io_manager.py", line 977, in handle_input_exception
+    yield
+  File "/pkg/modal/_container_entrypoint.py", line 187, in run_input_sync
+    values = io_context.call_function_sync()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pkg/modal/_runtime/container_io_manager.py", line 265, in call_function_sync
+    expected_value_or_values = self.finalized_function.callable(*args, **kwargs)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/equiorient_nobox.py", line 161, in probe_features
+    manifest = load_manifest(mf_path)
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/repo/equiorient/experiments/train_nobox.py", line 68, in load_manifest
+    return json.loads((data_dir / "manifest.json").read_text(encoding="utf-8"))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/pathlib.py", line 1027, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+NotADirectoryError: [Errno 20] Not a directory: '/root/phase2_data/manifest.json/manifest.json'
+Stopping app - uncaught exception raised locally: NotADirectoryError(20, 'Not a directory').

@@ -158,7 +158,7 @@ def probe_features(n_dev: int = 200,
     from equiorient.experiments.train_nobox import NoBoxRunner, load_manifest
 
     mf_path = Path("/root/phase2_data/manifest.json")
-    manifest = load_manifest(mf_path)
+    manifest = load_manifest(Path("/root/phase2_data"))
     runner = NoBoxRunner(Path("/root/phase2_data"), Path("/dev/shm"))
     runner.load_model()
     # collect cell features for the first n_dev train scenes (identity views)

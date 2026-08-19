@@ -1,0 +1,72 @@
+┌───────────────────── Traceback (most recent call last) ─────────────────────┐
+│ C:\Users\Khage\Desktop\VLM-Spatial-Reasoning-NoBox\modal/equiorient_nobox.p │
+│ y:230 in main                                                               │
+│                                                                             │
+│   229 │   if probe:                                                         │
+│ > 230 │   │   print("PROBE:", probe_features.remote(                        │
+│   231 │   │   │   target_size_min=target_size_min, target_size_max=target_s │
+│                                                                             │
+│ C:\Users\Khage\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_ │
+│ qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\modal\_obje │
+│ ct.py:46 in wrapped                                                         │
+│                                                                             │
+│    45 │   │   await self.hydrate()                                          │
+│ >  46 │   │   return await method(self, *args, **kwargs)                    │
+│    47                                                                       │
+│                                                                             │
+│ C:\Users\Khage\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_ │
+│ qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\modal\_func │
+│ tions.py:1841 in remote                                                     │
+│                                                                             │
+│   1840 │   │                                                                │
+│ > 1841 │   │   return await self._call_function(args, kwargs)               │
+│   1842                                                                      │
+│                                                                             │
+│ C:\Users\Khage\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_ │
+│ qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\modal\_func │
+│ tions.py:1778 in _call_function                                             │
+│                                                                             │
+│   1777 │   │                                                                │
+│ > 1778 │   │   return await invocation.run_function()                       │
+│   1779                                                                      │
+│                                                                             │
+│ C:\Users\Khage\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_ │
+│ qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\modal\_func │
+│ tions.py:502 in run_function                                                │
+│                                                                             │
+│    501 │   │   │   # No more retries left.                                  │
+│ >  502 │   │   │   return await _process_result(                            │
+│    503 │   │   │   │   await_response.output.result, await_response.output. │
+│                                                                             │
+│ C:\Users\Khage\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_ │
+│ qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\modal\_util │
+│ s\function_utils.py:572 in _process_result                                  │
+│                                                                             │
+│   571 │   │   │                                                             │
+│ > 572 │   │   │   raise exc_with_hints(exc)                                 │
+│   573                                                                       │
+│                                                                             │
+│     ...Remote call to Modal Function (ta-01M0C7DZWK2R36ABHRVW9ZRW1R)...     │
+│                                                                             │
+│ /root/equiorient_nobox.py:161 in probe_features                             │
+│                                                                             │
+│ > 161 manifest = load_manifest(mf_path)                                     │
+│                                                                             │
+│                                                                             │
+│ /root/repo/equiorient/experiments/train_nobox.py:68 in load_manifest        │
+│                                                                             │
+│ > 68 return json.loads((data_dir / "manifest.json").read_text(encoding="utf │
+│                                                                             │
+│                                                                             │
+│ /usr/local/lib/python3.12/pathlib.py:1027 in read_text                      │
+│                                                                             │
+│ > 1027 with self.open(mode='r', encoding=encoding, errors=errors) as f:     │
+│                                                                             │
+│                                                                             │
+│ /usr/local/lib/python3.12/pathlib.py:1013 in open                           │
+│                                                                             │
+│ > 1013 return io.open(self, mode, buffering, encoding, errors, newline)     │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+NotADirectoryError: [Errno 20] Not a directory: 
+'/root/phase2_data/manifest.json/manifest.json'
