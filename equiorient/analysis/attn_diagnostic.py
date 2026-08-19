@@ -17,16 +17,19 @@ Contract:
 from __future__ import annotations
 
 
-def target_cell_indices(boxes: dict, grid_w: int, grid_h: int,
+def target_cell_indices(pair_boxes: dict, grid_w: int, grid_h: int,
                         canvas: tuple[float, float] = (192.0, 192.0)) -> set:
-    """Map each GT box center (scene canvas coords) to a merged-grid cell.
+    """Map the TARGET pair (a,b) cell centers to merged-grid cells.
 
-    Mirrors how the boxed study located cells, but here it is used ONLY
-    to score attention mass; the model never sees these indices.
+    Only the pair objects count as targets; distractors are explicitly
+    excluded so the diagnostic answers "did the pool find THE pair".
     """
     cw, ch = canvas
     idx = set()
-    for (_obj_id, (cx, cy, _sz)) in boxes.items():
+    for key in ("a", "b"):
+        if key not in pair_boxes:
+            continue
+        cx, cy, _sz = pair_boxes[key]
         c = (max(min(int(cx / cw * grid_w), grid_w), 0),
              max(min(int(cy / ch * grid_h), grid_h), 0))
         idx.add(c[1] * grid_w + c[0])
@@ -35,13 +38,30 @@ def target_cell_indices(boxes: dict, grid_w: int, grid_h: int,
 
 def attention_mass_diag(attn, boxes: dict, grid_w: int, grid_h: int,
                         canvas: tuple[float, float] = (192.0, 192.0)) -> dict:
-    """Measure distribution of a (1, T) attention vector over GT target
-    cells vs the rest of the image. Returns the two masses."""
+    """Measure distribution of a (1, T) attention vector over the GT
+    TARGET-PAIR cells vs the rest of the image.
+
+    Returns pair-attention mass AND whether BOTH a and b cells are inside
+    the attended set (locatability).
+    """
     n_tok = attn.numel()
     target = target_cell_indices(boxes, grid_w, grid_h, canvas)
     aw = attn.flatten()
-    tgt = sum(float(aw[i]) for i in target if 0 <= i < n_tok)
-    return {"target_mass": tgt, "non_target_mass": max(0.0, 1.0 - tgt)}
+    if not target:
+        return {"pair_mass": None, "pair_in_top4": None,
+                "a_in_top4": None, "b_in_top4": None}
+    pair_mass = sum(float(aw[i]) for i in target if 0 <= i < n_tok)
+    top_idx = set(aw.topk(min(4, n_tok)).indices.tolist())
+    a_i = target_cell_indices({"a": boxes["a"]}, grid_w, grid_h, canvas)
+    b_i = target_cell_indices({"b": boxes["b"]}, grid_w, grid_h, canvas)
+    a_in = bool(a_i & top_idx)
+    b_in = bool(b_i & top_idx)
+    return {
+        "pair_mass": pair_mass,
+        "pair_in_top4": (a_in and b_in),
+        "a_in_top4": a_in,
+        "b_in_top4": b_in,
+    }
 
 
 def attention_mass_diag_from_example(attn, example: dict, grid_w: int,

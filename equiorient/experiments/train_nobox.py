@@ -305,7 +305,7 @@ class NoBoxRunner:
         per_g: dict[str, dict] = {}
         for g in ELEMENTS:
             per_g[g] = {"correct": 0, "total": 0}
-        attn_diag = {"target_mass": [], "non_target_mass": []}
+        attn_diag = {"pair_mass": [], "pair_in_top4": []}
         with torch.no_grad():
             for e in manifest["examples"]:
                 if e["split"] != split:
@@ -321,10 +321,9 @@ class NoBoxRunner:
                         attention_mass_diag_from_example)
                     d = attention_mass_diag_from_example(
                         attn, e, int(grid[0][2]), int(grid[0][1]))
-                    if d is not None:
-                        attn_diag["target_mass"].append(d["target_mass"])
-                        attn_diag["non_target_mass"].append(
-                            d["non_target_mass"])
+                    if d is not None and d.get("pair_mass") is not None:
+                        attn_diag["pair_mass"].append(d["pair_mass"])
+                        attn_diag["pair_in_top4"].append(d["pair_in_top4"])
                 per_g[g]["total"] += 1
                 per_g[g]["correct"] += int(
                     logits.argmax(-1).item() == LABELS.index(e["label"]))
@@ -336,13 +335,13 @@ class NoBoxRunner:
                "unseen_accuracy": round(unseen, 4),
                "worst_unseen_accuracy": round(worst, 4),
                "n_per_transform": {g: per_g[g]["total"] for g in ELEMENTS}}
-        if self._diag_boxes and attn_diag["target_mass"]:
+        if self._diag_boxes and attn_diag["pair_mass"]:
             out["attention_diag"] = {
-                "mean_target_mass": round(
-                    float(np.mean(attn_diag["target_mass"])), 4),
-                "mean_non_target_mass": round(
-                    float(np.mean(attn_diag["non_target_mass"])), 4),
-                "n": len(attn_diag["target_mass"])}
+                "mean_pair_mass": round(
+                    float(np.mean(attn_diag["pair_mass"])), 4),
+                "pair_in_top4_pct": round(
+                    100.0 * float(np.mean(attn_diag["pair_in_top4"])), 1),
+                "n": len(attn_diag["pair_mass"])}
         return out
 
     def log(self, msg):
