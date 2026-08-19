@@ -25,8 +25,10 @@ because GT boxes identified the pair. => nobox_v1 generator: targets a
 | D9 | 2026-08-19 | nobox_v1 easier | 128 | 10 | 5e-4 | 4q | 101 | (rate-limited) | 6-9px, 4-8 dist, noise 6 |
 | D10 | 2026-08-19 | nobox_v1 easier2 | 128 | 10 | 5e-4 | 4q | 101 | 0.1250 (chance) | 4-7px, 8-12 dist, noise 8 |
 | D11 | 2026-08-19 | nobox_v1 | 512 | 10 | 5e-4 | 4q | 101 | 0.1250 (chance) | same data as D8, more N — paradox |
-| D12 | 2026-08-19 | nobox_v1 mid | 256 | 20 | 5e-4 | 4q | 101 | (fill) | 4-7px, 6-10 dist, noise 8, eval-mode fix |
-| D13 | 2026-08-19 | nobox_v1 mid | 128 | 30 | 5e-4 | 4q | 101 | (fill) | 4-7px, 6-10 dist, noise 8, eval-mode fix |
+| D12 | 2026-08-19 | nobox_v1 mid | 256 | 20 | 5e-4 | 4q | 101 | 1.0000 (REPRODUCIBLE) | 4-7px, 6-10 dist, noise 8 — train_acc 0.195 was STALE-CACHE BUG; true train_acc reaches 1.0. Dev 1.0 real. SATURATED |
+| D13 | 2026-08-19 | nobox_v1 mid | 128 | 30 | 5e-4 | 4q | 101 | 0.3551 | 4-7px, 6-10 dist, noise 8, eval-mode fix — half the data, still above chance but not saturated |
+| D14 | 2026-08-19 | nobox_v1 mid | 256 | 20 | 5e-4 | 4q | 101 | **1.0000** | D12 config + cache fix (140a981). train_acc climbs to 1.0; dev 1.0 all transforms. FIRST LEARNABLE NO-BOX REGIME. SATURATED |
+| D15 | 2026-08-19 | nobox_v1 harder | 256 | 20 | 5e-4 | 4q | 101 | (running) | 3.5-6px, 8-14 dist, noise 10 — probe for 60-85% window |
 
 ## PROBES (frozen deepstack features, held-out scenes — no training)
 | config | linear top2 recall | mlp top2 recall | verdict |
@@ -39,3 +41,13 @@ interpretation: cell-level target signal in frozen deepstack tokens is *weak but
 present* (~0.1-0.2 top2 recall vs chance ~0.0005). The pool CAN in principle
 learn to localize, but needs capacity + budget; attention diag shows it currently
 doesn't (pair_in_top4_pct=0.0 across runs).
+
+REVISED (post-D14): the weak cell-level signal is NOT the bottleneck. With
+identifiable targets at 4-7px/6-10 dist/noise8 and N=256×20ep, the full-image
+pool achieves dev 1.0 WITHOUT cell-level localization (attention essentially
+uniform, pair_in_top4 0.0) — it reads a GLOBAL statistical signature of the pair
+(e.g. red-mass vs blue-mass centroid) from the pooled context, which is enough
+under equiorient noise. So no-box learning works when the pixels carry
+identifiable color statistics; it failed before only because (a) v4 data made
+targets visually identical to distractors, and (b) the stale feature cache hid
+real training progress.
