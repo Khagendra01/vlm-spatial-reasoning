@@ -366,12 +366,18 @@ def main(arm: str = "equiorient", seed: int = 101, mode: str = "dev",
             noise_amp=noise_amp))
         return
     if not array:
+        prep = prepare_data.remote(
+            target_size_min=target_size_min, target_size_max=target_size_max,
+            n_dist_min=n_dist_min, n_dist_max=n_dist_max,
+            noise_amp=noise_amp)
+        info = next(iter(prep))
+        print(f"[single] data ready: {info}", flush=True)
         m = run_arm.remote(arm=arm, seed=seed, mode=mode, n_train=n_train,
                            epochs=epochs, lr=lr,
                            target_size_min=target_size_min,
                            target_size_max=target_size_max,
                            n_dist_min=n_dist_min, n_dist_max=n_dist_max,
-                           noise_amp=noise_amp)
+                           noise_amp=noise_amp, data_key=info["data_key"])
         print("RESULT:", m)
         return
 
