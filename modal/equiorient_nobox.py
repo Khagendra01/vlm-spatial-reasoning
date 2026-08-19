@@ -37,7 +37,9 @@ PINNED_COMMIT = ""  # empty = HEAD + recorded in results
 SPARSE_CONE = ["equiorient", "modal", "configs", "cloud_setup"]
 
 
-def _prepare() -> str:
+def _prepare(target_size: tuple = (3.0, 5.0),
+             n_distractor_range: tuple = (12, 20),
+             noise_amp: int = 12) -> str:
     import subprocess
 
     def run(cmd):
@@ -55,11 +57,14 @@ def _prepare() -> str:
         raise RuntimeError(f"PIN MISMATCH {head[:8]} != {PINNED_COMMIT}")
     sys.path.insert(0, dst)
     import shutil
-    import equiorient.data.manifests as mf
+    import equiorient.data.manifests_nobox as mf
     from pathlib import Path
     out = Path("/root/phase2_data")
     shutil.rmtree(out, ignore_errors=True)
-    mf.build(out, n_dev=512, n_train=2048, n_val=512, n_test=1024)
+    mf.build(out, n_dev=512, n_train=2048, n_val=512, n_test=1024,
+             target_size=target_size,
+             n_distractor_range=n_distractor_range,
+             noise_amp=noise_amp)
     return head
 
 
@@ -71,11 +76,16 @@ def _prepare() -> str:
               timeout=6 * 60 * 60)
 def run_arm(arm: str, seed: int, n_train: int = 128, lam: float = 1.0,
             epochs: int = 2, batch: int = 8, mode: str = "dev",
-            lr: float = 1e-4) -> dict:
+            lr: float = 1e-4,
+            target_size_min: float = 3.0, target_size_max: float = 5.0,
+            n_dist_min: int = 12, n_dist_max: int = 20,
+            noise_amp: int = 12) -> dict:
     import os
     os.environ["HF_TOKEN"] = os.environ["HF_TOKEN"]
     os.environ["HF_HOME"] = "/root/hf-cache"
-    head = _prepare()
+    head = _prepare(target_size=(target_size_min, target_size_max),
+                    n_distractor_range=(n_dist_min, n_dist_max),
+                    noise_amp=noise_amp)
     import json
     from pathlib import Path
     out_dir = Path("/root/results") / "phase2_nobox"
@@ -115,12 +125,19 @@ def run_gate() -> dict:
 @app.local_entrypoint()
 def main(arm: str = "equiorient", seed: int = 101, mode: str = "dev",
          n_train: int = 128, gate: bool = False, epochs: int = 2,
-         lr: float = 1e-4):
+         lr: float = 1e-4,
+         target_size_min: float = 3.0, target_size_max: float = 5.0,
+         n_dist_min: int = 12, n_dist_max: int = 20,
+         noise_amp: int = 12):
     if gate:
         print("GATE:", run_gate.remote())
         return
     m = run_arm.remote(arm=arm, seed=seed, mode=mode, n_train=n_train,
-                       epochs=epochs, lr=lr)
+                       epochs=epochs, lr=lr,
+                       target_size_min=target_size_min,
+                       target_size_max=target_size_max,
+                       n_dist_min=n_dist_min, n_dist_max=n_dist_max,
+                       noise_amp=noise_amp)
     print("RESULT:", m)
 
 

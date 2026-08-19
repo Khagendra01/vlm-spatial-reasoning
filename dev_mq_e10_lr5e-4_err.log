@@ -1,0 +1,6 @@
+[modal-client] 2026-08-18T23:08:48-0400 Warning: Received Status.RESOURCE_EXHAUSTED
+App create rate limit exceeded. Please wait and retry.
+for /modal.client.ModalClient/AppCreate (24c70b6e). Retrying...
+┌─ Error ─────────────────────────────────────────────────────────────────────┐
+│ App create rate limit exceeded. Please wait and retry.                      │
+└─────────────────────────────────────────────────────────────────────────────┘

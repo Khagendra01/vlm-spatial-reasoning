@@ -1,0 +1,112 @@
+✓ Initialized. View run at 
+https://modal.com/apps/kgengamer/main/ap-tvu8WK5sALCmeIcYQ18JgN
+✓ Created objects.
+├── 🔨 Created mount 
+│   C:\Users\Khage\Desktop\VLM-Spatial-Reasoning-NoBox\modal\equiorient_nobox.p
+│   y
+├── 🔨 Created function run_arm.
+└── 🔨 Created function run_gate.
+RESULT: {'mode': 'dev', 'arm': 'augmentation', 'seed': 101, 'n_train': 128, 'lambda': 1.0, 'lr': 0.0005, 'epochs': 15, 'variant': 'no_box', 'train_loss': {'answer': [17.14086, 16.676812, 16.70126, 16.684443, 16.668196, 16.666183, 16.653596, 16.659785, 16.655053, 16.64912, 16.651742, 16.650626, 16.654931, 16.646165, 16.645483], 'structural': [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, 'dev_eval': {'per_transform': {'I': 0.125, 'R': 0.125, 'R2': 0.125, 'R3': 0.125, 'H': 0.125, 'RH': 0.125, 'R2H': 0.125, 'R3H': 0.125}, 'unseen_accuracy': 0.125, 'worst_unseen_accuracy': 0.125, 'n_per_transform': {'I': 512, 'R': 512, 'R2': 512, 'R3': 512, 'H': 512, 'RH': 512, 'R2H': 512, 'R3H': 512}, 'attention_diag': {'mean_target_mass': 0.1185, 'mean_non_target_mass': 0.8815, 'n': 4096}}, 'provenance': {'git_commit': '2d8bcbbb9cacd52f0a88c87dfb179fd26b0f0195', 'dataset_manifest_sha256': '0b12e0f38eb93a74c9cf106fe09dc8a12ff8bd3fae5d9fe420d3a404f7ffd24f', 'backbone': 'qwen3', 'torch': '2.8.0+cu128'}, 'repo_commit': '2d8bcbbb9cacd52f0a88c87dfb179fd26b0f0195'}
+[03:13:38] train scenes 128 pairs 256 arm augmentation lam 1.0 lr 0.0005 NO-BOX
+[03:13:56] [augmentation] epoch 1/15 (ans 17.1409, struct 0.000000)
+[03:14:11] [augmentation] epoch 2/15 (ans 16.6768, struct 0.000000)
+[03:14:27] [augmentation] epoch 3/15 (ans 16.7013, struct 0.000000)
+[03:14:42] [augmentation] epoch 4/15 (ans 16.6844, struct 0.000000)
+[03:14:57] [augmentation] epoch 5/15 (ans 16.6682, struct 0.000000)
+[03:15:12] [augmentation] epoch 6/15 (ans 16.6662, struct 0.000000)
+[03:15:28] [augmentation] epoch 7/15 (ans 16.6536, struct 0.000000)
+[03:15:43] [augmentation] epoch 8/15 (ans 16.6598, struct 0.000000)
+[03:15:58] [augmentation] epoch 9/15 (ans 16.6551, struct 0.000000)
+[03:16:13] [augmentation] epoch 10/15 (ans 16.6491, struct 0.000000)
+[03:16:28] [augmentation] epoch 11/15 (ans 16.6517, struct 0.000000)
+[03:16:44] [augmentation] epoch 12/15 (ans 16.6506, struct 0.000000)
+[03:16:59] [augmentation] epoch 13/15 (ans 16.6549, struct 0.000000)
+[03:17:14] [augmentation] epoch 14/15 (ans 16.6462, struct 0.000000)
+[03:17:29] [augmentation] epoch 15/15 (ans 16.6455, struct 0.000000)
+[03:19:05] DEV unseen_accuracy 0.1250 worst 0.1250
+[03:20:22] DEV unseen_accuracy 0.1250 worst 0.1250
+{
+ "mode": "dev",
+ "arm": "augmentation",
+ "seed": 101,
+ "n_train": 128,
+ "lambda": 1.0,
+ "lr": 0.0005,
+ "epochs": 15,
+ "variant": "no_box",
+ "train_loss": {
+  "answer": [
+   17.14086,
+   16.676812,
+   16.70126,
+   16.684443,
+   16.668196,
+   16.666183,
+   16.653596,
+   16.659785,
+   16.655053,
+   16.64912,
+   16.651742,
+   16.650626,
+   16.654931,
+   16.646165,
+   16.645483
+  ],
+  "structural": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "dev_eval": {
+  "per_transform": {
+   "I": 0.125,
+   "R": 0.125,
+   "R2": 0.125,
+   "R3": 0.125,
+   "H": 0.125,
+   "RH": 0.125,
+   "R2H": 0.125,
+   "R3H": 0.125
+  },
+  "unseen_accuracy": 0.125,
+  "worst_unseen_accuracy": 0.125,
+  "n_per_transform": {
+   "I": 512,
+   "R": 512,
+   "R2": 512,
+   "R3": 512,
+   "H": 512,
+   "RH": 512,
+   "R2H": 512,
+   "R3H": 512
+  },
+  "attention_diag": {
+   "mean_target_mass": 0.1185,
+   "mean_non_target_mass": 0.8815,
+   "n": 4096
+  }
+ },
+ "provenance": {
+  "git_commit": "2d8bcbbb9cacd52f0a88c87dfb179fd26b0f0195",
+  "dataset_manifest_sha256": "0b12e0f38eb93a74c9cf106fe09dc8a12ff8bd3fae5d9fe420d3a404f7ffd24f",
+  "backbone": "qwen3",
+  "torch": "2.8.0+cu128"
+ }
+}
+
+Stopping app - local entrypoint completed.
+✓ App completed. View run at 
+https://modal.com/apps/kgengamer/main/ap-tvu8WK5sALCmeIcYQ18JgN
