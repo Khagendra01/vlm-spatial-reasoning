@@ -207,15 +207,38 @@ def probe_features(n_dev: int = 200,
         top = set(np.argsort(-probs[k])[:2])
         if ia in top and ib in top:
             top_correct += 1
+    linear_recall = top_correct / max(n_t, 1)
+
+    # nonlinear probe: an MLP has much more capacity to learn "this cell
+    # has a red/blue dot vs gray" — upper bound on localizability of the
+    # frozen features regardless of the pooling head's architecture.
+    from sklearn.neural_network import MLPClassifier
+    mlp = MLPClassifier(hidden_layer_sizes=(128, 64), max_iter=300,
+                        alpha=1e-3, random_state=0)
+    mlp.fit(sc.transform(Xtr), Ytr)
+    if hasattr(mlp, "predict_proba"):
+        p2 = mlp.predict_proba(sc.transform(Xte))[:, 1].reshape(-1, T)
+    else:
+        p2 = mlp.predict(sc.transform(Xte)).astype(float).reshape(-1, T)
+    top_correct2 = 0
+    for k, (ia, ib) in enumerate(y_cells[n_tr:]):
+        top = set(np.argsort(-p2[k])[:2])
+        if ia in top and ib in top:
+            top_correct2 += 1
+    mlp_recall = top_correct2 / max(n_t, 1)
+
     n_t = n - n_tr
     return {"n_scenes": n_t, "T_cells": int(T),
-            "cell_pair_top2_recall": round(top_correct / max(n_t, 1), 4),
+            "linear_cell_pair_top2_recall": round(linear_recall, 4),
+            "mlp_cell_pair_top2_recall": round(mlp_recall, 4),
             "pos_rate": round(float(Ytr.mean()), 4),
             "difficulty": {"target_size": [target_size_min, target_size_max],
                            "n_distractor_range": [n_dist_min, n_dist_max],
                            "noise_amp": noise_amp},
             "repo_commit": head,
-            "explain": "top2 recall ~1.0 => features localizable; ~2/T => not."}
+            "explain": "top2 recall ~1.0 => features localizable; ~0 => not. "
+                       "linear ~ probe of cross-attention strength; "
+                       "mlp ~ upper bound for any learned pool."}
 
 
 @app.local_entrypoint()

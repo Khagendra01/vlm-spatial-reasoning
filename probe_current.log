@@ -1,5 +1,5 @@
 ✓ Initialized. View run at 
-https://modal.com/apps/kgengamer/main/ap-iJrI1ezRqf6O6qNlP8x6nv
+https://modal.com/apps/kgengamer/main/ap-n9n9mO76Ux3lemKY32vvQR
 ✓ Created objects.
 ├── 🔨 Created mount 
 │   C:\Users\Khage\Desktop\VLM-Spatial-Reasoning-NoBox\modal\equiorient_nobox.p
@@ -7,3 +7,14 @@ https://modal.com/apps/kgengamer/main/ap-iJrI1ezRqf6O6qNlP8x6nv
 ├── 🔨 Created function run_arm.
 ├── 🔨 Created function run_gate.
 └── 🔨 Created function probe_features.
+`torch_dtype` is deprecated! Use `dtype` instead!
+
+[1ALoading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]
+[1ALoading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:05,  1.97s/it]
+[1ALoading checkpoint shards:  50%|█████     | 2/4 [00:03<00:03,  1.94s/it]
+[1ALoading checkpoint shards:  75%|███████▌  | 3/4 [00:05<00:01,  1.92s/it]
+[1ALoading checkpoint shards: 100%|██████████| 4/4 [00:06<00:00,  1.58s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:06<00:00,  1.71s/it]
+PROBE: {'n_scenes': 100, 'T_cells': 64, 'cell_pair_top2_recall': 0.1, 'pos_rate': 0.0306, 'difficulty': {'target_size': [3.0, 5.0], 'n_distractor_range': [12, 20], 'noise_amp': 12}, 'repo_commit': '0df1d84aa98785d24bd4948095f32248d80d4042', 'explain': 'top2 recall ~1.0 => features localizable; ~2/T => not.'}
+Stopping app - local entrypoint completed.
+✓ App completed. View run at 
+https://modal.com/apps/kgengamer/main/ap-n9n9mO76Ux3lemKY32vvQR
