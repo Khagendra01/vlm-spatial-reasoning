@@ -1,0 +1,31 @@
+✓ Initialized. View run at 
+https://modal.com/apps/kgengamer/main/ap-qLYKQ1ehyso5VWUVmMpls1
+✓ Created objects.
+├── 🔨 Created mount 
+│   C:\Users\Khage\Desktop\VLM-Spatial-Reasoning-NoBox\modal\equiorient_nobox.p
+│   y
+├── 🔨 Created function run_arm.
+├── 🔨 Created function probe_features.
+└── 🔨 Created function run_gate.
+`torch_dtype` is deprecated! Use `dtype` instead!
+
+[1ALoading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]
+[1ALoading checkpoint shards:  25%|██▌       | 1/4 [00:02<00:07,  2.51s/it]
+[1ALoading checkpoint shards:  50%|█████     | 2/4 [00:04<00:04,  2.44s/it]
+[1ALoading checkpoint shards:  75%|███████▌  | 3/4 [00:07<00:02,  2.39s/it]
+[1ALoading checkpoint shards: 100%|██████████| 4/4 [00:08<00:00,  1.98s/it]
+[1ALoading checkpoint shards: 100%|██████████| 4/4 [00:08<00:00,  2.15s/it]
+Traceback (most recent call last):
+Stopping app - uncaught exception raised locally: UnboundLocalError("cannot access local variable 'n_t' where it is not associated with a value").
+  File "/pkg/modal/_runtime/container_io_manager.py", line 977, in handle_input_exception
+    yield
+  File "/pkg/modal/_container_entrypoint.py", line 187, in run_input_sync
+    values = io_context.call_function_sync()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pkg/modal/_runtime/container_io_manager.py", line 265, in call_function_sync
+    expected_value_or_values = self.finalized_function.callable(*args, **kwargs)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/equiorient_nobox.py", line 210, in probe_features
+    linear_recall = top_correct / max(n_t, 1)
+                                      ^^^
+UnboundLocalError: cannot access local variable 'n_t' where it is not associated with a value

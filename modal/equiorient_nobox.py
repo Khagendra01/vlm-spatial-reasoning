@@ -199,6 +199,7 @@ def probe_features(n_dev: int = 200,
     Ytr = Y[:n_tr * T]
     Xte = X[n_tr * T:]
     Yte = Y[n_tr * T:]
+    n_t = n - n_tr
     sc = StandardScaler().fit(Xtr)
     clf = LogisticRegression(max_iter=2000, C=1.0).fit(sc.transform(Xtr), Ytr)
     probs = clf.predict_proba(sc.transform(Xte))[:, 1].reshape(-1, T)
@@ -227,7 +228,6 @@ def probe_features(n_dev: int = 200,
             top_correct2 += 1
     mlp_recall = top_correct2 / max(n_t, 1)
 
-    n_t = n - n_tr
     return {"n_scenes": n_t, "T_cells": int(T),
             "linear_cell_pair_top2_recall": round(linear_recall, 4),
             "mlp_cell_pair_top2_recall": round(mlp_recall, 4),
