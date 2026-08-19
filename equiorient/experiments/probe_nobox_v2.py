@@ -62,6 +62,7 @@ def probe_attribute(runner, manifest, split, attribute, n_max=300):
 
     feats_list = []
     labels_list = []
+    n_processed = 0
 
     runner.model.eval()
     with torch.no_grad():
@@ -148,17 +149,18 @@ def probe_attribute(runner, manifest, split, attribute, n_max=300):
 
             labels_list.append(np.full(T, y, dtype=int))
             feats_list.append(f)
+            n_processed += 1
 
-    X = np.concatenate(feats_list, axis=0)  # (N*T, feat_dim)
+    X = np.concatenate(feats_list, axis=0)  # (N_actual*T, feat_dim)
     if attribute in ("shape", "color"):
-        Y = np.concatenate(labels_list, axis=0)  # (N*T,)
+        Y = np.concatenate(labels_list, axis=0)  # (N_actual*T,)
     else:
-        Y = np.concatenate(labels_list, axis=0)  # (N*T,)
+        Y = np.concatenate(labels_list, axis=0)  # (N_actual*T,)
 
     # train/test split by scene
-    n_scenes = len(examples)
+    n_scenes = n_processed
     n_tr = n_scenes // 2
-    T = X.shape[0] // n_scenes
+    T = X.shape[0] // max(n_scenes, 1)
     Xtr = X[:n_tr * T]
     Ytr = Y[:n_tr * T]
     Xte = X[n_tr * T:]
