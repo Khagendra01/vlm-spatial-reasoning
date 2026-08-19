@@ -122,15 +122,115 @@ def run_gate() -> dict:
     return {"gate": "PASS", "repo_commit": head}
 
 
+@app.function(gpu="L40S",
+              volumes={"/root/hf-cache": HF_CACHE,
+                       "/root/results": RESULTS,
+                       "/root/phase2_data": DATA},
+              secrets=[modal.Secret.from_name("hf-token")],
+              timeout=6 * 60 * 60)
+def probe_features(n_dev: int = 200,
+                   target_size_min: float = 3.0,
+                   target_size_max: float = 5.0,
+                   n_dist_min: int = 12, n_dist_max: int = 20,
+                   noise_amp: int = 12) -> dict:
+    """Linear-probe the frozen deepstack features for target-cell
+    localizability WITHOUT any training.
+
+    Asks: given the 64 (8x8) merged deepstack cell features of a scene,
+    can a linear classifier trained on SOME scenes identify, in HELDOUT
+    scenes, which cells contain target a / target b?
+
+    Results (top-1 cell-pair recall) tell us whether the no-box pool can
+    *in principle* learn to localize, or whether the visual features are
+    the blocker (in which case difficulty must be relaxed: bigger
+    targets, fewer distractors).
+    """
+    import os
+    os.environ["HF_TOKEN"] = os.environ["HF_TOKEN"]
+    os.environ["HF_HOME"] = "/root/hf-cache"
+    head = _prepare(target_size=(target_size_min, target_size_max),
+                    n_distractor_range=(n_dist_min, n_dist_max),
+                    noise_amp=noise_amp)
+    import json, torch
+    import numpy as np
+    from pathlib import Path
+    from transformers import Qwen3VLForConditionalGeneration, AutoProcessor
+    from equiorient.experiments.train_nobox import NoBoxRunner, load_manifest
+
+    mf_path = Path("/root/phase2_data/manifest.json")
+    manifest = load_manifest(mf_path)
+    runner = NoBoxRunner(Path("/root/phase2_data"), Path("/dev/shm"))
+    runner.load_model()
+    # collect cell features for the first n_dev train scenes (identity views)
+    feats, y_cells = [], []
+    n = 0
+    with torch.no_grad():
+        runner.model.eval()
+        for e in manifest["examples"]:
+            if e["split"] != "train" or e["transform"] != "I":
+                continue
+            if n >= n_dev:
+                break
+            feat, grid = runner.vision_features(e["png"], requires_grad=False)
+            # feat: (1, T, 4096); cell layout h x w
+            h, w = int(grid[0][1]), int(grid[0][2])
+            f = feat[0].float().cpu().numpy()  # (h*w, 4096)
+            boxes = e["boxes"]
+            ca = (max(min(int(boxes["a"][0] / 192.0 * w), w), 0),
+                  max(min(int(boxes["a"][1] / 192.0 * h), h), 0))
+            cb = (max(min(int(boxes["b"][0] / 192.0 * w), w), 0),
+                  max(min(int(boxes["b"][1] / 192.0 * h), h), 0))
+            ia = ca[1] * w + ca[0]
+            ib = cb[1] * w + cb[0]
+            feats.append(f)
+            y_cells.append((ia, ib))
+            n += 1
+    X = np.concatenate(feats, axis=0)          # (n*T, 4096)
+    Y = np.zeros(len(X), dtype=int)
+    for k, (ia, ib) in enumerate(y_cells):
+        Y[k * 64 + ia] = 1
+        Y[k * 64 + ib] = 1
+    # train/test split by scene
+    from sklearn.linear_model import LogisticRegression
+    from sklearn.preprocessing import StandardScaler
+    half = n // 80 * 40
+    tr = slice(0, n // 2); te = slice(n // 2, n)
+    Xtr, Ytr = X[tr.start * 64:tr.stop * 64], Y[tr.start * 64:tr.stop * 64]
+    Xte, Yte = X[te.start * 64:te.stop * 64], Y[te.start * 64:te.stop * 64]
+    sc = StandardScaler().fit(Xtr)
+    clf = LogisticRegression(max_iter=2000, C=1.0).fit(sc.transform(Xtr), Ytr)
+    probs = clf.predict_proba(sc.transform(Xte))[:, 1].reshape(-1, 64)
+    top_correct = 0
+    for k, (ia, ib) in enumerate(y_cells[n // 2:]):
+        top = set(np.argsort(-probs[k])[:2])
+        if ia in top and ib in top:
+            top_correct += 1
+    n_t = n - n // 2
+    return {"n_scenes": n_t,
+            "cell_pair_top2_recall": round(top_correct / max(n_t, 1), 4),
+            "pos_rate": round(float(Ytr.mean()), 4),
+            "difficulty": {"target_size": [target_size_min, target_size_max],
+                           "n_distractor_range": [n_dist_min, n_dist_max],
+                           "noise_amp": noise_amp},
+            "repo_commit": head,
+            "explain": "top2 recall ~1.0 => features localizable; ~0.06 (2/64) => not."}
+
+
 @app.local_entrypoint()
 def main(arm: str = "equiorient", seed: int = 101, mode: str = "dev",
          n_train: int = 128, gate: bool = False, epochs: int = 2,
-         lr: float = 1e-4,
+         lr: float = 1e-4, probe: bool = False,
          target_size_min: float = 3.0, target_size_max: float = 5.0,
          n_dist_min: int = 12, n_dist_max: int = 20,
          noise_amp: int = 12):
     if gate:
         print("GATE:", run_gate.remote())
+        return
+    if probe:
+        print("PROBE:", probe_features.remote(
+            target_size_min=target_size_min, target_size_max=target_size_max,
+            n_dist_min=n_dist_min, n_dist_max=n_dist_max,
+            noise_amp=noise_amp))
         return
     m = run_arm.remote(arm=arm, seed=seed, mode=mode, n_train=n_train,
                        epochs=epochs, lr=lr,
