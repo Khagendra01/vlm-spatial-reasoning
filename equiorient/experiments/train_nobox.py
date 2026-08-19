@@ -316,8 +316,15 @@ class NoBoxRunner:
                 logits = self.head(zx, zy)
                 if collect_attn:
                     self._attn_cache[e["png"]] = attn.detach().cpu()
-                if self._diag_boxes and "boxes" in e:
-                    self._collect_attn_diag(attn, grid, e, attn_diag)
+                if self._diag_boxes:
+                    from equiorient.analysis.attn_diagnostic import (
+                        attention_mass_diag_from_example)
+                    d = attention_mass_diag_from_example(
+                        attn, e, int(grid[0][2]), int(grid[0][1]))
+                    if d is not None:
+                        attn_diag["target_mass"].append(d["target_mass"])
+                        attn_diag["non_target_mass"].append(
+                            d["non_target_mass"])
                 per_g[g]["total"] += 1
                 per_g[g]["correct"] += int(
                     logits.argmax(-1).item() == LABELS.index(e["label"]))
@@ -337,32 +344,6 @@ class NoBoxRunner:
                     float(np.mean(attn_diag["non_target_mass"])), 4),
                 "n": len(attn_diag["target_mass"])}
         return out
-
-    def _collect_attn_diag(self, attn, grid, e, diag):
-        """POST-HOC diagnostic only: measures how much attention mass the
-        learned pool places on the GT target cells vs the rest of the
-        image. Ground truth is used ONLY to *measure* the model, never to
-        select features or compute any training signal."""
-        import torch
-        mw = int(grid[0][2])
-        mh = int(grid[0][1])
-        h, w = mh, mw
-        canvas_cx, canvas_cy = 192.0, 192.0
-        self._grid_h = h
-        self._grid_w = w
-        target_idx = set()
-        n_tok = attn[0].numel()
-        for obj_id, (cx, cy, _sz) in e["boxes"].items():
-            c = (max(min(int(cx / canvas_cx * w), w), 0),
-                 max(min(int(cy / canvas_cy * h), h), 0))
-            i = c[1] * w + c[0]
-            if 0 <= i < n_tok:
-                target_idx.add(i)
-        aw = attn[0].flatten()
-        tgt = sum(float(aw[i]) for i in target_idx if 0 <= i < n_tok)
-        non_tgt = float(1.0 - tgt)
-        diag["target_mass"].append(tgt)
-        diag["non_target_mass"].append(non_tgt)
 
     def log(self, msg):
         line = f"[{time.strftime('%H:%M:%S')}] {msg}"

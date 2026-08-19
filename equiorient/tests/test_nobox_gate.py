@@ -65,18 +65,24 @@ def test_no_gt_access_source():
     for tok in forbidden_in_forward:
         check(f"no_gt_{tok}_in_model_code", tok not in code,
               f"found '{tok}' in executable code")
-    # harness file: boxes must NOT appear in make_examples or the runner
+    # harness file: boxes must NOT appear in training/forward-path runtime
+    # code nor in make_examples. The post-hoc attention-localization
+    # diagnostic lives in equiorient/analysis/attn_diagnostic.py (a
+    # separate module, imported by the harness), so the audited harness
+    # source itself must contain NO ground-truth references at all.
     harness_src = (src_dir / "experiments" / "train_nobox.py").read_text(
         encoding="utf-8")
-    # "boxes" may only appear in a comment / docstring; grep for it in
-    # runtime (non-comment) positions is imperfect; instead we assert the
-    # example dict construction has no boxes key.
+    stripped = re.sub(r'""".*?"""', '', harness_src, flags=re.DOTALL)
+    stripped = re.sub(r'#.*$', '', stripped, flags=re.MULTILINE)
     check("make_examples_has_no_boxes",
-          '"boxes"' not in harness_src.replace('"""', ''),
+          '"boxes"' not in stripped,
           "'boxes' key present in train_nobox.py source")
     check("make_examples_has_no_delta",
-          '"delta"' not in harness_src.replace('"""', ''),
+          '"delta"' not in stripped,
           "'delta' key present in train_nobox.py source")
+    for tok in ("displacement", "obj_id", ".cx", ".cy"):
+        check(f"no_gt_{tok}_in_harness", tok not in stripped,
+              f"found '{tok}' in train_nobox.py")
 
 
 def test_example_dicts_have_no_gt():

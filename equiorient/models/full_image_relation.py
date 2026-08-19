@@ -33,24 +33,31 @@ N_CLASSES = 8
 
 
 class FullImagePool(nn.Module):
-    """Learned single-query cross-attention over full-image tokens.
+    """Learned multi-query cross-attention over full-image tokens.
 
     forward(feat) -> (z_x, z_y, attn)
       feat: (1, T, feat_dim) post-merge deepstack tokens (full image).
-      attn: (1, T) attention weights over tokens — used as a *localization
-            diagnostic* only; it reveals WHERE the model attends, it is
-            NOT used to select features and carries no ground truth.
+      attn: (1, T) attention weights over tokens (averaged over queries) —
+            used as a *localization diagnostic* only; it reveals WHERE the
+            model attends, it is NOT used to select features and carries
+            no ground truth.
+
+    Multi-query: multiple learned readout queries let distinct queries
+    specialize on the two target objects without any supervision about
+    where they are. Context vectors are concatenated along the feature
+    axis before projection to z (z_x, z_y).
     """
 
     def __init__(self, feat_dim: int = FEAT_DIM,
-                 proj_dim: int = 512):
+                 proj_dim: int = 512, n_queries: int = 4):
         super().__init__()
         self.proj_dim = proj_dim
-        # single learned query (the "relation readout")
-        self.query = nn.Parameter(torch.randn(proj_dim) * 0.02)
+        self.n_queries = n_queries
+        # learned queries (the "relation readout"): (n_queries, proj_dim)
+        self.query = nn.Parameter(torch.randn(n_queries, proj_dim) * 0.02)
         self.k_proj = nn.Linear(feat_dim, proj_dim)
         self.v_proj = nn.Linear(feat_dim, proj_dim)
-        self.out = nn.Linear(proj_dim, Z_DIM)
+        self.out = nn.Linear(proj_dim * n_queries, Z_DIM)
         self._init_weights()
 
     def _init_weights(self):
@@ -65,14 +72,16 @@ class FullImagePool(nn.Module):
         # feat: (1, T, feat_dim) or (T, feat_dim); normalise to 3D
         if feat.dim() == 2:
             feat = feat.unsqueeze(0)
-        q = self.query.unsqueeze(0)          # (1, proj_dim)
+        q = self.query.unsqueeze(0)          # (1, n_q, proj_dim)
         k = self.k_proj(feat)                # (1, T, proj_dim)
         v = self.v_proj(feat)                # (1, T, proj_dim)
-        logits = torch.einsum("bp,btd->bt", q, k) / (self.proj_dim ** 0.5)  # (1, T)
-        attn = F.softmax(logits, dim=-1)     # (1, T)
-        ctx = torch.einsum("bt,btd->bd", attn, v)  # (1, proj_dim)
+        logits = torch.einsum("bqp,btd->bqt", q, k) / (self.proj_dim ** 0.5)  # (1, n_q, T)
+        attn = F.softmax(logits, dim=-1)     # (1, n_q, T)
+        ctx = torch.einsum("bqt,btd->bqd", attn, v)  # (1, n_q, proj_dim)
+        ctx = ctx.reshape(1, self.n_queries * self.proj_dim)  # (1, n_q*d)
         z = self.out(ctx)                    # (1, Z_DIM)
-        return z[..., :Z_BLOCK], z[..., Z_BLOCK:], attn  # (z_x, z_y, attn)
+        attn_mean = attn.mean(dim=1)         # (1, T) for diagnostics
+        return z[..., :Z_BLOCK], z[..., Z_BLOCK:], attn_mean  # (z_x, z_y, attn)
 
 
 class NoBoxEncoder(nn.Module):

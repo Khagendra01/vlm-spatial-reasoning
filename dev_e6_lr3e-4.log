@@ -1,55 +1,85 @@
 ✓ Initialized. View run at 
-https://modal.com/apps/kgengamer/main/ap-TXwvjK3LZSs19DvElJdpG9
+https://modal.com/apps/kgengamer/main/ap-3acRdLcz0WFZM8LN4rsv2z
 ✓ Created objects.
 ├── 🔨 Created mount 
 │   C:\Users\Khage\Desktop\VLM-Spatial-Reasoning-NoBox\modal\equiorient_nobox.p
 │   y
 ├── 🔨 Created function run_arm.
 └── 🔨 Created function run_gate.
-[02:38:06] train scenes 128 pairs 256 arm augmentation lam 1.0 lr 0.0003 NO-BOX
-[02:38:23] [augmentation] epoch 1/6 (ans 16.9479, struct 0.000000)
-[02:38:38] [augmentation] epoch 2/6 (ans 16.6920, struct 0.000000)
-[02:38:53] [augmentation] epoch 3/6 (ans 16.6762, struct 0.000000)
-[02:39:07] [augmentation] epoch 4/6 (ans 16.6624, struct 0.000000)
-[02:39:21] [augmentation] epoch 5/6 (ans 16.6604, struct 0.000000)
-[02:39:34] [augmentation] epoch 6/6 (ans 16.6610, struct 0.000000)
+[02:50:56] train scenes 128 pairs 256 arm augmentation lam 1.0 lr 0.0003 NO-BOX
+[02:51:13] [augmentation] epoch 1/6 (ans 16.9479, struct 0.000000)
+[02:51:26] [augmentation] epoch 2/6 (ans 16.6920, struct 0.000000)
+[02:51:40] [augmentation] epoch 3/6 (ans 16.6762, struct 0.000000)
+[02:51:53] [augmentation] epoch 4/6 (ans 16.6624, struct 0.000000)
+[02:52:06] [augmentation] epoch 5/6 (ans 16.6604, struct 0.000000)
+[02:52:19] [augmentation] epoch 6/6 (ans 16.6610, struct 0.000000)
+[02:53:51] DEV unseen_accuracy 0.1250 worst 0.1250
+[02:54:57] DEV unseen_accuracy 0.1250 worst 0.1250
+{
+ "mode": "dev",
+ "arm": "augmentation",
+ "seed": 101,
+ "n_train": 128,
+ "lambda": 1.0,
+ "lr": 0.0003,
+ "epochs": 6,
+ "variant": "no_box",
+ "train_loss": {
+  "answer": [
+   16.947906,
+   16.69202,
+   16.676176,
+   16.66243,
+   16.660402,
+   16.661047
+  ],
+  "structural": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "dev_eval": {
+  "per_transform": {
+   "I": 0.125,
+   "R": 0.125,
+   "R2": 0.125,
+   "R3": 0.125,
+   "H": 0.125,
+   "RH": 0.125,
+   "R2H": 0.125,
+   "R3H": 0.125
+  },
+  "unseen_accuracy": 0.125,
+  "worst_unseen_accuracy": 0.125,
+  "n_per_transform": {
+   "I": 512,
+   "R": 512,
+   "R2": 512,
+   "R3": 512,
+   "H": 512,
+   "RH": 512,
+   "R2H": 512,
+   "R3H": 512
+  },
+  "attention_diag": {
+   "mean_target_mass": 0.116,
+   "mean_non_target_mass": 0.884,
+   "n": 4096
+  }
+ },
+ "provenance": {
+  "git_commit": "1c141d0379eb9b2666d53e3a9795640385fc2402",
+  "dataset_manifest_sha256": "0b12e0f38eb93a74c9cf106fe09dc8a12ff8bd3fae5d9fe420d3a404f7ffd24f",
+  "backbone": "qwen3",
+  "torch": "2.8.0+cu128"
+ }
+}
+RESULT: {'mode': 'dev', 'arm': 'augmentation', 'seed': 101, 'n_train': 128, 'lambda': 1.0, 'lr': 0.0003, 'epochs': 6, 'variant': 'no_box', 'train_loss': {'answer': [16.947906, 16.69202, 16.676176, 16.66243, 16.660402, 16.661047], 'structural': [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]}, 'dev_eval': {'per_transform': {'I': 0.125, 'R': 0.125, 'R2': 0.125, 'R3': 0.125, 'H': 0.125, 'RH': 0.125, 'R2H': 0.125, 'R3H': 0.125}, 'unseen_accuracy': 0.125, 'worst_unseen_accuracy': 0.125, 'n_per_transform': {'I': 512, 'R': 512, 'R2': 512, 'R3': 512, 'H': 512, 'RH': 512, 'R2H': 512, 'R3H': 512}, 'attention_diag': {'mean_target_mass': 0.116, 'mean_non_target_mass': 0.884, 'n': 4096}}, 'provenance': {'git_commit': '1c141d0379eb9b2666d53e3a9795640385fc2402', 'dataset_manifest_sha256': '0b12e0f38eb93a74c9cf106fe09dc8a12ff8bd3fae5d9fe420d3a404f7ffd24f', 'backbone': 'qwen3', 'torch': '2.8.0+cu128'}, 'repo_commit': '1c141d0379eb9b2666d53e3a9795640385fc2402'}
+Stopping app - local entrypoint completed.
 
-`torch_dtype` is deprecated! Use `dtype` instead!
-
-Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]
-Loading checkpoint shards:  25%|██▌       | 1/4 [00:02<00:06,  2.03s/it]
-Loading checkpoint shards:  50%|█████     | 2/4 [00:04<00:04,  2.01s/it]
-Loading checkpoint shards:  75%|███████▌  | 3/4 [00:06<00:01,  2.00s/it]
-Loading checkpoint shards: 100%|██████████| 4/4 [00:07<00:00,  1.65s/it]
-Loading checkpoint shards: 100%|██████████| 4/4 [00:07<00:00,  1.78s/it]
-Traceback (most recent call last):
-  File "<frozen runpy>", line 198, in _run_module_as_main
-  File "<frozen runpy>", line 88, in _run_code
-  File "/root/repo/equiorient/experiments/train_nobox.py", line 464, in <module>
-    main()
-  File "/root/repo/equiorient/experiments/train_nobox.py", line 428, in main
-    ev = runner.evaluate(manifest, "dev")
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/root/repo/equiorient/experiments/train_nobox.py", line 320, in evaluate
-    self._collect_attn_diag(attn, grid, e, attn_diag)
-  File "/root/repo/equiorient/experiments/train_nobox.py", line 359, in _collect_attn_diag
-    tgt = sum(float(aw[i]) for i in target_idx if i < aw.numel())
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/root/repo/equiorient/experiments/train_nobox.py", line 359, in <genexpr>
-    tgt = sum(float(aw[i]) for i in target_idx if i < aw.numel())
-                    ~~^^^
-IndexError: index -70 is out of bounds for dimension 0 with size 64
-
-Stopping app - uncaught exception raised locally: RuntimeError('train failed rc=1').
-Traceback (most recent call last):
-  File "/pkg/modal/_runtime/container_io_manager.py", line 977, in handle_input_exception
-    yield
-  File "/pkg/modal/_container_entrypoint.py", line 187, in run_input_sync
-    values = io_context.call_function_sync()
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/pkg/modal/_runtime/container_io_manager.py", line 265, in call_function_sync
-    expected_value_or_values = self.finalized_function.callable(*args, **kwargs)
-                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/root/equiorient_nobox.py", line 95, in run_arm
-    raise RuntimeError(f"train failed rc={p.returncode}")
-RuntimeError: train failed rc=1
+✓ App completed. View run at 
+https://modal.com/apps/kgengamer/main/ap-3acRdLcz0WFZM8LN4rsv2z
