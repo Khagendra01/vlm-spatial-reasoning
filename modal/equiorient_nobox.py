@@ -39,7 +39,9 @@ SPARSE_CONE = ["equiorient", "modal", "configs", "cloud_setup"]
 
 def _prepare(target_size: tuple = (3.0, 5.0),
              n_distractor_range: tuple = (12, 20),
-             noise_amp: int = 12) -> str:
+             noise_amp: int = 12,
+             variant: str = "nobox_v1",
+             data_key: str = "") -> str:
     import subprocess
 
     def run(cmd):
@@ -59,24 +61,36 @@ def _prepare(target_size: tuple = (3.0, 5.0),
     import shutil
     import equiorient.data.manifests_nobox as mf
     from pathlib import Path
-    out = Path("/root/phase2_data")
-    shutil.rmtree(out, ignore_errors=True)
-    mf.build(out, n_dev=512, n_train=2048, n_val=512, n_test=1024,
+    key = data_key or _data_key(target_size, n_distractor_range, noise_amp,
+                                variant)
+    out = Path("/root/phase2_data") / key
+    if (out / "manifest.json").exists():
+        return head
+    tmp = Path("/root/phase2_data") / f"_tmp_{key}"
+    shutil.rmtree(tmp, ignore_errors=True)
+    mf.build(tmp, n_dev=512, n_train=2048, n_val=512, n_test=1024,
              target_size=target_size,
              n_distractor_range=n_distractor_range,
-             noise_amp=noise_amp)
+             noise_amp=noise_amp, variant=variant)
+    shutil.rmtree(out, ignore_errors=True)
+    tmp.rename(out)
     return head
 
 
 def _data_key(target_size: tuple, n_distractor_range: tuple,
-              noise_amp: int) -> str:
+              noise_amp: int, variant: str = "nobox_v1") -> str:
     """Deterministic key for a difficulty config. Identical data across
     arms/seeds (matched-arm contract) is guaranteed by (generator seed,
-    key) => one canonical build."""
+    key) => one canonical build.
+
+    NB: only variant != nobox_v1 changes the key, so the existing
+    volume cache (built without a variant string) stays valid for v1.
+    """
     import hashlib
-    return hashlib.sha256(
-        f"{target_size}|{n_distractor_range}|{noise_amp}".encode()
-    ).hexdigest()[:12]
+    body = f"{target_size}|{n_distractor_range}|{noise_amp}"
+    if variant != "nobox_v1":
+        body += f"|{variant}"
+    return hashlib.sha256(body.encode()).hexdigest()[:12]
 
 
 # ------------------------------------------------------------------ #
@@ -87,6 +101,7 @@ def _data_key(target_size: tuple, n_distractor_range: tuple,
 def prepare_data(target_size_min: float = 3.0, target_size_max: float = 5.0,
                  n_dist_min: int = 12, n_dist_max: int = 20,
                  noise_amp: int = 12,
+                 variant: str = "nobox_v1",
                  n_dev: int = 512, n_train: int = 2048,
                  n_val: int = 512, n_test: int = 1024) -> dict:
     """Clone repo + render the deterministic dataset ON CPU.
@@ -116,7 +131,7 @@ def prepare_data(target_size_min: float = 3.0, target_size_max: float = 5.0,
 
     ts = (target_size_min, target_size_max)
     nd = (n_dist_min, n_dist_max)
-    key = _data_key(ts, nd, noise_amp)
+    key = _data_key(ts, nd, noise_amp, variant)
     out = Path("/root/phase2_data") / key
     if (out / "manifest.json").exists():          # idempotent: same key, no rebuild
         return {"data_key": key, "rebuilt": False, "repo_commit": head,
@@ -127,7 +142,8 @@ def prepare_data(target_size_min: float = 3.0, target_size_max: float = 5.0,
     import equiorient.data.manifests_nobox as mf
     mf.build(tmp, n_dev=n_dev, n_train=n_train, n_val=n_val,
              n_test=n_test, target_size=ts,
-             n_distractor_range=nd, noise_amp=noise_amp)
+             n_distractor_range=nd, noise_amp=noise_amp,
+             variant=variant)
     shutil.rmtree(out, ignore_errors=True)        # atomic-ish swap
     tmp.rename(out)
     import json
@@ -147,7 +163,8 @@ def run_arm(arm: str, seed: int, n_train: int = 128, lam: float = 1.0,
             lr: float = 1e-4,
             target_size_min: float = 3.0, target_size_max: float = 5.0,
             n_dist_min: int = 12, n_dist_max: int = 20,
-            noise_amp: int = 12, data_key: str = "") -> dict:
+            noise_amp: int = 12, data_key: str = "",
+            variant: str = "nobox_v1") -> dict:
     import os
     os.environ["HF_TOKEN"] = os.environ["HF_TOKEN"]
     os.environ["HF_HOME"] = "/root/hf-cache"
@@ -158,7 +175,7 @@ def run_arm(arm: str, seed: int, n_train: int = 128, lam: float = 1.0,
     from pathlib import Path
     ts = (target_size_min, target_size_max)
     nd = (n_dist_min, n_dist_max)
-    key = data_key or _data_key(ts, nd, noise_amp)
+    key = data_key or _data_key(ts, nd, noise_amp, variant)
     data_src = Path("/root/phase2_data") / key
     if not (data_src / "manifest.json").exists():
         raise RuntimeError(
@@ -229,7 +246,8 @@ def probe_features(n_dev: int = 200,
                    target_size_min: float = 3.0,
                    target_size_max: float = 5.0,
                    n_dist_min: int = 12, n_dist_max: int = 20,
-                   noise_amp: int = 12) -> dict:
+                   noise_amp: int = 12,
+                   variant: str = "nobox_v1") -> dict:
     """Linear-probe the frozen deepstack features for target-cell
     localizability WITHOUT any training.
 
@@ -247,16 +265,18 @@ def probe_features(n_dev: int = 200,
     os.environ["HF_HOME"] = "/root/hf-cache"
     head = _prepare(target_size=(target_size_min, target_size_max),
                     n_distractor_range=(n_dist_min, n_dist_max),
-                    noise_amp=noise_amp)
+                    noise_amp=noise_amp, variant=variant)
     import json, torch
     import numpy as np
     from pathlib import Path
     from transformers import Qwen3VLForConditionalGeneration, AutoProcessor
     from equiorient.experiments.train_nobox import NoBoxRunner, load_manifest
 
-    mf_path = Path("/root/phase2_data/manifest.json")
-    manifest = load_manifest(Path("/root/phase2_data"))
-    runner = NoBoxRunner(Path("/root/phase2_data"), Path("/dev/shm"))
+    data_src = Path("/root/phase2_data") / _data_key(
+        (target_size_min, target_size_max), (n_dist_min, n_dist_max),
+        noise_amp, variant)
+    manifest = load_manifest(data_src)
+    runner = NoBoxRunner(data_src, Path("/dev/shm"))
     runner.load_model()
     # collect cell features for the first n_dev train scenes (identity views)
     feats, y_cells = [], []
@@ -344,7 +364,7 @@ def main(arm: str = "equiorient", seed: int = 101, mode: str = "dev",
          lr: float = 1e-4, probe: bool = False,
          target_size_min: float = 3.0, target_size_max: float = 5.0,
          n_dist_min: int = 12, n_dist_max: int = 20,
-         noise_amp: int = 12,
+         noise_amp: int = 12, variant: str = "nobox_v1",
          array: str = "", seeds: str = "", batch_parallel: int = 100):
     """Suggested confirmatory invocations:
       python modal/equiorient_nobox.py --array \
@@ -363,13 +383,13 @@ def main(arm: str = "equiorient", seed: int = 101, mode: str = "dev",
         print("PROBE:", probe_features.remote(
             target_size_min=target_size_min, target_size_max=target_size_max,
             n_dist_min=n_dist_min, n_dist_max=n_dist_max,
-            noise_amp=noise_amp))
+            noise_amp=noise_amp, variant=variant))
         return
     if not array:
         prep = prepare_data.remote(
             target_size_min=target_size_min, target_size_max=target_size_max,
             n_dist_min=n_dist_min, n_dist_max=n_dist_max,
-            noise_amp=noise_amp)
+            noise_amp=noise_amp, variant=variant)
         info = prep
         print(f"[single] data ready: {info}", flush=True)
         m = run_arm.remote(arm=arm, seed=seed, mode=mode, n_train=n_train,
@@ -377,7 +397,8 @@ def main(arm: str = "equiorient", seed: int = 101, mode: str = "dev",
                            target_size_min=target_size_min,
                            target_size_max=target_size_max,
                            n_dist_min=n_dist_min, n_dist_max=n_dist_max,
-                           noise_amp=noise_amp, data_key=info["data_key"])
+                           noise_amp=noise_amp, data_key=info["data_key"],
+                           variant=variant)
         print("RESULT:", m)
         return
 
@@ -398,7 +419,7 @@ def main(arm: str = "equiorient", seed: int = 101, mode: str = "dev",
     prep = prepare_data.remote(
         target_size_min=target_size_min, target_size_max=target_size_max,
         n_dist_min=n_dist_min, n_dist_max=n_dist_max,
-        noise_amp=noise_amp)
+        noise_amp=noise_amp, variant=variant)
     info = prep
     print(f"[batch] data ready: {info}", flush=True)
 
@@ -416,7 +437,8 @@ def main(arm: str = "equiorient", seed: int = 101, mode: str = "dev",
                            target_size_min=target_size_min,
                            target_size_max=target_size_max,
                            n_dist_min=n_dist_min, n_dist_max=n_dist_max,
-                           noise_amp=noise_amp, data_key=info["data_key"])
+                           noise_amp=noise_amp, data_key=info["data_key"],
+                           variant=variant)
              for j in jobs]
     for i, c in enumerate(calls):
         r = c.get()

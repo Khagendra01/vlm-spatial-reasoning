@@ -53,6 +53,38 @@ SHAPES = ("circle", "square", "octagon")
 TARGET_A_COLOR = (222, 60, 52)    # red
 TARGET_B_COLOR = (48, 98, 214)    # blue
 
+# ------------------------------------------------------------------ #
+# Variants (DEV investigation 2026-08-19)
+# ------------------------------------------------------------------ #
+# nobox_v1             : a is ALWAYS red, b is ALWAYS blue. We then
+#   discovered a global shortcut: the model can read "red-mass centroid
+#   vs blue-mass centroid" from pooled tokens and recover label without
+#   ever localizing the pair (attention never concentrates on the pair
+#   cells). Probes: linear 0.10 / MLP 0.11 cell-pair recall; attention
+#   pair_in_top4_pct 0.0-2.0.
+#
+# nobox_v2_colorflip   : removes the red-vs-blue mass/centroid shortcut.
+#   Identity moves from color to SHAPE (a = circle ALWAYS, b = square
+#   ALWAYS) and the a/b color assignment is randomized per scene: half
+#   the scenes are (a=red, b=blue), half are (a=blue, b=red), sampled
+#   independently of geometry. Then:
+#     * red-vs-blue mass centroid direction is UNcorrelated with the
+#       label across the dataset (red is "a" only 50% of scenes) -> the
+#       color centroid shortcut is unlearnable by construction;
+#     * the image still uniquely determines the label (the one red
+#       object is the circle in some scenes and the square in others;
+#       shape disambiguates a vs b) so the task stays well-posed and
+#       gate tests still pass;
+#     * solving now REQUIRES localizing the two colored blobs and
+#       reading shape-fused identity — the behavior we want to probe.
+#   Warning (disclosed, not hidden): "red circle centroid vs blue
+#   square centroid" is still a global statistic; it is harder to pool
+#   than pure color (needs shape classification per mass token) but
+#   EXISTS. The dev runs below measure whether the baseline stays
+#   non-saturated after convergence WITH these residual leakages.
+VARIANT_V1 = "nobox_v1"
+VARIANT_V2 = "nobox_v2_colorflip"
+
 # distractor palette: muted grays, disjoint from target colors
 DISTRACTOR_PALETTE = [
     (145, 140, 135),  # warm gray
@@ -94,12 +126,16 @@ def _gen_distractor_appearance(rng: random.Random,
 
 def make_scene(scene_id: str, rng: random.Random, label: str,
                target_size: tuple = (3.0, 5.0),
-               n_distractor_range: tuple = (12, 20)) -> SceneNB:
-    """Scene with visually identifiable targets a (red) and b (blue).
+               n_distractor_range: tuple = (12, 20),
+               variant: str = VARIANT_V1) -> SceneNB:
+    """Scene with visually identifiable target pair.
 
     Geometry matches the boxed v2/v4 generator: a and b sit opposite
     around a random center at the label direction; 12-20 gray
     distractors clutter the canvas. Label = direction of b -> a.
+
+    variant selects the identity encoding (see VARIANT_V1/VARIANT_V2
+    docs at the top of this module).
     """
     from equiorient.algebra.label_action import DIRECTIONS, LABELS
 
@@ -118,12 +154,28 @@ def make_scene(scene_id: str, rng: random.Random, label: str,
     lab = direction_of(dx, dy)
     if lab is None:
         return make_scene(scene_id, rng, label, target_size,
-                          n_distractor_range)
+                          n_distractor_range, variant)
 
-    a = ObjectNB("a", ax, ay, rng.choice(SHAPES),
-                 round(rng.uniform(*target_size), 1), TARGET_A_COLOR)
-    b = ObjectNB("b", bx, by, rng.choice(SHAPES),
-                 round(rng.uniform(*target_size), 1), TARGET_B_COLOR)
+    if variant == VARIANT_V2:
+        # Identity by SHAPE: a is always the circle, b is always the
+        # square. Color is decoupled from identity: 50/50 per scene
+        # whether (a=red, b=blue) or (a=blue, b=red). Draws the rng
+        # state in the same order that v1 would have used for shapes,
+        # so the geometry RNG stream is shared across variants.
+        flip = rng.choice((False, True))
+        if flip:
+            a_color, b_color = TARGET_B_COLOR, TARGET_A_COLOR
+        else:
+            a_color, b_color = TARGET_A_COLOR, TARGET_B_COLOR
+        a = ObjectNB("a", ax, ay, "circle",
+                     round(rng.uniform(*target_size), 1), a_color)
+        b = ObjectNB("b", bx, by, "square",
+                     round(rng.uniform(*target_size), 1), b_color)
+    else:
+        a = ObjectNB("a", ax, ay, rng.choice(SHAPES),
+                     round(rng.uniform(*target_size), 1), TARGET_A_COLOR)
+        b = ObjectNB("b", bx, by, rng.choice(SHAPES),
+                     round(rng.uniform(*target_size), 1), TARGET_B_COLOR)
     objs = [a, b]
 
     lo, hi = n_distractor_range
@@ -146,7 +198,8 @@ def generate_pack(num_scenes: int, seed: int,
                   labels: Optional[list] = None,
                   id_offset: int = 0,
                   target_size: tuple = (3.0, 5.0),
-                  n_distractor_range: tuple = (12, 20)) -> list:
+                  n_distractor_range: tuple = (12, 20),
+                  variant: str = VARIANT_V1) -> list:
     rng = random.Random(seed)
     from equiorient.algebra.label_action import LABELS
     if labels is None:
@@ -155,5 +208,5 @@ def generate_pack(num_scenes: int, seed: int,
     for i in range(num_scenes):
         lab = labels[i % len(labels)]
         out.append(make_scene(f"scene_{i + id_offset:06d}", rng, lab,
-                              target_size, n_distractor_range))
+                              target_size, n_distractor_range, variant))
     return out

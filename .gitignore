@@ -1,2 +1,6 @@
 ﻿no-box-tiny-data/
 results/equiorient_no_box/tiny_smoke/
+results/phase2_data/
+*.log
+__pycache__/
+*.pyc
