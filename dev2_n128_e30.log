@@ -1,0 +1,183 @@
+✓ Initialized. View run at 
+https://modal.com/apps/kgengamer/main/ap-mfnaYT5O1nMudNdu4GZNdx
+✓ Created objects.
+├── 🔨 Created mount 
+│   C:\Users\Khage\Desktop\VLM-Spatial-Reasoning-NoBox\modal\equiorient_nobox.p
+│   y
+├── 🔨 Created function run_arm.
+├── 🔨 Created function run_gate.
+└── 🔨 Created function probe_features.
+truct 0.000000, train_acc 0.094)
+[16:15:55] [augmentation] epoch 8/30 (ans 16.6615, struct 0.000000, train_acc 0.125)
+[16:16:19] [augmentation] epoch 9/30 (ans 16.6530, struct 0.000000, train_acc 0.125)
+[16:16:43] [augmentation] epoch 10/30 (ans 16.6483, struct 0.000000, train_acc 0.125)
+[16:17:07] [augmentation] epoch 11/30 (ans 16.6548, struct 0.000000, train_acc 0.125)
+[16:17:31] [augmentation] epoch 12/30 (ans 16.6492, struct 0.000000, train_acc 0.125)
+[16:17:56] [augmentation] epoch 13/30 (ans 16.6541, struct 0.000000, train_acc 0.121)
+[16:18:20] [augmentation] epoch 14/30 (ans 16.6455, struct 0.000000, train_acc 0.121)
+[16:18:44] [augmentation] epoch 15/30 (ans 16.6491, struct 0.000000, train_acc 0.125)
+[16:19:08] [augmentation] epoch 16/30 (ans 16.6587, struct 0.000000, train_acc 0.141)
+[16:19:32] [augmentation] epoch 17/30 (ans 17.1955, struct 0.000000, train_acc 0.125)
+[16:19:56] [augmentation] epoch 18/30 (ans 16.7569, struct 0.000000, train_acc 0.125)
+[16:20:20] [augmentation] epoch 19/30 (ans 16.7575, struct 0.000000, train_acc 0.125)
+[16:20:45] [augmentation] epoch 20/30 (ans 16.6888, struct 0.000000, train_acc 0.125)
+[16:21:09] [augmentation] epoch 21/30 (ans 16.6654, struct 0.000000, train_acc 0.125)
+[16:21:34] [augmentation] epoch 22/30 (ans 16.6574, struct 0.000000, train_acc 0.125)
+[16:21:58] [augmentation] epoch 23/30 (ans 16.6487, struct 0.000000, train_acc 0.125)
+[16:22:24] [augmentation] epoch 24/30 (ans 16.2055, struct 0.000000, train_acc 0.125)
+[16:22:50] [augmentation] epoch 25/30 (ans 117.0843, struct 0.000000, train_acc 0.125)
+[16:23:16] [augmentation] epoch 26/30 (ans 17.3449, struct 0.000000, train_acc 0.125)
+[16:23:42] [augmentation] epoch 27/30 (ans 16.7538, struct 0.000000, train_acc 0.125)
+[16:24:06] [augmentation] epoch 28/30 (ans 16.5223, struct 0.000000, train_acc 0.125)
+[16:24:30] [augmentation] epoch 29/30 (ans 16.2634, struct 0.000000, train_acc 0.125)
+[16:24:54] [augmentation] epoch 30/30 (ans 13.9010, struct 0.000000, train_acc 0.125)
+[16:27:25] DEV unseen_accuracy 0.3551 worst 0.3438
+[16:29:34] DEV unseen_accuracy 0.3551 worst 0.3438
+{
+ "mode": "dev",
+ "arm": "augmentation",
+ "seed": 101,
+ "n_train": 128,
+ "lambda": 1.0,
+ "lr": 0.0005,
+ "epochs": 30,
+ "variant": "no_box",
+ "train_loss": {
+  "answer": [
+   17.075548,
+   16.682575,
+   16.704918,
+   16.671992,
+   16.692839,
+   16.672998,
+   16.661351,
+   16.661497,
+   16.653013,
+   16.648273,
+   16.654753,
+   16.649162,
+   16.654125,
+   16.645461,
+   16.649089,
+   16.658748,
+   17.195516,
+   16.756858,
+   16.757493,
+   16.688831,
+   16.665379,
+   16.657379,
+   16.6487,
+   16.205498,
+   117.084311,
+   17.344868,
+   16.753835,
+   16.522338,
+   16.26338,
+   13.900962
+  ],
+  "structural": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "train_acc": [
+   0.125,
+   0.125,
+   0.125,
+   0.125,
+   0.125,
+   0.125,
+   0.0938,
+   0.125,
+   0.125,
+   0.125,
+   0.125,
+   0.125,
+   0.1211,
+   0.1211,
+   0.125,
+   0.1406,
+   0.125,
+   0.125,
+   0.125,
+   0.125,
+   0.125,
+   0.125,
+   0.125,
+   0.125,
+   0.125,
+   0.125,
+   0.125,
+   0.125,
+   0.125,
+   0.125
+  ]
+ },
+ "dev_eval": {
+  "per_transform": {
+   "I": 0.3379,
+   "R": 0.3613,
+   "R2": 0.3496,
+   "R3": 0.3594,
+   "H": 0.3574,
+   "RH": 0.3438,
+   "R2H": 0.3652,
+   "R3H": 0.3574
+  },
+  "unseen_accuracy": 0.3551,
+  "worst_unseen_accuracy": 0.3438,
+  "n_per_transform": {
+   "I": 512,
+   "R": 512,
+   "R2": 512,
+   "R3": 512,
+   "H": 512,
+   "RH": 512,
+   "R2H": 512,
+   "R3H": 512
+  },
+  "attention_diag": {
+   "mean_pair_mass": 0.0713,
+   "pair_in_top4_pct": 2.0,
+   "n": 4096
+  }
+ },
+ "provenance": {
+  "git_commit": "cbfd480a84bf46fcd74620a059db4fa65991e1a7",
+  "dataset_manifest_sha256": "305f49ede0893589de6d6d8a17c5fbf3aa19b22bdcecb0716710cd8414481fba",
+  "backbone": "qwen3",
+  "torch": "2.8.0+cu128"
+ }
+}
+
+RESULT: {'mode': 'dev', 'arm': 'augmentation', 'seed': 101, 'n_train': 128, 'lambda': 1.0, 'lr': 0.0005, 'epochs': 30, 'variant': 'no_box', 'train_loss': {'answer': [17.075548, 16.682575, 16.704918, 16.671992, 16.692839, 16.672998, 16.661351, 16.661497, 16.653013, 16.648273, 16.654753, 16.649162, 16.654125, 16.645461, 16.649089, 16.658748, 17.195516, 16.756858, 16.757493, 16.688831, 16.665379, 16.657379, 16.6487, 16.205498, 117.084311, 17.344868, 16.753835, 16.522338, 16.26338, 13.900962], 'structural': [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], 'train_acc': [0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.0938, 0.125, 0.125, 0.125, 0.125, 0.125, 0.1211, 0.1211, 0.125, 0.1406, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125]}, 'dev_eval': {'per_transform': {'I': 0.3379, 'R': 0.3613, 'R2': 0.3496, 'R3': 0.3594, 'H': 0.3574, 'RH': 0.3438, 'R2H': 0.3652, 'R3H': 0.3574}, 'unseen_accuracy': 0.3551, 'worst_unseen_accuracy': 0.3438, 'n_per_transform': {'I': 512, 'R': 512, 'R2': 512, 'R3': 512, 'H': 512, 'RH': 512, 'R2H': 512, 'R3H': 512}, 'attention_diag': {'mean_pair_mass': 0.0713, 'pair_in_top4_pct': 2.0, 'n': 4096}}, 'provenance': {'git_commit': 'cbfd480a84bf46fcd74620a059db4fa65991e1a7', 'dataset_manifest_sha256': '305f49ede0893589de6d6d8a17c5fbf3aa19b22bdcecb0716710cd8414481fba', 'backbone': 'qwen3', 'torch': '2.8.0+cu128'}, 'repo_commit': 'cbfd480a84bf46fcd74620a059db4fa65991e1a7'}
+Stopping app - local entrypoint completed.
+✓ App completed. View run at 
+https://modal.com/apps/kgengamer/main/ap-mfnaYT5O1nMudNdu4GZNdx
