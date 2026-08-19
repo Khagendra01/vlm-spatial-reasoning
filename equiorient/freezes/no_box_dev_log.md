@@ -58,3 +58,25 @@ under equiorient noise. So no-box learning works when the pixels carry
 identifiable color statistics; it failed before only because (a) v4 data made
 targets visually identical to distractors, and (b) the stale feature cache hid
 real training progress.
+
+## Diagnostic Runs (2026-08-19)
+
+### Task 1: Latent Collapse Diagnosis (EquiOrient, v1 D18, seed 101)
+- File: equiorient/freezes/diag_eq_s101_latent.json
+- FINDING: Trivial latent collapse. z norm collapses 1.41 -> 0.09 (ep1->27).
+  Effective rank 11.66 -> 1.97. cos(zx,zgx) ~1.000 throughout (z invariant to g).
+  z_ablation_acc = 0.125 at all epochs (z carries no information).
+  Root cause: MSE loss ||G*g*z - z_gx|| has trivial minimum at z=0.
+  Fix: add norm regularizer lambda*||z||^2 to prevent collapse.
+
+### Task 2: v2 Feature Probes
+- BLOCKED: Modal workspace spend limit exceeded.
+- Code ready in equiorient/experiments/probe_nobox_v2.py.
+
+### Task 3: Easier v2 Conditions
+- Condition A (6-10px/4-6 dist/n4): 0.125 chance at 60ep. UNLEARNABLE.
+- Condition B (5-8px/5-8 dist/n6): BLOCKED (spend limit).
+- Condition C (4-7px/4-6 dist/n4): BLOCKED (spend limit).
+
+### Budget Status
+- Modal workspace spend limit EXCEEDED. No further GPU runs possible.
