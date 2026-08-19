@@ -94,6 +94,7 @@ class NoBoxRunner:
         self._pix_cache: dict = {}
         self._feat_cache: dict = {}
         self._attn_cache: dict = {}
+        self._diag_boxes = True
         self.log_f = open(self.out / "run.log", "w", encoding="utf-8")
 
     # ------------------------------------------------------------------ #
@@ -188,7 +189,7 @@ class NoBoxRunner:
     # training
     # ------------------------------------------------------------------ #
     def train(self, arm: str, examples: list, lam: float | None,
-              epochs: int, batch: int, seed: int) -> dict:
+              epochs: int, batch: int, seed: int, lr: float = 1e-4) -> dict:
         """examples: list of dicts {scene_id, transform, png, label_idx}.
         NOTE: examples intentionally contain NO boxes/centers/delta."""
         with torch.no_grad():
@@ -203,7 +204,7 @@ class NoBoxRunner:
         opt = torch.optim.AdamW(
             list(self.enc.parameters()) + list(self.head.parameters())
             + [p for n, p in self.model.named_parameters()
-               if p.requires_grad], lr=1e-4)
+               if p.requires_grad], lr=lr)
         pairs = [(e["scene_id"], e["transform"], e["png"],
                   e["label_idx"]) for e in examples]
         use_transform = arm != "original_sft"
@@ -304,6 +305,7 @@ class NoBoxRunner:
         per_g: dict[str, dict] = {}
         for g in ELEMENTS:
             per_g[g] = {"correct": 0, "total": 0}
+        attn_diag = {"target_mass": [], "non_target_mass": []}
         with torch.no_grad():
             for e in manifest["examples"]:
                 if e["split"] != split:
@@ -314,6 +316,8 @@ class NoBoxRunner:
                 logits = self.head(zx, zy)
                 if collect_attn:
                     self._attn_cache[e["png"]] = attn.detach().cpu()
+                if self._diag_boxes and "boxes" in e:
+                    self._collect_attn_diag(attn, grid, e, attn_diag)
                 per_g[g]["total"] += 1
                 per_g[g]["correct"] += int(
                     logits.argmax(-1).item() == LABELS.index(e["label"]))
@@ -321,10 +325,41 @@ class NoBoxRunner:
                for g in ELEMENTS}
         unseen = float(np.mean([acc[g] for g in UNSEEN]))
         worst = float(min(acc[g] for g in UNSEEN))
-        return {"per_transform": {g: round(acc[g], 4) for g in ELEMENTS},
-                "unseen_accuracy": round(unseen, 4),
-                "worst_unseen_accuracy": round(worst, 4),
-                "n_per_transform": {g: per_g[g]["total"] for g in ELEMENTS}}
+        out = {"per_transform": {g: round(acc[g], 4) for g in ELEMENTS},
+               "unseen_accuracy": round(unseen, 4),
+               "worst_unseen_accuracy": round(worst, 4),
+               "n_per_transform": {g: per_g[g]["total"] for g in ELEMENTS}}
+        if self._diag_boxes and attn_diag["target_mass"]:
+            out["attention_diag"] = {
+                "mean_target_mass": round(
+                    float(np.mean(attn_diag["target_mass"])), 4),
+                "mean_non_target_mass": round(
+                    float(np.mean(attn_diag["non_target_mass"])), 4),
+                "n": len(attn_diag["target_mass"])}
+        return out
+
+    def _collect_attn_diag(self, attn, grid, e, diag):
+        """POST-HOC diagnostic only: measures how much attention mass the
+        learned pool places on the GT target cells vs the rest of the
+        image. Ground truth is used ONLY to *measure* the model, never to
+        select features or compute any training signal."""
+        import torch
+        mw = int(grid[0][2])
+        mh = int(grid[0][1])
+        h, w = mh, mw
+        canvas_cx, canvas_cy = 192.0, 192.0
+        self._grid_h = h
+        self._grid_w = w
+        target_idx = set()
+        for obj_id, (cx, cy, _sz) in e["boxes"].items():
+            c = (min(int(cx / canvas_cx * w), w - 1),
+                 min(int(cy / canvas_cy * h), h - 1))
+            target_idx.add(c[1] * w + c[0])
+        aw = attn[0].flatten()
+        tgt = sum(float(aw[i]) for i in target_idx if i < aw.numel())
+        non_tgt = float(1.0 - tgt)
+        diag["target_mass"].append(tgt)
+        diag["non_target_mass"].append(non_tgt)
 
     def log(self, msg):
         line = f"[{time.strftime('%H:%M:%S')}] {msg}"
@@ -358,6 +393,7 @@ def main():
     ap.add_argument("--lambda", dest="lam", type=float, default=1.0)
     ap.add_argument("--epochs", type=int, default=2)
     ap.add_argument("--batch", type=int, default=8)
+    ap.add_argument("--lr", type=float, default=1e-4)
     ap.add_argument("--data", default="results/phase2_data")
     ap.add_argument("--out", default="results/equiorient_no_box/dev")
     ap.add_argument("--eval_split", default="dev")
@@ -381,14 +417,14 @@ def main():
     if a.mode == "tiny":
         train_ids = subset_scenes(manifest, "train", 8)
         ex = make_examples(manifest, train_ids)
-        hist = runner.train(a.arm, ex, a.lam, a.epochs, a.batch, a.seed)
+        hist = runner.train(a.arm, ex, a.lam, a.epochs, a.batch, a.seed, a.lr)
         ev = runner.evaluate(manifest, "dev")
     else:
         train_ids = subset_scenes(manifest, "train", a.n_train)
         ex = make_examples(manifest, train_ids)
         runner.log(f"train scenes {len(train_ids)} pairs {len(ex)} "
-                   f"arm {a.arm} lam {a.lam} NO-BOX")
-        hist = runner.train(a.arm, ex, a.lam, a.epochs, a.batch, a.seed)
+                   f"arm {a.arm} lam {a.lam} lr {a.lr} NO-BOX")
+        hist = runner.train(a.arm, ex, a.lam, a.epochs, a.batch, a.seed, a.lr)
         ev = runner.evaluate(manifest, "dev")
         runner.log(f"DEV unseen_accuracy {ev['unseen_accuracy']:.4f} "
                    f"worst {ev['worst_unseen_accuracy']:.4f}")
@@ -412,7 +448,8 @@ def main():
         dataset_sha = "unknown"
 
     result = {"mode": a.mode, "arm": a.arm, "seed": a.seed,
-              "n_train": a.n_train, "lambda": a.lam, "variant": "no_box",
+              "n_train": a.n_train, "lambda": a.lam, "lr": a.lr,
+              "epochs": a.epochs, "variant": "no_box",
               "train_loss": hist, f"{eval_split}_eval": ev,
               "provenance": {"git_commit": git_commit,
                              "dataset_manifest_sha256": dataset_sha,

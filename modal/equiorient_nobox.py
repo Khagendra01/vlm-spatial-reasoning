@@ -70,7 +70,8 @@ def _prepare() -> str:
               secrets=[modal.Secret.from_name("hf-token")],
               timeout=6 * 60 * 60)
 def run_arm(arm: str, seed: int, n_train: int = 128, lam: float = 1.0,
-            epochs: int = 2, batch: int = 8, mode: str = "dev") -> dict:
+            epochs: int = 2, batch: int = 8, mode: str = "dev",
+            lr: float = 1e-4) -> dict:
     import os
     os.environ["HF_TOKEN"] = os.environ["HF_TOKEN"]
     os.environ["HF_HOME"] = "/root/hf-cache"
@@ -83,6 +84,7 @@ def run_arm(arm: str, seed: int, n_train: int = 128, lam: float = 1.0,
            "--arm", arm, "--seed", str(seed),
            "--n_train", str(n_train), "--lambda", str(lam),
            "--epochs", str(epochs), "--batch", str(batch),
+           "--lr", str(lr),
            "--data", "/root/phase2_data",
            "--out", str(out_dir)]
     import subprocess
@@ -112,11 +114,13 @@ def run_gate() -> dict:
 
 @app.local_entrypoint()
 def main(arm: str = "equiorient", seed: int = 101, mode: str = "dev",
-         n_train: int = 128, gate: bool = False):
+         n_train: int = 128, gate: bool = False, epochs: int = 2,
+         lr: float = 1e-4):
     if gate:
         print("GATE:", run_gate.remote())
         return
-    m = run_arm.remote(arm=arm, seed=seed, mode=mode, n_train=n_train)
+    m = run_arm.remote(arm=arm, seed=seed, mode=mode, n_train=n_train,
+                       epochs=epochs, lr=lr)
     print("RESULT:", m)
 
 

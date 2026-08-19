@@ -1,0 +1,40 @@
+# EquiOrient NO-BOX confirmatory freeze ledger (fill at freeze)
+
+# THIS LEDGER MUST BE COMMITTED BEFORE inspecting confirmatory test
+# results. Follows the Phase-2 freeze convention.
+
+no_box_freeze:
+  architecture: "learned single-query cross-attention over ALL full-image Qwen3 deepstack tokens (no GT boxes/centers/displacement)"
+  branch: research/equiorient-no-box
+  runner: equiorient.experiments.train_nobox
+  dataset: "same deterministic v4 manifests (SHA-256-seeded noise), rebuilt per run"
+  backbone: "Qwen/Qwen3-VL-8B-Instruct @ 0c351dd01ed87e9c1b53cbc748cba10e6187ff3b"
+  transformers: "==4.57.6"
+  arms_primary: [augmentation, equiorient, wrong_geometry]
+  arms_secondary_if_compute: [output_consistency, latent_invariance, original_sft]
+  train_sizes: [128, 512]
+  primary_train_size: 128
+  seeds_primary: [101, 202, 303, 404, 505, 606, 707, 808, 909, 1010, 1111, 1212, 1313, 1414, 1515]
+  seeds_n512: [101, 202, 303, 404, 505]
+  lambda: 1.0
+  epochs: 2
+  batch: 8
+  optimizer: AdamW lr 1e-4
+  training_generators: [H, R90]
+  unseen_group_elements: [R2, R3, RH, R2H, R3H]
+  primary_metric: unseen_group_accuracy
+  primary_contrasts:
+    - "H1: EquiOrient - Augmentation"
+    - "H2: EquiOrient - WrongGeometry"
+    - "H3: Augmentation - WrongGeometry"
+  statistic: "matched-seed paired bootstrap (resample seeds; within seed resample test scenes; preserve pairing) + paired t-test"
+  dev_target_range: [0.55, 0.90]
+  dev_preferred_range: [0.60, 0.85]
+  git_sha: PENDING
+  dataset_manifest_sha256: PENDING
+  verification: NOBOX_GATE 25/25 + PHASE2_GATE 45/45
+  interpretation_rules:
+    A: "EquiOrient > Augmentation AND EquiOrient > WrongGeometry"
+    B: "EquiOrient ~ Augmentation BUT EquiOrient > WrongGeometry"
+    C: "EquiOrient ~ Augmentation ~ WrongGeometry"
+    D: "WrongGeometry or Augmentation outperforms EquiOrient"

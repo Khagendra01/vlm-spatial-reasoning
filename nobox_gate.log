@@ -1,0 +1,45 @@
+✓ Initialized. View run at 
+https://modal.com/apps/kgengamer/main/ap-Ps7iwyGrksPiE1PuqNucqf
+✓ Created objects.
+├── 🔨 Created mount 
+│   C:\Users\Khage\Desktop\VLM-Spatial-Reasoning-NoBox\modal\equiorient_nobox.p
+│   y
+├── 🔨 Created function run_arm.
+└── 🔨 Created function run_gate.
+[no-box] source-level no-ground-truth-audit
+  PASS no_gt_boxes_in_model_code
+  PASS no_gt_pixel_transform_in_model_code
+  PASS no_gt_displacement_in_model_code
+  PASS no_gt_delta_in_model_code
+  PASS no_gt_obj_id_in_model_code
+  PASS no_gt_.cx_in_model_code
+  PASS no_gt_.cy_in_model_code
+  PASS make_examples_has_no_boxes
+  PASS make_examples_has_no_delta
+[no-box] example dicts carry no ground-truth geometry
+  PASS example_has_no_boxes_key
+  PASS example_has_no_delta_key
+  PASS example_keys_are_minimal
+[no-box] D4 + wrong-law
+  PASS no_box_d4_laws_pass
+  PASS no_box_wrong_law_self_consistent
+  PASS no_box_wrong_differs_on_holdout
+  PASS no_box_label_perm_H
+[no-box] manipulation/gradient/init checks (CPU)
+  PASS no_box_equivariance_loss_nonzero
+  PASS no_box_wrong_loss_nonzero
+  PASS no_box_grad_reaches_query
+  PASS no_box_grad_reaches_k_proj
+  PASS no_box_grad_reaches_head
+  PASS no_box_common_initialization
+  PASS no_box_equal_trainable_params
+  PASS no_box_z_ablation_changes_logits
+  PASS no_box_attention_over_all_tokens
+
+TOTAL: 25 passed, 0 failed
+NOBOX_GATE_PASS
+
+GATE: {'gate': 'PASS', 'repo_commit': 'ddc68fa37a137f6216518aafc9c1a57ae35074b4'}
+Stopping app - local entrypoint completed.
+✓ App completed. View run at 
+https://modal.com/apps/kgengamer/main/ap-Ps7iwyGrksPiE1PuqNucqf

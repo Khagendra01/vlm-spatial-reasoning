@@ -1,0 +1,66 @@
+✓ Initialized. View run at 
+https://modal.com/apps/kgengamer/main/ap-X08nxk4wFzwJPMBtW2SOMY
+✓ Created objects.
+├── 🔨 Created mount 
+│   C:\Users\Khage\Desktop\VLM-Spatial-Reasoning-NoBox\modal\equiorient_nobox.p
+│   y
+├── 🔨 Created function run_arm.
+└── 🔨 Created function run_gate.
+RESULT: {'mode': 'dev', 'arm': 'augmentation', 'seed': 101, 'n_train': 128, 'lambda': 1.0, 'variant': 'no_box', 'train_loss': {'answer': [16.976683, 16.651365], 'structural': [0.0, 0.0]}, 'dev_eval': {'per_transform': {'I': 0.1387, 'R': 0.1289, 'R2': 0.1348, 'R3': 0.1113, 'H': 0.1328, 'RH': 0.1367, 'R2H': 0.1309, 'R3H': 0.1289}, 'unseen_accuracy': 0.1285, 'worst_unseen_accuracy': 0.1113, 'n_per_transform': {'I': 512, 'R': 512, 'R2': 512, 'R3': 512, 'H': 512, 'RH': 512, 'R2H': 512, 'R3H': 512}}, 'provenance': {'git_commit': 'ddc68fa37a137f6216518aafc9c1a57ae35074b4', 'dataset_manifest_sha256': '0b12e0f38eb93a74c9cf106fe09dc8a12ff8bd3fae5d9fe420d3a404f7ffd24f', 'backbone': 'qwen3', 'torch': '2.8.0+cu128'}, 'repo_commit': 'ddc68fa37a137f6216518aafc9c1a57ae35074b4'}
+[02:04:58] train scenes 128 pairs 256 arm augmentation lam 1.0 NO-BOX
+[02:05:25] [augmentation] epoch 1/2 (ans 16.9767, struct 0.000000)
+[02:05:50] [augmentation] epoch 2/2 (ans 16.6514, struct 0.000000)
+[02:08:16] DEV unseen_accuracy 0.1293 worst 0.1094
+[02:10:20] DEV unseen_accuracy 0.1285 worst 0.1113
+{
+ "mode": "dev",
+ "arm": "augmentation",
+ "seed": 101,
+ "n_train": 128,
+ "lambda": 1.0,
+ "variant": "no_box",
+ "train_loss": {
+  "answer": [
+   16.976683,
+   16.651365
+  ],
+  "structural": [
+   0.0,
+   0.0
+  ]
+ },
+ "dev_eval": {
+  "per_transform": {
+   "I": 0.1387,
+   "R": 0.1289,
+   "R2": 0.1348,
+   "R3": 0.1113,
+   "H": 0.1328,
+   "RH": 0.1367,
+   "R2H": 0.1309,
+   "R3H": 0.1289
+  },
+  "unseen_accuracy": 0.1285,
+  "worst_unseen_accuracy": 0.1113,
+  "n_per_transform": {
+   "I": 512,
+   "R": 512,
+   "R2": 512,
+   "R3": 512,
+   "H": 512,
+   "RH": 512,
+   "R2H": 512,
+   "R3H": 512
+  }
+ },
+ "provenance": {
+  "git_commit": "ddc68fa37a137f6216518aafc9c1a57ae35074b4",
+  "dataset_manifest_sha256": "0b12e0f38eb93a74c9cf106fe09dc8a12ff8bd3fae5d9fe420d3a404f7ffd24f",
+  "backbone": "qwen3",
+  "torch": "2.8.0+cu128"
+ }
+}
+Stopping app - local entrypoint completed.
+
+✓ App completed. View run at 
+https://modal.com/apps/kgengamer/main/ap-X08nxk4wFzwJPMBtW2SOMY
