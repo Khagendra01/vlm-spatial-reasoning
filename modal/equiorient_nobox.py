@@ -361,7 +361,8 @@ def probe_features(n_dev: int = 200,
 @app.local_entrypoint()
 def main(arm: str = "equiorient", seed: int = 101, mode: str = "dev",
          n_train: int = 128, gate: bool = False, epochs: int = 2,
-         lr: float = 1e-4, probe: bool = False,
+         lr: float = 1e-4, probe: bool = False, diag: bool = False,
+         probe_v2: bool = False,
          target_size_min: float = 3.0, target_size_max: float = 5.0,
          n_dist_min: int = 12, n_dist_max: int = 20,
          noise_amp: int = 12, variant: str = "nobox_v1",
@@ -375,9 +376,39 @@ def main(arm: str = "equiorient", seed: int = 101, mode: str = "dev",
     --seeds: comma list (default primary 15 seeds 101..1501)
     --batch-parallel: max concurrent Modal function calls (Modal bills
         per-running function second; queueing is free).
+    --diag: run latent diagnostics for the specified arm/seed
+    --probe-v2: run feature probes on v2_colorflip data
     """
     if gate:
         print("GATE:", run_gate.remote())
+        return
+    if diag:
+        # prepare data first if needed
+        prep = prepare_data.remote(
+            target_size_min=target_size_min, target_size_max=target_size_max,
+            n_dist_min=n_dist_min, n_dist_max=n_dist_max,
+            noise_amp=noise_amp, variant=variant)
+        info = prep
+        print(f"[diag] data ready: {info}", flush=True)
+        print("DIAG:", run_diag.remote(
+            arm=arm, seed=seed, n_train=n_train, epochs=epochs, lr=lr,
+            target_size_min=target_size_min, target_size_max=target_size_max,
+            n_dist_min=n_dist_min, n_dist_max=n_dist_max,
+            noise_amp=noise_amp, variant=variant,
+            data_key=info["data_key"]))
+        return
+    if probe_v2:
+        prep = prepare_data.remote(
+            target_size_min=target_size_min, target_size_max=target_size_max,
+            n_dist_min=n_dist_min, n_dist_max=n_dist_max,
+            noise_amp=noise_amp, variant=variant)
+        info = prep
+        print(f"[probe-v2] data ready: {info}", flush=True)
+        print("PROBE_V2:", run_probe_v2.remote(
+            target_size_min=target_size_min, target_size_max=target_size_max,
+            n_dist_min=n_dist_min, n_dist_max=n_dist_max,
+            noise_amp=noise_amp, variant=variant,
+            data_key=info["data_key"]))
         return
     if probe:
         print("PROBE:", probe_features.remote(
@@ -460,6 +491,143 @@ def main(arm: str = "equiorient", seed: int = 101, mode: str = "dev",
         (out_dir / f"batch_{info['data_key']}_{mode}.json").write_text(
             json.dumps(allr, indent=1), encoding="utf-8")
     print("[batch] ALL DONE")
+
+
+# ------------------------------------------------------------------ #
+# DIAGNOSTIC RUNS: latent collapse + v2 feature probes
+# ------------------------------------------------------------------ #
+
+@app.function(gpu="L40S",
+              volumes={"/root/hf-cache": HF_CACHE,
+                       "/root/results": RESULTS,
+                       "/root/phase2_data": DATA},
+              secrets=[modal.Secret.from_name("hf-token")],
+              timeout=6 * 60 * 60)
+def run_diag(arm: str = "equiorient", seed: int = 101,
+             n_train: int = 128, epochs: int = 40, lr: float = 5e-4,
+             lam: float = 1.0, batch: int = 8,
+             target_size_min: float = 3.0, target_size_max: float = 5.0,
+             n_dist_min: int = 12, n_dist_max: int = 20,
+             noise_amp: int = 12, variant: str = "nobox_v1",
+             data_key: str = "") -> dict:
+    """Run latent diagnostics for a single arm/seed configuration."""
+    import os, json
+    os.environ["HF_TOKEN"] = os.environ["HF_TOKEN"]
+    os.environ["HF_HOME"] = "/root/hf-cache"
+    head = ""
+    import subprocess
+    from pathlib import Path
+    dst = "/root/repo"
+    if not (Path(dst) / "equiorient").exists():
+        def run(cmd):
+            p = subprocess.run(cmd, capture_output=True, text=True)
+            if p.returncode != 0:
+                raise RuntimeError(
+                    f"CMD FAILED {cmd[0]}\n{p.stderr[-2000:]}")
+            return p
+        run(["git", "clone", "--quiet", "--depth", "1",
+             "--filter=blob:none", "--sparse", "--branch", BRANCH,
+             REPO_URL, dst])
+        run(["git", "-C", dst, "sparse-checkout", "set", *SPARSE_CONE])
+    head = subprocess.run(
+        ["git", "-C", dst, "rev-parse", "HEAD"],
+        capture_output=True, text=True, cwd="/root/repo").stdout.strip()
+    sys.path.insert(0, "/root/repo")
+
+    ts = (target_size_min, target_size_max)
+    nd = (n_dist_min, n_dist_max)
+    key = data_key or _data_key(ts, nd, noise_amp, variant)
+    data_src = Path("/root/phase2_data") / key
+    if not (data_src / "manifest.json").exists():
+        raise RuntimeError(f"data_key {key} missing")
+
+    import equiorient.experiments.train_nobox as tn
+    import equiorient.experiments.diagnose_nobox as dn
+    manifest = tn.load_manifest(data_src)
+    runner = tn.NoBoxRunner(data_src, Path("/root/results") / "diag")
+    runner.load_model()
+    runner.attach_lora()
+
+    train_ids = tn.subset_scenes(manifest, "train", n_train)
+    ex = tn.make_examples(manifest, train_ids)
+    diag = dn.diagnose(runner, arm, ex, manifest, lam, epochs, batch, seed, lr)
+    diag["repo_commit"] = head
+    diag["data_key"] = key
+    out_dir = Path("/root/results") / "diag"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / f"diag_{arm}_s{seed}.json").write_text(
+        json.dumps(diag, indent=1), encoding="utf-8")
+    return diag
+
+
+@app.function(gpu="L40S",
+              volumes={"/root/hf-cache": HF_CACHE,
+                       "/root/results": RESULTS,
+                       "/root/phase2_data": DATA},
+              secrets=[modal.Secret.from_name("hf-token")],
+              timeout=6 * 60 * 60)
+def run_probe_v2(target_size_min: float = 4.0, target_size_max: float = 7.0,
+                 n_dist_min: int = 6, n_dist_max: int = 10,
+                 noise_amp: int = 8,
+                 variant: str = "nobox_v2_colorflip",
+                 n_dev: int = 300,
+                 data_key: str = "") -> dict:
+    """Run feature probes on v2_colorflip data."""
+    import os, json
+    os.environ["HF_TOKEN"] = os.environ["HF_TOKEN"]
+    os.environ["HF_HOME"] = "/root/hf-cache"
+    head = ""
+    import subprocess
+    from pathlib import Path
+    dst = "/root/repo"
+    if not (Path(dst) / "equiorient").exists():
+        def run(cmd):
+            p = subprocess.run(cmd, capture_output=True, text=True)
+            if p.returncode != 0:
+                raise RuntimeError(
+                    f"CMD FAILED {cmd[0]}\n{p.stderr[-2000:]}")
+            return p
+        run(["git", "clone", "--quiet", "--depth", "1",
+             "--filter=blob:none", "--sparse", "--branch", BRANCH,
+             REPO_URL, dst])
+        run(["git", "-C", dst, "sparse-checkout", "set", *SPARSE_CONE])
+    head = subprocess.run(
+        ["git", "-C", dst, "rev-parse", "HEAD"],
+        capture_output=True, text=True, cwd="/root/repo").stdout.strip()
+    sys.path.insert(0, "/root/repo")
+
+    ts = (target_size_min, target_size_max)
+    nd = (n_dist_min, n_dist_max)
+    key = data_key or _data_key(ts, nd, noise_amp, variant)
+    data_src = Path("/root/phase2_data") / key
+    if not (data_src / "manifest.json").exists():
+        raise RuntimeError(f"data_key {key} missing")
+
+    import equiorient.experiments.train_nobox as tn
+    import equiorient.experiments.probe_nobox_v2 as pv
+    manifest = tn.load_manifest(data_src)
+    runner = tn.NoBoxRunner(data_src, Path("/dev/shm"))
+    runner.load_model()
+
+    attrs = ["target_location", "reference_location", "shape",
+             "pair_relation"]
+    results = {}
+    for attr in attrs:
+        r = pv.probe_attribute(runner, manifest, "dev", attr, n_max=n_dev)
+        results[attr] = r
+        print(f"  {attr}: acc={r['accuracy']:.4f} chance={r['chance']:.4f}",
+              flush=True)
+
+    out = {"variant": variant, "data_key": key, "n_dev": n_dev,
+           "difficulty": {"target_size": [target_size_min, target_size_max],
+                          "n_distractor_range": [n_dist_min, n_dist_max],
+                          "noise_amp": noise_amp},
+           "results": results, "repo_commit": head}
+    out_dir = Path("/root/results") / "probe_v2"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / f"probe_{variant}_k{key}.json").write_text(
+        json.dumps(out, indent=1), encoding="utf-8")
+    return out
 
 
 if __name__ == "__main__":
