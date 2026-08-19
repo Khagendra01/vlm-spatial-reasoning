@@ -396,20 +396,28 @@ def main(arm: str = "equiorient", seed: int = 101, mode: str = "dev",
     info = next(iter(prep))
     print(f"[batch] data ready: {info}", flush=True)
 
-    # 2) Concurrent GPU runs (Modal queues beyond concurrent limit).
+    # 2) Concurrent GPU runs: Modal auto-scales these cached function
+    # invocations (each .remote is a separate container that runs in
+    # parallel and is queued by Modal when warm-pool + quota are full).
+    # Completed runs are written to the RESULTS volume by the harness
+    # (result_<arm>_s<seed>.json + per-epoch progress files), so even
+    # if the local process dies or credit runs out mid-batch, every
+    # *finished* run is already persisted.
     import json
     results = []
-    with modal.concurrent.map(lambda job: run_arm.remote(
-            arm=job[0], seed=job[1], mode=mode, n_train=n_train,
-            epochs=epochs, lr=lr,
-            target_size_min=target_size_min, target_size_max=target_size_max,
-            n_dist_min=n_dist_min, n_dist_max=n_dist_max,
-            noise_amp=noise_amp, data_key=info["data_key"]), jobs) as it:
-        for r in it:
-            results.append(r)
-            print(f"[batch] DONE {r['arm']} s{r['seed']} "
-                  f"dev={r.get('dev_eval', {}).get('unseen_accuracy')}",
-                  flush=True)
+    calls = [run_arm.spawn(arm=j[0], seed=j[1], mode=mode, n_train=n_train,
+                           epochs=epochs, lr=lr,
+                           target_size_min=target_size_min,
+                           target_size_max=target_size_max,
+                           n_dist_min=n_dist_min, n_dist_max=n_dist_max,
+                           noise_amp=noise_amp, data_key=info["data_key"])
+             for j in jobs]
+    for i, c in enumerate(calls):
+        r = c.get()
+        results.append(r)
+        print(f"[batch] {i + 1}/{len(calls)} DONE {r['arm']} s{r['seed']} "
+              f"dev={r.get('dev_eval', {}).get('unseen_accuracy')}",
+              flush=True)
 
     # 3) Dump all results to the results volume for later export.
     from pathlib import Path

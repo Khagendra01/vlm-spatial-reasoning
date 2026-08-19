@@ -1,13 +1,20 @@
-# EquiOrient NO-BOX confirmatory freeze ledger (fill at freeze)
+# EquiOrient NO-BOX confirmatory freeze ledger — FROZEN 2026-08-19
+# (commit 4b0a365, before any confirmatory test results were inspected)
 
 # THIS LEDGER MUST BE COMMITTED BEFORE inspecting confirmatory test
 # results. Follows the Phase-2 freeze convention.
 
 no_box_freeze:
-  architecture: "learned single-query cross-attention over ALL full-image Qwen3 deepstack tokens (no GT boxes/centers/displacement)"
+  architecture: "learned 4-query cross-attention over ALL full-image Qwen3 deepstack tokens (no GT boxes/centers/displacement)"
   branch: research/equiorient-no-box
   runner: equiorient.experiments.train_nobox
-  dataset: "same deterministic v4 manifests (SHA-256-seeded noise), rebuilt per run"
+  dataset: "nobox_v1 (red a / blue b targets, gray distractors), deterministic, SHA-256-seeded per-image noise; built ONCE on CPU (modal prepare_data) and cached by data_key"
+  data_difficulty:
+    generator_variant: nobox_v1
+    target_size: [4.0, 7.0]        # px radius — DEV-CALIBRATED, not test-tuned
+    n_distractor_range: [6, 10]
+    noise_amp: 8
+    bg_color: [155, 152, 148]
   backbone: "Qwen/Qwen3-VL-8B-Instruct @ 0c351dd01ed87e9c1b53cbc748cba10e6187ff3b"
   transformers: "==4.57.6"
   arms_primary: [augmentation, equiorient, wrong_geometry]
@@ -17,9 +24,9 @@ no_box_freeze:
   seeds_primary: [101, 202, 303, 404, 505, 606, 707, 808, 909, 1010, 1111, 1212, 1313, 1414, 1515]
   seeds_n512: [101, 202, 303, 404, 505]
   lambda: 1.0
-  epochs: 2
+  epochs: 40
   batch: 8
-  optimizer: AdamW lr 1e-4
+  optimizer: "AdamW lr 5e-4 (DEV-CALIBRATED: D18 dev 0.80)"
   training_generators: [H, R90]
   unseen_group_elements: [R2, R3, RH, R2H, R3H]
   primary_metric: unseen_group_accuracy
@@ -30,9 +37,16 @@ no_box_freeze:
   statistic: "matched-seed paired bootstrap (resample seeds; within seed resample test scenes; preserve pairing) + paired t-test"
   dev_target_range: [0.55, 0.90]
   dev_preferred_range: [0.60, 0.85]
-  git_sha: PENDING
-  dataset_manifest_sha256: PENDING
-  verification: NOBOX_GATE 25/25 + PHASE2_GATE 45/45
+  dev_evidence:
+    - "D14 N=256/20ep 1.0000 (saturated)"
+    - "D15 N=256/20ep 0.1250 (cliff: harder data unlearnable)"
+    - "D16 N=256/20ep 0.1250 (cliff confirmed)"
+    - "D17 N=256/10ep 1.0000 (still saturated)"
+    - "D18 N=128/40ep **0.8000 (IN WINDOW) -> freeze point"
+    - "D19 N=128/60ep (stalled, stale pipeline; superseded)"
+  git_sha: 4b0a365dfe0edb90169bc745d18c8feb6c716a53
+  dataset_manifest_sha256: PENDING-BATCH (data_key recorded in each result)
+  verification: "NOBOX_GATE 29/29 PASS (commit 4b0a365) + PHASE2_GATE (unchanged)"
   interpretation_rules:
     A: "EquiOrient > Augmentation AND EquiOrient > WrongGeometry"
     B: "EquiOrient ~ Augmentation BUT EquiOrient > WrongGeometry"
