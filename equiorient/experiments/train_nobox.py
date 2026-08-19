@@ -284,8 +284,12 @@ class NoBoxRunner:
                     n += 1
                 (tot / max(n, 1)).backward()
                 opt.step()
-            # train-pair accuracy (answer on the transform image)
+            # train-pair accuracy (answer on the transform image).
+            # Refresh the feature cache first so the diagnostic is measured
+            # under the CURRENT (post-update) LoRA weights, not a stale
+            # cache from an earlier epoch's model state.
             self.model.eval()
+            self._feat_cache = {}
             with torch.no_grad():
                 for i in idx:
                     sid, g, png, y = pairs[i.item()]
