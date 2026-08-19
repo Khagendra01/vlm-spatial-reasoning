@@ -106,6 +106,7 @@ def probe_attribute(runner, manifest, split, attribute, n_max=300):
                 # replicate for all T cells
                 labels_list.append(y_arr)
                 feats_list.append(f)
+                n_processed += 1
                 continue
             elif attribute == "color":
                 # per-cell: 0=gray, 1=red, 2=blue
