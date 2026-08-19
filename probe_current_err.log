@@ -1,10 +1,10 @@
 ┌───────────────────── Traceback (most recent call last) ─────────────────────┐
 │ C:\Users\Khage\Desktop\VLM-Spatial-Reasoning-NoBox\modal/equiorient_nobox.p │
-│ y:230 in main                                                               │
+│ y:232 in main                                                               │
 │                                                                             │
-│   229 │   if probe:                                                         │
-│ > 230 │   │   print("PROBE:", probe_features.remote(                        │
-│   231 │   │   │   target_size_min=target_size_min, target_size_max=target_s │
+│   231 │   if probe:                                                         │
+│ > 232 │   │   print("PROBE:", probe_features.remote(                        │
+│   233 │   │   │   target_size_min=target_size_min, target_size_max=target_s │
 │                                                                             │
 │ C:\Users\Khage\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_ │
 │ qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\modal\_obje │
@@ -46,11 +46,11 @@
 │ > 572 │   │   │   raise exc_with_hints(exc)                                 │
 │   573                                                                       │
 │                                                                             │
-│     ...Remote call to Modal Function (ta-01M0C867W0E7TZP86HH8TF934R)...     │
+│     ...Remote call to Modal Function (ta-01M0C8YFE9KBFDVRZJGA9V5EZR)...     │
 │                                                                             │
-│ /root/equiorient_nobox.py:200 in probe_features                             │
+│ /root/equiorient_nobox.py:202 in probe_features                             │
 │                                                                             │
-│ > 200 sc = StandardScaler().fit(Xtr)                                        │
+│ > 202 sc = StandardScaler().fit(Xtr)                                        │
 │                                                                             │
 │                                                                             │
 │ /usr/local/lib/python3.12/site-packages/sklearn/preprocessing/_data.py:928  │
@@ -83,7 +83,7 @@
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 ValueError: Expected 2D array, got 1D array instead:
-array=[ 0.72265625  0.3828125  -0.17089844 ...  0.31835938 -0.16796875
- -0.01916504].
+array=[ 0.72265625  0.3828125  -0.17089844 ...  0.75        0.765625
+  0.8125    ].
 Reshape your data either using array.reshape(-1, 1) if your data has a single 
 feature or array.reshape(1, -1) if it contains a single sample.

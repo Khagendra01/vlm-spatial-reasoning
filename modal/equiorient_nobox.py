@@ -172,9 +172,9 @@ def probe_features(n_dev: int = 200,
             if n >= n_dev:
                 break
             feat, grid = runner.vision_features(e["png"], requires_grad=False)
-            # feat: (1, T, 4096); cell layout h x w
+            # feat: (T, 4096) post-merge (2D already); cell layout h x w
             h, w = int(grid[0][1]), int(grid[0][2])
-            f = feat[0].float().cpu().numpy()  # (h*w, 4096)
+            f = feat.float().cpu().numpy()  # (T, 4096)
             boxes = e["boxes"]
             ca = (max(min(int(boxes["a"][0] / 192.0 * w), w), 0),
                   max(min(int(boxes["a"][1] / 192.0 * h), h), 0))
