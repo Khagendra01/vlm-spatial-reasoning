@@ -186,34 +186,36 @@ def probe_features(n_dev: int = 200,
             y_cells.append((ia, ib))
             n += 1
     X = np.concatenate(feats, axis=0)          # (n*T, 4096)
+    T = X.shape[0] // n
     Y = np.zeros(len(X), dtype=int)
     for k, (ia, ib) in enumerate(y_cells):
-        Y[k * 64 + ia] = 1
-        Y[k * 64 + ib] = 1
+        Y[k * T + ia] = 1
+        Y[k * T + ib] = 1
     # train/test split by scene
     from sklearn.linear_model import LogisticRegression
     from sklearn.preprocessing import StandardScaler
-    half = n // 80 * 40
-    tr = slice(0, n // 2); te = slice(n // 2, n)
-    Xtr, Ytr = X[tr.start * 64:tr.stop * 64], Y[tr.start * 64:tr.stop * 64]
-    Xte, Yte = X[te.start * 64:te.stop * 64], Y[te.start * 64:te.stop * 64]
+    n_tr = n // 2
+    Xtr = X[:n_tr * T]
+    Ytr = Y[:n_tr * T]
+    Xte = X[n_tr * T:]
+    Yte = Y[n_tr * T:]
     sc = StandardScaler().fit(Xtr)
     clf = LogisticRegression(max_iter=2000, C=1.0).fit(sc.transform(Xtr), Ytr)
-    probs = clf.predict_proba(sc.transform(Xte))[:, 1].reshape(-1, 64)
+    probs = clf.predict_proba(sc.transform(Xte))[:, 1].reshape(-1, T)
     top_correct = 0
-    for k, (ia, ib) in enumerate(y_cells[n // 2:]):
+    for k, (ia, ib) in enumerate(y_cells[n_tr:]):
         top = set(np.argsort(-probs[k])[:2])
         if ia in top and ib in top:
             top_correct += 1
-    n_t = n - n // 2
-    return {"n_scenes": n_t,
+    n_t = n - n_tr
+    return {"n_scenes": n_t, "T_cells": int(T),
             "cell_pair_top2_recall": round(top_correct / max(n_t, 1), 4),
             "pos_rate": round(float(Ytr.mean()), 4),
             "difficulty": {"target_size": [target_size_min, target_size_max],
                            "n_distractor_range": [n_dist_min, n_dist_max],
                            "noise_amp": noise_amp},
             "repo_commit": head,
-            "explain": "top2 recall ~1.0 => features localizable; ~0.06 (2/64) => not."}
+            "explain": "top2 recall ~1.0 => features localizable; ~2/T => not."}
 
 
 @app.local_entrypoint()

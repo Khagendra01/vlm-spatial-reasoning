@@ -1,13 +1,22 @@
 ✓ Initialized. View run at 
-https://modal.com/apps/kgengamer/main/ap-nFiuSBreNVDfp7mjyElAfP
+https://modal.com/apps/kgengamer/main/ap-2Q0IlAp9nxr5zWadfcdMOY
 ✓ Created objects.
 ├── 🔨 Created mount 
 │   C:\Users\Khage\Desktop\VLM-Spatial-Reasoning-NoBox\modal\equiorient_nobox.p
 │   y
-├── 🔨 Created function run_gate.
 ├── 🔨 Created function run_arm.
-└── 🔨 Created function probe_features.
+├── 🔨 Created function probe_features.
+└── 🔨 Created function run_gate.
+`torch_dtype` is deprecated! Use `dtype` instead!
+
+[1ALoading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]
+[1ALoading checkpoint shards:  25%|██▌       | 1/4 [00:03<00:11,  3.90s/it]
+[1ALoading checkpoint shards:  50%|█████     | 2/4 [00:07<00:07,  3.75s/it]
+[1ALoading checkpoint shards:  75%|███████▌  | 3/4 [00:11<00:03,  3.75s/it]
+[1ALoading checkpoint shards: 100%|██████████| 4/4 [00:13<00:00,  3.14s/it]
+[1ALoading checkpoint shards: 100%|██████████| 4/4 [00:13<00:00,  3.38s/it]
 Traceback (most recent call last):
+Stopping app - uncaught exception raised locally: ValueError('Expected 2D array, got 1D array instead:\narray=[ 0.72265625  0.3828125  -0.17089844 ...  0.31835938 -0.16796875\n -0.01916504].\nReshape your data either using array.reshape(-1, 1) if your data has a single feature or array.reshape(1, -1) if it contains a single sample.').
   File "/pkg/modal/_runtime/container_io_manager.py", line 977, in handle_input_exception
     yield
   File "/pkg/modal/_container_entrypoint.py", line 187, in run_input_sync
@@ -16,17 +25,24 @@ Traceback (most recent call last):
   File "/pkg/modal/_runtime/container_io_manager.py", line 265, in call_function_sync
     expected_value_or_values = self.finalized_function.callable(*args, **kwargs)
                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/root/equiorient_nobox.py", line 161, in probe_features
-    manifest = load_manifest(mf_path)
-               ^^^^^^^^^^^^^^^^^^^^^^
-  File "/root/repo/equiorient/experiments/train_nobox.py", line 68, in load_manifest
-    return json.loads((data_dir / "manifest.json").read_text(encoding="utf-8"))
-                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/pathlib.py", line 1027, in read_text
-    with self.open(mode='r', encoding=encoding, errors=errors) as f:
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/lib/python3.12/pathlib.py", line 1013, in open
-    return io.open(self, mode, buffering, encoding, errors, newline)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-NotADirectoryError: [Errno 20] Not a directory: '/root/phase2_data/manifest.json/manifest.json'
-Stopping app - uncaught exception raised locally: NotADirectoryError(20, 'Not a directory').
+  File "/root/equiorient_nobox.py", line 200, in probe_features
+    sc = StandardScaler().fit(Xtr)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sklearn/preprocessing/_data.py", line 928, in fit
+    return self.partial_fit(X, y, sample_weight)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sklearn/base.py", line 1403, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sklearn/preprocessing/_data.py", line 965, in partial_fit
+    X = validate_data(
+        ^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sklearn/utils/validation.py", line 3038, in validate_data
+    out = check_array(X, input_name="X", **check_params)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/sklearn/utils/validation.py", line 1073, in check_array
+    raise ValueError(msg)
+ValueError: Expected 2D array, got 1D array instead:
+array=[ 0.72265625  0.3828125  -0.17089844 ...  0.31835938 -0.16796875
+ -0.01916504].
+Reshape your data either using array.reshape(-1, 1) if your data has a single feature or array.reshape(1, -1) if it contains a single sample.

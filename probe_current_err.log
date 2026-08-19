@@ -46,27 +46,44 @@
 │ > 572 │   │   │   raise exc_with_hints(exc)                                 │
 │   573                                                                       │
 │                                                                             │
-│     ...Remote call to Modal Function (ta-01M0C7DZWK2R36ABHRVW9ZRW1R)...     │
+│     ...Remote call to Modal Function (ta-01M0C867W0E7TZP86HH8TF934R)...     │
 │                                                                             │
-│ /root/equiorient_nobox.py:161 in probe_features                             │
+│ /root/equiorient_nobox.py:200 in probe_features                             │
 │                                                                             │
-│ > 161 manifest = load_manifest(mf_path)                                     │
-│                                                                             │
-│                                                                             │
-│ /root/repo/equiorient/experiments/train_nobox.py:68 in load_manifest        │
-│                                                                             │
-│ > 68 return json.loads((data_dir / "manifest.json").read_text(encoding="utf │
+│ > 200 sc = StandardScaler().fit(Xtr)                                        │
 │                                                                             │
 │                                                                             │
-│ /usr/local/lib/python3.12/pathlib.py:1027 in read_text                      │
+│ /usr/local/lib/python3.12/site-packages/sklearn/preprocessing/_data.py:928  │
+│ in fit                                                                      │
 │                                                                             │
-│ > 1027 with self.open(mode='r', encoding=encoding, errors=errors) as f:     │
+│ > 928 return self.partial_fit(X, y, sample_weight)                          │
 │                                                                             │
 │                                                                             │
-│ /usr/local/lib/python3.12/pathlib.py:1013 in open                           │
+│ /usr/local/lib/python3.12/site-packages/sklearn/base.py:1403 in wrapper     │
 │                                                                             │
-│ > 1013 return io.open(self, mode, buffering, encoding, errors, newline)     │
+│ > 1403 return fit_method(estimator, *args, **kwargs)                        │
+│                                                                             │
+│                                                                             │
+│ /usr/local/lib/python3.12/site-packages/sklearn/preprocessing/_data.py:965  │
+│ in partial_fit                                                              │
+│                                                                             │
+│ > 965 X = validate_data(                                                    │
+│                                                                             │
+│                                                                             │
+│ /usr/local/lib/python3.12/site-packages/sklearn/utils/validation.py:3038 in │
+│ validate_data                                                               │
+│                                                                             │
+│ > 3038 out = check_array(X, input_name="X", **check_params)                 │
+│                                                                             │
+│                                                                             │
+│ /usr/local/lib/python3.12/site-packages/sklearn/utils/validation.py:1073 in │
+│ check_array                                                                 │
+│                                                                             │
+│ > 1073 raise ValueError(msg)                                                │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
-NotADirectoryError: [Errno 20] Not a directory: 
-'/root/phase2_data/manifest.json/manifest.json'
+ValueError: Expected 2D array, got 1D array instead:
+array=[ 0.72265625  0.3828125  -0.17089844 ...  0.31835938 -0.16796875
+ -0.01916504].
+Reshape your data either using array.reshape(-1, 1) if your data has a single 
+feature or array.reshape(1, -1) if it contains a single sample.
