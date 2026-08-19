@@ -212,13 +212,15 @@ class NoBoxRunner:
         by_scene = {}
         for e in examples:
             by_scene.setdefault(e["scene_id"], []).append(e)
-        history = {"answer": [], "structural": []}
+        history = {"answer": [], "structural": [], "train_acc": []}
         for ep in range(epochs):
             torch.manual_seed(seed + ep)
             idx = torch.randperm(len(pairs))
             n_steps = max(len(idx) // batch, 1)
             ans_sum = struct_sum = 0.0
             struct_n = 0
+            corr = 0
+            tot_n = 0
             for st in range(n_steps):
                 sel = idx[st * batch:(st + 1) * batch]
                 opt.zero_grad()
@@ -282,10 +284,20 @@ class NoBoxRunner:
                     n += 1
                 (tot / max(n, 1)).backward()
                 opt.step()
+            # train-pair accuracy (answer on the transform image)
+            self.model.eval()
+            with torch.no_grad():
+                for i in idx:
+                    sid, g, png, y = pairs[i.item()]
+                    l, _ = self.image_logits(png, grad=False)
+                    corr += int(l.argmax(-1).item() == y)
+                    tot_n += 1
+            self.model.train()
+            acc_tr = corr / max(tot_n, 1)
             mean_struct = struct_sum / max(struct_n, 1)
             self.log(f"[{arm}] epoch {ep + 1}/{epochs} "
                      f"(ans {ans_sum / max(n_steps, 1):.4f}, "
-                     f"struct {mean_struct:.6f})")
+                     f"struct {mean_struct:.6f}, train_acc {acc_tr:.3f})")
             if need_structural and lam is not None and struct_n:
                 if mean_struct < 1e-6:
                     raise RuntimeError(
@@ -293,6 +305,7 @@ class NoBoxRunner:
                         f"{mean_struct:.3e} for {arm}")
             history["answer"].append(round(ans_sum / max(n_steps, 1), 6))
             history["structural"].append(round(mean_struct, 8))
+            history["train_acc"].append(round(acc_tr, 4))
         return history
 
     # ------------------------------------------------------------------ #
@@ -302,6 +315,7 @@ class NoBoxRunner:
                  collect_attn: bool = False) -> dict:
         self._feat_cache = {}
         self._attn_cache = {}
+        self.model.eval()
         per_g: dict[str, dict] = {}
         for g in ELEMENTS:
             per_g[g] = {"correct": 0, "total": 0}
