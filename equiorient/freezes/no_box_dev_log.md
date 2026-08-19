@@ -28,7 +28,11 @@ because GT boxes identified the pair. => nobox_v1 generator: targets a
 | D12 | 2026-08-19 | nobox_v1 mid | 256 | 20 | 5e-4 | 4q | 101 | 1.0000 (REPRODUCIBLE) | 4-7px, 6-10 dist, noise 8 — train_acc 0.195 was STALE-CACHE BUG; true train_acc reaches 1.0. Dev 1.0 real. SATURATED |
 | D13 | 2026-08-19 | nobox_v1 mid | 128 | 30 | 5e-4 | 4q | 101 | 0.3551 | 4-7px, 6-10 dist, noise 8, eval-mode fix — half the data, still above chance but not saturated |
 | D14 | 2026-08-19 | nobox_v1 mid | 256 | 20 | 5e-4 | 4q | 101 | **1.0000** | D12 config + cache fix (140a981). train_acc climbs to 1.0; dev 1.0 all transforms. FIRST LEARNABLE NO-BOX REGIME. SATURATED |
-| D15 | 2026-08-19 | nobox_v1 harder | 256 | 20 | 5e-4 | 4q | 101 | (running) | 3.5-6px, 8-14 dist, noise 10 — probe for 60-85% window |
+| D15 | 2026-08-19 | nobox_v1 harder | 256 | 20 | 5e-4 | 4q | 101 | 0.1250 (chance) | 3.5-6px, 8-14 dist, noise 10 — cliff below D14 |
+| D16 | 2026-08-19 | nobox_v1 mid-hard | 256 | 20 | 5e-4 | 4q | 101 | 0.1250 (chance) | 3.8-6px, 7-11 dist, noise 9 — confirms sharp cliff |
+| D17 | 2026-08-19 | nobox_v1 easy | 256 | **10** | 5e-4 | 4q | 101 | 1.0000 | 4-7px, 6-10 dist, noise 8 — easy data saturates even at 10 epochs |
+| D18 | 2026-08-19 | nobox_v1 easy | **128** | **40** | 5e-4 | 4q | 101 | **0.8000 ✔ IN WINDOW** | 4-7px, 6-10, noise 8. train_acc kicks in late (ep28+) climbing to 0.88; dev 0.80. Candidate freeze point |
+| D19 | 2026-08-19 | nobox_v1 easy | 128 | 60 | 5e-4 | 4q | 101 | (running) | same data — does more epochs overshoot to 1.0? |
 
 ## PROBES (frozen deepstack features, held-out scenes — no training)
 | config | linear top2 recall | mlp top2 recall | verdict |
@@ -41,6 +45,9 @@ interpretation: cell-level target signal in frozen deepstack tokens is *weak but
 present* (~0.1-0.2 top2 recall vs chance ~0.0005). The pool CAN in principle
 learn to localize, but needs capacity + budget; attention diag shows it currently
 doesn't (pair_in_top4_pct=0.0 across runs).
+
+PROBE-FREEZE CANDIDATE: N=128, epochs=40, lr=5e-4, difficulty (4-7px, 6-10 dist, noise8)
+=> dev 0.80. Waiting on D19 (60ep) to confirm 40ep is the non-saturated point.
 
 REVISED (post-D14): the weak cell-level signal is NOT the bottleneck. With
 identifiable targets at 4-7px/6-10 dist/noise8 and N=256×20ep, the full-image

@@ -302,6 +302,14 @@ class NoBoxRunner:
             self.log(f"[{arm}] epoch {ep + 1}/{epochs} "
                      f"(ans {ans_sum / max(n_steps, 1):.4f}, "
                      f"struct {mean_struct:.6f}, train_acc {acc_tr:.3f})")
+            # per-epoch checkpoint: a killed run never loses its curve.
+            ckpt = {"arm": arm, "seed": seed, "epoch": ep + 1,
+                    "answer": round(ans_sum / max(n_steps, 1), 6),
+                    "structural": round(mean_struct, 8),
+                    "train_acc": round(acc_tr, 4)}
+            ckpt_path = self.out / f"progress_{arm}_s{seed}.jsonl"
+            with open(ckpt_path, "a", encoding="utf-8") as f:
+                f.write(json.dumps(ckpt) + "\n")
             if need_structural and lam is not None and struct_n:
                 if mean_struct < 1e-6:
                     raise RuntimeError(

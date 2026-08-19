@@ -68,6 +68,74 @@ def _prepare(target_size: tuple = (3.0, 5.0),
     return head
 
 
+def _data_key(target_size: tuple, n_distractor_range: tuple,
+              noise_amp: int) -> str:
+    """Deterministic key for a difficulty config. Identical data across
+    arms/seeds (matched-arm contract) is guaranteed by (generator seed,
+    key) => one canonical build."""
+    import hashlib
+    return hashlib.sha256(
+        f"{target_size}|{n_distractor_range}|{noise_amp}".encode()
+    ).hexdigest()[:12]
+
+
+# ------------------------------------------------------------------ #
+# CPU-ONLY data builder. NEVER pays GPU rates for PNG rendering.
+# ------------------------------------------------------------------ #
+@app.function(volumes={"/root/phase2_data": DATA},
+              timeout=60 * 30)
+def prepare_data(target_size_min: float = 3.0, target_size_max: float = 5.0,
+                 n_dist_min: int = 12, n_dist_max: int = 20,
+                 noise_amp: int = 12,
+                 n_dev: int = 512, n_train: int = 2048,
+                 n_val: int = 512, n_test: int = 1024) -> dict:
+    """Clone repo + render the deterministic dataset ON CPU.
+
+    Stores under /root/phase2_data/<key>/ so every arm/seed of a frozen
+    confirmatory config reuses the exact same img/PNG files (matched
+    examples) instead of rebuilding per GPU run. Returns the data key
+    that the GPU runner must consume as --data.
+    """
+    import subprocess, shutil
+    from pathlib import Path
+
+    def run(cmd):
+        p = subprocess.run(cmd, capture_output=True, text=True)
+        if p.returncode != 0:
+            raise RuntimeError(f"CMD FAILED {cmd[0]}\n{p.stderr[-2000:]}")
+        return p
+
+    dst = "/root/repo"
+    run(["git", "clone", "--quiet", "--depth", "1", "--filter=blob:none",
+         "--sparse", "--branch", BRANCH, REPO_URL, dst])
+    run(["git", "-C", dst, "sparse-checkout", "set", *SPARSE_CONE])
+    head = run(["git", "-C", dst, "rev-parse", "HEAD"]).stdout.strip()
+    if PINNED_COMMIT and head != PINNED_COMMIT:
+        raise RuntimeError(f"PIN MISMATCH {head[:8]} != {PINNED_COMMIT}")
+    sys.path.insert(0, dst)
+
+    ts = (target_size_min, target_size_max)
+    nd = (n_dist_min, n_dist_max)
+    key = _data_key(ts, nd, noise_amp)
+    out = Path("/root/phase2_data") / key
+    if (out / "manifest.json").exists():          # idempotent: same key, no rebuild
+        return {"data_key": key, "rebuilt": False, "repo_commit": head,
+                "n_examples": int(0)}
+
+    tmp = Path("/root/phase2_data") / f"_tmp_{key}"
+    shutil.rmtree(tmp, ignore_errors=True)
+    import equiorient.data.manifests_nobox as mf
+    mf.build(tmp, n_dev=n_dev, n_train=n_train, n_val=n_val,
+             n_test=n_test, target_size=ts,
+             n_distractor_range=nd, noise_amp=noise_amp)
+    shutil.rmtree(out, ignore_errors=True)        # atomic-ish swap
+    tmp.rename(out)
+    import json
+    return {"data_key": key, "rebuilt": True, "repo_commit": head,
+            "n_examples": int(
+                len(json.loads((out / "manifest.json").read_text())["examples"]))}
+
+
 @app.function(gpu="L40S",
               volumes={"/root/hf-cache": HF_CACHE,
                        "/root/results": RESULTS,
@@ -79,15 +147,44 @@ def run_arm(arm: str, seed: int, n_train: int = 128, lam: float = 1.0,
             lr: float = 1e-4,
             target_size_min: float = 3.0, target_size_max: float = 5.0,
             n_dist_min: int = 12, n_dist_max: int = 20,
-            noise_amp: int = 12) -> dict:
+            noise_amp: int = 12, data_key: str = "") -> dict:
     import os
     os.environ["HF_TOKEN"] = os.environ["HF_TOKEN"]
     os.environ["HF_HOME"] = "/root/hf-cache"
-    head = _prepare(target_size=(target_size_min, target_size_max),
-                    n_distractor_range=(n_dist_min, n_dist_max),
-                    noise_amp=noise_amp)
-    import json
+    # data must ALREADY exist in the volume (build on CPU once via
+    # prepare_data); if a caller supplies no key, resolve from config. This
+    # path NEVER renders PNGs on a billed GPU container.
+    import hashlib, shutil
     from pathlib import Path
+    ts = (target_size_min, target_size_max)
+    nd = (n_dist_min, n_dist_max)
+    key = data_key or _data_key(ts, nd, noise_amp)
+    data_src = Path("/root/phase2_data") / key
+    if not (data_src / "manifest.json").exists():
+        raise RuntimeError(
+            f"data_key {key} missing — call prepare_data first")
+    data_dir = str(data_src)      # harness reads PNGs relative to data_dir
+    head = ""
+    import subprocess
+    dst = "/root/repo"
+    if not (Path(dst) / "equiorient").exists():
+        def run(cmd):
+            p = subprocess.run(cmd, capture_output=True, text=True)
+            if p.returncode != 0:
+                raise RuntimeError(
+                    f"CMD FAILED {cmd[0]}\n{p.stderr[-2000:]}")
+            return p
+        run(["git", "clone", "--quiet", "--depth", "1",
+             "--filter=blob:none", "--sparse", "--branch", BRANCH,
+             REPO_URL, dst])
+        run(["git", "-C", dst, "sparse-checkout", "set", *SPARSE_CONE])
+        if PINNED_COMMIT and head != PINNED_COMMIT:
+            raise RuntimeError(f"PIN MISMATCH {head[:8]}")
+    head = subprocess.run(
+        ["git", "-C", dst, "rev-parse", "HEAD"],
+        capture_output=True, text=True, cwd="/root/repo").stdout.strip()
+    sys.path.insert(0, "/root/repo")
+    import json
     out_dir = Path("/root/results") / "phase2_nobox"
     cmd = ["python", "-m", "equiorient.experiments.train_nobox",
            "--mode", mode,
@@ -95,9 +192,8 @@ def run_arm(arm: str, seed: int, n_train: int = 128, lam: float = 1.0,
            "--n_train", str(n_train), "--lambda", str(lam),
            "--epochs", str(epochs), "--batch", str(batch),
            "--lr", str(lr),
-           "--data", "/root/phase2_data",
+           "--data", data_dir,
            "--out", str(out_dir)]
-    import subprocess
     p = subprocess.run(cmd, capture_output=True, text=True, cwd="/root/repo")
     print(p.stdout[-4000:])
     if p.returncode != 0:
@@ -105,6 +201,7 @@ def run_arm(arm: str, seed: int, n_train: int = 128, lam: float = 1.0,
         raise RuntimeError(f"train failed rc={p.returncode}")
     res = json.loads((out_dir / f"result_{arm}_s{seed}.json").read_text())
     res["repo_commit"] = head
+    res["data_key"] = key
     return res
 
 
@@ -247,7 +344,18 @@ def main(arm: str = "equiorient", seed: int = 101, mode: str = "dev",
          lr: float = 1e-4, probe: bool = False,
          target_size_min: float = 3.0, target_size_max: float = 5.0,
          n_dist_min: int = 12, n_dist_max: int = 20,
-         noise_amp: int = 12):
+         noise_amp: int = 12,
+         array: str = "", seeds: str = "", batch_parallel: int = 100):
+    """Suggested confirmatory invocations:
+      python modal/equiorient_nobox.py --array \
+          --mode confirmatory --n-train 128 --epochs 40 --lr 0.0005 \
+          --target-size-min 4.0 --target-size-max 7.0 \
+          --n-dist-min 6 --n-dist-max 10 --noise-amp 8
+    --array: comma list of arms (default augmentation,equiorient,wrong_geometry)
+    --seeds: comma list (default primary 15 seeds 101..1501)
+    --batch-parallel: max concurrent Modal function calls (Modal bills
+        per-running function second; queueing is free).
+    """
     if gate:
         print("GATE:", run_gate.remote())
         return
@@ -257,13 +365,65 @@ def main(arm: str = "equiorient", seed: int = 101, mode: str = "dev",
             n_dist_min=n_dist_min, n_dist_max=n_dist_max,
             noise_amp=noise_amp))
         return
-    m = run_arm.remote(arm=arm, seed=seed, mode=mode, n_train=n_train,
-                       epochs=epochs, lr=lr,
-                       target_size_min=target_size_min,
-                       target_size_max=target_size_max,
-                       n_dist_min=n_dist_min, n_dist_max=n_dist_max,
-                       noise_amp=noise_amp)
-    print("RESULT:", m)
+    if not array:
+        m = run_arm.remote(arm=arm, seed=seed, mode=mode, n_train=n_train,
+                           epochs=epochs, lr=lr,
+                           target_size_min=target_size_min,
+                           target_size_max=target_size_max,
+                           n_dist_min=n_dist_min, n_dist_max=n_dist_max,
+                           noise_amp=noise_amp)
+        print("RESULT:", m)
+        return
+
+    # ---- batch mode: 1 CPU data build + concurrent GPU runs ------------- #
+    arms = [a.strip() for a in array.split(",") if a.strip()]
+    if seeds:
+        seed_list = [int(s) for s in seeds.split(",") if s.strip()]
+    else:
+        seed_list = [101, 202, 303, 404, 505, 606, 707, 808, 909, 1010,
+                     1111, 1212, 1313, 1414, 1515]
+    jobs = [(a, s) for a in arms for s in seed_list]
+    print(f"[batch] {len(jobs)} jobs ({len(arms)} arms x {len(seed_list)} "
+          f"seeds) mode={mode} n_train={n_train} epochs={epochs} "
+          f"lr={lr} difficulty=({target_size_min},{target_size_max})/"
+          f"({n_dist_min},{n_dist_max})/n{noise_amp}", flush=True)
+
+    # 1) CPU-only data build ONCE for this difficulty config.
+    prep = prepare_data.remote(
+        target_size_min=target_size_min, target_size_max=target_size_max,
+        n_dist_min=n_dist_min, n_dist_max=n_dist_max,
+        noise_amp=noise_amp)
+    info = next(iter(prep))
+    print(f"[batch] data ready: {info}", flush=True)
+
+    # 2) Concurrent GPU runs (Modal queues beyond concurrent limit).
+    import json
+    results = []
+    with modal.concurrent.map(lambda job: run_arm.remote(
+            arm=job[0], seed=job[1], mode=mode, n_train=n_train,
+            epochs=epochs, lr=lr,
+            target_size_min=target_size_min, target_size_max=target_size_max,
+            n_dist_min=n_dist_min, n_dist_max=n_dist_max,
+            noise_amp=noise_amp, data_key=info["data_key"]), jobs) as it:
+        for r in it:
+            results.append(r)
+            print(f"[batch] DONE {r['arm']} s{r['seed']} "
+                  f"dev={r.get('dev_eval', {}).get('unseen_accuracy')}",
+                  flush=True)
+
+    # 3) Dump all results to the results volume for later export.
+    from pathlib import Path
+    out_dir = Path("/root/results") / "phase2_nobox"
+    if results:
+        allr = {"mode": mode, "n_train": n_train, "epochs": epochs, "lr": lr,
+                "difficulty": {"target_size": [target_size_min,
+                                               target_size_max],
+                               "n_distractor_range": [n_dist_min, n_dist_max],
+                               "noise_amp": noise_amp},
+                "data_key": info["data_key"], "results": results}
+        (out_dir / f"batch_{info['data_key']}_{mode}.json").write_text(
+            json.dumps(allr, indent=1), encoding="utf-8")
+    print("[batch] ALL DONE")
 
 
 if __name__ == "__main__":
