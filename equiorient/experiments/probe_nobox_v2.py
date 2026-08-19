@@ -86,7 +86,7 @@ def probe_attribute(runner, manifest, split, attribute, n_max=300):
                 # mark cells near a (circle) and b (square)
                 for obj_id, color_expected, label_val in [
                     ("a", None, 1), ("b", None, 2)]:
-                    ox, oy = boxes[obj_id]
+                    ox, oy = boxes[obj_id][:2]
                     # find cells within the object radius
                     obj_info = None
                     for obj in (e.get("objects_list", []) or []):
@@ -114,7 +114,7 @@ def probe_attribute(runner, manifest, split, attribute, n_max=300):
                     TARGET_A_COLOR, TARGET_B_COLOR)
                 for obj_id, expected_color, label_val in [
                     ("a", TARGET_A_COLOR, None), ("b", TARGET_B_COLOR, None)]:
-                    ox, oy = boxes[obj_id]
+                    ox, oy = boxes[obj_id][:2]
                     # determine actual color from the scene's variant
                     # For v2: color is random per scene, but stored in manifest
                     # We can detect from the rendered pixel or infer from
