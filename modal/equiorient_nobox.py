@@ -362,7 +362,7 @@ def probe_features(n_dev: int = 200,
 def main(arm: str = "equiorient", seed: int = 101, mode: str = "dev",
          n_train: int = 128, gate: bool = False, epochs: int = 2,
          lr: float = 1e-4, probe: bool = False, diag: bool = False,
-         probe_v2: bool = False,
+         probe_v2: bool = False, data_only: bool = False,
          target_size_min: float = 3.0, target_size_max: float = 5.0,
          n_dist_min: int = 12, n_dist_max: int = 20,
          noise_amp: int = 12, variant: str = "nobox_v1",
@@ -381,6 +381,13 @@ def main(arm: str = "equiorient", seed: int = 101, mode: str = "dev",
     """
     if gate:
         print("GATE:", run_gate.remote())
+        return
+    if data_only:
+        info = prepare_data.remote(
+            target_size_min=target_size_min, target_size_max=target_size_max,
+            n_dist_min=n_dist_min, n_dist_max=n_dist_max,
+            noise_amp=noise_amp, variant=variant)
+        print(f"DATA_ONLY: {info}", flush=True)
         return
     if diag:
         # prepare data first if needed

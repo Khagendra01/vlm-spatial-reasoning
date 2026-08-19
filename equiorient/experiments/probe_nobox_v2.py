@@ -168,8 +168,7 @@ def probe_attribute(runner, manifest, split, attribute, n_max=300):
     if attribute in ("target_location", "reference_location"):
         # per-scene: find the top-1 cell prediction, check if it's correct
         sc = StandardScaler().fit(Xtr)
-        clf = LogisticRegression(max_iter=2000, C=1.0,
-                                multi_class="multinomial").fit(
+        clf = LogisticRegression(max_iter=2000, C=1.0).fit(
             sc.transform(Xtr), Ytr)
         probs = clf.predict_proba(sc.transform(Xte))[:, 1].reshape(-1, T)
         # actually we need all classes for top-1
@@ -185,8 +184,7 @@ def probe_attribute(runner, manifest, split, attribute, n_max=300):
         chance = 1.0 / (T)  # random guess over cells
     elif attribute == "pair_relation":
         sc = StandardScaler().fit(Xtr)
-        clf = LogisticRegression(max_iter=2000, C=1.0,
-                                multi_class="multinomial").fit(
+        clf = LogisticRegression(max_iter=2000, C=1.0).fit(
             sc.transform(Xtr), Ytr)
         probs = clf.predict_proba(sc.transform(Xte))
         # per-scene: majority vote across cells
@@ -200,8 +198,7 @@ def probe_attribute(runner, manifest, split, attribute, n_max=300):
         chance = 1.0 / 8
     elif attribute == "shape":
         sc = StandardScaler().fit(Xtr)
-        clf = LogisticRegression(max_iter=2000, C=1.0,
-                                multi_class="multinomial").fit(
+        clf = LogisticRegression(max_iter=2000, C=1.0).fit(
             sc.transform(Xtr), Ytr)
         probs = clf.predict_proba(sc.transform(Xte))
         # per-cell accuracy
