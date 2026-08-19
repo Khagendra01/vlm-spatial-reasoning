@@ -370,7 +370,7 @@ def main(arm: str = "equiorient", seed: int = 101, mode: str = "dev",
             target_size_min=target_size_min, target_size_max=target_size_max,
             n_dist_min=n_dist_min, n_dist_max=n_dist_max,
             noise_amp=noise_amp)
-        info = next(iter(prep))
+        info = prep
         print(f"[single] data ready: {info}", flush=True)
         m = run_arm.remote(arm=arm, seed=seed, mode=mode, n_train=n_train,
                            epochs=epochs, lr=lr,
@@ -399,7 +399,7 @@ def main(arm: str = "equiorient", seed: int = 101, mode: str = "dev",
         target_size_min=target_size_min, target_size_max=target_size_max,
         n_dist_min=n_dist_min, n_dist_max=n_dist_max,
         noise_amp=noise_amp)
-    info = next(iter(prep))
+    info = prep
     print(f"[batch] data ready: {info}", flush=True)
 
     # 2) Concurrent GPU runs: Modal auto-scales these cached function
