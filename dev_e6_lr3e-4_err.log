@@ -1,0 +1,56 @@
+┌───────────────────── Traceback (most recent call last) ─────────────────────┐
+│ C:\Users\Khage\Desktop\VLM-Spatial-Reasoning-NoBox\modal/equiorient_nobox.p │
+│ y:122 in main                                                               │
+│                                                                             │
+│   121 │   │   return                                                        │
+│ > 122 │   m = run_arm.remote(arm=arm, seed=seed, mode=mode, n_train=n_train │
+│   123 │   │   │   │   │      epochs=epochs, lr=lr)                          │
+│                                                                             │
+│ C:\Users\Khage\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_ │
+│ qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\modal\_obje │
+│ ct.py:46 in wrapped                                                         │
+│                                                                             │
+│    45 │   │   await self.hydrate()                                          │
+│ >  46 │   │   return await method(self, *args, **kwargs)                    │
+│    47                                                                       │
+│                                                                             │
+│ C:\Users\Khage\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_ │
+│ qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\modal\_func │
+│ tions.py:1841 in remote                                                     │
+│                                                                             │
+│   1840 │   │                                                                │
+│ > 1841 │   │   return await self._call_function(args, kwargs)               │
+│   1842                                                                      │
+│                                                                             │
+│ C:\Users\Khage\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_ │
+│ qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\modal\_func │
+│ tions.py:1778 in _call_function                                             │
+│                                                                             │
+│   1777 │   │                                                                │
+│ > 1778 │   │   return await invocation.run_function()                       │
+│   1779                                                                      │
+│                                                                             │
+│ C:\Users\Khage\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_ │
+│ qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\modal\_func │
+│ tions.py:502 in run_function                                                │
+│                                                                             │
+│    501 │   │   │   # No more retries left.                                  │
+│ >  502 │   │   │   return await _process_result(                            │
+│    503 │   │   │   │   await_response.output.result, await_response.output. │
+│                                                                             │
+│ C:\Users\Khage\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.12_ │
+│ qbz5n2kfra8p0\LocalCache\local-packages\Python312\site-packages\modal\_util │
+│ s\function_utils.py:572 in _process_result                                  │
+│                                                                             │
+│   571 │   │   │                                                             │
+│ > 572 │   │   │   raise exc_with_hints(exc)                                 │
+│   573                                                                       │
+│                                                                             │
+│     ...Remote call to Modal Function (ta-01M0BXVN3SJ5NYYJCQMZMT4VSR)...     │
+│                                                                             │
+│ /root/equiorient_nobox.py:95 in run_arm                                     │
+│                                                                             │
+│ > 95 raise RuntimeError(f"train failed rc={p.returncode}")                  │
+│                                                                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+RuntimeError: train failed rc=1

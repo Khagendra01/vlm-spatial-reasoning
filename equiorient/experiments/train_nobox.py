@@ -351,12 +351,15 @@ class NoBoxRunner:
         self._grid_h = h
         self._grid_w = w
         target_idx = set()
+        n_tok = attn[0].numel()
         for obj_id, (cx, cy, _sz) in e["boxes"].items():
-            c = (min(int(cx / canvas_cx * w), w - 1),
-                 min(int(cy / canvas_cy * h), h - 1))
-            target_idx.add(c[1] * w + c[0])
+            c = (max(min(int(cx / canvas_cx * w), w), 0),
+                 max(min(int(cy / canvas_cy * h), h), 0))
+            i = c[1] * w + c[0]
+            if 0 <= i < n_tok:
+                target_idx.add(i)
         aw = attn[0].flatten()
-        tgt = sum(float(aw[i]) for i in target_idx if i < aw.numel())
+        tgt = sum(float(aw[i]) for i in target_idx if 0 <= i < n_tok)
         non_tgt = float(1.0 - tgt)
         diag["target_mass"].append(tgt)
         diag["non_target_mass"].append(non_tgt)

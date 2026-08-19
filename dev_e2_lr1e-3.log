@@ -1,0 +1,51 @@
+✓ Initialized. View run at 
+https://modal.com/apps/kgengamer/main/ap-9AOVg6iytiVVzrsmyMxm3O
+✓ Created objects.
+├── 🔨 Created mount 
+│   C:\Users\Khage\Desktop\VLM-Spatial-Reasoning-NoBox\modal\equiorient_nobox.p
+│   y
+├── 🔨 Created function run_gate.
+└── 🔨 Created function run_arm.
+[02:38:37] train scenes 128 pairs 256 arm augmentation lam 1.0 lr 0.001 NO-BOX
+[02:39:05] [augmentation] epoch 1/2 (ans 18.9318, struct 0.000000)
+[02:39:30] [augmentation] epoch 2/2 (ans 16.7090, struct 0.000000)
+
+Stopping app - uncaught exception raised locally: RuntimeError('train failed rc=1').
+`torch_dtype` is deprecated! Use `dtype` instead!
+
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]
+Loading checkpoint shards:  25%|██▌       | 1/4 [00:02<00:06,  2.25s/it]
+Loading checkpoint shards:  50%|█████     | 2/4 [00:04<00:04,  2.25s/it]
+Loading checkpoint shards:  75%|███████▌  | 3/4 [00:06<00:02,  2.27s/it]
+Loading checkpoint shards: 100%|██████████| 4/4 [00:08<00:00,  1.89s/it]
+Loading checkpoint shards: 100%|██████████| 4/4 [00:08<00:00,  2.03s/it]
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/root/repo/equiorient/experiments/train_nobox.py", line 464, in <module>
+    main()
+  File "/root/repo/equiorient/experiments/train_nobox.py", line 428, in main
+    ev = runner.evaluate(manifest, "dev")
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/repo/equiorient/experiments/train_nobox.py", line 320, in evaluate
+    self._collect_attn_diag(attn, grid, e, attn_diag)
+  File "/root/repo/equiorient/experiments/train_nobox.py", line 359, in _collect_attn_diag
+    tgt = sum(float(aw[i]) for i in target_idx if i < aw.numel())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/repo/equiorient/experiments/train_nobox.py", line 359, in <genexpr>
+    tgt = sum(float(aw[i]) for i in target_idx if i < aw.numel())
+                    ~~^^^
+IndexError: index -70 is out of bounds for dimension 0 with size 64
+
+Traceback (most recent call last):
+  File "/pkg/modal/_runtime/container_io_manager.py", line 977, in handle_input_exception
+    yield
+  File "/pkg/modal/_container_entrypoint.py", line 187, in run_input_sync
+    values = io_context.call_function_sync()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pkg/modal/_runtime/container_io_manager.py", line 265, in call_function_sync
+    expected_value_or_values = self.finalized_function.callable(*args, **kwargs)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/equiorient_nobox.py", line 95, in run_arm
+    raise RuntimeError(f"train failed rc={p.returncode}")
+RuntimeError: train failed rc=1
