@@ -9,14 +9,20 @@ Note: rebuild used tectonic 0.15.0 (MiKTeX unavailable on this machine);
 layout re-verified: 6 pp incl. references, review header + line numbers intact,
 within the 8-page limit. If preferred, rebuild once more with MiKTeX before
 upload and refresh the hash again.
+**FINAL 2026-08-22 (post-enrollment): OpenReview submission #3083 confirmed.
+`set_paper_id.py` steps executed manually with tectonic (script is
+MiKTeX/Windows-bound): ID 3083 set in main.tex + suppl.tex, both PDFs
+rebuilt and copied to 01_UPLOAD_THIS. Verified: "Submission #3083" header on
+both, no author leaks, main 6 pp incl. refs / suppl 1 p. Hashes above are
+the FINAL upload hashes.**
 **GPU compute:** OFF (no further model compute; this is the post-compute layer).
 
 ## Upload artifacts (01_UPLOAD_THIS/)
 
 | File | Size | SHA-256 | Status |
 |---|---|---|---|
-| main.pdf | 0.31 MB | `0A8BE8E551FAC761EA7136878BED73504E848E0F7AD7AC11BCBDC0F442546C55` | Rebuilt 2026-08-22 with protocol-first abstract/intro rewrite (6 pp incl. references, anonymous `#*****`, tectonic 0.15.0) — upload Aug 28 |
-| supplementary.pdf | 0.12 MB | `A4A55543A9BBC61A2C468063C87F3B4C4A3EBC9FCF639082265B579DA85BD57B` | Built (1 p, anonymous) — upload Aug 30 |
+| main.pdf | 0.31 MB | `76DC7A505AB3E1051653A1EC4C5515F833AE4CDD6DBE74EFD81CA53896D0F278` | FINAL: paper ID 3083 set, rebuilt 2026-08-22 (6 pp incl. references, anonymous, tectonic 0.15.0) — upload Aug 28 |
+| supplementary.pdf | 0.04 MB | `6E0FB23DF2FF0622267E7198BEFEAE186F78B935E6330C1E8CD4139480A52D6D` | FINAL: paper ID 3083 set, rebuilt 2026-08-22 (1 p, anonymous) — upload Aug 30 |
 | wacv2027_code.zip | 0.45 MB | `9ABAE8E33210799A939A80AC55FB5D7056F066045815147CC2B09B31267DAF88` | Built (39 entries) — upload Aug 30 |
 
 > After Aug 21 enrollment: run `set_paper_id.py <id>` and RE-COMPUTE these
