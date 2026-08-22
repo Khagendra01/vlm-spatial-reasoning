@@ -2,13 +2,20 @@
 
 **Kit:** `FINAL_WACV2027_SUBMISSION_PAPER2/`
 **Status at freeze:** all three upload artifacts built and hashed (2026-08-14).
+**Update 2026-08-22:** main.pdf rebuilt after protocol-first abstract/intro
+rewrite (`paper2/abstract-rewrite`, commit `5b6f49f`); hash above refreshed;
+`02_OPENREVIEW_ENROLLMENT/abstract_paste.txt` synced to the new abstract.
+Note: rebuild used tectonic 0.15.0 (MiKTeX unavailable on this machine);
+layout re-verified: 6 pp incl. references, review header + line numbers intact,
+within the 8-page limit. If preferred, rebuild once more with MiKTeX before
+upload and refresh the hash again.
 **GPU compute:** OFF (no further model compute; this is the post-compute layer).
 
 ## Upload artifacts (01_UPLOAD_THIS/)
 
 | File | Size | SHA-256 | Status |
 |---|---|---|---|
-| main.pdf | 0.42 MB | `D6AF008E927E893FBB52A6B88B8BD69FBE5F4973BC15D7A6282EBE02F04CBBA6` | Built (5 pp, anonymous `#*****`) — upload Aug 28 |
+| main.pdf | 0.31 MB | `0A8BE8E551FAC761EA7136878BED73504E848E0F7AD7AC11BCBDC0F442546C55` | Rebuilt 2026-08-22 with protocol-first abstract/intro rewrite (6 pp incl. references, anonymous `#*****`, tectonic 0.15.0) — upload Aug 28 |
 | supplementary.pdf | 0.12 MB | `A4A55543A9BBC61A2C468063C87F3B4C4A3EBC9FCF639082265B579DA85BD57B` | Built (1 p, anonymous) — upload Aug 30 |
 | wacv2027_code.zip | 0.45 MB | `9ABAE8E33210799A939A80AC55FB5D7056F066045815147CC2B09B31267DAF88` | Built (39 entries) — upload Aug 30 |
 
