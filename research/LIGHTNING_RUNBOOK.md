@@ -11,9 +11,21 @@ Prereq reading: `research/EQUIORIENT_ICLR_PUSH_PREREGISTRATION.md`.
 3. Studio storage persists between sessions; GPU hours only burn while a
    session is active. **Stop the studio when done** (top-right power icon).
 
-## 1. Smoke test (~20 min) — decides everything
+## 1. THE one command (does smoke test → image fetch → full E2 extraction)
 
-Open a terminal in the studio:
+After creating the studio (A10G), paste this in the terminal and walk away:
+
+```bash
+bash <(curl -sL https://raw.githubusercontent.com/Khagendra01/vlm-spatial-reasoning/research/equiorient-iclr-push/scripts/lightning_bootstrap.sh)
+```
+
+It runs: clone/checkout → deps → CPU unit tests → materialize Paper-2
+adapters + CSVs → **VRAM smoke test** → fetch the frozen 245 images (~40MB,
+no cache upload needed) → resumable E2 extraction loop for all Qwen2-VL
+checkpoints. Ends by printing the exact commit/push commands and a reminder
+to STOP the studio.
+
+Manual step-by-step equivalent (if you prefer to run pieces yourself):
 
 ```bash
 git clone https://github.com/Khagendra01/vlm-spatial-reasoning
