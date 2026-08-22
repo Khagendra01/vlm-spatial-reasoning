@@ -10,12 +10,17 @@ coexist with error~\cite{bhat2026consistent}. Prior work has also
 introduced grounding-aware training objectives that explicitly reward
 visual dependence~\cite{zafar2026coral}.
 
-What has not been examined is whether \emph{ordinary} spatial task
-fine-tuning---the standard LoRA recipe with no grounding-aware
-objective---moves benchmark accuracy, correct-image dependence, and
-semantic pair consistency as a jointly measured vector of capability
-changes, and whether those changes replicate across training seeds and
-backbone families. This is the gap we address.
+What is missing is an evaluation practice, not merely another
+observation: spatial fine-tuning studies report the scalar benchmark
+delta and leave evidence dependence and semantic consistency unmeasured,
+so two adaptations with identical accuracy gains can be silently
+different in what they changed. We address this gap by treating
+\emph{ordinary} spatial task fine-tuning---the standard LoRA recipe with
+no grounding-aware objective---as a controlled intervention and measuring
+it with a preregistered protocol that reports benchmark accuracy,
+correct-image dependence, and semantic pair consistency as one jointly
+measured vector of capability changes, evaluated across training seeds
+and backbone families.
 
 We use Visual Spatial Reasoning (VSR)~\cite{liu2023vsr} as the task.
 VSR contains natural-image statements about object-relative relations
@@ -65,13 +70,18 @@ gain, and is explicitly labeled exploratory rather than preregistered.
 
 We make three contributions:
 \begin{itemize}[leftmargin=*]
-  \item \textbf{A controlled multi-seed, cross-backbone decomposition of
-        ordinary spatial fine-tuning} into benchmark gain, correct-image
-        dependence, and semantic pair consistency, with all quantities
-        recomputed independently and frozen before manuscript mode.
-  \item \textbf{A seed-robust result set:} every component of the vector
-        replicates across three fresh training seeds on two backbone
-        families, closing the single-checkpoint-anecdote criticism.
+  \item \textbf{A preregistered capability-vector protocol for auditing
+        spatial fine-tuning:} six frozen evaluation conditions and three
+        jointly reported metrics (benchmark gain, correct-image
+        dependence, semantic pair consistency) plus Tier-C transformation
+        behavior, released with frozen manifests, metric definitions, and
+        an independent audit script, so that any spatial-adaptation study
+        can report decomposed rather than scalar results.
+  \item \textbf{A controlled multi-seed, cross-backbone application of the
+        protocol} to ordinary LoRA fine-tuning on VSR: every vector
+        component replicates across three fresh training seeds on two
+        backbone families, closing the single-checkpoint-anecdote
+        criticism.
   \item \textbf{A scoped contemporary-backbone extension} (\qwennew{})
         that reproduces the primary adaptation pattern, honestly labeled as
         post-confirmatory external validation.
