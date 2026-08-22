@@ -9,7 +9,7 @@ Prereq reading: `research/EQUIORIENT_ICLR_PUSH_PREREGISTRATION.md`
 
 | Machine | VRAM | Free | Hosts |
 |---|---|---|---|
-| T4 | 16 GB | 36 h | SmolVLM2 training (fp16), small evals |
+| T4 | 16 GB | 36 h | SmolVLM2 training (fp32 preferred, verify fit; fp16 only w/ numerics control — see preregistration deviation 1) |
 | L40S | 48 GB | 5 h | **Qwen2-VL bf16 inference + training** |
 | A100 / H100 | 80 GB | 3 + 3 h | Qwen2-VL continuation |
 | H200 | 141 GB | 2 h | reserve |
@@ -24,9 +24,10 @@ STOP the studio whenever idle.
 SESSION A — L40S (~3h of the pool):
    bootstrap one-command → smoke test → E2 ALL Qwen extractions
    → as many E1-7B pilot runs as fit (target: 2 seeds × 3 arms)
-SESSION B — Colab/Kaggle T4/P100 (free, ~15h needed):
-   E1 SmolVLM2-2B full campaign: 15 seeds × 3 arms in fp16
-   (fp16 is a preregistered deviation #1; NOT quantization)
+SESSION B — Colab/Kaggle T4/P100 (free, ~15h+ needed):
+   E1 SmolVLM2-2B full campaign: 15 seeds × 3 arms
+   PRECISION: fp32 preferred (verify fit in smoke test); fp16 ONLY with the
+   preregistered numerics control (3 seeds dual-format). See deviation 1.
 RESERVE — A100/H100 leftovers:
    E1-7B pilot overflow, E3 wrong-law eval sweep
 ```

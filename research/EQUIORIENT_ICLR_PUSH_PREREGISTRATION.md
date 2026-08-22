@@ -90,27 +90,41 @@ algebra compliance relate to behavior on natural images at all.
 
 ---
 
-## PLANNED DEVIATIONS (logged 2026-08-22, BEFORE any GPU run)
+## AMENDMENT STATUS — HONEST PROVENANCE (rewritten 2026-08-22)
 
-The free-compute reality (Lightning starter bucket: T4×36h, ~13h pooled
-premium across L40S/A100/H100/H200; Colab/Kaggle T4/P100 for overflow)
-forces two protocol deviations, declared here before results exist:
+Correction of an earlier overstated framing: this is NOT a clean-slate
+preregistration. All phase-2 GPU results (including the Qwen3-VL canonical
+outcome) were known before these decisions were made. This section is a
+COMPUTE-CONSTRAINED AMENDMENT designed with full knowledge of prior results.
+It governs the not-yet-run E1/E2/E3 experiments only.
 
-1. **E1 backbone precision:** SmolVLM2-2B arms will run on Turing-era
-   cards (T4/P100) which do not support bfloat16. These arms execute in
-   fp16 (full-precision weights, different float format — NOT
-   quantization). All Qwen-family work remains bf16. Limitation noted.
-2. **E1-7B scope reduction:** the formal preregistered replication
-   (15 seeds × 3 arms) is carried by SmolVLM2-2B (different VLM family —
-   greater architectural distance from Qwen3-VL than Qwen2-VL). Qwen2-VL-7B
-   is demoted to a PILOT: up to 2 seeds × 3 arms = 6 training runs on the
-   premium pool, reported as supporting consistency evidence, not the
-   primary replication. Rationale: pooled premium hours (~13) cannot host
-   45 seven-billion-parameter training runs; family diversity is the
-   stronger generality argument per unit compute.
+## PLANNED DEVIATIONS (compute-driven, declared before E1/E2/E3 runs)
 
-These deviations are compute-driven only. Success gates are unchanged:
-SmolVLM E1 success = Eq-Wrong > Eq-Aug, p<0.01, ≥12/15 positive seeds.
+1. **E1-SmolVLM numerics:** the frozen protocol specifies bf16. Turing-era
+   free-tier cards (T4/P100) cannot execute bf16. Preference order:
+   a) **fp32 preferred** — SmolVLM2-2B (~9 GB weights fp32 + LoRA +
+      gradient checkpointing) plausibly fits 16 GB; verified by smoke test
+      before committing.
+   b) fp16 ONLY if fp32 does not fit, AND only together with a numerics
+      control: at least 3 seeds executed in BOTH formats, fp32-vs-fp16
+      deltas reported, and an explicit limitations paragraph stating that
+      sub-1pp effects (the paper's regime) are sensitive to
+      gradient-underflow/loss-scaling differences between float formats.
+   Rationale: the measured effects are +0.68pp-scale; float-format-induced
+   changes to gradient dynamics are a genuine confound at this scale and
+   must be bounded, not waved off ("not quantization" is NOT sufficient).
+2. **E1 backbone scope:** formal replication (15 seeds × 3 arms) carried
+   by SmolVLM2-2B (different family, smaller scale); Qwen2-VL-7B demoted
+   to a pilot (up to 2 seeds × 3 arms) on the pooled premium hours.
+   Declared risk, stated openly: gates below were calibrated on Qwen3-VL
+   behavior; there is no guarantee effect sizes transfer across a 4× scale
+   drop and a family change. A gate failure on SmolVLM will be reported as
+   non-replication, NOT re-gated or explained away.
+3. **Gates:** retained numerically (p<0.01, >=12/15 positive seeds) but
+   with the above caveat stated: identical thresholds on a different
+   backbone/floating-point path constitute a *choice*, and a miss will be
+   interpreted as possible true non-replication rather than attributed to
+   hardware.
 
 ## Decision gates
 
