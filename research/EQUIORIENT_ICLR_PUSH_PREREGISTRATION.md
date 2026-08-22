@@ -90,6 +90,28 @@ algebra compliance relate to behavior on natural images at all.
 
 ---
 
+## PLANNED DEVIATIONS (logged 2026-08-22, BEFORE any GPU run)
+
+The free-compute reality (Lightning starter bucket: T4×36h, ~13h pooled
+premium across L40S/A100/H100/H200; Colab/Kaggle T4/P100 for overflow)
+forces two protocol deviations, declared here before results exist:
+
+1. **E1 backbone precision:** SmolVLM2-2B arms will run on Turing-era
+   cards (T4/P100) which do not support bfloat16. These arms execute in
+   fp16 (full-precision weights, different float format — NOT
+   quantization). All Qwen-family work remains bf16. Limitation noted.
+2. **E1-7B scope reduction:** the formal preregistered replication
+   (15 seeds × 3 arms) is carried by SmolVLM2-2B (different VLM family —
+   greater architectural distance from Qwen3-VL than Qwen2-VL). Qwen2-VL-7B
+   is demoted to a PILOT: up to 2 seeds × 3 arms = 6 training runs on the
+   premium pool, reported as supporting consistency evidence, not the
+   primary replication. Rationale: pooled premium hours (~13) cannot host
+   45 seven-billion-parameter training runs; family diversity is the
+   stronger generality argument per unit compute.
+
+These deviations are compute-driven only. Success gates are unchanged:
+SmolVLM E1 success = Eq-Wrong > Eq-Aug, p<0.01, ≥12/15 positive seeds.
+
 ## Decision gates
 
 | Outcome | Action |

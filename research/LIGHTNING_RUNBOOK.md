@@ -1,15 +1,35 @@
 # Lightning AI Runbook — EquiOrient ICLR Push ($0 track)
 
-Last updated: 2026-08-22. Branch: `research/equiorient-iclr-push`.
-Prereq reading: `research/EQUIORIENT_ICLR_PUSH_PREREGISTRATION.md`.
+Last updated: 2026-08-22 (revised for the REAL tiered starter bucket).
+Branch: `research/equiorient-iclr-push`.
+Prereq reading: `research/EQUIORIENT_ICLR_PUSH_PREREGISTRATION.md`
+(see PLANNED DEVIATIONS section — compute-driven, logged pre-GPU).
 
-## 0. Account setup (~10 min)
+## 0. The actual budget (from the studio picker)
 
-1. Sign up https://lightning.ai (no card needed). Free tier ≈ 80 GPU-hrs/month.
-2. New Studio → pick **A10G (24 GB)** as the GPU. If A10G is unavailable, L4
-   also works; do NOT pick T4 (16GB — fails Qwen2-VL bf16).
-3. Studio storage persists between sessions; GPU hours only burn while a
-   session is active. **Stop the studio when done** (top-right power icon).
+| Machine | VRAM | Free | Hosts |
+|---|---|---|---|
+| T4 | 16 GB | 36 h | SmolVLM2 training (fp16), small evals |
+| L40S | 48 GB | 5 h | **Qwen2-VL bf16 inference + training** |
+| A100 / H100 | 80 GB | 3 + 3 h | Qwen2-VL continuation |
+| H200 | 141 GB | 2 h | reserve |
+
+Treat the premium tiers as ONE POOLED ~13h budget ("up to 80 hrs to
+start" = finite grant, not monthly). Hours burn while a session is open —
+STOP the studio whenever idle.
+
+## Allocation plan (Option 2, preregistered)
+
+```
+SESSION A — L40S (~3h of the pool):
+   bootstrap one-command → smoke test → E2 ALL Qwen extractions
+   → as many E1-7B pilot runs as fit (target: 2 seeds × 3 arms)
+SESSION B — Colab/Kaggle T4/P100 (free, ~15h needed):
+   E1 SmolVLM2-2B full campaign: 15 seeds × 3 arms in fp16
+   (fp16 is a preregistered deviation #1; NOT quantization)
+RESERVE — A100/H100 leftovers:
+   E1-7B pilot overflow, E3 wrong-law eval sweep
+```
 
 ## 1. THE one command (does smoke test → image fetch → full E2 extraction)
 

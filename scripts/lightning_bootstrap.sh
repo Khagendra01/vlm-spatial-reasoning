@@ -29,15 +29,25 @@ echo "== [4/6] VRAM smoke test (THE decision point) =="
 python scripts/lightning_smoke_test.py | tee smoke.log
 
 if ! grep -q "INFERENCE-FIT.*PASS" smoke.log; then
-  echo "RESULT: this GPU cannot host Qwen2-VL bf16 — pick A10G/L4 studio and rerun."
+  echo "RESULT: this GPU cannot host Qwen2-VL bf16 — use the L40S studio (48GB), not T4."
   exit 1
 fi
 
 echo "== [5/6] fetching the frozen 245 E2 images (~40 MB) =="
 python scripts/fetch_e2_images.py
 
-echo "== [6/6] E2 extraction loop (resumable; ~3 h for all checkpoints) =="
+echo "== [6/6] E2 extraction loop (resumable) =="
 bash scripts/run_e2_lightning.sh
+
+# E1-7B pilot (preregistered: up to 2 seeds x 3 arms) — only if TRAIN-FIT passed
+if grep -q "TRAIN-FIT.*PASS" smoke.log; then
+  echo "TRAIN-FIT passed — E1-7B pilot eligible on this machine."
+  echo "Launch via phase-2 canonical runner with backbone=Qwen2-VL-7B,"
+  echo "seeds limited to the preregistered pilot set (see runbook §4)."
+else
+  echo "TRAIN-FIT failed — E1 proceeds via preregistered SmolVLM fallback"
+  echo "(deviation #1/#2 already logged pre-GPU in the preregistration file)."
+fi
 
 echo ""
 echo "================ DONE — next steps ================"
